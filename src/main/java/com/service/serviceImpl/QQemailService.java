@@ -16,11 +16,11 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.sun.mail.util.MailSSLSocketFactory;
-
+@SuppressWarnings("unchecked")
 @Service
 public class QQemailService {
-	private static String userAddr="326379827@qq.com";//发送的邮箱地址
-	private static String userSecurity="cneomhjnzpzpbgee";//授权码
+	private static String userAddr="2316125104@qq.com";//发送的邮箱地址
+	private static String userSecurity="fqyaynkjmglyebgi";//授权码
 	/**
 	 * 
 	 * @param email 邮箱地址
@@ -30,7 +30,6 @@ public class QQemailService {
 	 * @throws GeneralSecurityException
 	 */
 	public static String emit(String data) throws MessagingException, GeneralSecurityException {
-		@SuppressWarnings("unchecked")
 		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
 		String title=map.get("title").toString();
 		String text =map.get("text").toString();
