@@ -11,7 +11,7 @@
 
 	<!-- 2.数据库连接池 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-		<!-- 配置连接池属�? -->
+		<!-- 配置连接池属性 -->
 		<property name="driverClassName" value="${jdbc.driver}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
@@ -24,17 +24,17 @@
 		<property name="dataSource" ref="dataSource" />
 		<!-- 配置MyBaties全局配置文件:mybatis-config.xml -->
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
-		<!-- 扫描entity�? 使用别名 -->
+		<!-- 扫描entity包 使用别名 -->
 		<property name="typeAliasesPackage" value="com.entity" />
-		<!-- 扫描sql配置文件:mapper�?要的xml文件 -->
+		<!-- 扫描sql配置文件:mapper需要的xml文件 -->
 		<property name="mapperLocations" value="classpath:*mapper/*.xml" />
 	</bean>
 
-	<!-- 4.配置扫描Dao接口包，动�?�实现Dao接口，注入到spring容器�? -->
+	<!-- 4.配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 注入sqlSessionFactory -->
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-		<!-- 给出�?要扫描Dao接口�? -->
+		<!-- 给出需要扫描Dao接口包 -->
 		<property name="basePackage" value="com.dao" />
 	</bean>
 </beans>

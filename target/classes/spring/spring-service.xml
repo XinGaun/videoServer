@@ -9,10 +9,10 @@
 	http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/tx
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
-	<!-- 扫描service包下�?有使用注解的类型 -->
+	<!-- 扫描service包下所有使用注解的类型 -->
 	<context:component-scan base-package="com.service" />
 
-	<!-- 配置事务管理�? -->
+	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<!-- 注入数据库连接池 -->
