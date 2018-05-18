@@ -56,9 +56,9 @@ public class PaysApiController {
 		ModelAndView view = null;
 		// 根据订单号查找相应的记录:根据结果跳转到不同的页面
 		if (isTrue) {
-			view = new ModelAndView("success");
-		} else {
 			view = new ModelAndView("error");
+		} else {
+			view = new ModelAndView("success");
 		}
 		return view;
 	}
