@@ -5,7 +5,7 @@
 <mapper namespace="com.dao.OrderTabDao">
 	<!-- 添加订单信息 -->
 	<insert id="addOrderTab" parameterType="java.util.HashMap" keyProperty="order_id">
-		INSERT INTO order_tab(user_id,order_due,order_status,order_date
+		INSERT INTO order_tab(user_id,order_due,order_status,order_date,order_type
 			<if test="video_id!=null">
 				,video_id
 			</if>
@@ -19,7 +19,7 @@
 				,discounts_id
 			</if>
 		) 
-		VALUES (#{user_id},${order_due},#{order_status},now()
+		VALUES (#{user_id},${order_due},#{order_status},now(),#{order_type}
 			<if test="video_id!=null">
 				,#{video_id}
 			</if>

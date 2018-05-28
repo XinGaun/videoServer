@@ -16,15 +16,9 @@ public class PayUtil {
 
 	public static String UID = "e61ddb86118dceb75a623d6c";
 
-<<<<<<< HEAD
-	public static String NOTIFY_URL = "http://39.105.77.229:2018/videoServer/pays/notifyPay";
+	public static String NOTIFY_URL = "http://39.105.100.211/videoServer/pays/notifyPay";
 
-	public static String RETURN_URL = "http://39.105.77.229:2018/videoServer/pays/returnPay";
-=======
-	public static String NOTIFY_URL = "http://39.105.100.211:2019/videoServer/pays/notifyPay";
-
-	public static String RETURN_URL = "http://39.105.100.211:2019/videoServer/pays/returnPay";
->>>>>>> guanxin
+	public static String RETURN_URL = "http://39.105.100.211/videoServer/pays/returnPay";
 
 	public static String BASE_URL = "https://pay.paysapi.com";
 
