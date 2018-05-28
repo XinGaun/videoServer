@@ -15,24 +15,22 @@ public class OSSUploadVideo {
 	
 	public void upload(String fileName,String filePath) throws Exception {
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);  
-		// 上传文件流   "bucktname"  "filename"
 		PutObjectResult result = ossClient.putObject(bucketName,fileName, new File(filePath));  
 		System.out.println(result.getRequestId());
 		
-		
-		// 关闭client  
 		ossClient.shutdown();  
 	}
 	public void download(String ossFileName,String localFile) throws Exception{
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);  
-
-		// 下载object到文件
 		ossClient.getObject(new GetObjectRequest(bucketName,ossFileName), new File(localFile));
 		System.out.println("end");
-		// 关闭client  
 		ossClient.shutdown();
 	}
-	
+	public void delectFile(String yourObjectName) {
+		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);  
+		ossClient.deleteObject(bucketName, yourObjectName);
+		ossClient.shutdown();
+	}
 	public static void main(String[] args) throws Exception {
 		OSSUploadVideo upload = new OSSUploadVideo();
 		upload.upload("test.log", "C:\\bxwlw\\home\\test.log");
