@@ -50,15 +50,13 @@ $().ready(function(){
     $("#demoBtn1").click(function(){
 		$.ajax({
 			type: "POST",
-			url:"/videoServer/pays/pay",
+			url:"http://localhost:8080/videoServer/pays/pay",
 			data:{
 				price : $("#inputprice").val(), 
                 istype : getistype(),
-<<<<<<< HEAD
-=======
                 user_id : 1,
                 video_id : 1,
->>>>>>> guanxin
+
 			},
 			dataType: "json",
 			success: function(data){
