@@ -8,7 +8,7 @@
 
     <form>
         <p><input id="inputprice" type="text" name="inputprice" class="form-control" placeholder="请输入金额" required></p>
-                
+        <p><input id="goodsname" type="text" name="goodsname" class="form-control" placeholder="请输入商品名称" required></p>        
         <div class="radio">
             <label>            
                 <p><input type="radio" name="demo1" id="demo1-alipay" value="option1" checked="">
@@ -50,10 +50,11 @@ $().ready(function(){
     $("#demoBtn1").click(function(){
 		$.ajax({
 			type: "POST",
-			url:"http://localhost/videoServer/pays/pay",
+			url:"http://localhost:8080/videoServer/pays/pay",
 			data:{
 				price : $("#inputprice").val(), 
                 istype : getistype(),
+                goodsname :$("goodsname").val(),
                 user_id : 1,//用户ID
                 video_id : 1,//视频ID
 
