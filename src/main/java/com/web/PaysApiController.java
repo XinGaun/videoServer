@@ -96,7 +96,7 @@ public class PaysApiController {
 		System.out.println(orderid);
 		int flog = orderTabService.queryOrderTab(hashMap);
 		System.out.println(flog);
-		if(flog!=1) {
+		if(flog==1) {
 			isTrue = true;
 		}
 		if (isTrue) {
