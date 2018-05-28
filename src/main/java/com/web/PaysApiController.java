@@ -67,7 +67,7 @@ public class PaysApiController {
 		if (PayUtil.checkPayKey(paySaPi)) {
 			Outputsystem.sysTemOut("price:"+paySaPi.getPrice());
 			Outputsystem.sysTemOut("spi_id: "+paySaPi.getPaysapi_id());
-			if(paySaPi.getPrice()==paySaPi.getRealprice()) {
+			if(paySaPi.getPrice().equals(paySaPi.getRealprice())) {
 				hashMap.put("order_pricemoney", paySaPi.getRealprice());
 				hashMap.put("order_status","已付款");
 				String result = orderTabService.updateOrderTab(hashMap);
