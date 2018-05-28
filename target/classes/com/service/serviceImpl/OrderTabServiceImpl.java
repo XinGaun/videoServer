@@ -58,5 +58,10 @@ public class OrderTabServiceImpl implements OrderTabService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public String queryOrderTabAll(String data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

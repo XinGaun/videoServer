@@ -32,4 +32,5 @@ public interface OrderTabService {
 	 * @return
 	 */
 	public String deleteOrderTab(String data);
+	public String queryOrderTabAll(String data);
 }
