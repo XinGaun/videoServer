@@ -15,7 +15,7 @@ public class AabController {
 	@Autowired
 	private AabService aabService;
 	
-	@RequestMapping(value="/selectAab",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	@RequestMapping(value="/selectAab",produces="application/json;charset=utf-8",method= {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public String selectAab(){
 		return aabService.queryAab();

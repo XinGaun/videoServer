@@ -8,14 +8,16 @@ import java.io.*;
 
 public class OSSUploadVideo {
 	private static String endpoint = "http://oss-cn-beijing.aliyuncs.com";  
-	private static String accessKeyId = "LTAILTZtDu4Cd81w";
-	private static String accessKeySecret = "V0dqav2h0k8Fo7ZZizGAHaLPznVV6M";
+	private static String accessKeyId = "LTAIb7ibuLQWDSIm";
+	private static String accessKeySecret = "Pa3gsiNAHC2FlFc0oKgCO3j70R6m8m";
 	private static String bucketName = "tmz8023";
-//	private static String key = "80bcefda64cbdaff855434efdf2ec8cf.mp4";
-	
-	public void upload(String fileName,String filePath) throws Exception {
-		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);  
-		PutObjectResult result = ossClient.putObject(bucketName,fileName, new File(filePath));  
+
+	public void upload(String filePath) throws Exception {
+		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret); 
+		if (!ossClient.doesBucketExist(bucketName)) {
+			ossClient.createBucket(bucketName);
+        }
+		PutObjectResult result = ossClient.putObject(bucketName,new File(filePath).getName(), new File(filePath));  
 		System.out.println(result.getRequestId());
 		
 		ossClient.shutdown();  
@@ -31,9 +33,16 @@ public class OSSUploadVideo {
 		ossClient.deleteObject(bucketName, yourObjectName);
 		ossClient.shutdown();
 	}
+	
+	public String  showImg(String imgName) {
+		String path = "http://"+bucketName+"."+endpoint+"/"+imgName+"?x-oss-process=image/resize,w_1000";
+		return path;
+	}
+	
 	public static void main(String[] args) throws Exception {
 		OSSUploadVideo upload = new OSSUploadVideo();
-		upload.upload("test.log", "C:\\bxwlw\\home\\test.log");
-		upload.download("offile.docx","D:\\filedownload\\2.docx");
+//		C:\\bxwlw\\home\\test.log
+		upload.upload("D:\\filedownload\\3.jpg");
+//		upload.download("test.log","D:\\filedownload\\test.log");
 	}
 }
