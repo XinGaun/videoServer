@@ -51,8 +51,8 @@ public class PaysApiController {
 		
 		remoteMap.put("price", price);
 		remoteMap.put("istype", istype);
-		remoteMap.put("orderid", hashMap.get("order_id"));
-		//remoteMap.put("orderid", PayUtil.getOrderIdByUUId());
+		//remoteMap.put("orderid", hashMap.get("order_id"));
+		remoteMap.put("orderid", PayUtil.getOrderIdByUUId());
 		remoteMap.put("orderuid", user_id);
 		//remoteMap.put("goodsname", "测试");
 		resultMap.put("data", PayUtil.payOrder(remoteMap));
