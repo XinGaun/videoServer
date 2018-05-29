@@ -42,4 +42,8 @@
 	<update id="updateOrderTab" parameterType="java.util.HashMap">
 		UPDATE order_tab SET order_pricemoney = ${order_pricemoney},order_status = #{order_status} WHERE order_id = #{order_id}
 	</update>
+	<!-- 查询所有订单信息 -->
+	<select id="queryOrderTabAll" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT * FROM order_tab limit #{start},#{limit}
+	</select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -38,4 +39,10 @@ public interface OrderTabDao {
 	 * @return
 	 */
 	public int deleteOrderTab(int order_id);
+	/**
+	 * 查询订单总数信息
+	 * @param hashmap
+	 * @return
+	 */
+	public ArrayList<HashMap<String,Object>> queryOrderTabAll(HashMap<String,Object> hashmap);
 }
