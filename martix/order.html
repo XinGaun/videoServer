@@ -322,9 +322,16 @@
                               <table id="example" class="display table-striped table-bordered table-hover table-condensed" cellspacing="0" width="100%">
 								<thead>
 									<tr>
-										<th>编号</th>
-										<th>姓名</th>
-										<th>性别</th>
+										<th>订单编号</th>
+										<th>用户编号</th>
+										<th>视频编号</th>
+										<th>套餐编号</th>
+										<th>实付款</th>
+										<th>应付款</th>
+										<th>优惠码</th>
+										<th>生成日期</th>
+										<th>订单状态</th>
+										<th>付款类型</th>
 									</tr>
 								</thead>
 							</table>
@@ -409,13 +416,14 @@ $(function () {
                 $.ajax({
                     type: "POST",
                     url: "http://localhost:8080/videoServer/order/queryOrderAll",
-                    cache: false,  //禁用缓存
-                    data: param,  //传入组装的参数
+                    contentType: 'application/json; charset=UTF-8',
+					cache: false,  //禁用缓存
+                    data: JSON.stringify(param),  //传入组装的参数
                     dataType: "json",
                     success: function (result) {
                         console.log(result);
                         //setTimeout仅为测试延迟效果
-                        setTimeout(function () {
+                        //setTimeout(function () {
                             //封装返回数据
                             var returnData = {};
                             returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
@@ -426,15 +434,27 @@ $(function () {
                             //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
                             //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
                             callback(returnData);
-                        }, 200);
+                        //}, 200);
                     }
                 });
             },
             //列表表头字段
             columns: [
-                { "data": "Id" },
-                { "data": "Name" },
-                { "data": "Sex" }
+                { "data": "order_id" },
+                { "data": "user_id" },
+                { "data": "video_id" },
+				{ "data": "combo_id",
+				"sDefaultContent":"无",
+				"bVisible" : false //此列不显示
+				},
+				{ "data": "order_pricemoney" },
+				{ "data": "order_due" },
+				{ "data": "discounts_id" ,
+				"sDefaultContent":"无"
+				},
+				{ "data": "order_date" },
+				{ "data": "order_status" },
+				{ "data": "order_type" }
             ]
         }).api();
         //此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
