@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
 import com.dao.OrderTabDao;
@@ -15,6 +16,7 @@ import com.util.Outputsystem;
  * @author vip
  *
  */
+@SuppressWarnings("unchecked")
 @Service
 public class OrderTabServiceImpl implements OrderTabService {
 	@Autowired
@@ -55,31 +57,40 @@ public class OrderTabServiceImpl implements OrderTabService {
 	/**
 	 * 删除订单信息
 	 */
-	@Override
+	@Transactional
 	public String deleteOrderTab(String data) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<String> list = JSON.parseObject(data, ArrayList.class);
+		ArrayList<Integer> retlist = new ArrayList<Integer>();
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i));
+			int order_id = Integer.parseInt(list.get(i));
+			int flog = orderTabDao.deleteOrderTab(order_id);
+			if(flog<=0) {
+				retlist.add(order_id);
+			}
+		}
+		if(retlist.size()==0) {
+			return JSON.toJSONString("success");
+		}
+		return JSON.toJSONString(retlist);
 	}
+	/**
+	 * 查询所有订单信息
+	 */
 	@Override
 	public String queryOrderTabAll(String data) {
-		System.out.println(data);
+		//System.out.println(data);
 		HashMap<String,Object> hashmap = JSON.parseObject(data, HashMap.class);
 		ArrayList<HashMap<String,Object>> orderList = orderTabDao.queryOrderTabAll(hashmap);
+		int total = orderTabDao.queryOrderTabCount(hashmap);
+		HashMap<String,Object> result = new HashMap<String,Object>();
+		result.put("data", orderList);
+		result.put("limit", Integer.parseInt(hashmap.get("limit").toString()));
+		result.put("total", total);
+		result.put("page", Integer.parseInt(hashmap.get("page").toString()));
 		
-		ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
-		HashMap<String,Object> hashmap2 = new HashMap<String,Object>();
-		hashmap2.put("Id",1);
-		hashmap2.put("Name","asda");
-		hashmap2.put("Sex","asdssssa");
-		list.add(hashmap2);
-		HashMap<String,Object> has = new HashMap<>();
-		has.put("data", orderList);
-		has.put("limit", 10);
-		has.put("total", orderList.size());
-		has.put("page", 1);
-		
-		System.out.println(JSON.toJSONString(orderList));
-		return JSON.toJSONString(has);
+		//System.out.println(JSON.toJSONString(result));
+		return JSON.toJSONString(result);
 	}
 
 }

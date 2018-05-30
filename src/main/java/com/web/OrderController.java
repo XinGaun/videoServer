@@ -17,9 +17,22 @@ import com.service.OrderTabService;
 public class OrderController {
 	@Autowired
 	private OrderTabService orderTabService;//调用订单Service层接口
-	
+	/**
+	 * 查询订单信息
+	 * @param data
+	 * @return
+	 */
 	@RequestMapping(value="/queryOrderAll",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String queryOrderTabAll(@RequestBody String data) {
 		return orderTabService.queryOrderTabAll(data);
+	}
+	/**
+	 * 删除订单信息
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/deleteOrderTab",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String deleteOrderTab(@RequestBody String data) {
+		return orderTabService.deleteOrderTab(data);
 	}
 }
