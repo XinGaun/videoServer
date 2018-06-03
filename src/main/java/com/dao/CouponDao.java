@@ -3,6 +3,7 @@ package com.dao;
 import java.util.List;
 
 import com.entity.Coupon;
+import com.entity.UseCoupon;
 
 /**
  * 
@@ -14,7 +15,7 @@ public interface CouponDao {
 	 * 添加优惠券信息
 	 * @param coupon
 	 */
-	public void addCoupon(Coupon coupon);
+	public Integer addCoupon(Coupon coupon);
 	/**
 	 * 查询所有优惠券
 	 * @return
@@ -25,21 +26,27 @@ public interface CouponDao {
 	 * @param couponId
 	 * @return
 	 */
-	public List<Coupon> queryCouponById(Integer couponId);
+	public List<Coupon> queryCouponById(Integer discountsId);
 	/**
 	 * 物理上删除优惠券
 	 * @param couponId
 	 */
-	public void deleteCoupon(Integer couponId);
+	public Integer deleteCoupon(Integer discountsId);
 	/**
 	 * 作废优惠券
 	 * @param couponId
 	 */
-	public void delCoupon(Integer couponId);
+	public Integer delCoupon(Coupon coupon);
 	/**
 	 * 通过用户id查询该用户的优惠券
 	 * @param userId
 	 * @return
 	 */
 	public List<Coupon> queryCouponByUserId(Integer userId);
+	/**
+	 * 添加优惠券使用信息
+	 * @param userCoupon
+	 * @return
+	 */
+	public Integer addDiscountsUse(UseCoupon userCoupon);
 }

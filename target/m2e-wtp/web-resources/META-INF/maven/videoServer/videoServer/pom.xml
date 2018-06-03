@@ -315,5 +315,6 @@
 			</plugin>
 		</plugins>
 		<finalName>videoServer</finalName>
+		
 	</build>
 </project>

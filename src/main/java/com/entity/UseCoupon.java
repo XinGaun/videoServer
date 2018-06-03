@@ -1,13 +1,30 @@
 package com.entity;
 
 import java.util.Date;
-
+/**
+ * 用户使用优惠券记录
+ *
+ */
 public class UseCoupon {
-
+	/**
+	 * 用户ID
+	 */
 	private Integer userId;
+	/**
+	 * 优惠码ID
+	 */
 	private Integer DiscountsId;
+	/**
+	 * 视频ID
+	 */
 	private Integer videoId;
+	/**
+	 * 套餐ID
+	 */
 	private Integer comboId;
+	/**
+	 * 使用日期
+	 */
 	private Date discountsDate;
 	
 	public Integer getUserId() {
@@ -50,10 +67,4 @@ public class UseCoupon {
 		this.discountsDate = discountsDate;
 	}
 
-	@Override
-	public String toString() {
-		return "UseCoupon [userId=" + userId + ", DiscountsId=" + DiscountsId + ", videoId=" + videoId + ", comboId="
-				+ comboId + ", discountsDate=" + discountsDate + "]";
-	}
-	
 }

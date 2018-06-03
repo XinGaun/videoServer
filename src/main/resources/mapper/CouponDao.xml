@@ -3,5 +3,141 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.CouponDao">
-	<sql></sql>
+	<sql id="coupon_column">
+		discounts_id,discounts_text,discounts_number,discounts_date,discounts_valid,discounts_addr
+	</sql>
+	<sql id="discounts_use_column">
+		user_id,discounts_id,video_id,combo_id,discounts_date
+	</sql>
+	<select id="queryCoupon" resultType="com.entity.Coupon">
+		select <include refid="coupon_column"/> from discounts_tab
+	</select>
+	<select id="queryCouponById" resultType="com.entity.Coupon">
+		select <include refid="coupon_column"/> from discounts_tab where discounts_id = #{discountsId}
+	</select>
+	<select id="queryCouponByUserId" parameterType="java.lang.Integer" resultType="com.entity.UseCoupon">
+		select <include refid="discounts_use_column"/> from discounts_use_tab
+		where usesr_id = #{userId}
+	</select>
+	<delete id="deleteCoupon" parameterType="java.lang.Integer" >
+		delete discounts_tab where discounts_id = #{discountsId}
+	</delete>
+	<update id="delCoupon" parameterType="com.entity.Coupon">
+		update discounts_tab set discounts_valid = #{discountsValid} where discounts_id = #{discountsId}
+	</update>
+	<insert id="addCoupon" parameterType="com.entity.Coupon">
+		insert into discounts_tab
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="discountsText != null and discountsText !=''">
+				discounts_text,
+			</if>
+			<if test="discountsNumber != null and discountsNumber !=''">
+				discounts_number,
+			</if>
+			<if test="discountsDate != null and discountsDate !=''">
+				discounts_date,
+			</if>
+			<if test="discountsValid != null and discountsValid !=''">
+				discounts_valid,
+			</if>
+			<if test="discountsAddr != null and discountsAddr !=''">
+				discounts_addr,
+			</if>
+		</trim>
+		 <trim prefix="values(" suffix=")" suffixOverrides=",">
+		 	<if test="discountsText != null and discountsText !=''">
+				#{discountsText},
+			</if>
+			<if test="discountsNumber != null and discountsNumber !=''">
+				#{discountsNumber},
+			</if>
+			<if test="discountsDate != null and discountsDate !=''">
+				#{discountsDate},
+			</if>
+			<if test="discountsValid != null and discountsValid !=''">
+				#{discountsValid},
+			</if>
+			<if test="discountsAddr != null and discountsAddr !=''">
+				#{discountsAddr},
+			</if>
+		 </trim>
+	</insert>
+	<insert id="addDiscountsUse" parameterType="com.entity.Coupon">
+		insert into discounts_use_tab
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null and userId !=''">
+				user_id,
+			</if>
+			<if test="discountsId != null and discountsId !=''">
+				discounts_id,
+			</if>
+			<if test="videoId != null and videoId !=''">
+				video_id,
+			</if>
+			<if test="comboId != null and comboId !=''">
+				combo_id,
+			</if>
+			<if test="discountsDate != null and discountsDate !=''">
+				discounts_date,
+			</if>
+		</trim>
+		 <trim prefix="values(" suffix=")" suffixOverrides=",">
+		 	<if test="userId != null and userId !=''">
+				#{userId},
+			</if>
+			<if test="discountsId != null and discountsId !=''">
+				#{discountsId},
+			</if>
+			<if test="videoId != null and videoId !=''">
+				#{videoId},
+			</if>
+			<if test="comboId != null and comboId !=''">
+				#{comboId},
+			</if>
+			<if test="discountsDate != null and discountsDate !=''">
+				#{discountsDate},
+			</if>
+		 </trim>
+	</insert>
+	<update id="updateCoupon" parameterType="com.entity.Coupon">
+		update discounts_tab 
+		<set>
+		 	<if test="discountsText != null and discountsText !=''">
+				discounts_text = #{discountsText},
+			</if>
+			<if test="discountsNumber != null and discountsNumber !=''">
+				discounts_number = #{discountsNumber},
+			</if>
+			<if test="discountsDate != null and discountsDate !=''">
+				discounts_date = #{discountsDate},
+			</if>
+			<if test="discountsValid != null and discountsValid !=''">
+				discounts_valid = #{discountsValid},
+			</if>
+			<if test="discountsAddr != null and discountsAddr !=''">
+				discounts_addr = #{discountsAddr},
+			</if>
+		</set>
+		where discounts_id = #{discounts_Id}
+	</update>
+	<!-- <update id="updateDiscountsUse" parameterType="com.entity.UseCoupon">
+		update discounts_use_tab 
+		<set>
+		 	<if test="userId != null and userId !=''">
+				user_id = #{userId},
+			</if>
+			<if test="discountsId != null and discountsId !=''">
+				discounts_id = #{discountsId},
+			</if>
+			<if test="videoId != null and videoId !=''">
+				video_id = #{videoId},
+			</if>
+			<if test="comboId != null and comboId !=''">
+				combo_id = #{comboId},
+			</if>
+			<if test="discountsDate != null and discountsDate !=''">
+				discounts_date = #{discountsDate},
+			</if>
+		</set>
+	</update> -->
 </mapper>
