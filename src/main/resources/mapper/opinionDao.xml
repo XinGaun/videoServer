@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.opinionDao">
+	
+	<!-- 查询订单信息 -->
+	<select id="queryOpinionAll" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT * FROM opinion_tab
+	</select>
+	
+	<!-- 查询定单总数 -->
+	<select id="queryOpinionTabCount" parameterType="java.util.HashMap" resultType="int">
+	    SELECT COUNT(o.opinion_id) FROM opinion_tab o where 1=1 
+		<if test="order_id!='' and order_id!=null">
+			and o.opinion_id = #{opinion_id}
+		</if> 
+		<if test="user_name!='' and user_name!=null">
+			and o.user_id = #{user_id}
+		</if> 
+	</select>
+	
+	<!-- 删除订单信息 -->
+	<insert id="deleteOpinionTab" parameterType="int">
+		DELETE FROM order_tab WHERE order_id = #{order_id}
+	</insert>
+</mapper>
