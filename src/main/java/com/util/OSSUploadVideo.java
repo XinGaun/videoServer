@@ -1,10 +1,13 @@
 package com.util;
 
+import java.io.File;
+import java.net.URL;
+import java.util.Date;
+
+import com.aliyun.oss.HttpMethod;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.GetObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;  
-  
-import java.io.*;  
 
 public class OSSUploadVideo {
 	private static String endpoint = "http://oss-cn-beijing.aliyuncs.com";  
@@ -34,15 +37,32 @@ public class OSSUploadVideo {
 		ossClient.shutdown();
 	}
 	
-	public String  showImg(String imgName) {
-		String path = "http://"+bucketName+"."+endpoint+"/"+imgName+"?x-oss-process=image/resize,w_1000";
+	public String getImgURL(String imgName) {
+		String path = "http://"+bucketName+"."+endpoint.substring(7)+"/"+imgName+"?x-oss-process=image/resize,w_1000";
 		return path;
 	}
 	
+	public URL getURL() {
+		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
+
+		// 设置URL过期时间为1小时
+		Date expiration = new Date(new Date().getTime() + 3600 * 1000 * 24);
+		// 生成URL。
+		URL url = ossClient.generatePresignedUrl(bucketName, "1.mp4", expiration, HttpMethod.PUT);
+
+		// 关闭Client。
+		ossClient.shutdown();
+		return url;
+	}
+	
 	public static void main(String[] args) throws Exception {
-		OSSUploadVideo upload = new OSSUploadVideo();
+		OSSUploadVideo oss = new OSSUploadVideo();
 //		C:\\bxwlw\\home\\test.log
-		upload.upload("D:\\filedownload\\3.jpg");
-//		upload.download("test.log","D:\\filedownload\\test.log");
+//		oss.upload("D:\\filedownload\\3.jpg");
+//		oss.download("test.log","D:\\filedownload\\test.log");
+//		URL url =oss.getURL();
+		String path = oss.getImgURL("2.jpg");
+		System.out.println(path.toString());
+	
 	}
 }

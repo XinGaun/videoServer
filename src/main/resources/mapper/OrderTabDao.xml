@@ -4,42 +4,123 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.OrderTabDao">
 	<!-- 添加订单信息 -->
-	<insert id="addOrderTab" parameterType="java.util.HashMap" keyProperty="order_id">
-		INSERT INTO order_tab(user_id,order_due,order_status,order_date,order_type
-			<if test="video_id!=null">
-				,video_id
-			</if>
-			<if test="combo_id!=null">
-				,combo_id
-			</if>
-			<if test="order_pricemoney!=null">
-				,order_pricemoney
-			</if>
-			<if test="discounts_id!=null">
-				,discounts_id
-			</if>
-		) 
+	<insert id="addOrderTab" parameterType="java.util.HashMap"
+		keyProperty="order_id">
+		INSERT INTO
+		order_tab(user_id,order_due,order_status,order_date,order_type
+		<if test="video_id!=null">
+			,video_id
+		</if>
+		<if test="combo_id!=null">
+			,combo_id
+		</if>
+		<if test="order_pricemoney!=null">
+			,order_pricemoney
+		</if>
+		<if test="discounts_id!=null">
+			,discounts_id
+		</if>
+		)
 		VALUES (#{user_id},${order_due},#{order_status},now(),#{order_type}
-			<if test="video_id!=null">
-				,#{video_id}
-			</if>
-			<if test="combo_id!=null">
-				,#{combo_id}
-			</if>
-			<if test="order_pricemoney!=null">
-				,#{order_pricemoney}
-			</if>
-			<if test="discounts_id!=null">
-				,#{discounts_id}
-			</if>
+		<if test="video_id!=null">
+			,#{video_id}
+		</if>
+		<if test="combo_id!=null">
+			,#{combo_id}
+		</if>
+		<if test="order_pricemoney!=null">
+			,#{order_pricemoney}
+		</if>
+		<if test="discounts_id!=null">
+			,#{discounts_id}
+		</if>
 		)
 	</insert>
 	<!-- 查询订单信息 -->
-	<select id="queryOrderTab" parameterType="java.util.HashMap" resultType="int">
-		SELECT count(order_id) FROM order_tab WHERE order_id=#{order_id} AND order_status = '已付款'
+	<select id="queryOrderTab" parameterType="java.util.HashMap"
+		resultType="int">
+		SELECT count(order_id) FROM order_tab WHERE
+		order_id=#{order_id} AND order_status = '已付款'
 	</select>
 	<!-- 更新订单信息 -->
 	<update id="updateOrderTab" parameterType="java.util.HashMap">
-		UPDATE order_tab SET order_pricemoney = ${order_pricemoney},order_status = #{order_status} WHERE order_id = #{order_id}
+		UPDATE order_tab SET
+		order_pricemoney = ${order_pricemoney},order_status = #{order_status}
+		WHERE order_id = #{order_id}
 	</update>
+	<!-- 查询所有订单信息 -->
+	<select id="queryOrderTabAll" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		SELECT
+		o.order_id,o.user_id,o.video_id,o.combo_id,o.order_pricemoney,o.order_due,o.discounts_id,date_format(o.order_date,'%Y-%m-%d %h:%i:%s')order_date
+		,o.order_status,o.order_type,s.status_type,u.user_name,v.video_name,c.combo_name
+		FROM order_tab o LEFT JOIN status_tab s ON o.order_type = s.status_id
+		LEFT JOIN user_tab u ON o.user_id = u.user_id LEFT JOIN video_tab v ON
+		o.video_id=v.video_id
+		LEFT JOIN combo_tab c on o.combo_id = o.combo_id where 1=1 
+		<if test="order_id!='' and order_id!=null">
+			and o.order_id = #{order_id}
+		</if> 
+		<if test="user_name!='' and user_name!=null">
+			and u.user_name = #{user_name}
+		</if> 
+		<if test="video_name!='' and video_name!=null">
+			and v.video_name = #{video_name}
+		</if> 
+		<if test="combo_name!='' and combo_name!=null">
+			and c.combo_name = #{combo_name}
+		</if> 
+		<if test="order_status!='' and order_status!=null">
+			and o.order_status = #{order_status}
+		</if> 
+		<if test="order_type!='' and order_type!=null and order_type!=0">
+			and o.order_type = #{order_type}
+		</if> 
+		<if test="order_start!='' and order_start!=null">
+			and o.order_date >= str_to_date(#{order_start}, '%Y-%m-%d')
+		</if> 
+		<if test="order_start!=order_end">
+			<if test="order_end!='' and order_end!=null">
+				and o.order_date &lt;= str_to_date(#{order_end}, '%Y-%m-%d')
+			</if>
+		</if>
+		limit #{start},#{limit}
+	</select>
+	<!-- 查询定单总数 -->
+	<select id="queryOrderTabCount" parameterType="java.util.HashMap" resultType="int">
+	    SELECT COUNT(o.order_id) FROM order_tab o LEFT JOIN status_tab s ON o.order_type = s.status_id
+		LEFT JOIN user_tab u ON o.user_id = u.user_id LEFT JOIN video_tab v ON
+		o.video_id=v.video_id
+		LEFT JOIN combo_tab c on o.combo_id = o.combo_id where 1=1 
+		<if test="order_id!='' and order_id!=null">
+			and o.order_id = #{order_id}
+		</if> 
+		<if test="user_name!='' and user_name!=null">
+			and u.user_name = #{user_name}
+		</if> 
+		<if test="video_name!='' and video_name!=null">
+			and v.video_name = #{video_name}
+		</if> 
+		<if test="combo_name!='' and combo_name!=null">
+			and c.combo_name = #{combo_name}
+		</if> 
+		<if test="order_status!='' and order_status!=null">
+			and o.order_status = #{order_status}
+		</if> 
+		<if test="order_type!='' and order_type!=null and order_type!=0">
+			and o.order_type = #{order_type}
+		</if> 
+		<if test="order_start!='' and order_start!=null">
+			and o.order_date >= str_to_date(#{order_start}, '%Y-%m-%d')
+		</if> 
+		<if test="order_start!=order_end">
+			<if test="order_end!='' and order_end!=null">
+				and o.order_date &lt;= str_to_date(#{order_end}, '%Y-%m-%d')
+			</if>
+		</if>
+	</select>
+	<!-- 删除订单信息 -->
+	<insert id="deleteOrderTab" parameterType="int">
+		DELETE FROM order_tab WHERE order_id = #{order_id}
+	</insert>
 </mapper>

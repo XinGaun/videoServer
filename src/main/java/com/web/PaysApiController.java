@@ -34,7 +34,7 @@ public class PaysApiController {
 
 	@RequestMapping(value="/pay",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	@ResponseBody
-	public String pay(HttpServletRequest request, float price, int istype,int user_id,@RequestParam(value="combo_id",required=false) Integer combo_id,@RequestParam(value="video_id",required=false) Integer video_id,@RequestParam(value="discounts_id",required=false) Integer discounts_id) throws UnsupportedEncodingException {
+	public String pay(HttpServletRequest request, String price, int istype,int user_id,@RequestParam(value="combo_id",required=false) Integer combo_id,@RequestParam(value="video_id",required=false) Integer video_id,@RequestParam(value="discounts_id",required=false) Integer discounts_id) throws UnsupportedEncodingException {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		Map<String, Object> remoteMap = new HashMap<String, Object>();
 		HashMap<String,Object> hashMap = new HashMap<String, Object>();
@@ -48,7 +48,6 @@ public class PaysApiController {
 		String result = orderTabService.addOrderTab(hashMap);
 		Outputsystem.sysTemOut("addOrderTab result: "+result);
 		Outputsystem.sysTemOut(price+"");
-		
 		remoteMap.put("price", price);
 		remoteMap.put("istype", istype);
 		//remoteMap.put("orderid", hashMap.get("order_id"));
