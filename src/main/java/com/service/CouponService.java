@@ -15,7 +15,9 @@ public interface CouponService {
 	
 	public String addDiscountsUse(UseCoupon userCoupon);
 	
-	public List<Coupon> quaryCoupon(Integer discountsId);
+	public String queryCoupon(String data);
+	
+	public List<Coupon> queryCoupon(Integer discountsId);
 	
 	public String deleteCoupon(Coupon coupon);
 	

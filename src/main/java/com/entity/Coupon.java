@@ -11,7 +11,7 @@ public class Coupon {
 	/**
 	 * 优惠券id
 	 */
-	private Integer disCountsId;
+	private Integer discountsId;
 	/**
 	 * 优惠内容
 	 */
@@ -19,27 +19,35 @@ public class Coupon {
 	/**
 	 * 优惠码
 	 */
-	private Integer discountsNumber;
+	private String discountsNumber;
 	/**
 	 * 有效日期
 	 */
 	@DateTimeFormat(pattern="yyyy-mm-dd")
 	private Date discountsDate;
 	/**
+	 * 有效日期
+	 */
+	private String discountsDateString;
+	/**
 	 * 是否有效
 	 */
 	private Integer discountsValid;
+	/**
+	 * 是否有效
+	 */
+	private String discountsValue;
 	/**
 	 * 投放地区
 	 */
 	private String discountsAddr;
 	
-	public Integer getDisCountsId() {
-		return disCountsId;
+	public Integer getDiscountsId() {
+		return discountsId;
 	}
 	
-	public void setDisCountsId(Integer disCountsId) {
-		this.disCountsId = disCountsId;
+	public void setDiscountsId(Integer discountsId) {
+		this.discountsId = discountsId;
 	}
 	
 	public String getDiscountsText() {
@@ -50,11 +58,11 @@ public class Coupon {
 		this.discountsText = discountsText;
 	}
 	
-	public Integer getDiscountsNumber() {
+	public String getDiscountsNumber() {
 		return discountsNumber;
 	}
 	
-	public void setDiscountsNumber(Integer discountsNumber) {
+	public void setDiscountsNumber(String discountsNumber) {
 		this.discountsNumber = discountsNumber;
 	}
 	
@@ -66,6 +74,14 @@ public class Coupon {
 		this.discountsDate = discountsDate;
 	}
 	
+	public String getDiscountsDateString() {
+		return discountsDateString;
+	}
+
+	public void setDiscountsDateString(String discountsDateString) {
+		this.discountsDateString = discountsDateString;
+	}
+
 	public Integer getDiscountsValid() {
 		return discountsValid;
 	}
@@ -74,6 +90,14 @@ public class Coupon {
 		this.discountsValid = discountsValid;
 	}
 	
+	public String getDiscountsValue() {
+		return discountsValue;
+	}
+
+	public void setDiscountsValue(String discountsValue) {
+		this.discountsValue = discountsValue;
+	}
+
 	public String getDiscountsAddr() {
 		return discountsAddr;
 	}

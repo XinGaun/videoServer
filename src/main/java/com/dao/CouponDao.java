@@ -20,7 +20,12 @@ public interface CouponDao {
 	 * 查询所有优惠券
 	 * @return
 	 */
-	public List<Coupon> queryCoupon();
+	public List<Coupon> queryCoupon(Coupon coupon);
+	/**
+	 * 查询所有优惠券总数
+	 * @return
+	 */
+	public Integer queryCouponCount(Coupon coupon);
 	/**
 	 * 通过id查询优惠券
 	 * @param couponId

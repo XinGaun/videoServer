@@ -3,19 +3,77 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.CouponDao">
+	<resultMap type="com.entity.Coupon" id="couponEntity">
+		<id property="discountsId" column="discounts_id" jdbcType="NUMERIC"/>
+		<result property="discountsText" column="discounts_text" jdbcType="VARCHAR"/>
+		<result property="discountsNumber" column="discounts_number" jdbcType="VARCHAR"/>
+		<result property="discountsDateString" column="discounts_date" jdbcType="VARCHAR"/>
+		<result property="discountsValid" column="discounts_valid" jdbcType="NUMERIC"/>
+		<result property="discountsAddr" column="discounts_addr" jdbcType="VARCHAR"/>
+	</resultMap>
+	<resultMap type="com.entity.UseCoupon" id="useCouponEntity">
+		<result property="userId" column="user_id" jdbcType="NUMERIC"/>
+		<result property="DiscountsId" column="discounts_id" jdbcType="NUMERIC"/>
+		<result property="videoId" column="video_id" jdbcType="NUMERIC"/>
+		<result property="comboId" column="combo_id" jdbcType="NUMERIC"/>
+		<result property="discountsDateString" column="discounts_date" jdbcType="VARCHAR"/>
+	</resultMap>
 	<sql id="coupon_column">
-		discounts_id,discounts_text,discounts_number,discounts_date,discounts_valid,discounts_addr
+		discounts_id,discounts_text,discounts_number,date_format(discounts_date,'%Y-%m-%d %h:%i:%s') discounts_date,discounts_valid,discounts_addr
 	</sql>
 	<sql id="discounts_use_column">
-		user_id,discounts_id,video_id,combo_id,discounts_date
+		user_id,discounts_id,video_id,combo_id,date_format(discounts_date,'%Y-%m-%d %h:%i:%s') discounts_date
 	</sql>
-	<select id="queryCoupon" resultType="com.entity.Coupon">
+	<select id="queryCoupon" parameterType="com.entity.Coupon" resultMap="couponEntity">
 		select <include refid="coupon_column"/> from discounts_tab
+		<where>
+			<if test="discountsId != null and discountsId != ''">
+				discounts_id = #{discountsId}
+			</if>
+			<if test="discountsText != null and discountsText != ''">
+				AND discounts_text = #{discountsText}
+			</if>
+			<if test="discountsNumber != null and discountsNumber != ''">
+				AND discounts_number = #{discountsNumber}
+			</if>
+			<if test="discountsDate != null and discountsDate != ''">
+				AND discounts_date = #{discountsDate}
+			</if>
+			<if test="discountsValid != null and discountsValid != ''">
+				AND discounts_valid = #{discountsValid}
+			</if>
+			<if test="discountsAddr != null and discountsAddr != ''">
+				AND discounts_addr = #{discountsAddr}
+			</if>
+		</where>
 	</select>
-	<select id="queryCouponById" resultType="com.entity.Coupon">
+	<select id="queryCouponCount" resultType="java.lang.Integer">
+		select count(discounts_id) from discounts_tab
+		<where>
+			<if test="discountsId != null and discountsId != ''">
+				discounts_id = #{discountsId}
+			</if>
+			<if test="discountsText != null and discountsText != ''">
+				AND discounts_text = #{discountsText}
+			</if>
+			<if test="discountsNumber != null and discountsNumber != ''">
+				AND discounts_number = #{discountsNumber}
+			</if>
+			<if test="discountsDate != null and discountsDate != ''">
+				AND discounts_date = #{discountsDate}
+			</if>
+			<if test="discountsValid != null and discountsValid != ''">
+				AND discounts_valid = #{discountsValid}
+			</if>
+			<if test="discountsAddr != null and discountsAddr != ''">
+				AND discounts_addr = #{discountsAddr}
+			</if>
+		</where>
+	</select>
+	<select id="queryCouponById" resultMap="couponEntity">
 		select <include refid="coupon_column"/> from discounts_tab where discounts_id = #{discountsId}
 	</select>
-	<select id="queryCouponByUserId" parameterType="java.lang.Integer" resultType="com.entity.UseCoupon">
+	<select id="queryCouponByUserId" parameterType="java.lang.Integer" resultMap="useCouponEntity">
 		select <include refid="discounts_use_column"/> from discounts_use_tab
 		where usesr_id = #{userId}
 	</select>
