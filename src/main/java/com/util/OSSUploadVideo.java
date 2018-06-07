@@ -13,8 +13,9 @@ public class OSSUploadVideo {
 	private static String endpoint = "http://oss-cn-beijing.aliyuncs.com";  
 	private static String accessKeyId = "LTAIb7ibuLQWDSIm";
 	private static String accessKeySecret = "Pa3gsiNAHC2FlFc0oKgCO3j70R6m8m";
-	private static String bucketName = "tmz8023";
-
+//	private static String bucketName = "tmz8023";
+	/*private static String bucketName = "img-1-yudao";*/
+	private static String bucketName = "video-yudao-1";
 	public void upload(String filePath) throws Exception {
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret); 
 		if (!ossClient.doesBucketExist(bucketName)) {
@@ -37,12 +38,13 @@ public class OSSUploadVideo {
 		ossClient.shutdown();
 	}
 	
-	public String getImgURL(String imgName) {
-		String path = "http://"+bucketName+"."+endpoint.substring(7)+"/"+imgName+"?x-oss-process=image/resize,w_1000";
+	public String getOSSFileURL(String fileName) {
+		String path = "http://"+bucketName+"."+endpoint.substring(7)+"/"+fileName;
+		String style = "?x-oss-process=image/resize,w_1000";
 		return path;
 	}
 	
-	public URL getURL() {
+	public URL getOSSURL() {
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 
 		// 设置URL过期时间为1小时
@@ -55,14 +57,25 @@ public class OSSUploadVideo {
 		return url;
 	}
 	
+	
+	
 	public static void main(String[] args) throws Exception {
 		OSSUploadVideo oss = new OSSUploadVideo();
 //		C:\\bxwlw\\home\\test.log
+		oss.upload("D:\\filedownload\\2.mp4");
+		oss.upload("D:\\filedownload\\3.mp4");
+//		oss.upload("D:\\filedownload\\许嵩 - 庐州月.mp3");
+//		oss.upload("D:\\filedownload\\2.jpg");
 //		oss.upload("D:\\filedownload\\3.jpg");
+//		oss.upload("D:\\filedownload\\4.jpg");
+//		oss.upload("D:\\filedownload\\5.jpg");
+//		oss.upload("D:\\filedownload\\1.png");
+//		oss.upload("D:\\filedownload\\2.png");
+//		oss.upload("D:\\filedownload\\3.png");
 //		oss.download("test.log","D:\\filedownload\\test.log");
 //		URL url =oss.getURL();
-		String path = oss.getImgURL("2.jpg");
-		System.out.println(path.toString());
+//		String path = oss.getFileURL("2.jpg");
+//		System.out.println(path.toString());
 	
 	}
 }
