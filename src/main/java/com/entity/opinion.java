@@ -2,8 +2,9 @@ package com.entity;
 
 import java.util.Date;
 
-public class opinion {
+public class Opinion {
 	private Integer opinion_id;
+	private String user_name;
 	private Integer user_id;
 	private String opinion_text;
 	private Date opinion_date;
@@ -14,6 +15,12 @@ public class opinion {
 	}
 	public void setOpinion_id(Integer opinion_id) {
 		this.opinion_id = opinion_id;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 	public Integer getUser_id() {
 		return user_id;

@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.service.opinionService;
+import com.service.OpinionService;
 
 
 @Controller
 @RequestMapping("opinion")
 @ResponseBody
-public class opinionController {
+public class OpinionController {
 	@Autowired
-	private opinionService opinionservice;
+	private OpinionService opinionService;
 	
-	@RequestMapping(value="/queryOpinion",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	@RequestMapping(value="/queryOpinionAll",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String queryOpinionAll(@RequestBody String data) {
 		
-		return opinionservice.queryOpinionAll(data);
+		return opinionService.queryOpinionAll(data);
 		
 	}
 	
@@ -31,6 +31,6 @@ public class opinionController {
 	 */
 	@RequestMapping(value="/deleteopinionTab",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String deleteOrderTab(@RequestBody String data) {
-		return opinionservice.deleteOpinionTab(data);
+		return opinionService.deleteOpinionTab(data);
 	}
 }

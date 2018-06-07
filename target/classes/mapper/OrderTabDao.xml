@@ -120,7 +120,7 @@
 		</if>
 	</select>
 	<!-- 删除订单信息 -->
-	<insert id="deleteOrderTab" parameterType="int">
+	<delete id="deleteOrderTab" parameterType="int">
 		DELETE FROM order_tab WHERE order_id = #{order_id}
-	</insert>
+	</delete>
 </mapper>
