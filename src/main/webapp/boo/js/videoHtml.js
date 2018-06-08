@@ -1,21 +1,30 @@
 $(function() {
 	
 	initajax(param);
+<<<<<<< HEAD
 	initrecommend();
 	initqueryCourseGrade();
+=======
+>>>>>>> d08894e0d8b8c7e28ea3a0895ae74d050b7b3c77
 	judgePC();
 	//var user_id = getUrlParam('user_id');
 });
 
 
+<<<<<<< HEAD
 //var url = "http:/127.0.0.1:8080"
 var url = "";
+=======
+var url = "http:/127.0.0.1:8088"
+//var url = "";
+>>>>>>> d08894e0d8b8c7e28ea3a0895ae74d050b7b3c77
 var pages = 0;//当前页数
 var nums = 9;//每页几条
 var total = 0;//总条数 
 var sort = 0;//排序方式
 
 
+<<<<<<< HEAD
 //导航下方筛选
 function queryClassVideo(queryAlls){
 	param.queryAll=queryAlls;
@@ -29,6 +38,11 @@ function queryClassVideo(queryAlls){
 function queryNameVideo(){
 	param.keyword = $("#keyword").val();
 	param.queryAll = $("#queryAll").val();
+=======
+//搜索框查询
+function queryNameVideo(){
+	param.keyword = $("#keyword").val();
+>>>>>>> d08894e0d8b8c7e28ea3a0895ae74d050b7b3c77
 	$("#courseAll").html("");
 	param.pages = 0;
 	param.nums = 0;
@@ -154,6 +168,7 @@ function custom(number){
 	return false;
 }
 
+<<<<<<< HEAD
 //加载打榜好课
 function initqueryCourseGrade(){
 	$.ajax({
@@ -242,6 +257,10 @@ function initrecommend(){
 }
 
 //加载默认课程页面
+=======
+
+//加载默认页面
+>>>>>>> d08894e0d8b8c7e28ea3a0895ae74d050b7b3c77
 function initajax(param) {
 	$
 	.ajax({
@@ -252,7 +271,11 @@ function initajax(param) {
 		data : JSON.stringify(param), //传入组装的参数
 		dataType : "json",
 		success : function(result) {
+<<<<<<< HEAD
 			//console.log(result);
+=======
+			console.log(result);
+>>>>>>> d08894e0d8b8c7e28ea3a0895ae74d050b7b3c77
 			if (result.list.length == 0) {
 				$("#courseAll").append("暂无课程信息!");
 				return;

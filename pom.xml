@@ -58,11 +58,16 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
+<<<<<<< HEAD
 			<version>2.7.0</version>
 		</dependency>
+=======
+			<version>2.5.4</version>
+		</dependency> -->
+>>>>>>> d08894e0d8b8c7e28ea3a0895ae74d050b7b3c77
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

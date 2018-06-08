@@ -16,7 +16,10 @@ import com.util.Page;
 public class VideosDaoServiceImpl implements VideosDaoService {
 	@Autowired
 	private VideosDao videosDao;
+<<<<<<< HEAD
 	//课程中心课程查询
+=======
+>>>>>>> d08894e0d8b8c7e28ea3a0895ae74d050b7b3c77
 	@Override
 	public String querycoursesTabAll(String data) {
 		HashMap<String,Object> hashmap = JSON.parseObject(data,HashMap.class);
@@ -26,11 +29,14 @@ public class VideosDaoServiceImpl implements VideosDaoService {
 		//System.out.println(count);
 		return JSON.toJSONString(Count.counts(list, count, hashmap,200,"querycoursesTabAll success"));
 	}
+<<<<<<< HEAD
 	//课程中心推荐课程查询
 	@Override
 	public String queryRecommend() {
 		ArrayList<HashMap<String,Object>> list = videosDao.queryRecommend();
 		return JSON.toJSONString(list);
 	}
+=======
+>>>>>>> d08894e0d8b8c7e28ea3a0895ae74d050b7b3c77
 
 }
