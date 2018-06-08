@@ -24,7 +24,6 @@ public class VideosController {
 	public String querycoursesTabAll(@RequestBody String data) {
 		return videosDaoService.querycoursesTabAll(data);
 	}
-<<<<<<< HEAD
 	/**
 	 * video查询推荐课程信息
 	 * @param data
@@ -34,6 +33,4 @@ public class VideosController {
 	public String queryRecommend() {
 		return videosDaoService.queryRecommend();
 	}
-=======
->>>>>>> d08894e0d8b8c7e28ea3a0895ae74d050b7b3c77
 }

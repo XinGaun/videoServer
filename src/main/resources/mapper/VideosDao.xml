@@ -6,22 +6,15 @@
 	<!-- 查询所有课程 -->
 	<select id="querycoursesTabAll" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		SELECT courses_id,teacher_tab.teacher_id,teacher_name,courses_name,courses_introduce,courses_pricemoney,courses_click,courses_img_url,courses_grade,date_format(courses_date,'%Y-%m-%d')courses_date FROM courses_tab
-<<<<<<< HEAD
 		LEFT JOIN teacher_tab ON courses_tab.teacher_id=teacher_tab.teacher_id 
 		LEFT JOIN video_form_tab ON video_form_tab.video_form_id = courses_tab.video_form_id 
-=======
-		LEFT JOIN teacher_tab ON courses_tab.teacher_id=teacher_tab.teacher_id
->>>>>>> d08894e0d8b8c7e28ea3a0895ae74d050b7b3c77
  		WHERE 1=1 AND courses_status = 5 
  		<if test="keyword!=''">
  			AND courses_name like '%${keyword}%' 
  		</if>
-<<<<<<< HEAD
  		<if test="queryAll!=''">
  			AND video_form_tab.video_form_class = #{queryAll} 
  		</if>
-=======
->>>>>>> d08894e0d8b8c7e28ea3a0895ae74d050b7b3c77
  		ORDER BY 
  		<if test="sort==0">
  			courses_click DESC,courses_grade DESC,courses_date DESC 
@@ -43,17 +36,12 @@
 	<!-- 查询所有课程总数 -->
 	<select id="querycoursesTabAllCount" parameterType="java.util.HashMap" resultType="int">
 		SELECT COUNT(courses_id) FROM courses_tab
-<<<<<<< HEAD
 		LEFT JOIN teacher_tab ON courses_tab.teacher_id=teacher_tab.teacher_id 
 		LEFT JOIN video_form_tab ON video_form_tab.video_form_id = courses_tab.video_form_id 
-=======
-		LEFT JOIN teacher_tab ON courses_tab.teacher_id=teacher_tab.teacher_id
->>>>>>> d08894e0d8b8c7e28ea3a0895ae74d050b7b3c77
  		WHERE 1=1 AND courses_status = 5 
  		<if test="keyword!=''">
  			AND courses_name like '%${keyword}%' 
  		</if>
-<<<<<<< HEAD
  		<if test="queryAll!=''">
  			AND video_form_tab.video_form_class = #{queryAll} 
  		</if>
@@ -67,7 +55,5 @@
 		teacher_tab.teacher_id=courses_tab.teacher_id
 		WHERE 1=1 AND
 		courses_status = 5 order by courses_date DESC LIMIT 0,3
-=======
->>>>>>> d08894e0d8b8c7e28ea3a0895ae74d050b7b3c77
 	</select>
 </mapper>
