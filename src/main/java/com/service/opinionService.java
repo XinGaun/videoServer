@@ -1,6 +1,6 @@
 package com.service;
 
-public interface opinionService {
+public interface OpinionService {
 	/**
 	 * 查询建议
 	 * @return

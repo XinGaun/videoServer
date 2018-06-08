@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
-import com.dao.opinionDao;
-import com.service.opinionService;
+import com.dao.OpinionDao;
+import com.service.OpinionService;
 
 @Service
-public class opinionServerImpl implements opinionService{
+public class OpinionServerImpl implements OpinionService{
 	@Autowired
-	private opinionDao opiniondao;
+	private OpinionDao opinionDao;
 	
 	/**
 	 * 查询所有
@@ -22,10 +22,10 @@ public class opinionServerImpl implements opinionService{
 	@Override
 	public String queryOpinionAll(String data) {
 		HashMap<String,Object> hashmap = JSON.parseObject(data, HashMap.class);
-		ArrayList<HashMap<String,Object>> opinionList = opiniondao.queryOpinionAll(hashmap);
-		int total = opiniondao.queryOpinionTabCount(hashmap);
+		ArrayList<HashMap<String,Object>> orderList = opinionDao.queryOpinionAll(hashmap);
+		int total = opinionDao.queryOpinionTabCount(hashmap);
 		HashMap<String,Object> result = new HashMap<String,Object>();
-		result.put("data", opinionList);
+		result.put("data", orderList);
 		result.put("limit", Integer.parseInt(hashmap.get("limit").toString()));
 		result.put("total", total);
 		result.put("page", Integer.parseInt(hashmap.get("page").toString()));
@@ -42,7 +42,7 @@ public class opinionServerImpl implements opinionService{
 		for(int i=0;i<list.size();i++) {
 			System.out.println(list.get(i));
 			int opinion_id = Integer.parseInt(list.get(i));
-			int flog = opiniondao.deleteOpinionTab(opinion_id);
+			int flog = opinionDao.deleteOpinionTab(opinion_id);
 			if(flog<=0) {
 				retlist.add(opinion_id);
 			}

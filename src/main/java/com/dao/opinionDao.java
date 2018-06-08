@@ -3,7 +3,7 @@ package com.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public interface opinionDao {
+public interface OpinionDao {
 	/**
 	 * 查询所有建议内容
 	 * @return

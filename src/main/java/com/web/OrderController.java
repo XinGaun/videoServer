@@ -35,4 +35,5 @@ public class OrderController {
 	public String deleteOrderTab(@RequestBody String data) {
 		return orderTabService.deleteOrderTab(data);
 	}
+
 }
