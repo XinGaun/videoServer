@@ -1,6 +1,5 @@
 package com.web;
 
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,7 @@ public class videoFormTabController {
 	
 	@RequestMapping(value="/updateTab.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void uploadflv(int id,String video_form_name,String video_form_class,int video_form_status){
+	public void uploadflv(Integer id,String video_form_name,String video_form_class,Integer video_form_status){
 		videoFormTab v=new videoFormTab();
 		v.setVideo_form_id(id);
 		v.setVideo_form_name(video_form_name);

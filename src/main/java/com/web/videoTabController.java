@@ -1,26 +1,18 @@
 package com.web;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.junit.runner.Result;
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import com.alibaba.fastjson.JSON;
 import com.entity.videoTab;
@@ -52,7 +44,7 @@ public class videoTabController {
 	
 	@RequestMapping(value="/uploadflv.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void uploadflv(String video_name, String video_introduce,String video_url, String video_img_url,int video_form_id){
+	public void uploadflv(String video_name, String video_introduce,String video_url, String video_img_url,Integer video_form_id){
 		/*SimpleDateFormat ff1=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String video_date=ff1.format(new Date());*/
 		videoTab vt=new videoTab();
@@ -73,14 +65,14 @@ public class videoTabController {
    }
    @RequestMapping(value="/getVideoById.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
    @ResponseBody
-   public String getVideoById(int id){
+   public String getVideoById(Integer id){
 	   
 	   return JSON.toJSONString(vdservice.getVideoById(id));
    }
    
    @RequestMapping(value="/selVideo.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
    @ResponseBody
-   public String selVideo(/*int video_id,*/String video_name,int video_form_id){
+   public String selVideo(/*int video_id,*/String video_name,Integer video_form_id){
 	   videoTab vt=new videoTab();
 	   vt.setVideo_form_id(video_form_id);
 	   //vt.setVideo_id(video_id);
@@ -90,7 +82,7 @@ public class videoTabController {
 
    @RequestMapping(value="/updetVideoById.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
    @ResponseBody
-   public void updetVideoById(int video_id,String video_name,String video_url,String video_img_url,String video_introduce){
+   public void updetVideoById(Integer video_id,String video_name,String video_url,String video_img_url,String video_introduce){
 	   videoTab vt=new videoTab();
 	   vt.setVideo_id(video_id);
 	   vt.setVideo_img_url(video_img_url);
@@ -102,7 +94,7 @@ public class videoTabController {
    
    @RequestMapping(value="/delVideoById.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
    @ResponseBody
-   public void delVideoById(int video_id){
+   public void delVideoById(Integer video_id){
 	   vdservice.delVideoById(video_id);
    }
 }

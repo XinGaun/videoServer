@@ -17,7 +17,7 @@ public class subscriptionTabController {
 	
 	@RequestMapping(value="/insertTab.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void insertTab(int user_id,int video_id){
+	public void insertTab(Integer user_id,Integer video_id){
 		subscriptionTab v=new subscriptionTab();
 		v.setUser_id(user_id);
 		v.setVideo_id(video_id);

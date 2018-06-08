@@ -32,7 +32,7 @@ public class registerController {
 	public String upload() {
 		SimpleDateFormat df=new SimpleDateFormat("yyyyMMddHHmmss");
 		String date=df.format(new Date());
-		String newFujianName=date + ".avi";
+		//String newFujianName=date + ".avi";
 		return JSON.toJSONString(date);
 	}
 }

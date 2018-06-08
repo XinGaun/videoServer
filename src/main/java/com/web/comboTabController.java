@@ -1,6 +1,6 @@
 package com.web;
 
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,18 +47,18 @@ public class comboTabController {
 	}
 	@RequestMapping(value="/delComboById.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void delComboById(int id){
+	public void delComboById(Integer id){
 		cService.delComboById(id);
 	}
 	@RequestMapping(value="/getTaocanId.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public String getTaocanId(int id){
+	public String getTaocanId(Integer id){
 		return JSON.toJSONString(cService.getTaocanId(id));
 	}
 	
 	@RequestMapping(value="/updComboById.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void updComboById(int combo_id,String combo_name,String combo_introduce,String video_id,String combo_imgs,String combo_price){
+	public void updComboById(Integer combo_id,String combo_name,String combo_introduce,String video_id,String combo_imgs,String combo_price){
 		comboTab c=new comboTab();
 		c.setCombo_id(combo_id);
 		c.setCombo_imgs(combo_imgs);

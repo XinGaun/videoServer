@@ -1,6 +1,6 @@
 package com.web;
 
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,19 +46,19 @@ public class coursesTabController {
 	}
 	@RequestMapping(value="/delCoursesById.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void delCoursesById(int id){
+	public void delCoursesById(Integer id){
 		ctService.delCoursesById(id);
 	}
 	
 	@RequestMapping(value="/getTabListById.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public String getTabListById(int id){
+	public String getTabListById(Integer id){
 		return JSON.toJSONString(ctService.getTabListById(id));
 	}
 	
 	@RequestMapping(value="/upCoursesById.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void upCoursesById(int courses_id,String courses_name,String courses_introduce,String courses_pricemoney,String courses_video,String courses_img_url){
+	public void upCoursesById(Integer courses_id,String courses_name,String courses_introduce,String courses_pricemoney,String courses_video,String courses_img_url){
 		coursesTab c=new coursesTab();
 		c.setCourses_name(courses_name);
 		c.setCourses_introduce(courses_introduce);
