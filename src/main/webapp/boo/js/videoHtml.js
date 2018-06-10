@@ -8,8 +8,8 @@ $(function() {
 });
 
 
-//var url = "http:/127.0.0.1:8080"
-var url = "";
+var url = "http:/127.0.0.1:8080"
+//var url = "";
 var pages = 0;//当前页数
 var nums = 9;//每页几条
 var total = 0;//总条数 
@@ -172,7 +172,7 @@ function initqueryCourseGrade(){
 			for(var i=0;i<result.length;i++){
 				var queryCourseGrade = '<li>'
 										+'<div class="col-md-12" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
-										+	'<a href="#">'+result[i].courses_name+'</a>'
+										+	'<a href="course.html?cid='+result[i].courses_id+'">'+result[i].courses_name+'</a>'
 										+	'<span style="float:right"><span class="glyphicon glyphicon-thumbs-up"></span><span style="color: red">'+result[i].courses_grade+'</span></span>'
 										+	'</div>'		
 										+'</li>';
@@ -237,6 +237,10 @@ function initrecommend(){
 					+ '</div>';
 				$("#queryRecommend").append(queryRecommend);
 			}	
+			$("img.lazy").lazyload({
+				effect : "fadeIn",
+				offset : 300
+			});
 		}
 	});
 }

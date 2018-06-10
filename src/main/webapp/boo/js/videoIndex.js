@@ -8,8 +8,8 @@ $(function(){
 		window.location.href = "video.html?user_id="+user_id;
 	});
 });
-//var url = "http:/127.0.0.1:8080"
-var url = "";
+var url = "http:/127.0.0.1:8080"
+//var url = "";
 var user_id = 1;
 $("img.lazy").lazyload({effect: "fadeIn"});
 
@@ -40,7 +40,7 @@ function initGrade(){
 			for(var i=0;i<result.length;i++){
 				var queryCourseGrade = '<li>'
 										+'<div class="col-md-12" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
-										+	'<a href="#">'+result[i].courses_name+'</a>'
+										+	'<a href="course.html?cid='+result[i].courses_id+'">'+result[i].courses_name+'</a>'
 										+	'<span style="float:right"><span class="glyphicon glyphicon-thumbs-up"></span><span style="color: red">'+result[i].courses_grade+'</span></span>'
 										+	'</div>'		
 										+'</li>';
@@ -67,7 +67,7 @@ function initClick(){
 			for(var i=0;i<result.length;i++){
 				var queryCourseClick = '<li>'
 										+'<div class="col-md-12" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
-										+	'<a href="#">'+result[i].courses_name+'</a>'
+										+	'<a href="course.html?cid='+result[i].courses_id+'">'+result[i].courses_name+'</a>'
 										+	'<span style="float:right"><span class="glyphicon glyphicon-hand-right"></span><span style="color: red">'+result[i].courses_click+'</span></span>'
 										+	'</div>'		
 										+'</li>';
@@ -148,7 +148,7 @@ function initBoutique(){
 			for (var i = 0; i < result.length; i++) {
 				var excellent = '<div class="col-md-3" >'
 						+ '<div class="thumbnail">'
-						+ '<a href="#">' + '<img data-original="'
+						+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
 						+ result[i].courses_img_url
 						+ '" class="jpckclass lazy" style="width:100%;" alt="...">'
 						+ '</a>'

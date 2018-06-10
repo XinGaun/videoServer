@@ -1,43 +1,68 @@
 package com.service.serviceImpl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
-import com.dao.UserDao;
-import com.entity.UserTab;
-import com.service.UserService;
+import com.dao.UserDAO;
+import com.entity.UserDomain;
+import com.service.IUserService;
+import com.util.PaginationBean;
+
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements IUserService
+{
 	@Autowired
-	UserDao aDao;
-	@Override
-	public int addUser(UserTab ut) {
-		// TODO Auto-generated method stub
-		//System.out.println("ut"+ut);
-		//System.out.println(ut.getUser_name());
-		return aDao.addUser(ut);
-	}
-	@Override
-	public ArrayList<HashMap<String,Object>> queryUser(String user_phone) {
-		// TODO Auto-generated method stub
-		//System.out.println("a"+user_phone); 	
-		return aDao.queryUser(user_phone);
-	}
-	@Override
-	public ArrayList<HashMap<String,Object>> selectUser(UserTab ut) {
-		// TODO Auto-generated method stub
-		return aDao.selectUser(ut);
-				
-	}
-	@Override
-	public int updateUser(UserTab ut) {
-		// TODO Auto-generated method stub
-		System.out.println("ut"+ut);
-		return aDao.updateUser(ut);
+	public UserDAO UserDAO;
+
+	public void setUserDAO(UserDAO UserDAO)
+	{
+		this.UserDAO = UserDAO;
 	}
 
+	public int addUser(UserDomain UserDomain)
+	{
+		return UserDAO.addUser(UserDomain);
+	}
+
+	public int deleteUser(UserDomain UserDomain)
+	{
+		return UserDAO.deleteUser(UserDomain);
+	}
+
+	public int modifyUser(UserDomain UserDomain)
+	{
+		return UserDAO.modifyUser(UserDomain);
+	}
+
+	public List<UserDomain> queryListUser(UserDomain UserDomain,PaginationBean page)
+	{
+		if( page != null )
+		{
+			page.setTotalRows(queryUserCount(UserDomain));
+			page.repaginate();
+			
+			UserDomain.setPage(page);
+		}
+		return UserDAO.queryListUser(UserDomain);
+	}
+
+	public UserDomain searchSingleUser(UserDomain UserDomain)
+	{
+		List<UserDomain> list = queryListUser(UserDomain,null);
+		if(list == null || list.isEmpty() || list.size()<1)
+		{
+			return null;
+		}
+		else
+		{
+			return list.get(0);
+		}
+	}
+
+	public int  queryUserCount(UserDomain UserDomain)
+	{
+		return UserDAO.queryUserCount(UserDomain);
+	}
 }
