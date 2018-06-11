@@ -304,14 +304,16 @@
 										答案D:
 										<textarea class="form-control" rows="3" id="answerD"></textarea>
 										<hr>
-										正确答案: <input type="radio" name="answer" id="" value="A"
-											checked>A <input type="radio" name="answer" id=""
-											value="B">B <input type="radio" name="answer" id=""
-											value="C">C <input type="radio" name="answer" id=""
+										正确答案: <input type="checkbox" name="answer" id="" value="A">A <input type="checkbox" name="answer" id=""
+											value="B">B <input type="checkbox" name="answer" id=""
+											value="C">C <input type="checkbox" name="answer" id=""
 											value="D">D
 										<hr>
 										难度等级:<input type="text" class="form-control"
 											id="difficultytest">
+										<hr>
+										所属分类:<input type="text" class="form-control"
+											id="test_type">
 										<hr>
 										<button class="btn btn-success" onclick="pushclear()">确认添加</button>
 										&nbsp;&nbsp;&nbsp;&nbsp;
@@ -348,13 +350,16 @@
 										答案D:
 										<textarea class="form-control" rows="3" id="answerDupdate"></textarea>
 										<hr>
-										正确答案: <input type="radio" name="answerupdate" id="" value="A">A
-										<input type="radio" name="answerupdate" id="" value="B">B
-										<input type="radio" name="answerupdate" id="" value="C">C
-										<input type="radio" name="answerupdate" id="" value="D">D
+										正确答案: <input type="checkbox" name="answerupdate" id="" value="A">A
+										<input type="checkbox" name="answerupdate" id="" value="B">B
+										<input type="checkbox" name="answerupdate" id="" value="C">C
+										<input type="checkbox" name="answerupdate" id="" value="D">D
 										<hr>
 										难度等级:<input type="text" class="form-control"
 											id="difficultytestupdate">
+										<hr>
+										所属分类:<input type="text" class="form-control"
+											id="type_calss">
 										<hr>
 										<button class="btn btn-success" onclick="testupdate()">修改</button>
 										&nbsp;&nbsp;&nbsp;&nbsp;
@@ -383,6 +388,7 @@
 												<td>测试题题目</td>
 												<td>测试题答案</td>
 												<td>测试题难度</td>
+												<td>测试题类别</td>
 												<td>操作</td>
 											</tr>
 										</thead>

@@ -1,9 +1,9 @@
 $(function(){
 	initTestTable(param);
 });
-//var url ="http://localhost:8088/"
+//var url ="http://localhost:8080/"
 var url="";
-	var pages = 0;//当前页数
+var pages = 0;//当前页数
 var nums = 10;//每页几条
 var total = 0;//总条数 	
 
@@ -60,11 +60,21 @@ function cleartest(){
 	$("#answerC").val("");
 	$("#answerD").val("");
 	$("#difficultytest").val("");
+	$("#test_type").val("");
 }
 
 //修改详情信息
 function testupdate(){
-	if($("#answerAupdate").val()==""||$("#answerBupdate").val()==""||$("#answerCupdate").val()==""||$("#answerDupdate").val()==""||$("#topictestupdate").val()==""||$("#difficultytestupdate").val()==""){
+	var test_answer =[]; 
+	$('input[name="answerupdate"]:checked').each(function(){ 
+		test_answer.push($(this).val()); 
+	}); 
+	var str = "";
+	for(var i=0;i<test_answer.length;i++){
+		str=str+","+test_answer[i]
+	}
+	str = str.substring(1,str.length);
+	if(str==""||$("#type_calss").val()==""||$("#answerAupdate").val()==""||$("#answerBupdate").val()==""||$("#answerCupdate").val()==""||$("#answerDupdate").val()==""||$("#topictestupdate").val()==""||$("#difficultytestupdate").val()==""){
 		alert("所有选项必填不能为空!");
 		return;
 	}
@@ -94,7 +104,8 @@ function testupdate(){
 			test_grade : $("#difficultytestupdate").val(),
 			test_id : $("#testupdate_id").val(),
 			user_test_answer : arr,
-			test_answer : $('input[name="answerupdate"]:checked').val()
+			test_answer : str,
+			test_type:$("#type_calss").val()
 	}
 	$.ajax({
 		type : "POST",
@@ -132,13 +143,18 @@ function particulars(map){
 		success : function(result) {
 			//console.log(result);
 			$("#topictestupdate").val(map.test_subject);
+			$("#type_calss").val(map.test_type);
 			$("#answerAupdate").val(result[0].answer_content);
 			$("#answerBupdate").val(result[1].answer_content);
 			$("#answerCupdate").val(result[2].answer_content);
 			$("#answerDupdate").val(result[3].answer_content);
 			$("#difficultytestupdate").val(map.test_grade);
 			$("#testupdate_id").val(map.test_id);
-			$("input:radio[name='answerupdate'][value='"+map.test_answer+"']").attr('checked','true');
+			var arrs = map.test_answer.split(",");
+			for(var i=0;i<arrs.length;i++){
+				$("input:checkbox[name='answerupdate'][value='"+arrs[i]+"']").attr('checked','true');
+			}
+			
 		}
 	});
 }
@@ -150,11 +166,21 @@ function emptytest(){
 	$("#answerCupdate").val("");
 	$("#answerDupdate").val("");
 	$("#difficultytestupdate").val("");
+	$("#type_calss").val("");
 }
 
 //添加题目信息
 function pushclear(){
-	if($("#answerA").val()==""||$("#answerB").val()==""||$("#answerC").val()==""||$("#answerD").val()==""||$("#topictest").val()==""||$("#difficultytest").val()==""){
+	var test_answer =[]; 
+	$('input[name="answer"]:checked').each(function(){ 
+		test_answer.push($(this).val()); 
+	}); 
+	var str = "";
+	for(var i=0;i<test_answer.length;i++){
+		str=str+","+test_answer[i]
+	}
+	str = str.substring(1,str.length);
+	if($("#test_type").val()==""||test_answer.length==0||$("#answerA").val()==""||$("#answerB").val()==""||$("#answerC").val()==""||$("#answerD").val()==""||$("#topictest").val()==""||$("#difficultytest").val()==""){
 		alert("所有选项必填不能为空!");
 		return;
 	}
@@ -180,12 +206,13 @@ function pushclear(){
 	arr[1]=answerB;
 	arr[2]=answerC;
 	arr[3]=answerD;
-
+	
 	var data = {
 			test_subject:$("#topictest").val(),
-			test_answer:$('input[name="answer"]:checked').val(),
+			test_answer:str,
 			test_grade:$("#difficultytest").val(),
-			user_test_answer:arr
+			user_test_answer:arr,
+			test_type:$("#test_type").val()
 	}
 	//console.log(data);
 	$.ajax({
@@ -219,15 +246,17 @@ function initTestTable(param){
 		data : JSON.stringify(param), //传入组装的参数
 		dataType : "json",
 		success : function(result) {
-			//console.log(result);
+			console.log(result);
 			if(result.list.length==0){
 				$("#TestTable").html("暂无题目信息");
 			}else{
+				
 				for(var i=0;i<result.list.length;i++){
 					var TestTable = '<tr><td>'+result.list[i].test_id+'</td>'
 					+'<td style="white-space: nowrap;overflow:hidden;text-overflow:ellipsis;"  title="'+result.list[i].test_subject+'">'+result.list[i].test_subject+'</td>'
 					+'<td>'+result.list[i].test_answer+'</td>'
 					+'<td>'+result.list[i].test_grade+'</td>'
+					+'<td>'+result.list[i].test_type+'</td>'
 					+'<td><button class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-lg2" onclick="particulars('+JSON.stringify(result.list[i]).replace(/"/g, '&quot;')+')">查看详情</button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteUserTest('+result.list[i].test_id+')">删除题目</button></td></tr>'
 					$("#TestTable").append(TestTable);
 				}
