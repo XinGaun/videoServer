@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.RoleDAO">
+<insert id="addRole" parameterType="com.entity.RoleDomain">
+			insert into role_tab(
+				role_id,
+				role_name,
+				role_introduce,
+				role_status
+			)values(
+				#{role_id,jdbcType=VARCHAR},
+				#{role_name,jdbcType=VARCHAR},
+				#{role_introduce,jdbcType=VARCHAR},
+				#{role_status,jdbcType=VARCHAR})
+			
+</insert>
+
+<delete id="deleteRole" parameterType="com.entity.RoleDomain">
+			delete from role_tab
+			where 1=1 
+			<if test="role_id != null and role_id.trim().length()>0">
+				 AND role_id = #{role_id}
+			</if>
+			<if test="role_name != null and role_name.trim().length()>0">
+				 AND role_name = #{role_name}
+			</if>
+			<if test="role_introduce != null and role_introduce.trim().length()>0">
+				 AND role_introduce = #{role_introduce}
+			</if>
+			<if test="role_status != null and role_status.trim().length()>0">
+				 AND role_status = #{role_status}
+			</if>
+</delete>
+
+<update id="modifyRole" parameterType="com.entity.RoleDomain">
+			update role_tab set 
+			<if test="role_name != null and role_name.trim().length()>0">
+				role_name = #{role_name,jdbcType=VARCHAR},
+			</if>
+			<if test="role_introduce != null and role_introduce.trim().length()>0">
+				role_introduce = #{role_introduce,jdbcType=VARCHAR},
+			</if>
+			<if test="role_status != null and role_status.trim().length()>0">
+				role_status = #{role_status,jdbcType=VARCHAR},
+			</if>
+			role_id = #{role_id,jdbcType=VARCHAR}
+			where 1=1 
+			<if test="role_id != null and role_id.trim().length()>0">
+				 AND role_id = #{role_id}
+			</if>
+			<!-- <if test="role_name != null and role_name.trim().length()>0">
+				 AND role_name = #{role_name}
+			</if>
+			<if test="role_introduce != null and role_introduce.trim().length()>0">
+				 AND role_introduce = #{role_introduce}
+			</if>
+			<if test="role_status != null and role_status.trim().length()>0">
+				 AND role_status = #{role_status}
+			</if> -->
+</update>
+
+<select id="queryRoleCount" parameterType="com.entity.RoleDomain" resultType="Integer">
+			select count(1) from  role_tab
+			 where 1=1 
+			<if test="role_id != null and role_id.trim().length()>0">
+				 AND role_id = #{role_id}
+			</if>
+			<if test="role_name != null and role_name.trim().length()>0">
+				 AND role_name = #{role_name}
+			</if>
+			<if test="role_introduce != null and role_introduce.trim().length()>0">
+				 AND role_introduce = #{role_introduce}
+			</if>
+			<if test="role_status != null and role_status.trim().length()>0">
+				 AND role_status = #{role_status}
+			</if>
+</select>
+
+<select id="queryListRole" parameterType="com.entity.RoleDomain" resultType="com.entity.RoleDomain">
+			select 
+				role_id,
+				role_name,
+				role_introduce,
+				role_status
+			 from role_tab
+			 where 1=1 
+			<if test="role_id != null and role_id.trim().length()>0">
+				 AND role_id = #{role_id}
+			</if>
+			<if test="role_name != null and role_name.trim().length()>0">
+				 AND role_name = #{role_name}
+			</if>
+			<if test="role_introduce != null and role_introduce.trim().length()>0">
+				 AND role_introduce = #{role_introduce}
+			</if>
+			<if test="role_status != null and role_status.trim().length()>0">
+				 AND role_status = #{role_status}
+			</if>
+			<if test="page != null" >
+				<![CDATA[  limit #{page.startNum},#{page.endIndex}  ]]>
+			</if>
+</select>
+</mapper>
