@@ -278,7 +278,8 @@
 						
 							&nbsp;<button class="btn btn-primary" onclick="queryparameterUserTest()">搜索题目</button>&nbsp;&nbsp;&nbsp;
 							<button class="btn btn-info" data-toggle="modal"
-								data-target=".bs-example-modal-lg1">添加题目</button>
+								data-target=".bs-example-modal-lg1">添加题目</button>&nbsp;&nbsp;&nbsp;
+							<button class="btn btn-warning" onclick="emptyqutest()">清 空</button>
 							
 						</div>
 
@@ -398,14 +399,130 @@
 									</table>
 								</div>
 								<div id="fanye" style="text-align: center;"></div>
-
+								<hr>
 							</div>
 						</div>
 						<!--End Advanced Tables -->
 					</div>
 				</div>
 				<!-- /. ROW  -->
+				<div class="row">
+					<div class="col-md-12">
+						
+						<div class="panel panel-default">
+						<div class="row">
+							<div class="col-md-4">
+								<input type="text" class="form-control" id="qu_evaluate_id" placeholder="请输入评价编号"
+									id="test_id">
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" id="qu_evaluate_type" placeholder="请输入评价类别"
+									id="test_id">
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" id="qu_test_grade" placeholder="请输入题目难度"
+									id="test_id">
+							</div>
+							<hr>
+						</div>
+							&nbsp;<button class="btn btn-primary" onclick="queryUserTestEvaluate()">搜索评价</button>&nbsp;&nbsp;&nbsp;
+							<button class="btn btn-info" data-toggle="modal"
+								data-target=".bs-example-modal-lg3">添加评价</button>&nbsp;&nbsp;&nbsp;
+							<button class="btn btn-warning" onclick="emptyquEvaluate()">清 空</button>
+						</div>
+						<div class="modal fade bs-example-modal-lg3" tabindex="-1"
+							id="modal3" role="dialog" aria-labelledby="myLargeModalLabel">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">添加评价</div>
+									<div class="modal-body">
+										难度等级:<input type="text" class="form-control"
+											id="ev_grade">
+										<hr>
+										答对提数:<input type="text" class="form-control"
+											id="ev_number">
+										<hr>
+										测试题类别:<input type="text" class="form-control"
+											id="ev_type">
+										<hr>
+										评价内容:<textarea class="form-control" rows="3" id="ev_content"></textarea>
+										<hr>
+										<button class="btn btn-success" onclick="addUserTestEvaluate()">确认添加</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;
 
+										<button class="btn btn-warning" style="" id=""
+											onclick="emptyaddEvaluate()">清空内容</button>
+										&nbsp;&nbsp;
+										<button class="btn btn-info" style="" data-dismiss="modal">取消</button>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--  -->
+						<div class="modal fade bs-example-modal-lg4" tabindex="-1"
+							id="modal4" role="dialog" aria-labelledby="myLargeModalLabel">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">评价详情</div>
+									<div class="modal-body">
+										<input type="text" style="display:none;" id="ev_id_up">
+										难度等级:<input type="text" class="form-control"
+											id="ev_grade_up">
+										<hr>
+										答对提数:<input type="text" class="form-control"
+											id="ev_number_up">
+										<hr>
+										测试题类别:<input type="text" class="form-control"
+											id="ev_type_up">
+										<hr>
+										评价内容:<textarea class="form-control" rows="3" id="ev_content_up"></textarea>
+										<hr>
+										<button class="btn btn-success" onclick="updateUserTestEvaluate()">确认修改</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+
+										<button class="btn btn-warning" style="" id=""
+											onclick="emptyaddEvaluatedetails()">清空内容</button>
+										&nbsp;&nbsp;
+										<button class="btn btn-info" style="" data-dismiss="modal">取消</button>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--  -->
+						
+					</div>
+					<div class="col-md-12">
+						<!-- Advanced Tables -->
+						<div class="panel panel-default">
+							<div class="panel-heading"></div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-striped table-hover "
+										style="table-layout: fixed">
+										<thead>
+											<tr>
+												<td>评价编号</td>						
+												<td>评价内容</td>
+												<td>测试题类别</td>
+												<td>测试题难度</td>
+												<td>答对题数</td>
+												<td>操作</td>
+											</tr>
+										</thead>
+										<tbody id="evaluate_body">
+
+										</tbody>
+									</table>
+								</div>
+								<div id="fanyeg" style="text-align: center;"></div>
+								<hr>
+							</div>
+						</div>
+						<!--End Advanced Tables -->
+					</div>
+				</div>
 				<!-- /. ROW  -->
 			</div>
 

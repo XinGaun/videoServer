@@ -60,4 +60,67 @@ public class UserTestController {
 	public String deteleUserTest(@RequestBody String data) {
 		return userTestService.deteleUserTest(data);
 	}
+	/**
+	 * 查询评价信息
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryUserTestEvaluate",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryUserTestEvaluate(@RequestBody String data) {
+		return userTestService.queryUserTestEvaluate(data);
+	}
+	/**
+	 * 添加评价信息
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/addUserTestEvaluate",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String addUserTestEvaluate(@RequestBody String data) {
+		return userTestService.addUserTestEvaluate(data);
+	}
+	/**
+	 * 删除评价信息
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/deleteUserTestEvaluate",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String deleteUserTestEvaluate(@RequestBody String data) {
+		return userTestService.deleteUserTestEvaluate(data);
+	}
+	/**
+	 * 更新评价信息
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/updateUserTestEvaluate",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String updateUserTestEvaluate(@RequestBody String data) {
+		return userTestService.updateUserTestEvaluate(data);
+	}
+	/**
+	 * 查询评价分类
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryUserTestEvaluatetypeName",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryUserTestEvaluatetypeName() {
+		return userTestService.queryUserTestEvaluatetypeName();
+	}
+	/**
+	 * 按难分类查询难度信息
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryUserTestEvaluateTestGrade",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryUserTestEvaluateTestGrade(@RequestBody String data) {
+		return userTestService.queryUserTestEvaluateTestGrade(data);
+	}
+	/**
+	 * 随机查询测试题
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryRandomUserTestAnswer",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryRandomUserTestAnswer(@RequestBody String data) {
+		return userTestService.queryRandomUserTestAnswer(data);
+	}
 }

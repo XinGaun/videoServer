@@ -238,20 +238,6 @@
                 <ul class="nav" id="main-menu">
 
                     
-						<li>
-							<a href="#"><i class="fa fa-sitemap" class="active-menu"></i>权限管理<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li>
-							<a href="role_list.html"><i class="fa fa-lock"></i> 权限管理</a>
-						</li>
-						<li>
-							<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
-						</li>
-						<li>
-							<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
-						</li>
-							</ul>
-						</li>
                     <li>
                         <a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a>
                     </li>
@@ -271,8 +257,6 @@
 						<li>
 							<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
 						</li>
-						<li><a href="test.html" ><i
-							class="fa fa-edit"></i>题目管理</a></li>
                 </ul>
             </div>
         </nav>
@@ -402,6 +386,8 @@
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 <script>
+	var url = "http:127.0.0.1:8080/"
+	//var url="";
 	$(document).ready(function () {
 	    $('#dataTables-example').dataTable();
 	});
@@ -409,7 +395,7 @@
 		$.ajax({
 			type : 'post',
 			contentType: 'application/json; charset=UTF-8',
-			url : '/videoServer/coursesTab/getTabList.do',
+			url : url+'/videoServer/coursesTab/getTabList.do',
 			success : function(data){
 				for(var i=0;i<data.length;i++){
 					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
@@ -420,7 +406,7 @@
 		$.ajax({
 			type : 'post',
 			contentType: 'application/json; charset=UTF-8',
-			url : '/videoServer/videoTab/getVideoTabs.do',
+			url : url+'/videoServer/videoTab/getVideoTabs.do',
 			success : function(meg){
 				for (var i = 0; i < meg.length; i++) {
 			    	$("#courses_video").append("<option>["+meg[i].video_id+"]" + meg[i].video_name + "</option>");
@@ -446,7 +432,7 @@
 		$.ajax({
 	       	type : 'post',
 			contentType: 'application/json; charset=UTF-8',
-	       	url : '/videoServer/coursesTab/delCoursesById.do?id='+d,
+	       	url : url+'/videoServer/coursesTab/delCoursesById.do?id='+d,
 	       	success : function(){
 	       		alert("删除成功");
 	       		window.location.href="";
@@ -460,7 +446,7 @@
 			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
 			data : {courses_name:$("#name").val(),courses_pricemoney:$("#jiage").val(),courses_img_url:$("#courses_img_url").val(),courses_introduce:$("#courses_introduce").val(),courses_video:$("#courses_video").val()},
-			url : '/videoServer/coursesTab/addCoursesTab.do',
+			url : url+'/videoServer/coursesTab/addCoursesTab.do',
 			success : function(){
 				alert("提交成功");
 				$("#quxiao").click();
@@ -474,7 +460,7 @@
 			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
 			data : {courses_name:$("#courses_name").val(),courses_grade:$("#courses_grade").val(),courses_pricemoney:$("#courses_pricemoney").val()},
-			url : '/videoServer/coursesTab/getTabListBy.do',
+			url : url+'/videoServer/coursesTab/getTabListBy.do',
 			success : function(data){
 				if(data.length==0){
 			 		alert("暂无符合条件的课程");

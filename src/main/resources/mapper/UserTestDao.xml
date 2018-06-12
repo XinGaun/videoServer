@@ -54,4 +54,59 @@
 	<delete id="deteleUserTest" parameterType="java.util.HashMap">
 		DELETE FROM user_test WHERE test_id = #{test_id}
 	</delete>
+	<!-- 查询评价信息 -->
+	<select id="queryUserTestEvaluate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT evaluate_id,test_grade,evaluate_content,evaluate_number,evaluate_type FROM user_test_evaluate WHERE 1=1 
+		<if test="evaluate_id!='' and evaluate_id!=null">
+			and evaluate_id =#{evaluate_id}
+		</if>
+		<if test="evaluate_type!='' and evaluate_type!=null">
+			and evaluate_type =#{evaluate_type}
+		</if>
+		<if test="test_grade!='' and test_grade!=null">
+			and test_grade =#{test_grade}
+		</if>
+		ORDER BY evaluate_id DESC LIMIT #{nums},#{page}
+	</select>
+	<!-- 查询评价信息总数 -->
+	<select id="queryUserTestEvaluateCount" parameterType="java.util.HashMap" resultType="int">
+		SELECT count(evaluate_id) FROM user_test_evaluate WHERE 1=1 
+		<if test="evaluate_id!='' and evaluate_id!=null">
+			and evaluate_id =#{evaluate_id}
+		</if>
+		<if test="evaluate_type!='' and evaluate_type!=null">
+			and evaluate_type =#{evaluate_type}
+		</if>
+		<if test="test_grade!='' and test_grade!=null">
+			and test_grade =#{test_grade}
+		</if>
+	</select>
+	<!-- 添加评价信息 -->
+	<insert id="addUserTestEvaluate" parameterType="java.util.HashMap">
+		INSERT INTO user_test_evaluate(test_grade, evaluate_content, evaluate_number, evaluate_type) VALUES(#{test_grade},#{evaluate_content},#{evaluate_number},#{evaluate_type})
+	</insert>
+	<!-- 删除评价信息 -->
+	<delete id="deleteUserTestEvaluate" parameterType="java.util.HashMap">
+		DELETE FROM user_test_evaluate WHERE evaluate_id = #{evaluate_id}
+	</delete>
+	<!-- 更新评价信息 -->
+	<update id="updateUserTestEvaluate" parameterType="java.util.HashMap">
+		UPDATE user_test_evaluate SET test_grade=#{test_grade} ,evaluate_content =#{evaluate_content},evaluate_number = #{evaluate_number},evaluate_type =#{evaluate_type} WHERE evaluate_id =#{evaluate_id}
+	</update>
+	<!-- 查询分类名 -->
+	<select id="queryUserTestEvaluatetypeName" resultType="java.util.HashMap">
+		SELECT test_type FROM user_test GROUP BY test_type
+	</select>
+	<!-- 根据类名查找难度信息 -->
+	<select id="queryUserTestEvaluateTestGrade" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT test_grade FROM user_test WHERE test_type = #{test_type} GROUP BY test_grade
+	</select>
+	<!-- 随机抽取题目信息 -->
+	<select id="queryRandomUserTest" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select test_id,test_subject,test_answer,test_grade,test_type from user_test WHERE test_type = #{test_type} AND test_grade = #{test_grade} order by rand() LIMIT 5
+	</select>
+	<!-- 根据题目ID查询答案信息 -->
+	<select id="queryRandomUserTestAnswer" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT answer_id,test_id,answer_content,test_answer FROM user_test_answer WHERE test_id = #{test_id}
+	</select>
 </mapper>

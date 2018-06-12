@@ -233,34 +233,21 @@
             </ul>
         </nav>
         <!--/. NAV TOP  -->
-         <nav class="navbar-default navbar-side" role="navigation">
+        <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-					<li>
-							<a href="#"><i class="fa fa-sitemap"></i>权限管理<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li>
-									<a href="role_list.html"  ><i class="fa fa-lock"></i> 权限管理</a>
-								</li>
-								<li>
-									<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
-								</li>
-								<li>
-									<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
-								</li>
-							</ul>
-					</li>
 
-					<li>
+                    
+                    <li>
                         <a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a>
                     </li>
                     <li>
                         <a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
                     </li>
                     <li>
-                        <a href="taocanInfo.html" class="active-menu"><i class="fa fa-table"></i>套餐管理</a>
+                        <a href="taocanInfo.html" class="active-menu"><i class="fa fa-sitemap"></i>套餐管理</a>
                     </li>
-                    <li>
+					<li>
 							<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
 						</li>
 						
@@ -268,16 +255,10 @@
 							<a href="order.html" ><i class="fa fa-table"></i>订单管理</a>
 						</li>
 						<li>
-							<a href="proposal.html" ><i class="fa fa-edit"></i>建议管理</a>
+							<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
 						</li>
-						<li><a href="test.html" ><i
-							class="fa fa-edit"></i>题目管理</a></li>
-
-
                 </ul>
-
             </div>
-
         </nav>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
@@ -399,6 +380,8 @@
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 <script>
+	var url = "http:127.0.0.1:8080/"
+	//var url="";
 	$(document).ready(function () {
 	    $('#dataTables-example').dataTable();
 	});
@@ -406,7 +389,7 @@
 		$.ajax({
 			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
-			url : '/videoServer/comboTab/getList.do',
+			url : url+'/videoServer/comboTab/getList.do',
 			success : function(data){
 				for(var i=0;i<data.length;i++){
 					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].combo_name+"</td><td>"+data[i].combo_introduce+"</td><td>"+data[i].video_id+"</td><td>"+data[i].combo_imgs+"</td><td>"+data[i].combo_price+"</td><td>"+data[i].combo_status+"</td></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].combo_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].combo_id+"'/></td></tr>")
@@ -417,7 +400,7 @@
 		$.ajax({
 			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
-			url : '/videoServer/videoTab/getVideoTabs.do',
+			url : url+'/videoServer/videoTab/getVideoTabs.do',
 			success : function(meg){
 				for (var i = 0; i < meg.length; i++) {
 			    	$("#courses_video").append("<option>["+meg[i].video_id+"]" + meg[i].video_name + "</option>");
@@ -443,7 +426,7 @@
 		$.ajax({
 			contentType: 'application/json; charset=UTF-8',
 	       	type : 'post',
-	       	url : '/videoServer/comboTab/delComboById.do?id='+d,
+	       	url : url+'/videoServer/comboTab/delComboById.do?id='+d,
 	       	success : function(){
 	       		alert("删除成功");
 	       		window.location.href="";
@@ -457,7 +440,7 @@
 			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
 			data : {combo_name:$("#name").val(),combo_price:$("#jiage").val(),combo_imgs:$("#courses_img_url").val(),combo_introduce:$("#courses_introduce").val(),video_id:$("#courses_video").val()},
-			url : '/videoServer/comboTab/insertComboTab.do',
+			url : url+'/videoServer/comboTab/insertComboTab.do',
 			success : function(){
 				alert("提交成功");
 				$("#quxiao").click();
@@ -471,7 +454,7 @@
 			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
 			data : {combo_name:$("#combo_name").val(),combo_price:$("#combo_price").val()},
-			url : '/videoServer/comboTab/getListBy.do',
+			url : url+'/videoServer/comboTab/getListBy.do',
 			success : function(data){
 				if(data.length==0){
 			 		alert("暂无符合条件的课程");
