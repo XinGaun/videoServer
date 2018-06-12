@@ -96,6 +96,7 @@ public class UserTestController {
 	public String updateUserTestEvaluate(@RequestBody String data) {
 		return userTestService.updateUserTestEvaluate(data);
 	}
+<<<<<<< HEAD
 	/**
 	 * 查询评价分类
 	 * @param data
@@ -123,4 +124,6 @@ public class UserTestController {
 	public String queryRandomUserTestAnswer(@RequestBody String data) {
 		return userTestService.queryRandomUserTestAnswer(data);
 	}
+=======
+>>>>>>> 2efa35b68a8fc3b28e91f2f89e6c016868fe4040
 }

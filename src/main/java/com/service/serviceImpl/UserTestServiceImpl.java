@@ -139,6 +139,7 @@ public class UserTestServiceImpl implements UserTestService {
 		}
 		return JSON.toJSONString("error");
 	}
+<<<<<<< HEAD
 	/**
 	 * 查询分类信息
 	 */
@@ -171,5 +172,7 @@ public class UserTestServiceImpl implements UserTestService {
 		}
 		return JSON.toJSONString(list);
 	}
+=======
+>>>>>>> 2efa35b68a8fc3b28e91f2f89e6c016868fe4040
 
 }

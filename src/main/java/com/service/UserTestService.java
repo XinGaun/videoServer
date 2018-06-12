@@ -19,10 +19,13 @@ public interface UserTestService {
 	public String deleteUserTestEvaluate(String data);
 	//更新评价信息
 	public String updateUserTestEvaluate(String data);
+<<<<<<< HEAD
 	//查询分类名称
 	public String queryUserTestEvaluatetypeName();
 	//按难分类查询难度信息
 	public String queryUserTestEvaluateTestGrade(String data);
 	//随机查询几道测试题
 	public String queryRandomUserTestAnswer(String data);
+=======
+>>>>>>> 2efa35b68a8fc3b28e91f2f89e6c016868fe4040
 }

@@ -93,6 +93,7 @@
 	<update id="updateUserTestEvaluate" parameterType="java.util.HashMap">
 		UPDATE user_test_evaluate SET test_grade=#{test_grade} ,evaluate_content =#{evaluate_content},evaluate_number = #{evaluate_number},evaluate_type =#{evaluate_type} WHERE evaluate_id =#{evaluate_id}
 	</update>
+<<<<<<< HEAD
 	<!-- 查询分类名 -->
 	<select id="queryUserTestEvaluatetypeName" resultType="java.util.HashMap">
 		SELECT test_type FROM user_test GROUP BY test_type
@@ -109,4 +110,6 @@
 	<select id="queryRandomUserTestAnswer" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		SELECT answer_id,test_id,answer_content,test_answer FROM user_test_answer WHERE test_id = #{test_id}
 	</select>
+=======
+>>>>>>> 2efa35b68a8fc3b28e91f2f89e6c016868fe4040
 </mapper>

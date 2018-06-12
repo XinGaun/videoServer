@@ -30,6 +30,7 @@ public interface UserTestDao {
 	public int deleteUserTestEvaluate(HashMap<String,Object> map);
 	//更新评价信息
 	public int updateUserTestEvaluate(HashMap<String,Object> map);
+<<<<<<< HEAD
 	//查询题目分类
 	public ArrayList<HashMap<String,Object>> queryUserTestEvaluatetypeName();
 	//按难分类查询难度信息
@@ -38,4 +39,6 @@ public interface UserTestDao {
 	public ArrayList<HashMap<String,Object>> queryRandomUserTest(HashMap<String,Object> map);
 	//根据题目ID查询答案信息
 	public ArrayList<HashMap<String,Object>> queryRandomUserTestAnswer(HashMap<String,Object> map);
+=======
+>>>>>>> 2efa35b68a8fc3b28e91f2f89e6c016868fe4040
 }
