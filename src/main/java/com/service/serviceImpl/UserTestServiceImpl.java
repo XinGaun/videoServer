@@ -92,5 +92,52 @@ public class UserTestServiceImpl implements UserTestService {
 		}
 		return JSON.toJSONString("error");
 	}
+	/**
+	 * 查询评价信息
+	 */
+	@Override
+	public String queryUserTestEvaluate(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		map = Page.page(map);
+		ArrayList<HashMap<String,Object>> list = userTestDao.queryUserTestEvaluate(map);
+		int count = userTestDao.queryUserTestEvaluateCount(map);
+		return JSON.toJSONString(Count.counts(list, count, map,200,"queryUserTestEvaluate success"));
+	}
+	/**
+	 * 添加评价信息
+	 */
+	@Override
+	public String addUserTestEvaluate(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		int flog = userTestDao.addUserTestEvaluate(map);
+		if(flog>0) {
+			return JSON.toJSONString("success");
+		}
+		return JSON.toJSONString("error");
+	}
+	/**
+	 * 删除评价信息
+	 */
+	@Override
+	public String deleteUserTestEvaluate(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		int flog = userTestDao.deleteUserTestEvaluate(map);
+		if(flog>0) {
+			return JSON.toJSONString("success");
+		}
+		return JSON.toJSONString("error");
+	}
+	/**
+	 * 更新评价信息
+	 */
+	@Override
+	public String updateUserTestEvaluate(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		int flog = userTestDao.updateUserTestEvaluate(map);
+		if(flog>0) {
+			return JSON.toJSONString("success");
+		}
+		return JSON.toJSONString("error");
+	}
 
 }

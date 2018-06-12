@@ -20,4 +20,14 @@ public interface UserTestDao {
 	public int deteleTestAnswer(HashMap<String,Object> map);
 	//删除题目信息
 	public int deteleUserTest(HashMap<String,Object> map);
+	//查询评价信息
+	public ArrayList<HashMap<String,Object>> queryUserTestEvaluate(HashMap<String,Object> map);
+	//查询评价信息总数
+	public int queryUserTestEvaluateCount(HashMap<String,Object> map);
+	//添加评价信息
+	public int addUserTestEvaluate(HashMap<String,Object> map);
+	//删除评价信息
+	public int deleteUserTestEvaluate(HashMap<String,Object> map);
+	//更新评价信息
+	public int updateUserTestEvaluate(HashMap<String,Object> map);
 }
