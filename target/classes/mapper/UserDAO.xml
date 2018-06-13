@@ -61,9 +61,6 @@
 
 <update id="modifyUser" parameterType="com.entity.UserDomain">
 			update user_tab set 
-			<if test="user_id != null and user_id.trim().length()>0">
-				user_id = #{user_id,jdbcType=VARCHAR},
-			</if>
 			<if test="user_name != null and user_name.trim().length()>0">
 				user_name = #{user_name,jdbcType=VARCHAR},
 			</if>
@@ -88,11 +85,12 @@
 			<if test="user_photo != null and user_photo.trim().length()>0">
 				user_photo = #{user_photo,jdbcType=VARCHAR},
 			</if>
+			user_id = #{user_id,jdbcType=VARCHAR}
 			where 1=1 
 			<if test="user_id != null and user_id.trim().length()>0">
 				 AND user_id = #{user_id}
 			</if>
-			<if test="user_name != null and user_name.trim().length()>0">
+			<!-- <if test="user_name != null and user_name.trim().length()>0">
 				 AND user_name = #{user_name}
 			</if>
 			<if test="user_sex != null and user_sex.trim().length()>0">
@@ -115,7 +113,7 @@
 			</if>
 			<if test="user_photo != null and user_photo.trim().length()>0">
 				 AND user_photo = #{user_photo}
-			</if>
+			</if> -->
 </update>
 
 <select id="queryUserCount" parameterType="com.entity.UserDomain" resultType="Integer">
@@ -193,5 +191,18 @@
 			<if test="page != null" >
 				<![CDATA[  limit #{page.startNum},#{page.endIndex}  ]]>
 			</if>
+</select>
+<select id="queryUserRight" parameterType="string" resultType="com.entity.RightDomain">
+	select DISTINCT right_id, right_name 
+		from right_tab 
+		where right_id in(
+			select right_id 
+			from role_right_tab 
+			where role_id in(
+				select role_id 
+				from user_role_tab 
+				where user_id = #{userId}
+			)
+		)
 </select>
 </mapper>

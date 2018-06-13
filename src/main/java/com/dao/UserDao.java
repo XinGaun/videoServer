@@ -2,6 +2,7 @@ package com.dao;
 
 import java.util.List;
 
+import com.entity.RightDomain;
 import com.entity.UserDomain;
 
 public interface UserDAO
@@ -15,7 +16,7 @@ public interface UserDAO
 
 	public List<UserDomain> queryListUser(UserDomain UserDomain);
 
-	public UserDomain searchSingleUser(UserDomain UserDomain);
-
 	public int queryUserCount(UserDomain UserDomain);
+	
+	public List<RightDomain> queryUserRight(String userId);
 }
