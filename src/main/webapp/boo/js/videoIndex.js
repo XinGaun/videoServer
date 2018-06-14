@@ -8,8 +8,8 @@ $(function(){
 		window.location.href = "video.html?user_id="+user_id;
 	});
 });
-var url = "http:/127.0.0.1:8080"
-//var url = "";
+//var url = "http:/127.0.0.1:8080"
+var url = "";
 var user_id = 1;
 $("img.lazy").lazyload({effect: "fadeIn"});
 

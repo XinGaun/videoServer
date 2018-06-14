@@ -214,36 +214,45 @@
 		<nav class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
+					<li>
+							<a href="#"><i class="fa fa-sitemap" class="active-menu"></i>权限管理<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li>
+							<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
+						</li>
+						<li>
+							<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
+						</li>
+						<li>
+							<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
+						</li>
+							</ul>
+						</li>
+					<li>
+                        <a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a>
+                    </li>
+                    <li>
+                        <a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
+                    </li>
+                    <li>
+                        <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
+                    </li>
+					<li>
+						<li>
+							<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
+						</li>
+						<li><a href="comment.html" class="active-menu"><i class="fa fa-table"></i>评论管理</a></li>
+						<li>
+							<a href="order.html"><i class="fa fa-table"></i>订单管理</a>
+						</li>
+						<li>
+							<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
+						</li>
+						<li><a href="test.html" ><i
+							class="fa fa-edit"></i>题目管理</a></li>
 
-					<li><a href="index.html"><i class="fa fa-dashboard"></i>
-							项目管理</a></li>
-					<li><a href="ui-elements.html"><i class="fa fa-desktop"></i>
-							项目管理</a></li>
-					<li><a href="chart.html"><i class="fa fa-bar-chart-o"></i>
-							项目管理</a></li>
-					<li><a href="tab-panel.html"><i class="fa fa-qrcode"></i>
-							项目管理</a></li>
-
-					<li><a href="table.html" class="active-menu"><i
-							class="fa fa-table"></i> 评论管理</a></li>
-					<li><a href="form.html"><i class="fa fa-edit"></i> 项目管理 </a></li>
-
-
-					<li><a href="#"><i class="fa fa-sitemap"></i> Multi-Level
-							Dropdown<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a href="#">Second Level Link</a></li>
-							<li><a href="#">Second Level Link</a></li>
-							<li><a href="#">Second Level Link<span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a href="#">Third Level Link</a></li>
-									<li><a href="#">Third Level Link</a></li>
-									<li><a href="#">Third Level Link</a></li>
-
-								</ul></li>
-						</ul></li>
-					<li><a href="empty.html"><i class="fa fa-fw fa-file"></i>
-							Empty Page</a></li>
+					
+					
 				</ul>
 
 			</div>
@@ -377,12 +386,14 @@
 									aria-hidden="true">&times;</button>
 							</div>
 							<div class="modal-body">
+								
 								<div class="input-group">
+								    <input type="text" id= "reply_comment_id" value="">
 									<span>回复内容</span> <br>
 									<textarea rows="5" class="form-control" id="reply_text_input"
 										placeholder="请输入您的留言！"></textarea>
 									<span>回复教师</span> <br> <input type="text"
-										class="form-control" id="reply_teacher_input" placeholder="1">
+										class="form-control" id="reply_teacher_id">
 								</div>
 							</div>
 							<div class="modal-footer">
@@ -421,32 +432,37 @@
 	<script src="dist/js/bootstrap-datepicker.min.js"></script>
 	<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
 	<script>
-$(function(){	
-             //全选
+$(function(){		
+	        var url1 = "http://localhost:8080/";
+	        var userteacherId = 2;
+             /* //全选
 	         $('.checkall').click(function () {  		
-	         });
+	         
+	         }); */
             //删除信息
        		 $("#removeComment").click(function(){      			
-       			var obj=document.getElementsByName('commentCheck'); //选择所有name="'test'"的对象，返回数组 
+       			var obj=document.getElementsByName('commentCheck'); //选择所有name="'test'"的对象，返回数组     		
        			var arr = [];      			
        			for(var i=0;i<obj.length;i++){
        				if(obj[i].checked==true){
        					arr[arr.length]=obj[i].value;
        					//console.log(obj[i].value);
        				}	
-       			}
+       			};
        			if(arr.length==0||arr==null){
        				alert("请选择评论!");
        				return;
-       			}
+       			};
+       			alert(1);
        			$.ajax({
                            type: "POST",
-                           url: "http://localhost:8080/videoServer/commentTab/deleteComment",
+                           url: url1+"videoServer/commentTab/deleteComment",
                            contentType: 'application/json; charset=UTF-8',
        					   cache: false,  //禁用缓存
                            data: JSON.stringify(arr),  //传入组装的参数
                            dataType: "json",
                            success: function (result) {
+                        	   alert(2);
        						if(result=="success"){
        							alert("删除成功");
        							window.location.reload();
@@ -529,7 +545,7 @@ $(function(){
                      //ajax请求数据                      
                      $.ajax({
                          type: "POST",
-                         url: "http://localhost:8080/videoServer/commentTab/queryCommentAll",
+                         url: url1+"videoServer/commentTab/queryCommentAll",
                          contentType: 'application/json; charset=UTF-8',
      					 cache: false,  //禁用缓存
                          data: JSON.stringify(param),  //传入组装的参数
@@ -582,9 +598,9 @@ $(function(){
      					"orderable" : false, // 禁用排序  
                         "sDefaultContent" : "",  
                         "sWidth" : "3%",
-                          "render" : function(data, type, full, meta) {  
+                          "render" : function(data, type, full, meta) {                         	
                             if(data=="" ||data == null ){                                  
-                 				data = "<button class='btn btn-danger  btn-sm' data-toggle='modal' data-target='#myModal'>回复</button>";
+                 				data = "<button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#myModal' data-commentid='"+full.comment_id+"'>回复</button>";
                             }else{  
                                 data = "<button class='btn btn-sm btn-safety' >已回复</button>"  
                             }  
@@ -684,7 +700,6 @@ $(function(){
                    param.limit = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
                    param.start = data.start;//开始的记录序号
                    param.page = (data.start / data.length)+1;//当前页码
-	             //	param.comment_id = $("#comment_id").val();//获得订单ID
 	               var username= $.trim($("#user_name").val());
 	               if (username.length > 0 ) 
 	               { 
@@ -714,7 +729,7 @@ $(function(){
                    //ajax请求数据
                    $.ajax({
                           type: "POST",
-                          url: "http://localhost:8080/videoServer/commentTab/queryCommentAll",
+                          url: url1+"videoServer/commentTab/queryCommentAll",
                           contentType: 'application/json; charset=UTF-8',
 			              cache: false,  //禁用缓存
                           data: JSON.stringify(param),  //传入组装的参数
@@ -762,9 +777,14 @@ $(function(){
 							"orderable" : false, // 禁用排序  
 	                        "sDefaultContent" : "",  
 	                        "sWidth" : "3%",
-	                          "render" : function(data, type, full, meta) {  
+	                        "render" : function(data, type, full, meta) {  
+	                        	  //comment_id	    
+	                        	//var comment_id =$('#example').DataTable().rows( this ).data()[0]; 
+	                        	 var nRow = $(this).parents('tr')[0];//得到这一行  
+	                             var aData = $("#example").dataTable().fnGetData(nRow);//得到这一行的json数据  	
+	                             var id = aData.comment_id;//得到Id  
 	                            if(data=="" ||data == null ){                                  
-	                 				data = "<button class='btn btn-danger  btn-sm' data-toggle='modal' data-target='#myModal'>回复</button>";
+	                 				data = "<button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#myModal' data-commentid='"+full.comment_id+"' >回复</button>"  ;//
 	                            }else{  
 	                                data = "<button class='btn btn-sm btn-safety' >已回复</button>"  
 	                            }  
@@ -812,37 +832,51 @@ $(function(){
 	     				}                      			
                      ] 
            }).api();   
-      });      
+      });         
+      //加载模态框    
+      var table = $('#example').DataTable();
+       $('#myModal').on('show.bs.modal', function (event) {     	  	 
+    	   var button = $(event.relatedTarget) // 触发事件的按钮  
+           var id = button.data('commentid') // 解析出data-whatever内容  
+    	   $("#reply_comment_id").val(id);   	
+     	   $("#reply_teacher_id").val(userteacherId);
+       }); 
+       
+      //提交回复
+	 $("#reply_text_submit").click(function(){   
+			 var replytext = $.trim($("#reply_text_input").val()); 
+			 var commentId = $.trim($("#reply_comment_id").val());
+			 var teacherId = $.trim($("#reply_teacher_id").val());
+			 if(  replytext.length = 0 ){
+				 alert("请输入您的留言");
+			 }					
+			 var param = {};
+			 param.comment_id = commentId;
+	         param.reply_text = replytext;	
+	         param.reply_teacher = teacherId;  
+	         param.reply_date = new Date();      
+			$.ajax({
+	              type: "POST",
+	              url: url1+"videoServer/commentTab/updateComment",
+	              contentType: 'application/json; charset=UTF-8',
+					   cache: false,  //禁用缓存
+	              data: JSON.stringify(param),  //传入组装的参数
+	              dataType: "json",
+	              success: function (result) {
+						if(result=="success"){
+							alert("留言成功");
+							window.location.reload();
+						}else{
+							alert("留言失败");
+						}
+					   }
+			   });
+			   $("#reply_comment_id").val("");   	
+		 	   $("reply_text_input").val("");
+		 	   $("#reply_teacher_id").val("");
+			  $("#myModal").modal("hide");
+		 });
 }); 
-
-     //提交回复
-	 $("#reply_text_submit").click(function(){      	
-		 var replytext= $.trim($("#reply_text_input").val()); 
-		 if(!(replytext.length>0)){
-			 alert("请输入您的留言");
-		 }		
-		 var param = {};
-		 param.comment_id = 4;
-         param.reply_text = replytext;	
-         param.reply_teacher = $.trim($("#reply_teacher_input").val());     
-         param.reply_date = new Date();      
-		$.ajax({
-              type: "POST",
-              url: "http://localhost:8080/videoServer/commentTab/updateComment",
-              contentType: 'application/json; charset=UTF-8',
-				   cache: false,  //禁用缓存
-              data: JSON.stringify(param),  //传入组装的参数
-              dataType: "json",
-              success: function (result) {
-					if(result=="success"){
-						alert("留言成功");
-						window.location.reload();
-					}else{
-						alert("留言失败");
-					}
-				   }
-		   });
-	}); 
     </script>
 	<!-- Custom Js -->
 	<!--<script src="assets/js/custom-scripts.js"></script> -->

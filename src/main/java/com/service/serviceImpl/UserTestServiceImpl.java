@@ -171,5 +171,14 @@ public class UserTestServiceImpl implements UserTestService {
 		}
 		return JSON.toJSONString(list);
 	}
+	/**
+	 * 查询评价信息
+	 */
+	@Override
+	public String queryAnswerEvaluate(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		HashMap<String,Object> resultMap = userTestDao.queryAnswerEvaluate(map);
+		return JSON.toJSONString(resultMap);
+	}
 
 }

@@ -2,8 +2,8 @@ $(function(){
 	init();
 	
 });
-//var url = "http://127.0.0.1:8080//"
-var url ="";
+var url = "http://127.0.0.1:8080//"
+	//var url ="";
 //初始化选项
 function init(){
 	$("#onemenu").html("");
@@ -86,7 +86,7 @@ function changedifficulty(test_type){
 }
 //提交答案
 function pushanswer(data){
-	//console.log(data);
+	
 	var flog = 0;
 	var index = -1;
 	for(var i=0;i<data.arr.length;i++){
@@ -106,5 +106,26 @@ function pushanswer(data){
 		alert("请填写所有测试题后再提交!");
 		return;
 	}
-	alert("答对了"+flog+"道题");
+	data.number = flog;
+	$.ajax({
+		type : "POST",
+		url : url+"/videoServer/UserTest/queryAnswerEvaluate",
+		contentType : 'application/json; charset=UTF-8',
+		data: JSON.stringify(data),  //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			
+			$('#myModal').modal({
+				show:true
+			});
+			if(result==""||result==null){
+				$("#modelbody").html("暂无评价信息!");
+				return;
+			}
+			$("#modelbody").html(result.evaluate_content)
+		}
+	});
+}
+function tiaozhuan(){
+	window.location.href='index.html';
 }

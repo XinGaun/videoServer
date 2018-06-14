@@ -13,5 +13,5 @@ public interface CommentTabService {
 	
 	public String updateCommentTab(HashMap<String,Object> hashMap);
 
-	public String deleteCommentTab(List<Number>  datalist);
+	public String deleteCommentTab(List<String> datalist);
 }

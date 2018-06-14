@@ -235,10 +235,23 @@
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-
-                    
-                    <li>
+               <ul class="nav" id="main-menu">
+					
+						<li>
+							<a href="#"><i class="fa fa-sitemap" class="active-menu"></i>权限管理<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li>
+							<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
+						</li>
+						<li>
+							<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
+						</li>
+						<li>
+							<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
+						</li>
+							</ul>
+						</li>
+					<li>
                         <a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a>
                     </li>
                     <li>
@@ -248,16 +261,19 @@
                         <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
                     </li>
 					<li>
+						<li>
 							<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
 						</li>
-						
+						<li><a href="comment.html"><i class="fa fa-table"></i>评论管理</a></li>
 						<li>
-							<a href="order.html" ><i class="fa fa-table"></i>订单管理</a>
+							<a href="order.html"><i class="fa fa-table"></i>订单管理</a>
 						</li>
 						<li>
 							<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
 						</li>
-                </ul>
+						<li><a href="test.html" ><i
+							class="fa fa-edit"></i>题目管理</a></li>
+					</ul>
             </div>
         </nav>
         <!-- /. NAV SIDE  -->
@@ -342,7 +358,7 @@
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="myModalLabel">课程视频添加</h4>
 	      </div>
-			<form action="/videoServer/videoTab/uploadflv1.do" method="post">
+			<form action="/videoTab/uploadflv1.do" method="post">
 				<div style="width:100%;">
 					<div style="height:30px;background:#D9ECFF;border:1px solid #CADEFD"></div>
 					<div style="height:50px;border:1px solid #CADEFD">
@@ -352,10 +368,11 @@
 						<div style="width:100px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">课程价格：</div>
 						<div style="width:100px;height:50px;float:left;line-height:50px;"><input type="text" id="jiage"style="width:130px;"/></div>
 					</div>
-					<div style="height:50px;border:1px solid #CADEFD">
-						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">选择视频：</div>
-						<div style="width:440px;height:50px;float:left;line-height:50px;">
-							&nbsp;<select id="courses_video"><option>请选择视频</option></select>
+					<div style="height:200px;border:1px solid #CADEFD">
+						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:200px;line-height:200px;">选择视频：</div>
+						<div style="width:440px;height:200px;float:left;overflow:scroll;">
+							<!-- <select id="courses_video"><option>请选择视频</option></select> -->
+							<table id="courses_video" class='table table-bordered'></table>
 						</div>
 					</div>
 					<div style="height:50px;border:1px solid #CADEFD">
@@ -386,16 +403,14 @@
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 <script>
-	var url = "http:127.0.0.1:8080/"
-	//var url="";
+	//var url ="http:8080"
 	$(document).ready(function () {
 	    $('#dataTables-example').dataTable();
 	});
 	$(function(){
 		$.ajax({
 			type : 'post',
-			contentType: 'application/json; charset=UTF-8',
-			url : url+'/videoServer/coursesTab/getTabList.do',
+			url : '/videoServer/coursesTab/getTabList.do',
 			success : function(data){
 				for(var i=0;i<data.length;i++){
 					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
@@ -405,11 +420,11 @@
 		})
 		$.ajax({
 			type : 'post',
-			contentType: 'application/json; charset=UTF-8',
-			url : url+'/videoServer/videoTab/getVideoTabs.do',
+			url : '/videoServer/videoTab/getVideoTabs.do',
 			success : function(meg){
 				for (var i = 0; i < meg.length; i++) {
-			    	$("#courses_video").append("<option>["+meg[i].video_id+"]" + meg[i].video_name + "</option>");
+			    	//$("#courses_video").append("<option>["+meg[i].video_id+"]" + meg[i].video_name + "</option>");
+			    	$("#courses_video").append("<tr><td><input type='checkbox' name='videoId' value="+meg[i].video_id+">"+ meg[i].video_name + "</td></tr>");
 			    }
 			}
 		})
@@ -431,8 +446,7 @@
 		var d=orderId.substring(67,orderId.length-2);
 		$.ajax({
 	       	type : 'post',
-			contentType: 'application/json; charset=UTF-8',
-	       	url : url+'/videoServer/coursesTab/delCoursesById.do?id='+d,
+	       	url : '/videoServer/coursesTab/delCoursesById.do?id='+d,
 	       	success : function(){
 	       		alert("删除成功");
 	       		window.location.href="";
@@ -442,25 +456,28 @@
  </script>
  <script>
 	$("#sub").click(function(){
+		var str="";
+		$("input[name='videoId']").each(function(){    
+             if($(this).is(":checked")){    
+                 str +=$(this).val()+",";    
+             }    
+         });
 		$.ajax({
-			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
-			data : {courses_name:$("#name").val(),courses_pricemoney:$("#jiage").val(),courses_img_url:$("#courses_img_url").val(),courses_introduce:$("#courses_introduce").val(),courses_video:$("#courses_video").val()},
-			url : url+'/videoServer/coursesTab/addCoursesTab.do',
+			data : {courses_name:$("#name").val(),courses_pricemoney:$("#jiage").val(),courses_img_url:$("#courses_img_url").val(),courses_introduce:$("#courses_introduce").val(),courses_video:str.substring(0,str.length-1)},
+			url : '/videoServer/coursesTab/addCoursesTab.do',
 			success : function(){
 				alert("提交成功");
 				$("#quxiao").click();
 				window.location.href="";
-			},error: function(){
 			}
 		})
 	})
 	$("#queryorder").click(function(){
 		$.ajax({
-			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
 			data : {courses_name:$("#courses_name").val(),courses_grade:$("#courses_grade").val(),courses_pricemoney:$("#courses_pricemoney").val()},
-			url : url+'/videoServer/coursesTab/getTabListBy.do',
+			url : '/videoServer/coursesTab/getTabListBy.do',
 			success : function(data){
 				if(data.length==0){
 			 		alert("暂无符合条件的课程");

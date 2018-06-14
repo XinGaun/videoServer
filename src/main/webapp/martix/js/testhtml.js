@@ -1,7 +1,8 @@
 $(function(){
 	initTestTable(param);
+	initEvaluateBody(paramg);
 });
-//var url ="http://localhost:8080/"
+//var url ="http://localhost:8088/"
 var url="";
 var pages = 0;//当前页数
 var nums = 10;//每页几条
@@ -18,8 +19,10 @@ var param = {
 
 function queryparameterUserTest(){
 	param.test_id = $("#test_id").val();
-	param.test_subject = $("#test_subject").val(),
-	param.test_grade = $("#test_grade").val()
+	param.test_subject = $("#test_subject").val();
+	param.test_grade = $("#test_grade").val();
+	param.page = 10;
+	param.nums = 0;
 	initTestTable(param);
 }
 
@@ -52,6 +55,13 @@ function deleteUserTest(test_id){
 }
 
 
+//清空搜索内容
+function emptyqutest(){
+	$("#test_id").val("");
+	$("#test_subject").val("");
+	$("#test_grade").val("");
+}
+
 //清空添加表单
 function cleartest(){
 	$("#topictest").val("");
@@ -61,6 +71,9 @@ function cleartest(){
 	$("#answerD").val("");
 	$("#difficultytest").val("");
 	$("#test_type").val("");
+	$("[name=answer]:checkbox").each(function(){
+		$(this).attr("checked",false);
+	});
 }
 
 //修改详情信息
@@ -119,6 +132,9 @@ function testupdate(){
 				alert("修改成功!");
 				initTestTable(param);
 				$('#modal2').modal('hide')
+				$("[name=answerupdate]:checkbox").each(function(){
+					$(this).attr("checked",false);
+				});
 			}else{
 				alert("修改失败!");
 			}
@@ -128,7 +144,7 @@ function testupdate(){
 
 //查询详情信息
 function particulars(map){
-
+	
 	var data ={
 			test_id:map.test_id
 	}
@@ -151,8 +167,11 @@ function particulars(map){
 			$("#difficultytestupdate").val(map.test_grade);
 			$("#testupdate_id").val(map.test_id);
 			var arrs = map.test_answer.split(",");
+			$("input:checkbox[name='answerupdate']").attr("checked",false);
 			for(var i=0;i<arrs.length;i++){
-				$("input:checkbox[name='answerupdate'][value='"+arrs[i]+"']").attr('checked','true');
+				$("input[name='answerupdate'][value='"+arrs[i]+"']").prop("checked","checked");
+				//$("input:checkbox[name='answerupdate'][value='"+arrs[i]+"']").attr('checked',true);
+				//alert($("input:checkbox[name='answerupdate'][value='"+arrs[i]+"']").is(':checked'));
 			}
 			
 		}
@@ -167,6 +186,9 @@ function emptytest(){
 	$("#answerDupdate").val("");
 	$("#difficultytestupdate").val("");
 	$("#type_calss").val("");
+	$("[name=answerupdate]:checkbox").each(function(){
+		$(this).attr("checked",false);
+	});
 }
 
 //添加题目信息
@@ -246,7 +268,7 @@ function initTestTable(param){
 		data : JSON.stringify(param), //传入组装的参数
 		dataType : "json",
 		success : function(result) {
-			console.log(result);
+			//console.log(result);
 			if(result.list.length==0){
 				$("#TestTable").html("暂无题目信息");
 			}else{
@@ -341,6 +363,274 @@ function custom(number){
 	param.nums=(pages)*nums;
 	$("#TestTable").html("");
 	initTestTable(param);
+	//console.log(pages);
+	return false;
+}
+
+//-----------------评价内容
+var pagesg = 0;//当前页数
+var numsg = 10;//每页几条
+var totalg = 0;//总条数 	 
+//组装参数
+var paramg = {
+		page : numsg,
+		nums : (pagesg*numsg)
+}
+
+function queryUserTestEvaluate(){
+	paramg.evaluate_id = $("#qu_evaluate_id").val();
+	paramg.test_grade = $("#qu_test_grade").val();
+	paramg.evaluate_type = $("#qu_evaluate_type").val();
+	paramg.pageg = 10;
+	paramg.numsg = 0;
+	initEvaluateBody(paramg);
+}
+
+//清空查询评价信息
+function emptyquEvaluate(){
+	$("#qu_evaluate_id").val("");
+	$("#qu_evaluate_type").val("");
+	$("#qu_test_grade").val("");
+}
+
+//清空添加评价信息
+function emptyaddEvaluate(){
+	$("#ev_grade").val("");
+	$("#ev_number").val("");
+	$("#ev_type").val("");
+	$("#ev_content").val("");
+}
+
+//清空详情内容
+function emptyaddEvaluatedetails(){
+	$("#ev_grade_up").val("");
+	$("#ev_number_up").val("");
+	$("#ev_type_up").val("");
+	$("#ev_content_up").val("");
+}
+
+//删除评价信息
+function deleteUserTestEvaluate(evaluate_id){
+	if (!window.confirm("确认删除吗?")) {
+
+		return;
+	} else {
+		var data ={
+				evaluate_id:evaluate_id	
+		}
+		$.ajax({
+			type : "POST",
+			url : url
+			+ "/videoServer/UserTest/deleteUserTestEvaluate",
+			contentType : 'application/json; charset=UTF-8',
+			data : JSON.stringify(data), //传入组装的参数
+			dataType : "json",
+			success : function(result) {
+				if(result=="success"){
+					alert("删除成功!");
+					initEvaluateBody(paramg);
+				}else{
+					alert("删除失败!");
+				}
+			}
+		});
+	}
+}
+
+//更新详情信息
+function updateUserTestEvaluate(){
+	if($("#ev_grade_up").val()==""||$("#ev_number_up").val()==""||$("#ev_type_up").val()==""||$("#ev_content_up").val()==""){
+		alert("所有选项为必填!");
+		return;
+	}
+	var data = {
+			evaluate_id :$("#ev_id_up").val(),
+			test_grade : $("#ev_grade_up").val(),
+			evaluate_content : $("#ev_content_up").val(),
+			evaluate_number : $("#ev_number_up").val(),
+			evaluate_type : $("#ev_type_up").val()
+	}
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/UserTest/updateUserTestEvaluate",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(data), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			if(result=="success"){
+				alert("修改成功!");
+				initEvaluateBody(param);
+				$('#modal4').modal('hide')
+			}else{
+				alert("修改失败!");
+			}
+		}
+	});
+}
+
+
+//查询详情信息
+function queryUserTestEvaluatedetails(evaluate_id){
+	var data ={
+			evaluate_id:evaluate_id
+	}
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/UserTest/queryUserTestEvaluate",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(data), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			for(var i=0;i<result.list.length;i++){
+				$("#ev_id_up").val(result.list[i].evaluate_id);
+				$("#ev_grade_up").val(result.list[i].test_grade);
+				$("#ev_number_up").val(result.list[i].evaluate_number);
+				$("#ev_type_up").val(result.list[i].evaluate_type);
+				$("#ev_content_up").val(result.list[i].evaluate_content);
+			}
+		}
+	});
+	
+}
+
+//添加评价信息
+function addUserTestEvaluate(){
+	if($("#ev_grade").val()==""||$("#ev_number").val()==""||$("#ev_type").val()==""||$("#ev_content").val()==""){
+		alert("所有选项为必填!");
+		return;
+	}
+	var data = {
+		test_grade : $("#ev_grade").val(),
+		evaluate_content : $("#ev_content").val(),
+		evaluate_number : $("#ev_number").val(),
+		evaluate_type : $("#ev_type").val()
+	}
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/UserTest/addUserTestEvaluate",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(data), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			if(result=="success"){
+				alert("添加成功!")
+				initEvaluateBody(param);
+				$('#modal3').modal('hide')
+			}else{
+				alert("添加失败!")
+			}
+		}
+	});
+	
+}
+
+//初始化评价内容信息
+function initEvaluateBody(paramg){
+	$("#evaluate_body").html("");
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/UserTest/queryUserTestEvaluate",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(paramg), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			//console.log(result);
+			if(result.list.length==0){
+				$("#evaluate_body").html("暂无评价信息");
+			}else{
+				for(var i=0;i<result.list.length;i++){
+					var evaluate_body = '<tr><td>'+result.list[i].evaluate_id+'</td>'
+					+'<td style="white-space: nowrap;overflow:hidden;text-overflow:ellipsis;"  title="'+result.list[i].evaluate_content+'">'+result.list[i].evaluate_content+'</td>'
+					+'<td>'+result.list[i].evaluate_type+'</td>'
+					+'<td>'+result.list[i].test_grade+'</td>'
+					+'<td>'+result.list[i].evaluate_number+'</td>'
+					+'<td><button class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-lg4" onclick="queryUserTestEvaluatedetails('+result.list[i].evaluate_id+')">查看详情</button>&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteUserTestEvaluate('+result.list[i].evaluate_id+')">删除评价</button></td></tr>'
+					$("#evaluate_body").append(evaluate_body);
+				}
+				totalg=result.total;
+				pageg(pagesg, numsg, result.total);
+			}
+		}
+	});
+}
+//分页
+//生成分页条
+function pageg(pagesg, numsg, totalg) {
+	var next = "";
+	var previous = "";
+	var pageStr = "";
+	if (pagesg == 0) {
+		previous = "";
+	} else {
+		previous = '<li>'
+			+ '<a href="javascript:void(0)" onclick="shangyeg()" aria-label="Previous">'
+			+ '<span aria-hidden="true">&laquo;</span>'
+			+ '</a>' + '</li>';
+	}
+	if (pagesg == totalg-1) {
+		next = "";
+	} else {
+		next = '<li>' + '<a href="javascript:void(0)" onclick="xiayeg()" >'
+		+ '<span aria-hidden="true">&raquo;</span>'
+		+ '</a>' + '</li>';
+	}
+	if (totalg <= 5 || pagesg <= 4) {
+		var totalnum = 5;
+		if(totalg<=5){
+			totalnum = totalg
+		}
+		for (var i = 1; i <= totalnum; i++) {
+			pageStr = pageStr + '<li><a href="javascript:void(0)" onclick="customg('+i+')">' + i
+			+ '</a></li>';
+
+		}
+	} else if (totalg - pagesg <= 2) {
+		for (var i = 0; i < 5; i++) {
+			pageStr = '<li><a href="javascript:void(0)" onclick="customg('+(totalg - i)+')">' + (totalg - i)
+			+ '</a></li>' + pageStr;
+		}
+	} else {
+		for (var i = -1; i <= 3; i++) {
+			pageStr = pageStr + '<li><a href="javascript:void(0)" onclick="customg('+(pagesg + i)+')">'
+			+ (pagesg + i) + '</a></li>';
+		}
+	}
+
+	//console.log(pageStr);
+
+	var fanyeg = '<nav aria-label="Page navigation">'
+		+ '<ul class="pagination">' + previous + pageStr
+		+ next + '<li><a>当前第'+(pagesg+1)+'页</a></li></ul>' + '</nav>'
+		$("#fanyeg").html(fanyeg);
+}
+//下一页
+function xiayeg(){
+	pagesg++;
+	paramg.numsg=pagesg*numsg;	
+	$("#evaluate_body").html("");
+	//console.log(pages+1);
+	initEvaluateBody(paramg);
+	return false;
+}
+//上页
+function shangyeg(){
+	pagesg--;
+	paramg.numsg=pagesg*numsg;
+	$("#evaluate_body").html("");
+	//console.log(pages);
+	initEvaluateBody(paramg);
+	return false;
+}
+//页数换页
+function customg(number){
+	pagesg=number-1;
+	paramg.numsg=(pagesg)*numsg;
+	$("#evaluate_body").html("");
+	initEvaluateBody(paramg);
 	//console.log(pages);
 	return false;
 }

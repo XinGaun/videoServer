@@ -123,4 +123,13 @@ public class UserTestController {
 	public String queryRandomUserTestAnswer(@RequestBody String data) {
 		return userTestService.queryRandomUserTestAnswer(data);
 	}
+	/**
+	 * 查询测试题答案
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryAnswerEvaluate",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryAnswerEvaluate(@RequestBody String data) {
+		return userTestService.queryAnswerEvaluate(data);
+	}
 }

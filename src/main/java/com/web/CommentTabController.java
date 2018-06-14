@@ -42,7 +42,7 @@ public class CommentTabController extends DemoController{
 	public String deleteCommentTabList(@RequestBody String data) {
 		logger.info("data"+data);
 		@SuppressWarnings("unchecked")
-		List<Number> datalist =  JSON.parseObject(data, List.class);
+		List<String> datalist =  JSON.parseObject(data, List.class);
 		String result =service.deleteCommentTab(datalist);
 		return result;
 	}

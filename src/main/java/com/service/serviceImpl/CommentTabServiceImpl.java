@@ -61,6 +61,7 @@ public class CommentTabServiceImpl implements CommentTabService {
 			return "error";
 		}
 		int flag = dao.updateCommentTab(hashMap);
+		logger.info(hashMap.toString());
 		if(flag >0) {
 			return "success";
 		}
@@ -68,18 +69,18 @@ public class CommentTabServiceImpl implements CommentTabService {
 	}
 
 	@Override
-	public String deleteCommentTab(List<Number>  datalist) {
+	public String deleteCommentTab(List<String>  datalist) {
 		// TODO Auto-generated method stub
 		logger.info("data"+datalist.toString());
 		int flag = 0;
-		for (Number number : datalist) {
+		for (int i = 0; i < datalist.size(); i++) {
 			logger.info("service");
-			flag =dao.deleteCommentTab(number.intValue());
+			flag =dao.deleteCommentTab(Integer.parseInt(datalist.get(i)));
 			logger.info("go");
 			if(flag <= 0) {
 				return "error";
 			}
-		}	
+		}		
 		if(flag >0) {
 			return "success";
 		}

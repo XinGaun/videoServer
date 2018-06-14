@@ -109,4 +109,8 @@
 	<select id="queryRandomUserTestAnswer" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		SELECT answer_id,test_id,answer_content,test_answer FROM user_test_answer WHERE test_id = #{test_id}
 	</select>
+	<!-- 根据答题结果查询评语 -->
+	<select id="queryAnswerEvaluate" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT evaluate_content FROM user_test_evaluate WHERE test_grade = #{test_grade} AND evaluate_type = #{test_type} AND evaluate_number >= #{number} GROUP BY evaluate_number ASC LIMIT 0,1;
+	</select>
 </mapper>

@@ -8,8 +8,8 @@ $(function() {
 });
 
 
-var url = "http:/127.0.0.1:8080"
-//var url = "";
+//var url = "http:/127.0.0.1:8080"
+var url = "";
 var pages = 0;//当前页数
 var nums = 9;//每页几条
 var total = 0;//总条数 

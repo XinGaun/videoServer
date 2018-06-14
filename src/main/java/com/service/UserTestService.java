@@ -25,4 +25,6 @@ public interface UserTestService {
 	public String queryUserTestEvaluateTestGrade(String data);
 	//随机查询几道测试题
 	public String queryRandomUserTestAnswer(String data);
+	//查询答题评价信息
+	public String queryAnswerEvaluate(String data);
 }
