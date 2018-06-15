@@ -235,12 +235,12 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-					
-						<li>
+
+                   <li>
 							<a href="#"><i class="fa fa-sitemap" class="active-menu"></i>权限管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li>
-							<a href="role_list.html"  ><i class="fa fa-lock"></i> 权限管理</a>
+							<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
 						</li>
 						<li>
 							<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
@@ -259,15 +259,16 @@
                     <li>
                         <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
                     </li>
-                    <li>
+					<li>
+						<li>
 							<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
 						</li>
-						
+						<li><a href="comment.html"><i class="fa fa-table"></i>评论管理</a></li>
 						<li>
 							<a href="order.html" ><i class="fa fa-table"></i>订单管理</a>
 						</li>
 						<li>
-							<a href="proposal.html" ><i class="fa fa-edit"></i>建议管理</a>
+							<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
 						</li>
 						<li><a href="test.html" ><i
 							class="fa fa-edit"></i>题目管理</a></li>
@@ -344,7 +345,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         
-                        <div class="panel-body">
+                        <div class="panel-body" style="height:500px;overflow-x: auto; overflow-y:auto;">
                             <table id="tb" class='table table-bordered'>
 						    	<tr>
 						    		<!-- <td><input type="checkbox"/></td> --><td>序号</td><td style="width:100px;white-space:nowrap;">视频名称</td><td>视频介绍</td><td>视频类型</td><td>视频链接</td><td>视频评分</td><td>点击次数</td><!-- <td>上传时间</td> --><td>查看</td><td>修改</td><td>删除</td>
@@ -423,11 +424,10 @@
 	$(function(){
 		$.ajax({
 			type : 'post',
-			contentType: 'application/json; charset=UTF-8',
 			url : '/videoServer/videoTab/getVideoTabs.do',
 			success : function(data){
 				for(var i=0;i<data.length;i++){
-					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td onclick='getId(this)'><input type='button' value='观看'/><input type='hidden' value='"+data[i].video_id+"'/></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td></tr>")
+					$("#tb").append("<tr><td'>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td onclick='getId(this)'><input type='button' value='观看'/><input type='hidden' value='"+data[i].video_id+"'/></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td></tr>")
 				}
 			},error: function(){
 				 
@@ -440,7 +440,7 @@
 		window.location.href="updateVideo.html?video_id="+d;
 		/* $.ajax({
 	       	type : 'post',
-	       	url : '/Edusystem/videoTab/updetVideoById.do?video_id='+d,
+	       	url : '/videoServer/videoTab/updetVideoById.do?video_id='+d,
 	       	success : function(data){
 	       		window.location.href="video.html?video_id="+d;
 	       	}
@@ -451,9 +451,10 @@
 		var d=orderId.substring(67,orderId.length-2);
 		$.ajax({
 	       	type : 'post',
-			contentType: 'application/json; charset=UTF-8',
 	       	url : '/videoServer/videoTab/delVideoById.do?video_id='+d,
 	       	success : function(){
+	       		alert("删除成功！");
+	       		window.location.href="";
 	       	}
 	    })
 	}
@@ -462,7 +463,6 @@
 		var d=orderId.substring(60,orderId.length-2);
 		$.ajax({
 	       	type : 'post',
-			contentType: 'application/json; charset=UTF-8',
 	       	url : '/videoServer/videoTab/getVideoById.do?id='+d,
 	       	success : function(data){
 	       		window.location.href="player.html?video_url="+data[0].video_id;
@@ -477,7 +477,6 @@
 		if(aa[aa.length-1]=='mp4'||aa[aa.length-1]=='webm'||aa[aa.length-1]=='ogv'||aa[aa.length-1]=='png'||aa[aa.length-1]=='jpeg'){
 			$.ajax({
 				type : 'post',
-				contentType: 'application/json; charset=UTF-8',
 				data : {video_name:$("#video_name").val(),video_url:$("#video_url").val(),video_img_url:$("#video_img_url").val(),video_introduce:$("#video_introduce").val(),video_form_id:$("#kctype").val()},
 				url : '/videoServer/videoTab/uploadflv.do',
 				success : function(){
@@ -496,7 +495,6 @@
 		//alert($("#video_name1").val())
 		$.ajax({
 			type : 'post',
-			contentType: 'application/json; charset=UTF-8',
 			data : {/* video_id:$("#order_id").val(), */video_form_id:$("#video_type").val(),video_name:$("#video_name1").val()},
 			url : '/videoServer/videoTab/selVideo.do',
 			success : function(data){

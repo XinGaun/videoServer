@@ -1,14 +1,16 @@
 package com.service;
 
+import java.util.HashMap;
 import java.util.List;
 
-import com.entity.videoTab;
+import com.entity.VideoTab;
 
-public interface videoTabService {
-	public void uploadVideo(videoTab vd);
-	public List<videoTab> getVideoList();
-	public List<videoTab> getVideoById(int id);
-	public List<videoTab> selVideo(videoTab vd);
+public interface VideoTabService {
+	public void uploadVideo(HashMap<String,Object> videoinfo);
+	public void downloadVideo(HashMap<String,Object> videoinfo);
+	public List<VideoTab> getVideoList();
+	public List<VideoTab> getVideoById(int id);
+	public List<VideoTab> selVideo(VideoTab vd);
 	public void delVideoById(int video_id);
-	public void updetVideoById(videoTab vd);
+	public void updetVideoById(VideoTab vd);
 }

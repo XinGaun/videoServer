@@ -8,6 +8,7 @@
 <META NAME="Description" CONTENT="">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </HEAD>
+
 <style>
 .jsjs {
 	color: #000000;
@@ -16,6 +17,9 @@
 	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
 	word-break: break-all;
+}
+#btpbq{
+	font-size:30px;
 }
 
 .kcjs {
@@ -27,9 +31,10 @@
 	word-break: break-all;
 }
 </style>
-<script src="js/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-3.3.1.min.js" ></script>
+	<link rel="stylesheet" href="css/bootstrap.min.css" >
+	<script src="js/bootstrap.min.js" ></script>
+	<script src="js/jquery.lazyload.min.js"></script>
 <BODY>
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -85,28 +90,39 @@
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container-fluid --> </nav>
-	<!--  -->
-	<div
-		style="width: 100%; height: 200px; background: url(img/banner@2x.png)">
+	<!-- 教师课程信息 -->
+	<div style="width: 100%; height: 200px; background: url(img/banner@2x.png)">
 		<div class="row">
 			<div class="col-md-12">&nbsp;</div>
 			<div class="col-md-12">
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<div class="media">
-							<div class="media-left">
-								<a href="#"> <img class="media-object" src="img/tx22@2x.png"
-									alt="...">
-								</a>
+						<div class="row bgs">
+							<div class="col-md-4">
+								<div class="col-md-12">&nbsp;</div>
+									<div id="teacher_imgurl"></div>
+								<div class="col-md-12">&nbsp;</div>
 							</div>
-							<div class="media-body">
-								<h4 class="media-heading" style="font-weight: bold;">教师名称</h4>
-								<p>&nbsp;</p>
-								<p>高中 英语</p>
-								<p style="text-indent: 2em;" class="jsjs">教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍</p>
+							<div class="col-md-8">
+								 <div class="row">
+									<div class="col-md-8">
+										<p>&nbsp;</p>
+										<p id="btpbq" ><span id="teacher_name"></span></p>
+									</div>
+									<div class="col-md-12">
+										<p><span id="video_form_class"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="video_form_name"></span></p>
+									</div>
+									<div class="col-md-12" >
+										<div class="row">
+											<div class="col-md-3">
+												<p class="glyphicon" id="teacher_introduce"></p> 
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-						</div>
+						</div> 
 					</div>
 					<div class="col-md-2"></div>
 				</div>
@@ -119,16 +135,16 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<div class="col-md-6" style="vertical-align: middle;">
+			<div class="col-md-6" style="vertical-align: middle;" onclick="queryVideo()">
 				<h4 style="font-weight: bold;">在教课程</h4>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group navbar-form navbar-right">
 					<div class="input-group col-xs-12">
-						<input type="text" name="keyword" id="keyword"
+						<input type="text" name="keywordthree" id="keywordthree"
 							class="form-control" placeholder="请您输入关键词"> <span
 							class="input-group-btn">
-							<button class="btn btn-success" id="search_submit" type="submit">搜索</button>
+							<button class="btn btn-success" id="search_submit" type="submit" onclick="queryVideoName()" >搜索</button>
 						</span>
 					</div>
 				</div>
@@ -137,214 +153,27 @@
 		<div class="col-md-2"></div>
 	</div>
 	</nav>
-	<!--  -->
+	<!-- 教师对应的教学视频  -->
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div class="row">
-				<!--  -->
-				<div class="col-md-3" style="width: 220px;">
-					<img src="img/fm.png" style="width: 210px;" alt="..."
-						class="img-rounded">
-					<h4>视频名称</h4>
-					<p style="text-align: right;">2018-06-02</p>
-					<p>
-						<span style="color: #00BFFF; text-align: left;">免费</span> <span
-							style="float: right"><span
-							class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-						<span style="float: right"><span
-							class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-					</p>
-				</div>
-				<!--  -->
-				<!--  -->
-				<div class="col-md-3" style="width: 220px;">
-					<img src="img/fm.png" style="width: 210px;" alt="..."
-						class="img-rounded">
-					<h4>视频名称</h4>
-					<p style="text-align: right;">2018-06-02</p>
-					<p>
-						<span style="color: #00BFFF; text-align: left;">免费</span> <span
-							style="float: right"><span
-							class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-						<span style="float: right"><span
-							class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-					</p>
-				</div>
-				<!--  -->
-				<!--  -->
-				<div class="col-md-3" style="width: 225px;">
-					<img src="img/fm.png" style="width: 210px;" alt="..."
-						class="img-rounded">
-					<h4>视频名称</h4>
-					<p style="text-align: right;">2018-06-02</p>
-					<p>
-						<span style="color: #00BFFF; text-align: left;">免费</span> <span
-							style="float: right"><span
-							class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-						<span style="float: right"><span
-							class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-					</p>
-				</div>
-				<!--  -->
-				<!--  -->
-				<div class="col-md-3" style="width: 220px;">
-					<img src="img/fm.png" style="width: 210px;" alt="..."
-						class="img-rounded">
-					<h4>视频名称</h4>
-					<p style="text-align: right;">2018-06-02</p>
-					<p>
-						<span style="color: #00BFFF; text-align: left;">免费</span> <span
-							style="float: right"><span
-							class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-						<span style="float: right"><span
-							class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-					</p>
-				</div>
-				<!--  -->
-				<!--  -->
-				<div class="col-md-3" style="width: 220px;">
-					<img src="img/fm.png" style="width: 210px;" alt="..."
-						class="img-rounded">
-					<h4>视频名称</h4>
-					<p style="text-align: right;">2018-06-02</p>
-					<p>
-						<span style="color: #00BFFF; text-align: left;">免费</span> <span
-							style="float: right"><span
-							class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-						<span style="float: right"><span
-							class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-					</p>
-				</div>
-				<!--  -->
-				<!--  -->
-				<div class="col-md-3" style="width: 220px;">
-					<img src="img/fm.png" style="width: 210px;" alt="..."
-						class="img-rounded">
-					<h4>视频名称</h4>
-					<p style="text-align: right;">2018-06-02</p>
-					<p>
-						<span style="color: #00BFFF; text-align: left;">免费</span> <span
-							style="float: right"><span
-							class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-						<span style="float: right"><span
-							class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-					</p>
-				</div>
-				<!--  -->
-				<!--  -->
-				<div class="col-md-3" style="width: 220px;">
-					<img src="img/fm.png" style="width: 210px;" alt="..."
-						class="img-rounded">
-					<h4>视频名称</h4>
-					<p style="text-align: right;">2018-06-02</p>
-					<p>
-						<span style="color: #00BFFF; text-align: left;">免费</span> <span
-							style="float: right"><span
-							class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-						<span style="float: right"><span
-							class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-					</p>
-				</div>
-				<!--  -->
-				<!--  -->
-				<div class="col-md-3" style="width: 220px;">
-					<img src="img/fm.png" style="width: 210px;" alt="..."
-						class="img-rounded">
-					<h4>视频名称</h4>
-					<p style="text-align: right;">2018-06-02</p>
-					<p>
-						<span style="color: #00BFFF; text-align: left;">免费</span> <span
-							style="float: right"><span
-							class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-						<span style="float: right"><span
-							class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-					</p>
-				</div>
-				<!--  -->
-				<!--  -->
-				<div class="col-md-3" style="width: 220px;">
-					<img src="img/fm.png" style="width: 210px;" alt="..."
-						class="img-rounded">
-					<h4>视频名称</h4>
-					<p style="text-align: right;">2018-06-02</p>
-					<p>
-						<span style="color: #00BFFF; text-align: left;">免费</span> <span
-							style="float: right"><span
-							class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-						<span style="float: right"><span
-							class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-					</p>
-				</div>
-				<!--  -->
-				<!--  -->
-				<div class="col-md-3" style="width: 220px;">
-					<img src="img/fm.png" style="width: 210px;" alt="..."
-						class="img-rounded">
-					<h4>视频名称</h4>
-					<p style="text-align: right;">2018-06-02</p>
-					<p>
-						<span style="color: #00BFFF; text-align: left;">免费</span> <span
-							style="float: right"><span
-							class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-						<span style="float: right"><span
-							class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-					</p>
-				</div>
-				<!--  -->
-				<!--  -->
-				<div class="col-md-3" style="width: 220px;">
-					<img src="img/fm.png" style="width: 210px;" alt="..."
-						class="img-rounded">
-					<h4>视频名称</h4>
-					<p style="text-align: right;">2018-06-02</p>
-					<p>
-						<span style="color: #00BFFF; text-align: left;">免费</span> <span
-							style="float: right"><span
-							class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-						<span style="float: right"><span
-							class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-					</p>
-				</div>
-				<!--  -->
-				<!--  -->
-				<div class="col-md-3" style="width: 220px;">
-					<img src="img/fm.png" style="width: 210px;" alt="..."
-						class="img-rounded">
-					<h4>视频名称</h4>
-					<p style="text-align: right;">2018-06-02</p>
-					<p>
-						<span style="color: #00BFFF; text-align: left;">免费</span> <span
-							style="float: right"><span
-							class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-						<span style="float: right"><span
-							class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-					</p>
-				</div>
-				<!--  -->
+				<div class="panel-body">
+					<div class="row" id="">
+						<div class="row" id="excellent">
 
-			</div>
-			<!--  -->
-			<!-- 翻页 -->
-			<div class="col-md-12" style="text-align: center;">
-				<nav aria-label="Page navigation">
-				<ul class="pagination">
-					<li><a href="#" aria-label="Previous"> <span
-							aria-hidden="true">&laquo;</span>
-					</a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#" aria-label="Next"> <span
-							aria-hidden="true">&raquo;</span>
-					</a></li>
-				</ul>
-				</nav>
-			</div>
-			<!--  -->
+							<!-- 教师模板结束 -->
 
+
+						</div>
+						<!-- 翻页 -->
+						<div class="col-md-12" style="text-align: center;" id="fanye">
+				
+						</div>
+						<!-- 翻页结束 -->
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
@@ -383,7 +212,7 @@
 		</div>
 
 	</div>
-
-
+	
+	<script type="text/javascript" src="js/teacherCentre.js"></script>
 </BODY>
 </HTML>

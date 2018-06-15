@@ -8,8 +8,8 @@ $(function() {
 });
 
 
-var url = "http:/127.0.0.1:8080"
-//var url = "";
+//var url = "http:/127.0.0.1:8080"
+var url = "";
 var pages = 0;//当前页数
 var nums = 9;//每页几条
 var total = 0;//总条数 
@@ -164,7 +164,7 @@ function initqueryCourseGrade(){
 		//data : JSON.stringify(param), //传入组装的参数
 		dataType : "json",
 		success : function(result) {
-			console.log(result);
+			//console.log(result);
 			if (result == "" || result.length == 0) {
 				$("#queryCourseGrade").append("暂无课程信息!");
 				return;

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -50,18 +49,18 @@ public class UserControllers {
 		return JSON.toJSONString(aList.size());
 	}
 	@ResponseBody
-	@RequestMapping(value="/selectuser",produces="application/json;charset=utf-8")
+	@RequestMapping(value="/selectuser")
 	public String selectuser(@RequestBody UserTab ut,HttpServletResponse response){
 		System.out.println("aaaaaaaaa");
 		System.out.println(ut.getUser_phone());
 		System.out.println(ut.getUser_pwd());
+		String spwd=ut.getUser_pwd();
+		String smi=MD5.md5(spwd);
+		ut.setUser_pwd(smi);
 		ArrayList<HashMap<String, Object>> aList=aService.selectUser(ut);
+		System.out.println(aList);
 		int flag=aList.size();
 		if(flag==1){
-			Cookie cookie1=new Cookie("user_phone",aList.get(0).get("user_phone").toString());
-			
-			response.addCookie(cookie1);
-
 			return JSON.toJSONString(aList);
 		}
 		return JSON.toJSONString("账号和密码不一致！");

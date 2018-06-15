@@ -233,51 +233,48 @@
             </ul>
         </nav>
         <!--/. NAV TOP  -->
-         <nav class="navbar-default navbar-side" role="navigation">
+        <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-					<li>
-							<a href="#"><i class="fa fa-sitemap"></i>权限管理<span class="fa arrow"></span></a>
+
+                   <li>
+							<a href="#"><i class="fa fa-sitemap" class="active-menu"></i>权限管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li>
-									<a href="role_list.html"  ><i class="fa fa-lock"></i> 权限管理</a>
-								</li>
-								<li>
-									<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
-								</li>
-								<li>
-									<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
-								</li>
+							<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
+						</li>
+						<li>
+							<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
+						</li>
+						<li>
+							<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
+						</li>
 							</ul>
-					</li>
-
+						</li>
 					<li>
                         <a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a>
                     </li>
                     <li>
-                        <a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
+                        <a href="classInfo.html" ><i class="fa fa-edit"></i>课程管理</a>
                     </li>
                     <li>
-                        <a href="taocanInfo.html" class="active-menu"><i class="fa fa-table"></i>套餐管理</a>
+                        <a href="taocanInfo.html"  class="active-menu"><i class="fa fa-sitemap"></i>套餐管理</a>
                     </li>
-                    <li>
+					<li>
+						<li>
 							<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
 						</li>
-						
+						<li><a href="comment.html"><i class="fa fa-table"></i>评论管理</a></li>
 						<li>
-							<a href="order.html" ><i class="fa fa-table"></i>订单管理</a>
+							<a href="order.html"><i class="fa fa-table"></i>订单管理</a>
 						</li>
 						<li>
-							<a href="proposal.html" ><i class="fa fa-edit"></i>建议管理</a>
+							<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
 						</li>
 						<li><a href="test.html" ><i
 							class="fa fa-edit"></i>题目管理</a></li>
-
-
                 </ul>
-
             </div>
-
         </nav>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
@@ -334,7 +331,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         
-                        <div class="panel-body">
+                        <div class="panel-body"style="height:500px;overflow-x: auto; overflow-y:auto;">
                             <table id="tb" class='table table-bordered'>
 						    	<tr>
 						    		<td>序号</td><td>套餐名称</td><td>套餐介绍</td><td>套餐视频</td><td>套餐图片</td><td>套餐价格</td><td>套餐状态</td><td>修改</td><td>删除</td>
@@ -365,10 +362,11 @@
 						<div style="width:100px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">套餐价格：</div>
 						<div style="width:100px;height:50px;float:left;line-height:50px;"><input type="text" id="jiage"style="width:130px;"/></div>
 					</div>
-					<div style="height:50px;border:1px solid #CADEFD">
-						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">套餐视频：</div>
-						<div style="width:440px;height:50px;float:left;line-height:50px;">
-							&nbsp;<select id="courses_video"><option>请选择视频</option></select>
+					<div style="height:200px;border:1px solid #CADEFD">
+						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:200px;line-height:200px;">套餐视频：</div>
+						<div style="width:440px;height:200px;float:left;overflow:scroll;">
+							<!-- <select id="courses_video"><option>请选择视频</option></select> -->
+							<table id="courses_video" class='table table-bordered'></table>
 						</div>
 					</div>
 					<div style="height:50px;border:1px solid #CADEFD">
@@ -404,7 +402,6 @@
 	});
 	$(function(){
 		$.ajax({
-			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
 			url : '/videoServer/comboTab/getList.do',
 			success : function(data){
@@ -415,12 +412,11 @@
 			}
 		})
 		$.ajax({
-			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
 			url : '/videoServer/videoTab/getVideoTabs.do',
 			success : function(meg){
 				for (var i = 0; i < meg.length; i++) {
-			    	$("#courses_video").append("<option>["+meg[i].video_id+"]" + meg[i].video_name + "</option>");
+			    	$("#courses_video").append("<tr><td><input type='checkbox' name='videoId' value="+meg[i].video_id+">"+ meg[i].video_name + "</td></tr>");
 			    }
 			}
 		})
@@ -441,7 +437,6 @@
 		var orderId=$(obj).html();
 		var d=orderId.substring(67,orderId.length-2);
 		$.ajax({
-			contentType: 'application/json; charset=UTF-8',
 	       	type : 'post',
 	       	url : '/videoServer/comboTab/delComboById.do?id='+d,
 	       	success : function(){
@@ -453,22 +448,25 @@
  </script>
  <script>
 	$("#sub").click(function(){
+		var str="";
+		$("input[name='videoId']").each(function(){    
+             if($(this).is(":checked")){    
+                 str +=$(this).val()+",";    
+             }    
+         });
 		$.ajax({
-			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
-			data : {combo_name:$("#name").val(),combo_price:$("#jiage").val(),combo_imgs:$("#courses_img_url").val(),combo_introduce:$("#courses_introduce").val(),video_id:$("#courses_video").val()},
+			data : {combo_name:$("#name").val(),combo_price:$("#jiage").val(),combo_imgs:$("#courses_img_url").val(),combo_introduce:$("#courses_introduce").val(),video_id:str.substring(0,str.length-1)},
 			url : '/videoServer/comboTab/insertComboTab.do',
 			success : function(){
 				alert("提交成功");
 				$("#quxiao").click();
 				window.location.href="";
-			},error: function(){
 			}
 		})
 	})
 	$("#queryorder").click(function(){
 		$.ajax({
-			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
 			data : {combo_name:$("#combo_name").val(),combo_price:$("#combo_price").val()},
 			url : '/videoServer/comboTab/getListBy.do',

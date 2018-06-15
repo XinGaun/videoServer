@@ -96,4 +96,40 @@ public class UserTestController {
 	public String updateUserTestEvaluate(@RequestBody String data) {
 		return userTestService.updateUserTestEvaluate(data);
 	}
+	/**
+	 * 查询评价分类
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryUserTestEvaluatetypeName",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryUserTestEvaluatetypeName() {
+		return userTestService.queryUserTestEvaluatetypeName();
+	}
+	/**
+	 * 按难分类查询难度信息
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryUserTestEvaluateTestGrade",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryUserTestEvaluateTestGrade(@RequestBody String data) {
+		return userTestService.queryUserTestEvaluateTestGrade(data);
+	}
+	/**
+	 * 随机查询测试题
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryRandomUserTestAnswer",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryRandomUserTestAnswer(@RequestBody String data) {
+		return userTestService.queryRandomUserTestAnswer(data);
+	}
+	/**
+	 * 查询测试题答案
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryAnswerEvaluate",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryAnswerEvaluate(@RequestBody String data) {
+		return userTestService.queryAnswerEvaluate(data);
+	}
 }
