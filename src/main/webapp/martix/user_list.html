@@ -449,7 +449,7 @@
 							//添加数据
 							addUserBody(data.listObject);
 						}else{
-							alert("删除失败");
+							alert(data.retMsg);
 						}
 					}
 			});
@@ -469,7 +469,7 @@
 							"<td>"+data[i].user_name+"</td>"+
 							"<td>"+data[i].user_sex+"</td>"+
 							"<td>"+data[i].user_phone+"</td>"+
-							"<td>"+$.trim(data[i].user_mail)+"</td>"+
+							"<td>"+$.trim(data[i].user_email)+"</td>"+
 							"<td>"+data[i].user_date+"</td>"+
 							"<td>"+data[i].user_status+"</td>"+
 							"<td><a href='user_info.html?id="+ data[i].user_id +"' class=\"btn btn-info\">查看</a>"+

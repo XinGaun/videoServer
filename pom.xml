@@ -145,6 +145,12 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.35</version>
 		</dependency>
+		<!-- <dependency>
+		    <groupId>net.pusuo</groupId>
+		    <artifactId>patchca</artifactId>
+		    <version>0.5.0</version>
+		</dependency> -->
+		
 		<!-- 文件上传 -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -164,7 +170,11 @@
 			<artifactId>shiro-all</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>1.6.2</version>
+		</dependency>
 
 		<!-- jsonrpc4j依赖的包 -->
 		<dependency>
