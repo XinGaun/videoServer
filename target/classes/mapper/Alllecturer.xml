@@ -6,12 +6,13 @@
 	<!-- 查询教师信息 -->
 	<select id="queryTeacherInformation" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		SELECT
-		teacher_name,courses_id,teacher_tab.teacher_id,courses_name,courses_introduce,teacher_imgurl,date_format(teacher_date,'%Y-%m-%d')teacher_date
-		FROM teacher_tab
-		LEFT JOIN courses_tab ON
-		teacher_tab.teacher_id=courses_tab.teacher_id
-		WHERE 1=1 AND
-		teacher_status = 5 order by teacher_date DESC LIMIT #{nums},#{page}
+		teacher_name,teacher_tab.teacher_id,teacher_introduce,teacher_imgurl,date_format(teacher_date,'%Y-%m-%d')teacher_date
+		FROM teacher_tab 
+		WHERE 1=1 AND teacher_status = 5 
+		<if test="keywordtwo!=''">
+ 			AND teacher_tab.teacher_name like '%${keywordtwo}%' 
+ 		</if>
+		order by teacher_date DESC LIMIT #{nums},#{page}
 	</select>
 	<!-- 查询所有课程总数 -->
 	<select id="querycoursesTabAllCount" parameterType="java.util.HashMap" resultType="int">

@@ -192,17 +192,4 @@
 				<![CDATA[  limit #{page.startNum},#{page.endIndex}  ]]>
 			</if>
 </select>
-<select id="queryUserRight" parameterType="string" resultType="com.entity.RightDomain">
-	select DISTINCT right_id, right_name 
-		from right_tab 
-		where right_id in(
-			select right_id 
-			from role_right_tab 
-			where role_id in(
-				select role_id 
-				from user_role_tab 
-				where user_id = #{userId}
-			)
-		)
-</select>
 </mapper>

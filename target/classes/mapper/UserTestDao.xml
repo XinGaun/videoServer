@@ -93,4 +93,24 @@
 	<update id="updateUserTestEvaluate" parameterType="java.util.HashMap">
 		UPDATE user_test_evaluate SET test_grade=#{test_grade} ,evaluate_content =#{evaluate_content},evaluate_number = #{evaluate_number},evaluate_type =#{evaluate_type} WHERE evaluate_id =#{evaluate_id}
 	</update>
+	<!-- 查询分类名 -->
+	<select id="queryUserTestEvaluatetypeName" resultType="java.util.HashMap">
+		SELECT test_type FROM user_test GROUP BY test_type
+	</select>
+	<!-- 根据类名查找难度信息 -->
+	<select id="queryUserTestEvaluateTestGrade" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT test_grade FROM user_test WHERE test_type = #{test_type} GROUP BY test_grade
+	</select>
+	<!-- 随机抽取题目信息 -->
+	<select id="queryRandomUserTest" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select test_id,test_subject,test_answer,test_grade,test_type from user_test WHERE test_type = #{test_type} AND test_grade = #{test_grade} order by rand() LIMIT 5
+	</select>
+	<!-- 根据题目ID查询答案信息 -->
+	<select id="queryRandomUserTestAnswer" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT answer_id,test_id,answer_content,test_answer FROM user_test_answer WHERE test_id = #{test_id}
+	</select>
+	<!-- 根据答题结果查询评语 -->
+	<select id="queryAnswerEvaluate" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT evaluate_content FROM user_test_evaluate WHERE test_grade = #{test_grade} AND evaluate_type = #{test_type} AND evaluate_number >= #{number} GROUP BY evaluate_number ASC LIMIT 0,1;
+	</select>
 </mapper>

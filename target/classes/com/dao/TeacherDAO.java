@@ -2,6 +2,7 @@ package com.dao;
 
 import java.util.List;
 
+import com.entity.RightDomain;
 import com.entity.TeacherDomain;
 
 public interface TeacherDAO
@@ -17,4 +18,6 @@ public interface TeacherDAO
 	public List<TeacherDomain> queryListTeacher(TeacherDomain TeacherDomain);
 
 	public int queryTeacherCount(TeacherDomain TeacherDomain);
+
+	public List<RightDomain> queryTeacherRight(String user_id);
 }
