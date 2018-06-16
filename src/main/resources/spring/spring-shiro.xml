@@ -51,6 +51,7 @@
 				/martix/fileupload/** = anon
 				/martix/assets/** = anon
 				/martix/login.html = anon
+				/boo/** = anon
 				/rand.jsp = anon
 				/teacher/teacherLogin = anon
 				/teacher/teacherLogout = anon
