@@ -433,7 +433,7 @@ var url="";
 		        		if(data==1){
 		        			$.ajax({
 		        	        	type:"POST",
-		        	        	url:url+"/videoServer/AliBigFish/verificationCode",
+		        	        	url:url+"/videoServer/front/AliBigFish/verificationCode",
 		        	        	contentType:'application/json;charset=UTF-8',
 		        	        	data:JSON.stringify(str),     	
 		        	        	//data:str,
@@ -538,7 +538,7 @@ var url="";
 	        		    } 
 	        			 $.ajax({
 	        	        	type:"POST",
-	        	        	url:url+"/videoServer/User/updateuser",
+	        	        	url:url+"/videoServer/front/User/updateuser",
 	        	        	data:JSON.stringify(UserTab),	
 	        	        	contentType:'application/json;charset=UTF-8',
 	        	        	cache:false,

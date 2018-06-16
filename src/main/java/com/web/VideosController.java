@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.service.VideosDaoService;
 
 @Controller
-@RequestMapping("/Videos")
+@RequestMapping("/front/Videos")
 @ResponseBody
 public class VideosController {
 	@Autowired

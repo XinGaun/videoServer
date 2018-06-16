@@ -159,7 +159,7 @@ function initqueryCourseGrade(){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/VideoIndex/queryCourseGrade",
+		+ "/videoServer/front/VideoIndex/queryCourseGrade",
 		contentType : 'application/json; charset=UTF-8',
 		//data : JSON.stringify(param), //传入组装的参数
 		dataType : "json",
@@ -187,7 +187,7 @@ function initrecommend(){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/Videos/queryRecommend",
+		+ "/videoServer/front/Videos/queryRecommend",
 		contentType : 'application/json; charset=UTF-8',
 		//data : JSON.stringify(param), //传入组装的参数
 		dataType : "json",
@@ -251,7 +251,7 @@ function initajax(param) {
 	.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/Videos/querycoursesTabAll",
+		+ "/videoServer/front/Videos/querycoursesTabAll",
 		contentType : 'application/json; charset=UTF-8',
 		data : JSON.stringify(param), //传入组装的参数
 		dataType : "json",

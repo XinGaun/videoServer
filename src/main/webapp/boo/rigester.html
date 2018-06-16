@@ -192,7 +192,7 @@ var url="";
 	           //alert("str"+str);
 		        $.ajax({
 		        	type:"POST",
-		        	url:url+"/videoServer/User/queryuser",
+		        	url:url+"/videoServer/front/User/queryuser",
 		        	data:{
 		        		user_phone:phonenumber,	
 		        	},		        	
@@ -304,7 +304,7 @@ var url="";
 	    if(typeof(phone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code&&typeof(name)!="undefined"&&typeof(pwd)!="undefined"&&repwd==pwd){   
 	    	$.ajax({
 	        	type:"POST",
-	        	url:url+"/videoServer/User/saveuser",
+	        	url:url+"/videoServer/front/User/saveuser",
 	        	data:JSON.stringify(UserTab),	
 	        	contentType:'application/json;charset=UTF-8',
 	        	cache:false,

@@ -31,7 +31,7 @@ function judgePC(){
 function initGrade(){
 	$.ajax({
 		type : "POST",
-		url : url+"/videoServer/VideoIndex/queryCourseGrade",
+		url : url+"/videoServer/front/VideoIndex/queryCourseGrade",
 		contentType : 'application/json; charset=UTF-8',
 		//data: JSON.stringify(param),  //传入组装的参数
 		dataType : "json",
@@ -58,7 +58,7 @@ function initGrade(){
 function initClick(){
 	$.ajax({
 		type : "POST",
-		url : url+"/videoServer/VideoIndex/queryCourseClick",
+		url : url+"/videoServer/front/VideoIndex/queryCourseClick",
 		contentType : 'application/json; charset=UTF-8',
 		//data: JSON.stringify(param),  //传入组装的参数
 		dataType : "json",
@@ -86,7 +86,7 @@ function initRecommend(){
 	$
 	.ajax({
 		type : "POST",
-		url : url+"/videoServer/VideoIndex/queryCombo",
+		url : url+"/videoServer/front/VideoIndex/queryCombo",
 		contentType : 'application/json; charset=UTF-8',
 		//data: JSON.stringify(param),  //传入组装的参数
 		dataType : "json",
@@ -139,7 +139,7 @@ function initBoutique(){
 	$
 	.ajax({
 		type : "POST",
-		url : url+"/videoServer/VideoIndex/queryBoutiqueVideo",
+		url : url+"/videoServer/front/VideoIndex/queryBoutiqueVideo",
 		contentType : 'application/json; charset=UTF-8',
 		//data: JSON.stringify(param),  //传入组装的参数
 		dataType : "json",

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.service.CourseDetailsService;
 
 @Controller
-@RequestMapping("/CourseDetails")
+@RequestMapping("/front/CourseDetails")
 @ResponseBody
 public class CourseDetailsController {
 	@Autowired

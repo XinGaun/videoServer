@@ -23,7 +23,7 @@ import com.util.MD5;
 
 
 @Controller
-@RequestMapping("/User")
+@RequestMapping("/front/User")
 public class UserControllers {
 	@Autowired
 	UserService aService;

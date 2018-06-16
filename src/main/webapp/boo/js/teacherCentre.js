@@ -134,7 +134,7 @@ function initCourseTop(cid){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/TeacherCentre/queryTeacherCentre",
+		+ "/videoServer/front/TeacherCentre/queryTeacherCentre",
 		contentType : 'application/json; charset=UTF-8',
 		data : JSON.stringify({cid:cid}), //传入组装的参数
 		dataType : "json",
@@ -169,7 +169,7 @@ function initBoutique(param){
 	$
 	.ajax({
 		type : "POST",
-		url : url+"/videoServer/TeacherCentre/queryTeacherCentreVideo",
+		url : url+"/videoServer/front/TeacherCentre/queryTeacherCentreVideo",
 		contentType : 'application/json; charset=UTF-8',
 		data: JSON.stringify(param),  //传入组装的参数
 		dataType : "json",

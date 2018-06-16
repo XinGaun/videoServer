@@ -134,7 +134,7 @@ function initBoutique(param){
 	$
 	.ajax({
 		type : "POST",
-		url : url+"/videoServer/Alllecturer/queryTeacherInformation",
+		url : url+"/videoServer/front/Alllecturer/queryTeacherInformation",
 		contentType : 'application/json; charset=UTF-8',
 		data: JSON.stringify(param),  //传入组装的参数
 		dataType : "json",

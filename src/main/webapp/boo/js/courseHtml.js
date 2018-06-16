@@ -34,7 +34,7 @@ function goumais(){
 	 }
 	 $.ajax({
 			type: "POST",
-			url:"/videoServer/pays/pay",
+			url:"/videoServer/front/pays/pay",
 			data:{
 			price : $("#qians").html(), 
              istype : getistype(),
@@ -72,7 +72,7 @@ function joincourse(){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/Videos/queryOrder",
+		+ "/videoServer/front/Videos/queryOrder",
 		contentType : 'application/json; charset=UTF-8',
 		data : JSON.stringify(data), //传入组装的参数
 		dataType : "json",
@@ -118,7 +118,7 @@ function initRecommendCourse(){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/Videos/queryRecommend",
+		+ "/videoServer/front/Videos/queryRecommend",
 		contentType : 'application/json; charset=UTF-8',
 		//data : JSON.stringify(param), //传入组装的参数
 		dataType : "json",
@@ -182,7 +182,7 @@ function initCourseTop(cid){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/CourseDetails/queryCourseDetails",
+		+ "/videoServer/front/CourseDetails/queryCourseDetails",
 		contentType : 'application/json; charset=UTF-8',
 		data : JSON.stringify({cid:cid}), //传入组装的参数
 		dataType : "json",
@@ -220,7 +220,7 @@ function initVideo(video_arr){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/CourseDetails/queryVideoDetails",
+		+ "/videoServer/front/CourseDetails/queryVideoDetails",
 		contentType : 'application/json; charset=UTF-8',
 		data : JSON.stringify(video_arr), //传入组装的参数
 		dataType : "json",

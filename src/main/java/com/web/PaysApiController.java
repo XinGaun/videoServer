@@ -27,7 +27,7 @@ import com.util.Outputsystem;
 import com.util.PayUtil;
 
 @Controller
-@RequestMapping("pays")
+@RequestMapping("/front/pays")
 public class PaysApiController {
 	@Autowired
 	private OrderTabService orderTabService;//调用订单Service层接口

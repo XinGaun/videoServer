@@ -9,7 +9,7 @@ function init(){
 	$("#onemenu").html("");
 	$.ajax({
 		type : "POST",
-		url : url+"/videoServer/UserTest/queryUserTestEvaluatetypeName",
+		url : url+"/videoServer/front/UserTest/queryUserTestEvaluatetypeName",
 		contentType : 'application/json; charset=UTF-8',
 		//data: JSON.stringify(param),  //传入组装的参数
 		dataType : "json",
@@ -31,7 +31,7 @@ function selectdifficulty(test_type){
 	}
 	$.ajax({
 		type : "POST",
-		url : url+"/videoServer/UserTest/queryUserTestEvaluateTestGrade",
+		url : url+"/videoServer/front/UserTest/queryUserTestEvaluateTestGrade",
 		contentType : 'application/json; charset=UTF-8',
 		data: JSON.stringify(data),  //传入组装的参数
 		dataType : "json",
@@ -62,7 +62,7 @@ function changedifficulty(test_type){
 	var arr =[];
 	$.ajax({
 		type : "POST",
-		url : url+"/videoServer/UserTest/queryRandomUserTestAnswer",
+		url : url+"/videoServer/front/UserTest/queryRandomUserTestAnswer",
 		contentType : 'application/json; charset=UTF-8',
 		data: JSON.stringify(data),  //传入组装的参数
 		dataType : "json",
@@ -109,7 +109,7 @@ function pushanswer(data){
 	data.number = flog;
 	$.ajax({
 		type : "POST",
-		url : url+"/videoServer/UserTest/queryAnswerEvaluate",
+		url : url+"/videoServer/front/UserTest/queryAnswerEvaluate",
 		contentType : 'application/json; charset=UTF-8',
 		data: JSON.stringify(data),  //传入组装的参数
 		dataType : "json",
