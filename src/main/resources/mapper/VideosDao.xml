@@ -56,4 +56,8 @@
 		WHERE 1=1 AND
 		courses_status = 5 order by courses_date DESC LIMIT 0,3
 	</select>
+	<!-- 查询用户是否有过下单记录 -->
+	<select id="queryOrder" resultType="int" parameterType="java.util.HashMap">
+		SELECT count(order_id) FROM order_tab WHERE user_id = #{user_id} AND video_id = #{video_id} AND order_status = '已付款'
+	</select>
 </mapper>

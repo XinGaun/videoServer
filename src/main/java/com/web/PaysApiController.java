@@ -45,6 +45,7 @@ public class PaysApiController {
 		hashMap.put("order_due", price);
 		hashMap.put("order_type", istype);
 		hashMap.put("order_status", "未付款");
+		
 		String result = orderTabService.addOrderTab(hashMap);
 		Outputsystem.sysTemOut("addOrderTab result: "+result);
 		Outputsystem.sysTemOut(price+"");
@@ -99,9 +100,9 @@ public class PaysApiController {
 			isTrue = true;
 		}
 		if (isTrue) {
-			view = new ModelAndView("success");
+			view = new ModelAndView("boo/success");
 		} else {
-			view = new ModelAndView("error");
+			view = new ModelAndView("boo/error");
 		}
 		return view;
 	}

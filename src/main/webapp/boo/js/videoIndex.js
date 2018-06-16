@@ -7,13 +7,16 @@ $(function(){
 	$("#videoHtml").click(function(){
 		window.location.href = "video.html?user_id="+user_id;
 	});
+	//cookie
+	$.cookie('user_id', '1', { expires: 1 });
 });
 //var url = "http:/127.0.0.1:8080"
 var url = "";
 var user_id = 1;
 $("img.lazy").lazyload({effect: "fadeIn"});
 
-
+//cookie
+$.cookie('phone', '17621995911', { expires: 1 });
 
 //判断PC或移动
 function judgePC(){

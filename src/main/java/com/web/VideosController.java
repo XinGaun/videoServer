@@ -33,4 +33,13 @@ public class VideosController {
 	public String queryRecommend() {
 		return videosDaoService.queryRecommend();
 	}
+	/**
+	 * video用户是否购买课程
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryOrder",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryOrder(@RequestBody String data) {
+		return videosDaoService.queryOrder(data);
+	}
 }

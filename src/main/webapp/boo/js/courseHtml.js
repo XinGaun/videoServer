@@ -1,4 +1,5 @@
 $(function(){
+	var user_id = $.cookie('user_id');
 	$("#kcml").hide();
 	$("#xypl").hide();
 	initRecommendCourse();
@@ -17,7 +18,7 @@ $(function(){
 		$("#kcml").hide();
 		$("#xypl").show();
 	});
-	cid = getUrlParam('cid');
+	var cid = getUrlParam('cid');
 	initCourseTop(cid);
 	judgePC();
 	//alert(cid);
@@ -25,9 +26,73 @@ $(function(){
 
 //var url = "http:/127.0.0.1:8080"
 	var url ="";
-	var cid = null;
 
+//购买课程
+function goumais(){
+	 function getistype(){
+	        return ($("#demo1-alipay").is(':checked') ? "1" : "2" ); 
+	 }
+	 $.ajax({
+			type: "POST",
+			url:"/videoServer/pays/pay",
+			data:{
+			price : $("#qians").html(), 
+             istype : getistype(),
+             //goodsname :$("goodsname").val(),
+             user_id : $.cookie('user_id'),//用户ID
+             video_id : getUrlParam('cid'),//课程Id
 
+			},
+			dataType: "json",
+			success: function(data){
+				 $("#goodsname").val(data.data.goodsname);
+                 $("#istype").val(data.data.istype);
+                 $('#key').val(data.data.key);
+                 $('#notify_url').val(data.data.notify_url);
+                 $('#orderid').val(data.data.orderid);
+                 $('#orderuid').val(data.data.orderuid);
+                 $('#price').val(data.data.price);
+                 $('#return_url').val(data.data.return_url);
+                 $('#uid').val(data.data.uid);
+                 $('#submitdemo1').click();
+			},
+			error:function(){
+				 alert(data.msg);
+			}
+		});
+	 
+}
+
+//加入课程
+function joincourse(){
+	var data = {
+		user_id:$.cookie('user_id'),
+		video_id:getUrlParam('cid')
+	}
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/Videos/queryOrder",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(data), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			console.log(result);
+			if(result!="success"){
+				if(confirm("是否购买课程加入课程!")){
+					$("#myModal").modal('show');
+				}else{
+					
+				}
+			}else{
+				alert("您已加入课程!,请直接在课程目录观看课程!");
+			}
+		}
+		
+	});
+}
+	
+	
 //判断PC或移动
 function judgePC(){
 	if (navigator.userAgent.match(/mobile/i)) {
@@ -125,7 +190,10 @@ function initCourseTop(cid){
 			//console.log(result);
 			for(var i=0;i<result.length;i++){
 				$("#courses_name").html(result[0].courses_name);
+				$("#courses_names").html(result[0].courses_name);
 				$("#courses_grade").html(result[0].courses_grade);
+				$("#qian").html(result[0].courses_pricemoney);
+				$("#qians").html(result[0].courses_pricemoney);
 				$("#courses_click").html(result[0].courses_click);
 				$("#courses_introduce").html(result[0].courses_introduce);
 				$("#video_form_name").html(result[0].video_form_name);
