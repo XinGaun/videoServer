@@ -16,10 +16,10 @@ $("#login").click(function(event){
 	}else{
 		 $.ajax({ 
 			 	type :'post',
-                url :url+'user/userLogin',  
+                url :url+'teacher/teacherLogin',  
                 data : { 
-                    "user_name" : userName,  
-                    "user_pwd" : userPwd,
+                    "teacher_phone" : userName,  
+                    "teacher_pwd" : userPwd,
                     "code":code
                 },  
                 

@@ -45,14 +45,20 @@
         <property name="filterChainDefinitions">
             <value>
                 <!-- 配置登出: 使用 logout 过滤器 -->
-                /videoServer/martix/css/** = anon
-				/videoServer/martix/images/** = anon
-				/videoServer/martix/js/** = anon
-				/videoServer/martix/login.html* = anon
-				/rand.jsp* = anon
-				/videoServer/rand.jsp* = anon
+                /martix/css/** = anon
+                /martix/js/** = anon
+				/martix/dist/** = anon
+				/martix/fileupload/** = anon
+				/martix/assets/** = anon
+				/martix/login.html = anon
+				/rand.jsp = anon
+				/teacher/teacherLogin = anon
+				/teacher/teacherLogout = anon
+				/teacher/** = perms["mngteacher"]
+				/user/** = perms["mnguser"]
+				/roleRight/** = perms["mngright"]
 				/user/queryUserAll = perms["user"]
-				/* = authc
+				/** = authc
             </value>
         </property>
     </bean>

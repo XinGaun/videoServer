@@ -2,16 +2,26 @@ package com.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.eclipse.jetty.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.entity.TeacherDomain;
 import com.service.ITeacherService;
+import com.util.MD5;
 import com.util.PaginationBean;
 import com.util.ResponseInfo;
+import com.util.StringUtils;
 
 /**
  * 
@@ -27,6 +37,60 @@ import com.util.ResponseInfo;
 public class TeacherController {
 	@Autowired
 	private ITeacherService teacherService;//调用订单Service层接口
+	@Autowired
+	private HttpSession session;
+	
+	@RequestMapping("/teacherLogout")    
+    public String logout(RedirectAttributes redirectAttributes ){   
+        //使用权限管理工具进行用户的退出，跳出登录，给出提示信息  
+        SecurityUtils.getSubject().logout();    
+        redirectAttributes.addFlashAttribute("message", "您已安全退出");    
+        return "login";  
+    }   
+	
+	/**
+	 * 
+	* @Title: userLogin
+	* @Description:哦用户登录方法
+	* @param @return    参数
+	* @return ResponseInfo    返回类型
+	* @throws
+	 */
+	@RequestMapping("/teacherLogin")
+	public @ResponseBody ResponseInfo userLogin(TeacherDomain param,String code){
+		ResponseInfo responseInfo = new ResponseInfo(1, "登录成功!");
+		Subject subject = SecurityUtils.getSubject();
+		String password = MD5.md5(param.getTeacher_pwd());
+		String sessionCode = (String)session.getAttribute("key");
+        UsernamePasswordToken token = new UsernamePasswordToken(param.getTeacher_phone(), password);
+        if (StringUtils.isBlank(code)) {
+			responseInfo.setRetCode(0).setRetMsg("验证码为空!");
+        	return responseInfo;
+		}
+        if (code.equals(sessionCode)) {
+        	try {
+        		//执行认证操作. 
+        		subject.login(token);
+        	}catch (UnknownAccountException ae) {
+        		ae.printStackTrace();
+        		System.out.println("登陆失败: " + ae.getMessage());
+        		responseInfo.setRetCode(0).setRetMsg("用户名或密码错误!");
+        		return responseInfo;
+        	}catch (Exception e) {
+        		e.printStackTrace();
+        		responseInfo.setRetCode(0).setRetMsg("用户名或密码错误!");
+        		return responseInfo;
+			}
+        	//获取认证信息对象中存储的User对象
+        	TeacherDomain user = (TeacherDomain) subject.getPrincipal();
+        	session.setAttribute("user", user);
+//		ServletActionContext.getRequest().getSession().setAttribute("loginUser", user);
+		}else {
+			responseInfo.setRetCode(0).setRetMsg("验证码错误!");
+		}
+        return responseInfo;
+		
+	}
 	
 	/**
 	 * 

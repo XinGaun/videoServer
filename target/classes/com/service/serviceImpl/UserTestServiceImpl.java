@@ -139,5 +139,46 @@ public class UserTestServiceImpl implements UserTestService {
 		}
 		return JSON.toJSONString("error");
 	}
+	/**
+	 * 查询分类信息
+	 */
+	@Override
+	public String queryUserTestEvaluatetypeName() {
+		ArrayList<HashMap<String,Object>> list = userTestDao.queryUserTestEvaluatetypeName();
+		return JSON.toJSONString(list);
+	}
+	/**
+	 * 按难分类查询难度信息
+	 */
+	@Override
+	public String queryUserTestEvaluateTestGrade(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		ArrayList<HashMap<String,Object>> list = userTestDao.queryUserTestEvaluateTestGrade(map);
+		return JSON.toJSONString(list);
+	}
+	/**
+	 * 随机查询答案信息
+	 */
+	@Override
+	public String queryRandomUserTestAnswer(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		ArrayList<HashMap<String,Object>> list = userTestDao.queryRandomUserTest(map);
+		for(int i=0;i<list.size();i++) {
+			HashMap<String,Object> hashmap = new HashMap<String,Object>();
+			hashmap.put("test_id", list.get(i).get("test_id"));
+			ArrayList<HashMap<String,Object>> lists = userTestDao.queryRandomUserTestAnswer(hashmap);
+			list.get(i).put("user_test_answer", lists);
+		}
+		return JSON.toJSONString(list);
+	}
+	/**
+	 * 查询评价信息
+	 */
+	@Override
+	public String queryAnswerEvaluate(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		HashMap<String,Object> resultMap = userTestDao.queryAnswerEvaluate(map);
+		return JSON.toJSONString(resultMap);
+	}
 
 }
