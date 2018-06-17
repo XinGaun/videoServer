@@ -9,6 +9,10 @@
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
    	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+   <!--  <style type="text/css">
+		table{table-layout:fixed;}
+		table td{word-wrap:break-word;}
+	</style> -->
 </head>
 <body>
     <div id="wrapper">
@@ -235,24 +239,23 @@
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
-               <ul class="nav" id="main-menu">
-					
-						<li>
-							<a href="#"><i class="fa fa-sitemap" class="active-menu"></i>权限管理<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li>
-							<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
-						</li>
-						<li>
-							<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
-						</li>
-						<li>
-							<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
-						</li>
-							</ul>
-						</li>
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>
+                    </li>
 					<li>
-                        <a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a>
+                        <a href="chart.html"><i class="fa fa-bar-chart-o"></i> Charts</a>
+                    </li>
+                    <li>
+                        <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
+                    </li>
+                    
+                    <li>
+                        <a href="videoInfo.html"><i class="fa fa-table"></i> 视频管理</a>
                     </li>
                     <li>
                         <a href="classInfo.html" class="active-menu"><i class="fa fa-edit"></i>课程管理</a>
@@ -260,20 +263,10 @@
                     <li>
                         <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
                     </li>
-					<li>
-						<li>
-							<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
-						</li>
-						<li><a href="comment.html"><i class="fa fa-table"></i>评论管理</a></li>
-						<li>
-							<a href="order.html"><i class="fa fa-table"></i>订单管理</a>
-						</li>
-						<li>
-							<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
-						</li>
-						<li><a href="test.html" ><i
-							class="fa fa-edit"></i>题目管理</a></li>
-					</ul>
+                    <li>
+                        <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
+                    </li>
+                </ul>
             </div>
         </nav>
         <!-- /. NAV SIDE  -->
@@ -337,8 +330,8 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         
-                        <div class="panel-body">
-                            <table id="tb" class='table table-bordered'>
+                        <div class="panel-body" style="overflow-x:scroll;height:330px;width:99%;">
+                            <table id="tb" class='table table-bordered' style="width:1300px;">
 						    	<tr>
 						    		<td>序号</td><td>课程名称</td><td>课程介绍</td><td>课程视频</td><td>课程图片</td><td>课程价格</td><td>课程评分</td><td>点击次数</td><td>修改</td><td>删除</td>
 						    	</tr>
@@ -358,7 +351,7 @@
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="myModalLabel">课程视频添加</h4>
 	      </div>
-			<form action="/videoTab/uploadflv1.do" method="post">
+			<form action="/videoServer/videoTab/uploadflv1.do" method="post">
 				<div style="width:100%;">
 					<div style="height:30px;background:#D9ECFF;border:1px solid #CADEFD"></div>
 					<div style="height:50px;border:1px solid #CADEFD">
@@ -396,16 +389,14 @@
 	    </div>
 	  </div>
 	</div>
+	<input type="hidden" id="teacher_id"/>
   </div>
 <script src="assets/js/jquery-1.10.2.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.metisMenu.js"></script>
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
-<script src="assets/js/custom-scripts.js"></script>
-
 <script>
-	//var url ="http:8080"
 	$(document).ready(function () {
 	    $('#dataTables-example').dataTable();
 	});
@@ -417,6 +408,7 @@
 				for(var i=0;i<data.length;i++){
 					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
 				}
+				$("#teacher_id").val(data[0].teacher_id);
 			},error: function(){
 			}
 		})
@@ -433,7 +425,15 @@
 	})
 	function updat(obj){
 		var orderId=$(obj).html();
-		var d=orderId.substring(67,orderId.length-2);
+		var d=0;
+	 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
+	 		d=orderId.substring(67,orderId.length-2)
+	 	}
+	 	if (navigator.userAgent.indexOf('Firefox') >= 0){
+	 		d=orderId.substring(53,orderId.length-16)
+	 	}else{
+	 		d=orderId.substring(67,orderId.length-2);
+	 	}
 		window.location.href="updateClass.html?id="+d;
 		/* $.ajax({
 	       	type : 'post',
@@ -445,7 +445,15 @@
 	}
 	function delet(obj){
 		var orderId=$(obj).html();
-		var d=orderId.substring(67,orderId.length-2);
+		var d=0;
+	 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
+	 		d=orderId.substring(67,orderId.length-2)
+	 	}
+	 	if (navigator.userAgent.indexOf('Firefox') >= 0){
+	 		d=orderId.substring(53,orderId.length-16)
+	 	}else{
+	 		d=orderId.substring(67,orderId.length-2);
+	 	}
 		$.ajax({
 	       	type : 'post',
 	       	url : '/videoServer/coursesTab/delCoursesById.do?id='+d,
@@ -478,7 +486,7 @@
 	$("#queryorder").click(function(){
 		$.ajax({
 			type : 'post',
-			data : {courses_name:$("#courses_name").val(),courses_grade:$("#courses_grade").val(),courses_pricemoney:$("#courses_pricemoney").val()},
+			data : {teacher_id:$("#teacher_id").val(),courses_name:$("#courses_name").val(),courses_grade:$("#courses_grade").val(),courses_pricemoney:$("#courses_pricemoney").val()},
 			url : '/videoServer/coursesTab/getTabListBy.do',
 			success : function(data){
 				if(data.length==0){

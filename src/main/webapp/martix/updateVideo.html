@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
 	<div>
@@ -49,14 +51,14 @@
 	</div>
 </body>
 <script>
-	/* $("#sub").click(function(){
+	$("#sub").click(function(){
 		var aa=document.getElementById("video_url").value.toLowerCase().split('.');//以“.”分隔上传文件字符串
 		//判断图片格式
 		if(aa[aa.length-1]=='mp4'||aa[aa.length-1]=='webm'||aa[aa.length-1]=='ogv'||aa[aa.length-1]=='png'||aa[aa.length-1]=='jpeg'){
 			$.ajax({
 				type : 'post',
 				data : {video_name:$("#video_name").val(),video_url:$("#video_url").val(),video_img_url:$("#video_img_url").val(),video_introduce:$("#video_introduce").val()},
-				url : '/Edusystem/videoTab/uploadflv.do',
+				url : '/videoServer/videoTab/uploadflv.do',
 				success : function(){
 					alert("suc");
 				},error: function(){
@@ -66,13 +68,12 @@
 		}else{
 			alert("请上传mp4，webm，ogv类型的视频文件");
 		}
-	})	 */
+	})	
 	$(function(){
 		var url = location.search;
 		var args = url.split("?");
 		var d=args[1].substring(9);
 		$.ajax({
-			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
 	       	url : '/videoServer/videoTab/getVideoById.do?id='+d,
 	       	success : function(data){
@@ -87,7 +88,6 @@
 		var args = url.split("?");
 		var d=args[1].substring(9);
 		$.ajax({
-			contentType: 'application/json; charset=UTF-8',
 	       	type : 'post',
 	       	url : '/videoServer/videoTab/updetVideoById.do?video_id='+d,
 	       	data : {video_name:$("#video_name").val(),video_url:$("#video_url").val(),video_img_url:$("#video_img_url").val(),video_introduce:$("#video_introduce").val()},

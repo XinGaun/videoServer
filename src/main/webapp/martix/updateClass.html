@@ -20,10 +20,10 @@
 						&nbsp;<input style="width:80px;"type="text" id="combo_price"/>
 					</div>
 				</div>
-				<div style="height:50px;border:1px solid #CADEFD">
-					<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">选择套餐：</div>
-					<div style="width:440px;height:50px;float:left;line-height:50px;">
-						&nbsp;<select id="video_id"><option>请选择视频</option></select>
+				<div style="height:200px;border:1px solid #CADEFD">
+					<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:200px;line-height:50px;">选择套餐：</div>
+					<div style="width:440px;height:200px;float:left;overflow:scroll;">
+						<table id="courses_video" class='table table-bordered'></table>
 					</div>
 				</div>
 				<div style="height:50px;border:1px solid #CADEFD">
@@ -54,7 +54,6 @@
 		var args = url.split("?");
 		var d=args[1].substring(3);
 		$.ajax({
-			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
 	       	url : '/videoServer/coursesTab/getTabListById.do?id='+d,
 	       	success : function(data){
@@ -64,12 +63,11 @@
 	       	}
 		})
 		$.ajax({
-			contentType: 'application/json; charset=UTF-8',
 			type : 'post',
 			url : '/videoServer/videoTab/getVideoTabs.do',
 			success : function(meg){
 				for (var i = 0; i < meg.length; i++) {
-			    	$("#video_id").append("<option>["+meg[i].video_id+"]" + meg[i].video_name + "</option>");
+			    	$("#courses_video").append("<tr><td><input type='checkbox' name='videoId' value="+meg[i].video_id+">"+ meg[i].video_name + "</td></tr>");
 			    }
 			}
 		})
@@ -78,11 +76,16 @@
 		var url = location.search;
 		var args = url.split("?");
 		var d=args[1].substring(3);
+		var str="";
+		$("input[name='videoId']").each(function(){    
+             if($(this).is(":checked")){    
+                 str +=$(this).val()+",";    
+             }    
+         });
 		$.ajax({
-			contentType: 'application/json; charset=UTF-8',
 	       	type : 'post',
 	       	url : '/videoServer/coursesTab/upCoursesById.do?courses_id='+d,
-	       	data : {courses_name:$("#video_name").val(),courses_video:$("#video_id").val(),courses_img_url:$("#video_img_url").val(),courses_introduce:$("#video_introduce").val(),courses_pricemoney:$("#combo_price").val()},
+	       	data : {courses_name:$("#video_name").val(),courses_video:str,courses_img_url:$("#video_img_url").val(),courses_introduce:$("#video_introduce").val(),courses_pricemoney:$("#combo_price").val()},
 	       	success : function(data){
 	       		alert("修改成功！")
 	       		window.location.href="classInfo.html";

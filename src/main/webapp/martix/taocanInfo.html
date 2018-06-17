@@ -237,42 +237,31 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
 
-                   <li>
-							<a href="#"><i class="fa fa-sitemap" class="active-menu"></i>权限管理<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li>
-							<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
-						</li>
-						<li>
-							<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
-						</li>
-						<li>
-							<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
-						</li>
-							</ul>
-						</li>
-					<li>
-                        <a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a>
+                    <li>
+                        <a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="classInfo.html" ><i class="fa fa-edit"></i>课程管理</a>
-                    </li>
-                    <li>
-                        <a href="taocanInfo.html"  class="active-menu"><i class="fa fa-sitemap"></i>套餐管理</a>
+                        <a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>
                     </li>
 					<li>
-						<li>
-							<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
-						</li>
-						<li><a href="comment.html"><i class="fa fa-table"></i>评论管理</a></li>
-						<li>
-							<a href="order.html"><i class="fa fa-table"></i>订单管理</a>
-						</li>
-						<li>
-							<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
-						</li>
-						<li><a href="test.html" ><i
-							class="fa fa-edit"></i>题目管理</a></li>
+                        <a href="chart.html"><i class="fa fa-bar-chart-o"></i> Charts</a>
+                    </li>
+                    <li>
+                        <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
+                    </li>
+                    
+                    <li>
+                        <a href="videoInfo.html"><i class="fa fa-table"></i> 视频管理</a>
+                    </li>
+                    <li>
+                        <a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
+                    </li>
+                    <li>
+                        <a href="taocanInfo.html" class="active-menu"><i class="fa fa-sitemap"></i>套餐管理</a>
+                    </li>
+                    <li>
+                        <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -390,13 +379,13 @@
 	    </div>
 	  </div>
 	</div>
+	<input type="hidden" id="teacher_id"/>
   </div>
 <script src="assets/js/jquery-1.10.2.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.metisMenu.js"></script>
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
-<script src="assets/js/custom-scripts.js"></script>
 <script>
 	$(document).ready(function () {
 	    $('#dataTables-example').dataTable();
@@ -409,6 +398,7 @@
 				for(var i=0;i<data.length;i++){
 					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].combo_name+"</td><td>"+data[i].combo_introduce+"</td><td>"+data[i].video_id+"</td><td>"+data[i].combo_imgs+"</td><td>"+data[i].combo_price+"</td><td>"+data[i].combo_status+"</td></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].combo_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].combo_id+"'/></td></tr>")
 				}
+				$("#teacher_id").val(data[0].teacher_id);
 			},error: function(){
 			}
 		})
@@ -424,7 +414,15 @@
 	})
 	function updat(obj){
 		var orderId=$(obj).html();
-		var d=orderId.substring(67,orderId.length-2);
+		var d=0;
+	 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
+	 		d=orderId.substring(67,orderId.length-2)
+	 	}
+	 	if (navigator.userAgent.indexOf('Firefox') >= 0){
+	 		d=orderId.substring(53,orderId.length-16)
+	 	}else{
+	 		d=orderId.substring(67,orderId.length-2);
+	 	}
 		window.location.href="updateTaocan.html?id="+d;
 		/* $.ajax({
 	       	type : 'post',
@@ -436,7 +434,15 @@
 	}
 	function delet(obj){
 		var orderId=$(obj).html();
-		var d=orderId.substring(67,orderId.length-2);
+		var d=0;
+	 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
+	 		d=orderId.substring(67,orderId.length-2)
+	 	}
+	 	if (navigator.userAgent.indexOf('Firefox') >= 0){
+	 		d=orderId.substring(53,orderId.length-16)
+	 	}else{
+	 		d=orderId.substring(67,orderId.length-2);
+	 	}
 		$.ajax({
 	       	type : 'post',
 	       	url : '/videoServer/comboTab/delComboById.do?id='+d,
@@ -469,11 +475,11 @@
 	$("#queryorder").click(function(){
 		$.ajax({
 			type : 'post',
-			data : {combo_name:$("#combo_name").val(),combo_price:$("#combo_price").val()},
+			data : {teacher_id:$("#teacher_id").val(),combo_name:$("#combo_name").val(),combo_price:$("#combo_price").val()},
 			url : '/videoServer/comboTab/getListBy.do',
 			success : function(data){
 				if(data.length==0){
-			 		alert("暂无符合条件的课程");
+			 		alert("暂无符合条件的套餐");
 			 	}else{
 			 		$("#tb  tr:not(:first)").html("");
 			 		for(var i=0;i<data.length;i++){

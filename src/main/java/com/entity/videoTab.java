@@ -1,7 +1,7 @@
 package com.entity;
 
 
-public class VideoTab {
+public class videoTab {
 	Integer video_id;
 	Integer video_form_id;
 	Integer teacher_id;

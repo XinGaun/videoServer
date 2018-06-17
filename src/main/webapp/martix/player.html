@@ -28,7 +28,6 @@
 			var d=args[1].substring(10);
 			var myPlayer = this;
 			$.ajax({
-				contentType: 'application/json; charset=UTF-8',
 		       	type : 'post',
 		       	url : '/videoServer/videoTab/getVideoById.do?id='+d,
 		       	success : function(data){
