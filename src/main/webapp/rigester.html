@@ -137,8 +137,7 @@
 </body>
 <script>
 	
-//var url="http:127.0.0.1:8080/";
-var url="";
+
 	var code="";
 	//获取验证码
 	$('#hmac').click(function(){  
@@ -192,14 +191,14 @@ var url="";
 	           //alert("str"+str);
 		        $.ajax({
 		        	type:"POST",
-		        	url:url+"/videoServer/front/User/queryuser",
+		        	url:"User/queryuser",
 		        	data:{
 		        		user_phone:phonenumber,	
 		        	},		        	
 		        	dataType:"json",
 		        	success:function(data){
 		        		alert(data+"data");
-		        		if(data==1){
+		        		if(data.length==1){
 		        			alert("该号码已注册，请直接登录");
 		        		}else{
 		        			$.ajax({
@@ -304,14 +303,14 @@ var url="";
 	    if(typeof(phone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code&&typeof(name)!="undefined"&&typeof(pwd)!="undefined"&&repwd==pwd){   
 	    	$.ajax({
 	        	type:"POST",
-	        	url:url+"/videoServer/front/User/saveuser",
+	        	url:"User/saveuser",
 	        	data:JSON.stringify(UserTab),	
 	        	contentType:'application/json;charset=UTF-8',
 	        	cache:false,
 	        	dataType:"json",
 	        	//dataType:"text",
 	        	success:function(data){
-	        		window.location.href="index.html"; 
+	        		window.location.href="HomeVue.html"; 
 	        		//alert("注册成功！");
 	        	},
 	        	error:function(data){

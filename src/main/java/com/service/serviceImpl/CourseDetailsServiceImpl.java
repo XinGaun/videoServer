@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.dao.CourseDetailsDao;
 import com.service.CourseDetailsService;
+import com.util.Count;
+import com.util.Page;
 @Service
 @SuppressWarnings("unchecked")
 public class CourseDetailsServiceImpl implements CourseDetailsService {
@@ -45,5 +47,15 @@ public class CourseDetailsServiceImpl implements CourseDetailsService {
 		ArrayList<HashMap<String,Object>> arrayList = courseDetailsDao.queryRecommendCourse();
 		return JSON.toJSONString(arrayList);
 	}
-
+	/**
+	 * 查询学员评论
+	 */
+	@Override
+	public String queryStudentComments(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		map= Page.page(map);
+		ArrayList<HashMap<String,Object>> list = courseDetailsDao.queryStudentComments(map);
+		int count = courseDetailsDao.queryStudentCommentsAllCount(map);
+		return JSON.toJSONString(Count.counts(list, count, map,200,"queryStudentCommentsAllCount success"));
+	}
 }

@@ -42,4 +42,13 @@ public class CourseDetailsController {
 	public String queryqueryRecommendCourse() {
 		return courseDetailsService.queryqueryRecommendCourse();
 	}
+	/**
+	 * 查询学员评论
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryStudentComments",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryStudentComments(@RequestBody String data) {
+		return courseDetailsService.queryStudentComments(data);
+	}
 }

@@ -15,6 +15,7 @@
 	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 	<script type="text/javascript" src="jquery.cookie1.4.1.js"></script>
 	
+	
 </head>
 <style>
 	#login{
@@ -106,7 +107,7 @@
 	  		<a href="resetpwd.html" style="float:right" id="mi">忘记密码？</a>
 	        <br/>
 			<label>
-				<button type="button" id="denglu">登录</button>
+				<button type="button" onclick="denglu()" id="denglu">登录</button>
 			</label>
 		</div>
 		<div id="wxChat" style="text-align:center">
@@ -119,9 +120,8 @@
     </form>
 	</div>
 </body>
-<script>
-//var url="http:127.0.0.1:8080/";
-	var url="";
+ <script>
+	
 	$("#denglu").click(function(){
 		
 		var uname=$('#uname').val();
@@ -154,7 +154,7 @@
 	        	dataType:"json",
 	        	success:function(data){
 	        		
-	        		if(data==1){
+	        		if(data.length==1){
 	        			
 	        			var UserTab={
 	        		    		"user_phone":uname,    	        		
@@ -163,7 +163,7 @@
 	        		    } 
 	        			 $.ajax({
 	        	        	type:"POST",
-	        	        	url:url+"/videoServer/front/User/selectuser",
+	        	        	url:"User/selectuser",
 	        	        	data:JSON.stringify(UserTab),	
 	        	        	contentType:'application/json;charset=UTF-8',
 	        	        	cache:false,
@@ -173,13 +173,12 @@
 	        	        		if(data=="账号和密码不一致！"){
 	        	        			alert(data);
 	        	        		}else{
-	        	        			alert("success");
-	        	        			alert(data[0].user_phone);
-	        	        			window.location.href="index.html";
+	        	        		
+	        	        			window.location.href="HomeVue.html";
 	        	        			var expiresDate= new Date();
 
 	        	        			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
-	        	        			alert(expiresDate);
+	        	        			
 	        	        			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
 		        	        		$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
 		        	        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像

@@ -40,8 +40,8 @@ import com.util.MD5;
 
 */  
 @Controller
-@RequestMapping("/front/User")
-public class UserControllers {
+@RequestMapping("/User")
+public class UserController {
 	@Autowired
 	UserService aService;
 	//添加用户
@@ -118,7 +118,7 @@ public class UserControllers {
             
             
             //先判断文件是否存在
-            String fileAdd = DateUtil.dateToStr(new Date(),"yyyyMMdd");
+            String fileAdd = DateUtil.parseDateToStr(new Date(),"yyyyMMdd");
             File file1 =new File(path+"/"+fileAdd); 
            
             System.out.println(file1);
