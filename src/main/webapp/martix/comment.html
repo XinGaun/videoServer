@@ -212,9 +212,10 @@
 		</nav>
 		<!--/. NAV TOP  -->
 		<nav class="navbar-default navbar-side" role="navigation">
-			<div class="sidebar-collapse">
-				<ul class="nav" id="main-menu">
-					<li>
+		<div class="sidebar-collapse">
+					<ul class="nav" id="main-menu">
+					
+						<li>
 							<a href="#"><i class="fa fa-sitemap" class="active-menu"></i>权限管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li>
@@ -243,19 +244,17 @@
 						</li>
 						<li><a href="comment.html" class="active-menu"><i class="fa fa-table"></i>评论管理</a></li>
 						<li>
-							<a href="order.html"><i class="fa fa-table"></i>订单管理</a>
+							<a href="order.html" ><i class="fa fa-table"></i>订单管理</a>
 						</li>
 						<li>
 							<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
 						</li>
 						<li><a href="test.html" ><i
 							class="fa fa-edit"></i>题目管理</a></li>
+					</ul>
 
-					
-					
-				</ul>
+				</div>
 
-			</div>
 
 		</nav>
 		<!-- /. NAV SIDE  -->
@@ -388,12 +387,10 @@
 							<div class="modal-body">
 								
 								<div class="input-group">
-								    <input type="text" id= "reply_comment_id" value="">
+								    <input type="hidden" id= "reply_comment_id" value=""/><br>
 									<span>回复内容</span> <br>
 									<textarea rows="5" class="form-control" id="reply_text_input"
-										placeholder="请输入您的留言！"></textarea>
-									<span>回复教师</span> <br> <input type="text"
-										class="form-control" id="reply_teacher_id">
+										placeholder="请输入您的留言！"></textarea>									
 								</div>
 							</div>
 							<div class="modal-footer">
@@ -431,12 +428,9 @@
 	<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 	<script src="dist/js/bootstrap-datepicker.min.js"></script>
 	<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
-	<script src="assets/js/custom-scripts.js"></script>
-	
 	<script>
 $(function(){		
-	        var url1 = "http://localhost:8080/";
-	        var userteacherId = 2;
+	        var url1 = "http://localhost:8080/";	        
              /* //全选
 	         $('.checkall').click(function () {  		
 	         
@@ -454,8 +448,7 @@ $(function(){
        			if(arr.length==0||arr==null){
        				alert("请选择评论!");
        				return;
-       			};
-       			alert(1);
+       			};      		
        			$.ajax({
                            type: "POST",
                            url: url1+"videoServer/commentTab/deleteComment",
@@ -464,7 +457,6 @@ $(function(){
                            data: JSON.stringify(arr),  //传入组装的参数
                            dataType: "json",
                            success: function (result) {
-                        	   alert(2);
        						if(result=="success"){
        							alert("删除成功");
        							window.location.reload();
@@ -840,22 +832,19 @@ $(function(){
        $('#myModal').on('show.bs.modal', function (event) {     	  	 
     	   var button = $(event.relatedTarget) // 触发事件的按钮  
            var id = button.data('commentid') // 解析出data-whatever内容  
-    	   $("#reply_comment_id").val(id);   	
-     	   $("#reply_teacher_id").val(userteacherId);
+    	   $("#reply_comment_id").val(id);   	     	   
        }); 
        
       //提交回复
 	 $("#reply_text_submit").click(function(){   
 			 var replytext = $.trim($("#reply_text_input").val()); 
-			 var commentId = $.trim($("#reply_comment_id").val());
-			 var teacherId = $.trim($("#reply_teacher_id").val());
+			 var commentId = $.trim($("#reply_comment_id").val());		
 			 if(  replytext.length = 0 ){
 				 alert("请输入您的留言");
 			 }					
 			 var param = {};
 			 param.comment_id = commentId;
-	         param.reply_text = replytext;	
-	         param.reply_teacher = teacherId;  
+	         param.reply_text = replytext;		       
 	         param.reply_date = new Date();      
 			$.ajax({
 	              type: "POST",
@@ -874,8 +863,7 @@ $(function(){
 					   }
 			   });
 			   $("#reply_comment_id").val("");   	
-		 	   $("reply_text_input").val("");
-		 	   $("#reply_teacher_id").val("");
+		 	   $("reply_text_input").val("");		 	
 			  $("#myModal").modal("hide");
 		 });
 }); 

@@ -39,13 +39,13 @@ import com.util.MD5;
 * @date 2018年6月17日  
 
 */  
+@ResponseBody
 @Controller
 @RequestMapping("/front/User")
 public class UserControllers {
 	@Autowired
 	UserService aService;
 	//添加用户
-	@ResponseBody
 	@RequestMapping(value="/saveuser",method=RequestMethod.POST)
 	public String saveuser(@RequestBody UserTab ut,HttpServletResponse response){
 		
@@ -59,17 +59,20 @@ public class UserControllers {
 		return JSON.toJSONString(aService.addUser(ut));
 	}
 	//根据手机号查找是否有该用户
-	@ResponseBody
-	@RequestMapping(value="/queryuser")
-	public String queryuser(String user_phone,HttpServletResponse response){
-		ArrayList<HashMap<String, Object>> aList=aService.queryUser(user_phone);
+
+	@RequestMapping(value="/queryuser",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryuser(@RequestBody String user_phone,HttpServletResponse response){
+		HashMap<String,Object> map = JSON.parseObject(user_phone,HashMap.class);
+		ArrayList<HashMap<String, Object>> aList=aService.queryUser(map.get("user_phone").toString());
 		System.out.println(aList);
-		return JSON.toJSONString(aList);
+		String json = JSON.toJSONString(aList);
+		System.out.println(json);
+		return json;
 	}
 	//登录验证账号密码
-	@ResponseBody
 	@RequestMapping(value="/selectuser")
-	public String selectuser(@RequestBody UserTab ut,HttpServletResponse response){
+	public String selectuser(@RequestBody String data,HttpServletResponse response){
+		UserTab ut = JSON.parseObject(data,UserTab.class);
 		//System.out.println("aaaaaaaaa");
 		String spwd=ut.getUser_pwd();
 		String smi=MD5.md5(spwd);
@@ -83,7 +86,6 @@ public class UserControllers {
 		return JSON.toJSONString("账号和密码不一致！");
 	}
 	//根据手机号更改用户密码
-	@ResponseBody
 	@RequestMapping(value="/updateuser",method=RequestMethod.POST)
 	public String updateuser(@RequestBody UserTab ut,HttpServletResponse response){
 		//System.out.println("bbbbb");
@@ -100,7 +102,6 @@ public class UserControllers {
 		//return JSON.toJSONString(flag);
 	}
 	//个人中心上传头像
-	@ResponseBody
 	@RequestMapping(value="/addfile",method=RequestMethod.POST)
 	public String addfile(@RequestParam(value="file",required=false)MultipartFile file,HttpServletRequest request){
 		System.out.println("11111111111");
@@ -109,8 +110,8 @@ public class UserControllers {
         int code=1;
         String fileName=file.getOriginalFilename();//获取文件名加后缀
         if(fileName!=null&&fileName!=""){   
-            String returnUrl = request.getContextPath() +"/photos/LoginPhoto/";//存储路径
-            String path = request.getSession().getServletContext().getRealPath("photos/LoginPhoto"); //文件存储位置
+            String returnUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() +request.getContextPath() +"/boo/photos/LoginPhoto/";//存储路径
+            String path = request.getSession().getServletContext().getRealPath("/boo/photos/LoginPhoto"); //文件存储位置
             System.out.println(path);
             String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//文件后缀
             fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//新的文件名
@@ -141,7 +142,6 @@ public class UserControllers {
         return JSON.toJSONString(Photo.result(code, msg));
 	}
 	//个人中心更改用户信息
-	@ResponseBody
 	@RequestMapping(value="/updatemessage",method=RequestMethod.POST)
 	public String updatemessage(@RequestBody UserTab ut,HttpServletResponse response){
 		//System.out.println("bbbbb");
@@ -152,17 +152,12 @@ public class UserControllers {
 		return JSON.toJSONString("信息保存失败！");
 	}
 	//修改手机号
-	@ResponseBody
 	@RequestMapping(value="/updatephone",method=RequestMethod.POST)
 	public String updatephone(@RequestBody UserTab ut,HttpServletResponse response){
 		System.out.println("bbbbb");
 		System.out.println(ut.getUser_email());
 		
-		int flag=aService.updatephone(ut);
-		System.out.println(flag);
-		if(flag==1){
-			return JSON.toJSONString("信息已保存！");
-		}
-		return JSON.toJSONString("信息保存失败！");
+		return JSON.toJSONString(aService.updatephone(ut));
+		
 	}
 }

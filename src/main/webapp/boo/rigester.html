@@ -45,11 +45,12 @@
 	}
 	/*登录模态框中输入框的设置-添加小图标*/
 	input[name=phone]{
-		background: url(photos/LoginPhoto/phone.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
+		background: url(photos/LoginPhoto/user.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
 		padding:0vh 1.5vw;
 	}
 	input[name=nic]{
-		background: url(photos/LoginPhoto/user.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
+		
+		background: url(photos/LoginPhoto/phone.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
 		padding:0vh 1.5vw;
 		
 	}
@@ -137,8 +138,8 @@
 </body>
 <script>
 	
-//var url="http:127.0.0.1:8080/";
-var url="";
+	/var url="http:127.0.0.1:8080/";
+	var url="";
 	var code="";
 	//获取验证码
 	$('#hmac').click(function(){  
@@ -198,13 +199,13 @@ var url="";
 		        	},		        	
 		        	dataType:"json",
 		        	success:function(data){
-		        		alert(data+"data");
-		        		if(data==1){
+		        		
+		        		if(data.length==1){
 		        			alert("该号码已注册，请直接登录");
 		        		}else{
 		        			$.ajax({
 		        	        	type:"POST",
-		        	        	url:"AliBigFish/verificationCode",
+		        	        	url:url+"/videoServer/front/AliBigFish/verificationCode",
 		        	        	contentType:'application/json;charset=UTF-8',
 		        	        	data:JSON.stringify(str),     	
 		        	        	//data:str,

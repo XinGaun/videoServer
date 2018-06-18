@@ -7,26 +7,82 @@
 <META NAME="Keywords" CONTENT="">
 <META NAME="Description" CONTENT="">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.lazyload.min.js"></script>
+	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+	<script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/videoIndex.js"></script>
 </HEAD>
 <style>
 
-.lazy {
-    display: none;
-}
-.kcjs {
-	color: #000000;
-	overflow: hidden;
-	display: -webkit-box;
-	-webkit-line-clamp: 4;
-	-webkit-box-orient: vertical;
-	word-break: break-all;
-}
+	.lazy {
+	    display: none;
+	}
+	.kcjs {
+		color: #000000;
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-line-clamp: 4;
+		-webkit-box-orient: vertical;
+		word-break: break-all;
+	}
+	#search_submit{
+	 	border-top-left-radius:0em;
+		border-top-right-radius:2em;
+		border-bottom-right-radius:2em;
+		border-bottom-left-radius:0em; 
+	 }
+ 	 #dropdown{
+ 	 	border-top-left-radius:2em;
+		border-top-right-radius:0em;
+		border-bottom-right-radius:0em;
+		border-bottom-left-radius:2em; 
+ 	 }
+ 	 /*按钮圆角设置*/
+	.router-link-active{  
+	 	border-radius:2em;
+	 	border:1px #3AA8FF solid;
+	 	padding:2px 0px;
+	 	display:inline-block;
+	 	verticle-align:middle;
+	 	color:black;
+	 	text-decoration: none;
+	 } 
+	 a:hover{
+	 	text-decoration:none;
+	 	
+	 } 
+	
+	  #log a{
+	 	color:#3AA8FF;
+	 	padding:1vh 1.5vw;
+	 	text-decoration:none;
+	 } 
+	 #logImg{
+	 	float:right;
+	 	border:1px solid red;
+	 	margin:-6vh 1vw 0vh 0vw;
+	 	display:none;
+	 }
+	 #loginrouter{
+	 	position:fixed;
+	 	top:15vh;
+	 	left:58vw;
+	 	z-index:2;
+	 }
+	 #log{
+	 	margin-top:3.5vh;
+	 	margin-right:15vw;
+	 	
+	 }
+	 #boo{
+	 	position:relative;
+	 }
 </style>
-<script src="js/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.cookie.js"></script>
-<script src="js/jquery.lazyload.min.js"></script>
 <BODY id="boo">
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -39,7 +95,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><img src="img/logo @2x.png"
+			<a class="navbar-brand" href="index.html"><img src="img/logo @2x.png"
 				alt="..." class="img-rounded img-responsive lazy"></a>
 			<p>&nbsp;</p>
 		</div>
@@ -48,8 +104,8 @@
 
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="active">&nbsp; <span class="sr-only">(current)</span></li>
+			<ul class="nav navbar-nav" style="margin-left:4vw;">
+				<!-- <li class="active">&nbsp; <span class="sr-only">(current)</span></li> -->
 
 
 				<li class="dropdown" STYLE="margin-top: 5%">
@@ -57,7 +113,7 @@
 					<div class="form-group navbar-form navbar-left">
 						<div class="input-group col-xs-12">
 							<div class="input-group-btn">
-								<select name="type" class="form-control" style="width: auto;">
+								<select name="type" id="dropdown" class="form-control" style="width: auto;">
 									<option value="1">全部</option>
 									<option value="2">高中</option>
 									<option value="3">初中</option>
@@ -65,19 +121,52 @@
 								</select>
 							</div>
 							<input type="text" name="keyword" id="keyword"
-								class="form-control" placeholder="请您输入关键词"> <span
-								class="input-group-btn">
-								<button class="btn btn-success" id="search_submit" type="submit">搜索</button>
+								class="form-control" placeholder="请您输入关键词"> 
+							<span class="input-group-btn">
+								<button class="btn btn-info" id="search_submit" type="submit">
+									搜索
+								</button>
 							</span>
 						</div>
 					</div>
 				</li>
 			</ul>
-
+			<!-- 登录|注册 -->
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">登录</a></li>
-				<li class="dropdown"><a href="#">注册</a></li>
+				<li>
+					<div  id="log">
+						<!-- <a @click.native="change(1)" :class="fla g==1?'active':''" >login</a>
+		    			<a @click.native="change(2)" :class="flag==2?'active':''">register</a> -->
+						<!-- 使用 router-link 组件来导航. -->
+					    <!-- 通过传入 `to` 属性指定链接. -->
+					    <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+					    <div id="logText">
+					    <router-link to="/login" id="loginbtn">登录</router-link>
+					    <router-link to="/register" id="registerbtn">注册</router-link>
+						</div>
+						<div id="loginrouter">
+							<!-- 路由出口 -->
+						  	<!-- 路由匹配到的组件将渲染在这里 -->
+						  	<router-view></router-view>
+						</div>
+						<!-- 添加头像 -->
+					
+					<div id="logImg" class="dropdown">             			
+                 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+   							<img src="images/touxiang.png" width="30px" height="30px" class="img-circle"/>
+    						<span class="caret"></span>
+  						</button>
+	                 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							<li><a href="personal_center.html">个人中心</a></li>					 
+							<li><a id="exit">退出</a></li>
+						</ul>
+	                		
+                 	</div>
+					</div><!-- 登录|注册结束 -->
+					
+				</li>
 			</ul>
+			
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
@@ -302,8 +391,142 @@
 
 	</div>
 
-	<script type="text/javascript" src="js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="js/videoIndex.js"></script>
+	
+	<script type="text/javascript">
+	//导进登录注册
+	$(function(){
+		var loc = location.href;
+		//var n1 = loc.length;//地址的总长度
+		var n2 = loc.indexOf("=");//取得=号的位置
+		var flag = loc.substr(n2+1,1);//取=号后一位的值
+		
+		if(flag==1){
+			$("#loginhtml").load("logins.html")
+		}
+		if(flag==2){
+			$("#loginhtml").load("rigester.html")
+		}
+		$("#loginbtn").click(function(){
+			$("#loginhtml").load("logins.html")
+			
+		})
+		$("#registerbtn").click(function(){
+			$("#loginhtml").load("rigester.html")
+			
+		})
+	})
+	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
+	$(function(){
+		
+		//alert($.cookie('phone'));
+		//alert($.cookie('photo'));
+		var toux="<img src=\"photos/LoginPhoto/txx.jpg\" width=\"35px\" height=\"35px\" class=\"img-circle\"/>";
+		var toux1="<img src=\"http://localhost:8080/videoServer/boo/photos/LoginPhoto/"+$.cookie("photo")+"\" width=\"35px\" height=\"35px\" class=\"img-circle\"/>";
+		if($.cookie("phone")==null){//cookie过期
+			alert("登录过期，请重新登录");
+		}else if($.cookie("phone")!=null&&$.cookie("photo")==null&&$.cookie("photo")==" "){//cookie有用户信息，但没有头像，添加默认头像
+			//alert("pp");
+			$("#logText").hide();
+			$("#logImg").append(toux);
+			$("#logImg").show();
+		}else if($.cookie("phone")!=null&&$.cookie("photo")!=null){//cookie有用户信息和头像
+			//alert("dd");
+			$("#logText").hide();
+			$("#logImg").append(toux1);
+			$("#logImg").show();
+		}
+		 
+		
+	})
+	/*
+		退出按钮点击事件
+	*/
+	$("#exit").click(function(){
+		
+		window.location.href="index.html"; 
+		
+		$("#logText").show();
+		$("#logImg").hide();
+		$.cookie('id', '', { expires: -1 });
+		$.cookie('phone', '', { expires: -1 });
+		$.cookie('photo', '', { expires: -1 }); 
+		 
+	})
+	
+</script>
+<script>
+	//logo图标
+	var logo=new Vue({
+		el:'#logo',
+		data:{
+			loginUrl:'photos/LoginPhoto/logo.png'
+		}
+	})
+	// 0. 如果使用模块化机制编程，導入Vue和VueRouter，要调用 Vue.use(VueRouter)
 
+	// 1. 定义（路由）组件。
+	// 可以从其他文件 import 进来
+	var login = { template: '<div id="loginhtml"></div>' }
+	var Register= { template: '<div id="loginhtml"></div>' }
+	//var Register = { template: '<div id="loginhtml>kjghjkfdgh</div>' }
+
+	// 2. 定义路由
+	// 每个路由应该映射一个组件。 其中"component" 可以是
+	// 通过 Vue.extend() 创建的组件构造器，
+	// 或者，只是一个组件配置对象。
+	// 我们晚点再讨论嵌套路由。
+	var routes = [
+	  {path:'/',redirect:'login'},
+	  { path: '/login', component: login },
+	  { path: '/register', component: Register },
+	]
+
+	// 3. 创建 router 实例，然后传 `routes` 配置
+	// 你还可以传别的配置参数, 不过先这么简单着吧。
+	var router = new VueRouter({
+		routes// （缩写）相当于 routes: routes
+		
+	})
+
+	// 4. 创建和挂载根实例。
+	// 记得要通过 router 配置参数注入路由，
+	// 从而让整个应用都有路由功能
+	var app = new Vue({
+	  router
+	  
+	}).$mount('#log')
+	
+	/* 尾部li标签添加的关于我们 */
+	/* new Vue({
+	  el: '#footli',
+	  data: {
+	    sites: [
+	      { name: '关于我们' },
+	      { name: '|'},
+	      { name: '加入我们' },
+	      { name: '|'},
+	      { name: '合作申请' },
+	      { name: '|'},
+	      { name: '意见反馈' },
+	      { name: '|'},
+	      { name: '用户协议' }
+	    ]
+	  }
+	})
+	//尾部的语道图标
+	new Vue({
+		el:'#footimg',
+		data:{
+			footimg:'photos/LoginPhoto/yudaologo.png'
+		}
+	})
+	//尾部二维码
+	new Vue({
+		el:'#footma',
+		data:{
+			footma:'photos/LoginPhoto/erweima.png'
+		}
+	}) */
+</script>
 </BODY>
 </HTML>

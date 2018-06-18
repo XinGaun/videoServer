@@ -2,13 +2,13 @@ package com.dao;
 
 import java.util.List;
 
-import com.entity.videoTab;
+import com.entity.VideoTab;
 
 public interface VideoTabDao {
-	public void uploadVideo(videoTab vd);
-	public List<videoTab> getVideoList(videoTab v);
-	public List<videoTab> getVideoById(int id);
-	public List<videoTab> selVideo(videoTab vd);
+	public void createVideo(VideoTab vd);
+	public List<VideoTab> getVideoList(VideoTab v);
+	public List<VideoTab> getVideoById(int id);
+	public List<VideoTab> selVideo(VideoTab vd);
 	public void delVideoById(int video_id);
-	public void updetVideoById(videoTab vd);
+	public void updetVideoById(VideoTab vd);
 }
