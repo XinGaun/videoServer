@@ -1,6 +1,7 @@
 package com.web;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ import com.util.Outputsystem;
 import com.util.PayUtil;
 
 @Controller
-@RequestMapping("pays")
+@RequestMapping("/front/pays")
 public class PaysApiController {
 	@Autowired
 	private OrderTabService orderTabService;//调用订单Service层接口
@@ -45,13 +46,19 @@ public class PaysApiController {
 		hashMap.put("order_due", price);
 		hashMap.put("order_type", istype);
 		hashMap.put("order_status", "未付款");
+		ArrayList<HashMap<String,Object>> OrderList = orderTabService.queryOrderExist(hashMap);
+/*		String result = null;
+		if(OrderList!=null&&OrderList.size()>0) {
+			hashMap.put("orderid",OrderList.get(0).get("order_id"));
+		}else {*/
 		String result = orderTabService.addOrderTab(hashMap);
+		/*}*/
 		Outputsystem.sysTemOut("addOrderTab result: "+result);
 		Outputsystem.sysTemOut(price+"");
 		remoteMap.put("price", price);
 		remoteMap.put("istype", istype);
-		//remoteMap.put("orderid", hashMap.get("order_id"));
-		remoteMap.put("orderid", PayUtil.getOrderIdByUUId());
+		remoteMap.put("orderid", hashMap.get("order_id"));
+		//remoteMap.put("orderid", PayUtil.getOrderIdByUUId());
 		remoteMap.put("orderuid", user_id);
 		//remoteMap.put("goodsname", "测试");
 		resultMap.put("data", PayUtil.payOrder(remoteMap));
@@ -76,7 +83,7 @@ public class PaysApiController {
 			// TODO 做自己想做的
 		} else {
 			// TODO 该怎么做就怎么做
-			System.out.println("秘钥不一致");
+			//System.out.println("秘钥不一致");
 			Outputsystem.sysTemOut("秘钥不一致");
 			hashMap.put("order_pricemoney",paySaPi.getRealprice());
 			hashMap.put("order_status","付款失败");
@@ -92,16 +99,16 @@ public class PaysApiController {
 		// 根据订单号查找相应的记录:根据结果跳转到不同的页面
 		HashMap<String,Object> hashMap = new HashMap<String,Object>();
 		hashMap.put("order_id", orderid);
-		System.out.println(orderid);
+		//System.out.println(orderid);
 		int flog = orderTabService.queryOrderTab(hashMap);
-		System.out.println(flog);
+		//System.out.println(flog);
 		if(flog==1) {
 			isTrue = true;
 		}
 		if (isTrue) {
-			view = new ModelAndView("success");
+			view = new ModelAndView("boo/success");
 		} else {
-			view = new ModelAndView("error");
+			view = new ModelAndView("boo/error");
 		}
 		return view;
 	}

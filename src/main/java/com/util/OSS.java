@@ -7,9 +7,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSException;
@@ -18,7 +15,7 @@ import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.OSSObjectSummary;
 import com.aliyun.oss.model.ObjectListing;
 public class OSS {
-	static Logger       logger = LoggerFactory.getLogger(OSS.class);  
+//	static Logger logger = Logger.getLogger(HelloOSS.class);
 
     // endpoint是访问OSS的域名。如果您已经在OSS的控制台上 创建了Bucket，请在控制台上查看域名。
     // 如果您还没有创建Bucket，endpoint选择请参看文档中心的“开发人员指南 > 基本概念 > 访问域名”，
@@ -47,7 +44,7 @@ public class OSS {
         // 日志的配置文件是“conf/log4j.properties”，如果您不需要日志，可以没有日志配置文件和下面的日志配置。
 //        PropertyConfigurator.configure("conf/log4j.properties");
 //
-        logger.info("Started");
+//        logger.info("Started");
 
         // 生成OSSClient，您可以指定一些参数，详见“SDK手册 > Java-SDK > 初始化”，
         // 链接地址是：https://help.aliyun.com/document_detail/oss/sdk/java-sdk/init.html?spm=5176.docoss/sdk/java-sdk/get-start

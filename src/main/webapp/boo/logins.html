@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>login 页面</title>
+	<!--
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    -->
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="http://static.runoob.com/assets/vue/1.0.11/vue.min.js"></script>
+	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+	<script type="text/javascript" src="jquery.cookie1.4.1.js"></script>
+	
+</head>
+<style>
+	#login{
+		width:20vw;
+	 	height:40vh;
+	 	border:1px solid red;
+	 	background-color:#FFFFFF;
+	 	border-radius:0.3em;
+	}
+	form{
+		
+	 	position:absolute;
+	 	top:4vh;
+	 	left:2.2vw;
+	 	width:15vw;
+	 	height:33vh;
+	 	
+	}
+	#header span{
+	  font-size:1.3vw;
+	}
+	/* 输入框的圆角设置 */
+	#body input{
+	  margin: 1vh 0vw;
+	  border:1px solid #888;
+      border-radius:4px;
+      padding:0px 25px;
+	}
+	/*登录模态框中输入框的设置-添加小图标*/
+	input[type=text]{
+		
+		background: url(photos/LoginPhoto/user.png) no-repeat 5px 5px; /*引入图片图片*/
+		
+		
+	}
+	input[type=password]{
+		background: url(photos/LoginPhoto/pwd.png) no-repeat 5px 5px; /*引入图片图片*/
+	
+	}
+	a{
+		color:#3AA8FF;
+	}
+	a:hover{
+		text-decoration:none;
+		color:#3AA8FF;
+	}
+	/* 登录按钮设置 */
+	#body button{
+		background:#3AA8FF;
+      	border-radius:4px;
+      	width:14.8vw;
+      	height:3.5vh;
+      	border:0px;
+      	color:#FFFFFF;
+      	margin:2vh 0vw 1.2vh;
+	}
+	/* 设置输入框里的字体大小，浏览器兼容不一样，每个都要设置 */
+	input::-webkit-input-placeholder { /* WebKit browsers */ 
+		font-size:1.5vh;
+	} 
+
+	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+		font-size:1.5vh;
+	} 
+	input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+		font-size:1.5vh;
+	} 
+	input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+		font-size:1.5vh;
+	} 
+</style>
+<body>
+	<div id="login">
+	<form>
+		<div id="header" style="margin-bottom:2vh">
+			<span>登录账户</span>
+			<a href="HomeVue.html?flag=2" style="float:right">注册
+				<img :src="rigesterUrl">
+			</a>
+		</div>
+		<div id="body">
+	        <label>
+	        	<input type="text" id="uname" placeholder="手机号/用户名" style="width:100%">
+	        </label>
+	        <label>
+	        	<input type="password" id="pwd" placeholder="密码" style="width:100%">
+	        </label>
+	        <span><input type="checkbox">记住密码</span>
+	  		<a href="resetpwd.html" style="float:right" id="mi">忘记密码？</a>
+	        <br/>
+			<label>
+				<button type="button" id="denglu">登录</button>
+			</label>
+		</div>
+		<div id="wxChat" style="text-align:center">
+			<span style="font-size:10px">微信快捷登录：</span>
+			<a @click="showModal = true">
+			    <img :src="weixin">
+			</a>
+				    	
+		</div>		    	
+    </form>
+	</div>
+</body>
+<script>
+//var url="http:127.0.0.1:8080/";
+	var url="";
+	$("#denglu").click(function(){
+		
+		var uname=$('#uname').val();
+		pwd=$("#pwd").val();
+		if(uname == ""){
+	    	  
+	    	$("#uname").attr('placeholder','请输入手机号');
+			$("#uname").css('color','red'); 
+			$("#uname").focus(function(){
+				$("#uname").css('color','black');
+			});
+	        return false;  
+	    }
+		if(pwd == ""){
+			$("#pwd").attr('placeholder','请输入密码');
+			$("#pwd").css('color','red'); 
+			$("#pwd").focus(function(){
+				$("#pwd").css('color','black');
+			});
+	        return false;  
+	    }
+		if(typeof(uname)!="undefined"&&typeof(pwd)!="undefined"){
+			
+			$.ajax({
+	        	type:"POST",
+	        	url:"User/queryuser",
+	        	data:{
+	        		user_phone:uname,	
+	        	},		        	
+	        	dataType:"json",
+	        	success:function(data){
+	        		
+	        		if(data==1){
+	        			
+	        			var UserTab={
+	        		    		"user_phone":uname,    	        		
+	        	        		"user_pwd":pwd,
+	        	        		
+	        		    } 
+	        			 $.ajax({
+	        	        	type:"POST",
+	        	        	url:url+"/videoServer/front/User/selectuser",
+	        	        	data:JSON.stringify(UserTab),	
+	        	        	contentType:'application/json;charset=UTF-8',
+	        	        	cache:false,
+	        	        	dataType:"json",
+	        	        	success:function(data){
+	        	        		
+	        	        		if(data=="账号和密码不一致！"){
+	        	        			alert(data);
+	        	        		}else{
+	        	        			alert("success");
+	        	        			alert(data[0].user_phone);
+	        	        			window.location.href="index.html";
+	        	        			var expiresDate= new Date();
+
+	        	        			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
+	        	        			alert(expiresDate);
+	        	        			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
+		        	        		$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
+		        	        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
+	        	        			
+	        	        			
+	        	        		}
+	        	        	
+	        	        	},
+	        	        	error:function(){
+	        	        		alert("error");
+	        	        	}
+	        	        }); 
+	        		}else{ 
+	        			alert("该号码未注册，请先注册！");
+	        			
+	         		} 
+	        	},
+	        	error:function(){
+	        		
+	        	}
+	        });    
+		} 
+	})
+</script>
+<script>
+	//登录页面中注册按钮后的小图标
+	var rigster=new Vue({
+		el:'#header',
+		data:{
+			rigesterUrl:'photos/LoginPhoto/rigester.png'
+		}
+	})
+	//登录页面中的微信登录小图标
+	var weixin=new Vue({
+		el:'#wxChat',
+		data:{
+			weixin:'photos/LoginPhoto/weixin.png'
+		}
+	})
+</script>
+</html>
