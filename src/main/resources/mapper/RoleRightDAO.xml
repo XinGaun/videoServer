@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.RoleRightDAO">
+<insert id="addRoleRight" parameterType="com.entity.RoleRightDomain">
+			insert into role_right_tab(
+				right_id,
+				role_id
+			)values(
+				#{right_id,jdbcType=VARCHAR},
+				#{role_id,jdbcType=VARCHAR})
+			
+</insert>
+
+<delete id="deleteRoleRight" parameterType="com.entity.RoleRightDomain">
+			delete from role_right_tab
+			where 1=1 
+			<if test="right_id != null and right_id.trim().length()>0">
+				 AND right_id = #{right_id}
+			</if>
+			<if test="role_id != null and role_id.trim().length()>0">
+				 AND role_id = #{role_id}
+			</if>
+</delete>
+
+<update id="modifyRoleRight" parameterType="com.entity.RoleRightDomain">
+			update role_right_tab set 
+			<if test="right_id != null and right_id.trim().length()>0">
+				right_id = #{right_id,jdbcType=VARCHAR},
+			</if>
+			<if test="role_id != null and role_id.trim().length()>0">
+				role_id = #{role_id,jdbcType=VARCHAR},
+			</if>
+			where 1=1 
+			<if test="right_id != null and right_id.trim().length()>0">
+				 AND right_id = #{right_id}
+			</if>
+			<if test="role_id != null and role_id.trim().length()>0">
+				 AND role_id = #{role_id}
+			</if>
+</update>
+
+<select id="queryRoleRightCount" parameterType="com.entity.RoleRightDomain" resultType="Integer">
+			select count(1) from  role_right_tab
+			 where 1=1 
+			<if test="right_id != null and right_id.trim().length()>0">
+				 AND right_id = #{right_id}
+			</if>
+			<if test="role_id != null and role_id.trim().length()>0">
+				 AND role_id = #{role_id}
+			</if>
+</select>
+
+<select id="queryListRoleRight" parameterType="com.entity.RoleRightDomain" resultType="com.entity.RoleRightDomain">
+			select 
+				right_id,
+				role_id
+			 from role_right_tab
+			 where 1=1 
+			<if test="right_id != null and right_id.trim().length()>0">
+				 AND right_id = #{right_id}
+			</if>
+			<if test="role_id != null and role_id.trim().length()>0">
+				 AND role_id = #{role_id}
+			</if>
+			<if test="page != null" >
+				<![CDATA[  limit #{page.startNum},#{page.endIndex}  ]]>
+			</if>
+</select>
+</mapper>

@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title></title>
+<!-- Bootstrap Styles-->
+<link href="assets/css/bootstrap.css" rel="stylesheet" />
+<!-- FontAwesome Styles-->
+<link href="assets/css/font-awesome.css" rel="stylesheet" />
+<!-- Morris Chart Styles-->
+
+<!-- Custom Styles-->
+<link href="assets/css/custom-styles.css" rel="stylesheet" />
+<!-- Google Fonts-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css' />
+<!-- TABLE STYLES-->
+<link href="assets/js/dataTables/dataTables.bootstrap.css"
+	rel="stylesheet" />
+<link href="dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="wrapper">
+		<nav class="navbar navbar-default top-navbar" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html"><i
+					class="fa fa-comments"></i> <strong>语道后台管理 </strong></a>
+			</div>
+
+			<ul class="nav navbar-top-links navbar-right">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-messages">
+						<li><a href="#">
+								<div>
+									<strong>John Doe</strong> <span class="pull-right text-muted">
+										<em>Today</em>
+									</span>
+								</div>
+								<div>Lorem Ipsum has been the industry's standard dummy
+									text ever since the 1500s...</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<strong>John Smith</strong> <span class="pull-right text-muted">
+										<em>Yesterday</em>
+									</span>
+								</div>
+								<div>Lorem Ipsum has been the industry's standard dummy
+									text ever since an kwilnw...</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<strong>John Smith</strong> <span class="pull-right text-muted">
+										<em>Yesterday</em>
+									</span>
+								</div>
+								<div>Lorem Ipsum has been the industry's standard dummy
+									text ever since the...</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a class="text-center" href="#"> <strong>Read
+									All Messages</strong> <i class="fa fa-angle-right"></i>
+						</a></li>
+					</ul> <!-- /.dropdown-messages --></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-tasks">
+						<li><a href="#">
+								<div>
+									<p>
+										<strong>Task 1</strong> <span class="pull-right text-muted">60%
+											Complete</span>
+									</p>
+									<div class="progress progress-striped active">
+										<div class="progress-bar progress-bar-success"
+											role="progressbar" aria-valuenow="60" aria-valuemin="0"
+											aria-valuemax="100" style="width: 60%">
+											<span class="sr-only">60% Complete (success)</span>
+										</div>
+									</div>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<p>
+										<strong>Task 2</strong> <span class="pull-right text-muted">28%
+											Complete</span>
+									</p>
+									<div class="progress progress-striped active">
+										<div class="progress-bar progress-bar-info" role="progressbar"
+											aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"
+											style="width: 28%">
+											<span class="sr-only">28% Complete</span>
+										</div>
+									</div>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<p>
+										<strong>Task 3</strong> <span class="pull-right text-muted">60%
+											Complete</span>
+									</p>
+									<div class="progress progress-striped active">
+										<div class="progress-bar progress-bar-warning"
+											role="progressbar" aria-valuenow="60" aria-valuemin="0"
+											aria-valuemax="100" style="width: 60%">
+											<span class="sr-only">60% Complete (warning)</span>
+										</div>
+									</div>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<p>
+										<strong>Task 4</strong> <span class="pull-right text-muted">85%
+											Complete</span>
+									</p>
+									<div class="progress progress-striped active">
+										<div class="progress-bar progress-bar-danger"
+											role="progressbar" aria-valuenow="85" aria-valuemin="0"
+											aria-valuemax="100" style="width: 85%">
+											<span class="sr-only">85% Complete (danger)</span>
+										</div>
+									</div>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a class="text-center" href="#"> <strong>See
+									All Tasks</strong> <i class="fa fa-angle-right"></i>
+						</a></li>
+					</ul> <!-- /.dropdown-tasks --></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-alerts">
+						<li><a href="#">
+								<div>
+									<i class="fa fa-comment fa-fw"></i> New Comment <span
+										class="pull-right text-muted small">4 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-twitter fa-fw"></i> 3 New Followers <span
+										class="pull-right text-muted small">12 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-envelope fa-fw"></i> Message Sent <span
+										class="pull-right text-muted small">4 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-tasks fa-fw"></i> New Task <span
+										class="pull-right text-muted small">4 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-upload fa-fw"></i> Server Rebooted <span
+										class="pull-right text-muted small">4 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a class="text-center" href="#"> <strong>See
+									All Alerts</strong> <i class="fa fa-angle-right"></i>
+						</a></li>
+					</ul> <!-- /.dropdown-alerts --></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="#"><i class="fa fa-user fa-fw"></i> User
+								Profile</a></li>
+						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+						</li>
+						<li class="divider"></li>
+						<li><a href="#"><i class="fa fa-sign-out fa-fw"></i>
+								Logout</a></li>
+					</ul> <!-- /.dropdown-user --></li>
+				<!-- /.dropdown -->
+			</ul>
+		</nav>
+		<!--/. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+		<div class="sidebar-collapse">
+					<ul class="nav" id="main-menu">
+					
+						<li>
+							<a href="#"><i class="fa fa-sitemap" class="active-menu"></i>权限管理<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li>
+							<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
+						</li>
+						<li>
+							<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
+						</li>
+						<li>
+							<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
+						</li>
+							</ul>
+						</li>
+					<li>
+                        <a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a>
+                    </li>
+                    <li>
+                        <a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
+                    </li>
+                    <li>
+                        <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
+                    </li>
+					<li>
+						<li>
+							<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
+						</li>
+						<li><a href="comment.html" class="active-menu"><i class="fa fa-table"></i>评论管理</a></li>
+						<li>
+							<a href="order.html" ><i class="fa fa-table"></i>订单管理</a>
+						</li>
+						<li>
+							<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
+						</li>
+						<li><a href="test.html" ><i
+							class="fa fa-edit"></i>题目管理</a></li>
+					</ul>
+
+				</div>
+
+
+		</nav>
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="page-header">
+							语道 <small>评论管理</small>
+						</h1>
+					</div>
+				</div>
+				<!-- /. ROW  -->
+				<div class="row">
+					<div class="col-md-12">
+
+						<!-- Advanced Tables -->
+						<div class="panel panel-default">
+							<div class="table-responsive">
+								<table class="table"
+									class="display table-striped table-bordered table-hover table-condensed"
+									cellspacing="0" width="100%">
+									<tr>
+										<td>
+											<div class="input-group" width="100%">
+												<span class="input-group-addon" width="100%">视频名称</span> <input
+													type="text" class="form-control" placeholder="请输入视频名称"
+													id="video_name">
+											</div>
+										</td>
+										<td>
+											<div class="input-group" width="100%">
+												<span class="input-group-addon">所属用户</span> <input
+													type="text" class="form-control" placeholder="请输入用户名称"
+													id="user_name">
+											</div>
+										</td>
+										<td>
+											<div class="input-group" width="100%">
+												<span class="input-group-addon">回复教师</span> <input
+													type="text" class="form-control" placeholder="请输入教师名称"
+													id="teacher_name">
+											</div>
+										</td>
+										<td>
+									</tr>
+									<tr>
+										<td colspan="3">
+											<div id="sandbox-container">
+												<div class="input-daterange input-group" id="datepicker">
+													<input type="text" class="input form-control" name="start"
+														id="comment_start" /> <span class="input-group-addon">至</span>
+													<input type="text" class="input form-control" name="end"
+														id="comment_end" />
+												</div>
+											</div>
+										</td>
+
+									</tr>
+									<tr>
+										<td>
+											<button type="button" class="btn btn-danger"
+												id="removeComment">删除评论</button>
+										</td>
+										<td></td>
+										<td></td>
+										<td>
+											<div style="float: right">
+												<button type="button" class="btn btn-primary"
+													id="queryComment">搜索</button>
+												&nbsp;&nbsp; &nbsp;&nbsp;
+												<button type="button" class="btn btn-warning"
+													id="eliminates">清空</button>
+											</div>
+										</td>
+									</tr>
+								</table>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- /. ROW  -->
+				<div class="row">
+					<div class="col-md-12">
+
+						<!-- Advanced Tables -->
+						<div class="panel panel-default">
+
+							<div class="panel-body">
+								<div class="table-responsive" id="fatable">
+									<table id='example'
+										class='display table-striped table-bordered table-hover table-condensed'
+										cellspacing='0' width='100%'>
+										<thead>
+											<tr>
+												<th><input type='checkbox' class='checkall' /></th>
+												<!-- <th>评论编号</th> -->
+												<th>视频名称</th>
+												<th>所属用户</th>
+												<th>评论留言</th>
+												<th>留言时间</th>
+												<th>是否回复</th>
+												<th>回复内容</th>
+												<th>回复教师</th>
+												<th>回复时间</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+
+							</div>
+						</div>
+						<!--End Advanced Tables -->
+					</div>
+				</div>
+				<!-- /. ROW  -->
+
+				<!-- 模态框（Modal） -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+							</div>
+							<div class="modal-body">
+								
+								<div class="input-group">
+								    <input type="hidden" id= "reply_comment_id" value=""/><br>
+									<span>回复内容</span> <br>
+									<textarea rows="5" class="form-control" id="reply_text_input"
+										placeholder="请输入您的留言！"></textarea>									
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary"
+									id="reply_text_submit">提交更改</button>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal -->
+				</div>
+
+			</div>
+
+		</div>
+		<!-- /. PAGE INNER  -->
+	</div>
+	<!-- /. PAGE WRAPPER  -->
+	<!-- /. WRAPPER  -->
+	<!-- JS Scripts-->
+
+
+	<!-- jQuery Js -->
+	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="assets/js/jquery-1.10.2.js"></script>
+
+	<!-- Bootstrap Js -->
+	<script src="assets/js/bootstrap.min.js"></script>
+	<!-- Metis Menu Js -->
+	<script src="assets/js/jquery.metisMenu.js"></script>
+	<!-- DATA TABLE SCRIPTS -->
+	<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+	<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+	<script src="dist/js/bootstrap-datepicker.min.js"></script>
+	<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
+	<script>
+$(function(){		
+	        var url1 = "http://localhost:8080/";	        
+             /* //全选
+	         $('.checkall').click(function () {  		
+	         
+	         }); */
+            //删除信息
+       		 $("#removeComment").click(function(){      			
+       			var obj=document.getElementsByName('commentCheck'); //选择所有name="'test'"的对象，返回数组     		
+       			var arr = [];      			
+       			for(var i=0;i<obj.length;i++){
+       				if(obj[i].checked==true){
+       					arr[arr.length]=obj[i].value;
+       					//console.log(obj[i].value);
+       				}	
+       			};
+       			if(arr.length==0||arr==null){
+       				alert("请选择评论!");
+       				return;
+       			};      		
+       			$.ajax({
+                           type: "POST",
+                           url: url1+"videoServer/commentTab/deleteComment",
+                           contentType: 'application/json; charset=UTF-8',
+       					   cache: false,  //禁用缓存
+                           data: JSON.stringify(arr),  //传入组装的参数
+                           dataType: "json",
+                           success: function (result) {
+       						if(result=="success"){
+       							alert("删除成功");
+       							window.location.reload();
+       						}else{
+       							alert("删除失败");
+       						}
+       					   }
+       			   });
+       		}); 
+            
+         
+           //清除搜索框
+       $("#eliminates").click(function(){
+ 	          $("#comment_id").val(""); 
+	          $("#user_name").val("");
+	          $("#video_name").val("");
+	          $("#teacher_name").val("");           			
+	          $("#comment_start").val("");
+	          $("#comment_end").val("");
+        });     
+      //日期控件
+        $("#sandbox-container .input-daterange").datepicker({
+	          language:"zh-CN",
+	          format: 'yyyy-mm-dd'
+        });       
+       $(".checkall").click(function () {
+	        var check = $(this).prop("checked");
+	        $(".checkchild").prop("checked", check);
+       }); 
+        //提示信息
+       var lang = {
+               "sProcessing": "处理中...",
+               "sLengthMenu": "每页 _MENU_ 项",
+               "sZeroRecords": "没有匹配结果",
+               "sInfo": "当前显示第 _START_ 至 _END_ 项，共 _TOTAL_ 项。",
+               "sInfoEmpty": "当前显示第 0 至 0 项，共 0 项",
+               "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+               "sInfoPostFix": "",
+               "sSearch": "搜索:",
+               "sUrl": "",
+               "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+               "sInfoThousands": ",",
+               "oPaginate": {
+                    "sFirst": "首页",
+                     "sPrevious": "上页",
+                      "sNext": "下页",
+                      "sLast": "末页",
+                    "sJump": "跳转"
+                 },
+              "oAria": {
+                   "sSortAscending": ": 以升序排列此列",
+                   " sSortDescending": ": 以降序排列此列"
+              }
+           }; 
+       //初始化表格             
+        $("#example").dataTable({
+                 language:lang,  //提示信息
+                 autoWidth: false,  //禁用自动调整列宽
+                 stripeClasses: ["odd", "even"],  //为奇偶行加上样式，兼容不支持CSS伪类的场合
+                 processing: true,  //隐藏加载提示,自行处理
+                 serverSide: true,  //启用服务器端分页
+                 searching: false,  //禁用原生搜索
+                 orderMulti: false,  //启用多列排序
+                 order: [],  //取消默认排序查询,否则复选框一列会出现小箭头
+                 renderer: "bootstrap",  //渲染样式：Bootstrap和jquery-ui
+                 pagingType: "simple_numbers",  //分页样式：simple,simple_numbers,full,full_numbers
+                 columnDefs: [{
+                     "targets": 'nosort',  //列的样式名
+                     "orderable": false    //包含上样式名‘nosort’的禁止排序
+                 }],
+                ajax: function (data, callback, settings) {
+                     //封装请求参数                   
+                     var param = {};
+                     param.limit = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
+                     param.start = data.start;//开始的记录序号
+                     param.page = (data.start / data.length)+1;//当前页码
+     				//param.order_id = $("#order_id").val();//获得订单ID
+                     //  console.log(param);
+                     //ajax请求数据                      
+                     $.ajax({
+                         type: "POST",
+                         url: url1+"videoServer/commentTab/queryCommentAll",
+                         contentType: 'application/json; charset=UTF-8',
+     					 cache: false,  //禁用缓存
+                         data: JSON.stringify(param),  //传入组装的参数
+                         dataType: "json",
+                         success: function (result) {
+                             //console.log(result);
+                             //setTimeout仅为测试延迟效果
+                             //setTimeout(function () {
+                                 //封装返回数据    
+                                 var returnData = {};
+                                 returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                                 returnData.recordsTotal = result.total;//返回数据全部记录
+                                 returnData.recordsFiltered = result.total;//后台不实现过滤功能，每次查询均视作全部结果
+                                 returnData.data = result.data;//返回的数据列表
+                                 //console.log(returnData);
+                                 //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
+                                 //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
+                                 callback(returnData);
+                             //}, 200);
+                           }
+                      });  
+                },
+                 //列表表头字段
+               columns: [
+             	   {
+                      "sClass": "text-center",
+                      "data": "comment_id",
+                      "render": function (data, type, full, meta) {
+                          return '<input type="checkbox"  class="checkchild" name="commentCheck" value="' + data + '" />';
+                      },
+                      "bSortable": false
+                  },
+                    
+                    { 
+     					"data": "video_name",
+     				 	"sDefaultContent":"", 
+     				},
+     				{ "data": "user_name" },
+     				{ 
+     					"data": "comment_text",
+     					 "sDefaultContent":"", 
+     				},
+     				{ 
+     					"data": "comment_date",
+     					"sDefaultContent":"",
+    					
+     				},
+     				{ 
+     					"data": "reply_text" ,
+     					"orderable" : false, // 禁用排序  
+                        "sDefaultContent" : "",  
+                        "sWidth" : "3%",
+                          "render" : function(data, type, full, meta) {                         	
+                            if(data=="" ||data == null ){                                  
+                 				data = "<button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#myModal' data-commentid='"+full.comment_id+"'>回复</button>";
+                            }else{  
+                                data = "<button class='btn btn-sm btn-safety' >已回复</button>"  
+                            }  
+                             return   data;  
+                          }   
+     				},
+     				{  
+     					"data": "reply_text" ,
+     					"orderable" : false, // 禁用排序  
+                        "sDefaultContent" : "",  
+                         "render" : function(data, type, full, meta) {  
+                            if(data=="" ||data == null ){                                  
+                 				data = null;
+                            }else{  
+                                data = data;
+                            }  
+                             return   data;  
+                          }   
+     				},
+     				{ 
+     					"data": "teacher_name" ,
+     				    "sDefaultContent":"" ,
+     				    "orderable" : false, // 禁用排序                  
+                        "render" : function(data, type, full, meta) {  
+                             if(data=="" ||data == null ){                                  
+             				       data = null;
+                             }else{  
+                                   data =data;
+                             }  
+                             return   data;  
+                         }  
+     				},
+     				{ 
+     					"data": "reply_date",  
+     					"orderable" : false, // 禁用排序  
+                        "sDefaultContent" : "",  
+                          "render" : function(data, type, full, meta) {  
+                            if(data=="" ||data == null ){                                  
+                 				data = null;
+                            }else{  
+                                data = data; 
+                            }  
+                             return   data;  
+                          }   
+     				}            			
+                 ] 
+             }).api();	 
+
+        //此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
+       //按条件搜索   
+       $("#queryComment").click(function(){
+ 	       //$("#example").next().remove();
+	       //$("#example").remove();
+	       $("#fatable").html(
+	              "<table id='example' class='display table-striped table-bordered table-hover table-condensed' cellspacing='0' width='100%'><thead><tr><th><input type='checkbox' class='checkall' /></th><th>视频名称</th><th>所属用户</th><th>评论留言</th><th>留言时间</th><th>是否回复</th><th>回复内容</th><th>回复教师</th><th>回复时间</th></tr></thead></table>"
+	        );
+	     //全选
+			$(".checkall").click(function(){
+				var str=document.getElementsByClassName("checkchild");
+				//alert($("#checks").prop('checked'));
+				if(!$("#checks").prop('checked')){
+					for(var i=0;i<str.length;i++){
+						//如果没有被选中
+						if(str[i].checked){
+							//改变选中框的属性，让它选不中
+							str[i].checked=false;
+						}
+					}
+				}else{
+					for(var i=0;i<str.length;i++){
+						//如果没有被选中
+						if(!str[i].checked){
+							//改变选中框的属性，让它选中
+							str[i].checked=true;
+						}
+					}
+				}
+			});	    
+	       $("#example").dataTable({
+                 language:lang,  //提示信息
+                 autoWidth: false,  //禁用自动调整列宽
+                 stripeClasses: ["odd", "even"],  //为奇偶行加上样式，兼容不支持CSS伪类的场合
+                 processing: true,  //隐藏加载提示,自行处理                
+                 serverSide: true,  //启用服务器端分页
+                 searching: false,  //禁用原生搜索
+                 orderMulti: false,  //启用多列排序
+                 order: [],  //取消默认排序查询,否则复选框一列会出现小箭头
+                 renderer: "bootstrap",  //渲染样式：Bootstrap和jquery-ui
+                 pagingType: "simple_numbers",  //分页样式：simple,simple_numbers,full,full_numbers
+                 columnDefs: [{
+                        "targets": 'nosort',  //列的样式名
+                         "orderable": false    //包含上样式名‘nosort’的禁止排序
+                  }],  
+                 ajax: function (data, callback, settings) {
+                   //封装请求参数                 
+                   var param = {};
+                   param.limit = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
+                   param.start = data.start;//开始的记录序号
+                   param.page = (data.start / data.length)+1;//当前页码
+	               var username= $.trim($("#user_name").val());
+	               if (username.length > 0 ) 
+	               { 
+	            	   param.user_name = username;//
+	               }
+	               var videoname= $.trim($("#video_name").val());
+	               if (videoname.length > 0 ) 
+	               { 
+	            	   param.video_name = videoname;//
+	               }
+	               var teachername= $.trim($("#teacher_name").val());
+	               if (teachername.length > 0) 
+	               { 
+	            	   param.teacher_name =teachername;//
+	               }
+	               var commentstart= $.trim($("#comment_start").val());
+	               if (commentstart.length > 0) 
+	               { 
+	            	   param.comment_start = commentstart;//start date
+	               }
+	               var commentend= $.trim($("#comment_end").val());
+	               if (commentend.length > 0) 
+	               { 
+	            	   param.comment_end = commentend;//end date
+	               }         
+                   //console.log(param);
+                   //ajax请求数据
+                   $.ajax({
+                          type: "POST",
+                          url: url1+"videoServer/commentTab/queryCommentAll",
+                          contentType: 'application/json; charset=UTF-8',
+			              cache: false,  //禁用缓存
+                          data: JSON.stringify(param),  //传入组装的参数
+                          dataType: "json",
+                          success: function (result) {            	         
+                                 //console.log(result);
+                                 //setTimeout仅为测试延迟效果
+                                 //setTimeout(function () {
+                                 //封装返回数据                            
+                                  var returnData = {};
+                                      returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                                      returnData.recordsTotal = result.total;//返回数据全部记录
+                                      returnData.recordsFiltered = result.total;//后台不实现过滤功能，每次查询均视作全部结果
+                                      returnData.data = result.data;//返回的数据列表
+                                       //console.log(returnData);
+                                     //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
+                                     //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
+                                    callback(returnData);
+                                    //}, 200);
+                          }
+                   });
+                },
+                //列表表头字段
+                columns: [
+	                   {
+                         "sClass": "text-center",
+                         "data": "comment_id",
+                          "render": function (data, type, full, meta) {
+                          return '<input type="checkbox"  class="checkchild" name="commentCheck" value="' + data + '" />'; },
+                          "bSortable": false
+                         },
+                         { 
+  			               "data": "video_name",
+  		                },
+		                { "data": "user_name" },
+		                { 
+			                "data": "comment_text",          					
+		                 },
+						{
+		                	 "data": "comment_date", 		                	
+						},
+						 
+						{
+							"data": "reply_text",
+							"orderable" : false, // 禁用排序  
+	                        "sDefaultContent" : "",  
+	                        "sWidth" : "3%",
+	                        "render" : function(data, type, full, meta) {  
+	                        	  //comment_id	    
+	                        	//var comment_id =$('#example').DataTable().rows( this ).data()[0]; 
+	                        	 var nRow = $(this).parents('tr')[0];//得到这一行  
+	                             var aData = $("#example").dataTable().fnGetData(nRow);//得到这一行的json数据  	
+	                             var id = aData.comment_id;//得到Id  
+	                            if(data=="" ||data == null ){                                  
+	                 				data = "<button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#myModal' data-commentid='"+full.comment_id+"' >回复</button>"  ;//
+	                            }else{  
+	                                data = "<button class='btn btn-sm btn-safety' >已回复</button>"  
+	                            }  
+	                             return   data;  
+	                          }   
+						}, 
+						{  
+	     					"data": "reply_text" ,
+	     					"orderable" : false, // 禁用排序  
+	                        "sDefaultContent" : "",  
+	                         "render" : function(data, type, full, meta) {  
+	                            if(data=="" ||data == null ){                                  
+	                 				data = null;
+	                            }else{  
+	                                data = data;
+	                            }  
+	                             return   data;  
+	                          }   
+	     				},
+	     				{ 
+	     					"data": "teacher_name" ,
+	     				    "sDefaultContent":"" ,
+	     				    "orderable" : false, // 禁用排序                  	                   
+	                        "render" : function(data, type, full, meta) {  
+	                             if(data=="" ||data == null ){                                  
+	             				       data = null;
+	                             }else{  
+	                                   data =data;
+	                             }  
+	                             return   data;  
+	                         }  
+	     				},
+	     				{ 
+	     					"data": "reply_date",  
+	     					"orderable" : false, // 禁用排序  
+	                        "sDefaultContent" : "",  	                       
+	                          "render" : function(data, type, full, meta) {  
+	                            if(data=="" ||data == null ){                                  
+	                 				data = null;
+	                            }else{  
+	                                data = data; 
+	                            }  
+	                             return   data;  
+	                          }   
+	     				}                      			
+                     ] 
+           }).api();   
+      });         
+      //加载模态框    
+      var table = $('#example').DataTable();
+       $('#myModal').on('show.bs.modal', function (event) {     	  	 
+    	   var button = $(event.relatedTarget) // 触发事件的按钮  
+           var id = button.data('commentid') // 解析出data-whatever内容  
+    	   $("#reply_comment_id").val(id);   	     	   
+       }); 
+       
+      //提交回复
+	 $("#reply_text_submit").click(function(){   
+			 var replytext = $.trim($("#reply_text_input").val()); 
+			 var commentId = $.trim($("#reply_comment_id").val());		
+			 if(  replytext.length = 0 ){
+				 alert("请输入您的留言");
+			 }					
+			 var param = {};
+			 param.comment_id = commentId;
+	         param.reply_text = replytext;		       
+	         param.reply_date = new Date();      
+			$.ajax({
+	              type: "POST",
+	              url: url1+"videoServer/commentTab/updateComment",
+	              contentType: 'application/json; charset=UTF-8',
+					   cache: false,  //禁用缓存
+	              data: JSON.stringify(param),  //传入组装的参数
+	              dataType: "json",
+	              success: function (result) {
+						if(result=="success"){
+							alert("留言成功");
+							window.location.reload();
+						}else{
+							alert("留言失败");
+						}
+					   }
+			   });
+			   $("#reply_comment_id").val("");   	
+		 	   $("reply_text_input").val("");		 	
+			  $("#myModal").modal("hide");
+		 });
+}); 
+    </script>
+	<!-- Custom Js -->
+	<!--<script src="assets/js/custom-scripts.js"></script> -->
+
+
+</body>
+</html>
