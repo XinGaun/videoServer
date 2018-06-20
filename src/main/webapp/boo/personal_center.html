@@ -238,7 +238,7 @@
   						</button>
 	                 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							<li><a href="personal_center.html">个人中心</a></li>					 
-							<li><a id="exit">退出</a></li>
+							<li id="exit"><a>退出</a></li>
 						</ul>
 	                		
                  	</div>
@@ -927,7 +927,7 @@
 							   <li><a>我的账号</a></li>
 							   <li class="active"><a href="#infomation" data-toggle="tab">个人资料</a></li>
 							   <li><a id="anquan" style="display:none" href="#security" data-toggle="tab">安全设置</a></li>
-							   <li><a href="#three" data-toggle="tab">第三方账户</a></li>
+							   <li><a href="#three" data-toggle="tab">修改密码</a></li>
 							</ul>
 						</div>
 						<div id="myTabContent" class="tab-content">
@@ -1721,8 +1721,6 @@
 		退出按钮点击事件
 	*/
 	$("#exit").click(function(){
-		
-		window.location.href="index.html"; 
 		
 		$("#logText").show();
 		$("#logImg").hide();

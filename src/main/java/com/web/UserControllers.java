@@ -160,4 +160,18 @@ public class UserControllers {
 		return JSON.toJSONString(aService.updatephone(ut));
 		
 	}
+
+	//根据手机号查找是否有该用户
+
+	@RequestMapping(value="/isfirst",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String isfirst(@RequestBody String user_phone,HttpServletResponse response){
+		System.out.println("ssdfgghgfghgf");
+		HashMap<String,Object> map = JSON.parseObject(user_phone,HashMap.class);
+		ArrayList<HashMap<String, Object>> aList=aService.isfirst(map.get("user_phone").toString());
+		System.out.println(aList);
+		System.out.println(JSON.toJSONString(aList));
+		return JSON.toJSONString(aList);
+	}	
+	
+
 }

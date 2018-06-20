@@ -103,7 +103,7 @@
 	        	<input type="password" id="pwd" placeholder="密码" style="width:100%">
 	        </label>
 	        <span><input type="checkbox">记住密码</span>
-	  		<a href="resetpwd.html" style="float:right" id="mi">忘记密码？</a>
+	  		<a href="personal_center.html" style="float:right" id="mi">忘记密码？</a>
 	        <br/>
 			<label>
 				<button type="button" id="denglu">登录</button>
@@ -123,7 +123,6 @@
 //var url="http:127.0.0.1:8080/";
 	var url="";
 	$("#denglu").click(function(){
-		alert(1);
 		var uname=$('#uname').val();
 		pwd=$("#pwd").val();
 		if(uname == ""){
@@ -168,45 +167,69 @@
 	        });    
 		} 
 	})
-function initss(){
-		var UserTab={
-	    		"user_phone":$('#uname').val(),    	        		
-        		"user_pwd":pwd,	        	        		
-	    } 
-		console.log(UserTab);
+	function initss(){
+			var UserTab={
+		    		"user_phone":$('#uname').val(),    	        		
+	        		"user_pwd":pwd,	        	        		
+		    } 
+			console.log(UserTab);
+			$.ajax({
+	    	type:"POST",
+	    	url:url+"/videoServer/front/User/selectuser",
+	    	data:JSON.stringify(UserTab),	
+	    	contentType:'application/json;charset=UTF-8',
+	    	cache:false,
+	    	async : false,
+	    	dataType:"json",
+	    	success:function(data){
+	    		
+	    		if(data=="账号和密码不一致！"){
+	    			alert(data);
+	    		}else{
+	    			var expiresDate= new Date();
+	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
+	    			//alert(expiresDate);
+	    			
+	    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
+	        		$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
+	        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
+	    			isfirst(data[0].user_phone);
+	    			
+	    		}
+	    	
+	    	},
+	    	error:function(){
+	    		alert("error");
+	    	}
+	    }); 
+	}
+	function isfirst(phone){
+		alert(7);
 		$.ajax({
-    	type:"POST",
-    	url:url+"/videoServer/front/User/selectuser",
-    	data:JSON.stringify(UserTab),	
-    	contentType:'application/json;charset=UTF-8',
-    	cache:false,
-    	async : false,
-    	dataType:"json",
-    	success:function(data){
-    		
-    		if(data=="账号和密码不一致！"){
-    			alert(data);
-    		}else{
-    			//alert("success");
-    			//alert(data[0].user_phone);
-    			window.location.href="index.html";
-    			var expiresDate= new Date();
-
-    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
-    			//alert(expiresDate);
-    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
-        		$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
-        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
-    			
-    			
-    		}
-    	
-    	},
-    	error:function(){
-    		alert("error");
-    	}
-    }); 
-}
+	        	type:"POST",
+	        	url:url+"/videoServer/front/User/isfirst",
+	        	contentType:'application/json;charset=UTF-8',
+	        	data:JSON.stringify({user_phone:phone}),		        	
+	        	dataType:"json",
+	         	async : false,
+	        	success:function(data){
+	        		console.log(data);
+	        		if(data.length==1){	 
+	        			//答过题的状态
+	        			window.location.href="index.html";	        			
+	        		}else{ 
+	        			//未答题状态
+	        			
+	        			window.location.href="user_test.html";
+	        			
+	         		}  
+	        	},
+	        	error:function(){
+	        		
+	        	}
+	    });    
+	}
+	
 </script>
 <script>
 	//登录页面中注册按钮后的小图标
