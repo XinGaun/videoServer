@@ -67,6 +67,7 @@ public class UserTestController {
 	 */
 	@RequestMapping(value="/queryUserTestEvaluate",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String queryUserTestEvaluate(@RequestBody String data) {
+		
 		return userTestService.queryUserTestEvaluate(data);
 	}
 	/**
@@ -130,6 +131,7 @@ public class UserTestController {
 	 */
 	@RequestMapping(value="/queryAnswerEvaluate",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String queryAnswerEvaluate(@RequestBody String data) {
+		System.out.println(data);
 		return userTestService.queryAnswerEvaluate(data);
 	}
 }

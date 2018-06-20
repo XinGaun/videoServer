@@ -178,6 +178,7 @@ public class UserTestServiceImpl implements UserTestService {
 	public String queryAnswerEvaluate(String data) {
 		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
 		HashMap<String,Object> resultMap = userTestDao.queryAnswerEvaluate(map);
+		userTestDao.addUserTestRecord(map);
 		return JSON.toJSONString(resultMap);
 	}
 

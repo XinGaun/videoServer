@@ -109,6 +109,7 @@ function pushanswer(data){
 		return;
 	}
 	data.number = flog;
+	data.user_id = $.cookie("id");
 	$.ajax({
 		type : "POST",
 		url : url+"/videoServer/front/UserTest/queryAnswerEvaluate",
