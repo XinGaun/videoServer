@@ -254,43 +254,45 @@
 			<nav class="navbar-default navbar-side" role="navigation">
 				<div class="sidebar-collapse">
 					<ul class="nav" id="main-menu">
-						<li>
-							<a href="#"><i class="fa fa-sitemap" class="active-menu"></i>权限管理<span class="fa arrow"></span></a>
+						<li class="role" style="display: none;">
+							<a href="#"><i class="fa fa-sitemap"  class="active-menu"></i>权限管理<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse in">
 								<li>
-							<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
-						</li>
-						<li>
-							<a href="teacher_list.html" class="active-menu"><i class="fa fa-users"></i> 教师管理</a>
-						</li>
-						<li>
-							<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
-						</li>
+									<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
+								</li>
+								<li>
+									<a href="teacher_list.html" class="active-menu"><i class="fa fa-users"></i> 教师管理</a>
+								</li>
+								<li>
+									<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
+								</li>
 							</ul>
 						</li>
 						<li>
-                        <a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a>
-                    </li>
-                    <li>
-                        <a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
-                    </li>
-                    <li>
-                        <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
-                    </li>
-                    <li>
+	                        <a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a>
+	                    </li>
+	                    <li>
+	                        <a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
+	                    </li>
+	                    <li>
+	                        <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
+	                    </li>
+						<li class="role" style="display: none;">
 							<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
 						</li>
-						<li><a href="comment.html"><i class="fa fa-table"></i>评论管理</a></li>
 						<li>
-							<a href="order.html" ><i class="fa fa-table"></i>订单管理</a>
+							<a href="comment.html"><i class="fa fa-table"></i>评论管理</a>
 						</li>
-						<li>
-							<a href="proposal.html" ><i class="fa fa-edit"></i>建议管理</a>
+						<li class="role" style="display: none;">
+							<a href="order.html"><i class="fa fa-table"></i>订单管理</a>
 						</li>
-						<li><a href="test.html" ><i
-							class="fa fa-edit"></i>题目管理</a></li>
+						<li class="role" style="display: none;">
+							<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
+						</li>
+						<li class="role" style="display: none;">
+							<a href="test.html" ><i class="fa fa-edit"></i>题目管理</a>
+						</li>
 					</ul>
-
 				</div>
 
 			</nav>
@@ -426,11 +428,14 @@
 		<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 		<script src="dist/js/bootstrap-datepicker.min.js"></script>
 		<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
+		<script src="assets/js/common.js"></script>
+		
 
 		<script>
 			//var url = "http://localhost:8080/videoServer/";
 			var url ="/videoServer/";
 			$(function() {
+				loadRoleInfo();
 				function backSelect(eleId,status){
 					 $("#"+eleId+" option").each(function(){   
 				          var txt = $(this).val();   

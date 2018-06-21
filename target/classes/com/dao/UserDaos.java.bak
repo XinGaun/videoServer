@@ -1,22 +1,22 @@
-package com.service;
-
+package com.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 import com.entity.UserTab;
 
-public interface UserService {
-	//æ³¨å†Œç”¨æˆ·
+public interface UserDao {
+	//×¢²áÓÃ»§
 	public int addUser(UserTab ut);
-	//æ³¨å†Œç™»å½•æ—¶æ ¹æ®æ‰‹æœºå·æŸ¥æ‰¾æ˜¯å¦æœ‰è¯¥ç”¨æˆ·
+	//×¢²áµÇÂ¼Ê±¸ù¾İÊÖ»úºÅ²éÕÒÊÇ·ñÓĞ¸ÃÓÃ»§
 	public ArrayList<HashMap<String,Object>> queryUser(String user_phone);
-	//ç™»å½•
+	//µÇÂ¼
 	public ArrayList<HashMap<String,Object>> selectUser(UserTab ut);
-	//æ ¹æ®æ‰‹æœºå·æ›´æ”¹å¯†ç -å¿˜è®°å¯†ç 
+	//¸ù¾İÊÖ»úºÅ¸ü¸ÄÃÜÂë-Íü¼ÇÃÜÂë
 	public int updateUser(UserTab ut);
-	//ä¸ªäººä¸­å¿ƒæ›´æ”¹æ‰€æœ‰ä¿¡æ¯
+	//¸öÈËÖĞĞÄ¸ü¸ÄËùÓĞĞÅÏ¢
 	public int updatemessage(UserTab ut);
-	//æ›´æ”¹æ‰‹æœºå·
+	//¸ü¸ÄÊÖ»úºÅ
 	public int updatephone(UserTab ut);
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.service.VideosDaoService;
 
 @Controller
-@RequestMapping("/Videos")
+@RequestMapping("/front/Videos")
 @ResponseBody
 public class VideosController {
 	@Autowired
@@ -32,5 +32,14 @@ public class VideosController {
 	@RequestMapping(value="/queryRecommend",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String queryRecommend() {
 		return videosDaoService.queryRecommend();
+	}
+	/**
+	 * video用户是否购买课程
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryOrder",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryOrder(@RequestBody String data) {
+		return videosDaoService.queryOrder(data);
 	}
 }

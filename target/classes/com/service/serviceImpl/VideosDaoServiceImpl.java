@@ -32,5 +32,15 @@ public class VideosDaoServiceImpl implements VideosDaoService {
 		ArrayList<HashMap<String,Object>> list = videosDao.queryRecommend();
 		return JSON.toJSONString(list);
 	}
+	//查询用户是否购买过课程
+	@Override
+	public String queryOrder(String data) {
+		HashMap<String,Object> hashmap = JSON.parseObject(data,HashMap.class);
+		int flog = videosDao.queryOrder(hashmap);
+		if(flog>0) {
+			return JSON.toJSONString("success");
+		}
+		return JSON.toJSONString("error");
+	}
 
 }

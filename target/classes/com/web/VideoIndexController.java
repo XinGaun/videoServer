@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.service.VideoIndexService;
 
 @Controller
-@RequestMapping("/VideoIndex")
+@RequestMapping("/front/VideoIndex")
 @ResponseBody
 public class VideoIndexController {
 	@Autowired

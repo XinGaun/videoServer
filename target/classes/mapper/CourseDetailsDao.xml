@@ -28,4 +28,30 @@
 		WHERE 1=1 AND
 		courses_status = 5 order by courses_date DESC LIMIT 0,3
 	</select>
+	<!-- 查询学员评论 -->
+	<select id="queryStudentComments" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select u.user_id,u.user_name, c.comment_text, date_format(comment_date,'%Y-%m-%d %h:%i:%s')comment_date, c.reply_text, date_format(reply_date,'%Y-%m-%d %h:%i:%s')reply_date,v.video_name,u.user_photo,t.teacher_name 
+		from comment_tab c 
+		LEFT JOIN user_tab u ON c.user_id = u.user_id 
+		LEFT JOIN video_tab v ON v.video_id = c.video_id 
+		LEFT JOIN teacher_tab t ON t.teacher_id = c.reply_teacher 
+		LEFT JOIN courses_tab co ON co.teacher_id = t.teacher_id 
+		WHERE  1=1 AND co.courses_status = 5 
+		<if test="cid!=''">
+			AND co.courses_id =#{cid}
+		</if>
+	</select>
+	<!-- 查询评论总数 -->
+	<select id="queryStudentCommentsAllCount" parameterType="java.util.HashMap" resultType="int">
+		select count(u.user_id) 
+		from comment_tab c 
+		LEFT JOIN user_tab u ON c.user_id = u.user_id 
+		LEFT JOIN video_tab v ON v.video_id = c.video_id 
+		LEFT JOIN teacher_tab t ON t.teacher_id = c.reply_teacher 
+		LEFT JOIN courses_tab co ON co.teacher_id = t.teacher_id 
+		WHERE  1=1 AND co.courses_status = 5 
+		<if test="cid!=''">
+			AND co.courses_id = #{cid}
+		</if>
+	</select>
 </mapper>

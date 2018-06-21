@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.service.UserTestService;
 
 @Controller
-@RequestMapping("/UserTest")
+@RequestMapping("/front/UserTest")
 @ResponseBody
 public class UserTestController {
 	@Autowired

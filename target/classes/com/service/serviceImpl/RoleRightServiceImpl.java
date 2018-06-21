@@ -1,6 +1,7 @@
 package com.service.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jetty.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,10 @@ public class RoleRightServiceImpl implements IRoleRightService
 	@Autowired
 	public RoleRightDAO RoleRightDAO;
 
+	public List<Map<String, String>> queryUserRole(String teacher_id) {
+		return RoleRightDAO.queryUserRole(teacher_id);
+	}
+	
 	public void setRoleRightDAO(RoleRightDAO RoleRightDAO)
 	{
 		this.RoleRightDAO = RoleRightDAO;
@@ -84,4 +89,6 @@ public class RoleRightServiceImpl implements IRoleRightService
 	{
 		return RoleRightDAO.queryRoleRightCount(RoleRightDomain);
 	}
+
+	
 }

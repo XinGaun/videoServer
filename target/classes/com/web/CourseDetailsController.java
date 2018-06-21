@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.service.CourseDetailsService;
 
 @Controller
-@RequestMapping("/CourseDetails")
+@RequestMapping("/front/CourseDetails")
 @ResponseBody
 public class CourseDetailsController {
 	@Autowired
@@ -41,5 +41,14 @@ public class CourseDetailsController {
 	@RequestMapping(value="/queryqueryRecommendCourse",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String queryqueryRecommendCourse() {
 		return courseDetailsService.queryqueryRecommendCourse();
+	}
+	/**
+	 * 查询学员评论
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryStudentComments",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryStudentComments(@RequestBody String data) {
+		return courseDetailsService.queryStudentComments(data);
 	}
 }

@@ -11,7 +11,7 @@ import com.aliyuncs.exceptions.ClientException;
 import com.util.AliBigFishSDK;
 
 @Controller
-@RequestMapping("/AliBigFish")
+@RequestMapping("/front/AliBigFish")
 @ResponseBody
 public class AliBigFishController {
 	/**

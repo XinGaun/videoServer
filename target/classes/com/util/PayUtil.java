@@ -16,9 +16,9 @@ public class PayUtil {
 
 	public static String UID = "e61ddb86118dceb75a623d6c";
 
-	public static String NOTIFY_URL = "http://39.105.100.211/videoServer/pays/notifyPay";
+	public static String NOTIFY_URL = "http://www.niceyuwen.com/videoServer/pays/notifyPay";
 
-	public static String RETURN_URL = "http://39.105.100.211/videoServer/pays/returnPay";
+	public static String RETURN_URL = "http://www.niceyuwen.com/videoServer/pays/returnPay";
 
 	public static String BASE_URL = "https://pay.paysapi.com";
 

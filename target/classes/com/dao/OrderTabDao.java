@@ -45,4 +45,8 @@ public interface OrderTabDao {
 	 * @return
 	 */
 	public ArrayList<HashMap<String,Object>> queryOrderTabAll(HashMap<String,Object> hashmap);
+	/**
+	 * 查询订单是否存在
+	 */
+	public ArrayList<HashMap<String,Object>> queryOrderExist(HashMap<String,Object> map);
 }
