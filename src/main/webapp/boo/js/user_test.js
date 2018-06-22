@@ -2,10 +2,8 @@ $(function(){
 	init();
 	
 });
-
-//var url = "http://127.0.0.1:8080//"
-	var url ="";
-
+var url = "http://127.0.0.1:8080//"
+	//var url ="";
 //初始化选项
 function init(){
 	$("#onemenu").html("");

@@ -164,9 +164,7 @@ function initqueryCourseGrade(){
 		//data : JSON.stringify(param), //传入组装的参数
 		dataType : "json",
 		success : function(result) {
-
 			//console.log(result);
-
 			if (result == "" || result.length == 0) {
 				$("#queryCourseGrade").append("暂无课程信息!");
 				return;
@@ -174,9 +172,7 @@ function initqueryCourseGrade(){
 			for(var i=0;i<result.length;i++){
 				var queryCourseGrade = '<li>'
 										+'<div class="col-md-12" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
-
 										+	'<a href="course.html?cid='+result[i].courses_id+'">'+result[i].courses_name+'</a>'
-
 										+	'<span style="float:right"><span class="glyphicon glyphicon-thumbs-up"></span><span style="color: red">'+result[i].courses_grade+'</span></span>'
 										+	'</div>'		
 										+'</li>';
@@ -241,12 +237,10 @@ function initrecommend(){
 					+ '</div>';
 				$("#queryRecommend").append(queryRecommend);
 			}	
-
 			$("img.lazy").lazyload({
 				effect : "fadeIn",
 				offset : 300
 			});
-
 		}
 	});
 }
@@ -270,9 +264,7 @@ function initajax(param) {
 			for (var i = 0; i < result.list.length; i++) {
 				var querycoursesTabAll = '<div class="col-md-4" >'
 					+ '<div class="thumbnail">'
-
-					+ '<a href="course.html?cid='+result.list[i].courses_id+'">'
-
+					+ '<a href="#">'
 					+ '<img data-original="'
 					+ result.list[i].courses_img_url
 					+ '" class="jpckclass lazy" style="width:100%;" alt="...">'
@@ -285,11 +277,9 @@ function initajax(param) {
 					+ result.list[i].courses_introduce
 					+ '</p>'
 					+ '<div class="col-md-6">'
-
-					+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result.list[i].teacher_id+'">'
+					+ '<p style="color:green;font-weight: bold;">'
 					+ result.list[i].teacher_name
-					+ '</a></p>'
-
+					+ '</p>'
 					+ '</div>'
 					+ '<div class="col-md-6">'
 					+ '<p style="text-align:right;">'

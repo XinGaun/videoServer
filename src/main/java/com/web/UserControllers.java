@@ -62,7 +62,10 @@ public class UserControllers {
 
 	@RequestMapping(value="/queryuser",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String queryuser(@RequestBody String user_phone,HttpServletResponse response){
+		System.out.println(user_phone);
 		HashMap<String,Object> map = JSON.parseObject(user_phone,HashMap.class);
+		
+		System.out.println(map);
 		ArrayList<HashMap<String, Object>> aList=aService.queryUser(map.get("user_phone").toString());
 		System.out.println(aList);
 		String json = JSON.toJSONString(aList);
@@ -160,7 +163,6 @@ public class UserControllers {
 		return JSON.toJSONString(aService.updatephone(ut));
 		
 	}
-
 	//根据手机号查找是否有该用户
 
 	@RequestMapping(value="/isfirst",produces="application/json;charset=utf-8",method=RequestMethod.POST)
@@ -173,5 +175,4 @@ public class UserControllers {
 		return JSON.toJSONString(aList);
 	}	
 	
-
 }
