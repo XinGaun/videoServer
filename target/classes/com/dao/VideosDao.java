@@ -10,4 +10,6 @@ public interface VideosDao {
 	public int querycoursesTabAllCount(HashMap<String,Object> hashMap);
 	//查询视频页面推荐课程
 	public ArrayList<HashMap<String,Object>> queryRecommend();
+	//查询用户是否有过订单记录
+	public int queryOrder(HashMap<String,Object> map);
 }

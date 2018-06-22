@@ -1,6 +1,6 @@
 package com.service.serviceImpl;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,40 +14,55 @@ import com.service.VideoTabService;
 import com.util.OSSUploadVideo;
 @Service
 public class VideoTabServiceImpl implements VideoTabService{
-	
+
 	@Autowired
 	private VideoTabDao videoDao;
-	private OSSUploadVideo ossUpload; 
-	
+	private OSSUploadVideo ossUpload = new OSSUploadVideo();
+
 	@Override
-	public void uploadVideo(HashMap<String,Object> videoinfo) {
-		//
-			
-	}
-	
 	@Transactional
 	public  void uploadVideo(String video_name, String video_introduce,String video_url, String video_image_url,Integer video_form_id,Integer teacher_id) throws Exception {
-		ossUpload.upload(video_url);
-		ossUpload.upload(video_image_url);
-	    String viderUrl = ossUpload.getOSSFileURL(video_name);
-		String imageUrl = ossUpload.getOSSFileURL(new File(video_image_url).getName());
-		
+		HashMap<String,String> map =videoUpload(video_url,video_image_url,video_name,null);
+		String videoUrl = map.get("video_url");
+		String videoImageUrl = map.get("video_image_url");
+		System.out.println("create");
+		createVideoTab(video_name,videoUrl,videoImageUrl,video_introduce,video_form_id,teacher_id);
+	}
+
+	public HashMap<String,String> videoUpload(String video_url, String video_image_url,String video_name,String imageName)throws Exception {
+		System.out.println(video_name);
+		HashMap<String,String> map = new HashMap<>();
+		/*ossUpload.uploadInput(video_name,video);
+		ossUpload.uploadInput(imageName,video_image);*/
+
+		String ossVideoName =ossUpload.upload(video_url,video_name);
+		String ossImageName = ossUpload.upload(video_image_url,video_name);
+		System.out.println("oss end");
+		String viderUrl = ossUpload.getWebURL(ossVideoName);
+		String imageUrl = ossUpload.getWebURL(ossImageName);
+		System.out.println("service"+viderUrl);
+		System.out.println("service"+ imageUrl);
+		map.put("video_url", viderUrl);
+		map.put("video_image_url", imageUrl);
+		return map;
+	}
+
+	public void createVideoTab(String video_name,String video_url, String video_image_url, String video_introduce,Integer video_form_id,Integer teacher_id) {
 		VideoTab video = new VideoTab();	
-		video.setVideo_img_url(imageUrl);
+		video.setVideo_img_url(video_image_url);
 		video.setVideo_introduce(video_introduce);
 		video.setVideo_name(video_name);
 		video.setTeacher_id(teacher_id);
-		video.setVideo_url(viderUrl);
+		video.setVideo_url(video_url);
 		video.setVideo_status(0);
 		video.setVideo_click(0);
 		video.setVideo_grade(0);
 		video.setVideo_form_id(video_form_id);
 		videoDao.createVideo(video);
 	}
-	
 	@Override
-	public List<VideoTab> getVideoList() {
-		return videoDao.getVideoList();
+	public List<VideoTab> getVideoList(VideoTab v) {
+		return videoDao.getVideoList(v);
 	}
 
 	@Override
@@ -70,10 +85,4 @@ public class VideoTabServiceImpl implements VideoTabService{
 		videoDao.updetVideoById(vd);
 	}
 
-	@Override
-	public void downloadVideo(HashMap<String, Object> videoinfo) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

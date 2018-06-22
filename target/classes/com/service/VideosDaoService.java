@@ -5,4 +5,6 @@ public interface VideosDaoService {
 	public String querycoursesTabAll(String data);
 	//课程中心推荐课程
 	public String queryRecommend();
+	//查询用户是否购买过课程
+	public String queryOrder(String data);
 }

@@ -11,6 +11,9 @@ public class UserTab {
 	private int user_status;
 	private Date user_date;
 	private String user_email;
+	private String user_truename;
+	private String user_qq;
+	private String user_self;
 	public int getUser_id() {
 		return user_id;
 	}
@@ -58,6 +61,24 @@ public class UserTab {
 	}
 	public void setUser_email(String user_email) {
 		this.user_email = user_email;
+	}
+	public String getUser_truename() {
+		return user_truename;
+	}
+	public void setUser_truename(String user_truename) {
+		this.user_truename = user_truename;
+	}
+	public String getUser_qq() {
+		return user_qq;
+	}
+	public void setUser_qq(String user_qq) {
+		this.user_qq = user_qq;
+	}
+	public String getUser_self() {
+		return user_self;
+	}
+	public void setUser_self(String user_self) {
+		this.user_self = user_self;
 	}
 	
 	

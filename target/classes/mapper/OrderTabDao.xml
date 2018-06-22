@@ -123,4 +123,17 @@
 	<delete id="deleteOrderTab" parameterType="int">
 		DELETE FROM order_tab WHERE order_id = #{order_id}
 	</delete>
+	<!-- 查询订单是否存在 -->
+	<select id="queryOrderExist" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT order_id FROM order_tab WHERE user_id = #{user_id} and order_type = #{order_type}
+		<if test="video_id!=null">
+			and video_id = #{video_id} 
+		</if>
+		<if test="combo_id!=null">
+			and combo_id = #{combo_id}
+		</if>
+		<if test="combo_id!=null">
+			and combo_id = #{combo_id}
+		</if>	
+	</select>
 </mapper>

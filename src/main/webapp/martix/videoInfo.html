@@ -9,6 +9,9 @@
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
    	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <style type="text/css">
+		.role{display:none}
+	</style>
 </head>
 <body>
     <div id="wrapper">
@@ -223,7 +226,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="javascript:teacherLoginOut()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -234,23 +237,24 @@
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-
-                    <li>
-                        <a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>
-                    </li>
+            
+            	<ul class="nav" id="main-menu">
+					<li class="role" style="display: none;">
+						<a href="#"><i class="fa fa-sitemap"></i>权限管理<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
+							</li>
+							<li>
+								<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
+							</li>
+							<li>
+								<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
+							</li>
+						</ul>
+					</li>
 					<li>
-                        <a href="chart.html"><i class="fa fa-bar-chart-o"></i> Charts</a>
-                    </li>
-                    <li>
-                        <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
-                    </li>
-                    
-                    <li>
-                        <a href="videoInfo.html" class="active-menu"><i class="fa fa-table"></i> 视频管理</a>
+                        <a href="videoInfo.html" class="active-menu"><i class="fa fa-table"></i>视频管理</a>
                     </li>
                     <li>
                         <a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
@@ -258,10 +262,22 @@
                     <li>
                         <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
                     </li>
-                    <li>
-                        <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
-                    </li>
-                </ul>
+					<li class="role" style="display: none;">
+						<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
+					</li>
+					<li>
+						<a href="comment.html"><i class="fa fa-table"></i>评论管理</a>
+					</li>
+					<li class="role" style="display: none;">
+						<a href="order.html"><i class="fa fa-table"></i>订单管理</a>
+					</li>
+					<li class="role" style="display: none;">
+						<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
+					</li>
+					<li class="role" style="display: none;">
+						<a href="test.html" ><i class="fa fa-edit"></i>题目管理</a>
+					</li>
+				</ul>
             </div>
         </nav>
         <!-- /. NAV SIDE  -->
@@ -405,12 +421,16 @@
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.metisMenu.js"></script>
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="dist/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="assets/js/common.js"></script>
 <script>
 	$(document).ready(function () {
 	    $('#dataTables-example').dataTable();
 	});
 	$(function(){
+		loadRoleInfo();
 		$.ajax({
 			type : 'post',
 			url : '/videoServer/videoTab/getVideoTabs.do',
@@ -521,6 +541,7 @@
 	$("#eliminates").click(function(){	
 		window.location.href="";
 	})
-</script> 
+</script>
+<script src="assets/js/custom-scripts.js"></script> 
 </body>
 </html>

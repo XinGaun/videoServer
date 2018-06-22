@@ -8,19 +8,22 @@
 		values(#{video_grade,jdbcType=INTEGER},#{video_img_url,jdbcType=VARCHAR},#{video_introduce,jdbcType=VARCHAR},#{video_name,jdbcType=VARCHAR},#{video_url,jdbcType=VARCHAR},now(),#{teacher_id,jdbcType=INTEGER},#{video_form_id,jdbcType=INTEGER})
 	</insert>
 	<select id="getVideoList" resultType="com.entity.VideoTab">
-		select * from video_tab where video_status=5
+		select * from video_tab where video_status=5 and teacher_id=#{teacher_id,jdbcType=INTEGER}
 	</select>
 	<select id="getVideoById" resultType="com.entity.VideoTab">
 		select * from video_tab where video_id=#{id,jdbcType=INTEGER}
 	</select>
 	<select id="selVideo" resultType="com.entity.VideoTab">
 		select * from video_tab 
-			<where> video_status=5
+			<where> video_status=5 
+				<if test="teacher_id !='' and teacher_id !=null">
+					and teacher_id=#{teacher_id,jdbcType=INTEGER}
+				</if>
 				<if test="video_form_id !='' and video_form_id !=null">
 					and video_form_id=#{video_form_id,jdbcType=INTEGER} 
 				</if>
 				<if test="video_name !='' and video_name !=null">
-					and video_name=#{video_name,jdbcType=VARCHAR}
+					and video_name like CONCAT(CONCAT('%',#{video_name,jdbcType=VARCHAR}),'%')
 				</if>
 			</where>
 	</select>

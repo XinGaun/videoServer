@@ -22,6 +22,9 @@
 				<if test="combo_price !='' and combo_price !=null">
 					and combo_price=#{combo_price,jdbcType=VARCHAR}
 				</if>
+				<if test="teacher_id !='' and teacher_id !=null">
+					and teacher_id = #{teacher_id,jdbcType=INTEGER})
+				</if>
 			</where>
 	</select>
 	<update id="updComboById" parameterType="com.entity.comboTab">

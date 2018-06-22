@@ -92,5 +92,13 @@ public class OrderTabServiceImpl implements OrderTabService {
 		//System.out.println(JSON.toJSONString(result));
 		return JSON.toJSONString(result);
 	}
+	/**
+	 * 查询订单是否存在
+	 */
+	@Override
+	public ArrayList<HashMap<String, Object>> queryOrderExist(HashMap<String, Object> map) {
+		
+		return orderTabDao.queryOrderExist(map);
+	}
 
 }

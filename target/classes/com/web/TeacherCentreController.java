@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.service.TeacherCentreService;
 
 @Controller
-@RequestMapping("/TeacherCentre")
+@RequestMapping("/front/TeacherCentre")
 @ResponseBody
 public class TeacherCentreController {
 	@Autowired

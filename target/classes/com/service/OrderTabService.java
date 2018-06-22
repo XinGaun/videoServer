@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -32,5 +33,16 @@ public interface OrderTabService {
 	 * @return
 	 */
 	public String deleteOrderTab(String data);
+	/**
+	 * 查询订单信息
+	 * @param data
+	 * @return
+	 */
 	public String queryOrderTabAll(String data);
+	/**
+	 * 查询订单是否存在
+	 * @param map
+	 * @return
+	 */
+	public ArrayList<HashMap<String,Object>> queryOrderExist(HashMap<String,Object> map);
 }

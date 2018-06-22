@@ -68,4 +68,9 @@
 				<![CDATA[  limit #{page.startNum},#{page.endIndex}  ]]>
 			</if>
 </select>
+<select id="queryUserRole" resultType="map" parameterType="string">
+	select ur.role_id, ur.role_id, r.role_name 
+		from user_role_tab ur,role_tab r where ur.role_id=r.role_id and ur.user_id = #{teacher_id} 
+</select>
+
 </mapper>
