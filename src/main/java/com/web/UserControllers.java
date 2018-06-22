@@ -47,8 +47,8 @@ public class UserControllers {
 	UserService aService;
 	//添加用户
 	@RequestMapping(value="/saveuser",method=RequestMethod.POST)
-	public String saveuser(@RequestBody UserTab ut,HttpServletResponse response){
-		
+	public String saveuser(@RequestBody String data,HttpServletResponse response){
+		UserTab ut = JSON.parseObject(data,UserTab.class);
 		System.out.println(ut);
 		System.out.println(ut.getUser_phone());
 		String spwd=ut.getUser_pwd();
@@ -62,7 +62,10 @@ public class UserControllers {
 
 	@RequestMapping(value="/queryuser",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String queryuser(@RequestBody String user_phone,HttpServletResponse response){
-		HashMap<String,Object> map = JSON.parseObject(user_phone,HashMap.class);
+		System.out.println(user_phone);
+		HashMap<String,Object> map = JSON.parseObject((user_phone),HashMap.class);
+		
+		System.out.println(map);
 		ArrayList<HashMap<String, Object>> aList=aService.queryUser(map.get("user_phone").toString());
 		System.out.println(aList);
 		String json = JSON.toJSONString(aList);

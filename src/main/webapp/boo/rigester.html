@@ -374,9 +374,8 @@
 		        $.ajax({
 		        	type:"POST",
 		        	url:url+"/videoServer/front/User/queryuser",
-		        	data:{
-		        		user_phone:phonenumber,	
-		        	},		        	
+		        	data:JSON.stringify({user_phone:phonenumber}),	
+		        	contentType:'application/json;charset=UTF-8',
 		        	dataType:"json",
 		        	success:function(data){
 		        		
