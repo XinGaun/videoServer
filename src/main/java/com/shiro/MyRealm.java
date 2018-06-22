@@ -14,10 +14,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.dao.TeacherDAO;
-import com.dao.UserDAO;
 import com.entity.RightDomain;
 import com.entity.TeacherDomain;
-import com.entity.UserDomain;
 
 public class MyRealm extends AuthorizingRealm {
 
