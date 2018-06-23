@@ -147,7 +147,7 @@
 
 						<div id="logImg" class="dropdown">             			
 	                 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	   							<img src="images/touxiang.png" width="30px" height="30px" class="img-circle"/>
+	   							<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px" height="40px" class="img-circle"/>
 	    						<span class="caret"></span>
 	  						</button>
 		                 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -396,22 +396,19 @@
 
 		//var toux="<img src=\"photos/LoginPhoto/txx.jpg\" width=\"35px\" height=\"35px\" class=\"img-circle\"/>";
 
-		alert($.cookie('phone'));
-		alert($.cookie('photo'));
-		var toux="<img src=\"boo/photos/LoginPhoto/txx.jpg\" width=\"35px\" height=\"35px\" class=\"img-circle\"/>";
+		//alert($.cookie('phone'));
+		//alert($.cookie('photo'));
 
-		var toux1="<img src=\"http://localhost:8080/videoServer/boo/photos/LoginPhoto/"+$.cookie("photo")+"\" width=\"35px\" height=\"35px\" class=\"img-circle\"/>";
 		if($.cookie("phone")==null){//cookie过期
 			alert("登录过期，请重新登录");
-		}else if($.cookie("phone")!=null&&$.cookie("photo")==null&&$.cookie("photo")==" "){//cookie有用户信息，但没有头像，添加默认头像
+		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
 			//alert("pp");
-			$("#logText").hide();
-			$("#logImg").append(toux);
+			$("#logsd").hide();
 			$("#logImg").show();
 		}else if($.cookie("phone")!=null&&$.cookie("photo")!=null){//cookie有用户信息和头像
 			//alert("dd");
-			$("#logText").hide();
-			$("#logImg").append(toux1);
+			$("#logsd").hide();
+			$("#logImg").attr("src","http://localhost:8080/videoServer/boo/photos/LoginPhoto/"+$.cookie("photo")+"");
 			$("#logImg").show();
 		}
 		 
@@ -423,9 +420,9 @@
 	$("#exit").click(function(){
 
 		
-		window.location.href="index.html"; 
 
-		$("#logText").show();
+		$("#logsd").show();
+
 		$("#logImg").hide();
 		$.cookie('id', '', { expires: -1 });
 		$.cookie('phone', '', { expires: -1 });

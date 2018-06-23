@@ -82,7 +82,7 @@ public class UserControllers {
 		ut.setUser_pwd(smi);
 		ArrayList<HashMap<String, Object>> aList=aService.selectUser(ut);
 		System.out.println(aList);
-		int flag=aList.size();
+		int flag=aList.size(); 
 		if(flag==1){
 			return JSON.toJSONString(aList);
 		}

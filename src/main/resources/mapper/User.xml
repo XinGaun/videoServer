@@ -33,8 +33,8 @@
 		update user_tab set user_name=#{user_name},user_sex=#{user_sex},user_email=#{user_email},user_truename=#{user_truename},user_qq=#{user_qq},user_photo=#{user_photo},user_self=#{user_self} where user_phone=#{user_phone}
 	</update>
 	<!-- 更改手机号 -->
-	<update id="updatephone" parameterType="com.entity.UserTab">
-		update user_tab set user_phone=#{user_phone} where user_email=#{user_email}
+	<update id="updatephone"  parameterType="com.entity.UserTab">
+		update user_tab set user_phone=#{user_phone} where user_id=#{user_id}
 	</update>
 	<!-- 查询是否是第一次登录 -->
 	<select id="isfirst"  parameterType="String" resultType="java.util.HashMap">
