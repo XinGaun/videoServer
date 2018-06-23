@@ -11,6 +11,7 @@ public class UserTab {
 	private int user_status;
 	private Date user_date;
 	private String user_email;
+	private String user_photo;
 	private String user_truename;
 	private String user_qq;
 	private String user_self;
@@ -79,6 +80,12 @@ public class UserTab {
 	}
 	public void setUser_self(String user_self) {
 		this.user_self = user_self;
+	}
+	public String getUser_photo() {
+		return user_photo;
+	}
+	public void setUser_photo(String user_photo) {
+		this.user_photo = user_photo;
 	}
 	
 	

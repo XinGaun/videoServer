@@ -13,7 +13,7 @@
 	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 	<script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
-	<script type="text/javascript" src="jquery.cookie1.4.1.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 </head>
 <style>
 	.jsjs {
@@ -984,6 +984,7 @@
 						      	<td><input id="altphone" type="text"/>
 						      	<a id="alterphone">修改手机号</a>
 						      		<p>仅用于优质课程的提醒等服务，及账号的快捷登录，手机号不会对外公开，请放心。</p>
+						      		<span style="display:none" id="userid"></span>
 						      	</td>
 						      </tr>
 						      <tr>
@@ -1066,7 +1067,7 @@
 								</tr>
 								<tr>
 									<td style="text-align: right;">新密码:</td>
-									<td><input id="pwd" onblur="mdjia()" placeholder="请输入6-21位密码" type="password" class="form-control"/> <span>&nbsp;</span></td>
+									<td><input id="pwd"  placeholder="请输入6-21位密码" type="password" class="form-control"/> <span>&nbsp;</span></td>
 								</tr>
 								<tr>
 									<td style="text-align: right;">重新输入新密码:</td>
@@ -1387,44 +1388,43 @@
         });
 　　}); 
     //保存按钮点击事件
-    $("#updateuser").click(function(){
-    	
-    	var user=$("#name").val();//昵称
+    $("#updateuser").click(function(){  	
+     	var user=$("#name").val();//昵称
     	var photo=$("#photoimg").val();
-    	var url=photo.substr(photo.lastIndexOf("/")+1);//头像
+    	//var url=photo.substr(photo.lastIndexOf("/")+1);//头像
     	var email=$("#email").val();//email
-    	var sex=$('input:radio:checked').val();
+    	var sex=$("input:radio:checked").val();
     	var area=$("#aboutme").val();
     	var truename=$("#truename").val();
     	var phone=$("#altphone").val();
     	var qq=$("#qq").val();
-    	var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //验证邮箱 正则表达式
-    	var regqq = /^[1-9]\d{4,9}$/; //验证qq
-    	var regname=/^[\u0391-\uFFE5\w]+$/;//验证名字
-    	if(user==null&&user==""){
+    	//var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //验证邮箱 正则表达式
+    	//var regqq = /^[1-9]\d{4,9}$/; //验证qq
+    	//var regname=/^[\u0391-\uFFE5\w]+$/;//验证名字
+     	if(user==null||user==""){
     		alert("带*号的不能为空");
     	} 
-    	if(email==null&&email==" "){
+    	if(email==null||email==" "){
     		alert("带*号的不能为空");
     		return false;
-    	}else if(!reg.test(email)){
+    	}/* else if(!reg.test(email)){
     		alert("邮箱格式不正确")
     		return false;
     	}
-    	if(qq!=""){
-	    	if(!regqq.test(qq)){
+    	if((qq!="")&&(!regqq.test(qq))){
+	    	//if(!regqq.test(qq)){
 	    		alert("QQ格式不正确");
 	    		
-	    	}
+	    	//}
     	}
-    	if(truename!=""){
-    		if(truename.search(regname)==-1){
+    	if((truename!="")&&(truename.search(regname)==-1)){
+    		//if(truename.search(regname)==-1){
         		alert("请填写正确的名字");
         		
-        	}
+        	//}
     	}
-    	
-    	var alluser={
+    	  */
+    	var data={
     			"user_name":user,
     			"user_photo":url,
     			"user_sex":sex,
@@ -1433,25 +1433,24 @@
     			"user_email":email,
     			"user_phone":phone,
     			"user_qq":qq,
-    	}
+    	};
     	
-    	//alert(JSON.stringify(alluser));
+    	alert(JSON.stringify(data));
     	if(typeof(user)!="undefined"&&typeof(email)!="undefined"){
-    		
+		//var data={};
     		$.ajax({
     			type:"POST",
-    			url:url+"/videoServer/front/User/updatemessage",
-    			data:JSON.stringify(alluser),
+    			url:url+"/videoServer/front/User/updatemessages",
+    			data:JSON.stringify(data),
     			contentType:'application/json;charset=UTF-8',
 	        	cache:false,
     			dataType:"json",
     			success:function(data){
-    				
-    				alert(data);
+    				alert("data");
     			},
     			error:function(){
-    				alert("信息保存失败");
-    			},
+    				alert("更改失败");
+    			}
     		})
     	} 
     	
@@ -1468,6 +1467,7 @@
         	data:JSON.stringify({user_phone:userphone}),
         	dataType:"json",
         	success:function(data){
+        		$("#userid").val(data[0].user_id);
         		$("#name").val(data[0].user_name);//昵称
         		
             	$("#email").val(data[0].user_email);//email
@@ -1499,9 +1499,9 @@
      $("#alterphone").click(function(){
     	var data={
     			"user_phone":$("#altphone").val(),
-    			"user_email":$("#email").val(),
+    			"user_id":$("#userid").val(),
     	}
-    	//alert(JSON.stringify(data));
+    	alert(JSON.stringify(data));
     	$.ajax({
     			type:"POST",
     			url:url+"/videoServer/front/User/updatephone",
@@ -1510,6 +1510,8 @@
 	        	cache:false,
     			dataType:"json",
     			success:function(data){
+    				var expiresDate= new Date();
+	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
     				$.cookie('phone',$("#altphone").val(),{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
     				//alert($.cookie("phone"));
     			},
@@ -1619,9 +1621,9 @@
 	    		"user_phone":userphone,
         		"user_pwd":pwd,
         		
-	    } 
+	    };
 	   // alert(JSON.stringify(UserTab));
-	   if(typeof(phone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code&&typeof(pwd)!="undefined"&&repwd==pwd){   
+	   if(typeof(vcode)!="undefined"&&vcode==code&&typeof(pwd)!="undefined"&&repwd==pwd){   
 
 	        $.ajax({
 	       			type:"POST",
@@ -1646,7 +1648,7 @@
 	})
 	//进入个人页面获取旧密码
 	
-    $(function(){
+    /* $(function(){
     	//var userphone=$.cookie('phone');
     	//alert(userphone);
     	$.ajax({
@@ -1659,7 +1661,7 @@
         		$("#oldpwd").val(data[0].user_pwd);//旧密码
         	}
     	})
-    })
+    }) */
 	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
 	$(function(){
 		
