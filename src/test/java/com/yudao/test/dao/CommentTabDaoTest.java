@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.dao.CommentTabDao;
-import com.entity.CommentTab;
 import com.yudao.test.BaseTest;
 
 public class CommentTabDaoTest extends BaseTest{

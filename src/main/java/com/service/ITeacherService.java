@@ -1,10 +1,10 @@
 package com.service;
 
+import java.util.List;
+
 import com.entity.TeacherDomain;
 import com.util.PaginationBean;
 import com.util.ResponseInfo;
-
-import java.util.List;
 
 public interface ITeacherService
 {

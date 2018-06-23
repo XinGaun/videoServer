@@ -3,7 +3,6 @@ package com.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 import com.entity.UserTab;
 
 public interface UserDaos {
