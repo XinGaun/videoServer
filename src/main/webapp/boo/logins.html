@@ -13,7 +13,8 @@
 	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
-	<script type="text/javascript" src="jquery.cookie1.4.1.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+
 	
 </head>
 <style>
@@ -372,7 +373,8 @@
 	    			//alert(expiresDate);
 	    			
 	    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
-	        		$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
+	        		//alert(data[0].user_id);
+	    			$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
 	        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
 	    			isfirst(data[0].user_phone);
 	    			

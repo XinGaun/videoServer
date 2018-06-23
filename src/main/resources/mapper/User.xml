@@ -19,7 +19,7 @@
 	<!-- 登录查询 -->
 
 	<select id="selectUser" resultType="java.util.HashMap">
-		select user_phone,user_name,user_pwd,user_photo from user_tab where user_phone=#{user_phone} and user_pwd=#{user_pwd}
+		select user_id,user_phone,user_name,user_pwd,user_photo from user_tab where user_phone=#{user_phone} and user_pwd=#{user_pwd}
 		
 	</select>
 
