@@ -40,15 +40,9 @@ public class VideoTabController {
 
 	@RequestMapping(value="/uploadflv.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void uploadflv(String video_name,String video_form_id,String video_introduce,String video_url,String video_img_url,HttpServletRequest request) throws Exception{
+	public void uploadflv(String video_name,String video_form_id,String video_introduce,String video_url,String video_img_url,HttpServletRequest request) throws Exception{		
 		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
 		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
-/*		System.out.println("name   "+video_name);
-		System.out.println(video_form_id);
-		System.out.println(video_url);
-		System.out.println(video_introduce);
-		System.out.println(video_img_url);
-		System.out.println(teacher_id);*/
 		vdservice.uploadVideo(video_name, video_introduce, video_url, video_img_url,Integer.parseInt(video_form_id), teacher_id);
 	}
 

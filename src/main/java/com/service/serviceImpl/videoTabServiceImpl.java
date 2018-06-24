@@ -1,8 +1,10 @@
 package com.service.serviceImpl;
 
-import java.io.InputStream;
+
 import java.util.HashMap;
 import java.util.List;
+
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,13 +13,17 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dao.VideoTabDao;
 import com.entity.VideoTab;
 import com.service.VideoTabService;
-import com.util.OSSUploadVideo;
+
+import com.util.OSSUtil;
+
 @Service
 public class VideoTabServiceImpl implements VideoTabService{
 
 	@Autowired
 	private VideoTabDao videoDao;
-	private OSSUploadVideo ossUpload = new OSSUploadVideo();
+
+	private OSSUtil ossUpload = new OSSUtil();
+
 
 	@Override
 	@Transactional
@@ -30,12 +36,17 @@ public class VideoTabServiceImpl implements VideoTabService{
 	}
 
 	public HashMap<String,String> videoUpload(String video_url, String video_image_url,String video_name,String imageName)throws Exception {
-		System.out.println(video_name);
+
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		factory.setSizeThreshold(4*1024);
+
 		HashMap<String,String> map = new HashMap<>();
 		/*ossUpload.uploadInput(video_name,video);
 		ossUpload.uploadInput(imageName,video_image);*/
 
-		String ossVideoName =ossUpload.upload(video_url,video_name);
+
+		String ossVideoName =ossUpload.uploadJD(video_url,video_name);
+
 		String ossImageName = ossUpload.upload(video_image_url,video_name);
 		System.out.println("oss end");
 		String viderUrl = ossUpload.getWebURL(ossVideoName);

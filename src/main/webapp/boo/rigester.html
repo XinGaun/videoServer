@@ -12,7 +12,9 @@
 	
 	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+
 	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 	<script type="text/javascript" src="js/videoIndex.js"></script>
 	<script src="js/jquery.lazyload.min.js"></script>
@@ -231,7 +233,9 @@
 						<!-- 添加头像 -->
 						<div id="logImg" class="dropdown">             			
 	                 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
 	   							<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px" height="40px" class="img-circle"/>
+
 	    						<span class="caret"></span>
 	  						</button>
 		                 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -506,6 +510,7 @@
 	    }  
 	     
   	})
+
   	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
 	$(function(){
 		
@@ -540,6 +545,7 @@
 		$.cookie('photo', '', { expires: -1,path:'/',secure: false }); 
 		 
 	})
+
   	//登录注册样式切换
 	new Vue({  
 		  el: '#logsd',  

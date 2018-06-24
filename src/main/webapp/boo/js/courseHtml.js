@@ -1,5 +1,7 @@
 $(function(){
+
 	var user_id = $.cookie('id');
+
 	$("#kcml").hide();
 	$("#xypl").hide();
 	initRecommendCourse();
@@ -27,11 +29,13 @@ $(function(){
 });
 
 //var url = "http:/127.0.0.1:8080"
+
 var url ="";
 
 var pages = 0;//当前页数
 var nums = 3;//每页几条
 var total = 0;//总条数 
+
 //组装参数
 var param = {
 		page : nums,
@@ -39,6 +43,7 @@ var param = {
 }
 //购买课程
 function goumais(){
+
 	function getistype(){
 		return ($("#demo1-alipay").is(':checked') ? "1" : "2" ); 
 	}
@@ -76,6 +81,7 @@ function goumais(){
 //加入课程
 function joincourse(){
 
+
 	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
 		if(confirm("您还没有登录请先登录!")){
 			window.location.href="logins.html";
@@ -98,6 +104,7 @@ function joincourse(){
 		success : function(result) {
 			//console.log(result);
 			if(result!="success"){
+
 				if(confirm("您还没有购买课程,是否购买课程加入课程!")){
 					$("#myModal").modal('show');
 					return false;
@@ -112,8 +119,6 @@ function joincourse(){
 
 	});
 }
-
-
 //判断PC或移动
 function judgePC(){
 	if (navigator.userAgent.match(/mobile/i)) {
@@ -249,16 +254,19 @@ function initVideo(video_arr){
 			//console.log(result);
 			for(var i=0;i<result.length;i++){
 				var videos = '<li>'
+
 					+	'<div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
 					+	'<a href="javascript:void(0)" onclick="videourl(&quot;'+result[i].video_url+'&quot;,'+result[i].video_id+')")">'+result[i].video_name+'</a>'
 					+'</div>'
 					+'</li>';
+
 				$("#videos").append(videos);
 			}
 		}
 	});
 
 }
+
 //弹出播放页面
 function videourl(urls,id){
 	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
@@ -307,6 +315,7 @@ function videourl(urls,id){
 	});
 
 }
+
 
 
 //初始化学员评论

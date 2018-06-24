@@ -223,8 +223,7 @@
 	        if(codeflag==60){  
 	            var timeflag = setInterval(function(){  
 	                codeflag--;  
-	                if(codeflag>0){        	
-
+	                if(codeflag>0){       
 	                    $('#hmac').val('重新发送'+codeflag+'s');  
 	                    $('#hmac').css({'color':'#99897A'});  
 	                    $('#hmac').attr('disabled','disabled');  
@@ -283,7 +282,6 @@
 			});
 	        return false;  
 	    } 
-
 	    if(pwd == ""){
 	    	$("#pwd").attr('placeholder','请输入密码');
 			$("#pwd").css('color','red'); 

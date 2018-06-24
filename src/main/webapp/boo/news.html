@@ -14,7 +14,6 @@
 	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 	<script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
-
 </head>
 <style>
 	.jsjs {
@@ -124,8 +123,7 @@
 		border-bottom-left-radius:2em; 
  	 }
  	 /*按钮圆角设置*/
-
-	.actives{  
+	.active{  
 	 	border-radius:2em;
 	 	border:1px #3AA8FF solid;
 	 	padding:2px 9px;
@@ -219,10 +217,8 @@
 				<li>
 					<div  id="log">
 						<div  id="logsd">
-
-							<a href="logins.html" @click="change(1)" :class="flag==1?'actives':''">登录</a>
-					    	<a href="rigester.html" @click="change(2)" :class="flag==2?'actives':''">注册</a>
-
+							<a href="logins.html" @click="change(1)" :class="flag==1?'active':''">登录</a>
+					    	<a href="rigester.html" @click="change(2)" :class="flag==2?'active':''">注册</a>
 						</div>
 						<!-- 添加头像 -->
 					
@@ -988,9 +984,7 @@
 						      	<td><input id="altphone" type="text"/>
 						      	<a id="alterphone">修改手机号</a>
 						      		<p>仅用于优质课程的提醒等服务，及账号的快捷登录，手机号不会对外公开，请放心。</p>
-
 						      		<span style="display:none" id="userid"></span>
-
 						      	</td>
 						      </tr>
 						      <tr>
@@ -1073,9 +1067,7 @@
 								</tr>
 								<tr>
 									<td style="text-align: right;">新密码:</td>
-
 									<td><input id="pwd"  placeholder="请输入6-21位密码" type="password" class="form-control"/> <span>&nbsp;</span></td>
-
 								</tr>
 								<tr>
 									<td style="text-align: right;">重新输入新密码:</td>
@@ -1087,9 +1079,7 @@
 										<!-- <input name="dx" id="vcode" placeholder="请输入短信验证码" type="text" class="form-control"/>		
 									 	<span>&nbsp;</span> -->
 									 	<input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" class="form-control" style="width:45%"/>
-
-	        							<input type="button" value="获取验证码" id="hmac" class="form-control"style="width:30%;float:right;font-size:1.5vh;margin-top:-8vh;margin-right:3vw"/>
-
+	        							<input type="button" value="获取验证码" id="hmac" class="form-control"style="width:30%;float:right;font-size:1.5vh;margin-top:-5vh;margin-right:3vw"/>
 									</td>
 								</tr>
 								<tr>
@@ -1398,7 +1388,6 @@
         });
 　　}); 
     //保存按钮点击事件
-
     $("#updateuser").click(function(){  	
      	var user=$("#name").val();//昵称
     	var photo=$("#photoimg").val();
@@ -1409,16 +1398,16 @@
     	var truename=$("#truename").val();
     	var phone=$("#altphone").val();
     	var qq=$("#qq").val();
-    	var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //验证邮箱 正则表达式
-    	var regqq = /^[1-9]\d{4,9}$/; //验证qq
-    	var regname=/^[\u0391-\uFFE5\w]+$/;//验证名字
+    	//var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //验证邮箱 正则表达式
+    	//var regqq = /^[1-9]\d{4,9}$/; //验证qq
+    	//var regname=/^[\u0391-\uFFE5\w]+$/;//验证名字
      	if(user==null||user==""){
     		alert("带*号的不能为空");
     	} 
-    	if(email==null||email==""){
+    	if(email==null||email==" "){
     		alert("带*号的不能为空");
     		return false;
-    	} else if(!reg.test(email)){
+    	}/* else if(!reg.test(email)){
     		alert("邮箱格式不正确")
     		return false;
     	}
@@ -1434,10 +1423,10 @@
         		
         	//}
     	}
-    	 
+    	  */
     	var data={
     			"user_name":user,
-    			"user_photo":photo,
+    			"user_photo":url,
     			"user_sex":sex,
     			"user_self":area,
     			"user_truename":truename,
@@ -1457,11 +1446,7 @@
 	        	cache:false,
     			dataType:"json",
     			success:function(data){
-    				//alert(data);
-    				var expiresDate= new Date();
-	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
-    				$.cookie('photo',photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
-    				auto();
+    				alert("data");
     			},
     			error:function(){
     				alert("更改失败");
@@ -1492,8 +1477,7 @@
             	$("#altphone").val(userphone);
             	$("#qq").val(data[0].user_qq);
             	if(data[0].user_sex==3){
-            		//var expiresDate= new Date();
-	    			//expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效男
+            		//男
             		$("input[name=sex][value=3]").attr("checked",true);
             	}else if(data[0].user_sex==4){
             		//女
@@ -1507,7 +1491,7 @@
             	}
         	},
         	error:function(){
-        		//alert("qerror");
+        		alert("qerror");
         	}
 		})		 
     })
@@ -1517,7 +1501,7 @@
     			"user_phone":$("#altphone").val(),
     			"user_id":$("#userid").val(),
     	}
-    	//alert(JSON.stringify(data));
+    	alert(JSON.stringify(data));
     	$.ajax({
     			type:"POST",
     			url:url+"/videoServer/front/User/updatephone",
@@ -1636,6 +1620,7 @@
 	   var UserTab={
 	    		"user_phone":userphone,
         		"user_pwd":pwd,
+        		
 	    };
 	   // alert(JSON.stringify(UserTab));
 	   if(typeof(vcode)!="undefined"&&vcode==code&&typeof(pwd)!="undefined"&&repwd==pwd){   
@@ -1663,7 +1648,6 @@
 	})
 	//进入个人页面获取旧密码
 	
-
     /* $(function(){
     	//var userphone=$.cookie('phone');
     	//alert(userphone);
@@ -1681,14 +1665,10 @@
 	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
 	$(function(){
 		
-		auto();
-	})
-	function auto(){
-		//alert($.cookie('phone'));
-		//alert($.cookie('photo'));
+		alert($.cookie('phone'));
+		alert($.cookie('photo'));
 		if($.cookie("phone")==null){//cookie过期
 			alert("登录过期，请重新登录");
-			window.location.href="logins.html"
 		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
 			//alert("pp");
 			$("#logsd").hide();
@@ -1696,22 +1676,24 @@
 		}else if($.cookie("phone")!=null&&$.cookie("photo")!=null){//cookie有用户信息和头像
 			//alert("dd");
 			$("#logsd").hide();
-			$("#imgt").attr("src",$.cookie("photo"));
+			$("#logImg").attr("src","http://localhost:8080/videoServer/boo/photos/LoginPhoto/"+$.cookie("photo")+"");
 			$("#logImg").show();
 		}
-	}
+		 
+		
+	})
 	/*
-	退出按钮点击事件
+		退出按钮点击事件
 	*/
 	$("#exit").click(function(){
-		//alert(5);
+		alert(5);
 		//window.location.href="index.html"; 
 		
 		$("#logsd").show();
 		$("#logImg").hide();
-		$.cookie('id', '', { expires: -1 ,path:'/',secure: false});
-		$.cookie('phone', '', { expires: -1 ,path:'/',secure: false});
-		$.cookie('photo', '', { expires: -1,path:'/',secure: false }); 
+		$.cookie('id', '', { expires: -1 });
+		$.cookie('phone', '', { expires: -1 });
+		$.cookie('photo', '', { expires: -1 }); 
 		 
 	})
 	
