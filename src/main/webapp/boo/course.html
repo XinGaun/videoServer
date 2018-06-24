@@ -7,6 +7,7 @@
 <META NAME="Keywords" CONTENT="">
 <META NAME="Description" CONTENT="">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="ckplayer/ckplayer.js"></script>
 </HEAD>
 <style>
 .bg {
@@ -447,6 +448,28 @@
 				</div>
 			</div>
 		</div>
+		<!-- video model -->
+		<div class="modal fade bs-example-modal-lg" id="myModalvideo" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabelvideo">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">播放课程</h4>
+					</div>
+					<div class="modal-body">
+						<div class="video"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<form style='display: none;' id='formpay' name='formpay' method='post'
 			action='https://pay.paysapi.com'>
 			<input name='goodsname' id='goodsname' type='text' value='' /> <input
