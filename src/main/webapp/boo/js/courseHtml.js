@@ -60,6 +60,10 @@ function goumais(){
 		},
 		dataType: "json",
 		success: function(data){
+			if(data==-1){
+				alert("购买成功!");
+				return;
+			}
 			$("#goodsname").val(data.data.goodsname);
 			$("#istype").val(data.data.istype);
 			$('#key').val(data.data.key);
