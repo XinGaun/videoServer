@@ -26,6 +26,7 @@ import com.entity.UserTab;
 import com.service.UserService;
 import com.util.DateUtil;
 import com.util.MD5;
+import com.util.OSSUploadVideo;
 
 
 /**  
@@ -45,6 +46,7 @@ import com.util.MD5;
 public class UserControllers {
 	@Autowired
 	UserService aService;
+	OSSUploadVideo ossvideo =new OSSUploadVideo();
 	//添加用户
 	@RequestMapping(value="/saveuser",method=RequestMethod.POST)
 	public String saveuser(@RequestBody String data,HttpServletResponse response){
@@ -114,12 +116,19 @@ public class UserControllers {
         String fileName=file.getOriginalFilename();//获取文件名加后缀
         if(fileName!=null&&fileName!=""){   
             String returnUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() +request.getContextPath() +"/boo/photos/LoginPhoto/";//存储路径
+            System.out.println(returnUrl);
             String path = request.getSession().getServletContext().getRealPath("/boo/photos/LoginPhoto"); //文件存储位置
             System.out.println(path);
             String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//文件后缀
+            System.out.println(fileF);
             fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//新的文件名
             System.out.println(fileName);
-            
+            /*try {
+				ossvideo.upload(path, fileName);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}*/
             
             //先判断文件是否存在
             String fileAdd = DateUtil.dateToStr(new Date(),"yyyyMMdd");
