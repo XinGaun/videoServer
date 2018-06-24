@@ -75,6 +75,15 @@ function goumais(){
 
 //加入课程
 function joincourse(){
+
+	if($.cookie('user_id')==null||$.cookie('user_id')==""||$.cookie('user_id')==undefined){
+		if(confirm("您还没有登录请先登录!")){
+			window.location.href="logins.html";
+			return;
+		}else{
+			return;
+		}
+	}
 	var data = {
 		user_id:$.cookie('user_id'),
 		video_id:getUrlParam('cid')
@@ -87,7 +96,7 @@ function joincourse(){
 		data : JSON.stringify(data), //传入组装的参数
 		dataType : "json",
 		success : function(result) {
-			console.log(result);
+			//console.log(result);
 			if(result!="success"){
 				if(confirm("是否购买课程加入课程!")){
 					$("#myModal").modal('show');

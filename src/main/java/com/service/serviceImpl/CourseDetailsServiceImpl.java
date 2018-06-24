@@ -33,9 +33,12 @@ public class CourseDetailsServiceImpl implements CourseDetailsService {
 		ArrayList<String> list = JSON.parseObject(data,ArrayList.class);
 		ArrayList<HashMap<String,Object>> arrayList = new ArrayList<HashMap<String,Object>>();
 		for(int i=0;i<list.size();i++) {
-			int video_id =  Integer.parseInt(list.get(i));
-			HashMap<String,Object> map = courseDetailsDao.queryVideoDetails(video_id);
-			arrayList.add(map);
+			if(list.get(i)!=""&&list.get(i)!=null&&list.get(i).toString().length()>0) {
+				int video_id =  Integer.parseInt(list.get(i));
+				HashMap<String,Object> map = courseDetailsDao.queryVideoDetails(video_id);
+				arrayList.add(map);
+			}
+			
 		}
 		return JSON.toJSONString(arrayList);
 	}

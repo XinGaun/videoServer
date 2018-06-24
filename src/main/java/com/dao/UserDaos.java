@@ -3,6 +3,7 @@ package com.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 import com.entity.UserTab;
 
 public interface UserDaos {
@@ -18,4 +19,9 @@ public interface UserDaos {
 	public int updatemessage(UserTab ut);
 	//更改手机号
 	public int updatephone(UserTab ut);
+
+	//登录时查询是否首次登录
+	public ArrayList<HashMap<String,Object>> isfirst(String user_phone);
+	
+
 }

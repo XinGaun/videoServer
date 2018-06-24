@@ -8,19 +8,15 @@ $(function(){
 		window.location.href = "video.html?user_id="+user_id;
 	});
 	//cookie
-
-	//$.cookie('user_id', $.cookie("id"), { expires: 1 });
-
+	$.cookie('user_id', $.cookie("id"), { expires: 1 });
 });
 //var url = "http:/127.0.0.1:8080"
 var url = "";
-var user_id = $.cookie('id');
+var user_id = 1;
 $("img.lazy").lazyload({effect: "fadeIn"});
 
 //cookie
-
-//$.cookie('phone', $.cookie("phone"), { expires: 1 });
-
+$.cookie('phone', $.cookie("phone"), { expires: 1 });
 
 //判断PC或移动
 function judgePC(){

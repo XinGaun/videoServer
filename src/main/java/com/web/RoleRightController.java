@@ -1,6 +1,9 @@
 package com.web;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.eclipse.jetty.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.entity.RightDomain;
 import com.entity.RoleDomain;
 import com.entity.RoleRightDomain;
+import com.entity.TeacherDomain;
 import com.service.IRightService;
 import com.service.IRoleRightService;
 import com.service.IRoleService;
@@ -37,6 +41,30 @@ public class RoleRightController {
 	
 	@Autowired
 	private IRoleRightService roleRightService;
+	
+	@Autowired
+	private HttpSession session;
+	
+	/**
+	 * 
+	* @Title: httpPageEle
+	* @Description:加载登录用户信息  判断用户角色
+	* @param @return    参数
+	* @return ResponseInfo    返回类型
+	* @throws
+	 */
+	@RequestMapping("/httpPageEle")
+	public @ResponseBody ResponseInfo httpPageEle(){
+		ResponseInfo responseInfo = new ResponseInfo(1, "teacher");
+		TeacherDomain teacher = (TeacherDomain)session.getAttribute("user");
+		List<Map<String, String>> roleList = roleRightService.queryUserRole(teacher.getTeacher_id());
+		for (Map<String, String> map : roleList) {
+			if("admin".equals(map.get("role_name"))){
+				responseInfo.setRetMsg("admin");
+			}
+		}
+		return responseInfo;
+	}
 	
 	/**
 	 * 

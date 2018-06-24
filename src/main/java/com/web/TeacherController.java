@@ -12,6 +12,7 @@ import org.eclipse.jetty.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -40,11 +41,11 @@ public class TeacherController {
 	private HttpSession session;
 	
 	@RequestMapping("/teacherLogout")    
-    public String logout(RedirectAttributes redirectAttributes ){   
+    public @ResponseBody ResponseInfo logout(RedirectAttributes redirectAttributes ){   
         //使用权限管理工具进行用户的退出，跳出登录，给出提示信息  
+		ResponseInfo responseInfo = new ResponseInfo(1, "登录成功!");
         SecurityUtils.getSubject().logout();    
-        redirectAttributes.addFlashAttribute("message", "您已安全退出");    
-        return "login";  
+        return responseInfo;  
     }   
 	
 	/**

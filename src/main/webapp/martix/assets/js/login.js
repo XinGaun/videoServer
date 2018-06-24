@@ -27,7 +27,7 @@ $("#login").click(function(event){
                 success : function(data) { 
                 	console.info(data);
                   if (data.retCode == 1) {  
-                      window.location.href = url+'martix/order.html';  
+                      window.location.href = url+'martix/videoInfo.html';  
                   } else {  
                 	 $("#errorInfo").text(data.retMsg);
                   	//异常信息提示 
