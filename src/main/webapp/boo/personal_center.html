@@ -14,6 +14,7 @@
 	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 	<script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+
 </head>
 <style>
 	.jsjs {
@@ -123,6 +124,7 @@
 		border-bottom-left-radius:2em; 
  	 }
  	 /*按钮圆角设置*/
+
 	.actives{  
 	 	border-radius:2em;
 	 	border:1px #3AA8FF solid;
@@ -217,8 +219,10 @@
 				<li>
 					<div  id="log">
 						<div  id="logsd">
+
 							<a href="logins.html" @click="change(1)" :class="flag==1?'actives':''">登录</a>
 					    	<a href="rigester.html" @click="change(2)" :class="flag==2?'actives':''">注册</a>
+
 						</div>
 						<!-- 添加头像 -->
 					
@@ -984,7 +988,9 @@
 						      	<td><input id="altphone" type="text"/>
 						      	<a id="alterphone">修改手机号</a>
 						      		<p>仅用于优质课程的提醒等服务，及账号的快捷登录，手机号不会对外公开，请放心。</p>
+
 						      		<span style="display:none" id="userid"></span>
+
 						      	</td>
 						      </tr>
 						      <tr>
@@ -1067,7 +1073,9 @@
 								</tr>
 								<tr>
 									<td style="text-align: right;">新密码:</td>
+
 									<td><input id="pwd"  placeholder="请输入6-21位密码" type="password" class="form-control"/> <span>&nbsp;</span></td>
+
 								</tr>
 								<tr>
 									<td style="text-align: right;">重新输入新密码:</td>
@@ -1079,7 +1087,9 @@
 										<!-- <input name="dx" id="vcode" placeholder="请输入短信验证码" type="text" class="form-control"/>		
 									 	<span>&nbsp;</span> -->
 									 	<input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" class="form-control" style="width:45%"/>
+
 	        							<input type="button" value="获取验证码" id="hmac" class="form-control"style="width:30%;float:right;font-size:1.5vh;margin-top:-8vh;margin-right:3vw"/>
+
 									</td>
 								</tr>
 								<tr>
@@ -1398,6 +1408,7 @@
         });
 　　}); 
     //保存按钮点击事件
+
     $("#updateuser").click(function(){  	
      	var user=$("#name").val();//昵称
     	var photo=$("#photoimg").val();
@@ -1635,7 +1646,6 @@
 	   var UserTab={
 	    		"user_phone":userphone,
         		"user_pwd":pwd,
-        		
 	    };
 	   // alert(JSON.stringify(UserTab));
 	   if(typeof(vcode)!="undefined"&&vcode==code&&typeof(pwd)!="undefined"&&repwd==pwd){   
@@ -1663,6 +1673,7 @@
 	})
 	//进入个人页面获取旧密码
 	
+
     /* $(function(){
     	//var userphone=$.cookie('phone');
     	//alert(userphone);

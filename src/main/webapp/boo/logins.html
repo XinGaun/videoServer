@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>login 页面</title>
+	<title>login</title>
 	<!--
     <link rel="stylesheet" type="text/css" href="styles.css">
     -->
@@ -15,6 +15,7 @@
 	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 	<!-- <script type="text/javascript" src="jquery.cookie1.4.1.js"></script> -->
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+
 </head>
 <style>
 	#search_submit{
@@ -369,7 +370,8 @@
 	    			//alert(expiresDate);
 	    			
 	    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
-	        		$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
+	        		//alert(data[0].user_id);
+	    			$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
 	        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
 	    			isfirst(data[0].user_phone);
 	    			
@@ -414,7 +416,7 @@
 		//alert($.cookie('phone'));
 		//alert($.cookie('photo'));
 		if($.cookie("phone")==null){//cookie过期
-			alert("登录过期，请重新登录");
+			//alert("登录过期，请重新登录");
 		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
 			//alert("pp");
 			$("#logsd").hide();
@@ -442,7 +444,6 @@
 		$.cookie('photo', '', { expires: -1,path:'/',secure: false }); 
 		 
 	})
-	
 	//登录注册样式切换
 	new Vue({  
 		  el: '#logsd',  
@@ -455,6 +456,7 @@
 		   }  
 		  }  
 	})  
+
 	//判断PC或移动
 	$(function(){
 		judgePC();
@@ -472,6 +474,7 @@
 			$("#logsd").css("margin-top", "3.5vh");
 		}
 	} 
+
 </script>
 <script>
 	//登录页面中注册按钮后的小图标

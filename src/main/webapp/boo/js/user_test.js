@@ -1,9 +1,11 @@
 $(function(){
 	init();
-	
+	//alert($.cookie('id'));
 });
-var url = "http://127.0.0.1:8080//"
-	//var url ="";
+
+//var url = "http://127.0.0.1:8080//"
+	var url ="";
+
 //初始化选项
 function init(){
 	$("#onemenu").html("");
@@ -107,6 +109,7 @@ function pushanswer(data){
 		return;
 	}
 	data.number = flog;
+	data.user_id = $.cookie("id");
 	$.ajax({
 		type : "POST",
 		url : url+"/videoServer/front/UserTest/queryAnswerEvaluate",

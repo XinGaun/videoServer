@@ -2,7 +2,7 @@ package com.entity;
 
 import java.util.Date;
 
-public class opinion {
+public class Opinion {
 	private Integer opinion_id;
 	private String user_name;
 	private Integer user_id;

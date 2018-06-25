@@ -1,6 +1,7 @@
 package com.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.entity.RoleRightDomain;
 import com.util.PaginationBean;
@@ -20,4 +21,6 @@ public interface IRoleRightService
 	public RoleRightDomain searchSingleRoleRight(RoleRightDomain RoleRightDomain);
 
 	public int  queryRoleRightCount(RoleRightDomain RoleRightDomain);
+
+	public List<Map<String, String>> queryUserRole(String teacher_id);
 }

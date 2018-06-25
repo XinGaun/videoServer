@@ -39,7 +39,7 @@
         <!-- 配置登陆页面 -->
         <property name="loginUrl" value="/martix/login.html"/>
         <!-- 登陆成功后的一面 -->
-        <property name="successUrl" value="/martix/order.html"/>
+        <property name="successUrl" value="/martix/videoInfo.html"/>
         <property name="unauthorizedUrl" value="/shiro-unauthorized.jsp"/>
         <!-- 具体配置需要拦截哪些 URL, 以及访问对应的 URL 时使用 Shiro 的什么 Filter 进行拦截.  -->
         <property name="filterChainDefinitions">
@@ -52,12 +52,15 @@
 				/martix/assets/** = anon
 				/martix/login.html = anon
 				/boo/** = anon
+				/success.html = anon
+				/error.html = anon
 				/front/** = anon
 				/rand.jsp = anon
 				/teacher/teacherLogin = anon
 				/teacher/teacherLogout = anon
 				/teacher/** = perms["mngteacher"]
 				/user/** = perms["mnguser"]
+				/roleRight/httpPageEle = anon
 				/roleRight/** = perms["mngright"]
 				/user/queryUserAll = perms["user"]
 				/** = authc

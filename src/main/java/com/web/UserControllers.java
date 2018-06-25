@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.entity.Photo;
-import com.entity.Photos;
 import com.entity.UserTab;
 import com.service.UserService;
 import com.util.DateUtil;

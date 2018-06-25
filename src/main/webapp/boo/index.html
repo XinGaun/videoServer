@@ -66,7 +66,9 @@
 	 #logImg{
 	 	float:right;
 	 	border:1px solid red;
+
 	 	margin:2vh 1vw 0vh 0vw;
+
 	 	display:none;
 	 }
 	 #loginrouter{
@@ -138,6 +140,7 @@
 					    	<a href="rigester.html" @click="change(2)" :class="flag==2?'active':''">注册</a>
 						</div>
 						<!-- 添加头像 -->
+
 						<div id="logImg" class="dropdown">             			
 	                 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 	   							<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px" height="40px" class="img-circle"/>
@@ -149,6 +152,7 @@
 							</ul>		                		
 	                 	</div>
 					</div><!-- 登录|注册结束 -->					
+
 				</li>
 			</ul>			
 		</div>
@@ -380,11 +384,8 @@
 	
 	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
 	$(function(){
-		
-		//alert($.cookie('phone'));
-		//alert($.cookie('photo'));
 		if($.cookie("phone")==null){//cookie过期
-			alert("登录过期，请重新登录");
+			//alert("登录过期，请重新登录");
 		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
 			//alert("pp");
 			$("#logsd").hide();
@@ -400,10 +401,11 @@
 		退出按钮点击事件
 	*/
 	$("#exit").click(function(){
-		//alert(5);
-		//window.location.href="index.html"; 
+
 		
+
 		$("#logsd").show();
+
 		$("#logImg").hide();
 		$.cookie('id', '', { expires: -1 ,path:'/',secure: false});
 		$.cookie('phone', '', { expires: -1 ,path:'/',secure: false});
@@ -411,6 +413,7 @@
 		 
 	})
 	
+
 	//登录注册样式切换
 	new Vue({  
 		  el: '#logsd',  
@@ -423,6 +426,7 @@
 		   }  
 		  }  
 	})  
+
 	//判断PC或移动
 	$(function(){
 		judgePC();
@@ -440,6 +444,7 @@
 			$("#logsd").css("margin-top", "3.5vh");
 		}
 	} 
+
 </script>
 </BODY>
 </HTML>

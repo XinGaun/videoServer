@@ -40,4 +40,6 @@ public interface UserTestDao {
 	public ArrayList<HashMap<String,Object>> queryRandomUserTestAnswer(HashMap<String,Object> map);
 	//根据答题结果查询评语
 	public HashMap<String,Object> queryAnswerEvaluate(HashMap<String,Object> map);
+	//添加答题记录
+	public int addUserTestRecord(HashMap<String,Object> map);
 }

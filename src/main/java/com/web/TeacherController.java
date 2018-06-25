@@ -41,11 +41,11 @@ public class TeacherController {
 	private HttpSession session;
 	
 	@RequestMapping("/teacherLogout")    
-    public String logout(RedirectAttributes redirectAttributes ){   
+    public @ResponseBody ResponseInfo logout(RedirectAttributes redirectAttributes ){   
         //使用权限管理工具进行用户的退出，跳出登录，给出提示信息  
+		ResponseInfo responseInfo = new ResponseInfo(1, "登录成功!");
         SecurityUtils.getSubject().logout();    
-        redirectAttributes.addFlashAttribute("message", "您已安全退出");    
-        return "login";  
+        return responseInfo;  
     }   
 	
 	/**

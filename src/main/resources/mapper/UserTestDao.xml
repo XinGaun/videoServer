@@ -113,4 +113,8 @@
 	<select id="queryAnswerEvaluate" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		SELECT evaluate_content FROM user_test_evaluate WHERE test_grade = #{test_grade} AND evaluate_type = #{test_type} AND evaluate_number >= #{number} GROUP BY evaluate_number ASC LIMIT 0,1;
 	</select>
+	<!-- 添加用户答题记录 -->
+	<insert id="addUserTestRecord" parameterType="java.util.HashMap">
+		INSERT INTO user_test_record(user_id, test_grade, record_number, record_type, record_date) VALUES (#{user_id},#{test_grade},#{number},#{test_type},now())
+	</insert>
 </mapper>

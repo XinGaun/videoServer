@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
-    <link href="assets/css/custom-styles.css" rel="stylesheet" />
-   	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title></title>
+<style type="text/css">
+#jd:after {
+	content: '%';
+}
+.role{display:none}
+</style>
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="assets/css/bootstrap.css" rel="stylesheet" />
+<link href="assets/css/font-awesome.css" rel="stylesheet" />
+<link href="assets/css/custom-styles.css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css' />
+<link href="assets/js/dataTables/dataTables.bootstrap.css"
+	rel="stylesheet" />
 </head>
 <body>
     <div id="wrapper">
@@ -223,7 +234,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="javascript:teacherLoginOut()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -234,23 +245,24 @@
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-
-                    <li>
-                        <a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>
-                    </li>
+            
+            	<ul class="nav" id="main-menu">
+					<li class="role" style="display: none;">
+						<a href="#"><i class="fa fa-sitemap"></i>权限管理<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
+							</li>
+							<li>
+								<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
+							</li>
+							<li>
+								<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
+							</li>
+						</ul>
+					</li>
 					<li>
-                        <a href="chart.html"><i class="fa fa-bar-chart-o"></i> Charts</a>
-                    </li>
-                    <li>
-                        <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
-                    </li>
-                    
-                    <li>
-                        <a href="videoInfo.html" class="active-menu"><i class="fa fa-table"></i> 视频管理</a>
+                        <a href="videoInfo.html" class="active-menu"><i class="fa fa-table"></i>视频管理</a>
                     </li>
                     <li>
                         <a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
@@ -258,10 +270,22 @@
                     <li>
                         <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
                     </li>
-                    <li>
-                        <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
-                    </li>
-                </ul>
+					<li class="role" style="display: none;">
+						<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
+					</li>
+					<li>
+						<a href="comment.html"><i class="fa fa-table"></i>评论管理</a>
+					</li>
+					<li class="role" style="display: none;">
+						<a href="order.html"><i class="fa fa-table"></i>订单管理</a>
+					</li>
+					<li class="role" style="display: none;">
+						<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
+					</li>
+					<li class="role" style="display: none;">
+						<a href="test.html" ><i class="fa fa-edit"></i>题目管理</a>
+					</li>
+				</ul>
             </div>
         </nav>
         <!-- /. NAV SIDE  -->
@@ -347,138 +371,190 @@
         </div>
         <input type="hidden" id="teacher_id"/>
     </div>
-    <!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">课程视频添加</h4>
-	      </div>
-			<form action="/videoServer/videoTab/uploadflv1.do" method="post" >
-				<div style="width:100%;">
-					<div style="height:30px;background:#D9ECFF;border:1px solid #CADEFD"></div>
-					<div style="height:50px;border:1px solid #CADEFD">
-						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">视频标题：</div>
-						<div style="width:200px;height:50px;float:left;line-height:50px;border:1px solid #CADEFD;"><input type="text" id="video_name"/><input type="hidden" name="video_name"/>
-						</div>
-						<div style="width:100px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">视频类型：</div>
-						<div style="width:100px;height:50px;float:left;line-height:50px;">
-							&nbsp;<select style="width:80px;text-align:center;" id="kctype"><option value="1">语文</option><option value="2">数学</option><option value="3">英语</option></select>
-						</div>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">课程视频添加</h4>
 					</div>
-					<div style="height:50px;border:1px solid #CADEFD">
-						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">选择视频：</div>
-						<div style="width:440px;height:50px;float:left;">
-							&nbsp;<input type="file" accept="video/*" id="video_url"><input type="hidden"  name="video_url">
-						</div>
-					</div>
-					<div style="height:50px;border:1px solid #CADEFD">
-						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">视频封面：</div>
-						<div style="width:440px;height:50px;float:left;">
-							&nbsp;<input type="file" id="video_img_url"><input type="hidden" name="video_img_url">
-						</div>
-					</div>
-					<div style="height:100px;border:1px solid #CADEFD">
-						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:100px;line-height:100px;">视频介绍：</div>
-						<div style="width:440px;height:100px;float:left;">
-							&nbsp;<textarea  style="width:250px;margin-top:25px;height:50px;" id="video_introduce"></textarea><input type="hidden" name="video_introduce">
-						</div>
-					</div>
-					<!-- <div style="height:50px;border:1px solid #CADEFD">
+					<form action="/videoServer/videoTab/uploadflv1.do" method="post">
+						<div style="width: 100%;">
+							<div
+								style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频标题：</div>
+								<div
+									style="width: 200px; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
+									<input type="text" id="video_name" /><input type="hidden"
+										name="video_name" />
+								</div>
+								<div
+									style="width: 100px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型：</div>
+								<div
+									style="width: 100px; height: 50px; float: left; line-height: 50px;">
+									&nbsp;<select style="width: 80px; text-align: center;"
+										id="kctype"><option value="1">语文</option>
+										<option value="2">数学</option>
+										<option value="3">英语</option></select>
+								</div>
+							</div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">选择视频：</div>
+								<div style="width: 440px; height: 50px; float: left;">
+									&nbsp;<input type="file" accept="video/*" id="video_url"><input
+										type="hidden" name="video_url">
+								</div>
+							</div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频封面：</div>
+								<div style="width: 440px; height: 50px; float: left;">
+									&nbsp;<input type="file" id="video_img_url"><input
+										type="hidden" name="video_img_url">
+								</div>
+							</div>
+							<div style="height: 100px; border: 1px solid #CADEFD">
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 100px; line-height: 100px;">视频介绍：</div>
+								<div style="width: 440px; height: 100px; float: left;">
+									&nbsp;
+									<textarea style="width: 250px; margin-top: 25px; height: 50px;"
+										id="video_introduce"></textarea>
+									<input type="hidden" name="video_introduce">
+								</div>
+							</div>
+							<!-- <div style="height:50px;border:1px solid #CADEFD">
 						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;"></div>
 						<div style="width:440px;height:50px;float:left;line-height:50px;">
 							&nbsp;<input type="button" id="sub" value="上传视频">&nbsp;&nbsp;<input type="button" value="重新选择">
 						</div>
 					</div> -->
+						</div>
+					</form>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							id="quxiao">取消</button>
+						<button type="button" class="btn btn-primary" id="sub">提交</button>
+					</div>
+					<div id="jd"></div>
 				</div>
-			</form> 
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal" id="quxiao">取消</button>
-	        <button type="button" class="btn btn-primary" id="sub">提交</button>
-	      </div>
-	    </div>
-	  </div>
+			</div>
+		</div>
 	</div>
-  </div>
-<script src="assets/js/jquery-1.10.2.js"></script>
+	<script src="assets/js/jquery-1.10.2.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.metisMenu.js"></script>
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="dist/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="assets/js/common.js"></script>
 <script>
-	$(document).ready(function () {
-	    $('#dataTables-example').dataTable();
-	});
-	$(function(){
-		$.ajax({
-			type : 'post',
-			url : '/videoServer/videoTab/getVideoTabs.do',
-			success : function(data){
-				for(var i=0;i<data.length;i++){
-					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td onclick='getId(this)'><input type='button' value='观看'/><input type='hidden' value='"+data[i].video_id+"'/></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td></tr>")
-				}
-				$("#teacher_id").val(data[0].teacher_id);
-			},error: function(){
-				 
+$(document).ready(function () {
+    $('#dataTables-example').dataTable();
+});
+$(function(){
+	loadRoleInfo();
+	$.ajax({
+		type : 'post',
+		url : '/videoServer/videoTab/getVideoTabs.do',
+		success : function(data){
+			for(var i=0;i<data.length;i++){
+				$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td onclick='getId(this)'><input type='button' value='观看'/><input type='hidden' value='"+data[i].video_id+"'/></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td></tr>")
 			}
-		})
+			$("#teacher_id").val(data[0].teacher_id);
+		},error: function(){
+			 
+		}
 	})
-	function updat(obj){
-		var orderId=$(obj).html();
-		var d=0;
-	 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
-	 		d=orderId.substring(67,orderId.length-2)
-	 	}
-	 	if (navigator.userAgent.indexOf('Firefox') >= 0){
-	 		d=orderId.substring(53,orderId.length-16)
-	 	}else{
-	 		d=orderId.substring(67,orderId.length-2);
-	 	}
-		window.location.href="updateVideo.html?video_id="+d;
-	}
-	function delet(obj){
-		var orderId=$(obj).html();
-		var d=0;
-	 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
-	 		d=orderId.substring(67,orderId.length-2)
-	 	}
-	 	if (navigator.userAgent.indexOf('Firefox') >= 0){
-	 		d=orderId.substring(46,orderId.length-16)
-	 	}else{
-	 		d=orderId.substring(67,orderId.length-2);
-	 	}
-		$.ajax({
-	       	type : 'post',
-	       	url : '/videoServer/videoTab/delVideoById.do?video_id='+d,
-	       	success : function(){
-	       		alert("删除成功！");
-	       		window.location.href="";
-	       	}
-	    })
-	}
-	function getId(obj){
-		var orderId=$(obj).html();
-		var d=0;
-	 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
-	 		d=orderId.substring(60,orderId.length-2)
-	 	}
-	 	if (navigator.userAgent.indexOf('Firefox') >= 0){
-	 		d=orderId.substring(46,orderId.length-16)
-	 	}else{
-	 		d=orderId.substring(60,orderId.length-2);
-	 	}
-		$.ajax({
-	       	type : 'post',
-	       	url : '/videoServer/videoTab/getVideoById.do?id='+d,
-	       	success : function(data){
-	       		window.location.href="player.html?video_url="+data[0].video_id;
-	       	}
-	    })
-	}	
- </script>
- <script>
+})
+function updat(obj){
+	var orderId=$(obj).html();
+	var d=0;
+ 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
+ 		d=orderId.substring(67,orderId.length-2)
+ 	}
+ 	if (navigator.userAgent.indexOf('Firefox') >= 0){
+ 		d=orderId.substring(53,orderId.length-16)
+ 	}else{
+ 		d=orderId.substring(67,orderId.length-2);
+ 	}
+	window.location.href="updateVideo.html?video_id="+d;
+}
+function delet(obj){
+	var orderId=$(obj).html();
+	var d=0;
+ 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
+ 		d=orderId.substring(67,orderId.length-2)
+ 	}
+ 	if (navigator.userAgent.indexOf('Firefox') >= 0){
+ 		d=orderId.substring(46,orderId.length-16)
+ 	}else{
+ 		d=orderId.substring(67,orderId.length-2);
+ 	}
+	$.ajax({
+       	type : 'post',
+       	url : '/videoServer/videoTab/delVideoById.do?video_id='+d,
+       	success : function(){
+       		alert("删除成功！");
+       		window.location.href="";
+       	}
+    })
+}
+function getId(obj){
+	var orderId=$(obj).html();
+	var d=0;
+ 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
+ 		d=orderId.substring(60,orderId.length-2)
+ 	}
+ 	if (navigator.userAgent.indexOf('Firefox') >= 0){
+ 		d=orderId.substring(46,orderId.length-16)
+ 	}else{
+ 		d=orderId.substring(60,orderId.length-2);
+ 	}
+	$.ajax({
+       	type : 'post',
+       	url : '/videoServer/videoTab/getVideoById.do?id='+d,
+       	success : function(data){
+       		window.location.href="player.html?video_url="+data[0].video_id;
+       	}
+    })
+}	
+</script>
+	<script>
+	var progress = document.getElementById("jd");
 	$("#sub").click(function(){
+		
+		//阻止默认事件
+		 event.preventDefault();
+		 //循环查看状态
+		         var t = setInterval(function(){       	
+		           $.ajax({
+		              url: '/videoServer/ProgressServlet/progress',
+		              type: 'post',
+		              data: {
+		            	  fileName:$("#video_name").val(),
+		            	  filePath:$("#video_url").val()
+			          },
+			          success: function (data) {	            	 	                 
+			                //前台更新进度
+			             progress.innerText = parseInt((data.progress / data.size) * 100);
+			           },
+			           error: function(){
+			              console.log("error");
+			           }
+			         });
+			     }, 500);
+			     //上传文件
+		
 		var aa=document.getElementById("video_url").value.toLowerCase().split('.');//以“.”分隔上传文件字符串
 		//判断图片格式
 		if(aa[aa.length-1]=='mp4'||aa[aa.length-1]=='webm'||aa[aa.length-1]=='ogv'||aa[aa.length-1]=='png'||aa[aa.length-1]=='jpeg'){
@@ -486,12 +562,15 @@
 				type : 'post',
 				data : {video_name:$("#video_name").val(),video_url:$("#video_url").val(),video_img_url:$("#video_img_url").val(),video_introduce:$("#video_introduce").val(),video_form_id:$("#kctype").val()},
 				url : '/videoServer/videoTab/uploadflv.do',
-				success : function(){
-					alert("提交成功");
+				success : function(responseText){
+					clearInterval(t);
+			        //将进度更新至100%
+			        progress.innerText = 100;
+			         
 					$("#quxiao").click();
 					window.location.href="";
 				},error: function(){
-					 
+					 console.log("error");
 				}
 			})
 		}else{
@@ -521,6 +600,7 @@
 	$("#eliminates").click(function(){	
 		window.location.href="";
 	})
-</script> 
+</script>
+<script src="assets/js/custom-scripts.js"></script> 
 </body>
 </html>
