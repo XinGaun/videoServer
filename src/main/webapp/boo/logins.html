@@ -35,7 +35,7 @@
 	 	border-radius:2em;
 	 	border:1px #3AA8FF solid;
 	 	padding:2px 9px;
-	 	margin:0vh 2vw;
+	 	/* margin:0vh 2vw; */
 	 	display:inline-block;
 	 	verticle-align:middle;
 	 	color:black;
@@ -63,11 +63,7 @@
 	 	left:58vw;
 	 	z-index:2;
 	 }
-	 #logsd{
-	 	margin-top:3.5vh;
-	 	margin-right:15vw;
-	 	
-	 }
+	
 	 #boo{
 	 	position:relative;
 	 }
@@ -155,6 +151,7 @@
 		width:28vw;
 		
 	}
+	 
 	#logo{
 		position:relative;
 		margin-top:15vh;
@@ -286,11 +283,11 @@
 						&nbsp;鄂公网安备 33010802003866号
 					</P>
 				</div>
-				<div class="col-md-2" style="text-align: center;">
+				<div class="col-md-2" style="text-align: center;" id="footimg">
 					<img src="img/footerlogo.png" alt="..."
 						class="img-rounded img-responsive" style="margin: 0 auto;">
 				</div>
-				<div class="col-md-6" style="text-align: right;">
+				<div class="col-md-6" style="text-align: right;" id="footlogo">
 					关注我们 : <img src="img/qrcode.png" alt="..." class="img-rounded">
 					<img src="img/qrcode.png" alt="..." class="img-rounded"> <img
 						src="img/qrcode.png" alt="..." class="img-rounded">
@@ -419,7 +416,7 @@
 		//alert($.cookie('phone'));
 		//alert($.cookie('photo'));
 		if($.cookie("phone")==null){//cookie过期
-			alert("登录过期，请重新登录");
+			//alert("登录过期，请重新登录");
 		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
 			//alert("pp");
 			$("#logsd").hide();
@@ -459,6 +456,25 @@
 		   }  
 		  }  
 	})  
+
+	//判断PC或移动
+	$(function(){
+		judgePC();
+	})
+	function judgePC(){
+		if (navigator.userAgent.match(/mobile/i)) {
+			//移动端
+			$("#logsd").css("margin-right", "10vw");
+			$("#logsd").css("margin-top", "3.5vh");
+			$("#footimg").css("margin-top","-16vh");
+			$("#footlogo").css("margin-top","-16vh");
+		} else {
+			//pc端
+			$("#logsd").css("margin-right", "15vw");
+			$("#logsd").css("margin-top", "3.5vh");
+		}
+	} 
+
 </script>
 <script>
 	//登录页面中注册按钮后的小图标

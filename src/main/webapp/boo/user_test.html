@@ -59,11 +59,7 @@
 	 	left:58vw;
 	 	z-index:2;
 	 }
-	 #logsd{
-	 	margin-top:3.5vh;
-	 	margin-right:15vw;
-	 	
-	 }
+	 
 </style>
 <body>
 <nav class="navbar navbar-default">
@@ -236,7 +232,23 @@
 		   }  
 		  }  
 	})  
-
+	//判断PC或移动
+	$(function(){
+		judgePC();
+	})
+	function judgePC(){
+		if (navigator.userAgent.match(/mobile/i)) {
+			//移动端
+			$("#logsd").css("margin-right", "10vw");
+			$("#logsd").css("margin-top", "3.5vh");
+			$("#footimg").css("margin-top","-16vh");
+			$("#footlogo").css("margin-top","-16vh");
+		} else {
+			//pc端
+			$("#logsd").css("margin-right", "15vw");
+			$("#logsd").css("margin-top", "3.5vh");
+		}
+	} 
 </script>
 
 </html>
