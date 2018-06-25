@@ -7,4 +7,6 @@ public interface VideosDaoService {
 	public String queryRecommend();
 	//查询用户是否购买过课程
 	public String queryOrder(String data);
+	//查询视频评论记录
+	public String queryComment(String data);
 }

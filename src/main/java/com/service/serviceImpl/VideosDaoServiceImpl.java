@@ -42,5 +42,14 @@ public class VideosDaoServiceImpl implements VideosDaoService {
 		}
 		return JSON.toJSONString("error");
 	}
+	/**
+	 * 查询视频评论记录
+	 */
+	@Override
+	public String queryComment(String data) {
+		HashMap<String,Object> hashmap = JSON.parseObject(data,HashMap.class);
+		ArrayList<HashMap<String,Object>> list = videosDao.queryComment(hashmap);
+		return JSON.toJSONString(list);
+	}
 
 }
