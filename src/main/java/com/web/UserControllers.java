@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.entity.Photo;
+import com.entity.Photos;
 import com.entity.UserTab;
 import com.service.UserService;
 import com.util.DateUtil;
@@ -46,8 +47,6 @@ import com.util.OSSUploadVideo;
 public class UserControllers {
 	@Autowired
 	UserService aService;
-	@Autowired
-	OSSUploadVideo ossvideo;
 	//添加用户
 	@RequestMapping(value="/saveuser",method=RequestMethod.POST)
 	public String saveuser(@RequestBody String data,HttpServletResponse response){
@@ -94,7 +93,7 @@ public class UserControllers {
 	//根据手机号更改用户密码
 	@RequestMapping(value="/updateuser",method=RequestMethod.POST)
 	public String updateuser(@RequestBody String data,HttpServletResponse response){
-		System.out.println("cjxnvmcxb");
+		//System.out.println("cjxnvmcxb");
 		UserTab ut = JSON.parseObject(data,UserTab.class);
 		String spwd=ut.getUser_pwd();
 		String smi=MD5.md5(spwd);
@@ -110,12 +109,45 @@ public class UserControllers {
 	}
 	//个人中心上传头像
 	@RequestMapping(value="/addfile",method=RequestMethod.POST)
-	public String addfile(@RequestParam(value="file",required=false)MultipartFile file,HttpServletRequest request){
-		System.out.println("11111111111");
-		File targetFile=null;
-        String msg="";//返回存储路径
-        int code=1;
+	public void addfile(@RequestBody String path,HttpServletResponse response){
+		System.out.println("cjxnvmcxb");
+		System.out.println(path);
+		String filePath=path.substring(1,path.lastIndexOf("\""));
+		System.out.println(filePath);
+		
+		
+		String Name=filePath.substring(filePath.lastIndexOf("\\")+1);//
+		System.out.println(Name);
+		String fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+Name;//新的文件名
+		System.out.println(fileName);
+		OSSUploadVideo ouv=new OSSUploadVideo();
+		try {
+			ouv.upload(filePath, fileName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	}
+/*	public void addfile(@RequestParam(value="file",required=false)MultipartFile file,String url,HttpServletRequest request){
+		
+		System.out.println(url);
+		//File targetFile=null;
+        //String msg="";//返回存储路径
+        //int code=1;
         String fileName=file.getOriginalFilename();//获取文件名加后缀
+        System.out.println(fileName);
+        try {
+			OSSUploadVideo ouv=new OSSUploadVideo();
+			ouv.upload(url, fileName);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        
         if(fileName!=null&&fileName!=""){   
             String returnUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() +request.getContextPath() +"/boo/photos/LoginPhoto/";//存储路径
             System.out.println(returnUrl);
@@ -125,14 +157,8 @@ public class UserControllers {
             System.out.println(fileF);
             fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//新的文件名
             System.out.println(fileName);
-            /*try {
-				ossvideo.upload(path, fileName);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}*/
             
-            //先判断文件是否存在
+         	//先判断文件是否存在
             String fileAdd = DateUtil.dateToStr(new Date(),"yyyyMMdd");
             File file1 =new File(path+"/"+fileAdd); 
            
@@ -152,9 +178,9 @@ public class UserControllers {
                 e.printStackTrace();
             }
         }
-        System.out.println(JSON.toJSONString(Photo.result(code, msg)));
-        return JSON.toJSONString(Photo.result(code, msg));
-	}
+        //System.out.println(JSON.toJSONString(Photo.result(code, msg)));
+       // return JSON.toJSONString(Photo.result(code, msg));
+	}*/
 	//个人中心更改用户信息
 	@RequestMapping(value="/updatemessages",method=RequestMethod.POST)
 	public String updatemessage(@RequestBody String data,HttpServletResponse response){

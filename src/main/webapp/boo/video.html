@@ -66,11 +66,7 @@
 	 	left:58vw;
 	 	z-index:2;
 	 }
-	 #logsd{
-	 	margin-top:3.5vh;
-	 	margin-right:15vw;
-	 	
-	 }
+	 
 </style>
 <script src="js/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -329,11 +325,11 @@
 							&nbsp;鄂公网安备 33010802003866号
 						</P>
 					</div>
-					<div class="col-md-2" style="text-align: center;">
+					<div class="col-md-2" style="text-align: center;" id="footimg">
 						<img src="img/footerlogo.png" alt="..."
 							class="img-rounded img-responsive" style="margin: 0 auto;">
 					</div>
-					<div class="col-md-6" style="text-align: right;">
+					<div class="col-md-6" style="text-align: right;" id="footlogo">
 						关注我们 : <img src="img/qrcode.png" alt="..." class="img-rounded">
 						<img src="img/qrcode.png" alt="..." class="img-rounded"> <img
 							src="img/qrcode.png" alt="..." class="img-rounded">
@@ -396,7 +392,23 @@
 		   }  
 		  }  
 	})  
-
+	//判断PC或移动
+	$(function(){
+		judgePC();
+	})
+	function judgePC(){
+		if (navigator.userAgent.match(/mobile/i)) {
+			//移动端
+			$("#logsd").css("margin-right", "10vw");
+			$("#logsd").css("margin-top", "3.5vh");
+			$("#footimg").css("margin-top","-16vh");
+			$("#footlogo").css("margin-top","-16vh");
+		} else {
+			//pc端
+			$("#logsd").css("margin-right", "15vw");
+			$("#logsd").css("margin-top", "3.5vh");
+		}
+	} 
 </script>
 
 </HTML>

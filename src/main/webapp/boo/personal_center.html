@@ -1195,10 +1195,10 @@
 				 &nbsp;鄂公网安备 33010802003866号
 			</P>
 		</div>
-		<div class="col-md-2" style="text-align: center;">
+		<div class="col-md-2" style="text-align: center;" id="footimg">
 			<img src="img/footerlogo.png" alt="..." class="img-rounded img-responsive" style="margin: 0 auto;">
 		</div>
-		<div class="col-md-6" style="text-align: LEFT;">
+		<div class="col-md-6" style="text-align: LEFT;" id="footlogo">
 		
 			<img src="img/qrcode.png" alt="..." class="img-rounded">
 			<img src="img/qrcode.png" alt="..." class="img-rounded">
@@ -1322,7 +1322,7 @@
     $(function () {
     	//var f="";//定义全局变量file改变时的值
         //file的change事件
-        $('#uploadFile').change(function () {
+        $('#uploadFile').change(function (e) {
         	//f=$(this).val();
         	//提交form表单的数据
             //$('#uploadForm').submit();
@@ -1344,27 +1344,37 @@
 	       		//图片大于2M
 	       		$("#up").css({color:"red"});
 	       	}else{
-	       		var data = new FormData();
+	       		/* var data = new FormData();
 			    $.each($(this)[0].files,function(i,file){
 			    	data.append('file', file);
-			    });
+			    }); */
+	       		
+				   //var url=f.split('\\');//注split可以用字符或字符串分割
+				   //var fileName=url[url.length-1];//这就是要取得的图片名称
+				   /* var data={
+						   "path":f,
+						   "name":fileName,
+				   }; */
 	       	}
+	      
 	      
 	        $.ajax({
 	            type: "POST",
 	            url: url+"/videoServer/front/User/addfile",
-	            //data: JSON.stringify(data),
-	            data:data,
+	            data: JSON.stringify(f),
+	            //data:data,
+	            contentType:'application/json;charset=UTF-8',
+	        	cache:false,
 	            cache: false,
 	            contentType: false,    //不可缺
 	            processData: false,    //不可缺
 	            dataType:"json",
 	            success: function(suc) {
 	                if(suc.code==0){
-	                        $("#thumbUrl").val(suc.message);//将地址存储好
+	                        $("#thumbUrl").val(suc.fileName);//将地址存储好
 	                        $("#thumburlShow").css({width:"80px"},{heith:"80px"});//显示图片     
-	                        $("#thumburlShow").attr("src",suc.message);//显示图片   
-	                        $("#photoimg").val(suc.message);
+	                        $("#thumburlShow").attr("src",suc.fileName);//显示图片   
+	                        $("#photoimg").val(suc.fileName.substr(suc.fileName.lastIndexOf("/")+1));
 	                        
 	                 }else{
 	                    alertLayel("上传失败");
@@ -1716,7 +1726,23 @@
 		   }  
 		  }  
 	})  
-	
+	//判断PC或移动
+	$(function(){
+		judgePC();
+	})
+	function judgePC(){
+		if (navigator.userAgent.match(/mobile/i)) {
+			//移动端
+			$("#logsd").css("margin-right", "10vw");
+			$("#logsd").css("margin-top", "3.5vh");
+			$("#footimg").css("margin-top","-16vh");
+			$("#footlogo").css("margin-top","-16vh");
+		} else {
+			//pc端
+			$("#logsd").css("margin-right", "15vw");
+			$("#logsd").css("margin-top", "3.5vh");
+		}
+	} 
 </script>
 
 </body>
