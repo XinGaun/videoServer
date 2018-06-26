@@ -312,7 +312,8 @@ function videourl(urls,id){
 						m:'0'
 				};
 				var player=new ckplayer(videoObject);
-				
+				//查询评论信息
+				videoComment(id);
 			}
 		}
 
@@ -498,4 +499,47 @@ function custom(number){
 	initStudentComments(param);
 	//console.log(pages);
 	return false;
+}
+//查询评论信息
+function videoComment(video_id){
+	var data ={video_id:video_id};
+	$.ajax({
+		type : "POST",
+		url : url+"/videoServer/front/Videos/queryComment",
+		contentType : 'application/json; charset=UTF-8',
+		data: JSON.stringify(data),  //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			console.log(result);
+			if(result.list.length<=0){
+				$("#pingliu").html("暂无评论信息");
+			}else{
+				$("#pingliu").html("");
+				for(var i=0;i<result.list.length;i++){
+					var pinglun = '<div class="media">'
+						  +	'<div class="media-left">'
+						  +		'<a href="#"> <img class="media-object" src="img/tx4.png" alt="..."></a>'
+						  +	'</div>'
+						  +	'<div class="media-body">'
+						  +		'<h4 class="media-heading">'
+						  +		'<span>'+result.list[i].courses_date+'</span>&nbsp;&nbsp;<span>'+result.list[i].user_name+'</span>:</h4>'
+						  +		'<div>'+result.list[i].comment_text+'</div>'
+						  +		'<div>&nbsp;</div>'
+						  +		'<div class="media">'
+						  +		'<div class="media-left">'
+						  +			'<a href="#"> <img class="media-object" src="img/tx1.png" alt="..."></a>'
+						  +		'</div>'
+						  +		'<div class="media-body">'
+						  +			'<h4 class="media-heading">'
+						  +			'<span>2017-06-25 12:00:00</span>&nbsp;&nbsp;<span>教师名</span>&nbsp;回复&nbsp;<span>用户名</span>:</h4>'
+						  +			'<div>点赞!</div>'
+						  +		'</div></div>'
+						  +	'</div>'
+						  +'</div>';
+					$("#pingliu").append(pinglun);
+				}
+				
+			}
+		}
+	});
 }

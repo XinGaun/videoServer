@@ -14,4 +14,6 @@ public interface VideosDao {
 	public int queryOrder(HashMap<String,Object> map);
 	//查询视频评论信息
 	public ArrayList<HashMap<String,Object>> queryComment(HashMap<String,Object> map);
+	//查询视频评论信息总数
+	public int queryCommentCount(HashMap<String,Object> map);
 }

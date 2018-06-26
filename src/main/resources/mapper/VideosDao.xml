@@ -81,4 +81,12 @@
 		LEFT JOIN teacher_tab tea ON com.reply_teacher = tea.teacher_id WHERE
 		1=1 AND com.video_id = #{video_id} ORDER BY com.comment_date;
 	</select>
+	<!-- 查询课程信息总数 -->
+	<select id="queryCommentCount" parameterType="java.util.HashMap" resultType="int">
+		SELECT
+		count(com.comment_id)
+		FROM comment_tab com LEFT JOIN user_tab usr ON com.user_id=usr.user_id
+		LEFT JOIN teacher_tab tea ON com.reply_teacher = tea.teacher_id WHERE
+		1=1 AND com.video_id = #{video_id} ORDER BY com.comment_date;
+	</select>
 </mapper>
