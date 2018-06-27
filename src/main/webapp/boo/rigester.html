@@ -513,7 +513,9 @@
 		//alert($.cookie('phone'));
 		//alert($.cookie('photo'));
 		if($.cookie("phone")==null){//cookie过期
+
 			//alert("登录过期，请重新登录");
+
 		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
 			//alert("pp");
 			$("#logsd").hide();

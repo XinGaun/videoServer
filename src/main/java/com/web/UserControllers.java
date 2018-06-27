@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,6 +45,7 @@ import com.util.OSSUploadVideo;
 public class UserControllers {
 	@Autowired
 	UserService aService;
+	
 	//添加用户
 	@RequestMapping(value="/saveuser",method=RequestMethod.POST)
 	public String saveuser(@RequestBody String data,HttpServletResponse response){
@@ -155,8 +155,7 @@ public class UserControllers {
             String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//文件后缀
             System.out.println(fileF);
             fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//新的文件名
-            System.out.println(fileName);
-            
+            System.out.println(fileName);       
          	//先判断文件是否存在
             String fileAdd = DateUtil.dateToStr(new Date(),"yyyyMMdd");
             File file1 =new File(path+"/"+fileAdd); 

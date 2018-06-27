@@ -383,7 +383,8 @@
 						</button>
 						<h4 class="modal-title" id="myModalLabel">课程视频添加</h4>
 					</div>
-					<form action="/videoServer/videoTab/uploadflv1.do" method="post">
+					<form action="/videoServer/videoTab/uploadflv1.do" method="post"
+		                  enctype="multipart/form-data" id="dataForm">
 						<div style="width: 100%;">
 							<div
 								style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
@@ -392,8 +393,7 @@
 									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频标题：</div>
 								<div
 									style="width: 200px; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
-									<input type="text" id="video_name" /><input type="hidden"
-										name="video_name" />
+									<input type="text" name="videoName" id="videoName" > 
 								</div>
 								<div
 									style="width: 100px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型：</div>
@@ -406,20 +406,12 @@
 								</div>
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
-								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">选择视频：</div>
-								<div style="width: 440px; height: 50px; float: left;">
-									&nbsp;<input type="file" accept="video/*" id="video_url"><input
-										type="hidden" name="video_url">
-								</div>
+								<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">选择视频：</div>
+								<input type="file" name="video" id="video" accept="video/*">
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
-								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频封面：</div>
-								<div style="width: 440px; height: 50px; float: left;">
-									&nbsp;<input type="file" id="video_img_url"><input
-										type="hidden" name="video_img_url">
-								</div>
+								<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频封面：</div>
+								<input type="file" name="image" id="image" accept="image/*">
 							</div>
 							<div style="height: 100px; border: 1px solid #CADEFD">
 								<div
@@ -427,7 +419,7 @@
 								<div style="width: 440px; height: 100px; float: left;">
 									&nbsp;
 									<textarea style="width: 250px; margin-top: 25px; height: 50px;"
-										id="video_introduce"></textarea>
+									name="video_introduce"	id="video_introduce"></textarea>								
 									<input type="hidden" name="video_introduce">
 								</div>
 							</div>
@@ -530,9 +522,28 @@ function getId(obj){
 }	
 </script>
 	<script>
+	
 	var progress = document.getElementById("jd");
-	$("#sub").click(function(){
+	//加载模态框    
+    $('#myModal').on('show.bs.modal', function (event) {     
+       progress.innerText= 0;
+ 	   $("#videoName").val(""); 
+ 	   $("#video_introduce").val("");
+    }); 
+	$("#sub").click(function(){	
+		//表单参数
+		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
+		 var videoName = $.trim($('#videoName').val());  
+		 var video_introduce =$.trim($("#video_introduce").val());
+		 var video_form_id = $.trim($("#kctype").val());
+		 var video = $('#video').prop("files")[0];
+		 var image = $('#image').prop("files")[0];
 		
+		 formData.append("videoName",videoName);  
+		 formData.append("video", video);  
+		 formData.append("image", image);
+		 formData.append("video_introduce", video_introduce);
+		 formData.append("video_form_id", video_form_id);
 		//阻止默认事件
 		 event.preventDefault();
 		 //循环查看状态
@@ -540,43 +551,40 @@ function getId(obj){
 		           $.ajax({
 		              url: '/videoServer/ProgressServlet/progress',
 		              type: 'post',
-		              data: {
-		            	  fileName:$("#video_name").val(),
-		            	  filePath:$("#video_url").val()
-			          },
+		              data: formData,
+		              contentType: false, //禁止设置请求类型
+			          processData: false, //禁止jquery对DAta数据的处理,默认会处理
+			          dataType:"json",
 			          success: function (data) {	            	 	                 
 			                //前台更新进度
-			             progress.innerText = parseInt((data.progress / data.size) * 100);
+			               progress.innerText = parseInt((data.progress / data.size) * 100);
 			           },
 			           error: function(){
 			              console.log("error");
 			           }
 			         });
 			     }, 500);
-			     //上传文件
-		
-		var aa=document.getElementById("video_url").value.toLowerCase().split('.');//以“.”分隔上传文件字符串
-		//判断图片格式
-		if(aa[aa.length-1]=='mp4'||aa[aa.length-1]=='webm'||aa[aa.length-1]=='ogv'||aa[aa.length-1]=='png'||aa[aa.length-1]=='jpeg'){
+		 
+			//上传文件		
 			$.ajax({
 				type : 'post',
-				data : {video_name:$("#video_name").val(),video_url:$("#video_url").val(),video_img_url:$("#video_img_url").val(),video_introduce:$("#video_introduce").val(),video_form_id:$("#kctype").val()},
+				data : formData,
 				url : '/videoServer/videoTab/uploadflv.do',
+				contentType: false, 
+		        processData: false, 
 				success : function(responseText){
 					clearInterval(t);
 			        //将进度更新至100%
-			        progress.innerText = 100;
-			         
-					$("#quxiao").click();
+			        progress.innerText = 100;			         				
 					window.location.href="";
+					 $("#myModal").modal("hide");
 				},error: function(){
 					 console.log("error");
 				}
-			})
-		}else{
-			alert("请上传mp4，webm，ogv类型的视频文件");
-		}
-	})
+			});	 
+			return false;
+	});
+	
 	$("#queryorder").click(function(){
 		//alert($("#video_name1").val())
 		$.ajax({

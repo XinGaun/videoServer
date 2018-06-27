@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
+
 	<title>login 页面</title>
 	<!--
     <link rel="stylesheet" type="text/css" href="styles.css">
@@ -17,6 +18,7 @@
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 </head>
 <style>
+
 	#search_submit{
 	 	border-top-left-radius:0em;
 		border-top-right-radius:2em;
@@ -40,6 +42,7 @@
 	 	color:black;
 	 	text-decoration: none;
 	 } 
+
 	 a:hover{
 	 	text-decoration:none;
 	 	
@@ -233,6 +236,7 @@
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
+<<<<<<< HEAD
 	<div id="bodys">
 		
 		<div id="login">
@@ -314,12 +318,160 @@
 	    }
 		if(pwd == ""){
 			$("#pwd").attr('placeholder','请输入密码');
+=======
+	<!-- /.container-fluid --> </nav>
+
+	<!--  -->
+	<div id="center_body" style="width:40vw;margin:0vh 30vw;">
+		<div >      
+			<div class="clo-md-12" >
+				<h3 style="margin-left:0vw;">修改密码</h3>
+				<table class="table" >
+					<tr>
+						<td style="text-align: right;">账号:</td>
+						<td><input id="zhanghao" type="text" /> <span>&nbsp;</span>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right;">新密码:</td>
+						<td><input id="pwd"  placeholder="请输入6-21位密码" type="password"/> <span>&nbsp;</span></td>
+					</tr>
+					<tr>
+						<td style="text-align: right;">重新输入新密码:</td>
+						<td><input id="repwd" placeholder="请再次输入密码" type="password" /> <span>&nbsp;</span></td>
+					</tr>
+					<tr>
+						<td style="text-align: right;">短信验证码:</td>
+						<td>
+							<!-- <input name="dx" id="vcode" placeholder="请输入短信验证码" type="text" class="form-control"/>		
+							<span>&nbsp;</span> -->
+						 	<input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" style="width:30%"/>
+	        				<input type="button" value="获取验证码" id="hmac" style="padding:7px;width:20%;float:right;font-size:1.8vh;margin-top:1.5vh;margin-right:13vw"/>
+						</td>
+					</tr>
+					<tr>
+						<td></td><td><button class="btn btn-info" id="reset" style="float:right;margin-right:3vw">修改密码</button></td>
+					</tr>
+				</table>			
+			</div><!-- 修改密码结束 -->
+		</div>
+	</div>
+
+<!-- 页底 -->
+
+<div class="row" style="">
+<HR style="border:1 dotted #000000" width="100%" >
+	<div class="col-md-12" >
+	  <div class="col-md-2">&nbsp;</div>
+	  <div class="col-md-8">
+		<div class="col-md-4" >
+			<p><a href="#">关于我们</a>&nbsp;|&nbsp;<a href="#">加入我们</a>&nbsp;|&nbsp;<a href="#">申请合作</a>&nbsp;|&nbsp;<a href="#">意见反馈</a>&nbsp;|&nbsp;<a href="#">用户协议</a></p>
+			<p>鄂ICP备13006852号-3 鄂B2-20160872</p>
+			<div class="col-md-12">&nbsp;</div>
+			<P>
+				<img src="img/beianbgs@2x.png" alt="..." class="img-rounded">
+				 &nbsp;鄂公网安备 33010802003866号
+			</P>
+		</div>
+		<div class="col-md-2" style="text-align: center;">
+			<img src="img/footerlogo.png" alt="..." class="img-rounded img-responsive" style="margin: 0 auto;">
+		</div>
+		<div class="col-md-6" style="text-align: LEFT;">
+		
+			<img src="img/qrcode.png" alt="..." class="img-rounded">
+			<img src="img/qrcode.png" alt="..." class="img-rounded">
+			<img src="img/qrcode.png" alt="..." class="img-rounded">
+		</div>
+	  </div>
+	  <div class="col-md-2">&nbsp;</div>
+	</div>
+
+</div>
+<script type="text/javascript">
+	var code="";
+	//获取验证码
+	$('#hmac').click(function(){  
+	        var codeflag = 60;//点击时间间隔60s
+	         
+	        if(codeflag==60){  
+	            var timeflag = setInterval(function(){  
+	                codeflag--;  
+	                if(codeflag>0){       
+	                    $('#hmac').val('重新发送'+codeflag+'s');  
+	                    $('#hmac').css({'color':'#99897A'});  
+	                    $('#hmac').attr('disabled','disabled');  
+	                }else{  
+	                    codeflag=60;  
+	                    $('#hmac').val('获取验证码');  
+	                    $('#hmac').css({'color':'black'});  
+	                    $('#hmac').removeAttr('disabled');  
+	                    clearInterval(timeflag);  
+	            	}  
+	        	},1000);  
+	            
+	            	//随机生成六位验证码
+		            //var code="";
+		        	for(var i=0;i<6;i++){
+		        		  code+=Math.floor(Math.random()*10);
+		        	}
+
+		        	//alert(code);
+	           
+	          
+	           var str={
+	        	   	phone:userphone,
+	        		code:code,//随机验证码
+	        		TemplateCode:"SMS_135036257"//模板信息
+	           };
+		       $.ajax({
+		       			type:"POST",
+		        	    url:url+"/videoServer/front/AliBigFish/verificationCode",
+		        	    contentType:'application/json;charset=UTF-8',
+		        	    data:JSON.stringify(str),     			        	        	
+		        	    dataType:"json",
+		        	    success:function(data){
+		        	       alert("验证码已发送，请注意查收！");		        	        		
+		        	     },
+		    	       	error:function(){
+		        	        		
+		        	    }
+		       	});   
+	        }
+	})
+	
+	//重置密码
+	$("#reset").click(function(){	
+		var userphone=$('#zhanghao').val();
+		var pwd = $('#pwd').val();
+		var repwd = $('#repwd').val();
+	    var vcode = $('#vcode').val();
+	    var myreg=/^[a-zA-Z0-9]{6,21}$/;  	
+	    if(userphone == ""){  
+	    	  
+	    	$("#zhanghao").attr('placeholder','请输入账号');
+			$("#zhanghao").css('color','red'); 
+			$("#zhanghao").focus(function(){
+				$("#zhanghao").css('color','black');
+			});
+	        return false;  
+	    } 
+	    if(pwd == ""){
+	    	$("#pwd").attr('placeholder','请输入密码');
+			$("#pwd").css('color','red'); 
+			$("#pwd").focus(function(){
+				$("#pwd").css('color','black');
+			});
+	        return false;  
+	    }else if(!myreg.test(pwd)){
+	    	$("#pwd").attr('placeholder','密码格式错误！');
+>>>>>>> zhengfei
 			$("#pwd").css('color','red'); 
 			$("#pwd").focus(function(){
 				$("#pwd").css('color','black');
 			});
 	        return false;  
 	    }
+<<<<<<< HEAD
 		if(typeof(uname)!="undefined"&&typeof(pwd)!="undefined"){
 			
 			$.ajax({
@@ -480,14 +632,106 @@
 		data:{
 			rigesterUrl:'photos/LoginPhoto/rigester.png'
 		}
-	})
-	//登录页面中的微信登录小图标
-	var weixin=new Vue({
-		el:'#wxChat',
-		data:{
-			weixin:'photos/LoginPhoto/weixin.png'
-		}
+=======
+	    if(vcode == ""){  
+	    	  
+	    	$("#vcode").attr('placeholder','请输入验证码');
+			$("#vcode").css('color','red'); 
+			$("#vcode").focus(function(){
+				$("#vcode").css('color','black');
+			});
+	        return false;  
+	    } 
+	    if(vcode!=code){
+	    	$("#vcode").attr('placeholder','验证码错误！');
+			$("#vcode").css('color','red'); 
+			$("#vcode").focus(function(){
+				$("#vcode").css('color','black');
+			});
+	        return false; 
+	    } 
+	    
+	   var UserTab={
+	    		"user_phone":userphone,
+	    		"user_pwd":pwd,
+	    		
+	    };
+	   // alert(JSON.stringify(UserTab));
+	   if(typeof(userphone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code&&typeof(pwd)!="undefined"&&repwd==pwd){   
+	
+	        $.ajax({
+	       			type:"POST",
+	        	    url:url+"/videoServer/front/User/updateuser",
+	        	    data:JSON.stringify(UserTab),	
+	        	    contentType:'application/json;charset=UTF-8',
+	        	    cache:false,
+	        	    dataType:"json",
+	        	    success:function(data){
+	        	       alert(data);	   		 
+	        	    },
+	        	    error:function(){
+	        	       alert("error");
+	        	       //window.location.reload();
+	        	    }
+	         }); 
+	        		
+	     }else{  
+	        alert("输入信息有误");
+	        return false;  
+	    }  
+>>>>>>> zhengfei
 	})
 
+	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
+	$(function(){
+		
+		//alert($.cookie('phone'));
+		//alert($.cookie('photo'));
+		if($.cookie("phone")==null){//cookie过期
+			alert("登录过期，请重新登录");
+		
+		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
+			//alert("pp");
+			$("#logsd").hide();
+			$("#logImg").show();
+		}else if($.cookie("phone")!=null&&$.cookie("photo")!=null){//cookie有用户信息和头像
+			//alert("dd");
+			$("#logsd").hide();
+			$("#imgt").attr("src",$.cookie("photo"));
+			$("#logImg").show();
+		}
+		 
+		
+	})
+	/*
+	退出按钮点击事件
+	*/
+	$("#exit").click(function(){
+		//alert(5);
+		//window.location.href="index.html"; 
+		$("#logsd").show();
+		$("#logImg").hide();
+		$.cookie('id', '', { expires: -1 ,path:'/',secure: false});
+		$.cookie('phone', '', { expires: -1 ,path:'/',secure: false});
+		$.cookie('photo', '', { expires: -1,path:'/',secure: false });  
+	})
+<<<<<<< HEAD
+=======
+		
+	//登录注册样式切换
+	new Vue({  
+		  el: '#logsd',  
+		  data: {  
+		   flag:1,//默认为百度添加 .active  
+		  },  
+		  methods:{  
+		   change:function(a){//传入参数这里指1、2  
+		    this.flag=a;//flag==1 or flag==2  
+		   }  
+		  }  
+	})  
+>>>>>>> zhengfei
+
 </script>
+</body>
 </html>

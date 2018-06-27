@@ -68,8 +68,6 @@
 	 	z-index:2;
 	 }
 
-	 
-
 </style>
 <script src="js/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -115,6 +113,7 @@
 					<div class="form-group navbar-form navbar-left">
 						<div class="input-group col-xs-12">
 							<div class="input-group-btn">
+
 								<select name="type" id="queryAll" class="form-control" style="width: auto;">
 									<option value="">全部</option>
 									<option value="高中">高中</option>
@@ -125,7 +124,9 @@
 							<input type="text" name="keyword" id="keyword"
 								class="form-control" placeholder="请您输入关键词"> 
 							<span class="input-group-btn">
+
 								<button class="btn btn-info" id="search_submit" onclick="queryNameVideo()">
+
 									搜索
 								</button>
 
@@ -367,7 +368,7 @@
 		//alert($.cookie('phone'));
 		//alert($.cookie('photo'));
 		if($.cookie("phone")==null){//cookie过期
-			///alert("登录过期，请重新登录");
+
 		
 		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
 			//alert("pp");
@@ -407,6 +408,7 @@
 		   }  
 		  }  
 	})  
+
 	//判断PC或移动
 	$(function(){
 		judgePC();
@@ -424,6 +426,7 @@
 			$("#logsd").css("margin-top", "3.5vh");
 		}
 	} 
+
 </script>
 
 </HTML>

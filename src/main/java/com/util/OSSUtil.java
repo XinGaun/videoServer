@@ -1,7 +1,6 @@
 package com.util;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Date;
@@ -72,63 +71,52 @@ public class OSSUtil implements ProgressListener{
 	}  
 
 	//上传一个文件，InputStream  
-	public void uploadInput(String fileName,InputStream input) throws Exception {
+	public String uploadInput(String fileName,InputStream input) throws Exception {
+	
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret); 
 		isVideo(fileName);
 		ossClient.putObject(bucketName,fileName,input );
 		System.out.println("end");
 		ossClient.shutdown();  
+		return fileName;
 	}
 
 
 	//上传一个文件，File  
 	public static void uploadFile(File file, String key) {  
 		OSSClient client = client();  
+		isVideo(file.getName());
 		PutObjectRequest putObjectRequest = new PutObjectRequest(  
 				bucketName, key, file);  
 		client.putObject(putObjectRequest);  
 	}  
 
 	//上传一个文件，path  
-	public String upload(String filePath,String fileName) throws Exception {
+	public String upload(File file,String fileName) throws Exception {
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret); 
-		File file = new File(filePath);
-		String fileNameStr = file.getName();
-		if(fileName == null || fileName == "" )   {    	
-			fileName = fileNameStr;
-		}else if(!fileName.contains(".")) {
-			fileName = fileName+fileNameStr.substring(fileNameStr.indexOf("."));
-		}	
 		isVideo(fileName);
 		ossClient.putObject(bucketName,fileName, file);  
 		ossClient.shutdown();  
 		return fileName;
 	}
 	// 带进度条的上传。
-	public String uploadJD(String filePath,String fileName) {
-		
+	public String uploadJD(InputStream inputStream,String fileName,long fileSize) {
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
-		File file = new File(filePath);
-		String fileNameStr = file.getName();
-		if(fileName == null || fileName == "" )   {    	
-			fileName = fileNameStr;
-		}else if(!fileName.contains(".")) {
-			fileName = fileName+fileNameStr.substring(fileNameStr.indexOf("."));
-		}	
-		this.fileName = fileName;	
-		this.size = file.length();		
+		this.size = fileSize;
+		this.fileName = fileName;
 		ProgressSingleton.put(fileName+"size", size);
 		ProgressSingleton.put(fileName+"progress", progress);
 		isVideo(fileName);
 		try {
 		
-			ossClient.putObject(new PutObjectRequest(bucketName, this.fileName, new FileInputStream(filePath)).
+			ossClient.putObject(new PutObjectRequest(bucketName, this.fileName, inputStream).
 					<PutObjectRequest>withProgressListener(this));
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		//当文件上传完成之后，从单例中移除此次上传的状态信息
+		System.out.println("oss end");
 		ProgressSingleton.remove(fileName + "size");
 		ProgressSingleton.remove(fileName + "progress");
 		// 关闭OSSClient。
@@ -184,7 +172,7 @@ public class OSSUtil implements ProgressListener{
 		return url;
 	}
 
-	public void isVideo(String fileName) {
+	public static void isVideo(String fileName) {
 		if (fileName.endsWith("mp4") || fileName.endsWith("mp3")) {			
 			bucketName = bucketName2;
 		}
@@ -209,10 +197,7 @@ public class OSSUtil implements ProgressListener{
 
 		case REQUEST_BYTE_TRANSFER_EVENT:
 			progress += bytes;
-			ProgressSingleton.put(fileName+"progress", progress);
-			System.out.println("oss  "+fileName);
-			System.out.println("oss  "+fileName+"progress"+"   "+ProgressSingleton.get(fileName+"progress"));
-			System.out.println("oss  "+fileName+"size"+"   "+ProgressSingleton.get(fileName+"size"));
+			ProgressSingleton.put(fileName+"progress", progress);			
 			this.bytesWritten += bytes;
 			if (this.totalBytes != -1) {
 				int percent = (int)(this.bytesWritten * 100.0 / this.totalBytes);
@@ -249,7 +234,6 @@ public class OSSUtil implements ProgressListener{
 		//		C:\\bxwlw\\home\\test.log
 		/*oss.upload("D:\\filedownload\\基本演绎法第六季01.mp4","基本演绎法第六季01");
 		oss.upload("D:\\filedownload\\2.jpg",null);*/
-		oss.uploadJD("D:\\filedownload\\3.mp4","3.mp4");
 		//		oss.upload("D:\\filedownload\\3.mp4");
 		//		oss.upload("D:\\filedownload\\许嵩 - 庐州月.mp3");
 		//		oss.upload("D:\\filedownload\\2.jpg");
