@@ -106,10 +106,10 @@ public class OSSUtil implements ProgressListener{
 		this.fileName = fileName;
 		ProgressSingleton.put(fileName+"size", size);
 		ProgressSingleton.put(fileName+"progress", progress);
-		isVideo(fileName);
+//		isVideo(fileName);
 		try {
 		
-			ossClient.putObject(new PutObjectRequest(bucketName, this.fileName, inputStream).
+			ossClient.putObject(new PutObjectRequest(bucketName2, this.fileName, inputStream).
 					<PutObjectRequest>withProgressListener(this));
 
 		} catch (Exception e) {
@@ -117,11 +117,12 @@ public class OSSUtil implements ProgressListener{
 		}
 		//当文件上传完成之后，从单例中移除此次上传的状态信息
 		System.out.println("oss end");
-		ProgressSingleton.remove(fileName + "size");
-		ProgressSingleton.remove(fileName + "progress");
+		ProgressSingleton.put(fileName+"size", 100);
+		ProgressSingleton.put(fileName+"progress", 100);		
 		// 关闭OSSClient。
 		ossClient.shutdown();
-		
+		ProgressSingleton.remove(fileName + "size");
+		ProgressSingleton.remove(fileName + "progress");
 		return fileName;
 	}
 
@@ -149,7 +150,7 @@ public class OSSUtil implements ProgressListener{
 	}
 	public String getWebURL(String fileName) {
 		String path = "";
-		if (fileName.endsWith("mp4") || fileName.endsWith("mp3")) {
+		if (fileName.endsWith("mp4") || fileName.endsWith("mp3") ||fileName.endsWith("MP4")) {
 			path = serviceName+"/video/"+fileName;		
 		}
 		if (fileName.endsWith("jpg") || fileName.endsWith("png")) {
@@ -173,7 +174,7 @@ public class OSSUtil implements ProgressListener{
 	}
 
 	public static void isVideo(String fileName) {
-		if (fileName.endsWith("mp4") || fileName.endsWith("mp3")) {			
+		if (fileName.endsWith("mp4") || fileName.endsWith("mp3") || fileName.endsWith("MP4")) {			
 			bucketName = bucketName2;
 		}
 		if (fileName.endsWith("jpg") || fileName.endsWith("png")) {		
@@ -229,11 +230,11 @@ public class OSSUtil implements ProgressListener{
 
 
 
-	public static void main(String[] args) throws Exception {
-		OSSUtil oss = new OSSUtil();
+	/*public static void main(String[] args) throws Exception {
+//		OSSUtil oss = new OSSUtil();
 		//		C:\\bxwlw\\home\\test.log
-		/*oss.upload("D:\\filedownload\\基本演绎法第六季01.mp4","基本演绎法第六季01");
-		oss.upload("D:\\filedownload\\2.jpg",null);*/
+		oss.upload("D:\\filedownload\\基本演绎法第六季01.mp4","基本演绎法第六季01");
+		oss.upload("D:\\filedownload\\2.jpg",null);
 		//		oss.upload("D:\\filedownload\\3.mp4");
 		//		oss.upload("D:\\filedownload\\许嵩 - 庐州月.mp3");
 		//		oss.upload("D:\\filedownload\\2.jpg");
@@ -248,5 +249,5 @@ public class OSSUtil implements ProgressListener{
 		//		String path = oss.getFileURL("2.jpg");
 		//		System.out.println(path.toString());
 
-	}
+	}*/
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.entity.TeacherDomain;
 import com.entity.coursesTab;
@@ -38,17 +39,11 @@ public class coursesTabController {
 	}
 	@RequestMapping(value="/addCoursesTab.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void addCoursesTab(HttpServletRequest request,String courses_name,String courses_introduce,String courses_pricemoney,String courses_video,String courses_img_url){
+	public void addCoursesTab(HttpServletRequest request,String courses_name,String courses_introduce,String courses_pricemoney,String courses_video,MultipartFile image) throws Exception{
 		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
 		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
-		coursesTab c=new coursesTab();
-		c.setCourses_name(courses_name);
-		c.setCourses_introduce(courses_introduce);
-		c.setCourses_video(courses_video);
-		c.setCourses_img_url(courses_img_url);
-		c.setTeacher_id(teacher_id);
-		c.setCourses_pricemoney(courses_pricemoney);
-		ctService.addCoursesTab(c);
+		System.out.println(image.getOriginalFilename());
+		ctService.addCoursesTab(courses_name,courses_introduce,courses_pricemoney,courses_video, image,teacher_id);
 	}
 	@RequestMapping(value="/delCoursesById.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody

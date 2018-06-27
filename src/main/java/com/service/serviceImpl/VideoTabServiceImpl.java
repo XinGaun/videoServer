@@ -4,7 +4,6 @@ package com.service.serviceImpl;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +21,6 @@ public class VideoTabServiceImpl implements VideoTabService{
 	private VideoTabDao videoDao;
 
 	private OSSUtil ossUpload = new OSSUtil();
-//	final long MAX_SIZE = 10 * 1024 * 1024 * 1024;// 设置上传文件最大为 10G 
 
 	@Override
 	@Transactional
@@ -35,8 +33,8 @@ public class VideoTabServiceImpl implements VideoTabService{
 
 	public HashMap<String,String> videoUpload(MultipartFile video, MultipartFile image,String video_name,String imageName,long size)throws Exception {
 
-		DiskFileItemFactory factory = new DiskFileItemFactory();
-		factory.setSizeThreshold(4*1024);
+	/*	DiskFileItemFactory factory = new DiskFileItemFactory();
+		factory.setSizeThreshold(4*1024);*/
 		HashMap<String,String> map = new HashMap<>();		
 		String ossVideoName =ossUpload.uploadJD(video.getInputStream(),video_name,size);
 		String ossImageName = ossUpload.uploadInput(imageName,image.getInputStream());

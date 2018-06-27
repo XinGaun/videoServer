@@ -49,6 +49,7 @@ public class VideoTabController {
 		long size = video.getSize();
 		String ossFileName = videoName+filePath.substring(filePath.lastIndexOf("."));	
 		String imageName = videoName+imagePath.substring(imagePath.lastIndexOf("."));
+		System.out.println(ossFileName+"   "+imageName);
 		vdservice.uploadVideo(ossFileName,imageName, video_introduce, video, image,Integer.parseInt(video_form_id), teacher_id,size);
 	}
 
