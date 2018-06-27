@@ -1,195 +1,229 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
-	<title>rigester 页面</title>
-	<!--
+<title>重置密码</title>
+ 	<!--
     <link rel="stylesheet" type="text/css" href="styles.css">
     -->
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-	
-	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-	
-	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="http://static.runoob.com/assets/vue/1.0.11/vue.min.js"></script>
+   
+    <script src="js/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
-	
 </head>
 <style>
-	#rigester{
-		width:28vw;
-	 	height:60vh;
-	 	background-color:#FFFFFF;
-	 	border-radius:0.3em;
-	 	margin-left:48vw;
-	 	margin-top:22vh;
-	}
-	form{
-		
-	 	position:relative;
-	 	top:4vh;
-	 	left:2.2vw;
-	 	width:23vw;
-	 	height:55vh;
-	 	
-	}
-	
-	#header span{
-	  font-size:1.5vw;
-	}
-	/* 输入框的圆角设置 */
-	#body input{
-	  margin: 1.5vh 0vw;
-	  border:1px solid #888;
-      border-radius:4px;
-      height:4vh;
-      padding:0px 55px;
-	}
-	/*登录模态框中输入框的设置-添加小图标*/
-	input[name=phone]{
-		background: url(photos/LoginPhoto/user.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
-		padding:0vh 1.5vw;
-	}
-	input[name=nic]{
-		
-		background: url(photos/LoginPhoto/phone.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
-		padding:0vh 1.5vw;
-		
-	}
-	input[type=password]{
-		background: url(photos/LoginPhoto/pwd.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
-		padding:0vh 1.5vw;
-	}
-	input[name=dx]{
-		padding:0vh 0.5vw;
-		
-	}
-	a{
-		color:#3AA8FF;
-	}
-	a:hover{
-		text-decoration:none;
-		color:#3AA8FF;
-	}
-	/* 注册按钮设置 */
-	#body button{
-		background:#3AA8FF;
+#search_submit{
+	 	border-top-left-radius:0em;
+		border-top-right-radius:2em;
+		border-bottom-right-radius:2em;
+		border-bottom-left-radius:0em; 
+	 }
+ 	 #dropdown{
+ 	 	border-top-left-radius:2em;
+		border-top-right-radius:0em;
+		border-bottom-right-radius:0em;
+		border-bottom-left-radius:2em; 
+ 	 }
+ 	 /*按钮圆角设置*/
+	.active{  
+	 	border-radius:2em;
+	 	border:1px #3AA8FF solid;
+	 	padding:2px 9px;
+	 	margin:0vh 2vw;
+	 	display:inline-block;
+	 	verticle-align:middle;
+	 	color:black;
+	 	text-decoration: none;
+	 } 
+	 #center_body input{
+	 	margin: 1.5vh 0vw;
+	  	border:1px solid #888;
       	border-radius:4px;
-      	width:21.5vw;
-      	height:4vh;
-      	border:0px;
-      	margin:2.2vh 0vw;
-      	color:#FFFFFF;
-	}
-	/* 设置输入框里的字体大小，浏览器兼容不一样，每个都要设置 */
-	input::-webkit-input-placeholder { /* WebKit browsers */ 
-		font-size:1.5vh;
-	} 
-
-	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
-		font-size:1.5vh;
-	} 
-	input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
-		font-size:1.5vh;
-	} 
-	input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
-		font-size:1.5vh;
-	} 
-	body{
-		background:#ccffcc;
-	}
-	#line{
-		margin-left:15vw;
-		float:left;
-	 	margin-top:0vh;
-		height:55vh;
-		width:28vw;
-		border-right:1px solid #cc99ff;
-	}
-	#logo{
-		position:relative;
-		margin-top:15vh;
-	 	border:1px solid #888888;
-	 	width:25vw;
-	}
+      	padding:5px 55px;
+	 }
+	 a:hover{
+	 	text-decoration:none;
+	 	
+	 } 
+	
+	  #log a{
+	 	color:#3AA8FF;
+	 	padding:1vh 1.5vw;
+	 	text-decoration:none;
+	 } 
+	 #logImg{
+	 	float:right;
+	 	border:1px solid red;
+	 	margin:2vh 1vw 0vh 0vw;
+	 	display:none;
+	 }
+	 #loginrouter{
+	 	position:fixed;
+	 	top:15vh;
+	 	left:58vw;
+	 	z-index:2;
+	 }
+	 #logsd{
+	 	margin-top:3.5vh;
+	 	margin-right:15vw;
+	 	
+	 }
 </style>
 <body>
-	<div>
-		<div id="line">
-			<div id="logo">
-				<a href="index.html"><img src="img/logo @2x.png"alt="..." class="img-rounded img-responsive lazy"></a>
-			</div>
+	<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html"><img src="img/logo @2x.png"
+				alt="..." class="img-rounded img-responsive lazy"></a>
+			<p>&nbsp;</p>
 		</div>
-		<div id="rigester">
-			<form>
-				<div id="header" style="margin-bottom:2vh">
-					<span>注册账户</span>
-					<a href="HomeVue.html?flag=1" style="float:right;margin-right:1vw;">登录
-						<img :src="rigesterUrl">
-					</a>
-				</div>
-				<div id="body">
-					<label>
-			        	<input type="text" name="phone" id="phone" placeholder="请输入手机号" style="width:100%">
-			        	<br>	        	
-			        </label>
-			        <label>
-			        	<input type="text" name="nic" id="name" placeholder="请输入昵称" style="width:100%">	      
-			        	<br>	        	
-			        </label>
-			        <label>
-			        	<input type="password" id="pwd" onblur="mdjia()" placeholder="请输入6-21位密码" style="width:100%">
-			        </label>
-			        <label>
-			        	<input type="password" id="repwd" placeholder="请再次输入密码" style="width:100%">
-			        </label>
-			        <input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" style="width:53%">
-			       
-			        <input type="button" value="获取验证码" id="hmac" style="margin-right:1vw;width:39%;float:right;font-size:1.5vh;">
-			        
-					<label>
-						<button type="button" id="zhuce">注册</button>
-					</label>
-				</div>
-				 	
-		    </form>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav" style="margin-left:4vw;">
+				<!-- <li class="active">&nbsp; <span class="sr-only">(current)</span></li> -->
+
+
+				<li class="dropdown" STYLE="margin-top: 5%">
+
+					<div class="form-group navbar-form navbar-left">
+						<div class="input-group col-xs-12">
+							<div class="input-group-btn">
+								<select name="type" id="dropdown" class="form-control" style="width: auto;">
+									<option value="1">全部</option>
+									<option value="2">高中</option>
+									<option value="3">初中</option>
+									<option value="4">小学</option>
+								</select>
+							</div>
+							<input type="text" name="keyword" id="keyword"
+								class="form-control" placeholder="请您输入关键词"> 
+							<span class="input-group-btn">
+								<button class="btn btn-info" id="search_submit" type="submit">
+									搜索
+								</button>
+							</span>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<!-- 登录|注册 -->
+			
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<div>
+						<div  id="logsd">
+							<a href="logins.html" @click="change(1)" :class="flag==1?'active':''">登录</a>
+					    	<a href="rigester.html" @click="change(2)" :class="flag==2?'active':''">注册</a>
+						</div>
+						<!-- 添加头像 -->
+						<div id="logImg" class="dropdown">             			
+	                 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	   							<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px" height="40px" class="img-circle"/>
+	    						<span class="caret"></span>
+	  						</button>
+		                 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="personal_center.html">个人中心</a></li>					 
+								<li id="exit"><a>退出</a></li>
+							</ul>		                		
+	                 	</div>
+					</div><!-- 登录|注册结束 -->					
+				</li>
+			</ul>			
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid --> </nav>
+
+	<!--  -->
+	<div id="center_body" style="width:40vw;margin:0vh 30vw;">
+		<div >      
+			<div class="clo-md-12" >
+				<h3 style="margin-left:0vw;">修改密码</h3>
+				<table class="table" >
+					<tr>
+						<td style="text-align: right;">账号:</td>
+						<td><input id="zhanghao" type="text" /> <span>&nbsp;</span>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right;">新密码:</td>
+						<td><input id="pwd"  placeholder="请输入6-21位密码" type="password"/> <span>&nbsp;</span></td>
+					</tr>
+					<tr>
+						<td style="text-align: right;">重新输入新密码:</td>
+						<td><input id="repwd" placeholder="请再次输入密码" type="password" /> <span>&nbsp;</span></td>
+					</tr>
+					<tr>
+						<td style="text-align: right;">短信验证码:</td>
+						<td>
+							<!-- <input name="dx" id="vcode" placeholder="请输入短信验证码" type="text" class="form-control"/>		
+							<span>&nbsp;</span> -->
+						 	<input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" style="width:30%"/>
+	        				<input type="button" value="获取验证码" id="hmac" style="padding:7px;width:20%;float:right;font-size:1.8vh;margin-top:1.5vh;margin-right:13vw"/>
+						</td>
+					</tr>
+					<tr>
+						<td></td><td><button class="btn btn-info" id="reset" style="float:right;margin-right:3vw">修改密码</button></td>
+					</tr>
+				</table>			
+			</div><!-- 修改密码结束 -->
 		</div>
 	</div>
-</body>
-<script>
-	
-/**
- * http://usejsdoc.org/
- */
 
-	//var url="http:127.0.0.1:8080/";
-	var url="";
+<!-- 页底 -->
+
+<div class="row" style="">
+<HR style="border:1 dotted #000000" width="100%" >
+	<div class="col-md-12" >
+	  <div class="col-md-2">&nbsp;</div>
+	  <div class="col-md-8">
+		<div class="col-md-4" >
+			<p><a href="#">关于我们</a>&nbsp;|&nbsp;<a href="#">加入我们</a>&nbsp;|&nbsp;<a href="#">申请合作</a>&nbsp;|&nbsp;<a href="#">意见反馈</a>&nbsp;|&nbsp;<a href="#">用户协议</a></p>
+			<p>鄂ICP备13006852号-3 鄂B2-20160872</p>
+			<div class="col-md-12">&nbsp;</div>
+			<P>
+				<img src="img/beianbgs@2x.png" alt="..." class="img-rounded">
+				 &nbsp;鄂公网安备 33010802003866号
+			</P>
+		</div>
+		<div class="col-md-2" style="text-align: center;">
+			<img src="img/footerlogo.png" alt="..." class="img-rounded img-responsive" style="margin: 0 auto;">
+		</div>
+		<div class="col-md-6" style="text-align: LEFT;">
+		
+			<img src="img/qrcode.png" alt="..." class="img-rounded">
+			<img src="img/qrcode.png" alt="..." class="img-rounded">
+			<img src="img/qrcode.png" alt="..." class="img-rounded">
+		</div>
+	  </div>
+	  <div class="col-md-2">&nbsp;</div>
+	</div>
+
+</div>
+<script type="text/javascript">
 	var code="";
 	//获取验证码
 	$('#hmac').click(function(){  
-		
-		var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
-		//	    获取输入框内容
-		var phonenumber = $("#phone").val();
-		var phoneflag=1;//标记手机号是正确的
-		//alert(phonenumber);
-		if (!myreg.test(phonenumber)){
-			$("#phone").attr('placeholder','请输入正确的手机号');
-			$("#phone").css('color','red'); 
-			$("#phone").focus(function(){
-				$("#phone").css('color','black');
-			});
-			return phoneflag=0; 
-		}
-	         var codeflag = 60;//点击时间间隔60s
+	        var codeflag = 60;//点击时间间隔60s
 	         
-	        if(phoneflag == 1&&codeflag==60){  
+	        if(codeflag==60){  
 	            var timeflag = setInterval(function(){  
 	                codeflag--;  
-	
-	                if(codeflag>0){ 
-	                	
+	                if(codeflag>0){       
 	                    $('#hmac').val('重新发送'+codeflag+'s');  
 	                    $('#hmac').css({'color':'#99897A'});  
 	                    $('#hmac').attr('disabled','disabled');  
@@ -207,78 +241,47 @@
 		        	for(var i=0;i<6;i++){
 		        		  code+=Math.floor(Math.random()*10);
 		        	}
-		        	alert(code);
+
+		        	//alert(code);
 	           
 	          
 	           var str={
-	        	   	phone:phonenumber,
+	        	   	phone:userphone,
 	        		code:code,//随机验证码
 	        		TemplateCode:"SMS_135036257"//模板信息
-	           }
-	           //alert("str"+str);
-		        $.ajax({
-		        	type:"POST",
-		        	url:url+"/videoServer/front/User/queryuser",
-		        	data:{
-		        		user_phone:phonenumber,	
-		        	},		        	
-		        	dataType:"json",
-		        	success:function(data){
-		        		
-		        		if(data.length==1){
-		        			alert("该号码已注册，请直接登录");
-		        		}else{
-		        			$.ajax({
-		        	        	type:"POST",
-		        	        	url:url+"/videoServer/front/AliBigFish/verificationCode",
-		        	        	contentType:'application/json;charset=UTF-8',
-		        	        	data:JSON.stringify(str),     	
-		        	        	//data:str,
-		        	        	dataType:"json",
-		        	        	success:function(data){
-		        	        		//alert("验证码已发送，请注意查收！");
+	           };
+		       $.ajax({
+		       			type:"POST",
+		        	    url:url+"/videoServer/front/AliBigFish/verificationCode",
+		        	    contentType:'application/json;charset=UTF-8',
+		        	    data:JSON.stringify(str),     			        	        	
+		        	    dataType:"json",
+		        	    success:function(data){
+		        	       alert("验证码已发送，请注意查收！");		        	        		
+		        	     },
+		    	       	error:function(){
 		        	        		
-		        	        	},
-		        	        	error:function(){
-		        	        		
-		        	        	}
-		        	        });
-		        		}
-		        	}
-		        });    
-	            
+		        	    }
+		       	});   
 	        }
-	        
-			
-			
 	})
-	//注册账号
-  	$("#zhuce").click(function(){
-  		
-  		var phone = $('#phone').val();  
-  		var name = $('#name').val();
-  		var pwd = $('#pwd').val();
-  		var repwd = $('#repwd').val();
+	
+	//重置密码
+	$("#reset").click(function(){	
+		var userphone=$('#zhanghao').val();
+		var pwd = $('#pwd').val();
+		var repwd = $('#repwd').val();
 	    var vcode = $('#vcode').val();
-	    var myreg=/^[a-zA-Z0-9]{6,21}$/;
-	  	if(phone == ""  ){  
-	  		$("#phone").attr('placeholder','手机号不能为空！');
-			$("#phone").css('color','red'); 
-			$("#phone").focus(function(){
-				$("#phone").css('color','black');
+	    var myreg=/^[a-zA-Z0-9]{6,21}$/;  	
+	    if(userphone == ""){  
+	    	  
+	    	$("#zhanghao").attr('placeholder','请输入账号');
+			$("#zhanghao").css('color','red'); 
+			$("#zhanghao").focus(function(){
+				$("#zhanghao").css('color','black');
 			});
 	        return false;  
-	    }  
-	    if(name == ""){
-	    	 
-	    	$("#name").attr('placeholder','请输入昵称');
-			$("#name").css('color','red'); 
-			$("#name").focus(function(){
-				$("#name").css('color','black');
-			});
-	        return false;  
-	    }
-	    
+	    } 
 	    if(pwd == ""){
 	    	$("#pwd").attr('placeholder','请输入密码');
 			$("#pwd").css('color','red'); 
@@ -321,50 +324,82 @@
 	    } 
 	    
 	   var UserTab={
-	    		"user_phone":phone,
-        		"user_name":name,
-        		"user_pwd":pwd,
-        		
-	    } 
+	    		"user_phone":userphone,
+	    		"user_pwd":pwd,
+	    		
+	    };
 	   // alert(JSON.stringify(UserTab));
-	    if(typeof(phone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code&&typeof(name)!="undefined"&&typeof(pwd)!="undefined"&&repwd==pwd){   
-	    	$.ajax({
-	        	type:"POST",
-	        	url:url+"/videoServer/front/User/saveuser",
-	        	data:JSON.stringify(UserTab),	
-	        	contentType:'application/json;charset=UTF-8',
-	        	cache:false,
-	        	dataType:"json",
-	        	//dataType:"text",
-	        	success:function(data){
-	        		window.location.href="index.html"; 
-	        		//alert("注册成功！");
-	        	},
-	        	error:function(data){
-	        		alert("注册失败！");
-	        	
-	        	},
-	        });
+	   if(typeof(userphone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code&&typeof(pwd)!="undefined"&&repwd==pwd){   
+	
+	        $.ajax({
+	       			type:"POST",
+	        	    url:url+"/videoServer/front/User/updateuser",
+	        	    data:JSON.stringify(UserTab),	
+	        	    contentType:'application/json;charset=UTF-8',
+	        	    cache:false,
+	        	    dataType:"json",
+	        	    success:function(data){
+	        	       alert(data);	   		 
+	        	    },
+	        	    error:function(){
+	        	       alert("error");
+	        	       //window.location.reload();
+	        	    }
+	         }); 
+	        		
 	     }else{  
-	         
+	        alert("输入信息有误");
 	        return false;  
 	    }  
-	     
-  	})
-	
-	//登录页面中注册按钮后的小图标
-	var rigster=new Vue({
-		el:'#header',
-		data:{
-			rigesterUrl:'photos/LoginPhoto/rigester.png'
-		}
 	})
-	//登录页面中的微信登录小图标
-	var weixin=new Vue({
-		el:'#wxChat',
-		data:{
-			weixin:'photos/LoginPhoto/weixin.png'
+
+	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
+	$(function(){
+		
+		//alert($.cookie('phone'));
+		//alert($.cookie('photo'));
+		if($.cookie("phone")==null){//cookie过期
+			alert("登录过期，请重新登录");
+		
+		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
+			//alert("pp");
+			$("#logsd").hide();
+			$("#logImg").show();
+		}else if($.cookie("phone")!=null&&$.cookie("photo")!=null){//cookie有用户信息和头像
+			//alert("dd");
+			$("#logsd").hide();
+			$("#imgt").attr("src",$.cookie("photo"));
+			$("#logImg").show();
 		}
+		 
+		
 	})
+	/*
+	退出按钮点击事件
+	*/
+	$("#exit").click(function(){
+		//alert(5);
+		//window.location.href="index.html"; 
+		$("#logsd").show();
+		$("#logImg").hide();
+		$.cookie('id', '', { expires: -1 ,path:'/',secure: false});
+		$.cookie('phone', '', { expires: -1 ,path:'/',secure: false});
+		$.cookie('photo', '', { expires: -1,path:'/',secure: false });  
+	})
+		
+	//登录注册样式切换
+	new Vue({  
+		  el: '#logsd',  
+		  data: {  
+		   flag:1,//默认为百度添加 .active  
+		  },  
+		  methods:{  
+		   change:function(a){//传入参数这里指1、2  
+		    this.flag=a;//flag==1 or flag==2  
+		   }  
+		  }  
+	})  
+
 </script>
+</body>
 </html>

@@ -17,7 +17,7 @@
 	</select>
 	<!-- 查询视频详情 -->
 	<select id="queryVideoDetails" parameterType="int" resultType="java.util.HashMap">
-		SELECT video_id,video_name FROM video_tab WHERE video_id = #{video_id}
+		SELECT video_id,video_name,video_url FROM video_tab WHERE video_id = #{video_id}
 	</select>
 	<select id="queryRecommendCourse" resultType="java.util.HashMap">
 		SELECT

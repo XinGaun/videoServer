@@ -1,5 +1,6 @@
 package com.service.serviceImpl;
 
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,42 +8,40 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dao.VideoTabDao;
 import com.entity.VideoTab;
 import com.service.VideoTabService;
 import com.util.OSSUtil;
+
 @Service
 public class VideoTabServiceImpl implements VideoTabService{
 
 	@Autowired
 	private VideoTabDao videoDao;
+
 	private OSSUtil ossUpload = new OSSUtil();
+//	final long MAX_SIZE = 10 * 1024 * 1024 * 1024;// 设置上传文件最大为 10G 
 
 	@Override
 	@Transactional
-	public  void uploadVideo(String video_name, String video_introduce,String video_url, String video_image_url,Integer video_form_id,Integer teacher_id) throws Exception {
-		HashMap<String,String> map =videoUpload(video_url,video_image_url,video_name,null);
+	public  void uploadVideo(String video_name,String imageName, String video_introduce,MultipartFile video, MultipartFile image,Integer video_form_id,Integer teacher_id,long size) throws Exception {
+		HashMap<String,String> map =videoUpload(video,image,video_name,imageName,size);
 		String videoUrl = map.get("video_url");
 		String videoImageUrl = map.get("video_image_url");
-		System.out.println("create");
 		createVideoTab(video_name,videoUrl,videoImageUrl,video_introduce,video_form_id,teacher_id);
 	}
 
-	public HashMap<String,String> videoUpload(String video_url, String video_image_url,String video_name,String imageName)throws Exception {
+	public HashMap<String,String> videoUpload(MultipartFile video, MultipartFile image,String video_name,String imageName,long size)throws Exception {
+
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(4*1024);
-		HashMap<String,String> map = new HashMap<>();
-		/*ossUpload.uploadInput(video_name,video);
-		ossUpload.uploadInput(imageName,video_image);*/
-
-		String ossVideoName =ossUpload.uploadJD(video_url,video_name);
-		String ossImageName = ossUpload.upload(video_image_url,video_name);
-		System.out.println("oss end");
+		HashMap<String,String> map = new HashMap<>();		
+		String ossVideoName =ossUpload.uploadJD(video.getInputStream(),video_name,size);
+		String ossImageName = ossUpload.uploadInput(imageName,image.getInputStream());
 		String viderUrl = ossUpload.getWebURL(ossVideoName);
 		String imageUrl = ossUpload.getWebURL(ossImageName);
-		System.out.println("service"+viderUrl);
-		System.out.println("service"+ imageUrl);
 		map.put("video_url", viderUrl);
 		map.put("video_image_url", imageUrl);
 		return map;

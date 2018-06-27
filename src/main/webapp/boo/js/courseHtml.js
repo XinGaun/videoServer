@@ -1,5 +1,7 @@
 $(function(){
-	var user_id = $.cookie('user_id');
+
+	var user_id = $.cookie('id');
+
 	$("#kcml").hide();
 	$("#xypl").hide();
 	initRecommendCourse();
@@ -27,11 +29,13 @@ $(function(){
 });
 
 //var url = "http:/127.0.0.1:8080"
-	var url ="";
 
-	var pages = 0;//当前页数
-	var nums = 3;//每页几条
-	var total = 0;//总条数 
+var url ="";
+
+var pages = 0;//当前页数
+var nums = 3;//每页几条
+var total = 0;//总条数 
+
 //组装参数
 var param = {
 		page : nums,
@@ -39,54 +43,60 @@ var param = {
 }
 //购买课程
 function goumais(){
-	 function getistype(){
-	        return ($("#demo1-alipay").is(':checked') ? "1" : "2" ); 
-	 }
-	 $.ajax({
-			type: "POST",
-			url:"/videoServer/front/pays/pay",
-			data:{
-			price : $("#qians").html(), 
-             istype : getistype(),
-             //goodsname :$("goodsname").val(),
-             user_id : $.cookie('user_id'),//用户ID
-             video_id : getUrlParam('cid'),//课程Id
 
-			},
-			dataType: "json",
-			success: function(data){
-				 $("#goodsname").val(data.data.goodsname);
-                 $("#istype").val(data.data.istype);
-                 $('#key').val(data.data.key);
-                 $('#notify_url').val(data.data.notify_url);
-                 $('#orderid').val(data.data.orderid);
-                 $('#orderuid').val(data.data.orderuid);
-                 $('#price').val(data.data.price);
-                 $('#return_url').val(data.data.return_url);
-                 $('#uid').val(data.data.uid);
-                 $('#submitdemo1').click();
-			},
-			error:function(){
-				 alert(data.msg);
+	function getistype(){
+		return ($("#demo1-alipay").is(':checked') ? "1" : "2" ); 
+	}
+	$.ajax({
+		type: "POST",
+		url:"/videoServer/front/pays/pay",
+		data:{
+			price : $("#qians").html(), 
+			istype : getistype(),
+			//goodsname :$("goodsname").val(),
+			user_id : $.cookie('id'),//用户ID
+			video_id : getUrlParam('cid'),//课程Id
+
+		},
+		dataType: "json",
+		success: function(data){
+			if(data==-1){
+				alert("购买成功!");
+				return;
 			}
-		});
-	 
+			$("#goodsname").val(data.data.goodsname);
+			$("#istype").val(data.data.istype);
+			$('#key').val(data.data.key);
+			$('#notify_url').val(data.data.notify_url);
+			$('#orderid').val(data.data.orderid);
+			$('#orderuid').val(data.data.orderuid);
+			$('#price').val(data.data.price);
+			$('#return_url').val(data.data.return_url);
+			$('#uid').val(data.data.uid);
+			$('#submitdemo1').click();
+		},
+		error:function(){
+			alert(data.msg);
+		}
+	});
+
 }
 
 //加入课程
 function joincourse(){
 
-	if($.cookie('user_id')==null||$.cookie('user_id')==""||$.cookie('user_id')==undefined){
+
+	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
 		if(confirm("您还没有登录请先登录!")){
 			window.location.href="logins.html";
-			return;
+			return false;
 		}else{
-			return;
+			return false;
 		}
 	}
 	var data = {
-		user_id:$.cookie('user_id'),
-		video_id:getUrlParam('cid')
+			user_id:$.cookie('id'),
+			video_id:getUrlParam('cid')
 	}
 	$.ajax({
 		type : "POST",
@@ -98,20 +108,21 @@ function joincourse(){
 		success : function(result) {
 			//console.log(result);
 			if(result!="success"){
-				if(confirm("是否购买课程加入课程!")){
+
+				if(confirm("您还没有购买课程,是否购买课程加入课程!")){
 					$("#myModal").modal('show');
+					return false;
 				}else{
-					
+					return false;
 				}
 			}else{
 				alert("您已加入课程!,请直接在课程目录观看课程!");
+				return true;
 			}
 		}
-		
+
 	});
 }
-	
-	
 //判断PC或移动
 function judgePC(){
 	if (navigator.userAgent.match(/mobile/i)) {
@@ -247,16 +258,70 @@ function initVideo(video_arr){
 			//console.log(result);
 			for(var i=0;i<result.length;i++){
 				var videos = '<li>'
-							+	'<div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
-							+	'<a href="javascript:void(0)">'+result[i].video_name+'</a>'
-							+'</div>'
-							+'</li>';
+
+					+	'<div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
+					+	'<a href="javascript:void(0)" onclick="videourl(&quot;'+result[i].video_url+'&quot;,'+result[i].video_id+')")">'+result[i].video_name+'</a>'
+					+'</div>'
+					+'</li>';
+
 				$("#videos").append(videos);
 			}
 		}
 	});
 
 }
+
+//弹出播放页面
+function videourl(urls,id){
+	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
+		if(confirm("您还没有登录请先登录!")){
+			window.location.href="logins.html";
+			return false;
+		}else{
+			return false;
+		}
+	}
+	var data = {
+			user_id:$.cookie('id'),
+			video_id:getUrlParam('cid')
+	}
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/front/Videos/queryOrder",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(data), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			//console.log(result);
+			if(result!="success"){
+				if(confirm("您还没有购买课程,是否购买课程加入课程!")){
+					$("#myModal").modal('show');
+					return false;
+				}else{
+					return false;
+				}
+			}else{
+				$("#myModalvideo").modal('show');
+				var videoObject = {
+						container: '.video',//“#”代表容器的ID，“.”或“”代表容器的class
+						variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
+						autoplay:true,//自动播放
+						video:urls,//视频地址,
+						h:'1',
+						m:'0'
+				};
+				var player=new ckplayer(videoObject);
+				
+			}
+		}
+
+	});
+
+}
+
+
+
 //初始化学员评论
 function initStudentComments(param){
 	$
@@ -342,7 +407,7 @@ function initStudentComments(param){
 						total=result.total;
 						page(pages,nums,result.total);
 					}
-					
+
 				}
 			}
 		}

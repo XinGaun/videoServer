@@ -388,17 +388,6 @@
 	
 	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
 	$(function(){
-		
-
-
-		//alert($.cookie('phone'));
-		//alert($.cookie('photo'));
-
-		//var toux="<img src=\"photos/LoginPhoto/txx.jpg\" width=\"35px\" height=\"35px\" class=\"img-circle\"/>";
-
-		//alert($.cookie('phone'));
-		//alert($.cookie('photo'));
-
 		if($.cookie("phone")==null){//cookie过期
 			alert("登录过期，请重新登录");
 		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
@@ -408,11 +397,9 @@
 		}else if($.cookie("phone")!=null&&$.cookie("photo")!=null){//cookie有用户信息和头像
 			//alert("dd");
 			$("#logsd").hide();
-			$("#logImg").attr("src","http://localhost:8080/videoServer/boo/photos/LoginPhoto/"+$.cookie("photo")+"");
+			$("#imgt").attr("src",$.cookie("photo"));
 			$("#logImg").show();
 		}
-		 
-		
 	})
 	/*
 		退出按钮点击事件
@@ -424,9 +411,9 @@
 		$("#logsd").show();
 
 		$("#logImg").hide();
-		$.cookie('id', '', { expires: -1 });
-		$.cookie('phone', '', { expires: -1 });
-		$.cookie('photo', '', { expires: -1 }); 
+		$.cookie('id', '', { expires: -1 ,path:'/',secure: false});
+		$.cookie('phone', '', { expires: -1 ,path:'/',secure: false});
+		$.cookie('photo', '', { expires: -1,path:'/',secure: false }); 
 		 
 	})
 	
