@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>个人中心-我的账号</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+	#all{
+		width:100vw 100vh;
+	}
+	#myTab{
+		border:1px solid gray;
+	}
+	#left{
+		width:46vw;
+		height:auto;	
+		float:left;
+	}
+	#right{
+		width:15vw;
+		height:100vh;
+		float:left;
+		border:1px solid red;
+		margin-left:1vw;
+	}
+	#myTabContent{
+		margin-top:2vh;
+	}
+	#infomation,#security,#three{
+		margin-left:1vw;
+		margin-right:3vw;
+	}
+	label{
+		margin-left:2vw;
+		text-align:right;
+		width:80px;
+	}
+	#infomation input,#infomation img,#infomation textarea,#infomation p,#three input{
+		margin-left:2vw;
+	}
+	#infomation p{
+		font-size:10px;
+		color:#999999;
+	}
+	textarea{
+		background:#F0F0F0;
+		border:0px;
+		padding-top:2vh;
+		padding-left:1vw;
+	}
+	#up{
+		font-size:10px;
+		margin-left:2vw;
+		
+	}
+	#btn{
+		background:#3AA8FF;
+		color:white;
+		margin-left:2vw;
+		border:0px;
+		
+	}
+	input {
+		border:1px solid #999999;
+	}
+	input:hover{
+		border:1px solid #3AA8FF;
+	}
+	td,#three div{
+		padding-top:2vh;
+	}
+	.default{
+		color:red;
+	}
+	.save{
+		background:#3AA8FF;
+		border-radius:2em;
+		padding-left:1vw;
+		padding-right:1vw;
+		color:white;
+		border:0px;
+		
+	}
+	.atab{
+		
+		border-radius:2em;
+		padding-left:1vw;
+		padding-right:1vw;
+		
+		border:1px solid #3AA8FF;
+	}
+	#three p{
+		margin-left:10vw;
+		display:none;
+	}
+	#three input{
+		width:31vw;
+	}
+	#security img{
+		margin-left:2vw;
+		margin-right:1vw;
+	}
+	#security button,#dengji{
+		float:right;
+	}
+	#security>div{
+		margin-top:2vh;
+	}
+	#security span{
+		margin-right:2vw;
+	}
+</style>
+<body>
+<div id="all">
+	<div id="left">
+		<div id="myTab">
+			<ul class="nav nav-tabs">	
+			   <li><a>我的账号</a></li>
+			   <li class="active"><a href="#infomation" data-toggle="tab">个人资料</a></li>
+			   <li><a href="#security" data-toggle="tab">安全设置</a></li>
+			   <li><a href="#three" data-toggle="tab">第三方账户</a></li>
+			</ul>
+		</div>
+		<div id="myTabContent" class="tab-content">
+		   <div class="tab-pane fade in active" id="infomation">
+		   	  <h6>展示您的个人资料，是别人认识您的第一步</h6>
+		      <h4>基本信息</h4>
+		      <table>
+		      <tr>
+		      	<td><label><span class="default">*</span>昵称</label></td>
+		      	<td><input id="name" type="text"/></td>
+		      </tr>
+		      <tr>
+		      	<td><label>上传头像</label></td>
+		      	<td>
+		      		<table>
+		      			<tr>
+		      				<td rowspan="2" id="photoimg"><img id="thumburlShow" src="photos/LoginPhoto/txx.png"/></td>
+		      				<td><span id="up">你可以上传JPG、GIF或PNG格式的文件，文件大小不能超过2M。</span></td>
+		      			</tr>
+		      			<tr>
+		      				<td>
+			      				<!-- <form id="uploadForm"  action="" method="post" enctype="multipart/form-data"> -->
+									<input type="file" name="uploadFile" id="uploadFile" style="visibility:hidden;position:absolute;top:0px;width:0px"/><!--隐藏默认标签样式-->
+								<!-- </form> -->
+								<input type="hidden" name="img"  id="thumbUrl"/>
+								<input type="button" class="btn btn-xs" value="上传你的头像" id="btn"/>				
+		      				</td>
+		      			</tr>
+		      		</table>
+		      	</td>
+		      </tr>
+		      <tr>
+		      	<td><label>性别</label>	</td>	      	
+                <td><input type="radio" value="3"  name="sex">男
+                <input type="radio" value="4"  name="sex">女
+                <input type="radio" value="7" checked="checked" name="sex">保密</td>
+		      </tr>
+		      <tr>
+		      	<td><label>个人介绍</label></td>
+		      	<td><textarea name="aboutme"  id="aboutme" placeholder="再用一句话您介绍自己，这将显示在您的个人主页上，最多显示80个字" cols="70" rows="3"></textarea>
+		      		<p><span id="text-count">80</span>/80</p>
+		      	</td>
+		      </tr>
+		      </table>
+		      <h4>联系信息</h4>
+		      <table>
+		      <tr>
+		      	<td><label>真实姓名</label></td>
+		      	<td>
+		      		<input type="text" id="truename"/><p>仅用于身份验证，不会以任何形式向第三方透漏</p>
+		      	</td>
+		      </tr>
+		      <tr>
+		      	<td><label><span class="default">*</span>常用邮箱</label></td>
+		      	<td>
+		      		<input id="email" type="text"/>
+		      		
+		      		<p>用于接收平台来自平台和课程的邮件通知</p>
+		      	</td>
+		      </tr>
+		      <tr>
+		      	<td><label>修改手机</label></td>
+		      	<td><input id="altphone" type="text"/>
+		      	<a id="alterphone">修改手机号</a>
+		      		<p>仅用于优质课程的提醒等服务，及账号的快捷登录，手机号不会对外公开，请放心。</p>
+		      	</td>
+		      </tr>
+		      <tr>
+		      	<td><label>QQ号码</label></td>
+		      	<td><input id="qq" type="text"/>
+		      		<p>仅用于课程的高效交流，方便与课程老师答疑。</p></td>
+		      </tr>
+		      </table>
+		      <hr/>
+		      <div style="margin-left:7vw;margin-top:-2vh;margin-bottom:1vh;"><button type="button" id="updateuser" class="btn btn-xs save">保存</button></div>
+		      </div>
+		   
+		   <div class="tab-pane fade" id="security">
+		      <div><h6>设置账户的安全信息，保护您账户安全每一天。</h6></div>
+		      <div><h4>密码安全</h4></div>
+		      <div style="display:inline-block;">
+		      	<div style="float:left;"><img alt="" style="width:50px;height:50px;margin-top:-2vh;" src="photos/LoginPhoto/alert3.png"></div>
+				<div class="progress" style="float:left;width:25vw;height:15px;">
+				  	<div class="progress-bar" role="progressbar" aria-valuenow="60" 
+						 aria-valuemin="0" aria-valuemax="100" style="width: 40%;background:#3AA8FF;">
+						
+					</div>
+				</div>
+		      	<div style="margin-left:6vw;" id="dengji">安全等级：低</div>
+		      </div>
+		      <div>
+		      	<img alt="" src="photos/LoginPhoto/sec.png">
+				<span>登录密码</span>
+				<span>登录网校时需要输入的密码</span>
+				<button type="button" class="btn btn-xs atab">修改</button>
+		      </div>
+		      <div>
+		      	<img alt="" src="photos/LoginPhoto/alert2.png">
+				<span>支付密码</span>
+				<span>在网校上进行消费行为时需要输入的密码</span>
+				<button type="button" class="btn btn-xs save">设置</button>
+		      </div>
+		      <div>
+		      	<img alt="" src="photos/LoginPhoto/alert2.png">
+				<span>安全设置</span>
+				<span>通过设置并且验证安全问题，保护账号密码安全</span>
+				<button type="button" class="btn btn-xs save">设置</button>
+		      </div>
+		      <div>
+		      	<img alt="" src="photos/LoginPhoto/alert2.png">
+				<span>安全邮箱</span>
+				<span>用于账号找回密码的一种验证方式</span>
+				<button type="button" class="btn btn-xs save">设置</button>
+		      </div>
+		      <hr/>
+		      <h4>第三方账户</h4>
+		      <div>
+		      	<img alt="" src="photos/LoginPhoto/weixin.png">
+				<span>微信账号</span>
+				<span>已绑定</span>
+				<button type="button" class="btn btn-xs atab" style="padding:0vh 0.2vw;">取消绑定</button>
+		      </div>
+		      <div>
+		      	<img alt="" src="photos/LoginPhoto/QQ.png">
+				<span>QQ账号</span>
+				<span>未绑定</span>
+				<button type="button" class="btn btn-xs save">绑定</button>
+		      </div>
+		      <div>
+		      	<img alt="" src="photos/LoginPhoto/weibo.png">
+				<span>微博账号</span>
+				<span>未绑定</span>
+				<button type="button" class="btn btn-xs save">绑定</button>
+		      </div>
+		   </div>
+		   <div class="tab-pane fade" id="three" style="border:1px solid red;">
+		      <div><h6>设置账户的安全信息，保护您账户安全每一天。</h6></div>
+		      <div><h4>我的账号 / 安全设置 / 设置支付密码</h4></div>
+		      <div id="logindiv">
+		      	<label>登录密码</label>
+		      	<input id="loginpwd" type="password"/>
+		      	<p id="pwdtext">请输入登录密码</p>
+		      </div>
+		      <div id="paydiv">
+		      	<label>支付密码</label>
+		      	<input id="paypwd" type="password"/>
+		      	<p id="paytext">请输入支付密码</p>
+		      </div>
+		      <div id="repaydiv">
+		      	<label style="white-space:nowrap; ">确认支付密码</label>
+		      	<input id="repaypwd" type="password"/>
+		      	<p id="repaytext">请再次输入支付密码</p>
+		      </div>
+		      <hr/>
+		      <div style="margin-left:7vw;margin-top:-2vh;margin-bottom:1vh;"><button type="button" class="save" class="btn btn-xs">提交</button></div>
+		   </div>
+		</div>
+	</div>
+	<div id="right"></div>
+</div>
+<script type="text/javascript">  
+	
+    /*字数限制*/  
+    $("#aboutme").on("input propertychange", function() {  
+        var $this = $(this),  
+            _val = $this.val(),  
+            count = "";  
+        if (_val.length > 80) {  
+            $this.val(_val.substring(0, 80));  
+        }  
+        count = 80 - $this.val().length;  
+        $("#text-count").text(count);  
+    });  
+    /* 登录密码聚焦事件 */
+    $("#loginpwd").focus(function(){
+    	$("#logindiv").css({color:"red"});
+    	$(this).css({"border-color":"red"});
+    	$("#pwdtext").show();
+    })
+    /* 登录密码失焦事件*/
+    $("#loginpwd").blur(function(){
+    	$("#logindiv").css({color:"black"});
+    	$(this).css({"border-color":"#999999"});
+    	$("#pwdtext").hide();
+    })
+    /* 支付密码聚焦事件 */
+    $("#paypwd").focus(function(){
+    	$("#paydiv").css({color:"red"});
+    	$(this).css({"border-color":"red"});
+    	$("#paytext").show();
+    })
+    /* 支付密码失焦事件 */
+    $("#paypwd").blur(function(){
+    	$("#paydiv").css({color:"black"});
+    	$(this).css({"border-color":"#999999"});
+    	$("#paytext").hide();
+    })
+     /* 重复支付密码聚焦事件 */
+    $("#repaypwd").focus(function(){
+    	$("#repaydiv").css({color:"red"});
+    	$(this).css({"border-color":"red"});
+    	$("#repaytext").show();
+    })
+    /* 重复支付密码失焦事件 */
+    $("#repaypwd").blur(function(){
+    	$("#repaydiv").css({color:"black"});
+    	$(this).css({"border-color":"#999999"});
+    	$("#repaytext").hide();
+    })
+    
+    
+    
+    
+    /* 上传头像图片 */
+    $(function () {
+    	//var f="";//定义全局变量file改变时的值
+        //file的change事件
+        $('#uploadFile').change(function () {
+        	//f=$(this).val();
+        	//提交form表单的数据
+            //$('#uploadForm').submit();
+　　　　　　	
+　　　　　　	var f=$(this).val();
+	    	
+	        if(f == null || f ==undefined || f == ''){
+	            return false;
+	        }
+	        if(!/\.(?:png|jpg|gif|PNG|JPG|GIF)$/.test(f))
+	        {
+	        	$("#up").css({color:"red"});
+	            $(this).val('');
+	            return false;
+	        }
+	       	var size=Math.ceil(($(this)[0].files[0].size)/ 1024);//计算图片大小
+	       	
+	       	if(size>2*1024){
+	       		//图片大于2M
+	       		$("#up").css({color:"red"});
+	       	}else{
+	       		var data = new FormData();
+			    $.each($(this)[0].files,function(i,file){
+			    	data.append('file', file);
+			    });
+	       	}
+	       
+	        $.ajax({
+	            type: "POST",
+	            url: "User/addfile",
+	            //data: JSON.stringify(data),
+	            data:data,
+	            cache: false,
+	            contentType: false,    //不可缺
+	            processData: false,    //不可缺
+	            dataType:"json",
+	            success: function(suc) {
+	                if(suc.code==0){
+	                        $("#thumbUrl").val(suc.message);//将地址存储好
+	                        $("#thumburlShow").css({width:"80px"},{heith:"80px"});//显示图片     
+	                        $("#thumburlShow").attr("src",suc.message);//显示图片   
+	                        send(suc.message);
+	                        $("#photoimg").val(suc.message);
+	                        
+	                 }else{
+	                    alertLayel("上传失败");
+	                    $("#url").val("");
+	                    $(this).val('');
+	                }
+	            },
+	            error: function(XMLHttpRequest, textStatus, errorThrown) {
+	                alertLayel("上传失败，请检查网络后重试");
+	                $("#url").val("");
+	                $(this).val('');
+	            }
+	        });
+      	 //清空file标签的value，否则再次提交此文件时，onchange事件就不触发了
+　　　　    $('#uploadFile').val(''); 
+　　　　  });
+      	//按钮的点击事件
+        $('#btn').click(function () {
+        	//触发file的点击事件
+            $('#uploadFile').click();
+        });
+　　}); 
+    //保存按钮点击事件
+    $("#updateuser").click(function(){
+    	
+    	var user=$("#name").val();//昵称
+    	var photo=$("#photoimg").val();
+    	var url=photo.substr(photo.lastIndexOf("/")+1);//头像
+    	var email=$("#email").val();//email
+    	var sex=$('input:radio:checked').val();
+    	var area=$("#aboutme").val();
+    	var truename=$("#truename").val();
+    	var phone=$("#altphone").val();
+    	var qq=$("#qq").val();
+    	var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //验证邮箱 正则表达式
+    	var regqq = /^[1-9]\d{4,9}$/; //验证qq
+    	var regname=/^[\u0391-\uFFE5\w]+$/;//验证名字
+    	if(user==null&&user==""){
+    		alert("带*号的不能为空");
+    	} 
+    	if(email==null&&email==" "){
+    		alert("带*号的不能为空");
+    		return false;
+    	}else if(!reg.test(email)){
+    		alert("邮箱格式不正确")
+    		return false;
+    	}
+    	if(qq!=""){
+	    	if(!regqq.test(qq)){
+	    		alert("QQ格式不正确");
+	    		
+	    	}
+    	}
+    	if(truename!=""){
+    		if(truename.search(regname)==-1){
+        		alert("请填写正确的名字");
+        		
+        	}
+    	}
+    	
+    	var alluser={
+    			"user_name":user,
+    			"user_photo":photo,
+    			"user_sex":sex,
+    			"user_self":area,
+    			"user_truename":truename,
+    			"user_email":email,
+    			"user_phone":phone,
+    			"user_qq":qq,
+    	}
+    	
+    	//alert(JSON.stringify(alluser));
+    	if(typeof(user)!="undefined"&&typeof(email)!="undefined"){
+    		
+    		$.ajax({
+    			type:"POST",
+    			url:"User/updatemessage",
+    			data:JSON.stringify(alluser),
+    			contentType:'application/json;charset=UTF-8',
+	        	cache:false,
+    			dataType:"json",
+    			success:function(data){
+    				
+    				alert(data);
+    			},
+    			error:function(){
+    				alert("信息保存失败");
+    			},
+    		})
+    	} 
+    	
+    })
+    
+	var userphone=15036608954;
+    $(function(){
+    	//var userphone=$.cookie('phone');
+    	//alert(userphone);
+    	$.ajax({
+        	type:"POST",
+        	url:"User/queryuser",
+        	data:{
+        		"user_phone":userphone,	
+        	},		        	
+        	dataType:"json",
+        	success:function(data){
+        		$("#name").val(data[0].user_name);//昵称
+        		
+            	$("#email").val(data[0].user_email);//email
+            	//$('input:radio:checked').val(user_sex);
+            	$("#aboutme").val(data[0].user_self);
+            	$("#truename").val(data[0].user_truename);
+            	$("#altphone").val(data[0].user_phone);
+            	$("#qq").val(data[0].user_qq);
+            	if(data[0].user_sex==3){
+            		//男
+            		$("input[name=sex][value=3]").attr("checked",true);
+            	}else if(data[0].user_sex==4){
+            		//女
+            		$("input[name=sex][value=4]").attr("checked",true);
+            	}/* else if(data[0].user_sex==7){
+            		$("input[name=sex][value=7]").attr("checked",true);
+            	} */
+            	
+            	if(data[0].user_photo!=null&&data[0].user_photo!=""){
+            		$("#thumburlShow").attr("src",data[0].user_photo);//显示图片  
+            	}
+        	},
+        	error:function(){
+        		alert("error");
+        	}
+		})		 
+    })
+     $("#alterphone").click(function(){
+    	alert(1);
+    	var data={
+    			"user_phone":$("#altphone").val(),
+    			"user_email":$("#email").val(),
+    	}
+    	alert(JSON.stringify(data));
+    	$.ajax({
+    			type:"POST",
+    			url:"User/updatephone",
+    			data:JSON.stringify(data),
+    			contentType:'application/json;charset=UTF-8',
+	        	cache:false,
+    			dataType:"json",
+    			success:function(data){
+    				
+    				alert(data);
+    			},
+    			error:function(){
+    				alert("信息保存失败");
+    			}
+    		}) 
+    }) 
+</script>  
+</body>
+</html>

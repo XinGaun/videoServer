@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+   	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <style type="text/css">
+		.role{display:none}
+	</style>
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><i class="fa fa-comments"></i> <strong><span style="font-size:25px;">语道后台管理 </span></strong></a>
+            </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Doe</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Today</em>
+                                    </span>
+                                </div>
+                                <div>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem Ipsum has been the industry's standard dummy text ever since the...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>Read All Messages</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 1</strong>
+                                        <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 2</strong>
+                                        <span class="pull-right text-muted">28% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" style="width: 28%">
+                                            <span class="sr-only">28% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 3</strong>
+                                        <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 4</strong>
+                                        <span class="pull-right text-muted">85% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+                                            <span class="sr-only">85% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Tasks</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 min</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 min</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small">4 min</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <span class="pull-right text-muted small">4 min</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 min</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="javascript:teacherLoginOut()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+            
+            	<ul class="nav" id="main-menu">
+					<li class="role" style="display: none;">
+						<a href="#"><i class="fa fa-sitemap"></i>权限管理<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
+							</li>
+							<li>
+								<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
+							</li>
+							<li>
+								<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+                        <a href="videoInfo.html" class="active-menu"><i class="fa fa-table"></i>视频管理</a>
+                    </li>
+                    <li>
+                        <a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
+                    </li>
+                    <li>
+                        <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
+                    </li>
+					<li class="role" style="display: none;">
+						<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
+					</li>
+					<li>
+						<a href="comment.html"><i class="fa fa-table"></i>评论管理</a>
+					</li>
+					<li class="role" style="display: none;">
+						<a href="order.html"><i class="fa fa-table"></i>订单管理</a>
+					</li>
+					<li class="role" style="display: none;">
+						<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
+					</li>
+					<li class="role" style="display: none;">
+						<a href="test.html" ><i class="fa fa-edit"></i>题目管理</a>
+					</li>
+				</ul>
+            </div>
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner">
+			 <div class="row">
+                 <div class="col-md-12">
+                     <h1 class="page-header">
+                         	语道 <small>视频管理</small>
+                     </h1>
+                 </div>
+             </div> 
+             <div class="row">
+            	<div class="col-md-12">
+	                <div class="panel panel-default">
+	                	<div class="table-responsive">
+							<table class="table"  class="display table-striped table-bordered table-hover table-condensed" cellspacing="0" width="100%">
+								<tr>
+									<td>
+										<div class="input-group" width="100%">
+											<span class="input-group-addon">视频名称</span>
+											<input type="text" class="form-control" placeholder="请输入视频名称" id="video_name1">
+										</div>
+									</td>
+									<td>
+										<div class="input-group" width="100%">
+											<span class="input-group-addon">视频类型</span>
+											<select  class="form-control" style="width:200px;" id="video_type"><option value=""></option><option value="1">语文(1)</option><option value="2">数学(2)</option><option value="3">英语(3)</option></select>
+										</div>
+									</td>
+									<!-- <td>
+										<div class="input-group" width="100%">
+											<span class="input-group-addon" width="100%">视频编号</span>
+											<input type="text" class="form-control" placeholder="请输入视频编号" id="order_id">
+										</div>
+									</td> -->
+									<!-- <td colspan="2">
+										<div id="sandbox-container">
+											<div class="input-daterange input-group" id="datepicker">
+												<input type="text" class="input form-control" name="start" id="order_start"/>
+												<span class="input-group-addon">至</span>
+												<input type="text" class="input form-control" name="end" id="order_end"/>
+											</div>
+										</div>
+									</td> -->
+								</tr>
+								<tr>
+									
+								</tr>
+								<tr>
+									<td>
+										<button type="button" class="btn btn-danger" id="removeorder" data-toggle="modal" data-target="#myModal">添加视频</button>
+									</td>
+									<td></td>
+									<td></td>
+									<td>
+										<div style="float:right">
+											<button type="button" class="btn btn-primary" id="queryorder">搜索</button>&nbsp;&nbsp; &nbsp;&nbsp;
+											<button type="button" class="btn btn-warning" id="eliminates">清空</button>
+										</div>
+									</td>
+								</tr>
+							</table>							
+						</div>
+	                </div>
+	            </div>
+	        </div>   
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        
+                        <div class="panel-body" style="overflow-x:scroll;height:330px;width:99%;">
+                            <table id="tb" class='table table-bordered' style="width:1300px;">
+						    	<tr>
+						    		<!-- <td><input type="checkbox"/></td> --><td>序号</td><td style="width:100px;white-space:nowrap;">视频名称</td><td>视频介绍</td><td>视频类型</td><td>视频链接</td><td>视频评分</td><td>点击次数</td><td>上传时间</td><td>查看</td><td>修改</td><td>删除</td>
+						    	</tr>
+						    </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="teacher_id"/>
+    </div>
+    <!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">课程视频添加</h4>
+	      </div>
+			<form action="/videoServer/videoTab/uploadflv1.do" method="post" >
+				<div style="width:100%;">
+					<div style="height:30px;background:#D9ECFF;border:1px solid #CADEFD"></div>
+					<div style="height:50px;border:1px solid #CADEFD">
+						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">视频标题：</div>
+						<div style="width:200px;height:50px;float:left;line-height:50px;border:1px solid #CADEFD;"><input type="text" id="video_name"/><input type="hidden" name="video_name"/>
+						</div>
+						<div style="width:100px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">视频类型：</div>
+						<div style="width:100px;height:50px;float:left;line-height:50px;">
+							&nbsp;<select style="width:80px;text-align:center;" id="kctype"><option value="1">语文</option><option value="2">数学</option><option value="3">英语</option></select>
+						</div>
+					</div>
+					<div style="height:50px;border:1px solid #CADEFD">
+						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">选择视频：</div>
+						<div style="width:440px;height:50px;float:left;">
+							&nbsp;<input type="file" accept="video/*" id="video_url"><input type="hidden"  name="video_url">
+						</div>
+					</div>
+					<div style="height:50px;border:1px solid #CADEFD">
+						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">视频封面：</div>
+						<div style="width:440px;height:50px;float:left;">
+							&nbsp;<input type="file" id="video_img_url"><input type="hidden" name="video_img_url">
+						</div>
+					</div>
+					<div style="height:100px;border:1px solid #CADEFD">
+						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:100px;line-height:100px;">视频介绍：</div>
+						<div style="width:440px;height:100px;float:left;">
+							&nbsp;<textarea  style="width:250px;margin-top:25px;height:50px;" id="video_introduce"></textarea><input type="hidden" name="video_introduce">
+						</div>
+					</div>
+					<!-- <div style="height:50px;border:1px solid #CADEFD">
+						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;"></div>
+						<div style="width:440px;height:50px;float:left;line-height:50px;">
+							&nbsp;<input type="button" id="sub" value="上传视频">&nbsp;&nbsp;<input type="button" value="重新选择">
+						</div>
+					</div> -->
+				</div>
+			</form> 
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal" id="quxiao">取消</button>
+	        <button type="button" class="btn btn-primary" id="sub">提交</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+  </div>
+<script src="assets/js/jquery-1.10.2.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.metisMenu.js"></script>
+<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="dist/js/bootstrap-datepicker.min.js"></script>
+<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+	$(document).ready(function () {
+	    $('#dataTables-example').dataTable();
+	});
+	$(function(){
+		loadRoleInfo();
+		$.ajax({
+			type : 'post',
+			url : '/videoServer/videoTab/getVideoTabs.do',
+			success : function(data){
+				for(var i=0;i<data.length;i++){
+					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td onclick='getId(this)'><input type='button' value='观看'/><input type='hidden' value='"+data[i].video_id+"'/></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td></tr>")
+				}
+				$("#teacher_id").val(data[0].teacher_id);
+			},error: function(){
+				 
+			}
+		})
+	})
+	function updat(obj){
+		var orderId=$(obj).html();
+		var d=0;
+	 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
+	 		d=orderId.substring(67,orderId.length-2)
+	 	}
+	 	if (navigator.userAgent.indexOf('Firefox') >= 0){
+	 		d=orderId.substring(53,orderId.length-16)
+	 	}else{
+	 		d=orderId.substring(67,orderId.length-2);
+	 	}
+		window.location.href="updateVideo.html?video_id="+d;
+	}
+	function delet(obj){
+		var orderId=$(obj).html();
+		var d=0;
+	 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
+	 		d=orderId.substring(67,orderId.length-2)
+	 	}
+	 	if (navigator.userAgent.indexOf('Firefox') >= 0){
+	 		d=orderId.substring(46,orderId.length-16)
+	 	}else{
+	 		d=orderId.substring(67,orderId.length-2);
+	 	}
+		$.ajax({
+	       	type : 'post',
+	       	url : '/videoServer/videoTab/delVideoById.do?video_id='+d,
+	       	success : function(){
+	       		alert("删除成功！");
+	       		window.location.href="";
+	       	}
+	    })
+	}
+	function getId(obj){
+		var orderId=$(obj).html();
+		var d=0;
+	 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
+	 		d=orderId.substring(60,orderId.length-2)
+	 	}
+	 	if (navigator.userAgent.indexOf('Firefox') >= 0){
+	 		d=orderId.substring(46,orderId.length-16)
+	 	}else{
+	 		d=orderId.substring(60,orderId.length-2);
+	 	}
+		$.ajax({
+	       	type : 'post',
+	       	url : '/videoServer/videoTab/getVideoById.do?id='+d,
+	       	success : function(data){
+	       		window.location.href="player.html?video_url="+data[0].video_id;
+	       	}
+	    })
+	}	
+ </script>
+ <script>
+	$("#sub").click(function(){
+		var aa=document.getElementById("video_url").value.toLowerCase().split('.');//以“.”分隔上传文件字符串
+		//判断图片格式
+		if(aa[aa.length-1]=='mp4'||aa[aa.length-1]=='webm'||aa[aa.length-1]=='ogv'||aa[aa.length-1]=='png'||aa[aa.length-1]=='jpeg'){
+			$.ajax({
+				type : 'post',
+				data : {video_name:$("#video_name").val(),video_url:$("#video_url").val(),video_img_url:$("#video_img_url").val(),video_introduce:$("#video_introduce").val(),video_form_id:$("#kctype").val()},
+				url : '/videoServer/videoTab/uploadflv.do',
+				success : function(){
+					alert("提交成功");
+					$("#quxiao").click();
+					window.location.href="";
+				},error: function(){
+					 
+				}
+			})
+		}else{
+			alert("请上传mp4，webm，ogv类型的视频文件");
+		}
+	})
+	$("#queryorder").click(function(){
+		//alert($("#video_name1").val())
+		$.ajax({
+			type : 'post',
+			data : {teacher_id:$("#teacher_id").val(),video_form_id:$("#video_type").val(),video_name:$("#video_name1").val()},
+			url : '/videoServer/videoTab/selVideo.do',
+			success : function(data){
+				if(data.length==0){
+			 		alert("暂无符合条件的订单");
+			 	}else{
+			 		$("#tb  tr:not(:first)").html("");
+			 		for(var i=0;i<data.length;i++){
+						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td onclick='getId(this)'><input type='button' value='观看'/><input type='hidden' value='"+data[i].video_id+"'/></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td></tr>")
+					}
+				}
+			},error: function(){
+				 
+			}
+		})
+	})
+	$("#eliminates").click(function(){	
+		window.location.href="";
+	})
+</script>
+<script src="assets/js/custom-scripts.js"></script> 
+</body>
+</html>
