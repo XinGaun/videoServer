@@ -4,7 +4,6 @@ package com.service.serviceImpl;
 import java.util.HashMap;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.dao.VideoTabDao;
 import com.entity.VideoTab;
 import com.service.VideoTabService;
+import com.util.HttpReq;
 import com.util.OSSUtil;
 
 @Service
@@ -26,9 +26,12 @@ public class VideoTabServiceImpl implements VideoTabService{
 	private String url = "http://www.niceyuwen.com:2020/videoffmpeg/transcoding/transcodingm3u8";
 	@Override
 	@Transactional
-		
+	public String uploadVideo(String video_name,String imageName, String video_introduce,MultipartFile video, MultipartFile image,Integer video_form_id,Integer teacher_id,long size) throws Exception {
+		HashMap<String,String> data = new HashMap<>();
 		/*DiskFileItemFactory factory = new DiskFileItemFactory();
-		factory.setSizeThreshold(4*1024);	*/
+		factory.setSizeThreshold(4*1024);*/
+        //final long MAX_SIZE = 10 * 1024 * 1024 * 1024;// 设置上传文件最大为 10G 
+
 		String ossVideoName =ossUpload.uploadJD(video.getInputStream(),video_name,size);
 		String ossImageName = ossUpload.uploadInput(imageName,image.getInputStream());
 //		String viderUrl = ossUpload.getWebURL(ossVideoName);
