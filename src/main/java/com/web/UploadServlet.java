@@ -1,8 +1,11 @@
 package com.web;
 
+import java.io.File;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.util.OSSUtil;
 @Controller
@@ -32,9 +36,15 @@ public class UploadServlet extends HttpServlet{
 			String imagePath = image.getOriginalFilename();		
 			long size = video.getSize();
 			String ossFileName = videoName+filePath.substring(filePath.lastIndexOf("."));	
-			String imageName = videoName+imagePath.substring(imagePath.lastIndexOf("."));		
-			ossUtil.uploadJD(video.getInputStream(), ossFileName,size);						
-			ossUtil.uploadInput(imageName,image.getInputStream());
+			String imageName = videoName+imagePath.substring(imagePath.lastIndexOf("."));
+			CommonsMultipartFile cf= (CommonsMultipartFile)video; 
+			DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
+			File videoFile = fi.getStoreLocation(); 
+			ossUtil.uploadJD(videoFile,ossFileName,size);	
+			CommonsMultipartFile cf2= (CommonsMultipartFile)image; 
+			DiskFileItem fi2 = (DiskFileItem)cf2.getFileItem(); 
+			File imageFile = fi2.getStoreLocation(); 
+			ossUtil.upload(imageFile,imageName);
 
 
 		} catch (Exception e) {  

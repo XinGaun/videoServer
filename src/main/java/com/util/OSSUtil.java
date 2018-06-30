@@ -1,6 +1,7 @@
 package com.util;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Date;
@@ -77,10 +78,12 @@ public class OSSUtil implements ProgressListener{
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret); 
 		isVideo(fileName);
 		String ossFileName = getOSSName(fileName);
-		ossClient.putObject(bucketName,ossFileName,input );
-
-
-		System.out.println(ossClient.putObject(bucketName,fileName,input ));
+		try {
+			ossClient.putObject(bucketName,ossFileName, input);  
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
 		System.out.println("end");
 		ossClient.shutdown();  
 		return fileName;
@@ -92,13 +95,19 @@ public class OSSUtil implements ProgressListener{
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret); 
 		isVideo(fileName);
 		String ossFileName = getOSSName(fileName);
-		ossClient.putObject(bucketName,ossFileName, file);  
+		try {
+			ossClient.putObject(bucketName,ossFileName, file);  
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+
 		ossClient.shutdown();  
 		return ossFileName;
 	}
-	
+
 	// 带进度条的上传。视频
-	public String uploadJD(InputStream inputStream,String fileName,long fileSize) {
+	public String uploadJD(File file,String fileName,long fileSize) throws IOException {
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 		this.size = fileSize;
 		this.fileName = fileName;
@@ -108,16 +117,15 @@ public class OSSUtil implements ProgressListener{
 		String ossFileName = getOSSName(fileName);
 		try {
 
-			ossClient.putObject(new PutObjectRequest(bucketName2, ossFileName, inputStream).
+			ossClient.putObject(new PutObjectRequest(bucketName2, ossFileName,file).
 					<PutObjectRequest>withProgressListener(this));
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		//当文件上传完成之后，从单例中移除此次上传的状态信息
-		System.out.println("oss end");
-		ProgressSingleton.put(fileName+"size", 100);
-		ProgressSingleton.put(fileName+"progress", 100);		
+		System.out.println("oss end");	
 		// 关闭OSSClient。
 		ossClient.shutdown();
 		ProgressSingleton.remove(fileName + "size");
@@ -203,7 +211,7 @@ public class OSSUtil implements ProgressListener{
 			this.bytesWritten += bytes;
 			if (this.totalBytes != -1) {
 				int percent = (int)(this.bytesWritten * 100.0 / this.totalBytes);
-				System.out.println(bytes + " bytes have been written at this time, upload progress: " + percent + "%(" + this.bytesWritten + "/" + this.totalBytes + ")");
+				//				System.out.println(bytes + " bytes have been written at this time, upload progress: " + percent + "%(" + this.bytesWritten + "/" + this.totalBytes + ")");
 			} else {
 				//				System.out.println(bytes + " bytes have been written at this time, upload ratio: unknown" + "(" + this.bytesWritten + "/...)");
 			}

@@ -1,13 +1,16 @@
 package com.service.serviceImpl;
 
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.dao.VideoTabDao;
@@ -28,26 +31,30 @@ public class VideoTabServiceImpl implements VideoTabService{
 	@Transactional
 	public String uploadVideo(String video_name,String imageName, String video_introduce,MultipartFile video, MultipartFile image,Integer video_form_id,Integer teacher_id,long size) throws Exception {
 		HashMap<String,String> data = new HashMap<>();
-		/*DiskFileItemFactory factory = new DiskFileItemFactory();
-		factory.setSizeThreshold(4*1024);*/
-        //final long MAX_SIZE = 10 * 1024 * 1024 * 1024;// 设置上传文件最大为 10G 
-
-		String ossVideoName =ossUpload.uploadJD(video.getInputStream(),video_name,size);
-		String ossImageName = ossUpload.uploadInput(imageName,image.getInputStream());
-//		String viderUrl = ossUpload.getWebURL(ossVideoName);
+		
+		CommonsMultipartFile cf= (CommonsMultipartFile)video; //这个myfile是MultipartFile的
+		DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
+		File videoFile = fi.getStoreLocation(); 
+		String ossVideoName =ossUpload.uploadJD(videoFile,video_name,size);
+		
+		CommonsMultipartFile cf2= (CommonsMultipartFile)image; //这个myfile是MultipartFile的
+		DiskFileItem fi2 = (DiskFileItem)cf2.getFileItem(); 
+		File imageFile = fi2.getStoreLocation(); 
+		String ossImageName = ossUpload.upload(imageFile,imageName);
+		//		String viderUrl = ossUpload.getWebURL(ossVideoName);
 		String imageUrl = ossUpload.getWebURL(ossImageName);
-		
-		
+
+
 		String path = "/oss/video/"+ossVideoName;
 		String fileName ="/oss/video/"+ossVideoName.substring(0, ossVideoName.lastIndexOf("."));
 		data.put("PATH",path);
 		data.put("fileName",fileName);
 		HttpReq.httpRequest(url, "POST", JSON.toJSONString(data));
-		
+
 		String savevideoPath = fileName+".m3u8";
 		System.out.println("video service"+path+"   "+fileName+"   "+savevideoPath);
 		createVideoTab(video_name,savevideoPath,imageUrl,video_introduce,video_form_id,teacher_id);
-		
+
 		return "succes";
 	}
 

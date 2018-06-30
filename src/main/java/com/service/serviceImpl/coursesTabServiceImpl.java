@@ -1,10 +1,13 @@
 package com.service.serviceImpl;
 
+import java.io.File;
 import java.util.List;
 
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.dao.coursesTabDao;
 import com.entity.coursesTab;
@@ -53,7 +56,10 @@ public class coursesTabServiceImpl implements coursesTabService{
 		String oldImageName = image.getOriginalFilename();
 		String imageName = courses_name+oldImageName.substring(oldImageName.lastIndexOf("."));
 		System.out.println(imageName);
-		String ossImageName = ossUpload.uploadInput(imageName,image.getInputStream());
+		CommonsMultipartFile cf= (CommonsMultipartFile)image; //这个myfile是MultipartFile的
+		DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
+		File imageFile = fi.getStoreLocation();
+		String ossImageName = ossUpload.upload(imageFile,imageName);
 		
 		String imageUrl = ossUpload.getWebURL(ossImageName);
 		System.out.println(imageUrl);
