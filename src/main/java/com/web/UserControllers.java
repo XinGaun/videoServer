@@ -2,11 +2,12 @@
 package com.web;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,7 @@ import com.entity.UserTab;
 import com.service.UserService;
 import com.util.DateUtil;
 import com.util.MD5;
-import com.util.OSSUploadVideo;
+import com.util.OSSUtil;
 
 
 /**  
@@ -46,6 +47,7 @@ import com.util.OSSUploadVideo;
 public class UserControllers {
 	@Autowired
 	UserService aService;
+	
 	//添加用户
 	@RequestMapping(value="/saveuser",method=RequestMethod.POST)
 	public String saveuser(@RequestBody String data,HttpServletResponse response){
@@ -108,46 +110,28 @@ public class UserControllers {
 	}
 	//个人中心上传头像
 	@RequestMapping(value="/addfile",method=RequestMethod.POST)
-	public void addfile(@RequestBody String path,HttpServletResponse response){
-		System.out.println("cjxnvmcxb");
-		System.out.println(path);
-		String filePath=path.substring(1,path.lastIndexOf("\""));
-		System.out.println(filePath);
-		
-		
-		String Name=filePath.substring(filePath.lastIndexOf("\\")+1);//
-		System.out.println(Name);
-		String fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+Name;//新的文件名
-		System.out.println(fileName);
-		OSSUploadVideo ouv=new OSSUploadVideo();
-		try {
-			ouv.upload(filePath, fileName);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		
-	}
-/*	public void addfile(@RequestParam(value="file",required=false)MultipartFile file,String url,HttpServletRequest request){
-		
-		System.out.println(url);
+	public String addfile(@RequestParam(value="file",required=false)MultipartFile file,HttpServletRequest request){
+		OSSUtil ou=new OSSUtil();
 		//File targetFile=null;
         //String msg="";//返回存储路径
         //int code=1;
-        String fileName=file.getOriginalFilename();//获取文件名加后缀
+        String fileName=file.getOriginalFilename();//获取文件名加后缀 
         System.out.println(fileName);
+        String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//文件后缀
+        System.out.println(fileF);
+        fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//新的文件名
+        System.out.println("fileName"+fileName); 
+        
         try {
-			OSSUploadVideo ouv=new OSSUploadVideo();
-			ouv.upload(url, fileName);
+        	InputStream is = file.getInputStream();
+        	//System.out.println("is"+is.available());
+        	ou.uploadInput(fileName, is);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-        
-        if(fileName!=null&&fileName!=""){   
+        return JSON.toJSONString(ou.getWebURL(fileName));
+      /*  if(fileName!=null&&fileName!=""){   
             String returnUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() +request.getContextPath() +"/boo/photos/LoginPhoto/";//存储路径
             System.out.println(returnUrl);
             String path = request.getSession().getServletContext().getRealPath("/boo/photos/LoginPhoto"); //文件存储位置
@@ -155,8 +139,7 @@ public class UserControllers {
             String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//文件后缀
             System.out.println(fileF);
             fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//新的文件名
-            System.out.println(fileName);
-            
+            System.out.println(fileName);       
          	//先判断文件是否存在
             String fileAdd = DateUtil.dateToStr(new Date(),"yyyyMMdd");
             File file1 =new File(path+"/"+fileAdd); 
@@ -176,10 +159,10 @@ public class UserControllers {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         //System.out.println(JSON.toJSONString(Photo.result(code, msg)));
        // return JSON.toJSONString(Photo.result(code, msg));
-	}*/
+	}
 	//个人中心更改用户信息
 	@RequestMapping(value="/updatemessages",method=RequestMethod.POST)
 	public String updatemessage(@RequestBody String data,HttpServletResponse response){

@@ -20,4 +20,5 @@ public interface CommentTabDao {
 	public int updateCommentTab(HashMap<String,Object> hashMap);
 
 	public int deleteCommentTab(@Param(value="comment_id") int comment_id);
+
 }
