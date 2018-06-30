@@ -79,9 +79,11 @@ public class OSSUtil implements ProgressListener{
 		String ossFileName = getOSSName(fileName);
 		ossClient.putObject(bucketName,ossFileName,input );
 
+
+		System.out.println(ossClient.putObject(bucketName,fileName,input ));
 		System.out.println("end");
 		ossClient.shutdown();  
-		return ossFileName;
+		return fileName;
 	}
 
 
@@ -153,6 +155,8 @@ public class OSSUtil implements ProgressListener{
 		if (fileName.endsWith("jpg") || fileName.endsWith("png")) {
 			path = serviceName+"/image/"+fileName;		
 		}
+
+
 		return path;
 	}
 

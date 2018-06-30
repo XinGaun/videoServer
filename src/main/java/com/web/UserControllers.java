@@ -2,6 +2,8 @@
 package com.web;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -25,6 +27,7 @@ import com.entity.UserTab;
 import com.service.UserService;
 import com.util.DateUtil;
 import com.util.MD5;
+import com.util.OSSUtil;
 
 
 /**  
@@ -91,7 +94,7 @@ public class UserControllers {
 	//根据手机号更改用户密码
 	@RequestMapping(value="/updateuser",method=RequestMethod.POST)
 	public String updateuser(@RequestBody String data,HttpServletResponse response){
-		System.out.println("cjxnvmcxb");
+		//System.out.println("cjxnvmcxb");
 		UserTab ut = JSON.parseObject(data,UserTab.class);
 		String spwd=ut.getUser_pwd();
 		String smi=MD5.md5(spwd);
@@ -108,12 +111,27 @@ public class UserControllers {
 	//个人中心上传头像
 	@RequestMapping(value="/addfile",method=RequestMethod.POST)
 	public String addfile(@RequestParam(value="file",required=false)MultipartFile file,HttpServletRequest request){
-		System.out.println("11111111111");
-		File targetFile=null;
-        String msg="";//返回存储路径
-        int code=1;
-        String fileName=file.getOriginalFilename();//获取文件名加后缀
-        if(fileName!=null&&fileName!=""){   
+		OSSUtil ou=new OSSUtil();
+		//File targetFile=null;
+        //String msg="";//返回存储路径
+        //int code=1;
+        String fileName=file.getOriginalFilename();//获取文件名加后缀 
+        System.out.println(fileName);
+        String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//文件后缀
+        System.out.println(fileF);
+        fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//新的文件名
+        System.out.println("fileName"+fileName); 
+        
+        try {
+        	InputStream is = file.getInputStream();
+        	//System.out.println("is"+is.available());
+        	ou.uploadInput(fileName, is);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        return JSON.toJSONString(ou.getWebURL(fileName));
+      /*  if(fileName!=null&&fileName!=""){   
             String returnUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() +request.getContextPath() +"/boo/photos/LoginPhoto/";//存储路径
             System.out.println(returnUrl);
             String path = request.getSession().getServletContext().getRealPath("/boo/photos/LoginPhoto"); //文件存储位置
@@ -121,15 +139,8 @@ public class UserControllers {
             String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//文件后缀
             System.out.println(fileF);
             fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//新的文件名
-            System.out.println(fileName);
-            /*try {
-				ossvideo.upload(path, fileName);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}*/
-            
-            //先判断文件是否存在
+            System.out.println(fileName);       
+         	//先判断文件是否存在
             String fileAdd = DateUtil.dateToStr(new Date(),"yyyyMMdd");
             File file1 =new File(path+"/"+fileAdd); 
            
@@ -148,9 +159,9 @@ public class UserControllers {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        System.out.println(JSON.toJSONString(Photo.result(code, msg)));
-        return JSON.toJSONString(Photo.result(code, msg));
+        }*/
+        //System.out.println(JSON.toJSONString(Photo.result(code, msg)));
+       // return JSON.toJSONString(Photo.result(code, msg));
 	}
 	//个人中心更改用户信息
 	@RequestMapping(value="/updatemessages",method=RequestMethod.POST)

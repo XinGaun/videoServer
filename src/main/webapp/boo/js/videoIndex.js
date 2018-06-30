@@ -5,7 +5,7 @@ $(function(){
 	judgePC();
 	initGrade();
 	$("#videoHtml").click(function(){
-		window.location.href = "video.html?user_id="+user_id;
+		window.location.href = "video.html";
 	});
 
 });

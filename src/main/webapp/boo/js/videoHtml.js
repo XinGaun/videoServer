@@ -262,7 +262,7 @@ function initajax(param) {
 		data : JSON.stringify(param), //传入组装的参数
 		dataType : "json",
 		success : function(result) {
-			//console.log(result);
+			console.log(result);
 			if (result.list.length == 0) {
 				$("#courseAll").append("暂无课程信息!");
 				return;
