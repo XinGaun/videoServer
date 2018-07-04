@@ -20,6 +20,7 @@
 	rel='stylesheet' type='text/css' />
 <link href="assets/js/dataTables/dataTables.bootstrap.css"
 	rel="stylesheet" />
+<script type="text/javascript" src="js/socket.io.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -521,15 +522,82 @@ function getId(obj){
     })
 }	
 </script>
+
 	<script>
 	
 	var progress = document.getElementById("jd");
+	//创建socket连接	
+	var socket= io.connect('http://127.0.0.1:8099');
+			//连接成功后会监听到
+	socket.on('connect',function() {
+	     output('<span>连接成功</span>');
+	});
+		    
+			socket.on('connecting',function() {
+		        output('<span>正在连接...</span>');
+		    });
+		    
+		    socket.on('disconnect',function() {
+		        output('<span>断开连接! </span>');
+		    });
+		    
+		    socket.on('reconnecting',function() {
+		        output('<span>正在重连...</span>');
+		    });
+		    
+	socket.on('reconnect',function() {
+		  output('<span>成功重连！</span>');
+	});
+		    
+	socket.on('connect_failed',function() {
+		  output('<span>连接失败！</span>');
+	});
+	//想要断开连接调用此方法
+	function sendDisconnect() {
+		 socket.disconnect();
+	};
+		    
+	function output(message) {		      
+		  progress.innerText =message;
+	}	
+     //启动socket
+	function soucketStart(){
+    	 alert("start");
+    	 //启动socket
+    		$.ajax({
+    			url : 'http://localhost:8080/videoServer/socketServer/start',
+    			type : 'post',				
+    			success : function() {	
+    				
+    			},
+    			error : function() {
+    				alert("soucketStart error");
+    			}
+    		});	  
+	}
+    //stop
+	function soucketStop(){
+		 alert("stop");
+		 		$.ajax({
+		 			url : 'http://localhost:8080/videoServer/socketServer/stop',
+		 			type : 'post',				
+		 			success : function() {	
+		 				
+		 			},
+		 			error : function() {
+		 				alert(" soucketStop error");
+		 			}
+		 		});	 
+	}
+    //启动socket
+		soucketStart();
 	//加载模态框    
     $('#myModal').on('show.bs.modal', function (event) {     
        progress.innerText= 0;
  	   $("#videoName").val(""); 
- 	   $("#video_introduce").val("");
+ 	   $("#video_introduce").val("");		
     }); 
+    
 	$("#sub").click(function(){	
 		//表单参数
 		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
@@ -546,7 +614,25 @@ function getId(obj){
 		 formData.append("video_form_id", video_form_id);
 		//阻止默认事件
 		 event.preventDefault();
-		 //循环查看状态
+		
+			var t = setInterval(function(){
+	 	 		 //下面的testMessage是自定义的。
+	 	 		 socket.emit('fileUpload',videoName,function(){	 
+				    	output('<span> emit' +data+ '</span>');				    	
+				    }); 
+			}, 500);
+	 		 //这里是监听服务端返回的testMessage事件
+	 		 socket.on('fileUpload',function(data){
+	 			 if(data == "null" ||data == null ){
+	 				 output('0');
+	 			 } else{
+	 				output(data);
+	 				clearInterval(t);
+	 			 }
+		    	 
+		    });   
+ 	
+		/*  //循环查看状态
 		         var t = setInterval(function(){       	
 		           $.ajax({
 		              url: '/videoServer/ProgressServlet/progress',
@@ -563,7 +649,7 @@ function getId(obj){
 			              console.log("error");
 			           }
 			         });
-			     }, 500);
+			     }, 500); */
 		 
 			//上传文件		
 			$.ajax({
@@ -573,18 +659,19 @@ function getId(obj){
 				contentType: false, 
 		        processData: false, 
 				success : function(data){
-					clearInterval(t);
+					//clearInterval(t);
 			        //将进度更新至100%
 			        progress.innerText = 100;		
-			        
+			       // soucketStop();
 			        $("#myModal").modal("hide");
 					window.location.href="";					
 				},error: function(){
-					 console.log("error");
+					 console.log("submit error");
 				}				
 			});	 
 			return false;		
 	});
+	
 	//转换m3u8	
 	/* function toM3U8(path,fileName){
 		alert(1);

@@ -32,6 +32,7 @@ public class OSSUtil implements ProgressListener{
 	private long progress = 0;
 	String callbackUrl = "http://oss-cn-beijing.aliyuncs.com";
 	String key = "";
+	
 	// 单例，只需要建立一次链接  
 	private static OSSClient client = null;  
 	// 是否使用另外一套本地账户  
@@ -108,13 +109,19 @@ public class OSSUtil implements ProgressListener{
 
 	// 带进度条的上传。视频
 	public String uploadJD(File file,String fileName,long fileSize) throws IOException {
+		
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 		this.size = fileSize;
-		this.fileName = fileName;
-		ProgressSingleton.put(fileName+"size", size);
-		ProgressSingleton.put(fileName+"progress", progress);
+		String name = fileName.substring(0, fileName.lastIndexOf("."));
+		System.out.println("ossutil "+name);
+		this.fileName = name;
+		ProgressSingleton.put(name+"status", "start");
+		ProgressSingleton.put(name+"size", size);
+		this.progress = 0;
+		System.out.println(ProgressSingleton.get(name+"progress"));
+		ProgressSingleton.put(name+"progress", progress);
 		//		isVideo(fileName);
-		String ossFileName = getOSSName(fileName);
+		String ossFileName = getOSSName(fileName);		
 		try {
 
 			ossClient.putObject(new PutObjectRequest(bucketName2, ossFileName,file).
@@ -127,9 +134,13 @@ public class OSSUtil implements ProgressListener{
 		//当文件上传完成之后，从单例中移除此次上传的状态信息
 		System.out.println("oss end");	
 		// 关闭OSSClient。
+		ProgressSingleton.put(name+"status", "end");
+		ProgressSingleton.remove(name + "size");
+		ProgressSingleton.remove(name + "progress");
+		System.out.println(ProgressSingleton.get(name+"progress"));
+		System.out.println("oss end 2");
 		ossClient.shutdown();
-		ProgressSingleton.remove(fileName + "size");
-		ProgressSingleton.remove(fileName + "progress");
+
 		return ossFileName;
 	}
 
@@ -211,9 +222,9 @@ public class OSSUtil implements ProgressListener{
 			this.bytesWritten += bytes;
 			if (this.totalBytes != -1) {
 				int percent = (int)(this.bytesWritten * 100.0 / this.totalBytes);
-				//				System.out.println(bytes + " bytes have been written at this time, upload progress: " + percent + "%(" + this.bytesWritten + "/" + this.totalBytes + ")");
+//				System.out.println(bytes + " bytes have been written at this time, upload progress: " + percent + "%(" + this.bytesWritten + "/" + this.totalBytes + ")");
 			} else {
-				//				System.out.println(bytes + " bytes have been written at this time, upload ratio: unknown" + "(" + this.bytesWritten + "/...)");
+//				System.out.println(bytes + " bytes have been written at this time, upload ratio: unknown" + "(" + this.bytesWritten + "/...)");
 			}
 			break;
 		case TRANSFER_COMPLETED_EVENT:
