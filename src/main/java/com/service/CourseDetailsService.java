@@ -10,4 +10,10 @@ public interface CourseDetailsService {
 	 * @return
 	 */
 	public String queryStudentComments(String data);
+	/**
+	 * 插入到收藏表
+	 * @param data
+	 * @return
+	 */
+	public String addCollection(String data);
 }

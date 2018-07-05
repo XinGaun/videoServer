@@ -441,7 +441,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="assets/js/jquery-1.10.2.js"></script>
+<script src="assets/js/jquery-1.10.2.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.metisMenu.js"></script>
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
@@ -572,18 +572,38 @@ function getId(obj){
 				url : '/videoServer/videoTab/uploadflv.do',
 				contentType: false, 
 		        processData: false, 
-				success : function(responseText){
+				success : function(data){
 					clearInterval(t);
 			        //将进度更新至100%
-			        progress.innerText = 100;			         				
-					window.location.href="";
-					 $("#myModal").modal("hide");
+			        progress.innerText = 100;		
+			        
+			        $("#myModal").modal("hide");
+					window.location.href="";					
 				},error: function(){
 					 console.log("error");
-				}
+				}				
 			});	 
-			return false;
+			return false;		
 	});
+	//转换m3u8	
+	/* function toM3U8(path,fileName){
+		alert(1);
+		alert(path+"   "+fileName);
+		$.ajax({
+			type : 'post',
+			data : {"PATH":"/oss/video/语文视频测试12.mp4","fileName":"/oss/video/语文视频测试12"},
+			//"PATH":/oss/video/语文视频测试12.mp4,	"fileName":/oss/video/语文视频测试12
+			url : 'http://www.niceyuwen.com:2020/videoffmpeg/transcoding/transcodingm3u8',
+			contentType: 'json', 		     
+			success : function(responseText){
+				alert(2);
+				alert(responseText);
+			},error: function(){
+				alert("error");
+				
+			}				
+		});	 
+	} */
 	
 	$("#queryorder").click(function(){
 		//alert($("#video_name1").val())
@@ -605,6 +625,7 @@ function getId(obj){
 			}
 		})
 	})
+	
 	$("#eliminates").click(function(){	
 		window.location.href="";
 	})
