@@ -29,9 +29,11 @@ public class coursesTabController {
 	}
 	@RequestMapping(value="/getTabListBy.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public List<coursesTab> getTabListBy(int teacher_id,String courses_name,String courses_pricemoney,int courses_grade){
+	public List<coursesTab> getTabListBy(int teacher_id,int courses_video_form_id,String courses_name,String courses_pricemoney,int courses_grade){
+	
 		coursesTab c=new coursesTab();
 		c.setCourses_name(courses_name);
+		c.setVideo_form_id(courses_video_form_id);
 		c.setCourses_pricemoney(courses_pricemoney);
 		c.setCourses_grade(courses_grade);
 		c.setTeacher_id(teacher_id);
@@ -39,11 +41,11 @@ public class coursesTabController {
 	}
 	@RequestMapping(value="/addCoursesTab.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void addCoursesTab(HttpServletRequest request,String courses_name,String courses_introduce,String courses_pricemoney,String courses_video,MultipartFile image) throws Exception{
+	public void addCoursesTab(HttpServletRequest request,String courses_name,int courses_video_form_id,String courses_introduce,String courses_pricemoney,String courses_video,MultipartFile image) throws Exception{
 		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
 		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
 		System.out.println(image.getOriginalFilename());
-		ctService.addCoursesTab(courses_name,courses_introduce,courses_pricemoney,courses_video, image,teacher_id);
+		ctService.addCoursesTab(courses_name,courses_video_form_id,courses_introduce,courses_pricemoney,courses_video, image,teacher_id);
 	}
 	@RequestMapping(value="/delCoursesById.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody

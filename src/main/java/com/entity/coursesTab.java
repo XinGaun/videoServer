@@ -11,6 +11,20 @@ public class coursesTab {
 	String courses_img_url;
 	int courses_grade;
 	int courses_status;
+	int video_form_id;
+	String video_form_name;
+	public int getVideo_form_id() {
+		return video_form_id;
+	}
+	public void setVideo_form_id(int video_form_id) {
+		this.video_form_id = video_form_id;
+	}
+	public String getVideo_form_name() {
+		return video_form_name;
+	}
+	public void setVideo_form_name(String video_form_name) {
+		this.video_form_name = video_form_name;
+	}
 	String courses_date;
 	public int getCourses_id() {
 		return courses_id;

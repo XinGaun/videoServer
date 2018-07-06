@@ -314,24 +314,11 @@
 									<td>
 										<div class="input-group" width="100%">
 											<span class="input-group-addon">视频类型</span>
-											<select  class="form-control" style="width:200px;" id="video_type"><option value=""></option><option value="1">语文(1)</option><option value="2">数学(2)</option><option value="3">英语(3)</option></select>
+											<select  class="form-control" style="width:200px;text-align: center;" id="video_type">
+											   
+											</select>
 										</div>
-									</td>
-									<!-- <td>
-										<div class="input-group" width="100%">
-											<span class="input-group-addon" width="100%">视频编号</span>
-											<input type="text" class="form-control" placeholder="请输入视频编号" id="order_id">
-										</div>
-									</td> -->
-									<!-- <td colspan="2">
-										<div id="sandbox-container">
-											<div class="input-daterange input-group" id="datepicker">
-												<input type="text" class="input form-control" name="start" id="order_start"/>
-												<span class="input-group-addon">至</span>
-												<input type="text" class="input form-control" name="end" id="order_end"/>
-											</div>
-										</div>
-									</td> -->
+									</td>								
 								</tr>
 								<tr>
 									
@@ -362,7 +349,7 @@
                         <div class="panel-body" style="overflow-x:scroll;height:330px;width:99%;">
                             <table id="tb" class='table table-bordered' style="width:1300px;">
 						    	<tr>
-						    		<!-- <td><input type="checkbox"/></td> --><td>序号</td><td style="width:100px;white-space:nowrap;">视频名称</td><td>视频介绍</td><td>视频类型</td><td>视频链接</td><td>视频评分</td><td>点击次数</td><td>上传时间</td><td>查看</td><td>修改</td><td>删除</td>
+						    		<!-- <td><input type="checkbox"/></td> --><td>序号</td><td style="width:100px;white-space:nowrap;">视频名称</td><td>视频介绍</td><td>视频类型</td><td>视频链接</td><td>视频评分</td><td>点击次数</td><td>上传时间</td>
 						    	</tr>
 						    </table>
                         </div>
@@ -387,49 +374,36 @@
 					<form action="/videoServer/videoTab/uploadflv1.do" method="post"
 		                  enctype="multipart/form-data" id="dataForm">
 						<div style="width: 100%;">
-							<div
-								style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
+							<div style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
-								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频标题：</div>
-								<div
-									style="width: 200px; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
-									<input type="text" name="videoName" id="videoName" > 
+								<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频标题：</div>
+								<div style="width: 200px; height: 50px; float: left; line-height: 50px;border: 1px solid #CADEFD; ">
+									<input type="text" style="width: 100%;height:100%;" name="videoName" id="videoName" > 
 								</div>
-								<div
-									style="width: 100px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型：</div>
-								<div
-									style="width: 100px; height: 50px; float: left; line-height: 50px;">
-									&nbsp;<select style="width: 80px; text-align: center;"
-										id="kctype"><option value="1">语文</option>
-										<option value="2">数学</option>
-										<option value="3">英语</option></select>
-								</div>
-							</div>
+								<div style="width: 100px;; background: #D9ECFF; float: left; text-align: right; height: 50px; line-height: 50px;">视频类型：</div>
+								<div style="width:130px;height:50px;float:left;border: 1px solid #CADEFD;">							           
+							           <select style="width:100%;text-align: center;" id="kctype">
+							           
+							           </select>
+						            </div>
+							    </div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">选择视频：</div>
-								<input type="file" name="video" id="video" accept="video/*">
+								<input type="file"  name="video" id="video" accept="video/*">
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频封面：</div>
 								<input type="file" name="image" id="image" accept="image/*">
 							</div>
 							<div style="height: 100px; border: 1px solid #CADEFD">
-								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 100px; line-height: 100px;">视频介绍：</div>
-								<div style="width: 440px; height: 100px; float: left;">
-									&nbsp;
-									<textarea style="width: 250px; margin-top: 25px; height: 50px;"
+								<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 100px; line-height: 100px;">视频介绍：</div>
+								<div style="width: 440px; height: 100px; float: left;border: 1px solid #CADEFD;">								
+									<textarea style="width: 100%;height: 100%;"
 									name="video_introduce"	id="video_introduce"></textarea>								
 									<input type="hidden" name="video_introduce">
 								</div>
 							</div>
-							<!-- <div style="height:50px;border:1px solid #CADEFD">
-						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;"></div>
-						<div style="width:440px;height:50px;float:left;line-height:50px;">
-							&nbsp;<input type="button" id="sub" value="上传视频">&nbsp;&nbsp;<input type="button" value="重新选择">
-						</div>
-					</div> -->
+					
 						</div>
 					</form>
 					<div class="modal-footer">
@@ -456,12 +430,13 @@ $(document).ready(function () {
 });
 $(function(){
 	loadRoleInfo();
+	getVideoForm();
 	$.ajax({
 		type : 'post',
 		url : '/videoServer/videoTab/getVideoTabs.do',
 		success : function(data){
 			for(var i=0;i<data.length;i++){
-				$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td onclick='getId(this)'><input type='button' value='观看'/><input type='hidden' value='"+data[i].video_id+"'/></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td></tr>")
+				$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td></tr>")
 			}
 			$("#teacher_id").val(data[0].teacher_id);
 		},error: function(){
@@ -523,8 +498,7 @@ function getId(obj){
 }	
 </script>
 
-	<script>
-	
+	<script>	
 	var progress = document.getElementById("jd");
 	//创建socket连接	
 	var socket= io.connect('http://127.0.0.1:8099');
@@ -562,7 +536,6 @@ function getId(obj){
 	}	
      //启动socket
 	function soucketStart(){
-    	 alert("start");
     	 //启动socket
     		$.ajax({
     			url : 'http://localhost:8080/videoServer/socketServer/start',
@@ -571,13 +544,12 @@ function getId(obj){
     				
     			},
     			error : function() {
-    				alert("soucketStart error");
+    				//alert("soucketStart error");
     			}
     		});	  
 	}
     //stop
 	function soucketStop(){
-		 alert("stop");
 		 		$.ajax({
 		 			url : 'http://localhost:8080/videoServer/socketServer/stop',
 		 			type : 'post',				
@@ -585,7 +557,7 @@ function getId(obj){
 		 				
 		 			},
 		 			error : function() {
-		 				alert(" soucketStop error");
+		 				//alert(" soucketStop error");
 		 			}
 		 		});	 
 	}
@@ -632,25 +604,6 @@ function getId(obj){
 		    	 
 		    });   
  	
-		/*  //循环查看状态
-		         var t = setInterval(function(){       	
-		           $.ajax({
-		              url: '/videoServer/ProgressServlet/progress',
-		              type: 'post',
-		              data: formData,
-		              contentType: false, //禁止设置请求类型
-			          processData: false, //禁止jquery对DAta数据的处理,默认会处理
-			          dataType:"json",
-			          success: function (data) {	            	 	                 
-			                //前台更新进度
-			               progress.innerText = parseInt((data.progress / data.size) * 100);
-			           },
-			           error: function(){
-			              console.log("error");
-			           }
-			         });
-			     }, 500); */
-		 
 			//上传文件		
 			$.ajax({
 				type : 'post',
@@ -660,40 +613,22 @@ function getId(obj){
 		        processData: false, 
 				success : function(data){
 					//clearInterval(t);
-			        //将进度更新至100%
+					alert("上传成功");			        
+					//将进度更新至100%
 			        progress.innerText = 100;		
 			       // soucketStop();
 			        $("#myModal").modal("hide");
 					window.location.href="";					
 				},error: function(){
-					 console.log("submit error");
+					 alert("submit error");
 				}				
 			});	 
 			return false;		
 	});
 	
-	//转换m3u8	
-	/* function toM3U8(path,fileName){
-		alert(1);
-		alert(path+"   "+fileName);
-		$.ajax({
-			type : 'post',
-			data : {"PATH":"/oss/video/语文视频测试12.mp4","fileName":"/oss/video/语文视频测试12"},
-			//"PATH":/oss/video/语文视频测试12.mp4,	"fileName":/oss/video/语文视频测试12
-			url : 'http://www.niceyuwen.com:2020/videoffmpeg/transcoding/transcodingm3u8',
-			contentType: 'json', 		     
-			success : function(responseText){
-				alert(2);
-				alert(responseText);
-			},error: function(){
-				alert("error");
-				
-			}				
-		});	 
-	} */
-	
 	$("#queryorder").click(function(){
-		//alert($("#video_name1").val())
+		alert($("#video_name1").val());
+		alert($("#video_type").val());
 		$.ajax({
 			type : 'post',
 			data : {teacher_id:$("#teacher_id").val(),video_form_id:$("#video_type").val(),video_name:$("#video_name1").val()},
@@ -704,7 +639,7 @@ function getId(obj){
 			 	}else{
 			 		$("#tb  tr:not(:first)").html("");
 			 		for(var i=0;i<data.length;i++){
-						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td onclick='getId(this)'><input type='button' value='观看'/><input type='hidden' value='"+data[i].video_id+"'/></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td></tr>")
+						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td></tr>")
 					}
 				}
 			},error: function(){
@@ -716,6 +651,24 @@ function getId(obj){
 	$("#eliminates").click(function(){	
 		window.location.href="";
 	})
+	function getVideoForm(){
+		$.ajax({
+			type: "POST",
+			url : '/videoServer/videoFormTab/getVideoList.do',
+			cache: false,  //禁用缓存
+            dataType: "json",
+			success : function(data){
+				$("#kctype").empty(); 
+				$("#video_type").empty(); 
+				for (var i = 0; i < data.length; i++) {						
+			    	$("#kctype").append("<option value="+data[i].video_form_id+">"+data[i].video_form_class+data[i].video_form_name+"</option>");			    	
+			    	$("#video_type").append("<option value="+data[i].video_form_id+">"+data[i].video_form_class+data[i].video_form_name+"</option>");
+			    }
+			},error: function(){
+				alert("VideoForm error"); 
+			}
+		})
+	}
 </script>
 <script src="assets/js/custom-scripts.js"></script> 
 </body>

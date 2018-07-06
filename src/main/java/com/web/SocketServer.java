@@ -50,11 +50,15 @@ public class SocketServer {
 						size = size == null ? 100 : size;
 						Object progress = ProgressSingleton.get(videoName + "progress");				
 						progress = progress == null ? 0 : progress; 		
-					//	System.out.println("progress   "+progress+"size   "+size);
-						int proess = Integer.parseInt(progress.toString())*100/Integer.parseInt(size.toString());						
+						System.out.println("progress   "+progress+"size   "+size);
+						int progressint = Integer.parseInt(progress.toString());
+						int sizeint = Integer.parseInt(size.toString());
+						int proess = progressint*100/sizeint;	
+						//parseInt((data.progress / data.size) * 100)
 						//第一个参数必须与eventName一致，第二个参数data必须与eventClass一致
-						//System.out.println("%   "+proess);
+						System.out.println("%   "+proess);
 						client.sendEvent("fileUpload", Integer.toString(proess));
+						 Thread.sleep(1000);
 					}
 				}
 			}			

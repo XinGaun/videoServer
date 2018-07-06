@@ -22,7 +22,7 @@ import com.service.CommentTabService;
 public class CommentTabController extends DemoController{
 	@Autowired
 	private CommentTabService service;
-	
+
 	@RequestMapping(value="/addComment",produces="application/json;charset=utf-8")
 	public String addComment(@RequestBody String data) {
 		
@@ -33,11 +33,11 @@ public class CommentTabController extends DemoController{
 	
 	@RequestMapping(value="/queryCommentAll",produces="application/json;charset=utf-8",method=RequestMethod.POST)	
 	public String queryCommentTabList(@RequestBody String data,HttpServletRequest request) {
-		/*TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
-		int teacher_id = Integer.parseInt(teacher.getTeacher_id());*/
+		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
+		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
 		@SuppressWarnings("unchecked")
 		HashMap<String,Object> hashmap = JSON.parseObject(data, HashMap.class);
-//		hashmap.put("teacher_id", teacher_id);
+		hashmap.put("teacher_id", teacher_id);
 		logger.info("hashmap"+hashmap);
 		String result =service.queryCommentTab(hashmap);
 		logger.info("result"+result);
