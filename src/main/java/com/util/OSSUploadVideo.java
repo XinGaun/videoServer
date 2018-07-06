@@ -7,8 +7,9 @@ import java.util.Date;
 
 import com.aliyun.oss.HttpMethod;
 import com.aliyun.oss.OSSClient;
-import com.aliyun.oss.model.GetObjectRequest;
-import com.aliyun.oss.model.PutObjectResult;  
+
+import com.aliyun.oss.model.GetObjectRequest;  
+
 
 public class OSSUploadVideo {
 	private static String endpoint = "http://oss-cn-beijing.aliyuncs.com";  

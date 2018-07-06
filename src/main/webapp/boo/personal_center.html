@@ -3,10 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
- 	<!--
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    -->
-   
     <script src="js/jquery-3.3.1.min.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<script src="js/bootstrap.min.js"></script>
@@ -14,9 +10,22 @@
 	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 	<script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script src="js/jquery.lazyload.min.js"></script>
 
 </head>
 <style>
+#btpbq{
+	font-size:30px;
+}
+
+.kcjs {
+	color: #000000;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	word-break: break-all;
+}
 	.jsjs {
 		color: #000000;
 		overflow: hidden;
@@ -117,6 +126,12 @@
 		border-bottom-right-radius:2em;
 		border-bottom-left-radius:0em; 
 	 }
+	 #searchSubmitOne{
+	 	border-top-left-radius:0em;
+		border-top-right-radius:2em;
+		border-bottom-right-radius:2em;
+		border-bottom-left-radius:0em; 
+	 }
  	 #dropdown{
  	 	border-top-left-radius:2em;
 		border-top-right-radius:0em;
@@ -164,6 +179,72 @@
 	 }
 	 #boo{
 	 	position:relative;
+	 }
+	 #foot{
+	 	width:100vw;
+	 	height:12vh;	
+	 	border-bottom:1px solid #999999;
+	 	position:relative;
+	 	border-top:1px solid gray;
+	 	
+	 }
+	 #foot-head{
+	 	margin:3vh 19.4vw 0vh 19.2vw;
+	 	height:9vh;
+	 	width:61.3vw;
+	 	
+	 }
+	 #foot-bot{
+	 	width:100vw;
+	 	height:6vh;
+	 	
+	 	bottom:0vh;
+	 }
+	 #foot-bottom{
+	 	margin:1.7vh 21.3vw 0vh 19.2vw;
+	 	height:1.5vh;
+	 	width:59.4vw;
+	 }
+	 #footimg{
+	 	height:9.2vh;
+	 	width:5vw;
+	 	margin-left:5vw;
+	 }
+	 #footma{
+	 	width:21vw;
+	 	margin-left:6vw;
+	 }
+	 #footma span{
+	 	
+	 	vertical-align:top;
+	 }
+	 #footma img,#footma span{
+	 	margin:0vh 0vw 0vh 0.9vw;
+	 }
+	 .footli{
+	 	float:left;
+	 }
+	 #footli{
+	 	width:24vw;
+	 	height:9vh;
+	 	font-size:0.8vw;
+	 }
+	 #footli span,#footli div{
+	 	
+		margin-left:0.5vw;
+	 }
+	 ol{
+	 	list-style-type:none;
+	 	padding:0px;
+	 }
+	 li{
+	 	display:inline-block;
+	 	
+	 	color:white;
+	 	margin:0vh 0.4vw
+	 }
+	 body{
+	 	heigh:100vh;
 	 }
 </style>
 <body>
@@ -259,15 +340,14 @@
 					<div class="col-md-8">
 						<div class="media">
 							<div class="media-left">
-								<a href="#"> <img class="media-object" src="img/tx22@2x.png"
-									alt="..." style="width: 112px; height: 112px;">
+								<a href="#" id="student_img"> 
 								</a>
 							</div>
 							<div class="media-body">
-								<h4 class="media-heading" style="font-weight: bold;">学生名称</h4>
+								<h4 class="media-heading" style="font-weight: bold;"><span id="studentName"></span></h4>
 								<p>&nbsp;</p>
 
-								<p style="text-indent: 2em;" class="jsjs">教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍教师介绍</p>
+								<p style="text-indent: 2em;" class="jsjs"></p>
 							</div>
 						</div>
 					</div>
@@ -282,7 +362,7 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<ul class="nav nav-tabs ">
-				<li role="presentation"><a href="#" id="qbhkclassify">全部好课</a></li>
+				<li role="presentation"><a href="video.html" id="qbhkclassify">全部好课</a></li>
 				<li role="presentation"><a href="#" id="schkcassify">收藏好课</a></li>
 				<li role="presentation"><a href="#" id="ddclassify">订单记录</a></li>
 				<li role="presentation"><a href="#" id="yhjclassify">优惠券</a></li>
@@ -290,10 +370,10 @@
 				<li role="presentation" style="float: right;">
 					<div class="form-group navbar-form navbar-right">
 						<div class="input-group col-xs-12">
-							<input type="text" name="keyword" id="keyword"
+							<input type="text" name="searchSubmitOne" id="searchSubmitOne"
 								class="form-control" placeholder="搜索我加入的好课"> <span
 								class="input-group-btn">
-								<button class="btn btn-success" id="search_submit" type="submit">搜索</button>
+								<button class="btn btn-success" id="search_submit" type="submit" onclick="queryVideoName()">搜索</button>
 							</span>
 						</div>
 					</div>
@@ -302,168 +382,6 @@
 
 			<div class="row">
 				<div class="col-md-9">
-
-					<div class="panel panel-default" id="qbhk">
-
-						<div class="panel-heading col-md-12" style="font-weight: bold">全部好课</div>
-						<div class="col-md-12">&nbsp;</div>
-						<div class="row">
-							<div class="panel-body">
-								<!--  -->
-								<div class="col-md-4" style="width: 215px;">
-									<img src="img/fm.png" style="width: 185px;" alt="..."
-										class="img-rounded">
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<button class="btn btn-info" style="width: 100%">开始学习</button>
-									</p>
-								</div>
-								<!--  -->
-
-								<!--  -->
-								<div class="col-md-4" style="width: 215px;">
-									<img src="img/fm.png" style="width: 185px;" alt="..."
-										class="img-rounded">
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<button class="btn btn-info" style="width: 100%">开始学习</button>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 215px;">
-									<img src="img/fm.png" style="width: 185px;" alt="..."
-										class="img-rounded">
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<button class="btn btn-info" style="width: 100%">开始学习</button>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 215px;">
-									<img src="img/fm.png" style="width: 185px;" alt="..."
-										class="img-rounded">
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<button class="btn btn-info" style="width: 100%">开始学习</button>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 215px;">
-									<img src="img/fm.png" style="width: 185px;" alt="..."
-										class="img-rounded">
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<button class="btn btn-info" style="width: 100%">开始学习</button>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 215px;">
-									<img src="img/fm.png" style="width: 185px;" alt="..."
-										class="img-rounded">
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<button class="btn btn-info" style="width: 100%">开始学习</button>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 215px;">
-									<img src="img/fm.png" style="width: 185px;" alt="..."
-										class="img-rounded">
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<button class="btn btn-info" style="width: 100%">开始学习</button>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 215px;">
-									<img src="img/fm.png" style="width: 185px;" alt="..."
-										class="img-rounded">
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<button class="btn btn-info" style="width: 100%">开始学习</button>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 215px;">
-									<img src="img/fm.png" style="width: 185px;" alt="..."
-										class="img-rounded">
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<button class="btn btn-info" style="width: 100%">开始学习</button>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 215px;">
-									<img src="img/fm.png" style="width: 185px;" alt="..."
-										class="img-rounded">
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<button class="btn btn-info" style="width: 100%">开始学习</button>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 215px;">
-									<img src="img/fm.png" style="width: 185px;" alt="..."
-										class="img-rounded">
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<button class="btn btn-info" style="width: 100%">开始学习</button>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 215px;">
-									<img src="img/fm.png" style="width: 185px;" alt="..."
-										class="img-rounded">
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<button class="btn btn-info" style="width: 100%">开始学习</button>
-									</p>
-								</div>
-								<!--  -->
-								<!-- 翻页 -->
-								<div class="col-md-12" style="text-align: center;">
-									<nav aria-label="Page navigation">
-										<ul class="pagination">
-											<li><a href="#" aria-label="Previous"> <span
-													aria-hidden="true">&laquo;</span>
-											</a></li>
-											<li><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-											<li><a href="#" aria-label="Next"> <span
-													aria-hidden="true">&raquo;</span>
-											</a></li>
-										</ul>
-									</nav>
-								</div>
-
-							</div>
-						</div>
-					</div>
 					<!-- 全部好课结束 -->
 					<!-- 私藏好课 -->
 					<div class="panel panel-default" id="schk">
@@ -473,163 +391,14 @@
 						<div class="row">
 							<div class="panel-body">
 								<!--  -->
-								<div class="col-md-4" style="width: 210px;">
-									<a href="#"><img src="img/fm.png" style="width: 180px;"
-										alt="..." class="img-rounded"></a>
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<span style="color: #00BFFF; text-align: left;">免费</span> <span
-											style="float: right"><span
-											class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-										<span style="float: right"><span
-											class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-									</p>
+								<div class="row" id="excellent">
+									
 								</div>
-								<!--  -->
-
-								<!--  -->
-								<div class="col-md-4" style="width: 210px;">
-									<a href="#"><img src="img/fm.png" style="width: 180px;"
-										alt="..." class="img-rounded"></a>
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<span style="color: #00BFFF; text-align: left;">免费</span> <span
-											style="float: right"><span
-											class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-										<span style="float: right"><span
-											class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-									</p>
-								</div>
-								<!--  -->
-
-								<!--  -->
-								<div class="col-md-4" style="width: 210px;">
-									<a href="#"><img src="img/fm.png" style="width: 180px;"
-										alt="..." class="img-rounded"></a>
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<span style="color: #00BFFF; text-align: left;">免费</span> <span
-											style="float: right"><span
-											class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-										<span style="float: right"><span
-											class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 210px;">
-									<a href="#"><img src="img/fm.png" style="width: 180px;"
-										alt="..." class="img-rounded"></a>
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<span style="color: #00BFFF; text-align: left;">免费</span> <span
-											style="float: right"><span
-											class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-										<span style="float: right"><span
-											class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 210px;">
-									<a href="#"><img src="img/fm.png" style="width: 180px;"
-										alt="..." class="img-rounded"></a>
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<span style="color: #00BFFF; text-align: left;">免费</span> <span
-											style="float: right"><span
-											class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-										<span style="float: right"><span
-											class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 210px;">
-									<a href="#"><img src="img/fm.png" style="width: 180px;"
-										alt="..." class="img-rounded"></a>
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<span style="color: #00BFFF; text-align: left;">免费</span> <span
-											style="float: right"><span
-											class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-										<span style="float: right"><span
-											class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 210px;">
-									<a href="#"><img src="img/fm.png" style="width: 180px;"
-										alt="..." class="img-rounded"></a>
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<span style="color: #00BFFF; text-align: left;">免费</span> <span
-											style="float: right"><span
-											class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-										<span style="float: right"><span
-											class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 210px;">
-									<a href="#"><img src="img/fm.png" style="width: 180px;"
-										alt="..." class="img-rounded"></a>
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<span style="color: #00BFFF; text-align: left;">免费</span> <span
-											style="float: right"><span
-											class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-										<span style="float: right"><span
-											class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-									</p>
-								</div>
-								<!--  -->
-								<!--  -->
-								<div class="col-md-4" style="width: 210px;">
-									<a href="#"><img src="img/fm.png" style="width: 180px;"
-										alt="..." class="img-rounded"></a>
-									<h4>视频名称</h4>
-									<p style="text-align: right;">2018-06-02</p>
-									<p>
-										<span style="color: #00BFFF; text-align: left;">免费</span> <span
-											style="float: right"><span
-											class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-										<span style="float: right"><span
-											class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-									</p>
-								</div>
-								<!--  -->
-							</div>
-							<div class="col-md-12">
+								<div id="excellentTest"></div>
 								<!-- 翻页 -->
-								<div class="col-md-12" style="text-align: center;">
-									<nav aria-label="Page navigation">
-										<ul class="pagination">
-											<li><a href="#" aria-label="Previous"> <span
-													aria-hidden="true">&laquo;</span>
-											</a></li>
-											<li><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-											<li><a href="#" aria-label="Next"> <span
-													aria-hidden="true">&raquo;</span>
-											</a></li>
-										</ul>
-									</nav>
+								<div class="col-md-12" style="text-align: center;" id="fanye">
+									
 								</div>
-								<!--  -->
 							</div>
 						</div>
 					</div>
@@ -637,142 +406,29 @@
 					<!-- 我的订单 -->
 					<div class="row" id="wddd">
 						<div class="clo-md-12">
-							<ul class="nav nav-tabs ">
-								<li role="presentation"><a href="#" id="">全部订单</a></li>
-								<li role="presentation"><a href="#" id="">待支付</a></li>
-								<li role="presentation"><a href="#" id="">交易成功</a></li>
-								<li role="presentation"><a href="#" id="">交易关闭</a></li>
-							</ul>
-						</div>
-						<div class="clo-md-12">
 							<div class="table-responsive">
 								<table class="table table-striped table-hover">
-									<thead>
+									 <thead>
 										<tr>
-											<th>#订单信息</th>
+											<th>订单信息</th>
 											<th>付款金额(元)</th>
 											<th>交易状态</th>
 											<th>订单日期</th>
 											<th>交易操作</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>《<a href="#">课程名称</a>》<br> 订单编号:<span>10000001</span>
-											</td>
-											<td>19.00</td>
-											<td>购买成功</td>
-											<td>2018-06-04 10:15:00</td>
-											<td><a href="#">查看课程</a><br> <a href="#"
-												style="color: black;">删除订单</a></td>
-										</tr>
-										<tr>
-											<td>《<a href="#">课程名称</a>》<br> 订单编号:<span>10000001</span>
-											</td>
-											<td>19.00</td>
-											<td>购买成功</td>
-											<td>2018-06-04 10:15:00</td>
-											<td><a href="#">查看课程</a><br> <a href="#"
-												style="color: black;">删除订单</a></td>
-										</tr>
-										<tr>
-											<td>《<a href="#">课程名称</a>》<br> 订单编号:<span>10000001</span>
-											</td>
-											<td>19.00</td>
-											<td>购买成功</td>
-											<td>2018-06-04 10:15:00</td>
-											<td><a href="#">查看课程</a><br> <a href="#"
-												style="color: black;">删除订单</a></td>
-										</tr>
-										<tr>
-											<td>《<a href="#">课程名称</a>》<br> 订单编号:<span>10000001</span>
-											</td>
-											<td>19.00</td>
-											<td>购买成功</td>
-											<td>2018-06-04 10:15:00</td>
-											<td><a href="#">查看课程</a><br> <a href="#"
-												style="color: black;">删除订单</a></td>
-										</tr>
-										<tr>
-											<td>《<a href="#">课程名称</a>》<br> 订单编号:<span>10000001</span>
-											</td>
-											<td>19.00</td>
-											<td>购买成功</td>
-											<td>2018-06-04 10:15:00</td>
-											<td><a href="#">查看课程</a><br> <a href="#"
-												style="color: black;">删除订单</a></td>
-										</tr>
-										<tr>
-											<td>《<a href="#">课程名称</a>》<br> 订单编号:<span>10000001</span>
-											</td>
-											<td>19.00</td>
-											<td>购买成功</td>
-											<td>2018-06-04 10:15:00</td>
-											<td><a href="#">查看课程</a><br> <a href="#"
-												style="color: black;">删除订单</a></td>
-										</tr>
-										<tr>
-											<td>《<a href="#">课程名称</a>》<br> 订单编号:<span>10000001</span>
-											</td>
-											<td>19.00</td>
-											<td>购买成功</td>
-											<td>2018-06-04 10:15:00</td>
-											<td><a href="#">查看课程</a><br> <a href="#"
-												style="color: black;">删除订单</a></td>
-										</tr>
-										<tr>
-											<td>《<a href="#">课程名称</a>》<br> 订单编号:<span>10000001</span>
-											</td>
-											<td>19.00</td>
-											<td>购买成功</td>
-											<td>2018-06-04 10:15:00</td>
-											<td><a href="#">查看课程</a><br> <a href="#"
-												style="color: black;">删除订单</a></td>
-										</tr>
-										<tr>
-											<td>《<a href="#">课程名称</a>》<br> 订单编号:<span>10000001</span>
-											</td>
-											<td>19.00</td>
-											<td>购买成功</td>
-											<td>2018-06-04 10:15:00</td>
-											<td><a href="#">查看课程</a><br> <a href="#"
-												style="color: black;">删除订单</a></td>
-										</tr>
-										<tr>
-											<td>《<a href="#">课程名称</a>》<br> 订单编号:<span>10000001</span>
-											</td>
-											<td>19.00</td>
-											<td>购买成功</td>
-											<td>2018-06-04 10:15:00</td>
-											<td><a href="#">查看课程</a><br> <a href="#"
-												style="color: black;">删除订单</a></td>
-										</tr>
+									<tbody id="OrderInformation">
+										
 									</tbody>
+									
 								</table>
-								<!--  -->
-								<div class="col-md-12">
-									<!-- 翻页 -->
-									<div class="col-md-12" style="text-align: center;">
-										<nav aria-label="Page navigation">
-											<ul class="pagination">
-												<li><a href="#" aria-label="Previous"> <span
-														aria-hidden="true">&laquo;</span>
-												</a></li>
-												<li><a href="#">1</a></li>
-												<li><a href="#">2</a></li>
-												<li><a href="#">3</a></li>
-												<li><a href="#">4</a></li>
-												<li><a href="#">5</a></li>
-												<li><a href="#" aria-label="Next"> <span
-														aria-hidden="true">&raquo;</span>
-												</a></li>
-											</ul>
-										</nav>
-									</div>
-									<!--  -->
-								</div>
-
+							
 							</div>
+							<!-- 翻页 -->
+							<div class="col-md-12" style="text-align: center;" id="fanyeTT">
+										
+							</div>
+							<!--  -->
 						</div>
 					</div>
 					<!-- 我的订单结束 -->
@@ -799,96 +455,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>优惠卷编号:<span style="color: red">100001</span><br>
-												(<span style="font-weight: bold;">满69元可用</span>)
-											</td>
-											<td>20.00</td>
-											<td>全场通用</td>
-											<td>2018-06-09</td>
-											<td>可用</td>
-										</tr>
-										<tr>
-											<td>优惠卷编号:<span style="color: red">100001</span><br>
-												(<span style="font-weight: bold;">满69元可用</span>)
-											</td>
-											<td>20.00</td>
-											<td>全场通用</td>
-											<td>2018-06-09</td>
-											<td>可用</td>
-										</tr>
-										<tr>
-											<td>优惠卷编号:<span style="color: red">100001</span><br>
-												(<span style="font-weight: bold;">满69元可用</span>)
-											</td>
-											<td>20.00</td>
-											<td>全场通用</td>
-											<td>2018-06-09</td>
-											<td>可用</td>
-										</tr>
-										<tr>
-											<td>优惠卷编号:<span style="color: red">100001</span><br>
-												(<span style="font-weight: bold;">满69元可用</span>)
-											</td>
-											<td>20.00</td>
-											<td>全场通用</td>
-											<td>2018-06-09</td>
-											<td>可用</td>
-										</tr>
-										<tr>
-											<td>优惠卷编号:<span style="color: red">100001</span><br>
-												(<span style="font-weight: bold;">满69元可用</span>)
-											</td>
-											<td>20.00</td>
-											<td>全场通用</td>
-											<td>2018-06-09</td>
-											<td>可用</td>
-										</tr>
-										<tr>
-											<td>优惠卷编号:<span style="color: red">100001</span><br>
-												(<span style="font-weight: bold;">满69元可用</span>)
-											</td>
-											<td>20.00</td>
-											<td>全场通用</td>
-											<td>2018-06-09</td>
-											<td>可用</td>
-										</tr>
-										<tr>
-											<td>优惠卷编号:<span style="color: red">100001</span><br>
-												(<span style="font-weight: bold;">满69元可用</span>)
-											</td>
-											<td>20.00</td>
-											<td>全场通用</td>
-											<td>2018-06-09</td>
-											<td>可用</td>
-										</tr>
-										<tr>
-											<td>优惠卷编号:<span style="color: red">100001</span><br>
-												(<span style="font-weight: bold;">满69元可用</span>)
-											</td>
-											<td>20.00</td>
-											<td>全场通用</td>
-											<td>2018-06-09</td>
-											<td>可用</td>
-										</tr>
-										<tr>
-											<td>优惠卷编号:<span style="color: red">100001</span><br>
-												(<span style="font-weight: bold;">满69元可用</span>)
-											</td>
-											<td>20.00</td>
-											<td>全场通用</td>
-											<td>2018-06-09</td>
-											<td>可用</td>
-										</tr>
-										<tr>
-											<td>优惠卷编号:<span style="color: red">100001</span><br>
-												(<span style="font-weight: bold;">满69元可用</span>)
-											</td>
-											<td>20.00</td>
-											<td>全场通用</td>
-											<td>2018-06-09</td>
-											<td>可用</td>
-										</tr>
+										
 									</tbody>
 								</table>
 								<div class="col-md-12">
@@ -1074,6 +641,7 @@
 								<tr>
 									<td style="text-align: right;">新密码:</td>
 
+
 									<td><input id="pwd"  placeholder="请输入6-21位密码" type="password" class="form-control"/> <span>&nbsp;</span></td>
 
 								</tr>
@@ -1089,7 +657,6 @@
 									 	<input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" class="form-control" style="width:45%"/>
 
 	        							<input type="button" value="获取验证码" id="hmac" class="form-control"style="width:30%;float:right;font-size:1.5vh;margin-top:-8vh;margin-right:3vw"/>
-
 									</td>
 								</tr>
 								<tr>
@@ -1104,136 +671,68 @@
 					</div>
 					<!-- 我的账户结束 -->
 				</div>
-				<div class="col-md-3">
-					<div class="row">
-
+				<div class="row">
+					<div class="col-md-3">
 						<div class="panel panel-default">
 
 							<div class="panel-heading col-md-12" style="font-weight: bold">推荐好课</div>
 							<div class="col-md-12">&nbsp;</div>
-							<div class="row">
+							
 								<div class="panel-body">
-									<!--  -->
-									<div class="col-md-12" style="width: 210px;">
-										<a href="#"><img src="img/fm.png" style="width: 180px;"
-											alt="..." class="img-rounded"></a>
-										<h4>视频名称</h4>
-										<p style="text-align: right;">2018-06-02</p>
-										<p>
-											<span style="color: #00BFFF; text-align: left;">免费</span> <span
-												style="float: right"><span
-												class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-											<span style="float: right"><span
-												class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-										</p>
-									</div>
-									<!--  -->
-									<div class="col-md-12">&nbsp;</div>
-									<!--  -->
-									<div class="col-md-12" style="width: 210px;">
-										<a href="#"><img src="img/fm.png" style="width: 180px;"
-											alt="..." class="img-rounded"></a>
-										<h4>视频名称</h4>
-										<p style="text-align: right;">2018-06-02</p>
-										<p>
-											<span style="color: #00BFFF; text-align: left;">免费</span> <span
-												style="float: right"><span
-												class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-											<span style="float: right"><span
-												class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-										</p>
-									</div>
-									<!--  -->
-									<div class="col-md-12">&nbsp;</div>
-									<!--  -->
-									<div class="col-md-12" style="width: 210px;">
-										<a href="#"><img src="img/fm.png" style="width: 180px;"
-											alt="..." class="img-rounded"></a>
-										<h4>视频名称</h4>
-										<p style="text-align: right;">2018-06-02</p>
-										<p>
-											<span style="color: #00BFFF; text-align: left;">免费</span> <span
-												style="float: right"><span
-												class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-											<span style="float: right"><span
-												class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-										</p>
-									</div>
-									<!--  -->
-									<div class="col-md-12">&nbsp;</div>
-									<!--  -->
-									<div class="col-md-12" style="width: 210px;">
-										<a href="#"><img src="img/fm.png" style="width: 180px;"
-											alt="..." class="img-rounded"></a>
-										<h4>视频名称</h4>
-										<p style="text-align: right;">2018-06-02</p>
-										<p>
-											<span style="color: #00BFFF; text-align: left;">免费</span> <span
-												style="float: right"><span
-												class="glyphicon glyphicon-star" style="color: yellow;"></span>164458</span>
-											<span style="float: right"><span
-												class="glyphicon glyphicon-eye-open" style="color: red"></span>13458</span>
-										</p>
-									</div>
-
+									<!-- 推荐好课内容 -->
+									<div class="row" id="queryRecommendCourse"></div>
 								</div>
-							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
-
-
-
-<!-- 页底 -->
-
-<div class="row" style="">
-<HR style="border:1 dotted #000000" width="100%" >
-	<div class="col-md-12" >
-	  <div class="col-md-2">&nbsp;</div>
-	  <div class="col-md-8">
-		<div class="col-md-4" >
-			<p><a href="#">关于我们</a>&nbsp;|&nbsp;<a href="#">加入我们</a>&nbsp;|&nbsp;<a href="#">申请合作</a>&nbsp;|&nbsp;<a href="#">意见反馈</a>&nbsp;|&nbsp;<a href="#">用户协议</a></p>
-			<p>鄂ICP备13006852号-3 鄂B2-20160872</p>
-			<div class="col-md-12">&nbsp;</div>
-			<P>
-				<img src="img/beianbgs@2x.png" alt="..." class="img-rounded">
-				 &nbsp;鄂公网安备 33010802003866号
-			</P>
+<!-- 尾部 -->
+	<footer style="background:gray;margin-bottom:0vh;height:21vh;">
+		<div id="foot">
+			<div id="foot-head">
+				<div class="footli" id="footli">
+					<ol>
+    					<li v-for="site in sites">
+      						{{ site.name }}
+    					</li>
+    					
+  					</ol>
+  					<div id="footbeian">
+  						<img src="photos/LoginPhoto/beianbgs@2x.png"/>
+  						<span style="color:white;">晋ICP备18006212号</span>
+  					</div>
+				</div>
+				<div class="footli" id="footimg">
+					<img :src="footimg"/>
+				</div>
+				<div class="footli" id="footma">
+					<span style="color:white;">关注我们：</span>
+					<img :src="footma" style="width:50px;height:50px;"/>
+				</div>
+			</div>
 		</div>
-		<div class="col-md-2" style="text-align: center;" id="footimg">
-			<img src="img/footerlogo.png" alt="..." class="img-rounded img-responsive" style="margin: 0 auto;">
+		<div id="foot-bot">
+			<div id="foot-bottom" style="color:white;">7*24小时服务电话：13623512127</div>
 		</div>
-		<div class="col-md-6" style="text-align: LEFT;" id="footlogo">
-		
-			<img src="img/qrcode.png" alt="..." class="img-rounded">
-			<img src="img/qrcode.png" alt="..." class="img-rounded">
-			<img src="img/qrcode.png" alt="..." class="img-rounded">
-		</div>
-	  </div>
-	  <div class="col-md-2">&nbsp;</div>
-	</div>
-
-</div>
+	</footer>
 
 
 	<script type="text/javascript">
 	
 		$(function() {
-			$("#schk").hide();
+			$("#schk").show();//不显示全部课程的内容
 			$("#wddd").hide();
 			$("#yhj").hide();
 			$("#wdzh").hide();
-			$("#qbhkclassify").click(function() {
-				$("#wdzh").hide();
+			$("#qbhkclassify").click(function() {//好像不需要了
+				/* $("#wdzh").hide();
 				$("#yhj").hide();
 				$("#wddd").hide();
-				$("#schk").hide();
-				$("#qbhk").show();
+				$("#schk").show();
+				$("#qbhk").hide(); */
 			});
 			$("#schkcassify").click(function() {
 				$("#wdzh").hide();
@@ -1273,6 +772,7 @@
 				$("#xgmm").show();
 			});
 		});
+		
 	</script>
 	<script type="text/javascript">
 	//var url="http:127.0.0.1:8080/";
@@ -1332,7 +832,7 @@
     $(function () {
     	//var f="";//定义全局变量file改变时的值
         //file的change事件
-        $('#uploadFile').change(function (e) {
+        $('#uploadFile').change(function () {
         	//f=$(this).val();
         	//提交form表单的数据
             //$('#uploadForm').submit();
@@ -1354,25 +854,18 @@
 	       		//图片大于2M
 	       		$("#up").css({color:"red"});
 	       	}else{
-	       		/* var data = new FormData();
+	       		var data = new FormData();
 			    $.each($(this)[0].files,function(i,file){
 			    	data.append('file', file);
-			    }); */
-	       		
-				   //var url=f.split('\\');//注split可以用字符或字符串分割
-				   //var fileName=url[url.length-1];//这就是要取得的图片名称
-				   /* var data={
-						   "path":f,
-						   "name":fileName,
-				   }; */
+			    });
+
 	       	}
-	      
 	      
 	        $.ajax({
 	            type: "POST",
 	            url: url+"/videoServer/front/User/addfile",
-	            data: JSON.stringify(f),
-	            //data:data,
+	            //data: JSON.stringify(f),
+	            data:data,
 	            contentType:'application/json;charset=UTF-8',
 	        	cache:false,
 	            cache: false,
@@ -1380,11 +873,12 @@
 	            processData: false,    //不可缺
 	            dataType:"json",
 	            success: function(suc) {
-	                if(suc.code==0){
-	                        $("#thumbUrl").val(suc.fileName);//将地址存储好
-	                        $("#thumburlShow").css({width:"80px"},{heith:"80px"});//显示图片     
-	                        $("#thumburlShow").attr("src",suc.fileName);//显示图片   
-	                        $("#photoimg").val(suc.fileName.substr(suc.fileName.lastIndexOf("/")+1));
+	            	//alert("suc"+suc);
+	                if(suc.length!=0){
+	                   // alert("dd");
+	                	$("#thumburlShow").css({width:"80px"},{heith:"80px"});//显示图片     
+	                    $("#thumburlShow").attr("src",suc);//显示图片   
+	                    $("#photoimg").val(suc);
 	                        
 	                 }else{
 	                    alertLayel("上传失败");
@@ -1393,6 +887,7 @@
 	                }
 	            },
 	            error: function(XMLHttpRequest, textStatus, errorThrown) {
+	            	alert(2);
 	                alertLayel("上传失败，请检查网络后重试");
 	                $("#url").val("");
 	                $(this).val('');
@@ -1407,8 +902,7 @@
             $('#uploadFile').click();
         });
 　　}); 
-    //保存按钮点击事件
-
+  	//保存按钮点击事件
     $("#updateuser").click(function(){  	
      	var user=$("#name").val();//昵称
     	var photo=$("#photoimg").val();
@@ -1492,18 +986,18 @@
         	data:JSON.stringify({user_phone:userphone}),
         	dataType:"json",
         	success:function(data){
-        		$("#userid").val(data[0].user_id);
         		$("#name").val(data[0].user_name);//昵称
         		
-            	$("#email").val(data[0].user_email);//email
-            	//$('input:radio:checked').val(user_sex);
+        		$("#studentName").html(data[0].user_name);//个人中心页头借用用户昵称
+        		$("#student_img").html('<img src="'+data[0].user_photo+'"  alt="..." style="width:100%;" class="img-rounded lazy">');//个人中心页头借用用户图片
+            	
+        		$("#email").val(data[0].user_email);//email
             	$("#aboutme").val(data[0].user_self);
             	$("#truename").val(data[0].user_truename);
             	$("#altphone").val(userphone);
             	$("#qq").val(data[0].user_qq);
             	if(data[0].user_sex==3){
-            		//var expiresDate= new Date();
-	    			//expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效男
+            		//男
             		$("input[name=sex][value=3]").attr("checked",true);
             	}else if(data[0].user_sex==4){
             		//女
@@ -1517,7 +1011,7 @@
             	}
         	},
         	error:function(){
-        		//alert("qerror");
+        		alert("qerror");
         	}
 		})		 
     })
@@ -1525,7 +1019,7 @@
      $("#alterphone").click(function(){
     	var data={
     			"user_phone":$("#altphone").val(),
-    			"user_id":$("#userid").val(),
+    			"user_email":$("#email").val(),
     	}
     	//alert(JSON.stringify(data));
     	$.ajax({
@@ -1536,8 +1030,6 @@
 	        	cache:false,
     			dataType:"json",
     			success:function(data){
-    				var expiresDate= new Date();
-	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
     				$.cookie('phone',$("#altphone").val(),{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
     				//alert($.cookie("phone"));
     			},
@@ -1647,8 +1139,9 @@
 	    		"user_phone":userphone,
         		"user_pwd":pwd,
 	    };
+
 	   // alert(JSON.stringify(UserTab));
-	   if(typeof(vcode)!="undefined"&&vcode==code&&typeof(pwd)!="undefined"&&repwd==pwd){   
+	   if(typeof(phone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code&&typeof(pwd)!="undefined"&&repwd==pwd){   
 
 	        $.ajax({
 	       			type:"POST",
@@ -1674,6 +1167,7 @@
 	//进入个人页面获取旧密码
 	
 
+
     /* $(function(){
     	//var userphone=$.cookie('phone');
     	//alert(userphone);
@@ -1687,8 +1181,8 @@
         		$("#oldpwd").val(data[0].user_pwd);//旧密码
         	}
     	})
-    }) */
-	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
+    })*/
+  //进入页面自动获取cookie的值，根据cookie决定是否显示登录
 	$(function(){
 		
 		auto();
@@ -1711,17 +1205,17 @@
 		}
 	}
 	/*
-	退出按钮点击事件
+		退出按钮点击事件
 	*/
 	$("#exit").click(function(){
-		//alert(5);
+		alert(5);
 		//window.location.href="index.html"; 
 		
 		$("#logsd").show();
 		$("#logImg").hide();
-		$.cookie('id', '', { expires: -1 ,path:'/',secure: false});
-		$.cookie('phone', '', { expires: -1 ,path:'/',secure: false});
-		$.cookie('photo', '', { expires: -1,path:'/',secure: false }); 
+		$.cookie('id', '', { expires: -1 });
+		$.cookie('phone', '', { expires: -1 });
+		$.cookie('photo', '', { expires: -1 }); 
 		 
 	})
 	
@@ -1737,24 +1231,437 @@
 		   }  
 		  }  
 	})  
-	//判断PC或移动
-	$(function(){
-		judgePC();
-	})
-	function judgePC(){
-		if (navigator.userAgent.match(/mobile/i)) {
-			//移动端
-			$("#logsd").css("margin-right", "10vw");
-			$("#logsd").css("margin-top", "3.5vh");
-			$("#footimg").css("margin-top","-16vh");
-			$("#footlogo").css("margin-top","-16vh");
-		} else {
-			//pc端
-			$("#logsd").css("margin-right", "15vw");
-			$("#logsd").css("margin-top", "3.5vh");
-		}
-	} 
+	
 </script>
+<script type="text/javascript">
+$(function(){
+	var userphone=$.cookie("phone");
+	param.userphone=userphone;
+	initBoutique(param);
+	initRecommend();
+});
+var url ="";
+$("img.lazy").lazyload({effect: "fadeIn"});
+var pages = 0;//当前页数
+var nums = 6;//每页几条
+var total = 0;//总条数 
 
+//搜索框查询
+function queryVideoName(){
+	param.searchSubmit = $("#searchSubmitOne").val();
+	$("#excellent").html("");
+	param.pages = 0;
+	param.nums = 0;
+	initBoutique(param);
+}
+
+//组装参数
+var param = {
+		searchSubmit : $("#searchSubmitOne").val(),
+		page : nums,
+		nums : (pages*nums)
+}
+
+//生成分页条
+function page(pages, nums, total) {
+	var next = "";
+	var previous = "";
+	var pageStr = "";
+	if (pages == 0) {
+		previous = "";
+	} else {
+		previous = '<li>'
+			+ '<a href="javascript:void(0)" onclick="shangye()" aria-label="Previous">'
+			+ '<span aria-hidden="true">&laquo;</span>'
+			+ '</a>' + '</li>';
+	}
+	if (pages == total-1) {
+		next = "";
+	} else {
+		next = '<li>' + '<a href="javascript:void(0)" onclick="xiaye()" >'
+		+ '<span aria-hidden="true">&raquo;</span>'
+		+ '</a>' + '</li>';
+	}
+	if (total <= 5 || pages <= 4) {
+		var totalnum = 5;
+		if(total<=5){
+			totalnum = total
+		}
+		for (var i = 1; i <= totalnum; i++) {
+			pageStr = pageStr + '<li><a href="javascript:void(0)" onclick="custom('+i+')">' + i
+			+ '</a></li>';
+
+		}
+	} else if (total - pages <= 2) {
+		for (var i = 0; i < 5; i++) {
+			pageStr = '<li><a href="javascript:void(0)" onclick="custom('+(total - i)+')">' + (total - i)
+			+ '</a></li>' + pageStr;
+		}
+	} else {
+		for (var i = -1; i <= 3; i++) {
+			pageStr = pageStr + '<li><a href="javascript:void(0)" onclick="custom('+(pages + i)+')">'
+			+ (pages + i) + '</a></li>';
+		}
+	}
+	var fanye = '<nav aria-label="Page navigation">'
+		+ '<ul class="pagination">' + previous + pageStr
+		+ next + '<li><a>当前第'+(pages+1)+'页</a></li></ul>' + '</nav>'
+		$("#fanye").html(fanye);
+}
+
+//获取传递参数
+function getUrlParam(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+	var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+	if (r != null)
+		return unescape(r[2]);
+	return null; // 返回参数值  
+}	
+
+//下一页
+function xiaye(){
+	pages++;
+	param.nums=pages*nums;	
+	$("#excellent").html("");
+	//console.log(pages+1);
+	initBoutique(param);
+	return false;
+}
+//上页
+function shangye(){
+	pages--;
+	param.nums=pages*nums;
+	$("#excellent").html("");
+	//console.log(pages);
+	initBoutique(param);
+	return false;
+}
+//页数换页
+function custom(number){
+	pages=number-1;
+	param.nums=(pages)*nums;
+	$("#excellent").html("");
+	initBoutique(param);
+	//console.log(pages);
+	return false;
+}
+
+//取消收藏信息
+function DeleteCancel(number){
+	$("#excellent").html("");
+	param.number = number;
+	//initBoutique(param)
+	initOrderBoutique(param);
+	initBoutique(param)
+}
+
+//加载推荐课程
+function initRecommend(){
+	$
+	.ajax({
+		type : "POST",
+		url : url+"/videoServer/front/PersonalCenter/queryRecommend",
+		contentType : 'application/json; charset=UTF-8',
+	//	data: JSON.stringify(param),  //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			if (result.length == 0) {
+				$("#queryRecommendCourse").html("暂无推荐好课!");
+				return;
+			}
+			for (var i = 0; i < result.length; i++) {
+				var queryRecommendCourse = '<div class="col-md-12" >'
+					+ '<div class="thumbnail">'
+					+ '<a href="course.html?cid='+result[i].courses_id+'">'
+					+ '<img data-original="'
+					+ result[i].courses_img_url
+					+ '" class="jpckclass lazy" style="width:100%;" alt="...">'
+					+ '</a>'
+					+ '<div class="caption">'
+					+ '<p style="font-weight: bold;">'
+					+ result[i].courses_name
+					+ '</p>'
+					+ '<p style="text-indent:2em" class="kcjs">'
+					+ result[i].courses_introduce
+					+ '</p>'
+					+ '<div class="col-md-6">'
+					+ '<p style="color:green;font-weight: bold;">'
+					+ result[i].teacher_name
+					+ '</p>'
+					+ '</div>'
+					+ '<div class="col-md-6">'
+					+ '<p style="text-align:right;">'
+					+ result[i].courses_date
+					+ '</p>'
+					+ '</div>'
+					+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" ><span class="glyphicon glyphicon-star" style="color:yellow;"></span>'
+					+ result[i].courses_grade
+					+ '</p>'
+					+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+					+ result[i].courses_pricemoney
+					+ '<span>￥</span></p>'
+					+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+					+ result[i].courses_click
+					+ '</p>'
+					+ '<p>&nbsp;</p>'
+					+ '</div>'
+					+ '</div>'
+					+ '</div>';
+				$("#queryRecommendCourse").append(queryRecommendCourse);
+			}
+			$("img.lazy").lazyload({
+				effect : "fadeIn",
+				offset : 300
+			});
+		}
+	});	
+}
+
+
+
+//index 加载收藏课程
+function initBoutique(param){
+	$
+	.ajax({
+		type : "POST",
+		url : url+"/videoServer/front/PersonalCenter/queryPersonalCenter",
+		contentType : 'application/json; charset=UTF-8',
+		data: JSON.stringify(param),  //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			if (result.list.length == 0) {
+				$("#excellentTest").html("暂无收藏课程!");
+				return;
+			}else{
+				for (var i = 0; i < result.list.length; i++) {
+					var excellent = '<div class="col-md-3" >'
+							+ '<div class="thumbnail">'
+							+ '<a href="course.html?cid='+result.list[i].courses_id+'">' 
+							+ '<img data-original="'+ result.list[i].courses_img_url+'" class="jpckclass lazy"  style="width:100%;" alt="...">'
+							+ '</a>'
+							+ '<div class="caption">'
+							+ '<p style="color:green;font-weight: bold;font-size:18px;"><a href="course.html?cid='+result.list[i].courses_id+'">'
+							+ result.list[i].courses_name
+							+ '</a></p>'
+							+ '<p style="font-weight: bold;">'
+							+ result.list[i].courses_date
+							+ '</p>'
+							+ '<div class="col-md-6">'
+							+ '</div>'
+							+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" ><span class="glyphicon glyphicon-star" style="color:yellow;"></span>'
+							+ result.list[i].courses_grade
+							+ '</p>'
+							+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+							+ result.list[i].courses_pricemoney
+							+ '<span>￥</span></p>'
+							+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+							+ result.list[i].courses_click
+							+ '</p>'
+							+ '<p><button class="btn btn-info" style="width: 100%" onclick= "DeleteCancel('+result.list[i].courses_id+')">取消收藏</button></p>'
+							+ '</div>'
+							+ '</div>'
+							+ '</div>';
+					$("#excellent").append(excellent);
+					$("#excellentTest").html("");
+				}
+				$("img.lazy").lazyload({effect: "fadeIn",offset:300});
+				total=result.total;
+				page(pages,nums,result.total);
+			}
+			
+		}
+
+	});	
+}
+//取消收藏课程
+function initOrderBoutique(param){
+	$
+	.ajax({
+		type : "POST",
+		url : url+"/videoServer/front/PersonalCenter/deleteSubscription",
+		contentType : 'application/json; charset=UTF-8',
+		data: JSON.stringify(param),  //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			
+		}
+	});	
+}
+
+	
+	/* 尾部li标签添加的关于我们 */
+	new Vue({
+	  el: '#footli',
+	  data: {
+	    sites: [
+	      { name: '关于我们' },
+	      { name: '|'},
+	      { name: '加入我们' },
+	      { name: '|'},
+	      { name: '合作申请' },
+	      { name: '|'},
+	      { name: '意见反馈' },
+	      { name: '|'},
+	      { name: '用户协议' }
+	    ]
+	  }
+	})
+	//尾部的语道图标
+	new Vue({
+		el:'#footimg',
+		data:{
+			footimg:'photos/LoginPhoto/yudaologo.png'
+		}
+	})
+	
+	
+	//尾部二维码
+	new Vue({
+		el:'#footma',
+		data:{
+			footma:'photos/LoginPhoto/erweima_20180628215615.jpg'
+		}
+	})
+</script>
+<script type="text/javascript">
+$(function(){
+	var userphone=$.cookie("phone");
+	paramT.userphone=userphone;
+	initOrderInformation(paramT)
+});
+var url ="";
+$("img.lazy").lazyload({effect: "fadeIn"});
+var pages = 0;//当前页数
+var nums = 6;//每页几条
+var total = 0;//总条数 
+
+//组装参数
+var paramT = {
+		page : nums,
+		nums : (pages*nums)
+}
+
+//生成分页条
+function pageT(pages, nums, total) {
+	var next = "";
+	var previous = "";
+	var pageStr = "";
+	if (pages == 0) {
+		previous = "";
+	} else {
+		previous = '<li>'
+			+ '<a href="javascript:void(0)" onclick="shangye()" aria-label="Previous">'
+			+ '<span aria-hidden="true">&laquo;</span>'
+			+ '</a>' + '</li>';
+	}
+	if (pages == total-1) {
+		next = "";
+	} else {
+		next = '<li>' + '<a href="javascript:void(0)" onclick="xiaye()" >'
+		+ '<span aria-hidden="true">&raquo;</span>'
+		+ '</a>' + '</li>';
+	}
+	if (total <= 5 || pages <= 4) {
+		var totalnum = 5;
+		if(total<=5){
+			totalnum = total
+		}
+		for (var i = 1; i <= totalnum; i++) {
+			pageStr = pageStr + '<li><a href="javascript:void(0)" onclick="custom('+i+')">' + i
+			+ '</a></li>';
+
+		}
+	} else if (total - pages <= 2) {
+		for (var i = 0; i < 5; i++) {
+			pageStr = '<li><a href="javascript:void(0)" onclick="custom('+(total - i)+')">' + (total - i)
+			+ '</a></li>' + pageStr;
+		}
+	} else {
+		for (var i = -1; i <= 3; i++) {
+			pageStr = pageStr + '<li><a href="javascript:void(0)" onclick="custom('+(pages + i)+')">'
+			+ (pages + i) + '</a></li>';
+		}
+	}
+	var fanye = '<nav aria-label="Page navigation">'
+		+ '<ul class="pagination">' + previous + pageStr
+		+ next + '<li><a>当前第'+(pages+1)+'页</a></li></ul>' + '</nav>'
+		$("#fanyeTT").html(fanye);
+}
+
+//获取传递参数
+function getUrlParamT(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+	var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+	if (r != null)
+		return unescape(r[2]);
+	return null; // 返回参数值  
+}	
+
+//下一页
+function xiayeT(){
+	pages++;
+	paramT.nums=pages*nums;	
+	$("#OrderInformation").html("");
+	//console.log(pages+1);
+	initOrderInformation(paramT);
+	return false;
+}
+//上页
+function shangyeT(){
+	pages--;
+	paramT.nums=pages*nums;
+	$("#OrderInformation").html("");
+	//console.log(pages);
+	initOrderInformation(paramT);
+	return false;
+}
+//页数换页
+function customT(number){
+	pages=number-1;
+	paramT.nums=(pages)*nums;
+	$("#OrderInformation").html("");
+	initOrderInformation(paramT);
+	//console.log(pages);
+	return false;
+}
+
+//加载推荐课程
+function initOrderInformation(paramT){
+	$
+	.ajax({
+		type : "POST",
+		url : url+"/videoServer/front/PersonalCenter/queryOrderInformation",
+		contentType : 'application/json; charset=UTF-8',
+		data: JSON.stringify(paramT),  //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			if (result.list.length == 0) {
+				$("#OrderInformation").html("暂无订单信息!");
+				return;
+			}
+			for (var i = 0; i < result.list.length; i++) {
+				var OrderInformation = '<tr>'
+				+ '<td>《<a href="#">'
+				+result.list[i].courses_name
+				+'</a>》<br> 订单编号:<span>'
+				+result.list[i].order_id
+				+'</span></td>'
+				+'<td>'
+				+result.list[i].order_pricemoney
+				+'</td><td>'
+				+result.list[i].order_status
+				+'</td><td>'
+				+result.list[i].order_date
+				+'</td><td><a href="course.html?cid='+result.list[i].order_id+'">查看课程</a><br></td></tr>';
+				
+				$("#OrderInformation").append(OrderInformation);
+			}
+			total=result.total;
+			pageT(pages,nums,result.total);
+		}
+	});	
+}
+
+</script>
 </body>
 </html>

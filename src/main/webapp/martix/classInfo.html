@@ -301,7 +301,7 @@
 									<td>
 										<div class="input-group" width="100%">
 											<span class="input-group-addon">课程名称</span>
-											<input type="text" class="form-control" placeholder="请输入课程名称" id="courses_name">
+											<input type="text" class="form-control" placeholder="请输入课程名称" id="courses_">
 										</div>
 									</td>
 									<td>
@@ -364,7 +364,7 @@
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="myModalLabel">课程视频添加</h4>
 	      </div>
-			<form action="/videoServer/videoTab/uploadflv1.do" method="post">
+			<form action="/videoServer/videoTab/uploadflv1.do" method="post" enctype="multipart/form-data">
 				<div style="width:100%;">
 					<div style="height:30px;background:#D9ECFF;border:1px solid #CADEFD"></div>
 					<div style="height:50px;border:1px solid #CADEFD">
@@ -384,7 +384,7 @@
 					<div style="height:50px;border:1px solid #CADEFD">
 						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">课程图片：</div>
 						<div style="width:440px;height:50px;float:left;">
-							&nbsp;<input type="file" id="courses_img_url">
+							&nbsp;<input type="file" id="courses_image">
 						</div>
 					</div>
 					<div style="height:100px;border:1px solid #CADEFD">
@@ -481,24 +481,48 @@
 	}
  </script>
  <script>
+ 
+//加载模态框    
+ $('#myModal').on('show.bs.modal', function (event) {     
+	   $("#name").val(""); 
+	   $("#jiage").val("");
+	   $("#courses_introduce").val("");
+ }); 
 	$("#sub").click(function(){
 		var str="";
 		$("input[name='videoId']").each(function(){    
              if($(this).is(":checked")){    
                  str +=$(this).val()+",";    
              }    
-         });
+         });	
+		//表单参数
+		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
+		 var courses_name = $.trim($("#name").val());  
+		 var courses_pricemoney =$.trim($("#jiage").val());
+		 var image = $('#courses_image').prop("files")[0];
+		 var courses_introduce = $.trim($("#courses_introduce").val());
+		 var courses_video = str.substring(0,str.length-1);	
+		 formData.append("courses_name",courses_name);  
+		 formData.append("courses_pricemoney", courses_pricemoney);  
+		 formData.append("image", image);
+		 formData.append("courses_introduce", courses_introduce);
+		 formData.append("courses_video", courses_video);
+		
 		$.ajax({
 			type : 'post',
-			data : {courses_name:$("#name").val(),courses_pricemoney:$("#jiage").val(),courses_img_url:$("#courses_img_url").val(),courses_introduce:$("#courses_introduce").val(),courses_video:str.substring(0,str.length-1)},
+			data : formData,	
+			contentType: false, 
+	        processData: false, 
 			url : '/videoServer/coursesTab/addCoursesTab.do',
 			success : function(){
 				alert("提交成功");
-				$("#quxiao").click();
 				window.location.href="";
+				$("#myModal").modal("hide");
 			}
 		})
+	
 	})
+
 	$("#queryorder").click(function(){
 		$.ajax({
 			type : 'post',

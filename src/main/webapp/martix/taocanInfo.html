@@ -354,7 +354,7 @@
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="myModalLabel">套餐视频添加</h4>
 	      </div>
-			<form action="/videoServer/videoTab/uploadflv1.do" method="post">
+			<form action="/videoServer/videoTab/uploadflv1.do" method="post" enctype="multipart/form-data">
 				<div style="width:100%;">
 					<div style="height:30px;background:#D9ECFF;border:1px solid #CADEFD"></div>
 					<div style="height:50px;border:1px solid #CADEFD">
@@ -470,24 +470,48 @@
 	}
  </script>
  <script>
-	$("#sub").click(function(){
+//加载模态框    
+ $('#myModal').on('show.bs.modal', function (event) {      
+	   $("#name").val(""); 
+	   $("#jiage").val("");
+	   $("#courses_introduce").val("");
+ }); 
+	$("#sub").click(function(){	
 		var str="";
 		$("input[name='videoId']").each(function(){    
              if($(this).is(":checked")){    
                  str +=$(this).val()+",";    
              }    
-         });
+         });	
+		//表单参数
+		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
+		 var combo_name = $.trim($('#name').val());  
+		 var combo_price =$.trim($("#jiage").val());
+		 var image = $('#courses_img_url').prop("files")[0];
+		 var combo_introduce = $.trim($("#courses_introduce").val());
+		 var video_id = str.substring(0,str.length-1);
+	
+		 formData.append("combo_name",combo_name);  
+		 formData.append("combo_price", combo_price);  
+		 formData.append("image", image);
+		 formData.append("combo_introduce", combo_introduce);
+		 formData.append("video_id", video_id);
+
 		$.ajax({
 			type : 'post',
-			data : {combo_name:$("#name").val(),combo_price:$("#jiage").val(),combo_imgs:$("#courses_img_url").val(),combo_introduce:$("#courses_introduce").val(),video_id:str.substring(0,str.length-1)},
+			data : formData,		
+			contentType: false, 
+	        processData: false, 
 			url : '/videoServer/comboTab/insertComboTab.do',
 			success : function(){
 				alert("提交成功");
-				$("#quxiao").click();
 				window.location.href="";
+				$("#myModal").modal("hide");
 			}
 		})
+	
 	})
+	
 	$("#queryorder").click(function(){
 		$.ajax({
 			type : 'post',

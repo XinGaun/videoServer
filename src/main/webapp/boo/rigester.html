@@ -168,6 +168,72 @@
 	 	border:1px solid #888888;
 	 	width:25vw;
 	}
+	#foot{
+	 	width:100vw;
+	 	height:12vh;	
+	 	border-bottom:1px solid #999999;
+	 	position:relative;
+	 	border-top:1px solid gray;
+	 	
+	 }
+	 #foot-head{
+	 	margin:3vh 19.4vw 0vh 19.2vw;
+	 	height:9vh;
+	 	width:61.3vw;
+	 	
+	 }
+	 #foot-bot{
+	 	width:100vw;
+	 	height:6vh;
+	 	
+	 	bottom:0vh;
+	 }
+	 #foot-bottom{
+	 	margin:1.7vh 21.3vw 0vh 19.2vw;
+	 	height:1.5vh;
+	 	width:59.4vw;
+	 }
+	 #footimg{
+	 	height:9.2vh;
+	 	width:5vw;
+	 	margin-left:5vw;
+	 }
+	 #footma{
+	 	width:21vw;
+	 	margin-left:6vw;
+	 }
+	 #footma span{
+	 	
+	 	vertical-align:top;
+	 }
+	 #footma img,#footma span{
+	 	margin:0vh 0vw 0vh 0.9vw;
+	 }
+	 .footli{
+	 	float:left;
+	 }
+	 #footli{
+	 	width:24vw;
+	 	height:9vh;
+	 	font-size:0.8vw;
+	 }
+	 #footli span,#footli div{
+	 	
+		margin-left:0.5vw;
+	 }
+	 ol{
+	 	list-style-type:none;
+	 	padding:0px;
+	 }
+	 li{
+	 	display:inline-block;
+	 	
+	 	color:white;
+	 	margin:0vh 0.4vw
+	 }
+	 body{
+	 	heigh:100vh;
+	 }
 </style>
 <body>
 	<nav class="navbar navbar-default">
@@ -282,40 +348,35 @@
 		    </form>
 		</div>
 	</div><!-- 内容结束 -->
-	<!-- 页底 -->
-
-	<div class="row" style="">
-		<HR style="border: 1 dotted #000000" width="100%">
-		<div class="col-md-12">
-			<div class="col-md-2">&nbsp;</div>
-			<div class="col-md-8">
-				<div class="col-md-4">
-					<p>
-						<a href="#">关于我们</a>&nbsp;|&nbsp;<a href="#">加入我们</a>&nbsp;|&nbsp;<a
-							href="#">申请合作</a>&nbsp;|&nbsp;<a href="#">意见反馈</a>&nbsp;|&nbsp;<a
-							href="#">关用户协议</a>
-					</p>
-					<p>鄂ICP备13006852号-3 鄂B2-20160872</p>
-					<div class="col-md-12">&nbsp;</div>
-					<P>
-						<img src="img/beianbgs@2x.png" alt="..." class="img-rounded">
-						&nbsp;鄂公网安备 33010802003866号
-					</P>
+	<!-- 尾部 -->
+	<footer style="background:gray;margin-bottom:0vh;height:21vh;">
+		<div id="foot">
+			<div id="foot-head">
+				<div class="footli" id="footli">
+					<ol>
+    					<li v-for="site in sites">
+      						{{ site.name }}
+    					</li>
+    					
+  					</ol>
+  					<div id="footbeian">
+  						<img src="photos/LoginPhoto/beianbgs@2x.png"/>
+  						<span style="color:white;">晋ICP备18006212号</span>
+  					</div>
 				</div>
-				<div class="col-md-2" style="text-align: center;" id="footimg">
-					<img src="img/footerlogo.png" alt="..."
-						class="img-rounded img-responsive" style="margin: 0 auto;">
+				<div class="footli" id="footimg">
+					<img :src="footimg">
 				</div>
-				<div class="col-md-6" style="text-align: right;" id="footlogo">
-					关注我们 : <img src="img/qrcode.png" alt="..." class="img-rounded">
-					<img src="img/qrcode.png" alt="..." class="img-rounded"> <img
-						src="img/qrcode.png" alt="..." class="img-rounded">
+				<div class="footli" id="footma">
+					<span style="color:white;">关注我们：</span>
+					<img :src="footma" style="width:50px;height:50px;"/>
 				</div>
 			</div>
-			<div class="col-md-2">&nbsp;</div>
 		</div>
-
-	</div>
+		<div id="foot-bot">
+			<div id="foot-bottom" style="color:white;">7*24小时服务电话：13623512127</div>
+		</div>
+	</footer>
 </body>
 <script>
 	
@@ -513,7 +574,9 @@
 		//alert($.cookie('phone'));
 		//alert($.cookie('photo'));
 		if($.cookie("phone")==null){//cookie过期
+
 			//alert("登录过期，请重新登录");
+
 		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
 			//alert("pp");
 			$("#logsd").hide();
@@ -586,5 +649,38 @@
 			$("#logsd").css("margin-top", "3.5vh");
 		}
 	} 
+	/* 尾部li标签添加的关于我们 */
+	new Vue({
+	  el: '#footli',
+	  data: {
+	    sites: [
+	      { name: '关于我们' },
+	      { name: '|'},
+	      { name: '加入我们' },
+	      { name: '|'},
+	      { name: '合作申请' },
+	      { name: '|'},
+	      { name: '意见反馈' },
+	      { name: '|'},
+	      { name: '用户协议' }
+	    ]
+	  }
+	})
+	//尾部的语道图标
+	new Vue({
+		el:'#footimg',
+		data:{
+			footimg:'photos/LoginPhoto/yudaologo.png'
+		}
+	})
+	
+	
+	//尾部二维码
+	new Vue({
+		el:'#footma',
+		data:{
+			footma:'photos/LoginPhoto/erweima_20180628215615.jpg'
+		}
+	})
 </script>
 </html>

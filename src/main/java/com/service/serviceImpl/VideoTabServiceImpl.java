@@ -1,19 +1,22 @@
 package com.service.serviceImpl;
 
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.dao.VideoTabDao;
 import com.entity.VideoTab;
 import com.service.VideoTabService;
-
+import com.util.HttpReq;
 import com.util.OSSUtil;
 
 @Service
@@ -23,39 +26,36 @@ public class VideoTabServiceImpl implements VideoTabService{
 	private VideoTabDao videoDao;
 
 	private OSSUtil ossUpload = new OSSUtil();
-
-
+	private String url = "http://www.niceyuwen.com:2020/videoffmpeg/transcoding/transcodingm3u8";
 	@Override
 	@Transactional
-	public  void uploadVideo(String video_name, String video_introduce,String video_url, String video_image_url,Integer video_form_id,Integer teacher_id) throws Exception {
-		HashMap<String,String> map =videoUpload(video_url,video_image_url,video_name,null);
-		String videoUrl = map.get("video_url");
-		String videoImageUrl = map.get("video_image_url");
-		System.out.println("create");
-		createVideoTab(video_name,videoUrl,videoImageUrl,video_introduce,video_form_id,teacher_id);
-	}
-
-	public HashMap<String,String> videoUpload(String video_url, String video_image_url,String video_name,String imageName)throws Exception {
-
-		DiskFileItemFactory factory = new DiskFileItemFactory();
-		factory.setSizeThreshold(4*1024);
-
-		HashMap<String,String> map = new HashMap<>();
-		/*ossUpload.uploadInput(video_name,video);
-		ossUpload.uploadInput(imageName,video_image);*/
-
-
-		String ossVideoName =ossUpload.uploadJD(video_url,video_name);
-
-		String ossImageName = ossUpload.upload(video_image_url,video_name);
-		System.out.println("oss end");
-		String viderUrl = ossUpload.getWebURL(ossVideoName);
+	public String uploadVideo(String video_name,String imageName, String video_introduce,MultipartFile video, MultipartFile image,Integer video_form_id,Integer teacher_id,long size) throws Exception {
+		HashMap<String,String> data = new HashMap<>();
+		
+		CommonsMultipartFile cf= (CommonsMultipartFile)video; //这个myfile是MultipartFile的
+		DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
+		File videoFile = fi.getStoreLocation(); 
+		String ossVideoName =ossUpload.uploadJD(videoFile,video_name,size);
+		
+		CommonsMultipartFile cf2= (CommonsMultipartFile)image; //这个myfile是MultipartFile的
+		DiskFileItem fi2 = (DiskFileItem)cf2.getFileItem(); 
+		File imageFile = fi2.getStoreLocation(); 
+		String ossImageName = ossUpload.upload(imageFile,imageName);
+		//		String viderUrl = ossUpload.getWebURL(ossVideoName);
 		String imageUrl = ossUpload.getWebURL(ossImageName);
-		System.out.println("service"+viderUrl);
-		System.out.println("service"+ imageUrl);
-		map.put("video_url", viderUrl);
-		map.put("video_image_url", imageUrl);
-		return map;
+
+
+		String path = "/oss/video/"+ossVideoName;
+		String fileName ="/oss/video/"+ossVideoName.substring(0, ossVideoName.lastIndexOf("."));
+		data.put("PATH",path);
+		data.put("fileName",fileName);
+		HttpReq.httpRequest(url, "POST", JSON.toJSONString(data));
+
+		String savevideoPath = fileName+".m3u8";
+		System.out.println("video service"+path+"   "+fileName+"   "+savevideoPath);
+		createVideoTab(video_name,savevideoPath,imageUrl,video_introduce,video_form_id,teacher_id);
+
+		return "succes";
 	}
 
 	public void createVideoTab(String video_name,String video_url, String video_image_url, String video_introduce,Integer video_form_id,Integer teacher_id) {

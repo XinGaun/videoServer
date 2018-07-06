@@ -42,4 +42,13 @@ public class VideosController {
 	public String queryOrder(@RequestBody String data) {
 		return videosDaoService.queryOrder(data);
 	}
+	/**
+	 * 查询视频评论信息
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryComment",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryComment(@RequestBody String data) {
+		return videosDaoService.queryComment(data);
+	}
 }
