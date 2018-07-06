@@ -31,12 +31,10 @@ public class VideoTabServiceImpl implements VideoTabService{
 	@Transactional
 	public String uploadVideo(String video_name,String imageName, String video_introduce,MultipartFile video, MultipartFile image,Integer video_form_id,Integer teacher_id,long size) throws Exception {
 		HashMap<String,String> data = new HashMap<>();
-
 		CommonsMultipartFile cf= (CommonsMultipartFile)video; //这个myfile是MultipartFile的
 		DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
 		File videoFile = fi.getStoreLocation(); 
 		String ossVideoName =ossUpload.uploadJD(videoFile,video_name,size);
-
 		CommonsMultipartFile cf2= (CommonsMultipartFile)image; //这个myfile是MultipartFile的
 		DiskFileItem fi2 = (DiskFileItem)cf2.getFileItem(); 
 		File imageFile = fi2.getStoreLocation(); 
@@ -50,7 +48,6 @@ public class VideoTabServiceImpl implements VideoTabService{
 		data.put("PATH",path);
 		data.put("fileName",fileName);
 		HttpReq.httpRequest(url, "POST", JSON.toJSONString(data));
-
 		String savevideoPath = viderUrl.substring(0, viderUrl.lastIndexOf("."))+".m3u8";
 		System.out.println("video service"+path+"   "+fileName+"   "+savevideoPath);
 		createVideoTab(video_name,savevideoPath,imageUrl,video_introduce,video_form_id,teacher_id);

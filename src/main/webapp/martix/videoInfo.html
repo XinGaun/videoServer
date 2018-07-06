@@ -497,7 +497,6 @@ function getId(obj){
     })
 }	
 </script>
-
 	<script>	
 	var progress = document.getElementById("jd");
 	//创建socket连接	
@@ -569,7 +568,6 @@ function getId(obj){
  	   $("#videoName").val(""); 
  	   $("#video_introduce").val("");		
     }); 
-    
 	$("#sub").click(function(){	
 		//表单参数
 		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
@@ -585,8 +583,7 @@ function getId(obj){
 		 formData.append("video_introduce", video_introduce);
 		 formData.append("video_form_id", video_form_id);
 		//阻止默认事件
-		 event.preventDefault();
-		
+		 event.preventDefault();		
 			var t = setInterval(function(){
 	 	 		 //下面的testMessage是自定义的。
 	 	 		 socket.emit('fileUpload',videoName,function(){	 
@@ -603,7 +600,7 @@ function getId(obj){
 	 			 }
 		    	 
 		    });   
- 	
+
 			//上传文件		
 			$.ajax({
 				type : 'post',
@@ -622,6 +619,7 @@ function getId(obj){
 			});	 
 			return false;		
 	});
+
 	
 	$("#queryorder").click(function(){
 		$.ajax({

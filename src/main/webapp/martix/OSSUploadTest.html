@@ -18,12 +18,14 @@
 
 <body>
 	<h3>File upload demo</h3>
+
 	<form action="/videoServer/UploadServlet/upload" method="post" enctype="multipart/form-data"
 		id="dataForm">
 		<input type="text" name="videoName" id="videoName"> <br>
 		<input type="file" name="video" id="video" accept="video/*"><br>
 		<input type="file" name="image" id="image" accept="image/*"> <br>
 		<input type="submit" value="submit" id="submit">
+
 	</form>
 
 
@@ -31,6 +33,7 @@
 </body>
 <script src="assets/js/jquery-1.10.2.js"></script>
 <script type="text/javascript">
+
 (function() {		
 	var progress = document.getElementById("jd");
 		//创建socket连接	
@@ -80,6 +83,7 @@
 	});	  
 	
 	$("#submit").click(function(){		
+
 		//表单参数
 		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  
 		 var video = $('#video').prop("files")[0];
@@ -87,10 +91,12 @@
 		 var videoName = $('#videoName').val();  
 		 formData.append("videoName",videoName);  
 		 formData.append("video", video);  
+
 		 formData.append("image", image);  	 		
 		 //阻止默认事件
 			event.preventDefault(); 
 	    //上传文件
+
 		$.ajax({
 			url : 'http://localhost:8080/videoServer/UploadServlet/upload',
 			type : 'post',
@@ -100,6 +106,7 @@
 			contentType: false, 
 			success : function() {		    			
 				progress.innerText =100;
+
 			},
 			error : function() {
 				alert("error");

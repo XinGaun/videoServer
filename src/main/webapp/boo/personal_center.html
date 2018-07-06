@@ -903,8 +903,6 @@
         });
 　　}); 
     //保存按钮点击事件
-
-
     $("#updateuser").click(function(){  	
      	var user=$("#name").val();//昵称
     	var photo=$("#photoimg").val();
@@ -1180,8 +1178,9 @@
         		$("#oldpwd").val(data[0].user_pwd);//旧密码
         	}
     	})
-    })
-	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
+    })*/
+  //进入页面自动获取cookie的值，根据cookie决定是否显示登录
+
 	$(function(){
 		
 		alert($.cookie('phone'));
@@ -1240,7 +1239,10 @@ $(function(){
 	initRecommend();
 });
 var url ="";
-$("img.lazy").lazyload({effectT: "fadeIn"});
+
+
+$("img.lazy").lazyload({effect: "fadeIn"});
+
 var pages = 0;//当前页数
 var nums = 6;//每页几条
 var total = 0;//总条数 
@@ -1375,6 +1377,7 @@ function initRecommend(){
 					+ '<img data-original="'
 					+ result[i].courses_img_url
 					+ '" class="jpckclass lazy" style="width:100%;height:180px;" alt="...">'
+
 					+ '</a>'
 					+ '<div class="caption">'
 					+ '<p style="font-weight: bold;">'
@@ -1489,6 +1492,7 @@ function initOrderBoutique(param){
 		}
 	});	
 }
+
 	/* 尾部li标签添加的关于我们 */
 	new Vue({
 	  el: '#footli',
@@ -1522,6 +1526,7 @@ function initOrderBoutique(param){
 			footma:'photos/LoginPhoto/erweima_20180628215615.jpg'
 		}
 	})
+
 </script>
 <script type="text/javascript">
 $(function(){
@@ -1530,6 +1535,9 @@ $(function(){
 	initOrderInformation(paramT)
 });
 var url ="";
+
+$("img.lazy").lazyload({effect: "fadeIn"});
+
 var pages = 0;//当前页数
 var nums = 6;//每页几条
 var total = 0;//总条数 
@@ -1624,7 +1632,9 @@ function customT(number){
 	return false;
 }
 
-//加载订单课
+
+//加载推荐课程
+
 function initOrderInformation(paramT){
 	$
 	.ajax({

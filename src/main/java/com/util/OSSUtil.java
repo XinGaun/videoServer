@@ -108,8 +108,7 @@ public class OSSUtil implements ProgressListener{
 	}
 
 	// 带进度条的上传。视频
-	public String uploadJD(File file,String fileName,long fileSize) throws IOException {
-		
+	public String uploadJD(File file,String fileName,long fileSize) throws IOException {	
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 		this.size = fileSize;
 		String name = fileName.substring(0, fileName.lastIndexOf("."));
@@ -140,7 +139,6 @@ public class OSSUtil implements ProgressListener{
 		//System.out.println(ProgressSingleton.get(name+"progress"));
 		System.out.println("oss end 2");
 		ossClient.shutdown();
-
 		return ossFileName;
 	}
 
@@ -252,6 +250,7 @@ public class OSSUtil implements ProgressListener{
 		String uuid = UUID.randomUUID().toString(); 	
 		return uuid.replaceAll("-", "");
 	}
+
 	public static String getOSSName(String filetype) {
 		return getUUID()+filetype;
 	}

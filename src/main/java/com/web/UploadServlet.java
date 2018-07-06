@@ -40,7 +40,6 @@ public class UploadServlet extends HttpServlet{
 			CommonsMultipartFile cf= (CommonsMultipartFile)video; 
 			DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
 			File videoFile = fi.getStoreLocation(); 
-
 			System.out.println(videoName);					 
 			ossUtil.uploadJD(videoFile,ossFileName,size);				
 

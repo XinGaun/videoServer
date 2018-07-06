@@ -87,6 +87,7 @@ public class coursesTabController {
 		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
 		System.out.println(image.getOriginalFilename());
 		ctService.addCoursesTab(courses_name,courses_video_form_id,courses_introduce,courses_pricemoney,courses_video, image,teacher_id);
+
 	}
 	@RequestMapping(value="/delCoursesById.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
