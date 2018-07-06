@@ -1,5 +1,7 @@
 package com.web;
 
+import java.awt.Robot;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,20 +47,22 @@ public class SocketServer {
 				if(ProgressSingleton.get(videoName + "status") == null) {
 					client.sendEvent("fileUpload", "null");
 				}else {
-					while(!(ProgressSingleton.get(videoName + "status").equals("end") )) {				
+					while(!(ProgressSingleton.get(videoName + "status").equals("end") )) {	
+						  // 创建机器人
+				        Robot robot = new Robot();
+				        // 设置默认休眠时间
+				        robot.setAutoDelay(5000);
 						Object size = ProgressSingleton.get(videoName + "size");					
 						size = size == null ? 100 : size;
 						Object progress = ProgressSingleton.get(videoName + "progress");				
 						progress = progress == null ? 0 : progress; 		
 						System.out.println("progress   "+progress+"size   "+size);
-						int progressint = Integer.parseInt(progress.toString());
-						int sizeint = Integer.parseInt(size.toString());
-						int proess = progressint*100/sizeint;	
-						//parseInt((data.progress / data.size) * 100)
+						long progressint = new Long(progress.toString());
+						long sizeint =new Long(size.toString());
+						int proess = (int)(progressint * 100.0 / sizeint);
 						//第一个参数必须与eventName一致，第二个参数data必须与eventClass一致
 						System.out.println("%   "+proess);
 						client.sendEvent("fileUpload", Integer.toString(proess));
-						 Thread.sleep(1000);
 					}
 				}
 			}			

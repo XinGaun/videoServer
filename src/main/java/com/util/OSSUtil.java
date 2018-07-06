@@ -120,8 +120,8 @@ public class OSSUtil implements ProgressListener{
 		this.progress = 0;
 		System.out.println(ProgressSingleton.get(name+"progress"));
 		ProgressSingleton.put(name+"progress", progress);
-		//		isVideo(fileName);
-		String ossFileName = getOSSName(fileName);		
+		String filetype= fileName.substring(fileName.lastIndexOf("."));
+		String ossFileName = getOSSName(filetype);		
 		try {
 
 			ossClient.putObject(new PutObjectRequest(bucketName2, ossFileName,file).
@@ -222,9 +222,9 @@ public class OSSUtil implements ProgressListener{
 			this.bytesWritten += bytes;
 			if (this.totalBytes != -1) {
 				int percent = (int)(this.bytesWritten * 100.0 / this.totalBytes);
-//				System.out.println(bytes + " bytes have been written at this time, upload progress: " + percent + "%(" + this.bytesWritten + "/" + this.totalBytes + ")");
+				System.out.println(bytes + " bytes have been written at this time, upload progress: " + percent + "%(" + this.bytesWritten + "/" + this.totalBytes + ")");
 			} else {
-//				System.out.println(bytes + " bytes have been written at this time, upload ratio: unknown" + "(" + this.bytesWritten + "/...)");
+				System.out.println(bytes + " bytes have been written at this time, upload ratio: unknown" + "(" + this.bytesWritten + "/...)");
 			}
 			break;
 		case TRANSFER_COMPLETED_EVENT:
@@ -252,8 +252,8 @@ public class OSSUtil implements ProgressListener{
 		String uuid = UUID.randomUUID().toString(); 	
 		return uuid.replaceAll("-", "");
 	}
-	public static String getOSSName(String fileName) {
-		return getUUID()+"_"+fileName;
+	public static String getOSSName(String filetype) {
+		return getUUID()+filetype;
 	}
 
 	/*public static void main(String[] args) throws Exception {

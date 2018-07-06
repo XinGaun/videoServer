@@ -74,4 +74,11 @@ public class coursesTabServiceImpl implements coursesTabService{
 		addCoursesTab(c);
 	}
 
+	@Override
+	public List<coursesTab> searchTabList(String teacher_id,String courses_video_form_id,String courses_name,String courses_pricemoney,String courses_grade) {
+		// TODO Auto-generated method stub
+		
+		return ctDao.searchTabList( teacher_id, courses_video_form_id, courses_name, courses_pricemoney, courses_grade);
+	}
+
 }

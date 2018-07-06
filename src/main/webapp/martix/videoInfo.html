@@ -598,8 +598,8 @@ function getId(obj){
 	 			 if(data == "null" ||data == null ){
 	 				 output('0');
 	 			 } else{
-	 				output(data);
 	 				clearInterval(t);
+	 				output(data);				
 	 			 }
 		    	 
 		    });   
@@ -611,12 +611,9 @@ function getId(obj){
 				url : '/videoServer/videoTab/uploadflv.do',
 				contentType: false, 
 		        processData: false, 
-				success : function(data){
-					//clearInterval(t);
-					alert("上传成功");			        
-					//将进度更新至100%
-			        progress.innerText = 100;		
-			       // soucketStop();
+				success : function(data){				
+					progress.innerText = 100;	
+					alert("上传成功");			        					
 			        $("#myModal").modal("hide");
 					window.location.href="";					
 				},error: function(){
@@ -627,15 +624,13 @@ function getId(obj){
 	});
 	
 	$("#queryorder").click(function(){
-		alert($("#video_name1").val());
-		alert($("#video_type").val());
 		$.ajax({
 			type : 'post',
 			data : {teacher_id:$("#teacher_id").val(),video_form_id:$("#video_type").val(),video_name:$("#video_name1").val()},
 			url : '/videoServer/videoTab/selVideo.do',
 			success : function(data){
 				if(data.length==0){
-			 		alert("暂无符合条件的订单");
+			 		alert("暂无符合条件的视频");
 			 	}else{
 			 		$("#tb  tr:not(:first)").html("");
 			 		for(var i=0;i<data.length;i++){

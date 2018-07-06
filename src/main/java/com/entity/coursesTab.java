@@ -1,5 +1,7 @@
 package com.entity;
 
+import com.google.gson.Gson;
+
 public class coursesTab {
 	int courses_id;
 	int teacher_id;
@@ -13,6 +15,7 @@ public class coursesTab {
 	int courses_status;
 	int video_form_id;
 	String video_form_name;
+	String courses_date;
 	public int getVideo_form_id() {
 		return video_form_id;
 	}
@@ -25,7 +28,7 @@ public class coursesTab {
 	public void setVideo_form_name(String video_form_name) {
 		this.video_form_name = video_form_name;
 	}
-	String courses_date;
+
 	public int getCourses_id() {
 		return courses_id;
 	}
@@ -92,5 +95,7 @@ public class coursesTab {
 	public void setCourses_date(String courses_date) {
 		this.courses_date = courses_date;
 	}
-	
+	public String toString() {
+		return new Gson().toJson(this);
+	}
 }

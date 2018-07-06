@@ -29,15 +29,57 @@ public class coursesTabController {
 	}
 	@RequestMapping(value="/getTabListBy.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public List<coursesTab> getTabListBy(int teacher_id,int courses_video_form_id,String courses_name,String courses_pricemoney,int courses_grade){
-	
+	public List<coursesTab> getTabListBy(String teacher_id,String courses_video_form_id,String courses_name,String courses_pricemoney,String courses_grade){
+		System.out.println("courses");
+		
+		String cteacherId = null;
+		String cVideo_form_id = null;
+		String cCourses_grade = null;
+		String cCourses_pricemoney = null;
+		String cCourses_name = null;
+		System.out.println(teacher_id);
+		System.out.println(courses_video_form_id);
+		System.out.println(courses_name);
+		System.out.println(courses_pricemoney);
+		System.out.println(courses_grade);
+		System.out.println("courses 2");
 		coursesTab c=new coursesTab();
-		c.setCourses_name(courses_name);
-		c.setVideo_form_id(courses_video_form_id);
-		c.setCourses_pricemoney(courses_pricemoney);
-		c.setCourses_grade(courses_grade);
-		c.setTeacher_id(teacher_id);
+		if(teacher_id!=null) {
+			cteacherId = teacher_id;
+			c.setTeacher_id(Integer.parseInt(cteacherId));
+		}
+		if(courses_video_form_id!=null) {
+			cVideo_form_id = courses_video_form_id;
+			c.setVideo_form_id(Integer.parseInt(cVideo_form_id));
+		}
+		if(courses_name!=null) {
+			cCourses_name = courses_name;
+			c.setCourses_name(cCourses_name);
+		}else {
+			System.out.println("3"+courses_name);
+		}
+			
+		if(courses_pricemoney!=null) {
+			cCourses_pricemoney = courses_pricemoney;
+			c.setCourses_pricemoney(cCourses_pricemoney);
+		}else {
+			System.out.println("4"+courses_pricemoney);
+		}			
+		if(courses_grade!=null) {
+			cCourses_grade = courses_grade;
+			c.setCourses_grade(Integer.parseInt(cCourses_grade));
+		}else {
+			System.out.println("5"+courses_grade);
+		}
+		
+	   
 		return ctService.getTabList(c);
+	}
+	@RequestMapping(value="/searchTabListBy.do", method={RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public List<coursesTab> searchTabListBy(String teacher_id,String courses_video_form_id,String courses_name,String courses_pricemoney,String courses_grade){
+		System.out.println("courses");
+		return ctService.searchTabList( teacher_id, courses_video_form_id, courses_name, courses_pricemoney, courses_grade);
 	}
 	@RequestMapping(value="/addCoursesTab.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
