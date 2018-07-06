@@ -2,6 +2,8 @@ package com.entity;
 
 import java.sql.Date;
 
+import com.google.gson.Gson;
+
 public class UserTab {
 	private int user_id;
 	private String user_name;
@@ -87,6 +89,8 @@ public class UserTab {
 	public void setUser_photo(String user_photo) {
 		this.user_photo = user_photo;
 	}
-	
+	public String toString() {
+		return new Gson().toJson(this);
+	}
 	
 }

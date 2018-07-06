@@ -1,7 +1,9 @@
 package com.service;
 
 import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
+
 import com.entity.VideoTab;
 
 public interface VideoTabService {
@@ -10,6 +12,7 @@ public interface VideoTabService {
 	public List<VideoTab> getVideoList(VideoTab v);
 	public List<VideoTab> getVideoById(int id);
 	public List<VideoTab> selVideo(VideoTab vd);
+	public List<VideoTab> selVideoByVideoForm(VideoTab vd);
 	public void delVideoById(int video_id);
 	public void updetVideoById(VideoTab vd);
 }

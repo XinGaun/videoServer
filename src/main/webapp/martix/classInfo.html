@@ -36,36 +36,36 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <strong>John Doe</strong>
+                                    <strong>JohnDoe</strong>
                                     <span class="pull-right text-muted">
                                         <em>Today</em>
                                     </span>
                                 </div>
-                                <div>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</div>
+                                <div> LoremIpsum has been the industry's standard dummy text ever since the 1500s...</div>
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
                             <a href="#">
                                 <div>
-                                    <strong>John Smith</strong>
+                                    <strong>JohnSmith</strong>
                                     <span class="pull-right text-muted">
                                         <em>Yesterday</em>
                                     </span>
                                 </div>
-                                <div>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</div>
+                                <div>LoremIpsum has been the industry's standard dummy text ever since an kwilnw...</div>
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
                             <a href="#">
                                 <div>
-                                    <strong>John Smith</strong>
+                                    <strong>JohnSmith</strong>
                                     <span class="pull-right text-muted">
                                         <em>Yesterday</em>
                                     </span>
                                 </div>
-                                <div>Lorem Ipsum has been the industry's standard dummy text ever since the...</div>
+                                <div>LoremIpsum has been the industry's standard dummy text ever since the...</div>
                             </a>
                         </li>
                         <li class="divider"></li>
@@ -301,7 +301,13 @@
 									<td>
 										<div class="input-group" width="100%">
 											<span class="input-group-addon">课程名称</span>
-											<input type="text" class="form-control" placeholder="请输入课程名称" id="courses_">
+											<input type="text" class="form-control" placeholder="请输入课程名称" id="courses_name">
+										</div>
+									</td>
+									<td>
+										<div class="input-group" width="100%">
+											<span class="input-group-addon">课程类型</span>															           
+							                   <select style="text-align: center;" id="video_form_name"> </select>					   
 										</div>
 									</td>
 									<td>
@@ -346,7 +352,7 @@
                         <div class="panel-body" style="overflow-x:scroll;height:330px;width:99%;">
                             <table id="tb" class='table table-bordered' style="width:1300px;">
 						    	<tr>
-						    		<td>序号</td><td>课程名称</td><td>课程介绍</td><td>课程视频</td><td>课程图片</td><td>课程价格</td><td>课程评分</td><td>点击次数</td><td>修改</td><td>删除</td>
+						    		<td>序号</td><td>课程名称</td><td>课程类型</td><td>课程介绍</td><td>课程视频</td><td>课程图片</td><td>课程价格</td><td>课程评分</td><td>点击次数</td>
 						    	</tr>
 						    </table>
                         </div>
@@ -366,31 +372,39 @@
 	      </div>
 			<form action="/videoServer/videoTab/uploadflv1.do" method="post" enctype="multipart/form-data">
 				<div style="width:100%;">
-					<div style="height:30px;background:#D9ECFF;border:1px solid #CADEFD"></div>
-					<div style="height:50px;border:1px solid #CADEFD">
-						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">课程名称：</div>
-						<div style="width:200px;height:50px;float:left;line-height:50px;border:1px solid #CADEFD;">&nbsp;<input type="text" id="name"/>
-						</div>
-						<div style="width:100px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">课程价格：</div>
-						<div style="width:100px;height:50px;float:left;line-height:50px;"><input type="text" id="jiage"style="width:130px;"/></div>
+					<div style="height:30px;background:#D9ECFF;"></div>
+					<div style="height:50px;">
+						<div style="width:150px;background:#D9ECFF;float:left;border: 1px solid #CADEFD; text-align:right;height:50px;">课程名称：</div>
+						<div style="width:200px;height:50px;float:left;line-height:50px;border:1px solid #CADEFD;">
+						   <input type="text" style="width:100%;height:100%;" id="name"/></div>
+						<div style="width:100px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">课程类型：</div>
+						<div style="width:130px;height:50px;float:left;border: 1px solid #CADEFD;" >							           
+							    <select style="text-align: center;"id="kctype"></select>
+						 </div>   
 					</div>
 					<div style="height:200px;border:1px solid #CADEFD">
 						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:200px;line-height:200px;">选择视频：</div>
-						<div style="width:440px;height:200px;float:left;overflow:scroll;">
+						<div style="width:440px;height:200px;float:left;overflow:scroll;border: 1px solid #CADEFD;">
 							<!-- <select id="courses_video"><option>请选择视频</option></select> -->
 							<table id="courses_video" class='table table-bordered'></table>
 						</div>
 					</div>
 					<div style="height:50px;border:1px solid #CADEFD">
 						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">课程图片：</div>
-						<div style="width:440px;height:50px;float:left;">
+						<div style="width:440px;height:50px;float:left;border: 1px solid #CADEFD;">
 							&nbsp;<input type="file" id="courses_image">
 						</div>
 					</div>
+					<div style="height:50px;border:1px solid #CADEFD">
+					     <div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">课程价格：</div>
+						 <div style="width:440px;height:50px;float:left;line-height:50px;border: 1px solid #CADEFD;">
+						   <input type="text" id="jiage"style="width:100%" placeholder="请输入课程价格，如99.99" onkeyup="checknum(this);"/>
+						  </div>
+					</div>	
 					<div style="height:100px;border:1px solid #CADEFD">
 						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:100px;line-height:100px;">课程介绍：</div>
-						<div style="width:440px;height:100px;float:left;">
-							&nbsp;<textarea  style="width:250px;margin-top:25px;height:50px;" id="courses_introduce"></textarea>
+						<div style="width:440px;height:100px;float:left;border: 1px solid #CADEFD;">
+							<textarea  style="width:100%;height:100%;" id="courses_introduce"></textarea>
 						</div>
 					</div>
 				</div>
@@ -417,28 +431,77 @@
 	    $('#dataTables-example').dataTable();
 	});
 	$(function(){
+		  getVideoForm();
 		$.ajax({
 			type : 'post',
 			url : '/videoServer/coursesTab/getTabList.do',
 			success : function(data){
 				for(var i=0;i<data.length;i++){
-					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
+					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td></td></tr>")
 				}
 				$("#teacher_id").val(data[0].teacher_id);
 			},error: function(){
 			}
-		})
+		});
 		$.ajax({
 			type : 'post',
 			url : '/videoServer/videoTab/getVideoTabs.do',
 			success : function(meg){
+				$("#courses_video").empty(); 
+				for (var i = 0; i < meg.length; i++) {
+			    	$("#courses_video").append("<tr><td><input type='checkbox' name='videoId' value="+meg[i].video_id+">"+ meg[i].video_name + "</td></tr>");
+			    }
+			}
+		})
+		
+	})
+	//输入金额
+	function checknum(obj)
+   {   
+     if(/^\d+\.?\d{0,2}$/.test(obj.value)){
+        obj.value = obj.value;
+     }else{
+        obj.value = obj.value.substring(0,obj.value.length-1);
+     }     
+   }
+	//拉取视频
+	function getVideoTabs(video_form_id){
+		$.ajax({
+			type : 'post',
+			data : {video_form_id:video_form_id},
+			url : '/videoServer/videoTab/selVideobyVideoForm.do',
+			success : function(meg){
+				$("#courses_video").empty(); 
 				for (var i = 0; i < meg.length; i++) {
 			    	//$("#courses_video").append("<option>["+meg[i].video_id+"]" + meg[i].video_name + "</option>");
 			    	$("#courses_video").append("<tr><td><input type='checkbox' name='videoId' value="+meg[i].video_id+">"+ meg[i].video_name + "</td></tr>");
 			    }
 			}
 		})
-	})
+	}
+	//拉取课程类型
+	function getVideoForm(){
+		$.ajax({
+			type: "POST",
+			url : '/videoServer/videoFormTab/getVideoList.do',
+			cache: false,  //禁用缓存
+            dataType: "json",
+			success : function(data){
+				$("#kctype").empty(); 
+				$("#video_form_name").empty(); 
+				for (var i = 0; i < data.length; i++) {			    	
+			    	$("#kctype").append("<option value="+data[i].video_form_id+">"+data[i].video_form_class+data[i].video_form_name+"</option>");
+			    	$("#video_form_name").append("<option value="+data[i].video_form_id+">"+data[i].video_form_class+data[i].video_form_name+"</option>");
+				}
+			},error: function(){
+				alert("VideoForm error"); 
+			}
+		});
+	}
+	 $("select#kctype").change(function(){
+	    var video_form_id = $(this).val();
+	    getVideoTabs(video_form_id);
+	 }); 
 	function updat(obj){
 		var orderId=$(obj).html();
 		var d=0;
@@ -451,13 +514,6 @@
 	 		d=orderId.substring(67,orderId.length-2);
 	 	}
 		window.location.href="updateClass.html?id="+d;
-		/* $.ajax({
-	       	type : 'post',
-	       	url : '/videoServer/videoTab/updetVideoById.do?video_id='+d,
-	       	success : function(data){
-	       		window.location.href="video.html?video_id="+d;
-	       	}
-	    }) */
 	}
 	function delet(obj){
 		var orderId=$(obj).html();
@@ -486,7 +542,7 @@
  $('#myModal').on('show.bs.modal', function (event) {     
 	   $("#name").val(""); 
 	   $("#jiage").val("");
-	   $("#courses_introduce").val("");
+	   $("#courses_introduce").val("");	 
  }); 
 	$("#sub").click(function(){
 		var str="";
@@ -498,13 +554,15 @@
 		//表单参数
 		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
 		 var courses_name = $.trim($("#name").val());  
-		 var courses_pricemoney =$.trim($("#jiage").val());
+		 var courses_video_form_id = $.trim($("#kctype").val());		
 		 var image = $('#courses_image').prop("files")[0];
+		 var courses_pricemoney =$.trim($("#jiage").val());
 		 var courses_introduce = $.trim($("#courses_introduce").val());
 		 var courses_video = str.substring(0,str.length-1);	
 		 formData.append("courses_name",courses_name);  
-		 formData.append("courses_pricemoney", courses_pricemoney);  
+		 formData.append("courses_video_form_id", courses_video_form_id); 
 		 formData.append("image", image);
+		 formData.append("courses_pricemoney", courses_pricemoney); 
 		 formData.append("courses_introduce", courses_introduce);
 		 formData.append("courses_video", courses_video);
 		
@@ -526,15 +584,15 @@
 	$("#queryorder").click(function(){
 		$.ajax({
 			type : 'post',
-			data : {teacher_id:$("#teacher_id").val(),courses_name:$("#courses_name").val(),courses_grade:$("#courses_grade").val(),courses_pricemoney:$("#courses_pricemoney").val()},
-			url : '/videoServer/coursesTab/getTabListBy.do',
+			data : {teacher_id:$("#teacher_id").val(),courses_video_form_id:$("#video_form_name").val(),courses_name:$("#courses_name").val(),courses_grade:$("#courses_grade").val(),courses_pricemoney:$("#courses_pricemoney").val()},
+			url : '/videoServer/coursesTab/searchTabListBy.do',
 			success : function(data){
 				if(data.length==0){
 			 		alert("暂无符合条件的课程");
 			 	}else{
 			 		$("#tb  tr:not(:first)").html("");
 			 		for(var i=0;i<data.length;i++){
-						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td></td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td><td onclick='delet(this)'><input type='button' value='删除'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
+						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td></td></tr>")
 					}
 				}
 			},error: function(){

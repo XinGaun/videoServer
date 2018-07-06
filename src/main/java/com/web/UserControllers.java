@@ -94,6 +94,7 @@ public class UserControllers {
 	public String updateuser(@RequestBody String data,HttpServletResponse response){
 		//System.out.println("cjxnvmcxb");
 		UserTab ut = JSON.parseObject(data,UserTab.class);
+		System.out.println(ut.toString());
 		String spwd=ut.getUser_pwd();
 		String smi=MD5.md5(spwd);
 		ut.setUser_pwd(smi);
@@ -123,11 +124,13 @@ public class UserControllers {
         try {
         	System.out.println(file.getSize());
         	ossFileName =ou.upload(image, fileName);
+        	System.out.println(ossFileName);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			System.out.println(e1.getMessage());
 		}
+        System.out.println(ou.getWebURL(ossFileName));
         return JSON.toJSONString(ou.getWebURL(ossFileName));
       /*  if(fileName!=null&&fileName!=""){   
             String returnUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() +request.getContextPath() +"/boo/photos/LoginPhoto/";//存储路径

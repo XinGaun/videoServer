@@ -51,7 +51,7 @@ public class VideoTabController {
 		String imageName = videoName+imagePath.substring(imagePath.lastIndexOf("."));
 		System.out.println(ossFileName+"   "+imageName);
 		vdservice.uploadVideo(ossFileName,imageName, video_introduce, video, image,Integer.parseInt(video_form_id), teacher_id,size);
-	
+
 	}
 
 
@@ -79,6 +79,17 @@ public class VideoTabController {
 		vt.setVideo_form_id(video_form_id);
 		vt.setTeacher_id(teacher_id);
 		vt.setVideo_name(video_name);
+		return vdservice.selVideo(vt);
+	}
+
+	@RequestMapping(value="/selVideobyVideoForm.do", method={RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public List<VideoTab> selVideobyVideoForm(HttpServletRequest request,int video_form_id){
+		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
+		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
+		VideoTab vt=new VideoTab();
+		vt.setTeacher_id(teacher_id);
+		vt.setVideo_form_id(video_form_id);
 		return vdservice.selVideo(vt);
 	}
 
