@@ -434,7 +434,8 @@
 	<script>
 $(function(){	
 	loadRoleInfo();
-	        var url1 = "http://localhost:8080/";	        
+	        //var url1 = "http://localhost:8080/";
+	        var url1 ="";
              /* //全选
 	         $('.checkall').click(function () {  		
 	         
@@ -455,7 +456,7 @@ $(function(){
        			};      		
        			$.ajax({
                            type: "POST",
-                           url: url1+"videoServer/commentTab/deleteComment",
+                           url: url1+"/videoServer/commentTab/deleteComment",
                            contentType: 'application/json; charset=UTF-8',
        					   cache: false,  //禁用缓存
                            data: JSON.stringify(arr),  //传入组装的参数
@@ -544,7 +545,7 @@ $(function(){
                      //ajax请求数据                      
                      $.ajax({
                          type: "POST",
-                         url: url1+"videoServer/commentTab/queryCommentAll",
+                         url: url1+"/videoServer/commentTab/queryCommentAll",
                          contentType: 'application/json; charset=UTF-8',
      					 cache: false,  //禁用缓存
                          data: JSON.stringify(param),  //传入组装的参数
@@ -728,7 +729,7 @@ $(function(){
                    //ajax请求数据
                    $.ajax({
                           type: "POST",
-                          url: url1+"videoServer/commentTab/queryCommentAll",
+                          url: url1+"/videoServer/commentTab/queryCommentAll",
                           contentType: 'application/json; charset=UTF-8',
 			              cache: false,  //禁用缓存
                           data: JSON.stringify(param),  //传入组装的参数
@@ -853,7 +854,7 @@ $(function(){
 	         param.reply_date = new Date();      
 			$.ajax({
 	              type: "POST",
-	              url: url1+"videoServer/commentTab/updateComment",
+	              url: url1+"/videoServer/commentTab/updateComment",
 	              contentType: 'application/json; charset=UTF-8',
 					   cache: false,  //禁用缓存
 	              data: JSON.stringify(param),  //传入组装的参数

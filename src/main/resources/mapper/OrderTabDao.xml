@@ -53,11 +53,11 @@
 		resultType="java.util.HashMap">
 		SELECT
 		o.order_id,o.user_id,o.video_id,o.combo_id,o.order_pricemoney,o.order_due,o.discounts_id,date_format(o.order_date,'%Y-%m-%d %h:%i:%s')order_date
-		,o.order_status,o.order_type,s.status_type,u.user_name,v.video_name,c.combo_name
+		,o.order_status,o.order_type,s.status_type,u.user_name,v.courses_name video_name,c.combo_name
 		FROM order_tab o LEFT JOIN status_tab s ON o.order_type = s.status_id
-		LEFT JOIN user_tab u ON o.user_id = u.user_id LEFT JOIN video_tab v ON
-		o.video_id=v.video_id
-		LEFT JOIN combo_tab c on o.combo_id = o.combo_id where 1=1 
+		LEFT JOIN user_tab u ON o.user_id = u.user_id LEFT JOIN courses_tab v ON
+		o.video_id=v.courses_id
+		LEFT JOIN combo_tab c on o.combo_id = o.combo_id where 1=1
 		<if test="order_id!='' and order_id!=null">
 			and o.order_id = #{order_id}
 		</if> 
