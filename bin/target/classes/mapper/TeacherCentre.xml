@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.TeacherCentreDao">
+	<!-- 查询教师详情 -->
+	<select id="queryTeacherCentre" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		SELECT 
+		t.teacher_id,t.teacher_name,t.teacher_introduce,t.teacher_imgurl,v.video_form_name,v.video_form_class 
+		FROM teacher_tab t LEFT JOIN courses_tab c on t.teacher_id=c.teacher_id
+		LEFT JOIN video_form_tab v ON v.video_form_id=c.video_form_id
+		WHERE 1=1 AND t.teacher_status = 5 
+		<if test="cid!=''">
+ 			AND t.teacher_id = #{cid} 
+ 		</if>
+	</select>
+	<!-- 查询教师课程信息-->
+	 <select id="queryTeacherCentreVideo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT t.teacher_id,t.teacher_name,c.courses_name,c.courses_click,c.courses_status,c.courses_pricemoney, c.courses_grade,t.teacher_introduce,c.courses_img_url,date_format(c.courses_date,'%Y-%m-%d')courses_date 
+		FROM teacher_tab t 
+		LEFT JOIN courses_tab c ON t.teacher_id=c.teacher_id 
+		WHERE 1=1 AND c.courses_status = 5 AND t.teacher_status = 5 
+		<if test="cid!=''">
+ 			AND t.teacher_id = #{cid} 
+ 		</if>
+		<if test="keywordthree!=''">
+ 			AND c.courses_name like '%${keywordthree}%' 
+ 		</if>
+		ORDER BY c.courses_date DESC LIMIT #{nums},#{page}
+	</select> 
+	<!-- 查询教师课程总数 -->
+	<select id="queryTeacherCentreVideoAllCount" parameterType="java.util.HashMap" resultType="int">
+		SELECT COUNT(courses_id) 
+		FROM teacher_tab LEFT JOIN courses_tab ON teacher_tab.teacher_id=courses_tab.teacher_id 
+		WHERE 1=1 AND courses_status = 5 
+		<if test="cid!=''">
+ 			AND teacher_tab.teacher_id = #{cid} 
+ 		</if> 
+	</select>
+</mapper>
