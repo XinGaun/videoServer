@@ -21,8 +21,7 @@ public class ProgressServlet extends HttpServlet {//　进度servlet：
 	}
 	@RequestMapping(value="/progress",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public String doPost(@RequestParam(value = "videoName") String videoName,@RequestParam(value = "video") MultipartFile video,HttpServletRequest request) throws Exception{
-		System.out.println("press"+videoName);
+	public String doPost(@RequestParam(value = "videoName") String videoName,@RequestParam(value = "video") MultipartFile video,HttpServletRequest request) throws Exception{	
 		try {  
 			String filePath = video.getOriginalFilename();
 			String ossFileName = videoName+filePath.substring(filePath.lastIndexOf("."));

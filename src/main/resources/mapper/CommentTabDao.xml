@@ -70,9 +70,9 @@
 					'%Y-%m-%d')
 				</if>
 			</if>
-			<!-- <if test="teacher_id != null and teacher_id !='' ">
+			<if test="teacher_id != null and teacher_id !='' ">
 				and t.teacher_id = #{teacher_id}
-			</if> -->
+			</if>
 		</where>
 		limit #{start},#{limit}
 	</select>

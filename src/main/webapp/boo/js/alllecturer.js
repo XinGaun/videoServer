@@ -129,7 +129,7 @@ function custom(number){
 	return false;
 }
 
-//index 加载精品课程
+//index 加载所有教师
 function initBoutique(param){
 	$
 	.ajax({
@@ -144,11 +144,12 @@ function initBoutique(param){
 				return;
 			}
 			for (var i = 0; i < result.list.length; i++) {
-				var excellent = '<div class="col-md-3" >'
-						+ '<div class="thumbnail">'
-						+ '<a href="#">' + '<img data-original="'
+				var excellent = '<div class="col-md-3">'
+						+ '<div class="thumbnail" style="width:90%;">'
+						+ '<a href="#">' 
+						+ '<img data-original="'
 						+ result.list[i].teacher_imgurl
-						+ '" class="jpckclass lazy" style="width:100%;" alt="...">'
+						+ '" class="jpckclass lazy" style="width:100%;height:180px;" alt="...">'
 						+ '</a>'
 						+ '<div class="caption">'
 						+ '<p style="color:green;font-weight: bold;font-size:18px;"><a href="teacher_centre.html?cid='+result.list[i].teacher_id+'">'

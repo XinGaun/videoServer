@@ -13,16 +13,17 @@
 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 <script
 	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/socket.io.js"></script>
 </head>
 
 <body>
 	<h3>File upload demo</h3>
-	<form action="/videoServer/UploadServlet/upload" method="post"
-		enctype="multipart/form-data" id="dataForm">
-		<input type="text" name="videoName" id="videoName" > <br>
-		<input type="file" name="video" id="video" accept="video/*"><br> <input
-			type="file" name="image" id="image" accept="image/*"> <br> <input
-			type="submit" value="submit" id="submit">
+	<form action="/videoServer/UploadServlet/upload" method="post" enctype="multipart/form-data"
+		id="dataForm">
+		<input type="text" name="videoName" id="videoName"> <br>
+		<input type="file" name="video" id="video" accept="video/*"><br>
+		<input type="file" name="image" id="image" accept="image/*"> <br>
+		<input type="submit" value="submit" id="submit">
 	</form>
 
 
@@ -30,10 +31,55 @@
 </body>
 <script src="assets/js/jquery-1.10.2.js"></script>
 <script type="text/javascript">
-(function() {			
-	 var progress = document.getElementById("jd");
-
-	$("#submit").click(function(){
+(function() {		
+	var progress = document.getElementById("jd");
+		//创建socket连接	
+	 	var socket= io.connect('http://127.0.0.1:8099');
+			//连接成功后会监听到
+			socket.on('connect',function() {
+				output('<span>连接成功</span>');
+			});
+		    
+			socket.on('connecting',function() {
+		        output('<span>正在连接...</span>');
+		    });
+		    
+		    socket.on('disconnect',function() {
+		        output('<span>断开连接! </span>');
+		    });
+		    
+		    socket.on('reconnecting',function() {
+		        output('<span>正在重连...</span>');
+		    });
+		    
+		    socket.on('reconnect',function() {
+		        output('<span>成功重连！</span>');
+		    });
+		    
+		    socket.on('connect_failed',function() {
+		        output('<span>连接失败！</span>');
+		    });
+		    //想要断开连接调用此方法
+		    function sendDisconnect() {
+		        socket.disconnect();
+		    };
+		    
+		    function output(message) {		      
+		    	progress.innerText =message;
+		    }	
+	 //启动socket
+	$.ajax({
+		url : 'http://localhost:8080/videoServer/socketServer/start',
+		type : 'post',				
+		success : function() {	
+			
+		},
+		error : function() {
+			alert("error");
+		}
+	});	  
+	
+	$("#submit").click(function(){		
 		//表单参数
 		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  
 		 var video = $('#video').prop("files")[0];
@@ -41,35 +87,10 @@
 		 var videoName = $('#videoName').val();  
 		 formData.append("videoName",videoName);  
 		 formData.append("video", video);  
-		 formData.append("image", image);  
-		//阻止默认事件
-		event.preventDefault();
-		//循环查看状态
-		//进度条	
-		var t = setInterval(function(){
-					$.ajax({
-						url : 'http://localhost:8080/videoServer/ProgressServlet/progress',
-						type : 'post',
-						data :formData,
-						contentType: false, //禁止设置请求类型
-			            processData: false, //禁止jquery对DAta数据的处理,默认会处理
-			            dataType:"json",
-						success : function(data) {
-							//前台更新进度
-							progress.innerText = parseInt((data.progress / data.size) * 100);
-							/* var jd =parseInt((data.progress / data.size) * 100);
-							alert(jd); */
-							//$("#jd").val(jd);
-							//$("#progress").val("<div class='progress-bar progress-bar-success' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100' style='width:90%;'></div>");
-							//progress.innerText = jd;
-						},
-						error : function() {
-							alert("error");
-						}
-					});		
-				}, 500);
-		//上传文件
-		
+		 formData.append("image", image);  	 		
+		 //阻止默认事件
+			event.preventDefault(); 
+	    //上传文件
 		$.ajax({
 			url : 'http://localhost:8080/videoServer/UploadServlet/upload',
 			type : 'post',
@@ -77,22 +98,35 @@
 	        cache: false,   	
 		    processData: false,
 			contentType: false, 
-			success : function(responseText) {
-				alert(responseText);
-				//上传完成，清除循环事件
-			    clearInterval(t);
-				//将进度更新至100%
-			    //$("#jd").val(100);
-			    progress.innerText = 100;
+			success : function() {		    			
+				progress.innerText =100;
 			},
 			error : function() {
 				alert("error");
 			}
 		});		
-														
-	});
-	alert(4);
+	 	
+	 	  	var t = setInterval(function(){
+	 	 		 //下面的testMessage是自定义的。
+	 	 		 socket.emit('fileUpload',videoName,function(){	 
+				    	output('<span> emit' +data+ '</span>');				    	
+				    }); 
+			}, 500);
+	 		 //这里是监听服务端返回的testMessage事件
+	 		 socket.on('fileUpload',function(data){
+	 			 if(data == "null" ||data == null ){
+	 				 output('0');
+	 			 } else{
+	 				output(data);
+	 				clearInterval(t);
+	 			 }
+		    	 
+		    });   
+    												
+	}); 
+		
 })();
+
 	</script>
 
 </html>

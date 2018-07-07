@@ -207,7 +207,7 @@ function initrecommend(){
 					+ '<a href="#">'
 					+ '<img data-original="'
 					+ result[i].courses_img_url
-					+ '" class="jpckclass lazy" style="width:100%;" alt="...">'
+					+ '" class="jpckclass lazy" style="width:100%;height:180px;" alt="...">'
 					+ '</a>'
 					+ '<div class="caption">'
 					+ '<p style="font-weight: bold;">'
@@ -269,13 +269,13 @@ function initajax(param) {
 			}
 			for (var i = 0; i < result.list.length; i++) {
 				var querycoursesTabAll = '<div class="col-md-4" >'
-					+ '<div class="thumbnail">'
+					+ '<div class="thumbnail" style="width:90%;">'
 
 					+ '<a href="course.html?cid='+result.list[i].courses_id+'">'
 
 					+ '<img data-original="'
 					+ result.list[i].courses_img_url
-					+ '" class="jpckclass lazy" style="width:100%;" alt="...">'
+					+ '" class="jpckclass lazy" style="width:100%;height:180px;" alt="...">'
 					+ '</a>'
 					+ '<div class="caption">'
 					+ '<p style="font-weight: bold;">'
@@ -289,7 +289,6 @@ function initajax(param) {
 					+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result.list[i].teacher_id+'">'
 					+ result.list[i].teacher_name
 					+ '</a></p>'
-
 					+ '</div>'
 					+ '<div class="col-md-6">'
 					+ '<p style="text-align:right;">'
@@ -314,7 +313,7 @@ function initajax(param) {
 			}
 			$("img.lazy").lazyload({
 				effect : "fadeIn",
-				offset : 300
+				offset : 200
 			});
 			total=result.total;
 			page(pages,nums,result.total);
