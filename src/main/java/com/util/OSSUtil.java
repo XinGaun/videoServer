@@ -100,6 +100,7 @@ public class OSSUtil implements ProgressListener{
 			ossClient.putObject(bucketName,ossFileName, file);  
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
 

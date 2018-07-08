@@ -19,4 +19,10 @@ public interface CourseDetailsDao {
 	 * @return
 	 */
 	public int queryStudentCommentsAllCount(HashMap<String,Object> hashMap);
+	/**
+	 * 插入到收藏表
+	 * @param map
+	 * @return
+	 */
+	public Integer addCollection(HashMap<String,Object> map);
 }
