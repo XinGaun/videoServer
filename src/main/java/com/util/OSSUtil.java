@@ -1,4 +1,4 @@
-package com.util;
+﻿package com.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -113,12 +113,12 @@ public class OSSUtil implements ProgressListener{
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 		this.size = fileSize;
 		String name = fileName.substring(0, fileName.lastIndexOf("."));
-		System.out.println("ossutil "+name);
+		//System.out.println("ossutil "+name);
 		this.fileName = name;
 		ProgressSingleton.put(name+"status", "start");
 		ProgressSingleton.put(name+"size", size);
 		this.progress = 0;
-		System.out.println(ProgressSingleton.get(name+"progress"));
+		//System.out.println(ProgressSingleton.get(name+"progress"));
 		ProgressSingleton.put(name+"progress", progress);
 		String filetype= fileName.substring(fileName.lastIndexOf("."));
 		String ossFileName = getOSSName(filetype);		
@@ -137,7 +137,7 @@ public class OSSUtil implements ProgressListener{
 		ProgressSingleton.put(name+"status", "end");
 		ProgressSingleton.remove(name + "size");
 		ProgressSingleton.remove(name + "progress");
-		System.out.println(ProgressSingleton.get(name+"progress"));
+		//System.out.println(ProgressSingleton.get(name+"progress"));
 		System.out.println("oss end 2");
 		ossClient.shutdown();
 
@@ -221,10 +221,10 @@ public class OSSUtil implements ProgressListener{
 			ProgressSingleton.put(fileName+"progress", progress);			
 			this.bytesWritten += bytes;
 			if (this.totalBytes != -1) {
-				int percent = (int)(this.bytesWritten * 100.0 / this.totalBytes);
-				System.out.println(bytes + " bytes have been written at this time, upload progress: " + percent + "%(" + this.bytesWritten + "/" + this.totalBytes + ")");
+				//int percent = (int)(this.bytesWritten * 100.0 / this.totalBytes);
+				//System.out.println(bytes + " bytes have been written at this time, upload progress: " + percent + "%(" + this.bytesWritten + "/" + this.totalBytes + ")");
 			} else {
-				System.out.println(bytes + " bytes have been written at this time, upload ratio: unknown" + "(" + this.bytesWritten + "/...)");
+				//System.out.println(bytes + " bytes have been written at this time, upload ratio: unknown" + "(" + this.bytesWritten + "/...)");
 			}
 			break;
 		case TRANSFER_COMPLETED_EVENT:

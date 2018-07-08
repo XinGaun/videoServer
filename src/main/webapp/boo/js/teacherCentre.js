@@ -164,7 +164,7 @@ function initCourseTop(cid){
 	});
 }
 
-//index 加载精品课程
+//index加载在线课程
 function initBoutique(param){
 	$
 	.ajax({
@@ -180,10 +180,11 @@ function initBoutique(param){
 			}
 			for (var i = 0; i < result.list.length; i++) {
 				var excellent = '<div class="col-md-3" >'
-						+ '<div class="thumbnail">'
-						+ '<a href="#">' + '<img data-original="'
+						+ '<div class="thumbnail" style="width:90%;">'
+						+ '<a href="#">' 
+						+ '<img data-original="'
 						+ result.list[i].courses_img_url
-						+ '" class="jpckclass lazy" style="width:100%;" alt="...">'
+						+ '" class="jpckclass lazy" style="width:100%;height:180px;" alt="...">'
 						+ '</a>'
 						+ '<div class="caption">'
 						+ '<p style="color:green;font-weight: bold;font-size:18px;"><a href="course.html?cid='+result.list[i].teacher_id+'">'

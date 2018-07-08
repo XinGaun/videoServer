@@ -1,8 +1,8 @@
 $(function(){
 	initBoutique();
 	initRecommend();
-	initClick();
 	judgePC();
+	initClick();
 	initGrade();
 	$("#videoHtml").click(function(){
 		window.location.href = "video.html";
@@ -43,7 +43,7 @@ function initGrade(){
 										+'<div class="col-md-12" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
 										+	'<a href="course.html?cid='+result[i].courses_id+'">'+result[i].courses_name+'</a>'
 										+	'<span style="float:right"><span class="glyphicon glyphicon-thumbs-up"></span><span style="color: red">'+result[i].courses_grade+'</span></span>'
-										+	'</div>'		
+										+'</div>'		
 										+'</li>';
 				$("#queryCourseGrade").append(queryCourseGrade);				
 			}
@@ -70,7 +70,7 @@ function initClick(){
 										+'<div class="col-md-12" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
 										+	'<a href="course.html?cid='+result[i].courses_id+'">'+result[i].courses_name+'</a>'
 										+	'<span style="float:right"><span class="glyphicon glyphicon-hand-right"></span><span style="color: red">'+result[i].courses_click+'</span></span>'
-										+	'</div>'		
+										+'</div>';
 										+'</li>';
 				$("#queryCourseClick").append(queryCourseClick);				
 			}
@@ -96,9 +96,10 @@ function initRecommend(){
 			for (var i = 0; i < result.length; i++) {
 				var querycombo = '<div class="col-md-3" >'
 						+ '<div class="thumbnail">'
-						+ '<a href="#">' + '<img data-original="'
+						+ '<a href="#">' 
+						+ '<img data-original="'
 						+ result[i].combo_imgs
-						+ '" class="jpckclass lazy" style="width:100%;" alt="...">'
+						+ '" class="jpckclass lazy" style="width:100%;height:180px;" alt="...">'
 						+ '</a>'
 						+ '<div class="caption">'
 						+ '<p style="font-weight: bold;">'
@@ -147,11 +148,11 @@ function initBoutique(){
 				return;
 			}
 			for (var i = 0; i < result.length; i++) {
-				var excellent = '<div class="col-md-3" >'
+				var excellent = '<div class="col-md-3">'
 						+ '<div class="thumbnail">'
 						+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
 						+ result[i].courses_img_url
-						+ '" class="jpckclass lazy" style="width:100%;" alt="...">'
+						+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
 						+ '</a>'
 						+ '<div class="caption">'
 						+ '<p style="font-weight: bold;">'

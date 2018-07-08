@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="UTF-8">
-<title>Home</title>
+    <meta charset="UTF-8">
+    <title>Home</title>
     <script src="js/jquery-3.3.1.min.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<script src="js/bootstrap.min.js"></script>
@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 	<script src="js/jquery.lazyload.min.js"></script>
 
-</head>
+
 <style>
 #btpbq{
 	font-size:30px;
@@ -247,6 +247,7 @@
 	 	heigh:100vh;
 	 }
 </style>
+</head>
 <body>
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -881,14 +882,13 @@
 	                    $("#photoimg").val(suc);
 	                        
 	                 }else{
-	                    alertLayel("上传失败");
+	                    alert("上传失败");
 	                    $("#url").val("");
 	                    $(this).val('');
 	                }
 	            },
 	            error: function(XMLHttpRequest, textStatus, errorThrown) {
-	            	alert(2);
-	                alertLayel("上传失败，请检查网络后重试");
+	                alert("上传失败，请检查网络后重试");
 	                $("#url").val("");
 	                $(this).val('');
 	            }
@@ -902,15 +902,13 @@
             $('#uploadFile').click();
         });
 　　}); 
-    //保存按钮点击事件
-
-
+  	//保存按钮点击事件
     $("#updateuser").click(function(){  	
      	var user=$("#name").val();//昵称
     	var photo=$("#photoimg").val();
-    	var url=photo.substr(photo.lastIndexOf("/")+1);//头像
+    	//var url=photo.substr(photo.lastIndexOf("/")+1);//头像
     	var email=$("#email").val();//email
-    	var sex=$('input:radio:checked').val();
+    	var sex=$("input:radio:checked").val();
     	var area=$("#aboutme").val();
     	var truename=$("#truename").val();
     	var phone=$("#altphone").val();
@@ -918,57 +916,60 @@
     	var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //验证邮箱 正则表达式
     	var regqq = /^[1-9]\d{4,9}$/; //验证qq
     	var regname=/^[\u0391-\uFFE5\w]+$/;//验证名字
-    	if(user==null&&user==""){
+     	if(user==null||user==""){
     		alert("带*号的不能为空");
     	} 
-    	if(email==null&&email==" "){
+    	if(email==null||email==""){
     		alert("带*号的不能为空");
     		return false;
-    	}else if(!reg.test(email)){
+    	} else if(!reg.test(email)){
     		alert("邮箱格式不正确")
     		return false;
     	}
-    	if(qq!=""){
-	    	if(!regqq.test(qq)){
+    	if((qq!="")&&(!regqq.test(qq))){
+	    	//if(!regqq.test(qq)){
 	    		alert("QQ格式不正确");
 	    		
-	    	}
+	    	//}
     	}
-    	if(truename!=""){
-    		if(truename.search(regname)==-1){
+    	if((truename!="")&&(truename.search(regname)==-1)){
+    		//if(truename.search(regname)==-1){
         		alert("请填写正确的名字");
         		
-        	}
+        	//}
     	}
-    	
-    	var alluser={
+    	 
+    	var data={
     			"user_name":user,
-    			"user_photo":url,
+    			"user_photo":photo,
     			"user_sex":sex,
     			"user_self":area,
     			"user_truename":truename,
     			"user_email":email,
     			"user_phone":phone,
     			"user_qq":qq,
-    	}
+    	};
     	
-    	//alert(JSON.stringify(alluser));
+    	//alert(JSON.stringify(data));
     	if(typeof(user)!="undefined"&&typeof(email)!="undefined"){
-    		
+		//var data={};
     		$.ajax({
     			type:"POST",
-    			url:url+"/videoServer/front/User/updatemessage",
-    			data:JSON.stringify(alluser),
+    			url:url+"/videoServer/front/User/updatemessages",
+    			data:JSON.stringify(data),
     			contentType:'application/json;charset=UTF-8',
 	        	cache:false,
     			dataType:"json",
     			success:function(data){
-    				
-    				alert(data);
+    				//alert(data);
+    				var expiresDate= new Date();
+	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
+    				$.cookie('photo',photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
+    				auto();
     			},
     			error:function(){
-    				alert("信息保存失败");
-    			},
+    				alert("更改失败");
+    			}
     		})
     	} 
     	
@@ -1180,15 +1181,17 @@
         		$("#oldpwd").val(data[0].user_pwd);//旧密码
         	}
     	})
-    })
-	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
+    })*/
+  //进入页面自动获取cookie的值，根据cookie决定是否显示登录
 	$(function(){
 		
-		alert($.cookie('phone'));
-		alert($.cookie('photo'));
+		auto();
+	})
+	function auto(){
+		//alert($.cookie('phone'));
+		//alert($.cookie('photo'));
 		if($.cookie("phone")==null){//cookie过期
-
-			//alert("登录过期，请重新登录");
+			alert("登录过期，请重新登录");
 			window.location.href="logins.html"
 		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
 			//alert("pp");
@@ -1197,12 +1200,10 @@
 		}else if($.cookie("phone")!=null&&$.cookie("photo")!=null){//cookie有用户信息和头像
 			//alert("dd");
 			$("#logsd").hide();
-			$("#logImg").attr("src","http://localhost:8080/videoServer/boo/photos/LoginPhoto/"+$.cookie("photo")+"");
+			$("#imgt").attr("src",$.cookie("photo"));
 			$("#logImg").show();
 		}
-		 
-		
-	})
+	}
 	/*
 		退出按钮点击事件
 	*/
@@ -1487,7 +1488,7 @@ function initOrderBoutique(param){
 	});	
 }
 
-	} 
+	
 	/* 尾部li标签添加的关于我们 */
 	new Vue({
 	  el: '#footli',

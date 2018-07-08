@@ -1,4 +1,4 @@
-package com.web;
+﻿package com.web;
 
 import java.awt.Robot;
 
@@ -56,12 +56,12 @@ public class SocketServer {
 						size = size == null ? 100 : size;
 						Object progress = ProgressSingleton.get(videoName + "progress");				
 						progress = progress == null ? 0 : progress; 		
-						System.out.println("progress   "+progress+"size   "+size);
+						//System.out.println("progress   "+progress+"size   "+size);
 						long progressint = new Long(progress.toString());
 						long sizeint =new Long(size.toString());
 						int proess = (int)(progressint * 100.0 / sizeint);
 						//第一个参数必须与eventName一致，第二个参数data必须与eventClass一致
-						System.out.println("%   "+proess);
+						//System.out.println("%   "+proess);
 						client.sendEvent("fileUpload", Integer.toString(proess));
 					}
 				}

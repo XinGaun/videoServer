@@ -77,8 +77,7 @@ public class coursesTabController {
 	}
 	@RequestMapping(value="/searchTabListBy.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public List<coursesTab> searchTabListBy(String teacher_id,String courses_video_form_id,String courses_name,String courses_pricemoney,String courses_grade){
-		System.out.println("courses");
+	public List<coursesTab> searchTabListBy(String teacher_id,String courses_video_form_id,String courses_name,String courses_pricemoney,String courses_grade){	
 		return ctService.searchTabList( teacher_id, courses_video_form_id, courses_name, courses_pricemoney, courses_grade);
 	}
 	@RequestMapping(value="/addCoursesTab.do", method={RequestMethod.POST,RequestMethod.GET})

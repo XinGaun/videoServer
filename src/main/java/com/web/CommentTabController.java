@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.entity.TeacherDomain;
 import com.service.CommentTabService;
+import com.service.VideoTabService;
 
 @Controller
 @RequestMapping("/commentTab")
@@ -22,7 +23,8 @@ import com.service.CommentTabService;
 public class CommentTabController extends DemoController{
 	@Autowired
 	private CommentTabService service;
-
+	@Autowired
+	private VideoTabService vdservice;
 	@RequestMapping(value="/addComment",produces="application/json;charset=utf-8")
 	public String addComment(@RequestBody String data) {
 		

@@ -172,11 +172,11 @@ function initRecommendCourse(){
 			}
 			for(var i = 0; i < result.length; i++ ){
 				var queryqueryRecommendCourse = '<div class="col-md-4" >'
-					+ '<div class="thumbnail">'
+					+ '<div class="thumbnail" style="width:100%;">'
 					+ '<a href="course.html?cid='+result[i].courses_id+'">'
 					+ '<img data-original="'
 					+ result[i].courses_img_url
-					+ '" class="jpckclass lazy" style="width:100%;" alt="...">'
+					+ '" class="jpckclass lazy" style="width:100%;height:180px;" alt="...">'
 					+ '</a>'
 					+ '<div class="caption">'
 					+ '<p style="font-weight: bold;">'

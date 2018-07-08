@@ -51,4 +51,13 @@ public class CourseDetailsController {
 	public String queryStudentComments(@RequestBody String data) {
 		return courseDetailsService.queryStudentComments(data);
 	}
+	/**
+	 * 插入到收藏表
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/addCollection",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String addCollection(@RequestBody String data) {
+		return courseDetailsService.addCollection(data);
+	}
 }
