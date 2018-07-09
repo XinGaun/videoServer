@@ -35,7 +35,7 @@
 		border-bottom-left-radius:2em; 
  	 }
  	 /*按钮圆角设置*/
-	.active{  
+	.actives{  
 	 	border-radius:2em;
 	 	border:1px #3AA8FF solid;
 	 	padding:2px 9px;
@@ -50,7 +50,7 @@
 	 	
 	 } 
 	
-	  #log a{
+	 #log a{
 	 	color:#3AA8FF;
 	 	padding:1vh 1.5vw;
 	 	text-decoration:none;
@@ -133,6 +133,12 @@
 	 body{
 	 	heigh:100vh;
 	 }
+	 #queryAll{
+ 	 	border-top-left-radius:2em;
+		border-top-right-radius:0em;
+		border-bottom-right-radius:0em;
+		border-bottom-left-radius:2em; 
+ 	 }
 </style>
 <script src="js/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -207,8 +213,8 @@
 				<li>
 					<div>
 						<div  id="logsd">
-							<a href="logins.html" @click="change(1)" :class="flag==1?'active':''">登录</a>
-					    	<a href="rigester.html" @click="change(2)" :class="flag==2?'active':''">注册</a>
+							<a href="logins.html" @click="change(1)" :class="flag==1?'actives':''">登录</a>
+					    	<a href="rigester.html" @click="change(2)" :class="flag==2?'actives':''">注册</a>
 						</div>
 						<!-- 添加头像 -->
 						<div id="logImg" class="dropdown">             			
@@ -231,7 +237,7 @@
 	<!-- /.container-fluid --> </nav>
 
 	<!-- 滚动页面-->
-	<div id="carousel-example-generic" class="carousel slide"
+	<div id="carousel-example-generic" class="carousel slide" style="margin-top:-3vh;"
 		data-ride="carousel">
 		<!-- Indicators -->
 		<ol class="carousel-indicators">

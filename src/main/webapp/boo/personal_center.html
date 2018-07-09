@@ -126,12 +126,12 @@
 		border-bottom-right-radius:2em;
 		border-bottom-left-radius:0em; 
 	 }
-	 #searchSubmitOne{
+	 /* #searchSubmitOne{
 	 	border-top-left-radius:0em;
 		border-top-right-radius:2em;
 		border-bottom-right-radius:2em;
 		border-bottom-left-radius:0em; 
-	 }
+	 } */
  	 #dropdown{
  	 	border-top-left-radius:2em;
 		border-top-right-radius:0em;
@@ -330,7 +330,7 @@
 
 	<!--  -->
 	<div
-		style="width: 100%; height: 200px; background: url(img/banner@2x.png)">
+		style="width: 100%; height: 200px; margin-top:-3vh;background: url(img/banner@2x.png)">
 		<div class="row">
 			<div class="col-md-12">&nbsp;</div>
 			<div class="col-md-12">&nbsp;</div>
@@ -656,7 +656,7 @@
 									 	<span>&nbsp;</span> -->
 									 	<input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" class="form-control" style="width:45%"/>
 
-	        							<input type="button" value="获取验证码" id="hmac" class="form-control"style="width:30%;float:right;font-size:1.5vh;margin-top:-8vh;margin-right:3vw"/>
+	        							<input type="button" value="获取验证码" id="hmac" class="form-control"style="width:30%;float:right;font-size:1.5vh;margin-top:-5vh;margin-right:3vw"/>
 									</td>
 								</tr>
 								<tr>
@@ -849,7 +849,6 @@
 	            return false;
 	        }
 	       	var size=Math.ceil(($(this)[0].files[0].size)/ 1024);//计算图片大小
-	       	
 	       	if(size>2*1024){
 	       		//图片大于2M
 	       		$("#up").css({color:"red"});
@@ -887,7 +886,7 @@
 	                }
 	            },
 	            error: function(XMLHttpRequest, textStatus, errorThrown) {
-	            	alert(2);
+	            	
 	                alertLayel("上传失败，请检查网络后重试");
 	                $("#url").val("");
 	                $(this).val('');
@@ -902,9 +901,8 @@
             $('#uploadFile').click();
         });
 　　}); 
+
     //保存按钮点击事件
-
-
     $("#updateuser").click(function(){  	
      	var user=$("#name").val();//昵称
     	var photo=$("#photoimg").val();
@@ -952,7 +950,6 @@
     			"user_qq":qq,
     	}
     	
-    	//alert(JSON.stringify(alluser));
     	if(typeof(user)!="undefined"&&typeof(email)!="undefined"){
     		
     		$.ajax({
@@ -1010,7 +1007,7 @@
             	}
         	},
         	error:function(){
-        		alert("qerror");
+        		
         	}
 		})		 
     })
@@ -1078,7 +1075,7 @@
 		        	    data:JSON.stringify(str),     			        	        	
 		        	    dataType:"json",
 		        	    success:function(data){
-		        	       alert("验证码已发送，请注意查收！");		        	        		
+		        	       //alert("验证码已发送，请注意查收！");		        	        		
 		        	     },
 		    	       	error:function(){
 		        	        		
@@ -1140,7 +1137,7 @@
 	    };
 
 	   // alert(JSON.stringify(UserTab));
-	   if(typeof(phone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code&&typeof(pwd)!="undefined"&&repwd==pwd){   
+	   if(typeof(userphone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code&&typeof(pwd)!="undefined"&&repwd==pwd){   
 
 	        $.ajax({
 	       			type:"POST",
@@ -1163,25 +1160,7 @@
 	        return false;  
 	    }  
 	})
-	//进入个人页面获取旧密码
-	
 
-
-    /* $(function(){
-    	//var userphone=$.cookie('phone');
-    	//alert(userphone);
-    	$.ajax({
-        	type:"POST",
-        	url:url+"/videoServer/front/User/queryuser",
-        	contentType:'application/json;charset=UTF-8',
-        	data:JSON.stringify({user_phone:userphone}),
-        	dataType:"json",
-        	success:function(data){
-        		$("#oldpwd").val(data[0].user_pwd);//旧密码
-        	}
-    	})
-    })
-    */
   //进入页面自动获取cookie的值，根据cookie决定是否显示登录
 	$(function(){
 		
@@ -1191,8 +1170,8 @@
 		//alert($.cookie('phone'));
 		//alert($.cookie('photo'));
 		if($.cookie("phone")==null){//cookie过期
-			alert("登录过期，请重新登录");
-			window.location.href="logins.html"
+			//alert("登录过期，请重新登录");
+			window.location.href="logins.html";
 		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
 			//alert("pp");
 			$("#logsd").hide();
@@ -1209,14 +1188,14 @@
 		退出按钮点击事件
 	*/
 	$("#exit").click(function(){
-		alert(5);
 		//window.location.href="index.html"; 
 		
 		$("#logsd").show();
 		$("#logImg").hide();
-		$.cookie('id', '', { expires: -1 });
-		$.cookie('phone', '', { expires: -1 });
-		$.cookie('photo', '', { expires: -1 }); 
+		
+		$.cookie('id', '', { expires: -1 ,path:'/',secure: false});
+		$.cookie('phone', '', { expires: -1 ,path:'/',secure: false});
+		$.cookie('photo', '', { expires: -1,path:'/',secure: false }); 
 		 
 	})
 	

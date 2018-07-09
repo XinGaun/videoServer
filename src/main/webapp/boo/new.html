@@ -1,37 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
- <HEAD>
-  <TITLE> New Document </TITLE>
-  <META NAME="Generator" CONTENT="EditPlus">
-  <META NAME="Author" CONTENT="">
-  <META NAME="Keywords" CONTENT="">
-  <META NAME="Description" CONTENT="">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- </HEAD>
-	<!-- <style>
-.jsjs {
-    color: #000000;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    word-break: break-all;
-}
-	</style> -->
-	<style>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>rigester 页面</title>
+	<!--
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    -->
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 
-		.lazy {
-		    display: none;
-		}
-		.kcjs {
-			color: #000000;
-			overflow: hidden;
-			display: -webkit-box;
-			-webkit-line-clamp: 4;
-			-webkit-box-orient: vertical;
-			word-break: break-all;
-		}
-		#search_submit{
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+
+	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+	<script type="text/javascript" src="js/videoIndex.js"></script>
+	<script src="js/jquery.lazyload.min.js"></script>
+</head>
+<style>
+	#search_submit{
 	 	border-top-left-radius:0em;
 		border-top-right-radius:2em;
 		border-bottom-right-radius:2em;
@@ -77,10 +66,111 @@
 	 	left:58vw;
 	 	z-index:2;
 	 }
+	
+	 #boo{
+	 	position:relative;
+	 }
+	#rigester{
+		width:28vw;
+	 	height:45vh;
+	 	background-color:#FFFFFF;
+	 	border-radius:0.3em;
+	 	margin-left:52vw;
+	 	margin-top:12vh;
+	 	margin-bottom:9vh;
+	}
+	form{
+		
+	 	position:relative;
+	 	top:5vh;
+	 	left:2.2vw;
+	 	width:23vw;
+	 	height:40vh;
+	}
+	
+	#header span{
+	  font-size:1.5vw;
+	}
+	/* 输入框的圆角设置 */
+	#body input{
+	  margin: 2.2vh 0vw;
+	  border:1px solid #888;
+      border-radius:4px;
+      height:4vh;
+      padding:0px 55px;
+	}
+	/*登录模态框中输入框的设置-添加小图标*/
+	input[name=phone]{
+		background: url(photos/LoginPhoto/user.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
+		padding:0vh 1.5vw;
+	}
+	input[name=nic]{
+		
+		background: url(photos/LoginPhoto/phone.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
+		padding:0vh 1.5vw;
+		
+	}
+	input[type=password]{
+		background: url(photos/LoginPhoto/pwd.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
+		padding:0vh 1.5vw;
+	}
+	input[name=dx]{
+		padding:0vh 0.5vw;
+		
+	}
+	a{
+		color:#3AA8FF;
+	}
+	a:hover{
+		text-decoration:none;
+		color:#3AA8FF;
+	}
+	/* 注册按钮设置 */
+	#body button{
+		background:#3AA8FF;
+      	border-radius:4px;
+      	width:21.5vw;
+      	height:4vh;
+      	border:0px;
+      	margin:3vh 0vw;
+      	color:#FFFFFF;
+	}
+	/* 设置输入框里的字体大小，浏览器兼容不一样，每个都要设置 */
+	input::-webkit-input-placeholder { /* WebKit browsers */ 
+		font-size:1.5vh;
+	} 
 
-	 #foot{
+	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+		font-size:1.5vh;
+	} 
+	input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+		font-size:1.5vh;
+	} 
+	input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+		font-size:1.5vh;
+	} 
+	#bodys{
+		background:url(photos/LoginPhoto/bj@2x.png) no-repeat;
+		background-size:100% 100%; 
+		border:1px solid gray;
+	}
+	#line{
+		margin-left:15vw;
+		float:left;
+	 	margin-top:0vh;
+		height:55vh;
+		width:28vw;
+		border-right:1px solid #cc99ff;
+	}
+	#logo{
+		position:relative;
+		margin-top:15vh;
+	 	border:1px solid #888888;
+	 	width:25vw;
+	}
+	#foot{
 	 	width:100vw;
-	 	height:13vh;	
+	 	height:12vh;	
 	 	border-bottom:1px solid #999999;
 	 	position:relative;
 	 	border-top:1px solid gray;
@@ -88,7 +178,7 @@
 	 }
 	 #foot-head{
 	 	margin:3vh 19.4vw 0vh 19.2vw;
-	 	height:9.2vh;
+	 	height:9vh;
 	 	width:61.3vw;
 	 	
 	 }
@@ -124,7 +214,7 @@
 	 }
 	 #footli{
 	 	width:24vw;
-	 	height:9.1vh;
+	 	height:9vh;
 	 	font-size:0.8vw;
 	 }
 	 #footli span,#footli div{
@@ -141,17 +231,12 @@
 	 	color:white;
 	 	margin:0vh 0.4vw
 	 }
-
-	</style>
- 	<script src="js/jquery-3.3.1.min.js" ></script>
-	<link rel="stylesheet" href="css/bootstrap.min.css" >
-	<script src="js/bootstrap.min.js" ></script>
-	<script src="js/jquery.lazyload.min.js"></script>
-	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
-	<script type="text/javascript" src="js/jquery.cookie.js"></script>
-
- <BODY>
- 	<nav class="navbar navbar-default">
+	 body{
+	 	heigh:100vh;
+	 }
+</style>
+<body>
+	<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -210,7 +295,9 @@
 						<!-- 添加头像 -->
 						<div id="logImg" class="dropdown">             			
 	                 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
 	   							<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px" height="40px" class="img-circle"/>
+
 	    						<span class="caret"></span>
 	  						</button>
 		                 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -224,71 +311,35 @@
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
-	<!-- /.container-fluid --> </nav>
-<!--  -->
-<img src="img/banner@2x.png" style="height:200px;width:100%;margin-top:-3vh;" class="img-rounded">
-<!--  -->
-<nav class="navbar navbar-default">
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
-			<div class="col-md-6" style="vertical-align: middle;">
-				<h4 style="font-weight:bold;">所有教师</h4>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group navbar-form navbar-right">  
-					<div class="input-group col-xs-12">   
-						<input type="text" name="keywordtwo" id="keywordtwo" class="form-control" placeholder="请您输入关键词">  
-						<span class="input-group-btn">  
-							<button class="btn btn-success" id="search_submit" type="submit" onclick="queryNameVideo()">搜索</button>  
-						</span>  
-					</div>  
-				</div>   
-			</div>
-		</div>
-		<div class="col-md-1"></div>
-	</div>
-</nav>
-<!--  -->
-<div class="row">
-	<div class="col-md-1"></div>
-	<div class="col-md-10">
-	  <!-- 教师信息 -->
-	  <div class="row">
-		<div class="panel panel-default">
-				<!-- <div class="panel-heading col-md-12"
-					style="text-align: center; font-weight: bold">精品课程</div> -->
-				<div class="col-md-12">&nbsp;</div>
-				<div class="panel-body">
-					<div class="col-md-12" id="">
-						<div class="row" id="excellent">
-
-							<!-- 教师模板结束 -->
-
-
-						</div>
-						<div class="col-md-12">
-							<button class="btn btn-default" style="float: right">
-								更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span>
-							</button>
-						</div>
-						<!-- 翻页 -->
-						<div class="col-md-12" style="text-align: center;" id="fanye">
-				
-						</div>
-						<!-- 翻页结束 -->
-					</div>
+	<!-- 内容部分 -->
+	<div id="bodys">
+		<div id="rigester">
+			<form>
+				<div id="header" style="margin-bottom:2vh">
+					<span>注册账户</span>
+					<a href="javascript:history.back(-1)" style="float:right;margin-right:1vw;">登录
+						<img :src="rigesterUrl">
+					</a>
 				</div>
-			</div>
+				<div id="body">
+					<label>
+			        	<input type="text" name="phone" id="phone" placeholder="请输入手机号" style="width:100%">
+			        	<br>	        	
+			        </label>
+			        <input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" style="width:53%">
+			       
+			        <input type="button" value="获取验证码" id="hmac" style="margin-right:1.2vw;width:37%;float:right;font-size:1.5vh;">
+			        
+					<label>
+						<button type="button" id="zhuce">注册</button>
+					</label>
+				</div>
+				 	
+		    </form>
 		</div>
-	
-		
-	</div>
-	<div class="col-md-1"></div>
-</div>
-
-<!-- 尾部 -->
-	<footer style="background:gray">
+	</div><!-- 内容结束 -->
+	<!-- 尾部 -->
+	<footer style="background:gray;margin-bottom:0vh;height:21vh;">
 		<div id="foot">
 			<div id="foot-head">
 				<div class="footli" id="footli">
@@ -309,7 +360,6 @@
 				<div class="footli" id="footma">
 					<span style="color:white;">关注我们：</span>
 					<img :src="footma" style="width:50px;height:50px;"/>
-					
 				</div>
 			</div>
 		</div>
@@ -317,20 +367,125 @@
 			<div id="foot-bottom" style="color:white;">7*24小时服务电话：13623512127</div>
 		</div>
 	</footer>
-<script type="text/javascript" src="js/alllecturer.js"></script>
-<script type="text/javascript">
-
-
-//var url="http:127.0.0.1:8080/";
+</body>
+<script>
+	
+	//var url="http:127.0.0.1:8080/";
 	var url="";
-	$("#denglu").click(function(){
-		var uname=$('#uname').val();
-		pwd=$("#pwd").val();
-		if(uname == ""){	    	  
-	    	$("#uname").attr('placeholder','请输入手机号');
-			$("#uname").css('color','red'); 
-			$("#uname").focus(function(){
-				$("#uname").css('color','black');
+	var code="";
+	//获取验证码
+	$('#hmac').click(function(){  
+		
+		var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+		//	    获取输入框内容
+		var phonenumber = $("#phone").val();
+		var phoneflag=1;//标记手机号是正确的
+		//alert(phonenumber);
+		if (!myreg.test(phonenumber)){
+			$("#phone").attr('placeholder','请输入正确的手机号');
+			$("#phone").css('color','red'); 
+			$("#phone").focus(function(){
+				$("#phone").css('color','black');
+			});
+			return phoneflag=0; 
+		}
+	         var codeflag = 60;//点击时间间隔60s
+	         
+	        if(phoneflag == 1&&codeflag==60){  
+	            var timeflag = setInterval(function(){  
+	                codeflag--;  
+	
+	                if(codeflag>0){ 
+	                	
+	                    $('#hmac').val('重新发送'+codeflag+'s');  
+	                    $('#hmac').css({'color':'#99897A'});  
+	                    $('#hmac').attr('disabled','disabled');  
+	                }else{  
+	                    codeflag=60;  
+	                    $('#hmac').val('获取验证码');  
+	                    $('#hmac').css({'color':'black'});  
+	                    $('#hmac').removeAttr('disabled');  
+	                    clearInterval(timeflag);  
+	            	}  
+	        	},1000);  
+	            
+	            	//随机生成六位验证码
+		            //var code="";
+		        	for(var i=0;i<6;i++){
+		        		  code+=Math.floor(Math.random()*10);
+		        	}
+		        	alert(code);
+	           
+	          
+	           var str={
+	        	   	phone:phonenumber,
+	        		code:code,//随机验证码
+	        		TemplateCode:"SMS_135036257"//模板信息
+	           }
+	           alert("str"+JSON.stringify(str));
+		        $.ajax({
+		        	type:"POST",
+		        	url:url+"/videoServer/front/User/queryuser",
+		        	contentType:'application/json;charset=UTF-8',
+		        	data:JSON.stringify({user_phone:phonenumber}),
+		        	dataType:"json",
+		        	success:function(data){
+		        		
+		        		if(data.length==1){
+		        			alert("该号码已注册，请直接登录");
+		        		}else{
+		        			$.ajax({
+		        	        	type:"POST",
+		        	        	url:url+"/videoServer/front/AliBigFish/verificationCode",
+		        	        	contentType:'application/json;charset=UTF-8',
+		        	        	data:JSON.stringify(str),     	
+		        	        	//data:str,
+		        	        	dataType:"json",
+		        	        	success:function(data){
+		        	        		//alert("验证码已发送，请注意查收！");
+		        	        		
+		        	        	},
+		        	        	error:function(){
+		        	        		
+		        	        	}
+		        	        });
+		        		}
+		        	}
+		        });    	            
+	        }
+	})
+	//注册账号
+  	$("#zhuce").click(function(){
+  		
+  		var phone = $('#phone').val();  
+  		/* var name = $('#name').val();
+  		var pwd = $('#pwd').val();
+  		var repwd = $('#repwd').val(); */
+	    var vcode = $('#vcode').val();
+	    //var myreg=/^[a-zA-Z0-9]{6,21}$/;
+	  	if(phone == ""  ){  
+	  		$("#phone").attr('placeholder','手机号不能为空！');
+			$("#phone").css('color','red'); 
+			$("#phone").focus(function(){
+				$("#phone").css('color','black');
+			});
+	        return false;  
+	    }  
+	    /* if(name == ""){
+	    	 
+	    	$("#name").attr('placeholder','请输入昵称');
+			$("#name").css('color','red'); 
+			$("#name").focus(function(){
+				$("#name").css('color','black');
+			});
+	        return false;  
+	    }
+	    
+	    if(pwd == ""){
+	    	$("#pwd").attr('placeholder','请输入密码');
+			$("#pwd").css('color','red'); 
+			$("#pwd").focus(function(){
+				$("#pwd").css('color','black');
 			});
 	        return false;  
 	    }
@@ -341,104 +496,65 @@
 				$("#pwd").css('color','black');
 			});
 	        return false;  
-	    }
-		if(typeof(uname)!="undefined"&&typeof(pwd)!="undefined"){
-			
-			$.ajax({
+	    } */
+	    if(vcode == ""){  
+	    	  
+	    	$("#vcode").attr('placeholder','请输入验证码');
+			$("#vcode").css('color','red'); 
+			$("#vcode").focus(function(){
+				$("#vcode").css('color','black');
+			});
+	        return false;  
+	    } 
+	    if(vcode!=code){
+	    	$("#vcode").attr('placeholder','验证码错误！');
+			$("#vcode").css('color','red'); 
+			$("#vcode").focus(function(){
+				$("#vcode").css('color','black');
+			});
+	        return false; 
+	    } 
+	    
+	   var UserTab={
+	    		"user_phone":phone,
+        	
+	    } 
+	   // alert(JSON.stringify(UserTab));
+	    if(typeof(phone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code){   
+	    	$.ajax({
 	        	type:"POST",
-	        	url:url+"/videoServer/front/User/queryuser",
+	        	url:url+"/videoServer/front/User/saveuser",
+	        	data:JSON.stringify(UserTab),	
 	        	contentType:'application/json;charset=UTF-8',
-	        	data:JSON.stringify({user_phone:uname}),		        	
+	        	cache:false,
 	        	dataType:"json",
-	         	async : false,
+	        	//dataType:"text",
 	        	success:function(data){
-	        		console.log(data);
-	        		if(data.length==1){	        			
-	        			initss();
-	        			
-	        		}else{ 
-	        			alert("该号码未注册，请先注册！");
-	        			
-	         		} 
+	        		alert("注册成功！");
+	        		window.history.go(-1);
+	        		//window.location.href="index.html"; 
+	        		
 	        	},
-	        	error:function(){
-	        		
-	        	}
-	        });    
-		} 
-	})
-	function initss(){
-			var UserTab={
-		    		"user_phone":$('#uname').val(),    	        		
-	        		"user_pwd":pwd,	        	        		
-		    } 
-			console.log(UserTab);
-			$.ajax({
-	    	type:"POST",
-	    	url:url+"/videoServer/front/User/selectuser",
-	    	data:JSON.stringify(UserTab),	
-	    	contentType:'application/json;charset=UTF-8',
-	    	cache:false,
-	    	async : false,
-	    	dataType:"json",
-	    	success:function(data){
-	    		
-	    		if(data=="账号和密码不一致！"){
-	    			alert(data);
-	    		}else{
-	    			var expiresDate= new Date();
-	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
-	    			//alert(expiresDate);
-	    			
-	    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
-	        		$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
-	        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
-	    			isfirst(data[0].user_phone);
-	    			
-	    		}
-	    	
-	    	},
-	    	error:function(){
-	    		alert("error");
-	    	}
-	    }); 
-	}
-	function isfirst(phone){
-		//alert(7);
-		$.ajax({
-	        	type:"POST",
-	        	url:url+"/videoServer/front/User/isfirst",
-	        	contentType:'application/json;charset=UTF-8',
-	        	data:JSON.stringify({user_phone:phone}),		        	
-	        	dataType:"json",
-	         	async : false,
-	        	success:function(data){
-	        		console.log(data);
-	        		
-	        		if(data.length==1){	 
-	        			//答过题的状态
-	        			window.location.href="index.html";	        			
-	        		}else{ 
-	        			//未答题状态
-	        			
-	        			window.location.href="user_test.html";
-	        			
-	         		}  
+	        	error:function(data){
+	        		alert("注册失败！");
+	        	
 	        	},
-	        	error:function(){
-	        		
-	        	}
-	    });    
-	}
+	        });
+	     }else{  
+	         
+	        return false;  
+	    }  
+	     
+  	})
 
-	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
+  	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
 	$(function(){
 		
 		//alert($.cookie('phone'));
 		//alert($.cookie('photo'));
 		if($.cookie("phone")==null){//cookie过期
+
 			//alert("登录过期，请重新登录");
-		
 		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
 			//alert("pp");
 			$("#logsd").hide();
@@ -458,18 +574,21 @@
 	$("#exit").click(function(){
 		//alert(5);
 		//window.location.href="index.html"; 
+		
 		$("#logsd").show();
 		$("#logImg").hide();
 		$.cookie('id', '', { expires: -1 ,path:'/',secure: false});
 		$.cookie('phone', '', { expires: -1 ,path:'/',secure: false});
-		$.cookie('photo', '', { expires: -1,path:'/',secure: false });  
+		$.cookie('photo', '', { expires: -1,path:'/',secure: false }); 
+		 
+
 	})
-		
-	//登录注册样式切换
+
+  	//登录注册样式切换
 	new Vue({  
 		  el: '#logsd',  
 		  data: {  
-		   flag:1,//默认为百度添加 .active  
+		   flag:2,//默认为注册添加 .active  
 		  },  
 		  methods:{  
 		   change:function(a){//传入参数这里指1、2  
@@ -477,6 +596,23 @@
 		   }  
 		  }  
 	})  
+
+	
+	//登录页面中注册按钮后的小图标
+	var rigster=new Vue({
+		el:'#header',
+		data:{
+			rigesterUrl:'photos/LoginPhoto/rigester.png'
+		}
+	})
+	//登录页面中的微信登录小图标
+	var weixin=new Vue({
+		el:'#wxChat',
+		data:{
+			weixin:'photos/LoginPhoto/weixin.png'
+		}
+	})
+
 	//判断PC或移动
 	$(function(){
 		judgePC();
@@ -591,6 +727,4 @@
 		$.cookie('photo', '', { expires: -1,path:'/',secure: false });  
 	})
 </script>
- </BODY>
-</HTML>
-
+</html>

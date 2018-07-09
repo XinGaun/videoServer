@@ -71,7 +71,7 @@
 	 }
 	#rigester{
 		width:28vw;
-	 	height:60vh;
+	 	height:45vh;
 	 	background-color:#FFFFFF;
 	 	border-radius:0.3em;
 	 	margin-left:52vw;
@@ -81,11 +81,10 @@
 	form{
 		
 	 	position:relative;
-	 	top:4vh;
+	 	top:5vh;
 	 	left:2.2vw;
 	 	width:23vw;
-	 	height:55vh;
-	 	
+	 	height:40vh;
 	}
 	
 	#header span{
@@ -93,7 +92,7 @@
 	}
 	/* 输入框的圆角设置 */
 	#body input{
-	  margin: 1.5vh 0vw;
+	  margin: 2.2vh 0vw;
 	  border:1px solid #888;
       border-radius:4px;
       height:4vh;
@@ -132,7 +131,7 @@
       	width:21.5vw;
       	height:4vh;
       	border:0px;
-      	margin:2.2vh 0vw;
+      	margin:3vh 0vw;
       	color:#FFFFFF;
 	}
 	/* 设置输入框里的字体大小，浏览器兼容不一样，每个都要设置 */
@@ -326,19 +325,9 @@
 			        	<input type="text" name="phone" id="phone" placeholder="请输入手机号" style="width:100%">
 			        	<br>	        	
 			        </label>
-			        <label>
-			        	<input type="text" name="nic" id="name" placeholder="请输入昵称" style="width:100%">	      
-			        	<br>	        	
-			        </label>
-			        <label>
-			        	<input type="password" id="pwd" onblur="mdjia()" placeholder="请输入6-21位密码" style="width:100%">
-			        </label>
-			        <label>
-			        	<input type="password" id="repwd" placeholder="请再次输入密码" style="width:100%">
-			        </label>
 			        <input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" style="width:53%">
 			       
-			        <input type="button" value="获取验证码" id="hmac" style="margin-right:1vw;width:39%;float:right;font-size:1.5vh;">
+			        <input type="button" value="获取验证码" id="hmac" style="margin-right:1.2vw;width:37%;float:right;font-size:1.5vh;">
 			        
 					<label>
 						<button type="button" id="zhuce">注册</button>
@@ -432,7 +421,7 @@
 	        		code:code,//随机验证码
 	        		TemplateCode:"SMS_135036257"//模板信息
 	           }
-	           //alert("str"+str);
+	           alert("str"+JSON.stringify(str));
 		        $.ajax({
 		        	type:"POST",
 		        	url:url+"/videoServer/front/User/queryuser",
@@ -461,22 +450,18 @@
 		        	        });
 		        		}
 		        	}
-		        });    
-	            
+		        });    	            
 	        }
-	        
-			
-			
 	})
 	//注册账号
   	$("#zhuce").click(function(){
   		
   		var phone = $('#phone').val();  
-  		var name = $('#name').val();
+  		/* var name = $('#name').val();
   		var pwd = $('#pwd').val();
-  		var repwd = $('#repwd').val();
+  		var repwd = $('#repwd').val(); */
 	    var vcode = $('#vcode').val();
-	    var myreg=/^[a-zA-Z0-9]{6,21}$/;
+	    //var myreg=/^[a-zA-Z0-9]{6,21}$/;
 	  	if(phone == ""  ){  
 	  		$("#phone").attr('placeholder','手机号不能为空！');
 			$("#phone").css('color','red'); 
@@ -485,7 +470,7 @@
 			});
 	        return false;  
 	    }  
-	    if(name == ""){
+	    /* if(name == ""){
 	    	 
 	    	$("#name").attr('placeholder','请输入昵称');
 			$("#name").css('color','red'); 
@@ -517,7 +502,7 @@
 				$("#repwd").css('color','black');
 			});
 	        return false;  
-	    }
+	    } */
 	    if(vcode == ""){  
 	    	  
 	    	$("#vcode").attr('placeholder','请输入验证码');
@@ -538,12 +523,10 @@
 	    
 	   var UserTab={
 	    		"user_phone":phone,
-        		"user_name":name,
-        		"user_pwd":pwd,
-        		
+        	
 	    } 
 	   // alert(JSON.stringify(UserTab));
-	    if(typeof(phone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code&&typeof(name)!="undefined"&&typeof(pwd)!="undefined"&&repwd==pwd){   
+	    if(typeof(phone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code){   
 	    	$.ajax({
 	        	type:"POST",
 	        	url:url+"/videoServer/front/User/saveuser",
@@ -553,8 +536,10 @@
 	        	dataType:"json",
 	        	//dataType:"text",
 	        	success:function(data){
-	        		window.location.href="index.html"; 
-	        		//alert("注册成功！");
+	        		alert("注册成功！");
+	        		window.history.go(-1);
+	        		//window.location.href="index.html"; 
+	        		
 	        	},
 	        	error:function(data){
 	        		alert("注册失败！");
