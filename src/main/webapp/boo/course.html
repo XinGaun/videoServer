@@ -99,6 +99,7 @@ a:hover {
 	left: 58vw;
 	z-index: 2;
 }
+
 #foot{
 	 	width:100vw;
 	 	height:13vh;	
@@ -152,16 +153,17 @@ a:hover {
 	 	
 		margin-left:0.5vw;
 	 }
-	 ol{
+	 #foot ol{
 	 	list-style-type:none;
 	 	padding:0px;
 	 }
-	 li{
+	 #foot li{
 	 	display:inline-block;
 	 	
 	 	color:white;
 	 	margin:0vh 0.4vw
 	 }
+
 </style>
 <script src="js/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -283,8 +285,8 @@ a:hover {
 							<p>&nbsp;</p>
 							<a href="#"> <img src="img/fxxz@2x.png" alt="..."
 								class="img-rounded "> 分享
-							</a>&nbsp;&nbsp;&nbsp;&nbsp; <a href="#"> <img
-								src="img/scwxz@2x.png" alt="..." class="img-rounded "> 收藏
+							</a>&nbsp;&nbsp;&nbsp;&nbsp; <img
+								src="img/scwxz@2x.png" alt="..." class="img-rounded "><a href="#" id="Collection">收藏
 							</a>
 						</div>
 						<div class="col-md-12">&nbsp;</div>
@@ -471,6 +473,7 @@ a:hover {
 											<a href="#">学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态</a>
 										</div>
 										<p>&nbsp;</p>
+
 										<div class="xydtlh col-md-12">
 											<a href="#">学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态</a>
 										</div>
@@ -539,6 +542,7 @@ a:hover {
 		</div>
 		<div class="col-md-1"></div>
 	</div>
+
 	<!-- 尾部 -->
 	<footer style="background:gray">
 		<div id="foot">
@@ -592,6 +596,7 @@ a:hover {
 				</div>
 			</div>
 		</div>
+
 	</div>
 
 	<!-- video model -->
@@ -718,6 +723,7 @@ a:hover {
 			$("#logsd").css("margin-top", "3.5vh");
 		}
 	}
+
 	/* 尾部li标签添加的关于我们 */
 	new Vue({
 	  el: '#footli',
@@ -751,5 +757,6 @@ a:hover {
 			footma:'photos/LoginPhoto/erweima_20180628215615.jpg'
 		}
 	})
+
 </script>
 

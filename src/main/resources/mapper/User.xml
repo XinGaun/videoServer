@@ -6,13 +6,13 @@
 	<!-- 添加注册用户 -->
 	<insert id="addUser" parameterType="com.entity.UserTab">
 		insert into user_tab(user_name,user_sex,user_phone,user_pwd,user_status,user_date,user_email,user_photo) 
- 		values(#{user_name},3,#{user_phone},#{user_pwd},5,now() ,'','')
+ 		values('',3,#{user_phone},'',5,now() ,'','')
 	</insert>
 
 	<!-- 登录注册时查询是否有该用户 -->
 
 	<select id="queryUser" parameterType="String" resultType="java.util.HashMap">
-		select * from user_tab where user_phone=#{phone}
+		select user_id,user_phone,user_name,user_pwd,user_photo from user_tab where user_phone=#{phone}
 		
 	</select>
 

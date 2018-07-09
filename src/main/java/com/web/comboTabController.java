@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.entity.TeacherDomain;
 import com.entity.comboTab;
@@ -22,17 +23,12 @@ public class comboTabController {
 	
 	@RequestMapping(value="/insertComboTab.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void insertComboTab(HttpServletRequest request,String combo_name,String combo_introduce,String video_id,String combo_price,String combo_imgs){
+	public void insertComboTab(HttpServletRequest request,String combo_name,String combo_introduce,String video_id,String combo_price,MultipartFile image) throws Exception{
 		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
 		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
-		comboTab c=new comboTab();
-		c.setCombo_imgs(combo_imgs);
-		c.setCombo_introduce(combo_introduce);
-		c.setCombo_name(combo_name);
-		c.setCombo_price(combo_price);
-		c.setTeacher_id(teacher_id);
-		c.setVideo_id(video_id);
-		cService.insertComboTab(c);
+		System.out.println(image.getOriginalFilename());
+
+		cService.insertComboTab( combo_name, combo_introduce, video_id, combo_price, image, teacher_id);
 	}
 	
 	@RequestMapping(value="/getListBy.do", method={RequestMethod.POST,RequestMethod.GET})

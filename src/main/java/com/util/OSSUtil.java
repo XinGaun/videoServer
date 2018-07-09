@@ -1,9 +1,11 @@
 package com.util;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Date;
+import java.util.UUID;
 
 import com.aliyun.oss.ClientConfiguration;
 import com.aliyun.oss.HttpMethod;
@@ -30,6 +32,7 @@ public class OSSUtil implements ProgressListener{
 	private long progress = 0;
 	String callbackUrl = "http://oss-cn-beijing.aliyuncs.com";
 	String key = "";
+	
 	// 单例，只需要建立一次链接  
 	private static OSSClient client = null;  
 	// 是否使用另外一套本地账户  
@@ -72,60 +75,73 @@ public class OSSUtil implements ProgressListener{
 
 	//上传一个文件，InputStream  
 	public String uploadInput(String fileName,InputStream input) throws Exception {
-	
+
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret); 
 		isVideo(fileName);
-		ossClient.putObject(bucketName,fileName,input );
-		System.out.println(ossClient.putObject(bucketName,fileName,input ));
+		String ossFileName = getOSSName(fileName);
+		try {
+			ossClient.putObject(bucketName,ossFileName, input);  
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
 		System.out.println("end");
 		ossClient.shutdown();  
-		System.out.println(fileName);
-		System.out.println(input);
 		return fileName;
 	}
 
 
 	//上传一个文件，File  
-	public static void uploadFile(File file, String key) {  
-		OSSClient client = client();  
-		isVideo(file.getName());
-		PutObjectRequest putObjectRequest = new PutObjectRequest(  
-				bucketName, key, file);  
-		client.putObject(putObjectRequest);  
-	}  
-
-	//上传一个文件，path  
 	public String upload(File file,String fileName) throws Exception {
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret); 
 		isVideo(fileName);
-		ossClient.putObject(bucketName,fileName, file);  
+		String ossFileName = getOSSName(fileName);
+		try {
+			ossClient.putObject(bucketName,ossFileName, file);  
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+
 		ossClient.shutdown();  
-		return fileName;
+		return ossFileName;
 	}
-	// 带进度条的上传。
-	public String uploadJD(InputStream inputStream,String fileName,long fileSize) {
+
+	// 带进度条的上传。视频
+	public String uploadJD(File file,String fileName,long fileSize) throws IOException {
+		
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 		this.size = fileSize;
-		this.fileName = fileName;
-		ProgressSingleton.put(fileName+"size", size);
-		ProgressSingleton.put(fileName+"progress", progress);
-		isVideo(fileName);
+		String name = fileName.substring(0, fileName.lastIndexOf("."));
+		//System.out.println("ossutil "+name);
+		this.fileName = name;
+		ProgressSingleton.put(name+"status", "start");
+		ProgressSingleton.put(name+"size", size);
+		this.progress = 0;
+		//System.out.println(ProgressSingleton.get(name+"progress"));
+		ProgressSingleton.put(name+"progress", progress);
+		String filetype= fileName.substring(fileName.lastIndexOf("."));
+		String ossFileName = getOSSName(filetype);		
 		try {
-		
-			ossClient.putObject(new PutObjectRequest(bucketName, this.fileName, inputStream).
+
+			ossClient.putObject(new PutObjectRequest(bucketName2, ossFileName,file).
 					<PutObjectRequest>withProgressListener(this));
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		//当文件上传完成之后，从单例中移除此次上传的状态信息
-		System.out.println("oss end");
-		ProgressSingleton.remove(fileName + "size");
-		ProgressSingleton.remove(fileName + "progress");
+		System.out.println("oss end");	
 		// 关闭OSSClient。
+		ProgressSingleton.put(name+"status", "end");
+		ProgressSingleton.remove(name + "size");
+		ProgressSingleton.remove(name + "progress");
+		//System.out.println(ProgressSingleton.get(name+"progress"));
+		System.out.println("oss end 2");
 		ossClient.shutdown();
-		
-		return fileName;
+
+		return ossFileName;
 	}
 
 	//下载一个文件到本地  
@@ -152,13 +168,14 @@ public class OSSUtil implements ProgressListener{
 	}
 	public String getWebURL(String fileName) {
 		String path = "";
-		if (fileName.endsWith("mp4") || fileName.endsWith("mp3")) {
+		if (fileName.endsWith("mp4") || fileName.endsWith("mp3") ||fileName.endsWith("MP4")) {
 			path = serviceName+"/video/"+fileName;		
 		}
 		if (fileName.endsWith("jpg") || fileName.endsWith("png")) {
 			path = serviceName+"/image/"+fileName;		
 		}
-		System.out.println(path);
+
+
 		return path;
 	}
 
@@ -177,7 +194,7 @@ public class OSSUtil implements ProgressListener{
 	}
 
 	public static void isVideo(String fileName) {
-		if (fileName.endsWith("mp4") || fileName.endsWith("mp3")) {			
+		if (fileName.endsWith("mp4") || fileName.endsWith("mp3") || fileName.endsWith("MP4")) {			
 			bucketName = bucketName2;
 		}
 		if (fileName.endsWith("jpg") || fileName.endsWith("png")) {		
@@ -204,10 +221,10 @@ public class OSSUtil implements ProgressListener{
 			ProgressSingleton.put(fileName+"progress", progress);			
 			this.bytesWritten += bytes;
 			if (this.totalBytes != -1) {
-				int percent = (int)(this.bytesWritten * 100.0 / this.totalBytes);
-				System.out.println(bytes + " bytes have been written at this time, upload progress: " + percent + "%(" + this.bytesWritten + "/" + this.totalBytes + ")");
+				//int percent = (int)(this.bytesWritten * 100.0 / this.totalBytes);
+				//System.out.println(bytes + " bytes have been written at this time, upload progress: " + percent + "%(" + this.bytesWritten + "/" + this.totalBytes + ")");
 			} else {
-//				System.out.println(bytes + " bytes have been written at this time, upload ratio: unknown" + "(" + this.bytesWritten + "/...)");
+				//System.out.println(bytes + " bytes have been written at this time, upload ratio: unknown" + "(" + this.bytesWritten + "/...)");
 			}
 			break;
 		case TRANSFER_COMPLETED_EVENT:
@@ -231,26 +248,16 @@ public class OSSUtil implements ProgressListener{
 
 	}   
 
-
-
-	public static void main(String[] args) throws Exception {
-		OSSUtil oss = new OSSUtil();
-		//		C:\\bxwlw\\home\\test.log
-		/*oss.upload("D:\\filedownload\\基本演绎法第六季01.mp4","基本演绎法第六季01");
-		oss.upload("D:\\filedownload\\2.jpg",null);*/
-		//		oss.upload("D:\\filedownload\\3.mp4");
-		//		oss.upload("D:\\filedownload\\许嵩 - 庐州月.mp3");
-		//		oss.upload("D:\\filedownload\\2.jpg");
-		//		oss.upload("D:\\filedownload\\3.jpg");
-		//		oss.upload("D:\\filedownload\\4.jpg");
-		//		oss.upload("D:\\filedownload\\5.jpg");
-		//		oss.upload("D:\\filedownload\\1.png");
-		//		oss.upload("D:\\filedownload\\2.png");
-		//		oss.upload("D:\\filedownload\\3.png");
-		//		oss.download("test.log","D:\\filedownload\\test.log");
-		//		URL url =oss.getURL();
-		//		String path = oss.getFileURL("2.jpg");
-		//		System.out.println(path.toString());
-
+	public static String getUUID(){ 
+		String uuid = UUID.randomUUID().toString(); 	
+		return uuid.replaceAll("-", "");
 	}
+	public static String getOSSName(String filetype) {
+		return getUUID()+filetype;
+	}
+
+	/*public static void main(String[] args) throws Exception {
+		//		OSSUtil oss = new OSSUtil();
+
+	}*/
 }
