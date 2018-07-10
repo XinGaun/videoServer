@@ -51,7 +51,7 @@ public class coursesTabServiceImpl implements coursesTabService{
 
 	@Override
 	public void addCoursesTab(String courses_name,int video_form_id, String courses_introduce, String courses_pricemoney,
-			String courses_video, MultipartFile image,int teacher_id) throws Exception {
+			String courses_video, MultipartFile image,int teacher_id,int courses_qz) throws Exception {
 		// TODO Auto-generated method stub
 		String oldImageName = image.getOriginalFilename();
 		String imageName = courses_name+oldImageName.substring(oldImageName.lastIndexOf("."));
@@ -71,6 +71,7 @@ public class coursesTabServiceImpl implements coursesTabService{
 		c.setCourses_img_url(imageUrl);
 		c.setTeacher_id(teacher_id);
 		c.setCourses_pricemoney(courses_pricemoney);
+		c.setCourses_qz(courses_qz);
 		addCoursesTab(c);
 	}
 
@@ -80,5 +81,8 @@ public class coursesTabServiceImpl implements coursesTabService{
 		
 		return ctDao.searchTabList( teacher_id, courses_video_form_id, courses_name, courses_pricemoney, courses_grade);
 	}
-
+	@Override
+	public void updateCoursesById(int id) {
+		ctDao.updateCoursesById(id);
+	}
 }

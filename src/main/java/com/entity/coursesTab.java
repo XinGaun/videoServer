@@ -16,6 +16,13 @@ public class coursesTab {
 	int video_form_id;
 	String video_form_name;
 	String courses_date;
+	int courses_qz;
+	public int getCourses_qz() {
+		return courses_qz;
+	}
+	public void setCourses_qz(int courses_qz) {
+		this.courses_qz = courses_qz;
+	}
 	public int getVideo_form_id() {
 		return video_form_id;
 	}
