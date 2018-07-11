@@ -4,8 +4,8 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.coursesTabDao">
 	<insert id="addCoursesTab" parameterType="com.entity.coursesTab">
-		insert into courses_tab(courses_name,video_form_id,courses_introduce,courses_video,courses_img_url,courses_date,courses_pricemoney,teacher_id) 
-		values(#{courses_name,jdbcType=VARCHAR},#{video_form_id},#{courses_introduce,jdbcType=VARCHAR},#{courses_video,jdbcType=VARCHAR},#{courses_img_url,jdbcType=VARCHAR},now(),#{courses_pricemoney,jdbcType=VARCHAR},#{teacher_id,jdbcType=INTEGER})
+		insert into courses_tab(courses_name,video_form_id,courses_introduce,courses_video,courses_img_url,courses_date,courses_pricemoney,teacher_id,courses_qz) 
+		values(#{courses_name,jdbcType=VARCHAR},#{video_form_id},#{courses_introduce,jdbcType=VARCHAR},#{courses_video,jdbcType=VARCHAR},#{courses_img_url,jdbcType=VARCHAR},now(),#{courses_pricemoney,jdbcType=VARCHAR},#{teacher_id,jdbcType=INTEGER},#{courses_qz,jdbcType=INTEGER})
 	</insert>
 	<select id="searchTabList" parameterType="java.util.HashMap" resultType="com.entity.coursesTab">
 		select * from courses_tab 
@@ -26,10 +26,11 @@
 					and video_form_id = #{video_form_id,jdbcType=VARCHAR}
 				</if>
 			</where>
+			order by courses_qz desc
 	</select>
 	<select id="getTabList" parameterType="com.entity.coursesTab" resultType="com.entity.coursesTab">
 		select * from courses_tab 
-			<where> courses_status=5
+			<where> 1=1
 				<if test="teacher_id !='' and teacher_id !=null">
 					and teacher_id = #{teacher_id,jdbcType=INTEGER})
 				</if>
@@ -46,16 +47,20 @@
 					and video_form_id = #{video_form_id,jdbcType=INTEGER})
 				</if>
 			</where>
+				order by courses_qz desc
 	</select>
 	<select id="getTabListById" parameterType="int" resultType="com.entity.coursesTab">
 		select * from courses_tab where courses_id=#{id,jdbcType=INTEGER} 
 	</select>
 	<update id="delCoursesById" parameterType="com.entity.coursesTab">
-		update courses_tab set courses_status='6' where courses_id=#{id,jdbcType=INTEGER} 
+		update courses_tab set courses_status='9' where courses_id=#{id,jdbcType=INTEGER} 
+	</update>
+	<update id="updateCoursesById" parameterType="com.entity.coursesTab">
+		update courses_tab set courses_status='8' where courses_id=#{id,jdbcType=INTEGER} 
 	</update>
 	<update id="upCoursesById" parameterType="com.entity.coursesTab">
 		update courses_tab set courses_name=#{courses_name,jdbcType=VARCHAR},courses_introduce=#{courses_introduce,jdbcType=VARCHAR},
-		courses_video=#{courses_video,jdbcType=VARCHAR},courses_img_url=#{courses_img_url,jdbcType=VARCHAR},courses_pricemoney=#{courses_pricemoney,jdbcType=VARCHAR} 
+		courses_video=#{courses_video,jdbcType=VARCHAR},courses_img_url=#{courses_img_url,jdbcType=VARCHAR},courses_pricemoney=#{courses_pricemoney,jdbcType=VARCHAR},courses_qz=#{courses_qz,jdbcType=INTEGER} 
 		where courses_id=#{courses_id,jdbcType=INTEGER} 
 	</update>
 </mapper>

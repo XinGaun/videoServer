@@ -293,6 +293,18 @@ function initVideo(video_arr){
 					+'</li>';
 
 				$("#videos").append(videos);
+				var kcmls ="";
+				if(result[i].video_ppt!=undefined){
+					kcmls= '<li class="list-group-item">'
+
+						+	'<div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
+						+	'<a href="javascript:void(0)" onclick="">'+result[i].video_ppt+'</a>'
+						+'</div>'
+						+'</li>';
+					$("#kcmls").append(kcmls);
+				}
+				var kcxjs = '<button class="btn btn-default col-md-1"  onclick="videourl(&quot;'+result[i].video_url+'&quot;,'+result[i].video_id+')")" style="height:50px;width:50px;">'+(i+1)+'</button>';
+				$("#kcxjs").append(kcxjs);
 			}
 		}
 	});
@@ -302,12 +314,8 @@ function initVideo(video_arr){
 //弹出播放页面
 function videourl(urls,id){
 	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
-		if(confirm("您还没有登录请先登录!")){
 			window.location.href="logins.html";
-			return false;
-		}else{
-			return false;
-		}
+		
 	}
 	var data = {
 			user_id:$.cookie('id'),

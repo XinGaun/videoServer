@@ -14,6 +14,27 @@ public class VideoTab {
 	Integer video_click;
 	String video_img_url;
 	Integer video_grade;
+	int video_qz;
+	String video_ppt;
+	String video_time;
+	public String getVideo_time() {
+		return video_time;
+	}
+	public void setVideo_time(String video_time) {
+		this.video_time = video_time;
+	}	
+	public int getVideo_qz() {
+		return video_qz;
+	}
+	public void setVideo_qz(int video_qz) {
+		this.video_qz = video_qz;
+	}
+	public String getVideo_ppt() {
+		return video_ppt;
+	}
+	public void setVideo_ppt(String video_ppt) {
+		this.video_ppt = video_ppt;
+	}
 	public Integer getVideo_id() {
 		return video_id;
 	}
