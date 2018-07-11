@@ -19,10 +19,7 @@ import com.aliyun.oss.event.ProgressEvent;
 import com.aliyun.oss.event.ProgressEventType;
 import com.aliyun.oss.event.ProgressListener;
 import com.aliyun.oss.model.GetObjectRequest;
-import com.aliyun.oss.model.PutObjectRequest;
-
-import it.sauronsoftware.jave.Encoder;
-import it.sauronsoftware.jave.MultimediaInfo;  
+import com.aliyun.oss.model.PutObjectRequest;  
 
 public class OSSUtil implements ProgressListener{
 	private static String endpoint = "http://oss-cn-beijing.aliyuncs.com";  
@@ -169,7 +166,7 @@ public class OSSUtil implements ProgressListener{
 		ossClient.shutdown();
 	}
 	//获得视频时长
-	public String getVideoTime(File source) {
+	/*public String getVideoTime(File source) {
 		System.out.println("videoTime");
 		Encoder encoder = new Encoder();
 		StringBuffer length =new StringBuffer("时长:");
@@ -198,7 +195,7 @@ public class OSSUtil implements ProgressListener{
 		}
 		return length.toString();
 	}
-
+*/
 	public String getOSSFileURL(String fileName) {
 		isVideo(fileName);
 		String path = "http://"+bucketName+"."+endpoint.substring(7)+"/"+fileName;

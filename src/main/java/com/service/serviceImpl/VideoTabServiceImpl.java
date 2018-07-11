@@ -29,7 +29,7 @@ public class VideoTabServiceImpl implements VideoTabService{
 	private String url = "http://www.niceyuwen.com:2020/videoffmpeg/transcoding/transcodingm3u8";
 	@Override
 	@Transactional
-	public String uploadVideo(String videoName,String imageName,String pptName,int video_form_id,String video_introduce,MultipartFile video,MultipartFile image,MultipartFile ppt,int video_qz,int teacher_id,long size) throws Exception {
+	public String uploadVideo(String videoName,String imageName,String pptName,int video_form_id,String video_introduce,MultipartFile video,MultipartFile image,MultipartFile ppt,int video_qz,int teacher_id,long size,String videoTime) throws Exception {
 		HashMap<String,String> data = new HashMap<>();
 
 		CommonsMultipartFile cf= (CommonsMultipartFile)video; //这个myfile是MultipartFile的
@@ -52,13 +52,7 @@ public class VideoTabServiceImpl implements VideoTabService{
 		String imageUrl = ossUpload.getWebURL(ossImageName);
 		String pptUrl = ossUpload.getWebURL(osspptName);
 		System.out.println(pptUrl);
-		String videoTime = "0";
-		try {
-			 videoTime= ossUpload.getVideoTime(videoFile);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}	
-	
+		
 		String path = "/oss/video/"+ossVideoName;
 		String fileName ="/oss/video/"+ossVideoName.substring(0, ossVideoName.lastIndexOf("."));
 		data.put("PATH",path);
