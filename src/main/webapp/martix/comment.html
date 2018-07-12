@@ -350,20 +350,19 @@
 
 							<div class="panel-body">
 								<div class="table-responsive" id="fatable">
-									<table id='example'
-										class='display table-striped table-bordered table-hover table-condensed'
-										cellspacing='0' width='100%'>
+									<table id='example' class='display table-striped table-bordered table-hover table-condensed'>
 										<thead>
 											<tr>
 												<th><input type='checkbox' class='checkall' /></th>
 												<!-- <th>评论编号</th> -->
 												<th>视频名称</th>
-												<th>所属用户</th>
+										<!-- 		<th>所属用户</th> -->
 												<th>评论留言</th>
 												<th>留言时间</th>
+												<th>审核状态</th>
 												<th>是否回复</th>
 												<th>回复内容</th>
-												<th>回复教师</th>
+												<!-- <th>回复教师</th> -->
 												<th>回复时间</th>
 											</tr>
 										</thead>
@@ -433,8 +432,7 @@
 	<script src="assets/js/common.js"></script>
 	<script>
 $(function(){	
-	loadRoleInfo();
-	        var url1 = "http://localhost:8080/";	        
+	loadRoleInfo();	        
              /* //全选
 	         $('.checkall').click(function () {  		
 	         
@@ -455,7 +453,7 @@ $(function(){
        			};      		
        			$.ajax({
                            type: "POST",
-                           url: url1+"videoServer/commentTab/deleteComment",
+                           url: "/videoServer/commentTab/deleteComment",
                            contentType: 'application/json; charset=UTF-8',
        					   cache: false,  //禁用缓存
                            data: JSON.stringify(arr),  //传入组装的参数
@@ -544,26 +542,22 @@ $(function(){
                      //ajax请求数据                      
                      $.ajax({
                          type: "POST",
-                         url: url1+"videoServer/commentTab/queryCommentAll",
+                         url: "/videoServer/commentTab/queryCommentAll",
                          contentType: 'application/json; charset=UTF-8',
      					 cache: false,  //禁用缓存
                          data: JSON.stringify(param),  //传入组装的参数
                          dataType: "json",
                          success: function (result) {
-                             //console.log(result);
-                             //setTimeout仅为测试延迟效果
-                             //setTimeout(function () {
                                  //封装返回数据    
                                  var returnData = {};
                                  returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
                                  returnData.recordsTotal = result.total;//返回数据全部记录
                                  returnData.recordsFiltered = result.total;//后台不实现过滤功能，每次查询均视作全部结果
                                  returnData.data = result.data;//返回的数据列表
-                                 //console.log(returnData);
+                               
                                  //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
                                  //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
-                                 callback(returnData);
-                             //}, 200);
+                                 callback(returnData);                          
                            }
                       });  
                 },
@@ -581,23 +575,41 @@ $(function(){
                     { 
      					"data": "video_name",
      				 	"sDefaultContent":"", 
+     				 	 "sWidth" : "20%"
      				},
-     				{ "data": "user_name" },
+     			/* 	{ "data": "user_name" }, */
      				{ 
      					"data": "comment_text",
      					 "sDefaultContent":"", 
+     					"sWidth" : "20%"
      				},
      				{ 
      					"data": "comment_date",
      					"sDefaultContent":"",
-    					
+     					"sWidth" : "20%"
+     				},
+     				{ 
+     					"data": "comment_status" ,
+     					"orderable" : false, // 禁用排序  
+                        "sDefaultContent" : "",  
+                        "sWidth" : "3%",
+                        "render" : function(data, type, full, meta) {                         	
+                            if(data=="" ||data == null || data == "0"){    
+                            	data = "<button class='btn btn-danger btn-sm' >通过</button> <button class='btn btn-danger btn-sm' >不通过</button>  ";
+                            }else if(data == "10"){
+                 				data = "<button class='btn btn-safety btn-sm'>通过</button>";
+                            }else if(data == "11"){  
+                                data = "<button class='btn btn-sm btn-danger' >不通过</button>"  
+                            }  
+                             return   data;  
+                          }   
      				},
      				{ 
      					"data": "reply_text" ,
      					"orderable" : false, // 禁用排序  
                         "sDefaultContent" : "",  
                         "sWidth" : "3%",
-                          "render" : function(data, type, full, meta) {                         	
+                        "render" : function(data, type, full, meta) {                         	
                             if(data=="" ||data == null ){                                  
                  				data = "<button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#myModal' data-commentid='"+full.comment_id+"'>回复</button>";
                             }else{  
@@ -610,6 +622,7 @@ $(function(){
      					"data": "reply_text" ,
      					"orderable" : false, // 禁用排序  
                         "sDefaultContent" : "",  
+                        "sWidth" : "20%",
                          "render" : function(data, type, full, meta) {  
                             if(data=="" ||data == null ){                                  
                  				data = null;
@@ -619,7 +632,7 @@ $(function(){
                              return   data;  
                           }   
      				},
-     				{ 
+     				/* { 
      					"data": "teacher_name" ,
      				    "sDefaultContent":"" ,
      				    "orderable" : false, // 禁用排序                  
@@ -631,11 +644,12 @@ $(function(){
                              }  
                              return   data;  
                          }  
-     				},
+     				}, */
      				{ 
      					"data": "reply_date",  
      					"orderable" : false, // 禁用排序  
                         "sDefaultContent" : "",  
+                        "sWidth" : "20%",
                           "render" : function(data, type, full, meta) {  
                             if(data=="" ||data == null ){                                  
                  				data = null;
@@ -654,7 +668,7 @@ $(function(){
  	       //$("#example").next().remove();
 	       //$("#example").remove();
 	       $("#fatable").html(
-	              "<table id='example' class='display table-striped table-bordered table-hover table-condensed' cellspacing='0' width='100%'><thead><tr><th><input type='checkbox' class='checkall' /></th><th>视频名称</th><th>所属用户</th><th>评论留言</th><th>留言时间</th><th>是否回复</th><th>回复内容</th><th>回复教师</th><th>回复时间</th></tr></thead></table>"
+	              "<table id='example' class='display table-striped table-bordered table-hover table-condensed' cellspacing='0' width='100%'><thead><tr><th><input type='checkbox' class='checkall' /></th><th>视频名称</th><th>评论留言</th><th>留言时间</th><th>审核状态</th><th>是否回复</th><th>回复内容</th><th>回复时间</th></tr></thead></table>"
 	        );
 	     //全选
 			$(".checkall").click(function(){
@@ -728,7 +742,7 @@ $(function(){
                    //ajax请求数据
                    $.ajax({
                           type: "POST",
-                          url: url1+"videoServer/commentTab/queryCommentAll",
+                          url: "/videoServer/commentTab/queryCommentAll",
                           contentType: 'application/json; charset=UTF-8',
 			              cache: false,  //禁用缓存
                           data: JSON.stringify(param),  //传入组装的参数
@@ -853,7 +867,7 @@ $(function(){
 	         param.reply_date = new Date();      
 			$.ajax({
 	              type: "POST",
-	              url: url1+"videoServer/commentTab/updateComment",
+	              url: "/videoServer/commentTab/updateComment",
 	              contentType: 'application/json; charset=UTF-8',
 					   cache: false,  //禁用缓存
 	              data: JSON.stringify(param),  //传入组装的参数

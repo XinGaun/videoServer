@@ -29,53 +29,39 @@ public class VideoTabServiceImpl implements VideoTabService{
 	private String url = "http://www.niceyuwen.com:2020/videoffmpeg/transcoding/transcodingm3u8";
 	@Override
 	@Transactional
-	public String uploadVideo(String videoName,String imageName,String pptName,int video_form_id,String video_introduce,MultipartFile video,MultipartFile image,MultipartFile ppt,int video_qz,int teacher_id,long size,String videoTime) throws Exception {
+	public String uploadVideo(String videoName,String imageName,String pptName,int video_form_id,String video_introduce,MultipartFile video,MultipartFile image,MultipartFile ppt,int video_qz,int teacher_id,long size,String video_time) throws Exception {
 		HashMap<String,String> data = new HashMap<>();
-
+         System.out.println(1);
 		CommonsMultipartFile cf= (CommonsMultipartFile)video; //这个myfile是MultipartFile的
 		DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
 		File videoFile = fi.getStoreLocation(); 
-<<<<<<< HEAD
-		String ossVideoName =ossUpload.uploadJD(videoFile,video_name,size);
-=======
 		String ossVideoName =ossUpload.uploadJD(videoFile,videoName,size);
->>>>>>> zhengfei
 
 		CommonsMultipartFile cf2= (CommonsMultipartFile)image; //这个myfile是MultipartFile的
 		DiskFileItem fi2 = (DiskFileItem)cf2.getFileItem(); 
 		File imageFile = fi2.getStoreLocation(); 
 		String ossImageName = ossUpload.upload(imageFile,imageName);
-<<<<<<< HEAD
-=======
-	
+		
 		CommonsMultipartFile cf3= (CommonsMultipartFile)ppt; //这个myfile是MultipartFile的
 		DiskFileItem fi3 = (DiskFileItem)cf3.getFileItem(); 
 		File pptFile = fi3.getStoreLocation(); 
 		String osspptName = ossUpload.upload(pptFile,pptName);
 	
 		
->>>>>>> zhengfei
 		String viderUrl = ossUpload.getWebURL(ossVideoName);
 		String imageUrl = ossUpload.getWebURL(ossImageName);
 		String pptUrl = ossUpload.getWebURL(osspptName);
-		System.out.println(pptUrl);
 		
 		String path = "/oss/video/"+ossVideoName;
 		String fileName ="/oss/video/"+ossVideoName.substring(0, ossVideoName.lastIndexOf("."));
 		data.put("PATH",path);
 		data.put("fileName",fileName);
 		HttpReq.httpRequest(url, "POST", JSON.toJSONString(data));
-<<<<<<< HEAD
-
-		String savevideoPath = viderUrl.substring(0, viderUrl.lastIndexOf("."))+".m3u8";
-		System.out.println("video service"+path+"   "+fileName+"   "+savevideoPath);
-		createVideoTab(video_name,savevideoPath,imageUrl,video_introduce,video_form_id,teacher_id);
-=======
 		
 		String savevideoPath = viderUrl.substring(0, viderUrl.lastIndexOf("."))+".m3u8";
-		System.out.println("video service"+path+"   "+fileName+"   "+savevideoPath+"   "+pptUrl+"   "+videoTime);
-		createVideoTab(videoName,savevideoPath,imageUrl,pptUrl,video_introduce,video_form_id,teacher_id,video_qz,videoTime);
->>>>>>> zhengfei
+		System.out.println("video service"+path+"   "+fileName+"   "+savevideoPath+"   "+pptUrl+"   "+video_time);
+		createVideoTab(videoName,savevideoPath,imageUrl,pptUrl,video_introduce,video_form_id,teacher_id,video_qz,video_time);
+
 
 		return "succes";
 	}

@@ -41,7 +41,7 @@ public class VideoTabController {
 
 	@RequestMapping(value="/uploadflv.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void uploadflv(String videoName,String video_form_id,String video_introduce,MultipartFile video,MultipartFile image,MultipartFile ppt,String video_qz,String videoTime,HttpServletRequest request) throws Exception{		
+	public void uploadflv(String videoName,String video_form_id,String video_introduce,MultipartFile video,MultipartFile image,MultipartFile ppt,String video_qz,String video_time,HttpServletRequest request) throws Exception{		
 		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
 		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
 		String filePath = video.getOriginalFilename();
@@ -50,14 +50,15 @@ public class VideoTabController {
 		long size = video.getSize();
 		String ossFileName = videoName+filePath.substring(filePath.lastIndexOf("."));	
 		String imageName = videoName+imagePath.substring(imagePath.lastIndexOf("."));
-<<<<<<< HEAD
-		System.out.println(ossFileName+"   "+imageName);
-		vdservice.uploadVideo(ossFileName,imageName, video_introduce, video, image,Integer.parseInt(video_form_id), teacher_id,size);
-=======
 		String pptName = videoName+pptPath.substring(pptPath.lastIndexOf("."));
-		System.out.println(ossFileName+"   "+imageName+"   "+pptName);		
-		vdservice.uploadVideo(ossFileName,imageName,pptName,Integer.parseInt( video_form_id), video_introduce, video, image, ppt,Integer.parseInt(video_qz),teacher_id,size,videoTime);
->>>>>>> zhengfei
+		System.out.println(ossFileName+"   "+imageName+"   "+pptName+"  "+size+"   "+"   "+video_time);
+		try {
+			vdservice.uploadVideo(ossFileName,imageName,pptName,Integer.parseInt( video_form_id), video_introduce, video, image, ppt,Integer.parseInt(video_qz),teacher_id,size,video_time);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		
 
 	}
 

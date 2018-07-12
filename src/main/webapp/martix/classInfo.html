@@ -352,11 +352,7 @@
                         <div class="panel-body" style="overflow-x:scroll;height:330px;width:99%;">
                             <table id="tb" class='table table-bordered' style="width:1300px;">
 						    	<tr>
-<<<<<<< HEAD
-						    		<td>序号</td><td>课程名称</td><td>课程类型</td><td>课程介绍</td><td>课程视频</td><td>课程图片</td><td>课程价格</td><td>课程评分</td><td>点击次数</td>
-=======
 						    		<td>序号</td><td>课程名称</td><td>课程类型</td><td>课程介绍</td><td>课程视频</td><td>课程图片</td><td>课程价格</td><td>课程评分</td><td>点击次数</td><td>视频权重</td><td>修改</td><td>状态</td>
->>>>>>> zhengfei
 						    	</tr>
 						    </table>
                         </div>
@@ -402,19 +398,14 @@
 					<div style="height:50px;border:1px solid #CADEFD">
 					     <div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">课程价格：</div>
 						 <div style="width:440px;height:50px;float:left;line-height:50px;border: 1px solid #CADEFD;">
-<<<<<<< HEAD
-						   <input type="text" id="jiage"style="width:100%" placeholder="请输入课程价格，如99.99" onkeyup="checknum(this);"/>
-=======
+
 						   <input type="text" id="jiage"style="width:100%;height:50px;" placeholder="请输入课程价格，如99.99" onkeyup="checknum(this);"/>
->>>>>>> zhengfei
+
 						  </div>
 					</div>	
 					<div style="height:100px;border:1px solid #CADEFD">
 						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:100px;line-height:100px;">课程介绍：</div>
-<<<<<<< HEAD
-						<div style="width:440px;height:100px;float:left;border: 1px solid #CADEFD;">
-							<textarea  style="width:100%;height:100%;" id="courses_introduce"></textarea>
-=======
+
 						<div style="width:210px;height:100px;float:left;">
 							&nbsp;<textarea  style="width:200px;height:90px;margin-top:5px;" id="courses_introduce"></textarea>
 						</div>
@@ -424,7 +415,6 @@
 							<div style="margin-top:25px;margin-left:25px;">
 								<input type="button" style=" border-right:0px;" onClick="disNum(this)" value="-"><input type="text" value="0" id="courses_qz" style="width:30px;text-align:center" onkeyup="value=value.replace(/[^\d]/g,'1')"/><input type="button" value="+" style="border-left:0px;" onClick="incNum(this)">
 							</div>
->>>>>>> zhengfei
 						</div>
 					</div>
 				</div>
@@ -457,15 +447,11 @@
 			url : '/videoServer/coursesTab/getTabList.do',
 			success : function(data){
 				for(var i=0;i<data.length;i++){
-<<<<<<< HEAD
-					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td></td></tr>")
-=======
 					if(data[i].courses_status=='8'){
 						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td><td>"+data[i].courses_qz+"</td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td><td onclick='delet(this)'><input type='button' value='下线'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
 					}else if(data[i].courses_status=='9'){
 						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td><td>"+data[i].courses_qz+"</td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td><td onclick='delet(this)'><input type='button' value='上线'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
 					}
->>>>>>> zhengfei
 				}
 				$("#teacher_id").val(data[0].teacher_id);
 			},error: function(){
@@ -635,15 +621,11 @@
 			 	}else{
 			 		$("#tb  tr:not(:first)").html("");
 			 		for(var i=0;i<data.length;i++){
-<<<<<<< HEAD
-						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td></td></tr>")
-=======
 						if(data[i].courses_status=='8'){
 							$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_qz+"</td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td><td onclick='delet(this)'><input type='button' value='下线'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
 						}else if(data[i].courses_status=='9'){
 							$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_qz+"</td><td onclick='updat(this)'><input type='button' value='修改'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td><td onclick='delet(this)'><input type='button' value='上线'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
 						}
->>>>>>> zhengfei
 					}
 				}
 			},error: function(){

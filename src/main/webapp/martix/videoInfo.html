@@ -249,80 +249,6 @@
 					<li class="role" style="display: none;"><a href="test.html"><i
 							class="fa fa-edit"></i>题目管理</a></li>
 				</ul>
-<<<<<<< HEAD
-            </div>
-        </nav>
-        <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" >
-            <div id="page-inner">
-			 <div class="row">
-                 <div class="col-md-12">
-                     <h1 class="page-header">
-                         	语道 <small>视频管理</small>
-                     </h1>
-                 </div>
-             </div> 
-             <div class="row">
-            	<div class="col-md-12">
-	                <div class="panel panel-default">
-	                	<div class="table-responsive">
-							<table class="table"  class="display table-striped table-bordered table-hover table-condensed" cellspacing="0" width="100%">
-								<tr>
-									<td>
-										<div class="input-group" width="100%">
-											<span class="input-group-addon">视频名称</span>
-											<input type="text" class="form-control" placeholder="请输入视频名称" id="video_name1">
-										</div>
-									</td>
-									<td>
-										<div class="input-group" width="100%">
-											<span class="input-group-addon">视频类型</span>
-											<select  class="form-control" style="width:200px;text-align: center;" id="video_type">
-											   
-											</select>
-										</div>
-									</td>								
-								</tr>
-								<tr>
-									
-								</tr>
-								<tr>
-									<td>
-										<button type="button" class="btn btn-danger" id="removeorder" data-toggle="modal" data-target="#myModal">添加视频</button>
-									</td>
-									<td></td>
-									<td></td>
-									<td>
-										<div style="float:right">
-											<button type="button" class="btn btn-primary" id="queryorder">搜索</button>&nbsp;&nbsp; &nbsp;&nbsp;
-											<button type="button" class="btn btn-warning" id="eliminates">清空</button>
-										</div>
-									</td>
-								</tr>
-							</table>							
-						</div>
-	                </div>
-	            </div>
-	        </div>   
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Advanced Tables -->
-                    <div class="panel panel-default">
-                        
-                        <div class="panel-body" style="overflow-x:scroll;height:330px;width:99%;">
-                            <table id="tb" class='table table-bordered' style="width:1300px;">
-						    	<tr>
-						    		<!-- <td><input type="checkbox"/></td> --><td>序号</td><td style="width:100px;white-space:nowrap;">视频名称</td><td>视频介绍</td><td>视频类型</td><td>视频链接</td><td>视频评分</td><td>点击次数</td><td>上传时间</td>
-						    	</tr>
-						    </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <input type="hidden" id="teacher_id"/>
-    </div>
-=======
 			</div>
 		</nav>
 		<!-- /. NAV SIDE  -->
@@ -417,7 +343,6 @@
 			</div>
 			<input type="hidden" id="teacher_id" />
 		</div>
->>>>>>> zhengfei
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel">
@@ -433,13 +358,9 @@
 					<form action="/videoServer/videoTab/uploadflv1.do" method="post"
 						enctype="multipart/form-data" id="dataForm">
 						<div style="width: 100%;">
-							<div style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
+							<div
+								style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
-<<<<<<< HEAD
-								<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频标题：</div>
-								<div style="width: 200px; height: 50px; float: left; line-height: 50px;border: 1px solid #CADEFD; ">
-									<input type="text" style="width: 100%;height:100%;" name="videoName" id="videoName" > 
-=======
 								<div
 									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频标题：</div>
 								<div
@@ -454,26 +375,13 @@
 									<select style="width: 100%; text-align: center;" id="kctype">
 
 									</select>
->>>>>>> zhengfei
 								</div>
-								<div style="width: 100px;; background: #D9ECFF; float: left; text-align: right; height: 50px; line-height: 50px;">视频类型：</div>
-								<div style="width:130px;height:50px;float:left;border: 1px solid #CADEFD;">							           
-							           <select style="width:100%;text-align: center;" id="kctype">
-							           
-							           </select>
-						            </div>
-							    </div>
+							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
-<<<<<<< HEAD
-								<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">选择视频：</div>
-								<input type="file"  name="video" id="video" accept="video/*">
-=======
 								<div
 									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">选择视频：</div>
 								<input type="file" name="video" id="video" accept="video/*">
-								 <video style="display:none;" controls="controls" id="videoTime" oncanplaythrough="myFunction(this)"></video>
-								 <input type="text" id="getDuration" style="display:none;">
->>>>>>> zhengfei
+								 <video style="display:none;" controls="controls" oncanplaythrough="myFunction(this)" id="videoTime" ></video>								
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
@@ -501,16 +409,6 @@
 								</div>
 							</div>
 							<div style="height: 100px; border: 1px solid #CADEFD">
-<<<<<<< HEAD
-								<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 100px; line-height: 100px;">视频介绍：</div>
-								<div style="width: 440px; height: 100px; float: left;border: 1px solid #CADEFD;">								
-									<textarea style="width: 100%;height: 100%;"
-									name="video_introduce"	id="video_introduce"></textarea>								
-									<input type="hidden" name="video_introduce">
-								</div>
-							</div>
-					
-=======
 								<div
 									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 100px; line-height: 100px;">视频介绍：</div>
 								<div
@@ -521,7 +419,6 @@
 								</div>
 							</div>
 
->>>>>>> zhengfei
 						</div>
 					</form>
 					<div class="modal-footer">
@@ -554,11 +451,7 @@ $(function(){
 		url : '/videoServer/videoTab/getVideoTabs.do',
 		success : function(data){
 			for(var i=0;i<data.length;i++){
-<<<<<<< HEAD
-				$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td></tr>")
-=======
 				$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_ppt+"</td><td>"+data[i].video_qz+"</td><td>"+data[i].video_time+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td onclick='updat(this)'><input type='button' value='视频修改'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td></tr>")
->>>>>>> zhengfei
 			}
 			$("#teacher_id").val(data[0].teacher_id);
 		},error: function(){
@@ -624,22 +517,22 @@ function getId(obj){
 	var progress = document.getElementById("jd");
 	//创建socket连接	
 	var socket= io.connect('http://127.0.0.1:8099');
-			//连接成功后会监听到
+	//连接成功后会监听到
 	socket.on('connect',function() {
 	     output('<span>连接成功</span>');
 	});
 		    
-			socket.on('connecting',function() {
-		        output('<span>正在连接...</span>');
-		    });
+	socket.on('connecting',function() {
+		  output('<span>正在连接...</span>');
+	});
 		    
-		    socket.on('disconnect',function() {
-		        output('<span>断开连接! </span>');
-		    });
+	socket.on('disconnect',function() {
+		 output('<span>断开连接! </span>');
+	 });
 		    
-		    socket.on('reconnecting',function() {
-		        output('<span>正在重连...</span>');
-		    });
+    socket.on('reconnecting',function() {
+		 output('<span>正在重连...</span>');
+    });
 		    
 	socket.on('reconnect',function() {
 		  output('<span>成功重连！</span>');
@@ -691,36 +584,49 @@ function getId(obj){
  	   $("#videoName").val(""); 
  	   $("#video_introduce").val("");		
     }); 
+    var videoTime ;
+    $('#video').change(function(){
+    	$("#sub").attr('disabled',true);
+    	 var video = $('#video').prop("files")[0];	 
+    	 var url = URL.createObjectURL(video);  
+		 document.getElementById("videoTime").src = url;  		
+	 }); 
     
-	$("#sub").click(function(){	
-		
+	function myFunction(ele) {
+		var hour = parseInt((ele.duration)/3600);
+		var minute = parseInt((ele.duration%3600)/60);
+		var second = Math.ceil(ele.duration%60);
+		videoTime ="视频时长："+hour+"小时，"+minute+"分，"+second+"秒";
+		$("#sub").attr('disabled',false);
+	}  ;
+   
+    $("#sub").click(function(){
+	    //表单参数
+	    var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
 		//表单参数
 		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
 		 var videoName = $.trim($('#videoName').val());  
 		 var video_introduce =$.trim($("#video_introduce").val());
 		 var video_form_id = $.trim($("#kctype").val());
-		 var video = $('#video').prop("files")[0];		 
-		 var url = URL.createObjectURL(video);  	
-		 document.getElementById("videoTime").src = url;  
+		 var video = $('#video').prop("files")[0];	    
+		 var video_time= videoTime;
 		 var image = $('#image').prop("files")[0];
 		 var ppt = $('#ppt').prop("files")[0];
 		 var video_qz = $.trim($("#video_qz").val());	
-	     var videoTime = $.trim($("#getDuration").val());
+	     alert(video_time);
 		 formData.append("videoName",videoName);  
 		 formData.append("video", video);  
 		 formData.append("image", image);
 		 formData.append("video_introduce", video_introduce);
 		 formData.append("video_form_id", video_form_id);
-		 formData.append("ppt", ppt);
-		 formData.append("videoTime", videoTime);
+		 formData.append("ppt", ppt);	
 		 formData.append("video_qz", video_qz);
+		 formData.append("video_time", video_time);
 		//阻止默认事件
-		 event.preventDefault();
-		
+		  event.preventDefault();	
 			var t = setInterval(function(){
 	 	 		 //下面的testMessage是自定义的。
-	 	 		 socket.emit('fileUpload',videoName,function(){	 
-				    	output('<span> emit' +data+ '</span>');				    	
+	 	 		 socket.emit('fileUpload',videoName,function(){	 	    	
 				    }); 
 			}, 500);
 	 		 //这里是监听服务端返回的testMessage事件
@@ -730,9 +636,8 @@ function getId(obj){
 	 			 } else{
 	 				clearInterval(t);
 	 				output(data);				
-	 			 }
-		    	 
-		    });   
+	 			 }		    	 
+		      });   
  	
 			//上传文件		
 			$.ajax({
@@ -750,20 +655,12 @@ function getId(obj){
 					 alert("submit error");
 				}				
 			});	 
-			return false;		
-	});
+			return false;	
+      });
+    	 
 	
-<<<<<<< HEAD
-=======
-	function myFunction(ele) {
-		var hour = parseInt((ele.duration)/3600);
-		var minute = parseInt((ele.duration%3600)/60);
-		var second = Math.ceil(ele.duration%60);
-		alert("这段视频的时长为："+hour+"小时，"+minute+"分，"+second+"秒");
-		$("#getDuration").val("视频时长："+hour+"小时，"+minute+"分，"+second+"秒");		
-	} ;
 	
->>>>>>> zhengfei
+	
 	$("#queryorder").click(function(){
 		$.ajax({
 			type : 'post',
@@ -775,11 +672,7 @@ function getId(obj){
 			 	}else{
 			 		$("#tb  tr:not(:first)").html("");
 			 		for(var i=0;i<data.length;i++){
-<<<<<<< HEAD
-						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td></tr>")
-=======
 						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_ppt+"</td><td>"+data[i].video_qz+"</td><td>"+data[i].video_time+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td onclick='updat(this)'><input type='button' value='视频修改'><input type='hidden' id='a' value='"+data[i].video_id+"'/></td></tr>")
->>>>>>> zhengfei
 					}
 				}
 			},error: function(){
@@ -809,8 +702,6 @@ function getId(obj){
 			}
 		})
 	}
-<<<<<<< HEAD
-=======
 </script>
 	<script>
 function updat(obj){
@@ -831,7 +722,6 @@ function updat(obj){
 	function incNum(dom){
 		dom.previousSibling.value ++;
 	}
->>>>>>> zhengfei
 </script>
 	<script src="assets/js/custom-scripts.js"></script>
 </body>

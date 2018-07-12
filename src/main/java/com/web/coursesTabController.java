@@ -82,19 +82,11 @@ public class coursesTabController {
 	}
 	@RequestMapping(value="/addCoursesTab.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-<<<<<<< HEAD
-	public void addCoursesTab(HttpServletRequest request,String courses_name,int courses_video_form_id,String courses_introduce,String courses_pricemoney,String courses_video,MultipartFile image) throws Exception{
-		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
-		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
-		System.out.println(image.getOriginalFilename());
-		ctService.addCoursesTab(courses_name,courses_video_form_id,courses_introduce,courses_pricemoney,courses_video, image,teacher_id);
-=======
 	public void addCoursesTab(HttpServletRequest request,String courses_name,int courses_video_form_id,String courses_introduce,String courses_pricemoney,String courses_video,MultipartFile image,String courses_qz) throws Exception{
 		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
 		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
 		System.out.println(image.getOriginalFilename());
 		ctService.addCoursesTab(courses_name,courses_video_form_id,courses_introduce,courses_pricemoney,courses_video, image,teacher_id,Integer.parseInt(courses_qz));
->>>>>>> zhengfei
 	}
 	@RequestMapping(value="/delCoursesById.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
