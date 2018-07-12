@@ -14,4 +14,5 @@ public interface coursesTabDao {
 	public void delCoursesById(int id);
 	public void upCoursesById(coursesTab c);
 	public List<coursesTab> getTabListById(int id);
+	public void updateCoursesById(int id);
 }
