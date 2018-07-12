@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.CourseDetailsDao">
+	<!-- 查询课程详情 -->
+	<select id="queryCourseDetails" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		SELECT 
+		courses_id,t.teacher_id,courses_name,courses_introduce,courses_video,courses_pricemoney,
+		courses_click,courses_img_url,courses_grade,courses_date,courses_status,c.video_form_id,
+		teacher_name,teacher_introduce,teacher_imgurl,video_form_name,video_form_class,s.video_id 
+		FROM courses_tab c LEFT JOIN teacher_tab t ON c.teacher_id=t.teacher_id 
+		LEFT JOIN subscription_tab s ON c.courses_id = s.video_id 
+		LEFT JOIN video_form_tab v ON v.video_form_id=c.video_form_id 
+		WHERE 1=1 AND c.courses_status = 5 AND c.courses_id = #{cid}
+	</select>
+	<!-- 查询视频详情 -->
+	<select id="queryVideoDetails" parameterType="int" resultType="java.util.HashMap">
+		SELECT video_id,video_name,video_url FROM video_tab WHERE video_id = #{video_id}
+	</select>
+	<select id="queryRecommendCourse" resultType="java.util.HashMap">
+		SELECT 
+		teacher_name,courses_id,teacher_tab.teacher_id,courses_name,courses_introduce,courses_pricemoney,courses_click,courses_img_url,courses_grade,date_format(courses_date,'%Y-%m-%d')courses_date 
+		FROM courses_tab 
+		LEFT JOIN teacher_tab ON teacher_tab.teacher_id=courses_tab.teacher_id 
+		WHERE 1=1 AND courses_status = 5 order by courses_date DESC LIMIT 0,3
+	</select>
+	<!-- 查询学员评论 -->
+	<select id="queryStudentComments" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select u.user_id,u.user_name, c.comment_text, date_format(comment_date,'%Y-%m-%d %h:%i:%s')comment_date, c.reply_text, date_format(reply_date,'%Y-%m-%d %h:%i:%s')reply_date,v.video_name,u.user_photo,t.teacher_name 
+		from comment_tab c 
+		LEFT JOIN user_tab u ON c.user_id = u.user_id 
+		LEFT JOIN video_tab v ON v.video_id = c.video_id 
+		LEFT JOIN teacher_tab t ON t.teacher_id = c.reply_teacher 
+		LEFT JOIN courses_tab co ON co.teacher_id = t.teacher_id 
+		WHERE  1=1 AND co.courses_status = 5 
+		<if test="cid!=''">
+			AND co.courses_id =#{cid}
+		</if>
+	</select>
+	<!-- 查询评论总数 -->
+	<select id="queryStudentCommentsAllCount" parameterType="java.util.HashMap" resultType="int">
+		select count(u.user_id) 
+		from comment_tab c 
+		LEFT JOIN user_tab u ON c.user_id = u.user_id 
+		LEFT JOIN video_tab v ON v.video_id = c.video_id 
+		LEFT JOIN teacher_tab t ON t.teacher_id = c.reply_teacher 
+		LEFT JOIN courses_tab co ON co.teacher_id = t.teacher_id 
+		WHERE  1=1 AND co.courses_status = 5 
+		<if test="cid!=''">
+			AND co.courses_id = #{cid}
+		</if>
+	</select>
+	<!-- 插入到收藏表 -->
+	<insert id="addCollection" parameterType="java.util.HashMap">
+		INSERT INTO subscription_tab(user_id,video_id,subscription_date) VALUES ((select user_id from user_tab where user_phone=#{userphone}),#{cid},now())
+	</insert>
+</mapper>
