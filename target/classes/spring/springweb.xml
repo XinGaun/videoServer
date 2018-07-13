@@ -29,10 +29,18 @@
 	 	<property name="prefix" value="/" />
 	 	<property name="suffix" value=".html" />
 	 </bean>
+	 
+	 <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+	 
+	 
 	 <!-- 配置文件上传 -->
 	 <bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">	
-		<property name="maxUploadSize" value="5368709120" />		
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<property name="maxUploadSize" value="5368709120" />	
 		<property name="defaultEncoding" value="UTF-8" />
 		<property name="resolveLazily" value="true" />
 	</bean>
