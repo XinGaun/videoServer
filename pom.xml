@@ -274,13 +274,7 @@
 			<groupId>com.corundumstudio.socketio</groupId>
 			<artifactId>netty-socketio</artifactId>
 			<version>1.7.12</version>
-		</dependency>
-		<!-- 视频时长  -->
-		<dependency>
-			<groupId>org.javers</groupId>
-			<artifactId>javers-core</artifactId>
-			<version>1.0.2</version>
-		</dependency>
+		</dependency>		
 	</dependencies>
 	<build>
 		<resources>

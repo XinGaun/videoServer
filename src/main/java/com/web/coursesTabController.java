@@ -102,16 +102,9 @@ public class coursesTabController {
 	
 	@RequestMapping(value="/upCoursesById.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void upCoursesById(int courses_id,String courses_name,String courses_introduce,String courses_pricemoney,String courses_video,String courses_img_url/*,int video_qz*/){
-		coursesTab c=new coursesTab();
-		c.setCourses_name(courses_name);
-		c.setCourses_introduce(courses_introduce);
-		c.setCourses_video(courses_video);
-		c.setCourses_img_url(courses_img_url);
-		c.setCourses_pricemoney(courses_pricemoney);
-		c.setCourses_id(courses_id);
-		//c.setCourses_qz(courses_qz);
-		ctService.upCoursesById(c);
+	public void upCoursesById(int courses_id,String courses_name,int courses_video_form_id,String courses_introduce,String courses_pricemoney,String courses_video,MultipartFile image,String courses_qz,HttpServletRequest request)  throws Exception{
+		System.out.println("controller");
+		ctService.upCoursesById( courses_id, courses_name, courses_video_form_id, courses_introduce, courses_pricemoney, courses_video, image,Integer.parseInt(courses_qz));
 	}
 	@RequestMapping(value="/updateCoursesById.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody

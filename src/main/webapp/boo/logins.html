@@ -94,7 +94,7 @@
 	  margin: 1.5vh 0vw;
 	  border:1px solid #888;
       border-radius:4px;
-      padding:5px 55px;
+      padding:5px 70px 5px 40px;
 	}
 	/*登录模态框中输入框的设置-添加小图标*/
 	input[name=uname]{
@@ -122,7 +122,7 @@
       	height:5vh;
       	border:0px;
       	color:#FFFFFF;
-      	margin:4vh 0vw 1.2vh;
+      	margin:3vh 0vw 1.2vh;
 	}
 	/* 设置输入框里的字体大小，浏览器兼容不一样，每个都要设置 */
 	input::-webkit-input-placeholder { /* WebKit browsers */ 
@@ -317,6 +317,9 @@
 			        <label>
 			        	<input type="password" id="pwd" placeholder="密码" style="width:100%">
 			        </label>
+			        <input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" style="width:50%;padding:5px 27px;display:none;">
+			        <input type="button" value="获取验证码" id="hmac" style="margin-right:1.3vw;width:35%;height:30px;display:none;float:right;font-size:1.5vh;">
+			        
 			        <br/>
 			        <span><input type="checkbox">记住密码</span>
 			  		<a href="resetpwd.html" style="float:right;margin-right:1vw;" id="mi">忘记密码？</a>
@@ -325,7 +328,11 @@
 						<button type="button" id="denglu">登录</button>
 					</label>
 				</div>
-				 	
+				<div>
+					<span>
+						<span id="malogindiv">还没有密码？试试&nbsp</span><a id="malogin">验证码登录</a>
+					</span>
+				</div>	
 		    </form>
 		</div>
 	</div>
@@ -362,57 +369,209 @@
 <script>
 //var url="http:127.0.0.1:8080/";
 	var url="";
+	var code="";
 	$("#denglu").click(function(){
 		var uname=$('#uname').val();
 		pwd=$("#pwd").val();
-		if(uname == ""){
-	    	  
-	    	$("#uname").attr('placeholder','请输入手机号');
+		var vcode = $('#vcode').val();
+		if($("#malogin").html()=="验证码登录"){
+			//密码登录页面
+			if(uname == ""){   	  
+		    	$("#uname").attr('placeholder','请输入手机号');
+				$("#uname").css('color','red'); 
+				$("#uname").focus(function(){
+					$("#uname").css('color','black');
+				});
+		        return false;  
+		    }
+			if(pwd == ""){
+				$("#pwd").attr('placeholder','请输入密码');
+				$("#pwd").css('color','red'); 
+				$("#pwd").focus(function(){
+					$("#pwd").css('color','black');
+				});
+		        return false;  
+		    }
+			if(typeof(uname)!="undefined"&&typeof(pwd)!="undefined"){
+				
+				$.ajax({
+		        	type:"POST",
+		        	url:url+"/videoServer/front/User/queryuser",
+		        	contentType:'application/json;charset=UTF-8',
+		        	data:JSON.stringify({user_phone:uname}),		        	
+		        	dataType:"json",
+		         	async : false,
+		        	success:function(data){	        	
+		        		if(data.length==1){	  
+		        			initss();
+		     	
+		        		}else{ 
+		        			alert("该号码未注册，请先注册！");
+		         		} 
+		        	},
+		        	error:function(){
+		        		
+		        	}
+		        });    
+			} 
+		}else if($("#malogin").html()=="密码登录"){
+			//验证码登录页面
+			if(uname == ""){   	  
+		    	$("#uname").attr('placeholder','请输入手机号');
+				$("#uname").css('color','red'); 
+				$("#uname").focus(function(){
+					$("#uname").css('color','black');
+				});
+		        return false;  
+		    }
+			if(vcode == ""){  
+		    	  
+		    	$("#vcode").attr('placeholder','请输入验证码');
+				$("#vcode").css('color','red'); 
+				$("#vcode").focus(function(){
+					$("#vcode").css('color','black');
+				});
+		        return false;  
+		    } 
+		    if(vcode!=code){
+		    	$("#vcode").attr('placeholder','验证码错误！');
+				$("#vcode").css('color','red'); 
+				$("#vcode").focus(function(){
+					$("#vcode").css('color','black');
+				});
+		        return false; 
+		    }    
+			if(typeof(uname)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code){
+				
+				$.ajax({
+		        	type:"POST",
+		        	url:url+"/videoServer/front/User/queryuser",
+		        	contentType:'application/json;charset=UTF-8',
+		        	data:JSON.stringify({user_phone:uname}),		        	
+		        	dataType:"json",
+		         	async : false,
+		        	success:function(data){	        	
+		        		if(data.length==1){	  
+		        			var expiresDate= new Date();
+			    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
+			    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
+			    			$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
+			        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
+			    			isfirst(data[0].user_phone);
+		     	
+		        		}else{ 
+		        			alert("该号码未注册，请先注册！");
+		         		} 
+		        	},
+		        	error:function(){
+		        		
+		        	}
+		        });    
+			} 
+		}
+		
+		
+	})
+	$("#malogin").click(function(){
+		if($("#malogin").html()=="验证码登录"){
+			$("#hmac").css({"display":"inline-block"});
+			$("#vcode").css({"display":"inline-block"});
+			$("#pwd").css({"display":"none"});
+			$("#malogindiv").html("已有密码？试试&nbsp");
+			$("#malogin").html("密码登录");
+		}else if($("#malogin").html()=="密码登录"){
+			$("#hmac").css({"display":"none"});
+			$("#vcode").css({"display":"none"});
+			$("#pwd").css({"display":"block"});
+			$("#malogindiv").html("还没有密码？试试&nbsp");
+			$("#malogin").html("验证码登录");
+		}
+	})
+	//获取验证码
+	$('#hmac').click(function(){  
+		
+		var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+		//	    获取输入框内容
+		var phonenumber = $("#uname").val();
+		var phoneflag=1;//标记手机号是正确的
+		//alert(phonenumber);
+		if (!myreg.test(phonenumber)){
+			$("#uname").attr('placeholder','请输入正确的手机号');
 			$("#uname").css('color','red'); 
 			$("#uname").focus(function(){
 				$("#uname").css('color','black');
 			});
-	        return false;  
-	    }
-		if(pwd == ""){
-			$("#pwd").attr('placeholder','请输入密码');
-			$("#pwd").css('color','red'); 
-			$("#pwd").focus(function(){
-				$("#pwd").css('color','black');
-			});
-	        return false;  
-	    }
-		if(typeof(uname)!="undefined"&&typeof(pwd)!="undefined"){
-			
-			$.ajax({
-	        	type:"POST",
-	        	url:url+"/videoServer/front/User/queryuser",
-	        	contentType:'application/json;charset=UTF-8',
-	        	data:JSON.stringify({user_phone:uname}),		        	
-	        	dataType:"json",
-	         	async : false,
-	        	success:function(data){
-	        		console.log(data);
-	        		if(data.length==1){	        			
-	        			initss();
-	        			
-	        		}else{ 
-	        			alert("该号码未注册，请先注册！");
-	        			
-	         		} 
-	        	},
-	        	error:function(){
-	        		
-	        	}
-	        });    
-		} 
+			return phoneflag=0; 
+		}
+	         var codeflag = 60;//点击时间间隔60s
+	         
+	        if(phoneflag == 1&&codeflag==60){  
+	            var timeflag = setInterval(function(){  
+	                codeflag--;  
+	
+	                if(codeflag>0){ 
+	                	
+	                    $('#hmac').val('重新发送'+codeflag+'s');  
+	                    $('#hmac').css({'color':'#99897A'});  
+	                    $('#hmac').attr('disabled','disabled');  
+	                }else{  
+	                    codeflag=60;  
+	                    $('#hmac').val('获取验证码');  
+	                    $('#hmac').css({'color':'black'});  
+	                    $('#hmac').removeAttr('disabled');  
+	                    clearInterval(timeflag);  
+	            	}  
+	        	},1000);  
+	            
+	            	//随机生成六位验证码
+		            //var code="";
+		        	for(var i=0;i<6;i++){
+		        		  code+=Math.floor(Math.random()*10);
+		        	}
+		        	//alert(code);
+	           var str={
+	        	   	phone:phonenumber,
+	        		code:code,//随机验证码
+	        		TemplateCode:"SMS_135036257"//模板信息
+	           }
+	           //alert("str"+JSON.stringify(str));
+		       /*  $.ajax({
+		        	type:"POST",
+		        	url:url+"/videoServer/front/User/queryuser",
+		        	contentType:'application/json;charset=UTF-8',
+		        	data:JSON.stringify({user_phone:phonenumber}),
+		        	dataType:"json",
+		        	success:function(data){
+		        		
+		        		if(data.length==1){
+		        			alert("该号码已注册，请直接登录");
+		        		}else{ */
+		        			$.ajax({
+		        	        	type:"POST",
+		        	        	url:url+"/videoServer/front/AliBigFish/verificationCode",
+		        	        	contentType:'application/json;charset=UTF-8',
+		        	        	data:JSON.stringify(str),     	
+		        	        	//data:str,
+		        	        	dataType:"json",
+		        	        	success:function(data){
+		        	        		//alert("验证码已发送，请注意查收！");
+		        	        		
+		        	        	},
+		        	        	error:function(){
+		        	        		
+		        	        	}
+		        	        });
+		        	/* 	}
+		        	}
+		        });        */
+	        }
 	})
 	function initss(){
 			var UserTab={
 		    		"user_phone":$('#uname').val(),    	        		
 	        		"user_pwd":pwd,	        	        		
 		    } 
-			console.log(UserTab);
+			
 			$.ajax({
 	    	type:"POST",
 	    	url:url+"/videoServer/front/User/selectuser",
@@ -428,14 +587,10 @@
 	    		}else{
 	    			var expiresDate= new Date();
 	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
-	    			//alert(expiresDate);
-	    			
 	    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
-	        		//alert(data[0].user_id);
 	    			$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
 	        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
 	    			isfirst(data[0].user_phone);
-	    			
 	    		}
 	    	
 	    	},
@@ -445,7 +600,6 @@
 	    }); 
 	}
 	function isfirst(phone){
-		//alert(7);
 		$.ajax({
 	        	type:"POST",
 	        	url:url+"/videoServer/front/User/isfirst",
@@ -454,7 +608,6 @@
 	        	dataType:"json",
 	         	async : false,
 	        	success:function(data){
-	        		console.log(data);
 	        		
 	        		if(data.length==1){	 
 	        			//答过题的状态

@@ -285,7 +285,7 @@ function initVideo(video_arr){
 		success : function(result) {
 			//console.log(result);
 			for(var i=0;i<result.length;i++){
-				var videos = '<li>'
+				var videos = '<li class="list-group-item">'
 
 					+	'<div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
 					+	'<a href="javascript:void(0)" onclick="videourl(&quot;'+result[i].video_url+'&quot;,'+result[i].video_id+')")">'+result[i].video_name+'</a>'

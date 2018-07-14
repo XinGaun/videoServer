@@ -10,34 +10,50 @@
 		<form action="/videoServer/videoTab/uploadflv1.do" method="post">
 			<div style="margin:0 auto;width:600px;border:1px solid blue">
 				<div style="height:30px;background:#D9ECFF;border:1px solid #CADEFD"></div>
-				<div style="height:50px;border:1px solid #CADEFD">
-					<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">套餐标题：</div>
-					<div style="width:200px;height:50px;float:left;line-height:50px;border:1px solid #CADEFD;">
-						&nbsp;<input type="text" id="video_name"/>
-					</div>
-					<div style="width:100px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">套餐价格：</div>
-					<div style="width:100px;height:50px;float:left;line-height:50px;">
-						&nbsp;<input style="width:80px;"type="text" id="combo_price"/>
-					</div>
-				</div>
+				<div style="height:50px;">
+						<div style="width:150px;background:#D9ECFF;float:left;border: 1px solid #CADEFD; text-align:right;height:50px;">课程名称：</div>
+						<div style="width:200px;height:50px;float:left;line-height:50px;border:1px solid #CADEFD;">
+						   <input type="text" style="width:100%;height:100%;" id="name"/></div>
+						<div style="width:100px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">课程类型：</div>
+						<div style="width:130px;height:50px;float:left;border: 1px solid #CADEFD;" >							           
+							    <select style="text-align: center;"id="kctype"></select>
+						 </div>   
+			   </div>
 				<div style="height:200px;border:1px solid #CADEFD">
-					<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:200px;line-height:50px;">选择套餐：</div>
-					<div style="width:440px;height:200px;float:left;overflow:scroll;">
-						<table id="courses_video" class='table table-bordered'></table>
+						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:200px;line-height:200px;">选择视频：</div>
+						<div style="width:440px;height:200px;float:left;overflow:scroll;border: 1px solid #CADEFD;">
+							<!-- <select id="courses_video"><option>请选择视频</option></select> -->
+							<table id="courses_video" class='table table-bordered'></table>
+						</div>
 					</div>
-				</div>
-				<div style="height:50px;border:1px solid #CADEFD">
-					<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">套餐封面：</div>
-					<div style="width:440px;height:50px;float:left;line-height:50px;">
-						&nbsp;<input type="file" id="video_img_url"><input type="hidden" name="video_img_url">
+					<div style="height:50px;border:1px solid #CADEFD">
+						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">课程图片：</div>
+						<div style="width:440px;height:50px;float:left;border: 1px solid #CADEFD;">
+							&nbsp;<input type="file" id="courses_image">
+						</div>
 					</div>
-				</div>
-				<div style="height:100px;border:1px solid #CADEFD">
-					<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:100px;line-height:100px;">套餐介绍：</div>
-					<div style="width:440px;height:100px;float:left;">
-						&nbsp;<textarea  style="width:250px;margin-top:25px;height:50px;" id="video_introduce"></textarea><input type="hidden" name="video_introduce">
+					<div style="height:50px;border:1px solid #CADEFD">
+					     <div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;">课程价格：</div>
+						 <div style="width:440px;height:50px;float:left;line-height:50px;border: 1px solid #CADEFD;">
+
+						   <input type="text" id="jiage"style="width:100%;height:50px;" placeholder="请输入课程价格，如99.99" onkeyup="checknum(this);"/>
+
+						  </div>
+					</div>	
+					<div style="height:100px;border:1px solid #CADEFD">
+						<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:100px;line-height:100px;">课程介绍：</div>
+
+						<div style="width:210px;height:100px;float:left;">
+							&nbsp;<textarea  style="width:200px;height:90px;margin-top:5px;" id="courses_introduce"></textarea>
+						</div>
+						<div style="width:80px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:100px;line-height:100px;">排序权重：</div>
+						<div style="width:140px;height:100px;float:left;">
+							&nbsp;
+							<div style="margin-top:25px;margin-left:25px;">
+								<input type="button" style=" border-right:0px;" onClick="disNum(this)" value="-"><input type="text" value="0" id="courses_qz" style="width:30px;text-align:center" onkeyup="value=value.replace(/[^\d]/g,'1')"/><input type="button" value="+" style="border-left:0px;" onClick="incNum(this)">
+							</div>
+						</div>
 					</div>
-				</div>
 				<div style="height:50px;border:1px solid #CADEFD">
 					<div style="width:150px;background:#D9ECFF;float:left;border:1px solid #CADEFD;text-align:right;height:50px;line-height:50px;"></div>
 					<div style="width:440px;height:50px;float:left;line-height:50px;">
@@ -50,6 +66,7 @@
 </body>
 <script>
 	$(function(){
+		  getVideoForm();
 		var url = location.search;
 		var args = url.split("?");
 		var d=args[1].substring(3);
@@ -57,9 +74,9 @@
 			type : 'post',
 	       	url : '/videoServer/coursesTab/getTabListById.do?id='+d,
 	       	success : function(data){
-	       		$("#video_name").val(data[0].courses_name);
-	       		$("#combo_price").val(data[0].courses_pricemoney);
-	       		$("#video_introduce").val(data[0].courses_introduce);
+	       		$("#name").val(data[0].courses_name);
+	       		$("#jiage").val(data[0].courses_pricemoney);
+	       		$("#courses_introduce").val(data[0].courses_introduce);
 	       	}
 		})
 		$.ajax({
@@ -71,7 +88,8 @@
 			    }
 			}
 		})
-	})
+	});
+
 	function updat(obj){
 		var url = location.search;
 		var args = url.split("?");
@@ -82,15 +100,96 @@
                  str +=$(this).val()+",";    
              }    
          });
+		//表单参数
+		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
+		 var courses_name = $.trim($("#name").val());  
+		 var courses_video_form_id = $.trim($("#kctype").val());		
+		 var image = $('#courses_image').prop("files")[0];
+		 var courses_pricemoney =$.trim($("#jiage").val());
+		 var courses_introduce = $.trim($("#courses_introduce").val());
+		 var courses_video = str.substring(0,str.length-1);
+		 var courses_qz = $.trim($("#courses_qz").val());	
+		 formData.append("courses_name",courses_name);  
+		 formData.append("courses_video_form_id", courses_video_form_id); 
+		 formData.append("image", image);
+		 formData.append("courses_pricemoney", courses_pricemoney); 
+		 formData.append("courses_introduce", courses_introduce);
+		 formData.append("courses_video", courses_video);
+		 formData.append("courses_qz", courses_qz);
+		
 		$.ajax({
 	       	type : 'post',
+	    	data : formData,	
+			contentType: false, 
+	        processData: false, 
 	       	url : '/videoServer/coursesTab/upCoursesById.do?courses_id='+d,
-	       	data : {courses_name:$("#video_name").val(),courses_video:str,courses_img_url:$("#video_img_url").val(),courses_introduce:$("#video_introduce").val(),courses_pricemoney:$("#combo_price").val()},
 	       	success : function(data){
 	       		alert("修改成功！")
 	       		window.location.href="classInfo.html";
 	       	}
 	    })
+	};
+	//拉取视频
+	function getVideoTabs(video_form_id){
+		$.ajax({
+			type : 'post',
+			data : {video_form_id:video_form_id},
+			url : '/videoServer/videoTab/selVideobyVideoForm.do',
+			success : function(meg){
+				$("#courses_video").empty(); 
+				for (var i = 0; i < meg.length; i++) {
+			    	//$("#courses_video").append("<option>["+meg[i].video_id+"]" + meg[i].video_name + "</option>");
+			    	$("#courses_video").append("<tr><td><input type='checkbox' name='videoId' value="+meg[i].video_id+">"+ meg[i].video_name + "</td></tr>");
+			    }
+			}
+		})
 	}
+	//输入金额
+	function checknum(obj)
+   {   
+     if(/^\d+\.?\d{0,2}$/.test(obj.value)){
+        obj.value = obj.value;
+     }else{
+        obj.value = obj.value.substring(0,obj.value.length-1);
+     }     
+   }
+	//拉取视频
+	function getVideoTabs(video_form_id){
+		$.ajax({
+			type : 'post',
+			data : {video_form_id:video_form_id},
+			url : '/videoServer/videoTab/selVideobyVideoForm.do',
+			success : function(meg){
+				$("#courses_video").empty(); 
+				for (var i = 0; i < meg.length; i++) {
+			    	//$("#courses_video").append("<option>["+meg[i].video_id+"]" + meg[i].video_name + "</option>");
+			    	$("#courses_video").append("<tr><td><input type='checkbox' name='videoId' value="+meg[i].video_id+">"+ meg[i].video_name + "</td></tr>");
+			    }
+			}
+		})
+	}
+	//拉取课程类型
+	function getVideoForm(){
+		$.ajax({
+			type: "POST",
+			url : '/videoServer/videoFormTab/getVideoList.do',
+			cache: false,  //禁用缓存
+            dataType: "json",
+			success : function(data){
+				$("#kctype").empty(); 
+				$("#video_form_name").empty(); 
+				for (var i = 0; i < data.length; i++) {			    	
+			    	$("#kctype").append("<option value="+data[i].video_form_id+">"+data[i].video_form_class+data[i].video_form_name+"</option>");
+			    	$("#video_form_name").append("<option value="+data[i].video_form_id+">"+data[i].video_form_class+data[i].video_form_name+"</option>");
+				}
+			},error: function(){
+				alert("VideoForm error"); 
+			}
+		});
+	}
+	 $("select#kctype").change(function(){
+	    var video_form_id = $(this).val();
+	    getVideoTabs(video_form_id);
+	 }); 
 </script>
 </html>

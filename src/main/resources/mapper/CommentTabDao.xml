@@ -42,7 +42,7 @@
 	<select id="queryCommentTab" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
 		SELECT c.comment_id, v.video_name ,u.user_name ,c.comment_text,
-		c.comment_date,c.reply_text,t.teacher_name,c.reply_date FROM
+		c.comment_date,c.reply_text,t.teacher_name,c.reply_date,c.comment_status FROM
 		comment_tab c LEFT JOIN video_tab v ON c.video_id = v.video_id
 		LEFT
 		JOIN user_tab u ON c.user_id = u.user_id LEFT JOIN teacher_tab t ON
@@ -132,6 +132,9 @@
 			</if>
 			<if test="reply_teacher != null">
 				reply_teacher = #{reply_teacher} ,
+			</if>
+			<if test="comment_status != null">
+				comment_status = #{comment_status} ,
 			</if>
 			<if test="reply_date != null">
 				reply_date = now(),

@@ -11,7 +11,7 @@
 		select * from video_tab where video_status=5 and teacher_id=#{teacher_id,jdbcType=INTEGER} order by video_qz desc
 	</select>
 	<select id="getVideoById" resultType="com.entity.VideoTab">
-		select * from video_tab where video_id=#{id,jdbcType=INTEGER} order by video_qz desc
+		select * from video_tab where video_id=#{id,jdbcType=INTEGER} 
 	</select>
 	<select id="selVideo" resultType="com.entity.VideoTab">
 		select * from video_tab 
@@ -32,6 +32,9 @@
 		update video_tab set video_status='6' where video_id=#{video_id,jdbcType=INTEGER} 
 	</update>
 	<update id="updetVideoById" parameterType="com.entity.VideoTab">
-		update video_tab set video_name=#{video_name,jdbcType=VARCHAR},video_url=#{video_url,jdbcType=VARCHAR},video_introduce=#{video_introduce,jdbcType=VARCHAR},video_img_url=#{video_img_url,jdbcType=VARCHAR} where video_id=#{video_id,jdbcType=INTEGER} 
+		update video_tab 
+		set 
+		video_introduce=#{video_introduce,jdbcType=VARCHAR},video_img_url=#{video_img_url,jdbcType=VARCHAR},video_form_id=#{video_form_id,jdbcType=INTEGER},video_qz=#{video_qz,jdbcType=INTEGER},video_ppt=#{video_ppt,jdbcType=VARCHAR}
+		where video_id=#{video_id,jdbcType=INTEGER} 
 	</update>
 </mapper>

@@ -41,7 +41,7 @@ public class VideoTabController {
 
 	@RequestMapping(value="/uploadflv.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void uploadflv(String videoName,String video_form_id,String video_introduce,MultipartFile video,MultipartFile image,MultipartFile ppt,String video_qz,String videoTime,HttpServletRequest request) throws Exception{		
+	public void uploadflv(String videoName,String video_form_id,String video_introduce,MultipartFile video,MultipartFile image,MultipartFile ppt,String video_qz,String video_time,HttpServletRequest request) throws Exception{		
 		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
 		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
 		String filePath = video.getOriginalFilename();
@@ -51,8 +51,14 @@ public class VideoTabController {
 		String ossFileName = videoName+filePath.substring(filePath.lastIndexOf("."));	
 		String imageName = videoName+imagePath.substring(imagePath.lastIndexOf("."));
 		String pptName = videoName+pptPath.substring(pptPath.lastIndexOf("."));
-		System.out.println(ossFileName+"   "+imageName+"   "+pptName);		
-		vdservice.uploadVideo(ossFileName,imageName,pptName,Integer.parseInt( video_form_id), video_introduce, video, image, ppt,Integer.parseInt(video_qz),teacher_id,size,videoTime);
+		System.out.println(ossFileName+"   "+imageName+"   "+pptName+"  "+size+"   "+"   "+video_time);
+		try {
+			vdservice.uploadVideo(ossFileName,imageName,pptName,Integer.parseInt( video_form_id), video_introduce, video, image, ppt,Integer.parseInt(video_qz),teacher_id,size,video_time);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		
 
 	}
 
@@ -97,14 +103,11 @@ public class VideoTabController {
 
 	@RequestMapping(value="/updetVideoById.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void updetVideoById(int video_id,String video_name,String video_url,String video_img_url,String video_introduce){
-		VideoTab vt=new VideoTab();
-		vt.setVideo_id(video_id);
-		vt.setVideo_img_url(video_img_url);
-		vt.setVideo_url(video_url);
-		vt.setVideo_introduce(video_introduce);
-		vt.setVideo_name(video_name);
-		vdservice.updetVideoById(vt);
+	public void updetVideoById(int video_id,String video_name,String video_form_id,String video_introduce,MultipartFile image,MultipartFile ppt,String video_qz,HttpServletRequest request) throws Exception{
+		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
+		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
+		
+		vdservice.updetVideoById( video_id, video_name, video_form_id, video_introduce, image, ppt, video_qz, teacher_id);
 	}
 
 	@RequestMapping(value="/delVideoById.do", method={RequestMethod.POST,RequestMethod.GET})

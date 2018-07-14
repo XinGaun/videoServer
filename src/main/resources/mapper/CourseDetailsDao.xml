@@ -13,7 +13,7 @@
 		FROM courses_tab c LEFT JOIN teacher_tab t ON c.teacher_id=t.teacher_id 
 		LEFT JOIN subscription_tab s ON c.courses_id = s.video_id 
 		LEFT JOIN video_form_tab v ON v.video_form_id=c.video_form_id 
-		WHERE 1=1 AND c.courses_status = 5 AND c.courses_id = #{cid}
+		WHERE 1=1 AND c.courses_id = #{cid}
 	</select>
 	<!-- 查询视频详情 -->
 	<select id="queryVideoDetails" parameterType="int" resultType="java.util.HashMap">
@@ -24,7 +24,7 @@
 		teacher_name,courses_id,teacher_tab.teacher_id,courses_name,courses_introduce,courses_pricemoney,courses_click,courses_img_url,courses_grade,date_format(courses_date,'%Y-%m-%d')courses_date 
 		FROM courses_tab 
 		LEFT JOIN teacher_tab ON teacher_tab.teacher_id=courses_tab.teacher_id 
-		WHERE 1=1 AND courses_status = 5 order by courses_date DESC LIMIT 0,3
+		WHERE 1=1 order by courses_date DESC LIMIT 0,3
 	</select>
 	<!-- 查询学员评论 -->
 	<select id="queryStudentComments" parameterType="java.util.HashMap" resultType="java.util.HashMap">
@@ -34,7 +34,7 @@
 		LEFT JOIN video_tab v ON v.video_id = c.video_id 
 		LEFT JOIN teacher_tab t ON t.teacher_id = c.reply_teacher 
 		LEFT JOIN courses_tab co ON co.teacher_id = t.teacher_id 
-		WHERE  1=1 AND co.courses_status = 5 
+		WHERE  1=1
 		<if test="cid!=''">
 			AND co.courses_id =#{cid}
 		</if>
@@ -47,7 +47,7 @@
 		LEFT JOIN video_tab v ON v.video_id = c.video_id 
 		LEFT JOIN teacher_tab t ON t.teacher_id = c.reply_teacher 
 		LEFT JOIN courses_tab co ON co.teacher_id = t.teacher_id 
-		WHERE  1=1 AND co.courses_status = 5 
+		WHERE  1=1
 		<if test="cid!=''">
 			AND co.courses_id = #{cid}
 		</if>

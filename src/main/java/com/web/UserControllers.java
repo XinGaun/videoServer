@@ -48,29 +48,26 @@ public class UserControllers {
 	UserService aService;
 	
 	//添加用户
-	@RequestMapping(value="/saveuser",method=RequestMethod.POST)
+	@RequestMapping(value="/saveuser",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String saveuser(@RequestBody String data,HttpServletResponse response){
+		System.out.println("mmmmmmmmmmmmmmmmmmmm");
 		UserTab ut = JSON.parseObject(data,UserTab.class);
 		System.out.println(ut);
 		System.out.println(ut.getUser_phone());
-		String spwd=ut.getUser_pwd();
-		String smi=MD5.md5(spwd);
-		ut.setUser_pwd(smi);
-		//System.out.println(ut.getUser_date());
-		
 		return JSON.toJSONString(aService.addUser(ut));
 	}
 	//根据手机号查找是否有该用户
 
 	@RequestMapping(value="/queryuser",method=RequestMethod.POST)
 	public String queryuser(@RequestBody String user_phone,HttpServletResponse response){
-		System.out.println(user_phone);
 		HashMap<String,Object> map = JSON.parseObject(user_phone,HashMap.class);		
-		System.out.println(map);
-		ArrayList<HashMap<String, Object>> aList=aService.queryUser(map.get("user_phone").toString());
-		System.out.println(aList);
-		String json = JSON.toJSONString(aList);
-		System.out.println(json);
+		String json ="";
+		try{
+			ArrayList<HashMap<String, Object>> aList=aService.queryUser(map.get("user_phone").toString());
+			json = JSON.toJSONString(aList);
+		}catch(Exception e){
+			e.getMessage();
+		}
 		return json;
 	}
 	//登录验证账号密码
@@ -111,9 +108,6 @@ public class UserControllers {
 	@RequestMapping(value="/addfile",method=RequestMethod.POST)
 	public String addfile(@RequestParam(value="file",required=false)MultipartFile file,HttpServletRequest request){
 		OSSUtil ou=new OSSUtil();
-		//File targetFile=null;
-        //String msg="";//返回存储路径
-        //int code=1;
         String fileName=file.getOriginalFilename();//获取文件名加后缀    
         String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//文件后缀   
         fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//新的文件名    
@@ -132,37 +126,6 @@ public class UserControllers {
 		}
         System.out.println(ou.getWebURL(ossFileName));
         return JSON.toJSONString(ou.getWebURL(ossFileName));
-      /*  if(fileName!=null&&fileName!=""){   
-            String returnUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() +request.getContextPath() +"/boo/photos/LoginPhoto/";//存储路径
-            System.out.println(returnUrl);
-            String path = request.getSession().getServletContext().getRealPath("/boo/photos/LoginPhoto"); //文件存储位置
-            System.out.println(path);
-            String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//文件后缀
-            System.out.println(fileF);
-            fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//新的文件名
-            System.out.println(fileName);       
-         	//先判断文件是否存在
-            String fileAdd = DateUtil.dateToStr(new Date(),"yyyyMMdd");
-            File file1 =new File(path+"/"+fileAdd); 
-           
-            System.out.println(file1);
-            //如果文件夹不存在则创建    
-            if(!file1 .exists()  && !file1 .isDirectory()){       
-                file1 .mkdir();  
-            }
-            targetFile = new File(file1, fileName);
-            //targetFile = new File(path, fileName);
-            try {
-                file.transferTo(targetFile);
-                //msg=returnUrl+fileName;
-                msg=returnUrl+fileAdd+"/"+fileName;
-                code=0;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }*/
-        //System.out.println(JSON.toJSONString(Photo.result(code, msg)));
-       // return JSON.toJSONString(Photo.result(code, msg));
 	}
 	//个人中心更改用户信息
 	@RequestMapping(value="/updatemessages",method=RequestMethod.POST)

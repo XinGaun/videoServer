@@ -4,12 +4,12 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.coursesTabDao">
 	<insert id="addCoursesTab" parameterType="com.entity.coursesTab">
-		insert into courses_tab(courses_name,video_form_id,courses_introduce,courses_video,courses_img_url,courses_date,courses_pricemoney,teacher_id,courses_qz) 
-		values(#{courses_name,jdbcType=VARCHAR},#{video_form_id},#{courses_introduce,jdbcType=VARCHAR},#{courses_video,jdbcType=VARCHAR},#{courses_img_url,jdbcType=VARCHAR},now(),#{courses_pricemoney,jdbcType=VARCHAR},#{teacher_id,jdbcType=INTEGER},#{courses_qz,jdbcType=INTEGER})
+		insert into courses_tab(courses_name,video_form_id,courses_introduce,courses_video,courses_img_url,courses_date,courses_pricemoney,teacher_id,courses_qz,courses_time) 
+		values(#{courses_name,jdbcType=VARCHAR},#{video_form_id},#{courses_introduce,jdbcType=VARCHAR},#{courses_video,jdbcType=VARCHAR},#{courses_img_url,jdbcType=VARCHAR},now(),#{courses_pricemoney,jdbcType=VARCHAR},#{teacher_id,jdbcType=INTEGER},#{courses_qz,jdbcType=INTEGER},#{courses_time,jdbcType=VARCHAR})
 	</insert>
 	<select id="searchTabList" parameterType="java.util.HashMap" resultType="com.entity.coursesTab">
 		select * from courses_tab 
-			<where> courses_status=5
+			<where> courses_status=8
 				<if test="teacher_id !='' and teacher_id !=null">
 					and teacher_id = #{teacher_id,jdbcType=VARCHAR}
 				</if>
@@ -59,8 +59,11 @@
 		update courses_tab set courses_status='8' where courses_id=#{id,jdbcType=INTEGER} 
 	</update>
 	<update id="upCoursesById" parameterType="com.entity.coursesTab">
-		update courses_tab set courses_name=#{courses_name,jdbcType=VARCHAR},courses_introduce=#{courses_introduce,jdbcType=VARCHAR},
-		courses_video=#{courses_video,jdbcType=VARCHAR},courses_img_url=#{courses_img_url,jdbcType=VARCHAR},courses_pricemoney=#{courses_pricemoney,jdbcType=VARCHAR},courses_qz=#{courses_qz,jdbcType=INTEGER} 
+		update courses_tab 
+		set 
+		courses_name =#{courses_name,jdbcType=VARCHAR},
+		video_form_id =#{video_form_id},courses_introduce=#{courses_introduce,jdbcType=VARCHAR},courses_video=#{courses_video,jdbcType=VARCHAR},
+		courses_img_url =#{courses_img_url,jdbcType=VARCHAR},courses_pricemoney=#{courses_pricemoney,jdbcType=VARCHAR},courses_qz=#{courses_qz,jdbcType=INTEGER},courses_time=#{courses_time,jdbcType=VARCHAR}
 		where courses_id=#{courses_id,jdbcType=INTEGER} 
 	</update>
 </mapper>
