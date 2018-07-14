@@ -22,6 +22,12 @@
 			.addmargin {
 				margin-top: 10px;
 			}
+			.pic {
+			    position: relative;
+			    height: 160px;
+			    width: 120px;
+			    overflow: hidden;
+			}
 		</style>
 	</head>
 
@@ -321,7 +327,7 @@
                 	描述：context begin
                 -->
 									<div class="row">
-										<div class="col-sm-12">
+										<div class="col-sm-6">
 											<div class="row addmargin">
 												<div class="col-sm-4" align="right" style="line-height:-moz-block-height;">
 													<span class="">姓名:</span>
@@ -379,7 +385,6 @@
 													<input type="hidden" id="user_id">
 												</div>
 											</div>
-
 											<div class="row addmargin">
 												<div class="col-sm-4 col-sm-offset-4">
 													<button id="modifyInfo" class="btn btn-primary">修改</button>
@@ -390,6 +395,13 @@
 
 											</div>
 										</div>
+										<div  class="col-sm-6">
+											<div class="pic">
+						                        <img id="userImg" src="" align="absmiddle" width="120" height="160" alt="用户照片"/>
+						                        <div id="pic_tips_1"></div>
+						                    </div>
+										</div>
+											
 									</div>
 									<!--
                 	作者：offline
@@ -422,6 +434,7 @@
 		<script src="dist/js/bootstrap-datepicker.min.js"></script>
 		<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
 		<script src="assets/js/common.js"></script>
+		
 
 		<script>
 			//var url = "http://localhost:8080/videoServer/";
@@ -457,7 +470,7 @@
 						}
 					});
 				}
-
+				
 				//显示数据
 				function adduserInfo(data) {
 					$("#user_name").val(data.user_name);
@@ -465,6 +478,7 @@
 					$("#user_mail").val(data.user_email);
 					$("#user_date").val(data.user_date);
 					$("#user_imgurl").val(data.user_photo);
+					$("#userImg").attr("src",data.user_photo);
 					
 					var status = 6;
 					if(data.user_status == '正常'){
@@ -516,7 +530,7 @@
 				});
 				
 				$('#backBtn').click(function(){
-					window.location.go(-1);
+					window.history.go(-1);
 				})
 				
 				//日期控件
