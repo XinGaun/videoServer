@@ -45,8 +45,16 @@ public class PaysApiController {
 		hashMap.put("discounts_id", discounts_id);
 		hashMap.put("order_due", price);
 		hashMap.put("order_type", istype);
-		hashMap.put("order_status", "未付款");
-		ArrayList<HashMap<String,Object>> OrderList = orderTabService.queryOrderExist(hashMap);
+		if(price.equals("0")) {
+			hashMap.put("order_status", "已付款");
+			hashMap.put("order_pricemoney", "0");
+			orderTabService.addOrderTab(hashMap);
+			return JSON.toJSONString("-1");
+		}else {
+			hashMap.put("order_status", "未付款");
+		}
+		
+		//ArrayList<HashMap<String,Object>> OrderList = orderTabService.queryOrderExist(hashMap);
 /*		String result = null;
 		if(OrderList!=null&&OrderList.size()>0) {
 			hashMap.put("orderid",OrderList.get(0).get("order_id"));

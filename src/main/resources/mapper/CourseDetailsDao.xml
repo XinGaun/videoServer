@@ -6,27 +6,25 @@
 	<!-- 查询课程详情 -->
 	<select id="queryCourseDetails" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
-		SELECT
+		SELECT 
 		courses_id,t.teacher_id,courses_name,courses_introduce,courses_video,courses_pricemoney,
 		courses_click,courses_img_url,courses_grade,courses_date,courses_status,c.video_form_id,
-		teacher_name,teacher_introduce,teacher_imgurl,
-		video_form_name,video_form_class
-		FROM courses_tab c LEFT JOIN teacher_tab t ON c.teacher_id=t.teacher_id
-		LEFT JOIN video_form_tab v ON v.video_form_id=c.video_form_id
-		WHERE 1=1 AND c.courses_id = #{cid}
+		teacher_name,teacher_introduce,teacher_imgurl,video_form_name,video_form_class,s.video_id 
+		FROM courses_tab c LEFT JOIN teacher_tab t ON c.teacher_id=t.teacher_id 
+		LEFT JOIN subscription_tab s ON c.courses_id = s.video_id 
+		LEFT JOIN video_form_tab v ON v.video_form_id=c.video_form_id 
+		WHERE 1=1 AND c.courses_status = 5 AND c.courses_id = #{cid}
 	</select>
 	<!-- 查询视频详情 -->
 	<select id="queryVideoDetails" parameterType="int" resultType="java.util.HashMap">
-		SELECT video_id,video_name FROM video_tab WHERE video_id = #{video_id}
+		SELECT video_id,video_name,video_url FROM video_tab WHERE video_id = #{video_id}
 	</select>
 	<select id="queryRecommendCourse" resultType="java.util.HashMap">
-		SELECT
-		teacher_name,courses_id,teacher_tab.teacher_id,courses_name,courses_introduce,courses_pricemoney,courses_click,courses_img_url,courses_grade,date_format(courses_date,'%Y-%m-%d')courses_date
-		FROM courses_tab
-		LEFT JOIN teacher_tab ON
-		teacher_tab.teacher_id=courses_tab.teacher_id
-		WHERE 1=1 AND
-		courses_status = 5 order by courses_date DESC LIMIT 0,3
+		SELECT 
+		teacher_name,courses_id,teacher_tab.teacher_id,courses_name,courses_introduce,courses_pricemoney,courses_click,courses_img_url,courses_grade,date_format(courses_date,'%Y-%m-%d')courses_date 
+		FROM courses_tab 
+		LEFT JOIN teacher_tab ON teacher_tab.teacher_id=courses_tab.teacher_id 
+		WHERE 1=1 AND courses_status = 5 order by courses_date DESC LIMIT 0,3
 	</select>
 	<!-- 查询学员评论 -->
 	<select id="queryStudentComments" parameterType="java.util.HashMap" resultType="java.util.HashMap">
@@ -54,4 +52,8 @@
 			AND co.courses_id = #{cid}
 		</if>
 	</select>
+	<!-- 插入到收藏表 -->
+	<insert id="addCollection" parameterType="java.util.HashMap">
+		INSERT INTO subscription_tab(user_id,video_id,subscription_date) VALUES ((select user_id from user_tab where user_phone=#{userphone}),#{cid},now())
+	</insert>
 </mapper>

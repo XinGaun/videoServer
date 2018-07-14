@@ -1,143 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-	<title>rigester 页面</title>
-	<!--
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    -->
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-	
-	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-	
-	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="http://static.runoob.com/assets/vue/1.0.11/vue.min.js"></script>
-	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
-	
-</head>
-<style>
-	#rigester{
-		width:20vw;
-	 	height:50vh;
-	 	border:1px solid red;
-	 	background-color:#FFFFFF;
-	 	border-radius:0.3em;
-	}
-	form{
-		
-	 	position:absolute;
-	 	top:4vh;
-	 	left:2.2vw;
-	 	width:15vw;
-	 	height:42vh;
-	 	
-	}
-	
-	#header span{
-	  font-size:1.3vw;
-	}
-	/* 输入框的圆角设置 */
-	#body input{
-	  margin: 0.5vh 0vw;
-	  border:1px solid #888;
-      border-radius:4px;
-      height:3.5vh;
-	}
-	/*登录模态框中输入框的设置-添加小图标*/
-	input[name=phone]{
-		background: url(photos/LoginPhoto/phone.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
-		padding:0vh 1.5vw;
-	}
-	input[name=nic]{
-		background: url(photos/LoginPhoto/user.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
-		padding:0vh 1.5vw;
-		
-	}
-	input[type=password]{
-		background: url(photos/LoginPhoto/pwd.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
-		padding:0vh 1.5vw;
-	}
-	input[name=dx]{
-		padding:0vh 0.5vw;
-		
-	}
-	a{
-		color:#3AA8FF;
-	}
-	a:hover{
-		text-decoration:none;
-		color:#3AA8FF;
-	}
-	/* 注册按钮设置 */
-	#body button{
-		background:#3AA8FF;
-      	border-radius:4px;
-      	width:14.8vw;
-      	height:3.5vh;
-      	border:0px;
-      	margin:2.2vh 0vw;
-      	color:#FFFFFF;
-	}
-	/* 设置输入框里的字体大小，浏览器兼容不一样，每个都要设置 */
-	input::-webkit-input-placeholder { /* WebKit browsers */ 
-		font-size:1.5vh;
-	} 
+/**
+ * http://usejsdoc.org/
+ */
 
-	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
-		font-size:1.5vh;
-	} 
-	input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
-		font-size:1.5vh;
-	} 
-	input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
-		font-size:1.5vh;
-	} 
-</style>
-<body>
-	<div id="rigester">
-	<form>
-		<div id="header" style="margin-bottom:2vh">
-			<span>注册账户</span>
-			<a href="HomeVue.html?flag=1" style="float:right">登录
-				<img :src="rigesterUrl">
-			</a>
-		</div>
-		<div id="body">
-			<label>
-	        	<input type="text" name="phone" id="phone" placeholder="请输入手机号" style="width:100%">
-	        	<br>	        	
-	        </label>
-	        <label>
-	        	<input type="text" name="nic" id="name" placeholder="请输入昵称" style="width:100%">	      
-	        	<br>	        	
-	        </label>
-	        <label>
-	        	<input type="password" id="pwd" onblur="mdjia()" placeholder="请输入6-21位密码" style="width:100%">
-	        </label>
-	        <label>
-	        	<input type="password" id="repwd" placeholder="请再次输入密码" style="width:100%">
-	        </label>
-	        <input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" style="width:53%">
-	       
-	        <input type="button" value="获取验证码" id="hmac" style="width:39%;float:right;font-size:1.5vh;">
-	        
-			<label>
-				<button type="button" id="zhuce">注册</button>
-			</label>
-		</div>
-		<div id="wxChat" style="text-align:center">
-			<span style="font-size:10px">微信快捷登录：</span>
-			<a href="">
-			    <img :src="weixin">
-			</a>
-				    	
-		</div>		    	
-    </form>
-	</div>
-</body>
-<script>
-	
-
+	//var url="http:127.0.0.1:8080/";
+	var url="";
 	var code="";
 	//获取验证码
 	$('#hmac').click(function(){  
@@ -191,19 +57,19 @@
 	           //alert("str"+str);
 		        $.ajax({
 		        	type:"POST",
-		        	url:"User/queryuser",
+		        	url:url+"/videoServer/front/User/queryuser",
 		        	data:{
 		        		user_phone:phonenumber,	
 		        	},		        	
 		        	dataType:"json",
 		        	success:function(data){
-		        		alert(data+"data");
+		        		
 		        		if(data.length==1){
 		        			alert("该号码已注册，请直接登录");
 		        		}else{
 		        			$.ajax({
 		        	        	type:"POST",
-		        	        	url:"AliBigFish/verificationCode",
+		        	        	url:url+"/videoServer/front/AliBigFish/verificationCode",
 		        	        	contentType:'application/json;charset=UTF-8',
 		        	        	data:JSON.stringify(str),     	
 		        	        	//data:str,
@@ -303,14 +169,14 @@
 	    if(typeof(phone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code&&typeof(name)!="undefined"&&typeof(pwd)!="undefined"&&repwd==pwd){   
 	    	$.ajax({
 	        	type:"POST",
-	        	url:"User/saveuser",
+	        	url:url+"/videoServer/front/User/saveuser",
 	        	data:JSON.stringify(UserTab),	
 	        	contentType:'application/json;charset=UTF-8',
 	        	cache:false,
 	        	dataType:"json",
 	        	//dataType:"text",
 	        	success:function(data){
-	        		window.location.href="HomeVue.html"; 
+	        		window.location.href="index.html"; 
 	        		//alert("注册成功！");
 	        	},
 	        	error:function(data){
@@ -325,21 +191,3 @@
 	     
   	})
 	
-</script>
-<script>
-	//登录页面中注册按钮后的小图标
-	var rigster=new Vue({
-		el:'#header',
-		data:{
-			rigesterUrl:'photos/LoginPhoto/rigester.png'
-		}
-	})
-	//登录页面中的微信登录小图标
-	var weixin=new Vue({
-		el:'#wxChat',
-		data:{
-			weixin:'photos/LoginPhoto/weixin.png'
-		}
-	})
-</script>
-</html>

@@ -61,4 +61,13 @@ public class CourseDetailsServiceImpl implements CourseDetailsService {
 		int count = courseDetailsDao.queryStudentCommentsAllCount(map);
 		return JSON.toJSONString(Count.counts(list, count, map,200,"queryStudentCommentsAllCount success"));
 	}
+	/**
+	 * 插入到收藏表
+	 */
+	@Override
+	public String addCollection(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		Integer arrayList = courseDetailsDao.addCollection(map);
+		return "success";
+	}
 }

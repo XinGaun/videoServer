@@ -52,6 +52,8 @@
 				/martix/assets/** = anon
 				/martix/login.html = anon
 				/boo/** = anon
+				/success.html = anon
+				/error.html = anon
 				/front/** = anon
 				/rand.jsp = anon
 				/teacher/teacherLogin = anon

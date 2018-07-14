@@ -47,10 +47,20 @@ public class UserServiceImpls implements UserService{
 		// TODO Auto-generated method stub
 		return aDao.updatemessage(ut);
 	}
+
+	//更新手机号
+
 	@Override
 	public int updatephone(UserTab ut) {
 		// TODO Auto-generated method stub
 		return aDao.updatephone(ut);
+	}
+
+	//查询是否首次登录
+	@Override
+	public ArrayList<HashMap<String, Object>> isfirst(String user_phone) {
+		// TODO Auto-generated method stub
+		return aDao.isfirst(user_phone);
 	}
 	
 

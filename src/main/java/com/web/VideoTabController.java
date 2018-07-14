@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.entity.TeacherDomain;
 import com.entity.VideoTab;
@@ -40,16 +41,17 @@ public class VideoTabController {
 
 	@RequestMapping(value="/uploadflv.do",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void uploadflv(String video_name,String video_form_id,String video_introduce,String video_url,String video_img_url,HttpServletRequest request) throws Exception{
+	public void uploadflv(String videoName,String video_form_id,String video_introduce,MultipartFile video,MultipartFile image,HttpServletRequest request) throws Exception{		
 		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
 		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
-/*		System.out.println("name   "+video_name);
-		System.out.println(video_form_id);
-		System.out.println(video_url);
-		System.out.println(video_introduce);
-		System.out.println(video_img_url);
-		System.out.println(teacher_id);*/
-		vdservice.uploadVideo(video_name, video_introduce, video_url, video_img_url,Integer.parseInt(video_form_id), teacher_id);
+		String filePath = video.getOriginalFilename();
+		String imagePath = image.getOriginalFilename();
+		long size = video.getSize();
+		String ossFileName = videoName+filePath.substring(filePath.lastIndexOf("."));	
+		String imageName = videoName+imagePath.substring(imagePath.lastIndexOf("."));
+		System.out.println(ossFileName+"   "+imageName);
+		vdservice.uploadVideo(ossFileName,imageName, video_introduce, video, image,Integer.parseInt(video_form_id), teacher_id,size);
+
 	}
 
 
@@ -77,6 +79,17 @@ public class VideoTabController {
 		vt.setVideo_form_id(video_form_id);
 		vt.setTeacher_id(teacher_id);
 		vt.setVideo_name(video_name);
+		return vdservice.selVideo(vt);
+	}
+
+	@RequestMapping(value="/selVideobyVideoForm.do", method={RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public List<VideoTab> selVideobyVideoForm(HttpServletRequest request,int video_form_id){
+		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
+		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
+		VideoTab vt=new VideoTab();
+		vt.setTeacher_id(teacher_id);
+		vt.setVideo_form_id(video_form_id);
 		return vdservice.selVideo(vt);
 	}
 

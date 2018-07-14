@@ -4,47 +4,55 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.VideosDao">
 	<!-- 查询所有课程 -->
-	<select id="querycoursesTabAll" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-		SELECT courses_id,teacher_tab.teacher_id,teacher_name,courses_name,courses_introduce,courses_pricemoney,courses_click,courses_img_url,courses_grade,date_format(courses_date,'%Y-%m-%d')courses_date FROM courses_tab
-		LEFT JOIN teacher_tab ON courses_tab.teacher_id=teacher_tab.teacher_id 
-		LEFT JOIN video_form_tab ON video_form_tab.video_form_id = courses_tab.video_form_id 
- 		WHERE 1=1 AND courses_status = 5 
- 		<if test="keyword!=''">
- 			AND courses_name like '%${keyword}%' 
- 		</if>
- 		<if test="queryAll!=''">
- 			AND video_form_tab.video_form_class = #{queryAll} 
- 		</if>
- 		ORDER BY 
- 		<if test="sort==0">
- 			courses_click DESC,courses_grade DESC,courses_date DESC 
- 		</if>
- 		<if test="sort==null">
- 			courses_click DESC,courses_grade DESC,courses_date DESC 
- 		</if>
- 		<if test="sort==1">
- 			courses_date DESC 
- 		</if>
- 		<if test="sort==2">
- 			courses_click DESC 
- 		</if>
- 		<if test="sort==3">
- 			courses_pricemoney+0 DESC  
- 		</if>
- 		LIMIT #{nums},#{page}
+	<select id="querycoursesTabAll" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		SELECT
+		courses_id,teacher_tab.teacher_id,teacher_name,courses_name,courses_introduce,courses_pricemoney,courses_click,courses_img_url,courses_grade,date_format(courses_date,'%Y-%m-%d')courses_date
+		FROM courses_tab
+		LEFT JOIN teacher_tab ON
+		courses_tab.teacher_id=teacher_tab.teacher_id
+		LEFT JOIN video_form_tab ON video_form_tab.video_form_id =
+		courses_tab.video_form_id
+		WHERE 1=1 AND courses_status = 5
+		<if test="keyword!=''">
+			AND courses_name like '%${keyword}%'
+		</if>
+		<if test="queryAll!=''">
+			AND video_form_tab.video_form_class = #{queryAll}
+		</if>
+		ORDER BY
+		<if test="sort==0">
+			courses_click DESC,courses_grade DESC,courses_date DESC
+		</if>
+		<if test="sort==null">
+			courses_click DESC,courses_grade DESC,courses_date DESC
+		</if>
+		<if test="sort==1">
+			courses_date DESC
+		</if>
+		<if test="sort==2">
+			courses_click DESC
+		</if>
+		<if test="sort==3">
+			courses_pricemoney+0 DESC
+		</if>
+		LIMIT #{nums},#{page}
 	</select>
 	<!-- 查询所有课程总数 -->
-	<select id="querycoursesTabAllCount" parameterType="java.util.HashMap" resultType="int">
+	<select id="querycoursesTabAllCount" parameterType="java.util.HashMap"
+		resultType="int">
 		SELECT COUNT(courses_id) FROM courses_tab
-		LEFT JOIN teacher_tab ON courses_tab.teacher_id=teacher_tab.teacher_id 
-		LEFT JOIN video_form_tab ON video_form_tab.video_form_id = courses_tab.video_form_id 
- 		WHERE 1=1 AND courses_status = 5 
- 		<if test="keyword!=''">
- 			AND courses_name like '%${keyword}%' 
- 		</if>
- 		<if test="queryAll!=''">
- 			AND video_form_tab.video_form_class = #{queryAll} 
- 		</if>
+		LEFT JOIN teacher_tab ON
+		courses_tab.teacher_id=teacher_tab.teacher_id
+		LEFT JOIN video_form_tab ON video_form_tab.video_form_id =
+		courses_tab.video_form_id
+		WHERE 1=1 AND courses_status = 5
+		<if test="keyword!=''">
+			AND courses_name like '%${keyword}%'
+		</if>
+		<if test="queryAll!=''">
+			AND video_form_tab.video_form_class = #{queryAll}
+		</if>
 	</select>
 	<!-- 查询所有推荐课程 -->
 	<select id="queryRecommend" resultType="java.util.HashMap">
@@ -58,6 +66,27 @@
 	</select>
 	<!-- 查询用户是否有过下单记录 -->
 	<select id="queryOrder" resultType="int" parameterType="java.util.HashMap">
-		SELECT count(order_id) FROM order_tab WHERE user_id = #{user_id} AND video_id = #{video_id} AND order_status = '已付款'
+		SELECT
+		count(order_id) FROM order_tab WHERE user_id = #{user_id} AND video_id
+		= #{video_id} AND order_status = '已付款'
+	</select>
+	<!-- 查询视频评论信息记录 -->
+	<select id="queryComment" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		SELECT
+		com.comment_id,com.video_id,com.user_id,com.comment_text,
+		com.reply_teacher,com.reply_text,date_format(com.reply_date,'%Y-%m-%d %h:%i:%s')reply_date,date_format(com.comment_date,'%Y-%m-%d %h:%i:%s')courses_date,
+		usr.user_name,tea.teacher_name
+		FROM comment_tab com LEFT JOIN user_tab usr ON com.user_id=usr.user_id
+		LEFT JOIN teacher_tab tea ON com.reply_teacher = tea.teacher_id WHERE
+		1=1 AND com.video_id = #{video_id} ORDER BY com.comment_date;
+	</select>
+	<!-- 查询课程信息总数 -->
+	<select id="queryCommentCount" parameterType="java.util.HashMap" resultType="int">
+		SELECT
+		count(com.comment_id)
+		FROM comment_tab com LEFT JOIN user_tab usr ON com.user_id=usr.user_id
+		LEFT JOIN teacher_tab tea ON com.reply_teacher = tea.teacher_id WHERE
+		1=1 AND com.video_id = #{video_id} ORDER BY com.comment_date;
 	</select>
 </mapper>

@@ -12,4 +12,8 @@ public interface VideosDao {
 	public ArrayList<HashMap<String,Object>> queryRecommend();
 	//查询用户是否有过订单记录
 	public int queryOrder(HashMap<String,Object> map);
+	//查询视频评论信息
+	public ArrayList<HashMap<String,Object>> queryComment(HashMap<String,Object> map);
+	//查询视频评论信息总数
+	public int queryCommentCount(HashMap<String,Object> map);
 }

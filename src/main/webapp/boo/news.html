@@ -13,7 +13,7 @@
 	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 	<script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
-	<script type="text/javascript" src="jquery.cookie1.4.1.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 </head>
 <style>
 	.jsjs {
@@ -110,69 +110,138 @@
 	#security span{
 		margin-right:2vw;
 	}
+	#search_submit{
+	 	border-top-left-radius:0em;
+		border-top-right-radius:2em;
+		border-bottom-right-radius:2em;
+		border-bottom-left-radius:0em; 
+	 }
+ 	 #dropdown{
+ 	 	border-top-left-radius:2em;
+		border-top-right-radius:0em;
+		border-bottom-right-radius:0em;
+		border-bottom-left-radius:2em; 
+ 	 }
+ 	 /*按钮圆角设置*/
+	.active{  
+	 	border-radius:2em;
+	 	border:1px #3AA8FF solid;
+	 	padding:2px 9px;
+	 	margin:0vh 2vw;
+	 	display:inline-block;
+	 	verticle-align:middle;
+	 	color:black;
+	 	text-decoration: none;
+	 } 
+	 a:hover{
+	 	text-decoration:none;
+	 	
+	 } 
 	
+	  #log a{
+	 	color:#3AA8FF;
+	 	padding:1vh 1.5vw;
+	 	text-decoration:none;
+	 } 
+	 #logImg{
+	 	float:right;
+	 	border:1px solid red;
+	 	margin:-2vh 1vw 0vh 0vw;
+	 	display:none;
+	 }
+	 #loginrouter{
+	 	position:fixed;
+	 	top:15vh;
+	 	left:58vw;
+	 	z-index:2;
+	 }
+	 #log{
+	 	margin-top:3.5vh;
+	 	margin-right:15vw;
+	 	
+	 }
+	 #boo{
+	 	position:relative;
+	 }
 </style>
 <body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-					aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#"><img src="img/logo @2x.png"
-					alt="..." class="img-rounded img-responsive"></a>
-				<p>&nbsp;</p>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li class="active">&nbsp; <span class="sr-only">(current)</span></li>
-
-
-					<li class="dropdown" STYLE="margin-top: 5%">
-
-						<div class="form-group navbar-form navbar-left">
-							<div class="input-group col-xs-12">
-								<div class="input-group-btn">
-									<select name="type" class="form-control" style="width: auto;">
-										<option value="1">全部</option>
-										<option value="2">高中</option>
-										<option value="3">初中</option>
-										<option value="4">小学</option>
-									</select>
-								</div>
-								<input type="text" name="keyword" id="keyword"
-									class="form-control" placeholder="请您输入关键词"> <span
-									class="input-group-btn">
-									<button class="btn btn-success" id="search_submit"
-										type="submit">搜索</button>
-								</span>
-							</div>
-						</div>
-					</li>
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right" style="margin-top: 1%;">
-					<li><img src="img/tx22.png" alt="..."
-						class="img-circle img-responsive"
-						style="wdith: 42px; height: 42px;"></li>
-
-					<li class="dropdown"><a href="#">&nbsp;&nbsp;用户名 </a></li>
-					<li><a href="#"> 注销 </a></li>
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html"><img src="img/logo @2x.png"
+				alt="..." class="img-rounded img-responsive lazy"></a>
+			<p>&nbsp;</p>
 		</div>
-		<!-- /.container-fluid -->
-	</nav>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav" style="margin-left:4vw;">
+				<!-- <li class="active">&nbsp; <span class="sr-only">(current)</span></li> -->
+
+
+				<li class="dropdown" STYLE="margin-top: 5%">
+
+					<div class="form-group navbar-form navbar-left">
+						<div class="input-group col-xs-12">
+							<div class="input-group-btn">
+								<select name="type" id="dropdown" class="form-control" style="width: auto;">
+									<option value="1">全部</option>
+									<option value="2">高中</option>
+									<option value="3">初中</option>
+									<option value="4">小学</option>
+								</select>
+							</div>
+							<input type="text" name="keyword" id="keyword"
+								class="form-control" placeholder="请您输入关键词"> 
+							<span class="input-group-btn">
+								<button class="btn btn-info" id="search_submit" type="submit">
+									搜索
+								</button>
+							</span>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<!-- 登录|注册 -->
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<div  id="log">
+						<div  id="logsd">
+							<a href="logins.html" @click="change(1)" :class="flag==1?'active':''">登录</a>
+					    	<a href="rigester.html" @click="change(2)" :class="flag==2?'active':''">注册</a>
+						</div>
+						<!-- 添加头像 -->
+					
+						<!-- 添加头像 -->
+						<div id="logImg" class="dropdown">             			
+	                 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	   							<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px" height="40px" class="img-circle"/>
+	    						<span class="caret"></span>
+	  						</button>
+		                 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="personal_center.html">个人中心</a></li>					 
+								<li id="exit"><a>退出</a></li>
+							</ul>		                		
+	                 	</div>
+					</div><!-- 登录|注册结束 -->
+					
+				</li>
+			</ul>
+			
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid --> </nav>
 
 	<!--  -->
 	<div
@@ -848,8 +917,8 @@
 							<ul class="nav nav-tabs">	
 							   <li><a>我的账号</a></li>
 							   <li class="active"><a href="#infomation" data-toggle="tab">个人资料</a></li>
-							   <li><a id="anquan" href="#security" data-toggle="tab">安全设置</a></li>
-							   <li><a href="#three" data-toggle="tab">第三方账户</a></li>
+							   <li><a id="anquan" style="display:none" href="#security" data-toggle="tab">安全设置</a></li>
+							   <li><a href="#three" data-toggle="tab">修改密码</a></li>
 							</ul>
 						</div>
 						<div id="myTabContent" class="tab-content">
@@ -866,7 +935,7 @@
 						      	<td>
 						      		<table>
 						      			<tr>
-						      				<td rowspan="2" id="photoimg"><img id="thumburlShow" src="photos/LoginPhoto/txx.png"/></td>
+						      				<td rowspan="2" id="photoimg"><img id="thumburlShow" style="width:80px;height:80px;" src="photos/LoginPhoto/txx.png"/></td>
 						      				<td><span id="up">你可以上传JPG、GIF或PNG格式的文件，文件大小不能超过2M。</span></td>
 						      			</tr>
 						      			<tr>
@@ -883,9 +952,9 @@
 						      </tr>
 						      <tr>
 						      	<td><label>性别</label>	</td>	      	
-				                <td><input type="radio" value="3"  name="sex">男
-				                <input type="radio" value="4"  name="sex">女
-				                <input type="radio" value="7" checked="checked" name="sex">保密</td>
+				                <td><input type="radio" value="3"  name="sex"/>男
+				                <input type="radio" value="4"  name="sex"/>女
+				                <input type="radio" value="7" checked="checked" name="sex"/>保密</td>
 						      </tr>
 						      <tr>
 						      	<td><label>个人介绍</label></td>
@@ -915,6 +984,7 @@
 						      	<td><input id="altphone" type="text"/>
 						      	<a id="alterphone">修改手机号</a>
 						      		<p>仅用于优质课程的提醒等服务，及账号的快捷登录，手机号不会对外公开，请放心。</p>
+						      		<span style="display:none" id="userid"></span>
 						      	</td>
 						      </tr>
 						      <tr>
@@ -986,10 +1056,10 @@
 						      </div>
 						   </div>
 						   <!-- 安全设置结束 -->
-						   <div class="tab-pane fade" id="three" style="border:1px solid red;">      
+						   <div class="tab-pane fade" id="three">      
 							  <div class="clo-md-12">
 							  <h3>修改密码</h3>
-							  <table class="table">
+							  <table class="table" >
 								<tr>
 									<td style="text-align: right;">旧密码:</td>
 									<td><input id="oldpwd" type="password" class="form-control"> <span>&nbsp;</span>
@@ -997,18 +1067,26 @@
 								</tr>
 								<tr>
 									<td style="text-align: right;">新密码:</td>
-									<td><input id="pwd" onblur="mdjia()" placeholder="请输入6-21位密码" type="password" class="form-control"> <span>&nbsp;</span>
+									<td><input id="pwd"  placeholder="请输入6-21位密码" type="password" class="form-control"/> <span>&nbsp;</span></td>
 								</tr>
 								<tr>
 									<td style="text-align: right;">重新输入新密码:</td>
-									<td><input id="repwd" placeholder="请再次输入密码" type="password" class="form-control"> <span>&nbsp;</span>
+									<td><input id="repwd" placeholder="请再次输入密码" type="password" class="form-control"/> <span>&nbsp;</span></td>
 								</tr>
 								<tr>
 									<td style="text-align: right;">短信验证码:</td>
-									<td><input name="dx" id="vcode" placeholder="请输入短信验证码" type="text" class="form-control"> <span>&nbsp;</span>
+									<td>
+										<!-- <input name="dx" id="vcode" placeholder="请输入短信验证码" type="text" class="form-control"/>		
+									 	<span>&nbsp;</span> -->
+									 	<input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" class="form-control" style="width:45%"/>
+	        							<input type="button" value="获取验证码" id="hmac" class="form-control"style="width:30%;float:right;font-size:1.5vh;margin-top:-5vh;margin-right:3vw"/>
+									</td>
+								</tr>
+								<tr>
+									<td></td><td><button class="btn btn-info" id="reset" style="float:right;margin-right:3vw">修改密码</button></td>
 								</tr>
 							  </table>
-							  <button class="btn btn-info" id="reset">修改密码</button>
+							  
 						
 							</div><!-- 修改密码结束 -->
 						</div><!-- 基本信息结束 -->
@@ -1134,6 +1212,7 @@
 
 
 	<script type="text/javascript">
+	
 		$(function() {
 			$("#schk").hide();
 			$("#wddd").hide();
@@ -1186,7 +1265,8 @@
 		});
 	</script>
 	<script type="text/javascript">
-
+	//var url="http:127.0.0.1:8080/";
+	var url="";
     /*字数限制*/  
     $("#aboutme").on("input propertychange", function() {  
         var $this = $(this),  
@@ -1269,10 +1349,10 @@
 			    	data.append('file', file);
 			    });
 	       	}
-	       alert(data);
+	      
 	        $.ajax({
 	            type: "POST",
-	            url: "User/addfile",
+	            url: url+"/videoServer/front/User/addfile",
 	            //data: JSON.stringify(data),
 	            data:data,
 	            cache: false,
@@ -1284,7 +1364,6 @@
 	                        $("#thumbUrl").val(suc.message);//将地址存储好
 	                        $("#thumburlShow").css({width:"80px"},{heith:"80px"});//显示图片     
 	                        $("#thumburlShow").attr("src",suc.message);//显示图片   
-	                        send(suc.message);
 	                        $("#photoimg").val(suc.message);
 	                        
 	                 }else{
@@ -1309,97 +1388,93 @@
         });
 　　}); 
     //保存按钮点击事件
-    $("#updateuser").click(function(){
-    	alert(1);
-    	var user=$("#name").val();//昵称
+    $("#updateuser").click(function(){  	
+     	var user=$("#name").val();//昵称
     	var photo=$("#photoimg").val();
-    	var url=photo.substr(photo.lastIndexOf("/")+1);//头像
+    	//var url=photo.substr(photo.lastIndexOf("/")+1);//头像
     	var email=$("#email").val();//email
-    	var sex=$('input:radio:checked').val();
+    	var sex=$("input:radio:checked").val();
     	var area=$("#aboutme").val();
     	var truename=$("#truename").val();
     	var phone=$("#altphone").val();
     	var qq=$("#qq").val();
-    	var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //验证邮箱 正则表达式
-    	var regqq = /^[1-9]\d{4,9}$/; //验证qq
-    	var regname=/^[\u0391-\uFFE5\w]+$/;//验证名字
-    	if(user==null&&user==""){
+    	//var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //验证邮箱 正则表达式
+    	//var regqq = /^[1-9]\d{4,9}$/; //验证qq
+    	//var regname=/^[\u0391-\uFFE5\w]+$/;//验证名字
+     	if(user==null||user==""){
     		alert("带*号的不能为空");
     	} 
-    	if(email==null&&email==" "){
+    	if(email==null||email==" "){
     		alert("带*号的不能为空");
     		return false;
-    	}else if(!reg.test(email)){
+    	}/* else if(!reg.test(email)){
     		alert("邮箱格式不正确")
     		return false;
     	}
-    	if(qq!=""){
-	    	if(!regqq.test(qq)){
+    	if((qq!="")&&(!regqq.test(qq))){
+	    	//if(!regqq.test(qq)){
 	    		alert("QQ格式不正确");
 	    		
-	    	}
+	    	//}
     	}
-    	if(truename!=""){
-    		if(truename.search(regname)==-1){
+    	if((truename!="")&&(truename.search(regname)==-1)){
+    		//if(truename.search(regname)==-1){
         		alert("请填写正确的名字");
         		
-        	}
+        	//}
     	}
-    	
-    	var alluser={
+    	  */
+    	var data={
     			"user_name":user,
-    			"user_photo":photo,
+    			"user_photo":url,
     			"user_sex":sex,
     			"user_self":area,
     			"user_truename":truename,
     			"user_email":email,
     			"user_phone":phone,
     			"user_qq":qq,
-    	}
+    	};
     	
-    	//alert(JSON.stringify(alluser));
+    	alert(JSON.stringify(data));
     	if(typeof(user)!="undefined"&&typeof(email)!="undefined"){
-    		
+		//var data={};
     		$.ajax({
     			type:"POST",
-    			url:"User/updatemessage",
-    			data:JSON.stringify(alluser),
+    			url:url+"/videoServer/front/User/updatemessages",
+    			data:JSON.stringify(data),
     			contentType:'application/json;charset=UTF-8',
 	        	cache:false,
     			dataType:"json",
     			success:function(data){
-    				
-    				alert(data);
+    				alert("data");
     			},
     			error:function(){
-    				alert("信息保存失败");
-    			},
+    				alert("更改失败");
+    			}
     		})
     	} 
     	
     })
     //进入页面获取用户已有信息
 	//var userphone=15036608954;
-   var userphone=$.cookie("phone");
-  	alert(userphone);
-    $(function(){
-    	
-    	
+   	var userphone=$.cookie("phone");
+  	//alert(userphone);
+    $(function(){	
     	$.ajax({
         	type:"POST",
-        	url:"User/queryuser",
-        	data:{
-        		"user_phone":userphone,	
-        	},		        	
+        	url:url+"/videoServer/front/User/queryuser",
+        	contentType:'application/json;charset=UTF-8',
+        	data:JSON.stringify({user_phone:userphone}),
         	dataType:"json",
         	success:function(data){
+        		$("#userid").val(data[0].user_id);
         		$("#name").val(data[0].user_name);//昵称
         		
             	$("#email").val(data[0].user_email);//email
             	//$('input:radio:checked').val(user_sex);
             	$("#aboutme").val(data[0].user_self);
             	$("#truename").val(data[0].user_truename);
-            	$("#altphone").val(data[0].user_phone);
+            	$("#altphone").val(userphone);
             	$("#qq").val(data[0].user_qq);
             	if(data[0].user_sex==3){
             		//男
@@ -1416,47 +1491,91 @@
             	}
         	},
         	error:function(){
-        		alert("error");
+        		alert("qerror");
         	}
 		})		 
     })
     //个人信息手机号更改
      $("#alterphone").click(function(){
-    	alert(1);
     	var data={
     			"user_phone":$("#altphone").val(),
-    			"user_email":$("#email").val(),
+    			"user_id":$("#userid").val(),
     	}
     	alert(JSON.stringify(data));
     	$.ajax({
     			type:"POST",
-    			url:"User/updatephone",
+    			url:url+"/videoServer/front/User/updatephone",
     			data:JSON.stringify(data),
     			contentType:'application/json;charset=UTF-8',
 	        	cache:false,
     			dataType:"json",
     			success:function(data){
-    				
-    				alert(data);
+    				var expiresDate= new Date();
+	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
+    				$.cookie('phone',$("#altphone").val(),{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
+    				//alert($.cookie("phone"));
     			},
     			error:function(){
     				alert("手机号更改失败");
     			}
     		}) 
     }) 
-    //安全设置页面
-    $("#anquan").click(function(){
-    	alert("本页面功能尚不能用");
-    })
+    var code="";
+	//获取验证码
+	$('#hmac').click(function(){  
+	        var codeflag = 60;//点击时间间隔60s
+	         
+	        if(codeflag==60){  
+	            var timeflag = setInterval(function(){  
+	                codeflag--;  
+	                if(codeflag>0){        	
+	                    $('#hmac').val('重新发送'+codeflag+'s');  
+	                    $('#hmac').css({'color':'#99897A'});  
+	                    $('#hmac').attr('disabled','disabled');  
+	                }else{  
+	                    codeflag=60;  
+	                    $('#hmac').val('获取验证码');  
+	                    $('#hmac').css({'color':'black'});  
+	                    $('#hmac').removeAttr('disabled');  
+	                    clearInterval(timeflag);  
+	            	}  
+	        	},1000);  
+	            
+	            	//随机生成六位验证码
+		            //var code="";
+		        	for(var i=0;i<6;i++){
+		        		  code+=Math.floor(Math.random()*10);
+		        	}
+		        	//alert(code);
+	           
+	          
+	           var str={
+	        	   	phone:userphone,
+	        		code:code,//随机验证码
+	        		TemplateCode:"SMS_135036257"//模板信息
+	           };
+		       $.ajax({
+		       			type:"POST",
+		        	    url:url+"/videoServer/front/AliBigFish/verificationCode",
+		        	    contentType:'application/json;charset=UTF-8',
+		        	    data:JSON.stringify(str),     			        	        	
+		        	    dataType:"json",
+		        	    success:function(data){
+		        	       alert("验证码已发送，请注意查收！");		        	        		
+		        	     },
+		    	       	error:function(){
+		        	        		
+		        	    }
+		       	});   
+	        }
+	})
+    
     //重置密码
-	$("#reset").click(function(){
-  		 alert(1);
-  		 
+	$("#reset").click(function(){	 
   		var pwd = $('#pwd').val();
   		var repwd = $('#repwd').val();
 	    var vcode = $('#vcode').val();
-	    var myreg=/^[a-zA-Z0-9]{6,21}$/;
-	  	
+	    var myreg=/^[a-zA-Z0-9]{6,21}$/;  	
 	    if(pwd == ""){
 	    	$("#pwd").attr('placeholder','请输入密码');
 			$("#pwd").css('color','red'); 
@@ -1502,53 +1621,26 @@
 	    		"user_phone":userphone,
         		"user_pwd":pwd,
         		
-	    } 
+	    };
 	   // alert(JSON.stringify(UserTab));
-	    if(typeof(vcode)!="undefined"&&vcode==code&&typeof(pwd)!="undefined"&&repwd==pwd){   
-	    	$.ajax({
-	        	type:"POST",
-	        	url:"User/queryuser",
-	        	data:{
-	        		user_phone:userphone,	
-	        	},		        	
-	        	dataType:"json",
-	        	success:function(data){
-	        		//data=1 账号已注册
-	        		if(data==1){
-	        			alert("data==1");
-	        			var UserTab={
-	        		    		"user_phone":phone,    	        		
-	        	        		"user_pwd":pwd,
-	        	        		
-	        		    } 
-	        			 $.ajax({
-	        	        	type:"POST",
-	        	        	url:"User/updateuser",
-	        	        	data:JSON.stringify(UserTab),	
-	        	        	contentType:'application/json;charset=UTF-8',
-	        	        	cache:false,
-	        	        	dataType:"json",
-	        	        	success:function(data){
-	        	        		alert(data);
-	        	        		/* if(data==1){
-	        	        			alert("success");
-	        	        		} */
-	        	        		 
-	        	        	},
-	        	        	error:function(){
-	        	        		alert("error");
-	        	        		window.location.reload();
-	        	        	}
-	        	        }); 
-	        		}else{ 
-	        			alert("该号码未注册，请先注册！");
-	        			
-	         		} 
-	        	},
-	        	error:function(){
+	   if(typeof(vcode)!="undefined"&&vcode==code&&typeof(pwd)!="undefined"&&repwd==pwd){   
+
+	        $.ajax({
+	       			type:"POST",
+	        	    url:url+"/videoServer/front/User/updateuser",
+	        	    data:JSON.stringify(UserTab),	
+	        	    contentType:'application/json;charset=UTF-8',
+	        	    cache:false,
+	        	    dataType:"json",
+	        	    success:function(data){
+	        	       alert(data);	   		 
+	        	    },
+	        	    error:function(){
+	        	       alert("error");
+	        	       //window.location.reload();
+	        	    }
+	         }); 
 	        		
-	        	}
-	        });    
 	     }else{  
 	        alert("输入信息有误");
 	        return false;  
@@ -1556,21 +1648,69 @@
 	})
 	//进入个人页面获取旧密码
 	
-    $(function(){
+    /* $(function(){
     	//var userphone=$.cookie('phone');
     	//alert(userphone);
     	$.ajax({
         	type:"POST",
-        	url:"User/queryuser",
-        	data:{
-        		"user_phone":userphone,	
-        	},		        	
+        	url:url+"/videoServer/front/User/queryuser",
+        	contentType:'application/json;charset=UTF-8',
+        	data:JSON.stringify({user_phone:userphone}),
         	dataType:"json",
         	success:function(data){
         		$("#oldpwd").val(data[0].user_pwd);//旧密码
         	}
     	})
-    })
+    }) */
+	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
+	$(function(){
+		
+		alert($.cookie('phone'));
+		alert($.cookie('photo'));
+		if($.cookie("phone")==null){//cookie过期
+			alert("登录过期，请重新登录");
+		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
+			//alert("pp");
+			$("#logsd").hide();
+			$("#logImg").show();
+		}else if($.cookie("phone")!=null&&$.cookie("photo")!=null){//cookie有用户信息和头像
+			//alert("dd");
+			$("#logsd").hide();
+			$("#logImg").attr("src","http://localhost:8080/videoServer/boo/photos/LoginPhoto/"+$.cookie("photo")+"");
+			$("#logImg").show();
+		}
+		 
+		
+	})
+	/*
+		退出按钮点击事件
+	*/
+	$("#exit").click(function(){
+		alert(5);
+		//window.location.href="index.html"; 
+		
+		$("#logsd").show();
+		$("#logImg").hide();
+		$.cookie('id', '', { expires: -1 });
+		$.cookie('phone', '', { expires: -1 });
+		$.cookie('photo', '', { expires: -1 }); 
+		 
+	})
+	
+	//登录注册样式切换
+	new Vue({  
+		  el: '#logsd',  
+		  data: {  
+		   flag:1,//默认为百度添加 .active  
+		  },  
+		  methods:{  
+		   change:function(a){//传入参数这里指1、2  
+		    this.flag=a;//flag==1 or flag==2  
+		   }  
+		  }  
+	})  
+	
 </script>
+
 </body>
 </html>

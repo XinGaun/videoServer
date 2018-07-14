@@ -38,7 +38,7 @@ function deleteUserTest(test_id){
 		$.ajax({
 			type : "POST",
 			url : url
-			+ "/videoServer/UserTest/deteleUserTest",
+			+ "front/UserTest/deteleUserTest",
 			contentType : 'application/json; charset=UTF-8',
 			data : JSON.stringify(data), //传入组装的参数
 			dataType : "json",
@@ -123,7 +123,7 @@ function testupdate(){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/UserTest/updateUserTest",
+		+ "front/UserTest/updateUserTest",
 		contentType : 'application/json; charset=UTF-8',
 		data : JSON.stringify(data), //传入组装的参数
 		dataType : "json",
@@ -152,7 +152,7 @@ function particulars(map){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/UserTest/queryUserTestAnswer",
+		+ "front/UserTest/queryUserTestAnswer",
 		contentType : 'application/json; charset=UTF-8',
 		data : JSON.stringify(data), //传入组装的参数
 		dataType : "json",
@@ -240,7 +240,7 @@ function pushclear(){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/UserTest/addUserTest",
+		+ "front/UserTest/addUserTest",
 		contentType : 'application/json; charset=UTF-8',
 		data : JSON.stringify(data), //传入组装的参数
 		dataType : "json",
@@ -263,7 +263,7 @@ function initTestTable(param){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/UserTest/queryUserTest",
+		+ "front/UserTest/queryUserTest",
 		contentType : 'application/json; charset=UTF-8',
 		data : JSON.stringify(param), //传入组装的参数
 		dataType : "json",
@@ -421,7 +421,7 @@ function deleteUserTestEvaluate(evaluate_id){
 		$.ajax({
 			type : "POST",
 			url : url
-			+ "/videoServer/UserTest/deleteUserTestEvaluate",
+			+ "front/UserTest/deleteUserTestEvaluate",
 			contentType : 'application/json; charset=UTF-8',
 			data : JSON.stringify(data), //传入组装的参数
 			dataType : "json",
@@ -453,7 +453,7 @@ function updateUserTestEvaluate(){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/UserTest/updateUserTestEvaluate",
+		+ "front/UserTest/updateUserTestEvaluate",
 		contentType : 'application/json; charset=UTF-8',
 		data : JSON.stringify(data), //传入组装的参数
 		dataType : "json",
@@ -478,7 +478,7 @@ function queryUserTestEvaluatedetails(evaluate_id){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/UserTest/queryUserTestEvaluate",
+		+ "front/UserTest/queryUserTestEvaluate",
 		contentType : 'application/json; charset=UTF-8',
 		data : JSON.stringify(data), //传入组装的参数
 		dataType : "json",
@@ -510,7 +510,7 @@ function addUserTestEvaluate(){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/UserTest/addUserTestEvaluate",
+		+ "front/UserTest/addUserTestEvaluate",
 		contentType : 'application/json; charset=UTF-8',
 		data : JSON.stringify(data), //传入组装的参数
 		dataType : "json",
@@ -533,7 +533,7 @@ function initEvaluateBody(paramg){
 	$.ajax({
 		type : "POST",
 		url : url
-		+ "/videoServer/UserTest/queryUserTestEvaluate",
+		+ "front/UserTest/queryUserTestEvaluate",
 		contentType : 'application/json; charset=UTF-8',
 		data : JSON.stringify(paramg), //传入组装的参数
 		dataType : "json",
