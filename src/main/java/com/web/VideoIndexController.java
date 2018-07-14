@@ -2,6 +2,9 @@ package com.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,17 +40,17 @@ public class VideoIndexController {
 	 * @param data
 	 * @return
 	 */
-	@RequestMapping(value="/queryCourseClick",produces="application/json;charset=utf-8",method=RequestMethod.POST)
-	public String queryCourseClick() {
-		return indexService.queryCourseClick();
+	@RequestMapping(value="/queryBoutiqueVideoClick",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryBoutiqueVideoClick(@RequestBody String data) {
+		return indexService.queryBoutiqueVideoClick(data);
 	}
 	/**
 	 * index查询课程评分榜
 	 * @param data
 	 * @return
 	 */
-	@RequestMapping(value="/queryCourseGrade",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	/*@RequestMapping(value="/queryCourseGrade",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String queryCourseGrade() {
 		return indexService.queryCourseGrade();
-	}
+	}*/
 }

@@ -8,8 +8,8 @@ public interface VideoIndexDao {
 	public ArrayList<HashMap<String,Object>> queryBoutiqueVideo();
 	//推荐套餐
 	public ArrayList<HashMap<String,Object>> queryCombo();
-	//获取课程点击榜
-	public ArrayList<HashMap<String,Object>> queryCourseClick();
-	//获取课程评分榜
-	public ArrayList<HashMap<String,Object>> queryCourseGrade();
+	//获取所有精品课程
+	public ArrayList<HashMap<String,Object>> queryBoutiqueVideoClick(HashMap<String,Object> map);
+	//查询所有课程总数
+	public int queryBoutiqueVideoAllCount();
 }

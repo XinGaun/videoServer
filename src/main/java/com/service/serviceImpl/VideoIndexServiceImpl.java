@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.dao.VideoIndexDao;
 import com.service.VideoIndexService;
+
+import com.util.Count;
+import com.util.OSSUtil;
+import com.util.Page;
+
 @Service
 public class VideoIndexServiceImpl implements VideoIndexService {
 	@Autowired
@@ -25,17 +30,24 @@ public class VideoIndexServiceImpl implements VideoIndexService {
 		ArrayList<HashMap<String,Object>> list = videoIndexDao.queryCombo();
 		return JSON.toJSONString(list);
 	}
-	//课程点击榜
+	//获取所有精品课程
 	@Override
-	public String queryCourseClick() {
-		ArrayList<HashMap<String,Object>> list = videoIndexDao.queryCourseClick();
-		return JSON.toJSONString(list);
+	public String queryBoutiqueVideoClick(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		map= Page.page(map);
+		ArrayList<HashMap<String,Object>> list = videoIndexDao.queryBoutiqueVideoClick(map);
+		int count = videoIndexDao.queryBoutiqueVideoAllCount();
+		return JSON.toJSONString(Count.counts(list, count, map,200,"queryBoutiqueVideoAllCount success"));
 	}
 	//课程评分榜
-	@Override
+	/*@Override
 	public String queryCourseGrade() {
 		ArrayList<HashMap<String,Object>> list = videoIndexDao.queryCourseGrade();
 		return JSON.toJSONString(list);
+	}*/
+	private int parseInt(Object object) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

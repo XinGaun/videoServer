@@ -6,12 +6,15 @@ import java.util.List;
 import org.eclipse.jetty.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.TeacherDAO;
 import com.dao.UserRoleDAO;
 import com.entity.TeacherDomain;
 import com.entity.UserRoleDomain;
+
+
 import com.service.ITeacherService;
 import com.util.DateUtil;
 import com.util.MD5;
@@ -23,13 +26,16 @@ public class TeacherServiceImpl implements ITeacherService
 {
 	@Autowired
 	private TeacherDAO TeacherDAO;
+
 	@Autowired
 	private UserRoleDAO userRoleDAO;
+
 
 	public void setTeacherDAO(TeacherDAO TeacherDAO)
 	{
 		this.TeacherDAO = TeacherDAO;
 	}
+
 
 	@Transactional
 	public ResponseInfo addTeacher(TeacherDomain TeacherDomain)
@@ -45,6 +51,7 @@ public class TeacherServiceImpl implements ITeacherService
 		if (addStatus != 1) {
 			responseInfo.setRetCode(0).setRetMsg("系统有误,添加教师信息失败!");
 		}
+
 		//添加角色表信息
 		UserRoleDomain userRole = new UserRoleDomain();
 		userRole.setUser_id(TeacherDomain.getTeacher_id());

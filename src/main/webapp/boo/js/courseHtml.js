@@ -21,16 +21,21 @@ $(function(){
 		$("#xypl").show();
 	});
 	$("#Collection").click(function(){
-		var collection = $("#Collection").html();
-		if(collection =="已收藏"){
-			alert("已经收藏啦")
+		var userPhone = $.cookie("phone");
+		if(userPhone == null || userPhone == ""){
+			window.location.href="logins.html";
 		}else{
-			var userphone=$.cookie("phone");
-			var cid = getUrlParam('cid');
-			param.cid = cid;
-			param.userphone = userphone;
-			insertCollection(param);
-			$("#Collection").html("已收藏");
+			var collection = $("#Collection").html();
+			if(collection =="已收藏"){
+				alert("已经收藏啦")
+			}else{
+				var userphone=$.cookie("phone");
+				var cid = getUrlParam('cid');
+				param.cid = cid;
+				param.userphone = userphone;
+				insertCollection(param);
+				$("#Collection").html("已收藏");
+			}
 		}
 	});
 	var cid = getUrlParam('cid');
@@ -240,7 +245,7 @@ function initCourseTop(cid){
 					$("#courses_introduce").html(result[0].courses_introduce);
 					$("#video_form_name").html(result[0].video_form_name);
 					$("#video_form_class").html(result[0].video_form_class);
-					$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;" class="img-rounded lazy">');
+					$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
 					$("#teacher_name").html(result[0].teacher_name);
 					$("#teacher_introduce").html(result[0].teacher_introduce);
 					$("#Collection").html("收藏");
@@ -255,7 +260,7 @@ function initCourseTop(cid){
 					$("#courses_introduce").html(result[0].courses_introduce);
 					$("#video_form_name").html(result[0].video_form_name);
 					$("#video_form_class").html(result[0].video_form_class);
-					$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;" class="img-rounded lazy">');
+					$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
 					$("#teacher_name").html(result[0].teacher_name);
 					$("#teacher_introduce").html(result[0].teacher_introduce);
 				}									

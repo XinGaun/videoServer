@@ -5,8 +5,7 @@ public interface VideoIndexService {
 	public String queryBoutiqueVideo();
 	//查询推荐套餐
 	public String queryCombo();
-	//查询课程点击榜
-	public String queryCourseClick();
-	//查询课程评分榜
-	public String queryCourseGrade();
+	//查询所有的精品课程
+	public String queryBoutiqueVideoClick(String data);
+
 }

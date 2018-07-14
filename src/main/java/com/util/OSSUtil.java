@@ -107,6 +107,7 @@ public class OSSUtil implements ProgressListener{
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+
 			System.out.println(e.getMessage());
 		}
 
