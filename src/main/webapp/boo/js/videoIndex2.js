@@ -1,5 +1,5 @@
 $(function(){
-	initRecommendLesson();
+	initRecommendTJ();
 	judgePC();
 });
 //var url = "http:/127.0.0.1:8080"
@@ -111,23 +111,121 @@ function judgePC(){
 	}
 }
 
+//导航下方筛选
+function queryClassVideo(queryAlls){
+	queryClassVideo1111(queryAlls);
+	queryClassVideo2222(queryAlls);
+}
+
+
+function queryClassVideo2222(queryAlls){
+	paramT.queryAll=queryAlls;
+	$("#RecomExcellent").html("");
+	$("#MoreLesson").html('<button class="btn btn-default" style="float: right" onclick="btnMore()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
+	$("#MoreLesson").html('<button class="btn btn-default" style="float: right" onclick="MoreLesson()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
+	$("#fanyeTT").html("");
+	$("#fanye").html("");
+	paramT.pages = 0;
+	paramT.nums = 0;
+	initRecommendLesson(paramT);
+	//点击更多
+	function MoreLesson(){
+		var phone = $.cookie("phone");
+		paramT.phone = phone;
+		$("#RecomExcellent").html("");
+		$("#MoreLesson").html("");
+		initRecommendLessonClick(paramT);
+	}
+}
+
+//点击更多
 function MoreLesson(){
+	var phone = $.cookie("phone");
+	paramT.phone = phone;
+	paramT.queryAll="";
 	$("#RecomExcellent").html("");
 	$("#MoreLesson").html("");
 	initRecommendLessonClick(paramT);
 }
-//index 加载推荐好课
-function initRecommendLesson(){
+
+//index 加载默认课程
+function initRecommendTJ(){
 	$
 	.ajax({
 		type : "POST",
-		url : url+"/videoServer/front/VideoIndex/queryBoutiqueVideo",
+		url : url+"/videoServer/front/VideoIndex/queryCombo",
 		contentType : 'application/json; charset=UTF-8',
 		//data: JSON.stringify(param),  //传入组装的参数
 		dataType : "json",
 		success : function(result) {
 			if (result == "" || result.length == 0) {
 				$("#RecomExcellent").append("暂无课程信息!");
+				$("#MoreLesson").html("");
+				return;
+			}
+			for (var i = 0; i < result.length; i++) {
+				var RecomExcellent = '<div class="col-md-3">'
+					+ '<div class="thumbnail">'
+					+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
+					+ result[i].courses_img_url
+					+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
+					+ '</a>'
+					+ '<div class="caption">'
+					+ '<p style="font-weight: bold;">'
+					+ result[i].courses_name
+					+ '</p>'
+					+ '<p style="text-indent:2em;" class="kcjs">'
+					+ result[i].courses_introduce
+					+ '</p>'
+					+ '<div class="col-md-6">'
+					+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result[i].teacher_id+'">'
+					+ result[i].teacher_name
+					+ '</a></p>'
+					+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+					+ '</div>'
+					+ '<div class="col-md-6">'
+					+ '<p>'
+					+ result[i].courses_date
+					+'</P>'
+					+ '<p style="text-align:right;font-weight: bold;">'
+					+ result[i].courses_time
+					+ '</p>'
+					+ '</div>'
+					+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" ><span>3622人已购买</span>'
+					//+ result.list[i].courses_grade
+					+ '</p>'
+					+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+					+ result[i].courses_pricemoney
+					+ '<span>￥</span></p>'
+					/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+					+ result[i].courses_click
+					+ '</p>'*/
+					+ '<p>&nbsp;</p>'
+					+ '</div>'
+					+ '</div>'
+					+ '</div>';
+				$("#RecomExcellent").append(RecomExcellent);
+			}
+			$("img.lazy").lazyload({effect: "fadeIn",offset:300});
+		}
+	});
+}
+
+
+
+//index 加载推荐好课
+function initRecommendLesson(paramT){
+	$
+	.ajax({
+		type : "POST",
+		url : url+"/videoServer/front/VideoIndex/queryBoutiqueVideo",
+		contentType : 'application/json; charset=UTF-8',
+		data: JSON.stringify(paramT),  //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			if (result == "" || result.length == 0) {
+				$("#RecomExcellent").append("暂无课程信息!");
+				$("#MoreLesson").html("");
 				return;
 			}
 			for (var i = 0; i < result.length; i++) {
@@ -190,6 +288,7 @@ function initRecommendLessonClick(paramT){
 		success : function(result) {
 			if (result.list.length == 0) {
 				$("#RecomExcellent").append("暂无课程详情!");
+				$("#MoreLesson").html("");
 				return;
 			}else {
 				

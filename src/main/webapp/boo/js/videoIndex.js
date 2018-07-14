@@ -1,5 +1,5 @@
 $(function(){
-	initBoutique();
+	//initBoutique(param);
 	initRecommend();
 	judgePC();
 	$("#videoHtml").click(function(){
@@ -117,12 +117,41 @@ function judgePC(){
 	}
 }
 
+//导航下方筛选
+function queryClassVideo(queryAlls){
+	queryClassVideo1111(queryAlls);
+	queryClassVideo2222(queryAlls);
+}
+
+function queryClassVideo1111(queryAlls){
+	param.queryAll=queryAlls;
+	$("#excellent").html("");
+	$("#buttonMore").html('<button class="btn btn-default" style="float: right" onclick="btnMore()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
+	$("#MoreLesson").html('<button class="btn btn-default" style="float: right" onclick="MoreLesson()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
+	$("#fanye").html("");
+	$("#fanyeTT").html("");
+	param.pages = 0;
+	param.nums = 0;
+	initBoutique(param);
+	//点击更多
+	function btnMore(){
+		var phone = $.cookie("phone");
+		param.phone = phone;
+		$("#excellent").html("");
+		$("#buttonMore").html("");
+		initBoutiqueVideoClick(param);
+	}
+}
+
+//点击更多
 function btnMore(){
 	var phone = $.cookie("phone");
 	param.phone = phone;
+	param.queryAll="";
 	$("#excellent").html("");
 	$("#buttonMore").html("");
 	initBoutiqueVideoClick(param);
+	
 }
 
 //index 加载课程评分榜
@@ -182,8 +211,8 @@ function btnMore(){
 }*/
 
 
-//index 加载推荐套餐
-/*function initRecommend(){
+//index 加载默认课程
+function initRecommend(){
 	$
 	.ajax({
 		type : "POST",
@@ -193,61 +222,72 @@ function btnMore(){
 		dataType : "json",
 		success : function(result) {
 			if (result == "" || result.length == 0) {
-				$("#querycombo").append("暂无课程信息!");
+				$("#excellent").append("暂无课程信息!");
+				$("#buttonMore").html("");
 				return;
 			}
 			for (var i = 0; i < result.length; i++) {
-				var querycombo = '<div class="col-md-3" >'
-						+ '<div class="thumbnail">'
-						+ '<a href="#">' 
-						+ '<img data-original="'
-						+ result[i].combo_imgs
-						+ '" class="jpckclass lazy" style="width:100%;height:180px;" alt="...">'
-						+ '</a>'
-						+ '<div class="caption">'
-						+ '<p style="font-weight: bold;">'
-						+ result[i].combo_name
-						+ '</p>'
-						+ '<p style="text-indent:2em" class="kcjs">'
-						+ result[i].combo_introduce
-						+ '</p>'
-						+ '<div class="col-md-6">'
-						+ '<p style="color:green">'
-						+ result[i].teacher_name
-						+ '</p>'
-						+ '</div>'
-						+ '<div class="col-md-6">'
-						+ '<p style="text-align:right;">'
-						+ result[i].combo_date
-						+ '</p>'
-						+ '</div>'
-						+ '<p style="color:#00BFFF;" class="col-md-4">'
-						+ result[i].combo_price
-						+ '<span>￥</span></p>'
-						+ '<p>&nbsp;</p>'
-						+ '</div>'
-						+ '</div>'
-						+ '</div>';
-				$("#querycombo").append(querycombo);
+				var excellent = '<div class="col-md-3">'
+					+ '<div class="thumbnail">'
+					+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
+					+ result[i].courses_img_url
+					+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
+					+ '</a>'
+					+ '<div class="caption">'
+					+ '<p style="font-weight: bold;">'
+					+ result[i].courses_name
+					+ '</p>'
+					+ '<p style="text-indent:2em;" class="kcjs">'
+					+ result[i].courses_introduce
+					+ '</p>'
+					+ '<div class="col-md-6">'
+					+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result[i].teacher_id+'">'
+					+ result[i].teacher_name
+					+ '</a></p>'
+					+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+					+ '</div>'
+					+ '<div class="col-md-6">'
+					+ '<p>'
+					+ result[i].courses_date
+					+'</P>'
+					+ '<p style="text-align:right;font-weight: bold;">'
+					+ result[i].courses_time
+					+ '</p>'
+					+ '</div>'
+					+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" ><span>3622人已购买</span>'
+					//+ result.list[i].courses_grade
+					+ '</p>'
+					+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+					+ result[i].courses_pricemoney
+					+ '<span>￥</span></p>'
+					/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+					+ result[i].courses_click
+					+ '</p>'*/
+					+ '<p>&nbsp;</p>'
+					+ '</div>'
+					+ '</div>'
+					+ '</div>';
+				$("#excellent").append(excellent);
 			}
 			$("img.lazy").lazyload({effect: "fadeIn",offset:300});
 		}
 	});
-}*/
+}
 
 
 //index 加载精品课程
-function initBoutique(){
+function initBoutique(param){
 	$
 	.ajax({
 		type : "POST",
 		url : url+"/videoServer/front/VideoIndex/queryBoutiqueVideo",
 		contentType : 'application/json; charset=UTF-8',
-		//data: JSON.stringify(param),  //传入组装的参数
+		data: JSON.stringify(param),  //传入组装的参数
 		dataType : "json",
 		success : function(result) {
 			if (result == "" || result.length == 0) {
 				$("#excellent").append("暂无课程信息!");
+				$("#buttonMore").html("");
 				return;
 			}
 			for (var i = 0; i < result.length; i++) {
@@ -311,6 +351,7 @@ function initBoutiqueVideoClick(param){
 		success : function(result) {
 			if (result.list.length == 0) {
 				$("#excellent").append("暂无课程详情!");
+				$("#buttonMore").html("");
 				return;
 			}else {
 				for (var i = 0; i < result.list.length; i++) {

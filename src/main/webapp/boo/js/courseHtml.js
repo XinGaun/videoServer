@@ -1,7 +1,6 @@
 $(function(){
 
 	var user_id = $.cookie('id');
-
 	$("#kcml").hide();
 	$("#xypl").hide();
 	initRecommendCourse();
@@ -250,19 +249,37 @@ function initCourseTop(cid){
 					$("#teacher_introduce").html(result[0].teacher_introduce);
 					$("#Collection").html("收藏");
 				}else{
-					$("#Collection").html("已收藏");
-					$("#courses_name").html(result[0].courses_name);
-					$("#courses_names").html(result[0].courses_name);
-					$("#courses_grade").html(result[0].courses_grade);
-					$("#qian").html(result[0].courses_pricemoney);
-					$("#qians").html(result[0].courses_pricemoney);
-					$("#courses_click").html(result[0].courses_click);
-					$("#courses_introduce").html(result[0].courses_introduce);
-					$("#video_form_name").html(result[0].video_form_name);
-					$("#video_form_class").html(result[0].video_form_class);
-					$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
-					$("#teacher_name").html(result[0].teacher_name);
-					$("#teacher_introduce").html(result[0].teacher_introduce);
+					var userPhone = $.cookie("phone");
+					if(userPhone == null || userPhone == ""){
+						$("#Collection").html("收藏");
+						$("#courses_name").html(result[0].courses_name);
+						$("#courses_names").html(result[0].courses_name);
+						$("#courses_grade").html(result[0].courses_grade);
+						$("#qian").html(result[0].courses_pricemoney);
+						$("#qians").html(result[0].courses_pricemoney);
+						$("#courses_click").html(result[0].courses_click);
+						$("#courses_introduce").html(result[0].courses_introduce);
+						$("#video_form_name").html(result[0].video_form_name);
+						$("#video_form_class").html(result[0].video_form_class);
+						$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
+						$("#teacher_name").html(result[0].teacher_name);
+						$("#teacher_introduce").html(result[0].teacher_introduce);
+					}else{
+						$("#Collection").html("已收藏");
+						$("#courses_name").html(result[0].courses_name);
+						$("#courses_names").html(result[0].courses_name);
+						$("#courses_grade").html(result[0].courses_grade);
+						$("#qian").html(result[0].courses_pricemoney);
+						$("#qians").html(result[0].courses_pricemoney);
+						$("#courses_click").html(result[0].courses_click);
+						$("#courses_introduce").html(result[0].courses_introduce);
+						$("#video_form_name").html(result[0].video_form_name);
+						$("#video_form_class").html(result[0].video_form_class);
+						$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
+						$("#teacher_name").html(result[0].teacher_name);
+						$("#teacher_introduce").html(result[0].teacher_introduce);
+					}
+					
 				}									
 			}
 			$("img.lazy").lazyload({

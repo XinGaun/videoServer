@@ -20,8 +20,9 @@ public class VideoIndexServiceImpl implements VideoIndexService {
 	private VideoIndexDao videoIndexDao;
 	//查询推荐课程
 	@Override
-	public String queryBoutiqueVideo() {
-		ArrayList<HashMap<String,Object>> list = videoIndexDao.queryBoutiqueVideo();
+	public String queryBoutiqueVideo(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		ArrayList<HashMap<String,Object>> list = videoIndexDao.queryBoutiqueVideo(map);
 		return JSON.toJSONString(list);
 	}
 	//查询推荐套餐

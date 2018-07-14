@@ -23,8 +23,8 @@ public class VideoIndexController {
 	 * @return
 	 */
 	@RequestMapping(value="/queryBoutiqueVideo",produces="application/json;charset=utf-8",method=RequestMethod.POST)
-	public String queryBoutiqueVideo() {
-		return indexService.queryBoutiqueVideo();
+	public String queryBoutiqueVideo(@RequestBody String data) {
+		return indexService.queryBoutiqueVideo(data);
 	}
 	/**
 	 * index查询推荐套餐
@@ -36,7 +36,7 @@ public class VideoIndexController {
 		return indexService.queryCombo();
 	}
 	/**
-	 * index查询课程点击榜
+	 * index查询更多课程
 	 * @param data
 	 * @return
 	 */
