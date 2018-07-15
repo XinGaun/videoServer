@@ -117,7 +117,7 @@ function pushanswer(data){
 		data: JSON.stringify(data),  //传入组装的参数
 		dataType : "json",
 		success : function(result) {
-			
+			console.log(result)
 			$('#myModal').modal({
 				show:true
 			});

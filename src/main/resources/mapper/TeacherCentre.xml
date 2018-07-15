@@ -20,7 +20,7 @@
 		SELECT t.teacher_id,t.teacher_name,c.courses_name,c.courses_click,c.courses_status,c.courses_pricemoney, c.courses_grade,t.teacher_introduce,c.courses_img_url,date_format(c.courses_date,'%Y-%m-%d')courses_date 
 		FROM teacher_tab t 
 		LEFT JOIN courses_tab c ON t.teacher_id=c.teacher_id 
-		WHERE 1=1 AND c.courses_status = 5 AND t.teacher_status = 5 
+		WHERE 1=1 AND c.courses_status = 8 AND t.teacher_status = 5 
 		<if test="cid!=''">
  			AND t.teacher_id = #{cid} 
  		</if>
