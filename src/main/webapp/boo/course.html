@@ -9,7 +9,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <script type="text/javascript" src="ckplayer/ckplayer.js"></script>
-
+<link rel="stylesheet" href="/static/build/layui.css" media="all">
+<script src="/static/build/layui.js"></script>
+<link rel="stylesheet" href="/js/layui.css" media="all">
+<script src="/js/layui.js"></script>
 </HEAD>
 <style>
 .bg {
@@ -100,7 +103,6 @@ a:hover {
 	z-index: 2;
 }
 
-
 #foot {
 	width: 100vw;
 	height: 13vh;
@@ -176,10 +178,7 @@ a:hover {
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.lazyload.min.js"></script>
 
-
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
-
-
 <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 
 <BODY>
@@ -371,9 +370,11 @@ a:hover {
 						<!-- <p style="color: red;">
 							&nbsp;&nbsp;&nbsp;&nbsp;<span id="video_form_class"></span> <span
 								id="video_form_name"></span>
+
 						</p> -->
 						<ul class="list-group" id="kcmls" >
 						</ul>
+
 						<p>&nbsp;</p>
 						<h4>
 							<span class="glyphicon glyphicon-option-vertical"></span>课程目录
@@ -396,7 +397,7 @@ a:hover {
 							<span class="glyphicon glyphicon-option-vertical"></span>课程选集
 						</h4>
 						<div style="width:600px;" id="kcxjs">
-							
+
 						</div>
 					</div>
 					<!-- 课程目录结束 -->
@@ -634,7 +635,14 @@ a:hover {
 					<div>
 						<hr>
 					</div>
+
+					<div>
+						<textarea  name="addpinglun" id="addpinglun" cols="80" rows="2" placeholder="请写下你的评论..." ></textarea>
+						<button id="pinglbtn" onclick="pinglbtn()" style="margin-top:-5vh;margin-left:2vw;" class="btn btn-large btn-success">评论吧</button>
+					</div>
 					<div id="pingliu"></div>
+					<div id="fenye"></div>
+
 				</div>
 
 				<div class="modal-footer">
