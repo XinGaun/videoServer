@@ -50,10 +50,7 @@ public class UserControllers {
 	//添加用户
 	@RequestMapping(value="/saveuser",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String saveuser(@RequestBody String data,HttpServletResponse response){
-		System.out.println("mmmmmmmmmmmmmmmmmmmm");
 		UserTab ut = JSON.parseObject(data,UserTab.class);
-		System.out.println(ut);
-		System.out.println(ut.getUser_phone());
 		return JSON.toJSONString(aService.addUser(ut));
 	}
 	//根据手机号查找是否有该用户
@@ -126,7 +123,6 @@ public class UserControllers {
 		}
         System.out.println(ou.getWebURL(ossFileName));
         return JSON.toJSONString(ou.getWebURL(ossFileName));
-      
 	}
 	//个人中心更改用户信息
 	@RequestMapping(value="/updatemessages",method=RequestMethod.POST)

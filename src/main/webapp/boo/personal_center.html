@@ -901,7 +901,8 @@
             $('#uploadFile').click();
         });
 　　}); 
-  //保存按钮点击事件
+
+    //保存按钮点击事件
     $("#updateuser").click(function(){  	
      	var user=$("#name").val();//昵称
     	var photo=$("#photoimg").val();
@@ -949,7 +950,7 @@
     			"user_qq":qq,
     	};
     	
-    	//alert(JSON.stringify(data));
+    	alert(JSON.stringify(data));
     	if(typeof(user)!="undefined"&&typeof(email)!="undefined"){
 		//var data={};
     		$.ajax({
@@ -1163,6 +1164,7 @@
 	        return false;  
 	    }  
 	})
+
   //进入页面自动获取cookie的值，根据cookie决定是否显示登录
 	$(function(){
 		

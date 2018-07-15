@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.dao.VideosDao;
+import com.entity.CommentTab;
+import com.entity.UserTab;
 import com.service.VideosDaoService;
 import com.util.Count;
 import com.util.Page;
@@ -53,5 +55,14 @@ public class VideosDaoServiceImpl implements VideosDaoService {
 		int count = videosDao.queryCommentCount(hashmap);
 		return JSON.toJSONString(Count.counts(list, count, hashmap,200,"queryComment success"));
 	}
-
+	/**
+	 * 添加视频评论信息
+	 */
+	@Override
+	public int addComment(String data) {
+		CommentTab ct = JSON.parseObject(data,CommentTab.class);
+		System.out.println(ct.getUserId()+";"+ct.getVideoId()+";"+ct.getCommentText());
+		return videosDao.addComment(ct);
+	}
+	
 }
