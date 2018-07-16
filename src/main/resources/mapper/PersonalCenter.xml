@@ -5,7 +5,7 @@
 <mapper namespace="com.dao.PersonalCenterDao">
 	<!-- 查询收藏课程详情 -->
 	<select id="queryPersonalCenter" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		select c.courses_name,c.courses_img_url,date_format(c.courses_date,'%Y-%m-%d')courses_date,c.courses_pricemoney,c.courses_grade,c.courses_click,c.courses_id 
+		select c.courses_name,c.courses_img_url,date_format(c.courses_date,'%Y-%m-%d')courses_date,c.courses_pricemoney,substring((SELECT sec_to_time(c.courses_time)courses_time FROM dual),1,8) as courses_time,c.courses_grade,c.courses_click,c.courses_id 
 		from user_tab u 
 		LEFT JOIN subscription_tab s ON s.user_id = u.user_id 
 		LEFT JOIN courses_tab c ON c.courses_id = s.video_id 
@@ -43,7 +43,7 @@
 		LEFT JOIN teacher_tab ON
 		teacher_tab.teacher_id=courses_tab.teacher_id
 		WHERE 1=1 AND
-		courses_status = 5 order by courses_date DESC LIMIT 0,3
+		courses_status = 8 order by courses_date DESC LIMIT 0,3
 	</select>
 	<!-- 查询订单详情 -->
 	<select id="queryOrderInformation" parameterType="java.util.HashMap" resultType="java.util.HashMap">

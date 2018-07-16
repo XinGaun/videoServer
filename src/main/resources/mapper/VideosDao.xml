@@ -13,7 +13,7 @@
 		courses_tab.teacher_id=teacher_tab.teacher_id
 		LEFT JOIN video_form_tab ON video_form_tab.video_form_id =
 		courses_tab.video_form_id
-		WHERE 1=1 AND courses_status = 5
+		WHERE 1=1 AND courses_status = 8
 		<if test="keyword!=''">
 			AND courses_name like '%${keyword}%'
 		</if>
@@ -46,7 +46,7 @@
 		courses_tab.teacher_id=teacher_tab.teacher_id
 		LEFT JOIN video_form_tab ON video_form_tab.video_form_id =
 		courses_tab.video_form_id
-		WHERE 1=1 AND courses_status = 5
+		WHERE 1=1 AND courses_status = 8
 		<if test="keyword!=''">
 			AND courses_name like '%${keyword}%'
 		</if>
@@ -62,7 +62,7 @@
 		LEFT JOIN teacher_tab ON
 		teacher_tab.teacher_id=courses_tab.teacher_id
 		WHERE 1=1 AND
-		courses_status = 5 order by courses_date DESC LIMIT 0,3
+		courses_status = 8 order by courses_date DESC LIMIT 0,3
 	</select>
 	<!-- 查询用户是否有过下单记录 -->
 	<select id="queryOrder" resultType="int" parameterType="java.util.HashMap">

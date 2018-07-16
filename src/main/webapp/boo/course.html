@@ -367,10 +367,14 @@ a:hover {
 						<h4>
 							<span class="glyphicon glyphicon-option-vertical"></span>课程文档
 						</h4>
-						<p style="color: red;">
+						<!-- <p style="color: red;">
 							&nbsp;&nbsp;&nbsp;&nbsp;<span id="video_form_class"></span> <span
 								id="video_form_name"></span>
-						</p>
+
+						</p> -->
+						<ul class="list-group" id="kcmls" >
+						</ul>
+
 						<p>&nbsp;</p>
 						<h4>
 							<span class="glyphicon glyphicon-option-vertical"></span>课程目录
@@ -392,22 +396,8 @@ a:hover {
 						<h4>
 							<span class="glyphicon glyphicon-option-vertical"></span>课程选集
 						</h4>
-						<div style="width:600px;">
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">1</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">2</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">3</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">4</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">5</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">6</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">7</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">8</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">9</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">10</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">11</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">12</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">13</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">14</button>
-							<button class="btn btn-default col-md-1" style="height:50px;width:50px;">15</button>
+						<div style="width:600px;" id="kcxjs">
+
 						</div>
 					</div>
 					<!-- 课程目录结束 -->
@@ -597,9 +587,7 @@ a:hover {
 			</div>
 		</div>
 	</div>
-	<div id="foot-bot">
-		<div id="foot-bottom" style="color: white;">7*24小时服务电话：13623512127</div>
-	</div>
+	
 	</footer>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -645,12 +633,14 @@ a:hover {
 					<div>
 						<hr>
 					</div>
+
 					<div>
 						<textarea  name="addpinglun" id="addpinglun" cols="80" rows="2" placeholder="请写下你的评论..." ></textarea>
 						<button id="pinglbtn" onclick="pinglbtn()" style="margin-top:-5vh;margin-left:2vw;" class="btn btn-large btn-success">评论吧</button>
 					</div>
 					<div id="pingliu"></div>
 					<div id="fenye"></div>
+
 				</div>
 
 				<div class="modal-footer">
@@ -758,28 +748,14 @@ a:hover {
 
 	/* 尾部li标签添加的关于我们 */
 	new Vue({
-		el : '#footli',
-		data : {
-			sites : [ {
-				name : '关于我们'
-			}, {
-				name : '|'
-			}, {
-				name : '加入我们'
-			}, {
-				name : '|'
-			}, {
-				name : '合作申请'
-			}, {
-				name : '|'
-			}, {
-				name : '意见反馈'
-			}, {
-				name : '|'
-			}, {
-				name : '用户协议'
-			} ]
-		}
+	  el: '#footli',
+	  data: {
+	    sites: [
+	      { name: '关于我们' },
+	      { name: '|'},
+	      { name: '意见反馈' },
+	    ]
+	  }
 	})
 	//尾部的语道图标
 	new Vue({
@@ -797,4 +773,3 @@ a:hover {
 		}
 	})
 </script>
-

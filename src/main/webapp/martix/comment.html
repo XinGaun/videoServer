@@ -289,22 +289,22 @@
 										</td>
 										<td>
 											<div class="input-group" width="100%">
-												<span class="input-group-addon">所属用户</span> <input
-													type="text" class="form-control" placeholder="请输入用户名称"
-													id="user_name">
+												<span class="input-group-addon">审核状态</span> <input
+													type="text" class="form-control" placeholder="请输入审核是否通过"
+													id="comment_status">
 											</div>
 										</td>
-										<td>
+										<!-- <td>
 											<div class="input-group" width="100%">
 												<span class="input-group-addon">回复教师</span> <input
 													type="text" class="form-control" placeholder="请输入教师名称"
 													id="teacher_name">
 											</div>
-										</td>
+										</td> -->
 										<td>
 									</tr>
 									<tr>
-										<td colspan="3">
+										<td colspan="2">
 											<div id="sandbox-container">
 												<div class="input-daterange input-group" id="datepicker">
 													<input type="text" class="input form-control" name="start"
@@ -350,20 +350,15 @@
 
 							<div class="panel-body">
 								<div class="table-responsive" id="fatable">
-									<table id='example'
-										class='display table-striped table-bordered table-hover table-condensed'
-										cellspacing='0' width='100%'>
+									<table id='example' class='display table-striped table-bordered table-hover table-condensed' cellspacing='0' width='100%'>
 										<thead>
 											<tr>
-												<th><input type='checkbox' class='checkall' /></th>
-												<!-- <th>评论编号</th> -->
-												<th>视频名称</th>
-												<th>所属用户</th>
+												<th><input type='checkbox' class='checkall' /></th>										
+												<th>视频名称</th>									
 												<th>评论留言</th>
 												<th>留言时间</th>
-												<th>是否回复</th>
+												<th>审核状态</th>										
 												<th>回复内容</th>
-												<th>回复教师</th>
 												<th>回复时间</th>
 											</tr>
 										</thead>
@@ -390,6 +385,7 @@
 								
 								<div class="input-group">
 								    <input type="hidden" id= "reply_comment_id" value=""/><br>
+								    <input type="hidden" id= "reply_comment_status" value=""/><br> 
 									<span>回复内容</span> <br>
 									<textarea rows="5" class="form-control" id="reply_text_input"
 										placeholder="请输入您的留言！"></textarea>									
@@ -433,8 +429,7 @@
 	<script src="assets/js/common.js"></script>
 	<script>
 $(function(){	
-	loadRoleInfo();
-	        var url1 = "http://localhost:8080/";	        
+	loadRoleInfo();	        
              /* //全选
 	         $('.checkall').click(function () {  		
 	         
@@ -455,7 +450,7 @@ $(function(){
        			};      		
        			$.ajax({
                            type: "POST",
-                           url: url1+"videoServer/commentTab/deleteComment",
+                           url: "/videoServer/commentTab/deleteComment",
                            contentType: 'application/json; charset=UTF-8',
        					   cache: false,  //禁用缓存
                            data: JSON.stringify(arr),  //传入组装的参数
@@ -475,10 +470,9 @@ $(function(){
          
            //清除搜索框
        $("#eliminates").click(function(){
- 	          $("#comment_id").val(""); 
-	          $("#user_name").val("");
-	          $("#video_name").val("");
-	          $("#teacher_name").val("");           			
+ 	         // $("#comment_id").val(""); 
+	          $("#video_name").val("");	  
+	          $("#comment_status").val("");	 	          
 	          $("#comment_start").val("");
 	          $("#comment_end").val("");
         });     
@@ -544,26 +538,23 @@ $(function(){
                      //ajax请求数据                      
                      $.ajax({
                          type: "POST",
-                         url: url1+"videoServer/commentTab/queryCommentAll",
+                         url: "/videoServer/commentTab/queryCommentAll",
                          contentType: 'application/json; charset=UTF-8',
      					 cache: false,  //禁用缓存
                          data: JSON.stringify(param),  //传入组装的参数
                          dataType: "json",
                          success: function (result) {
-                             //console.log(result);
-                             //setTimeout仅为测试延迟效果
-                             //setTimeout(function () {
+                        	
                                  //封装返回数据    
                                  var returnData = {};
                                  returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
                                  returnData.recordsTotal = result.total;//返回数据全部记录
                                  returnData.recordsFiltered = result.total;//后台不实现过滤功能，每次查询均视作全部结果
                                  returnData.data = result.data;//返回的数据列表
-                                 //console.log(returnData);
+                               
                                  //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
                                  //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
-                                 callback(returnData);
-                             //}, 200);
+                                 callback(returnData);                          
                            }
                       });  
                 },
@@ -580,36 +571,49 @@ $(function(){
                     
                     { 
      					"data": "video_name",
-     				 	"sDefaultContent":"", 
-     				},
-     				{ "data": "user_name" },
+     				 	"sDefaultContent":"",     			
+     				},     	
      				{ 
      					"data": "comment_text",
-     					 "sDefaultContent":"", 
+     					 "sDefaultContent":"",     				
      				},
      				{ 
      					"data": "comment_date",
      					"sDefaultContent":"",
-    					
      				},
      				{ 
+     					"data": "comment_status" ,
+     					"orderable" : false, // 禁用排序  
+                        "sDefaultContent" : "",                  
+                        "render" : function(data, type, full, meta) {  
+                            if(data=="" ||data == null || data == 0){    
+                            	data = "<button class='btn btn-safety btn-sm' data-toggle='modal' data-target='#myModal' data-commentid='"+full.comment_id+"' data-commentstatusid='10'>通过</button>"+                       
+                            	       "<button class='btn btn-danger btn-sm' onclick='updateCommentStatus("+full.comment_id+")'>不通过</button>";
+                            }else if(data == 10){
+                 				data = "通过";
+                            }else if(data == 11){  
+                                data = "不通过"  
+                            }  
+                             return   data;  
+                          }   
+     				},
+     				/* { 
      					"data": "reply_text" ,
      					"orderable" : false, // 禁用排序  
-                        "sDefaultContent" : "",  
-                        "sWidth" : "3%",
-                          "render" : function(data, type, full, meta) {                         	
+                        "sDefaultContent" : "",                    
+                        "render" : function(data, type, full, meta) {                         	
                             if(data=="" ||data == null ){                                  
-                 				data = "<button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#myModal' data-commentid='"+full.comment_id+"'>回复</button>";
+                 				data = "";
                             }else{  
                                 data = "<button class='btn btn-sm btn-safety' >已回复</button>"  
                             }  
                              return   data;  
                           }   
-     				},
+     				}, */
      				{  
      					"data": "reply_text" ,
      					"orderable" : false, // 禁用排序  
-                        "sDefaultContent" : "",  
+                        "sDefaultContent" : "",                    
                          "render" : function(data, type, full, meta) {  
                             if(data=="" ||data == null ){                                  
                  				data = null;
@@ -618,24 +622,11 @@ $(function(){
                             }  
                              return   data;  
                           }   
-     				},
-     				{ 
-     					"data": "teacher_name" ,
-     				    "sDefaultContent":"" ,
-     				    "orderable" : false, // 禁用排序                  
-                        "render" : function(data, type, full, meta) {  
-                             if(data=="" ||data == null ){                                  
-             				       data = null;
-                             }else{  
-                                   data =data;
-                             }  
-                             return   data;  
-                         }  
-     				},
+     				},   				
      				{ 
      					"data": "reply_date",  
      					"orderable" : false, // 禁用排序  
-                        "sDefaultContent" : "",  
+                        "sDefaultContent" : "",                       
                           "render" : function(data, type, full, meta) {  
                             if(data=="" ||data == null ){                                  
                  				data = null;
@@ -650,11 +641,12 @@ $(function(){
 
         //此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
        //按条件搜索   
+      
        $("#queryComment").click(function(){
  	       //$("#example").next().remove();
 	       //$("#example").remove();
 	       $("#fatable").html(
-	              "<table id='example' class='display table-striped table-bordered table-hover table-condensed' cellspacing='0' width='100%'><thead><tr><th><input type='checkbox' class='checkall' /></th><th>视频名称</th><th>所属用户</th><th>评论留言</th><th>留言时间</th><th>是否回复</th><th>回复内容</th><th>回复教师</th><th>回复时间</th></tr></thead></table>"
+	              "<table id='example' class='display table-striped table-bordered table-hover table-condensed' cellspacing='0' width='100%'><thead><tr><th><input type='checkbox' class='checkall' /></th><th>视频名称</th><th>评论留言</th><th>留言时间</th><th>审核状态</th><th>回复内容</th><th>回复时间</th></tr></thead></table>"
 	        );
 	     //全选
 			$(".checkall").click(function(){
@@ -699,21 +691,31 @@ $(function(){
                    param.limit = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
                    param.start = data.start;//开始的记录序号
                    param.page = (data.start / data.length)+1;//当前页码
-	               var username= $.trim($("#user_name").val());
+	             /*   var username= $.trim($("#user_name").val());
 	               if (username.length > 0 ) 
 	               { 
 	            	   param.user_name = username;//
-	               }
+	               } */
 	               var videoname= $.trim($("#video_name").val());
 	               if (videoname.length > 0 ) 
 	               { 
 	            	   param.video_name = videoname;//
 	               }
-	               var teachername= $.trim($("#teacher_name").val());
+	               var commmentStatus= $.trim($("#comment_status").val());
+	               if (commmentStatus.length > 0 )  {
+	            	   if(commmentStatus == "通过"){
+	            		   param.comment_status = 10;//
+	                   }
+	            	   if(commmentStatus == "不通过"){
+	            		   param.comment_status = 11;//
+	                   }
+	            	   
+	               }
+	              /*  var teachername= $.trim($("#teacher_name").val());
 	               if (teachername.length > 0) 
 	               { 
 	            	   param.teacher_name =teachername;//
-	               }
+	               } */
 	               var commentstart= $.trim($("#comment_start").val());
 	               if (commentstart.length > 0) 
 	               { 
@@ -725,15 +727,16 @@ $(function(){
 	            	   param.comment_end = commentend;//end date
 	               }         
                    //console.log(param);
-                   //ajax请求数据
+                   //ajax请求数据      
                    $.ajax({
                           type: "POST",
-                          url: url1+"videoServer/commentTab/queryCommentAll",
+                          url: "/videoServer/commentTab/queryCommentAll",
                           contentType: 'application/json; charset=UTF-8',
 			              cache: false,  //禁用缓存
                           data: JSON.stringify(param),  //传入组装的参数
                           dataType: "json",
-                          success: function (result) {            	         
+                          success: function (result) {       
+                        
                                  //console.log(result);
                                  //setTimeout仅为测试延迟效果
                                  //setTimeout(function () {
@@ -752,7 +755,7 @@ $(function(){
                    });
                 },
                 //列表表头字段
-                columns: [
+                /* columns: [
 	                   {
                          "sClass": "text-center",
                          "data": "comment_id",
@@ -774,8 +777,7 @@ $(function(){
 						{
 							"data": "reply_text",
 							"orderable" : false, // 禁用排序  
-	                        "sDefaultContent" : "",  
-	                        "sWidth" : "3%",
+	                        "sDefaultContent" : "",  	                    
 	                        "render" : function(data, type, full, meta) {  
 	                        	  //comment_id	    
 	                        	//var comment_id =$('#example').DataTable().rows( this ).data()[0]; 
@@ -829,31 +831,130 @@ $(function(){
 	                             return   data;  
 	                          }   
 	     				}                      			
-                     ] 
+                     ]  */
+                columns: [
+              	   {
+                       "sClass": "text-center",
+                       "data": "comment_id",
+                       "render": function (data, type, full, meta) {
+                           return '<input type="checkbox"  class="checkchild" name="commentCheck" value="' + data + '" />';
+                       },
+                       "bSortable": false
+                   },
+                     
+                     { 
+      					"data": "video_name",
+      				 	"sDefaultContent":"",     			
+      				},     	
+      				{ 
+      					"data": "comment_text",
+      					 "sDefaultContent":"",     				
+      				},
+      				{ 
+      					"data": "comment_date",
+      					"sDefaultContent":"",
+      				},
+      				{ 
+      					"data": "comment_status" ,
+      					"orderable" : false, // 禁用排序  
+                         "sDefaultContent" : "",                  
+                         "render" : function(data, type, full, meta) {                         	
+                             if(data=="" ||data == null || data == 0){    
+                             	data = "<button class='btn btn-safety btn-sm' data-toggle='modal' data-target='#myModal' data-commentid='"+full.comment_id+" data-commentstatusid='10'>通过</button>"+
+                             	       "<button class='btn btn-danger btn-sm' onclick='updateCommentStatus("+full.comment_id+")'>不通过</button>";
+                             }else if(data == 10){
+                  				data = "通过";
+                             }else if(data == 11){  
+                                 data = "不通过"  
+                             }  
+                              return   data;  
+                           }   
+      				},
+      				/* { 
+      					"data": "reply_text" ,
+      					"orderable" : false, // 禁用排序  
+                         "sDefaultContent" : "",                    
+                         "render" : function(data, type, full, meta) {                         	
+                             if(data=="" ||data == null ){                                  
+                  				data = "";
+                             }else{  
+                                 data = "<button class='btn btn-sm btn-safety' >已回复</button>"  
+                             }  
+                              return   data;  
+                           }   
+      				}, */
+      				{  
+      					"data": "reply_text" ,
+      					"orderable" : false, // 禁用排序  
+                         "sDefaultContent" : "",                    
+                          "render" : function(data, type, full, meta) {  
+                             if(data=="" ||data == null ){                                  
+                  				data = null;
+                             }else{  
+                                 data = data;
+                             }  
+                              return   data;  
+                           }   
+      				},   				
+      				{ 
+      					"data": "reply_date",  
+      					"orderable" : false, // 禁用排序  
+                         "sDefaultContent" : "",                       
+                           "render" : function(data, type, full, meta) {  
+                             if(data=="" ||data == null ){                                  
+                  				data = null;
+                             }else{  
+                                 data = data; 
+                             }  
+                              return   data;  
+                           }   
+      				}            			
+                  ] 
            }).api();   
-      });         
+      });    
+          
       //加载模态框    
       var table = $('#example').DataTable();
        $('#myModal').on('show.bs.modal', function (event) {     	  	 
     	   var button = $(event.relatedTarget) // 触发事件的按钮  
            var id = button.data('commentid') // 解析出data-whatever内容  
-    	   $("#reply_comment_id").val(id);   	     	   
+           var statusid = button.data('commentstatusid') // 解析出data-whatever内容           
+    	   $("#reply_comment_id").val(id);  
+    	   $("#reply_comment_status").val(statusid); 
+    	  /*  $.ajax({
+	              type: "POST",
+	              url: "/videoServer/commentTab/updateComment",
+	              contentType: 'application/json; charset=UTF-8',
+				  cache: false,  //禁用缓存
+	              data: JSON.stringify(param),  //传入组装的参数
+	              dataType: "json",
+	              success: function (result) {
+						if(result=="success"){
+							alert("留言成功");
+							window.location.reload();
+						}else{
+							alert("留言失败");
+						}
+					   }
+			   }); */
        }); 
        
       //提交回复
 	 $("#reply_text_submit").click(function(){   
 			 var replytext = $.trim($("#reply_text_input").val()); 
-			 var commentId = $.trim($("#reply_comment_id").val());		
+			 var commentId = $.trim($("#reply_comment_id").val());	
+			 var reply_comment_status = $.trim($("#reply_comment_status").val());	
 			 if(  replytext.length = 0 ){
 				 alert("请输入您的留言");
 			 }					
 			 var param = {};
 			 param.comment_id = commentId;
+			 param.comment_status=reply_comment_status;
 	         param.reply_text = replytext;		       
 	         param.reply_date = new Date();      
 			$.ajax({
 	              type: "POST",
-	              url: url1+"videoServer/commentTab/updateComment",
+	              url: "/videoServer/commentTab/updateComment",
 	              contentType: 'application/json; charset=UTF-8',
 					   cache: false,  //禁用缓存
 	              data: JSON.stringify(param),  //传入组装的参数
@@ -868,10 +969,35 @@ $(function(){
 					   }
 			   });
 			   $("#reply_comment_id").val("");   	
-		 	   $("reply_text_input").val("");		 	
+		 	   $("reply_text_input").val("");		
+		 	  $("#reply_comment_status").val("");
 			  $("#myModal").modal("hide");
 		 });
 }); 
+function updateCommentStatus(commentId){
+	  /*  var button = $(event.relatedTarget) // 触发事件的按钮  
+    var id = button.data('commentid') // 解析出data-whatever内容  
+    var statusid = button.data('commentstatusid') // 解析出data-whatever内容        */
+    var param = {};
+	   param.comment_id = commentId;
+	   param.comment_status=11;
+    $.ajax({
+           type: "POST",
+           url: "/videoServer/commentTab/updateComment",
+           contentType: 'application/json; charset=UTF-8',
+		      cache: false,  //禁用缓存
+           data: JSON.stringify(param),  //传入组装的参数
+           dataType: "json",
+           success: function (result) {
+					if(result=="success"){
+						alert("审核成功");
+						window.location.reload();
+					}else{
+						alert("审核失败");
+					}
+				   }
+		   });
+};
     </script>
 	<!-- Custom Js -->
 	<script src="assets/js/custom-scripts.js"></script>

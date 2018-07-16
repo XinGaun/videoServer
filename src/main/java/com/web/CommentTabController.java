@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.entity.TeacherDomain;
 import com.service.CommentTabService;
-import com.service.VideoTabService;
 
 @Controller
 @RequestMapping("/commentTab")
@@ -23,21 +22,20 @@ import com.service.VideoTabService;
 public class CommentTabController extends DemoController{
 	@Autowired
 	private CommentTabService service;
-	@Autowired
-	private VideoTabService vdservice;
-	@RequestMapping(value="/addComment",produces="application/json;charset=utf-8")
-	public String addComment(@RequestBody String data) {
-		
-		HashMap<String,Object> datemap = formQuery(data);
-		String result = service.addCommentTabMap(datemap);
-		return result;
-	}
+
+//	@RequestMapping(value="/addComment",produces="application/json;charset=utf-8")
+//	public String addComment(@RequestBody String data) {
+//		
+//		HashMap<String,Object> datemap = formQuery(data);
+//		String result = service.addCommentTabMap(datemap);
+//		return result;
+//	}
 	
-	@RequestMapping(value="/queryCommentAll",produces="application/json;charset=utf-8",method=RequestMethod.POST)	
+	@RequestMapping(value="/queryCommentAll",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})	
 	public String queryCommentTabList(@RequestBody String data,HttpServletRequest request) {
 		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
 		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
-		@SuppressWarnings("unchecked")
+		
 		HashMap<String,Object> hashmap = JSON.parseObject(data, HashMap.class);
 		hashmap.put("teacher_id", teacher_id);
 		logger.info("hashmap"+hashmap);
@@ -46,7 +44,7 @@ public class CommentTabController extends DemoController{
 		return result;
 	}
 	
-	@RequestMapping(value="/deleteComment",produces="application/json;charset=utf-8",method=RequestMethod.POST)	
+	@RequestMapping(value="/deleteComment",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})	
 	public String deleteCommentTabList(@RequestBody String data) {
 		logger.info("data"+data);
 		@SuppressWarnings("unchecked")
@@ -55,7 +53,7 @@ public class CommentTabController extends DemoController{
 		return result;
 	}
 	
-	@RequestMapping(value="/updateComment",produces="application/json;charset=utf-8",method=RequestMethod.POST)	
+	@RequestMapping(value="/updateComment",produces="application/json;charset=utf-8", method={RequestMethod.POST,RequestMethod.GET})	
 	public String updateCommentTabList(@RequestBody String data,HttpServletRequest request) {
 		logger.info("data"+data);
 		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");

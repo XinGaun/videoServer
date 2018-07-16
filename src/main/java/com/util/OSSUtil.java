@@ -1,11 +1,16 @@
-package com.util;
+﻿package com.util;
+
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.FileNameMap;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Date;
 import java.util.UUID;
+
+import org.apache.http.util.TextUtils;
 
 import com.aliyun.oss.ClientConfiguration;
 import com.aliyun.oss.HttpMethod;
@@ -23,7 +28,8 @@ public class OSSUtil implements ProgressListener{
 	private static String serviceName = "http://www.niceyuwen.com";
 	private static String bucketName1 = "img-1-yudao";
 	private static String bucketName2 = "video-yudao-1";
-	private static String bucketName = "";
+	private static String bucketName;
+	private final static String PREFIX_VIDEO="video/";
 	private long bytesWritten = 0;
 	private long totalBytes = -1;
 	private boolean succeed = false;
@@ -32,7 +38,7 @@ public class OSSUtil implements ProgressListener{
 	private long progress = 0;
 	String callbackUrl = "http://oss-cn-beijing.aliyuncs.com";
 	String key = "";
-	
+
 	// 单例，只需要建立一次链接  
 	private static OSSClient client = null;  
 	// 是否使用另外一套本地账户  
@@ -91,13 +97,13 @@ public class OSSUtil implements ProgressListener{
 	}
 
 
-	//上传一个文件，File  
+	//上传一个文件，File  //image ,ppt ,
 	public String upload(File file,String fileName) throws Exception {
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret); 
-		isVideo(fileName);
-		String ossFileName = getOSSName(fileName);
+		String filetype= fileName.substring(fileName.lastIndexOf("."));
+		String ossFileName = getOSSName(filetype);
 		try {
-			ossClient.putObject(bucketName,ossFileName, file);  
+			ossClient.putObject(bucketName1,ossFileName, file);  
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
@@ -109,7 +115,7 @@ public class OSSUtil implements ProgressListener{
 
 	// 带进度条的上传。视频
 	public String uploadJD(File file,String fileName,long fileSize) throws IOException {
-		
+
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 		this.size = fileSize;
 		String name = fileName.substring(0, fileName.lastIndexOf("."));
@@ -159,6 +165,32 @@ public class OSSUtil implements ProgressListener{
 		ossClient.deleteObject(bucketName, yourObjectName);
 		ossClient.shutdown();
 	}
+	//获得视频时长
+	public String getVideoTime(int size) {
+		System.out.println("videoTime");		
+		StringBuffer length =new StringBuffer("");
+		try {	        		
+			int ls = size;
+			int hour = (int) (ls/3600);
+				length.append(hour+":");			
+			int minute = (int) (ls%3600)/60;
+			if( minute<10) {
+				length.append("0"+minute+":");
+			}else {
+				length.append(minute+":");
+			}
+			int second = (int) (ls-hour*3600-minute*60);
+			if( second<10) {
+				length.append("0"+second);
+			}else {
+				length.append(second);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return length.toString();
+	}
 
 	public String getOSSFileURL(String fileName) {
 		isVideo(fileName);
@@ -170,8 +202,7 @@ public class OSSUtil implements ProgressListener{
 		String path = "";
 		if (fileName.endsWith("mp4") || fileName.endsWith("mp3") ||fileName.endsWith("MP4")) {
 			path = serviceName+"/video/"+fileName;		
-		}
-		if (fileName.endsWith("jpg") || fileName.endsWith("png")) {
+		}else {		
 			path = serviceName+"/image/"+fileName;		
 		}
 
@@ -193,13 +224,21 @@ public class OSSUtil implements ProgressListener{
 		return url;
 	}
 
-	public static void isVideo(String fileName) {
-		if (fileName.endsWith("mp4") || fileName.endsWith("mp3") || fileName.endsWith("MP4")) {			
-			bucketName = bucketName2;
-		}
-		if (fileName.endsWith("jpg") || fileName.endsWith("png")) {		
-			bucketName = bucketName1;
-		}
+	public void isVideo(String fileName) {
+		FileNameMap fileNameMap = URLConnection.getFileNameMap();
+        String type = fileNameMap.getContentTypeFor(fileName);
+        System.out.println(type);
+        if (!TextUtils.isEmpty(fileName)&&type.contains(PREFIX_VIDEO)){
+           System.out.println("video");
+        }else {
+        	System.out.println("no video");
+        }
+       
+//		if (fileName.endsWith("mp4") || fileName.endsWith("mp3") || fileName.endsWith("MP4")) {			
+//			bucketName = bucketName2;
+//		}else {				
+//			bucketName = bucketName1;
+//		};
 	}
 
 	@Override
@@ -256,8 +295,13 @@ public class OSSUtil implements ProgressListener{
 		return getUUID()+filetype;
 	}
 
-	/*public static void main(String[] args) throws Exception {
-		//		OSSUtil oss = new OSSUtil();
-
-	}*/
+	public static void main(String[] args) throws Exception {
+//		OSSUtil oss = new OSSUtil();
+//		System.out.println(oss.getVideoTime(new File("D:\\filedownload\\2017高考语文秋季长线拯救班_第15节_20161124223004.mp4")));
+//		String filename = "yuwen.mp4";
+//		oss.isVideo(filename);
+//		String fileName = oss.upload(new File("D:\\filedownload\\演示文稿1.pptx"), "测试ppt1.pptx");
+//		String path = oss.getWebURL(fileName);
+//		System.out.println(oss.getVideoTime(Long.parseLong("5.12321")));
+	}
 }
