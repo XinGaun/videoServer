@@ -51,7 +51,10 @@ public class VideosController {
 	 */
 	@RequestMapping(value="/queryComment",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String queryComment(@RequestBody String data) {
-		System.out.println(videosDaoService.queryComment(data));
+		System.out.println(5555);
+		System.out.println("a"+data);
+		//System.out.println("b"+pageSize);
+		//System.out.println("c"+currPage);
 		return videosDaoService.queryComment(data);
 	}
 	

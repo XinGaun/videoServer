@@ -1,8 +1,15 @@
 package com.web;
 
+
+import java.io.File;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.fileupload.disk.DiskFileItem;
+
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -14,11 +21,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.entity.TeacherDomain;
 import com.service.ITeacherService;
 import com.util.MD5;
+
+import com.util.OSSUtil;
+
 import com.util.PaginationBean;
 import com.util.ResponseInfo;
 import com.util.StringUtils;
@@ -40,6 +55,53 @@ public class TeacherController {
 	@Autowired
 	private HttpSession session;
 	
+
+	/**
+	 * 
+	* @Title: teacherImgUpload
+	* @author hcb
+	* @Description:教师头像上传
+	* @param @return    参数
+	* @return ResponseInfo    返回类型
+	* @date 2018年7月7日 下午6:47:45
+	* @throws
+	 */
+	@RequestMapping("/teacherImgUpload")
+	public @ResponseBody ResponseInfo teacherImgUpload(MultipartFile imgFile){
+		ResponseInfo responseInfo = new ResponseInfo(1, "图片上传成功");
+		OSSUtil ou=new OSSUtil();
+		String fileName=imgFile.getOriginalFilename();//获取文件名加后缀    
+        String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//文件后缀   
+        fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//新的文件名    
+        CommonsMultipartFile cf= (CommonsMultipartFile)imgFile; //这个myfile是MultipartFile的
+		DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
+		File image = fi.getStoreLocation(); 
+        String ossFileName = "";
+        try {
+        	System.out.println(imgFile.getSize());
+        	ossFileName =ou.upload(image, fileName);
+        	System.out.println(ossFileName);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			System.out.println(e1.getMessage());
+		}
+        System.out.println(ou.getWebURL(ossFileName));
+        responseInfo.setRetMsg(ou.getWebURL(ossFileName));
+		return responseInfo;
+	}
+	
+	/**
+	 * 
+	* @Title: logout
+	* @author hcb
+	* @Description:退出登录
+	* @param @param redirectAttributes
+	* @param @return    参数
+	* @return ResponseInfo    返回类型
+	* @date 2018年7月7日 下午6:45:55
+	* @throws
+	 */
 	@RequestMapping("/teacherLogout")    
     public @ResponseBody ResponseInfo logout(RedirectAttributes redirectAttributes ){   
         //使用权限管理工具进行用户的退出，跳出登录，给出提示信息  

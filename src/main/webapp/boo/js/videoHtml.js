@@ -155,7 +155,7 @@ function custom(number){
 }
 
 //加载打榜好课
-function initqueryCourseGrade(){
+/*function initqueryCourseGrade(){
 	$.ajax({
 		type : "POST",
 		url : url
@@ -185,6 +185,8 @@ function initqueryCourseGrade(){
 		}
 	});
 }
+
+*/
 
 //加载推荐课程页面
 function initrecommend(){

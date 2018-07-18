@@ -8,11 +8,16 @@
 #jd:after {
 	content: '%';
 }
-.role{display:none}
+
+.role {
+	display: none
+}
 </style>
-<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="assets/css/bootstrap.css" rel="stylesheet" />
 <link href="assets/css/font-awesome.css" rel="stylesheet" />
 <link href="assets/css/custom-styles.css" rel="stylesheet" />
@@ -23,342 +28,321 @@
 <script type="text/javascript" src="js/socket.io.js"></script>
 </head>
 <body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html"><i class="fa fa-comments"></i> <strong><span style="font-size:25px;">语道后台管理 </span></strong></a>
-            </div>
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Doe</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Today</em>
-                                    </span>
-                                </div>
-                                <div>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem Ipsum has been the industry's standard dummy text ever since the...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>Read All Messages</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-messages -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-tasks">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 1</strong>
-                                        <span class="pull-right text-muted">60% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (success)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 2</strong>
-                                        <span class="pull-right text-muted">28% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" style="width: 28%">
-                                            <span class="sr-only">28% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 3</strong>
-                                        <span class="pull-right text-muted">60% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 4</strong>
-                                        <span class="pull-right text-muted">85% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
-                                            <span class="sr-only">85% Complete (danger)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Tasks</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-tasks -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small">4 min</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small">12 min</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small">4 min</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small">4 min</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 min</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-alerts -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="javascript:teacherLoginOut()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-        </nav>
-        <!--/. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-            
-            	<ul class="nav" id="main-menu">
-					<li class="role" style="display: none;">
-						<a href="#"><i class="fa fa-sitemap"></i>权限管理<span class="fa arrow"></span></a>
+	<div id="wrapper">
+		<nav class="navbar navbar-default top-navbar" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html"><i
+					class="fa fa-comments"></i> <strong><span
+						style="font-size: 25px;">语道后台管理 </span></strong></a>
+			</div>
+			<ul class="nav navbar-top-links navbar-right">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-messages">
+						<li><a href="#">
+								<div>
+									<strong>John Doe</strong> <span class="pull-right text-muted">
+										<em>Today</em>
+									</span>
+								</div>
+								<div>Lorem Ipsum has been the industry's standard dummy
+									text ever since the 1500s...</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<strong>John Smith</strong> <span class="pull-right text-muted">
+										<em>Yesterday</em>
+									</span>
+								</div>
+								<div>Lorem Ipsum has been the industry's standard dummy
+									text ever since an kwilnw...</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<strong>John Smith</strong> <span class="pull-right text-muted">
+										<em>Yesterday</em>
+									</span>
+								</div>
+								<div>Lorem Ipsum has been the industry's standard dummy
+									text ever since the...</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a class="text-center" href="#"> <strong>Read
+									All Messages</strong> <i class="fa fa-angle-right"></i>
+						</a></li>
+					</ul> <!-- /.dropdown-messages --></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-tasks">
+						<li><a href="#">
+								<div>
+									<p>
+										<strong>Task 1</strong> <span class="pull-right text-muted">60%
+											Complete</span>
+									</p>
+									<div class="progress progress-striped active">
+										<div class="progress-bar progress-bar-success"
+											role="progressbar" aria-valuenow="60" aria-valuemin="0"
+											aria-valuemax="100" style="width: 60%">
+											<span class="sr-only">60% Complete (success)</span>
+										</div>
+									</div>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<p>
+										<strong>Task 2</strong> <span class="pull-right text-muted">28%
+											Complete</span>
+									</p>
+									<div class="progress progress-striped active">
+										<div class="progress-bar progress-bar-info" role="progressbar"
+											aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"
+											style="width: 28%">
+											<span class="sr-only">28% Complete</span>
+										</div>
+									</div>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<p>
+										<strong>Task 3</strong> <span class="pull-right text-muted">60%
+											Complete</span>
+									</p>
+									<div class="progress progress-striped active">
+										<div class="progress-bar progress-bar-warning"
+											role="progressbar" aria-valuenow="60" aria-valuemin="0"
+											aria-valuemax="100" style="width: 60%">
+											<span class="sr-only">60% Complete (warning)</span>
+										</div>
+									</div>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<p>
+										<strong>Task 4</strong> <span class="pull-right text-muted">85%
+											Complete</span>
+									</p>
+									<div class="progress progress-striped active">
+										<div class="progress-bar progress-bar-danger"
+											role="progressbar" aria-valuenow="85" aria-valuemin="0"
+											aria-valuemax="100" style="width: 85%">
+											<span class="sr-only">85% Complete (danger)</span>
+										</div>
+									</div>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a class="text-center" href="#"> <strong>See
+									All Tasks</strong> <i class="fa fa-angle-right"></i>
+						</a></li>
+					</ul> <!-- /.dropdown-tasks --></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-alerts">
+						<li><a href="#">
+								<div>
+									<i class="fa fa-comment fa-fw"></i> New Comment <span
+										class="pull-right text-muted small">4 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-twitter fa-fw"></i> 3 New Followers <span
+										class="pull-right text-muted small">12 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-envelope fa-fw"></i> Message Sent <span
+										class="pull-right text-muted small">4 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-tasks fa-fw"></i> New Task <span
+										class="pull-right text-muted small">4 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-upload fa-fw"></i> Server Rebooted <span
+										class="pull-right text-muted small">4 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a class="text-center" href="#"> <strong>See
+									All Alerts</strong> <i class="fa fa-angle-right"></i>
+						</a></li>
+					</ul> <!-- /.dropdown-alerts --></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="#"><i class="fa fa-user fa-fw"></i> User
+								Profile</a></li>
+						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+						</li>
+						<li class="divider"></li>
+						<li><a href="javascript:teacherLoginOut()"><i
+								class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+					</ul> <!-- /.dropdown-user --></li>
+				<!-- /.dropdown -->
+			</ul>
+		</nav>
+		<!--/. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+
+				<ul class="nav" id="main-menu">
+					<li class="role" style="display: none;"><a href="#"><i
+							class="fa fa-sitemap"></i>权限管理<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li>
-								<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
-							</li>
-							<li>
-								<a href="teacher_list.html"><i class="fa fa-users"></i> 教师管理</a>
-							</li>
-							<li>
-								<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
-							</li>
-						</ul>
+							<li><a href="role_list.html"><i class="fa fa-lock"></i>
+									权限管理</a></li>
+							<li><a href="teacher_list.html"><i class="fa fa-users"></i>
+									教师管理</a></li>
+							<li><a href="user_list.html"><i class="fa fa-user"></i>
+									用户管理</a></li>
+						</ul></li>
+					<li><a href="videoInfo.html" class="active-menu"><i
+							class="fa fa-table"></i>视频管理</a></li>
+					<li><a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
 					</li>
-					<li>
-                        <a href="videoInfo.html" class="active-menu"><i class="fa fa-table"></i>视频管理</a>
-                    </li>
-                    <li>
-                        <a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
-                    </li>
-                    <li>
-                        <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
-                    </li>
-					<li class="role" style="display: none;">
-						<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
+					<li><a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
 					</li>
-					<li>
-						<a href="comment.html"><i class="fa fa-table"></i>评论管理</a>
+					<li class="role" style="display: none;"><a href="coupon.html"><i
+							class="fa fa-qrcode"></i>优惠券管理</a></li>
+					<li><a href="comment.html"><i class="fa fa-table"></i>评论管理</a>
 					</li>
-					<li class="role" style="display: none;">
-						<a href="order.html"><i class="fa fa-table"></i>订单管理</a>
-					</li>
-					<li class="role" style="display: none;">
-						<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
-					</li>
-					<li class="role" style="display: none;">
-						<a href="test.html" ><i class="fa fa-edit"></i>题目管理</a>
-					</li>
+					<li class="role" style="display: none;"><a href="order.html"><i
+							class="fa fa-table"></i>订单管理</a></li>
+					<li class="role" style="display: none;"><a
+						href="proposal.html"><i class="fa fa-edit"></i>建议管理</a></li>
+					<li class="role" style="display: none;"><a href="test.html"><i
+							class="fa fa-edit"></i>题目管理</a></li>
 				</ul>
-            </div>
-        </nav>
-        <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" >
-            <div id="page-inner">
-			 <div class="row">
-                 <div class="col-md-12">
-                     <h1 class="page-header">
-                         	语道 <small>视频管理</small>
-                     </h1>
-                 </div>
-             </div> 
-             <div class="row">
-            	<div class="col-md-12">
-	                <div class="panel panel-default">
-	                	<div class="table-responsive">
-							<table class="table"  class="display table-striped table-bordered table-hover table-condensed" cellspacing="0" width="100%">
-								<tr>
-									<td>
-										<div class="input-group" width="100%">
-											<span class="input-group-addon">视频名称</span>
-											<input type="text" class="form-control" placeholder="请输入视频名称" id="video_name1">
-										</div>
-									</td>
-									<td>
-										<div class="input-group" width="100%">
-											<span class="input-group-addon">视频类型</span>
-											<select  class="form-control" style="width:200px;text-align: center;" id="video_type">
-											   
-											</select>
-										</div>
-									</td>								
-								</tr>
-								<tr>
-									
-								</tr>
-								<tr>
-									<td>
-										<button type="button" class="btn btn-danger" id="removeorder" data-toggle="modal" data-target="#myModal">添加视频</button>
-									</td>
-									<td></td>
-									<td></td>
-									<td>
-										<div style="float:right">
-											<button type="button" class="btn btn-primary" id="queryorder">搜索</button>&nbsp;&nbsp; &nbsp;&nbsp;
-											<button type="button" class="btn btn-warning" id="eliminates">清空</button>
-										</div>
-									</td>
-								</tr>
-							</table>							
+			</div>
+		</nav>
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="page-header">
+							语道 <small>视频管理</small>
+						</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="table-responsive">
+								<table class="table"
+									class="display table-striped table-bordered table-hover table-condensed"
+									cellspacing="0" width="100%">
+									<tr>
+										<td>
+											<div class="input-group" width="100%">
+												<span class="input-group-addon">视频名称</span> <input
+													type="text" class="form-control" placeholder="请输入视频名称"
+													id="video_name1">
+											</div>
+										</td>
+										<td>
+											<div class="input-group" width="100%">
+												<span class="input-group-addon">视频类型</span> <select
+													class="form-control"
+													style="width: 200px; text-align: center;" id="video_type">
+
+												</select>
+											</div>
+										</td>
+									</tr>
+									<tr>
+
+									</tr>
+									<tr>
+										<td>
+											<button type="button" class="btn btn-danger" id="removeorder"
+												data-toggle="modal" data-target="#myModal">添加视频</button>
+										</td>
+										<td></td>
+										<td></td>
+										<td>
+											<div style="float: right">
+												<button type="button" class="btn btn-primary"
+													id="queryorder">搜索</button>
+												&nbsp;&nbsp; &nbsp;&nbsp;
+												<button type="button" class="btn btn-warning"
+													id="eliminates">清空</button>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</div>
 						</div>
-	                </div>
-	            </div>
-	        </div>   
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Advanced Tables -->
-                    <div class="panel panel-default">
-                        
-                        <div class="panel-body" style="overflow-x:scroll;height:330px;width:99%;">
-                            <table id="tb" class='table table-bordered' style="width:1300px;">
-						    	<tr>
-						    		<!-- <td><input type="checkbox"/></td> --><td>序号</td><td style="width:100px;white-space:nowrap;">视频名称</td><td>视频介绍</td><td>视频类型</td><td>视频链接</td><td>视频评分</td><td>点击次数</td><td>上传时间</td>
-						    	</tr>
-						    </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <input type="hidden" id="teacher_id"/>
-    </div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<!-- Advanced Tables -->
+						<div class="panel panel-default">
+
+							<div class="panel-body"
+								style="overflow-x: scroll; height: 330px; width: 99%;">
+								<table id="tb" class='table table-bordered'
+									style="width: 1300px;">
+									<tr>
+										<!-- <td><input type="checkbox"/></td> -->
+										<td>序号</td>
+										<td style="width: 100px; white-space: nowrap;">视频名称</td>
+										<td>视频介绍</td>
+										<td>视频类型</td>
+										<td>视频链接</td>
+										<td>视频PPT</td>
+										<td>视频权重</td>
+										<td>视频时长</td>
+										<td>视频评分</td>
+										<td>点击次数</td>
+										<td>上传时间</td>
+										<td>视频修改</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" id="teacher_id" />
+		</div>
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel">
@@ -372,38 +356,69 @@
 						<h4 class="modal-title" id="myModalLabel">课程视频添加</h4>
 					</div>
 					<form action="/videoServer/videoTab/uploadflv1.do" method="post"
-		                  enctype="multipart/form-data" id="dataForm">
+						enctype="multipart/form-data" id="dataForm">
 						<div style="width: 100%;">
-							<div style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
+							<div
+								style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
-								<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频标题：</div>
-								<div style="width: 200px; height: 50px; float: left; line-height: 50px;border: 1px solid #CADEFD; ">
-									<input type="text" style="width: 100%;height:100%;" name="videoName" id="videoName" > 
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频标题：</div>
+								<div
+									style="width: 200px; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
+									<input type="text" style="width: 100%; height: 100%;"
+										name="videoName" id="videoName">
 								</div>
-								<div style="width: 100px;; background: #D9ECFF; float: left; text-align: right; height: 50px; line-height: 50px;">视频类型：</div>
-								<div style="width:130px;height:50px;float:left;border: 1px solid #CADEFD;">							           
-							           <select style="width:100%;text-align: center;" id="kctype">
-							           
-							           </select>
-						            </div>
-							    </div>
-							<div style="height: 50px; border: 1px solid #CADEFD">
-								<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">选择视频：</div>
-								<input type="file"  name="video" id="video" accept="video/*">
+								<div
+									style="width: 100px;; background: #D9ECFF; float: left; text-align: right; height: 50px; line-height: 50px;">视频类型：</div>
+								<div
+									style="width: 130px; height: 50px; float: left; border: 1px solid #CADEFD;">
+									<select style="width: 100%; text-align: center;" id="kctype">
+
+									</select>
+								</div>
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
-								<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频封面：</div>
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">选择视频：</div>
+								<input type="file" name="video" id="video" accept="video/*">
+								 <video style="display:none;" controls="controls" oncanplaythrough="myFunction(this)" id="videoTime" ></video>								
+							</div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频封面：</div>
 								<input type="file" name="image" id="image" accept="image/*">
 							</div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频PPT：</div>
+								<input type="file" name="ppt" id="ppt">
+							</div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频权重：</div>
+								<div style="width: 440px; height: 50px; float: left;">
+									<div style="margin-top: 25px; margin-left: 25px;">
+										<input type="button" style="border-right: 0px;"
+											onClick="disNum(this)" value="-"><input type="text"
+											value="0" id="video_qz"
+											style="width: 30px; text-align: center"
+											onkeyup="value=value.replace(/[^\d]/g,'1')" /><input
+											type="button" value="+" style="border-left: 0px;"
+											onClick="incNum(this)">
+									</div>
+								</div>
+							</div>
 							<div style="height: 100px; border: 1px solid #CADEFD">
-								<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 100px; line-height: 100px;">视频介绍：</div>
-								<div style="width: 440px; height: 100px; float: left;border: 1px solid #CADEFD;">								
-									<textarea style="width: 100%;height: 100%;"
-									name="video_introduce"	id="video_introduce"></textarea>								
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 100px; line-height: 100px;">视频介绍：</div>
+								<div
+									style="width: 440px; height: 100px; float: left; border: 1px solid #CADEFD;">
+									<textarea style="width: 100%; height: 100%;"
+										name="video_introduce" id="video_introduce"></textarea>
 									<input type="hidden" name="video_introduce">
 								</div>
 							</div>
-					
+
 						</div>
 					</form>
 					<div class="modal-footer">
@@ -415,16 +430,100 @@
 				</div>
 			</div>
 		</div>
+		<!-- /model -->
+		
+		<!-- Modal2 -->
+		<div class="modal fade" id="updateVideoModal" tabindex="-1" role="dialog"
+			aria-labelledby="updateVideoModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">课程视频修改</h4>
+					</div>
+					<form action="/videoServer/videoTab/updetVideoById.do" method="post"
+						enctype="multipart/form-data" id="updatedataForm">
+						<div style="width: 100%;">
+							<div
+								style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频标题：</div>
+								<div
+									style="width: 200px; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
+									<input type="text" style="width: 100%; height: 100%;"
+										name="videoName" id="updatevideoName">
+								     <input type="hidden" id="updatevideoId" />
+								   
+								</div>
+								<div
+									style="width: 100px;; background: #D9ECFF; float: left; text-align: right; height: 50px; line-height: 50px;">视频类型：</div>
+								<div
+									style="width: 130px; height: 50px; float: left; border: 1px solid #CADEFD;">
+									<select style="width: 100%; text-align: center;" id="updatekctype">
+
+									</select>
+								</div>
+							</div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频封面：</div>
+								<input type="file" name="updateimage" id="updateimage" accept="image/*">
+							</div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频PPT：</div>
+								<input type="file" name="updateppt" id="updateppt">
+							</div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频权重：</div>
+								<div style="width: 440px; height: 50px; float: left;">
+									<div style="margin-top: 25px; margin-left: 25px;">
+										<input type="button" style="border-right: 0px;"
+											onClick="disNum(this)" value="-"><input type="text"
+											value="0" id="update_video_qz"
+											style="width: 30px; text-align: center"
+											onkeyup="value=value.replace(/[^\d]/g,'1')" /><input
+											type="button" value="+" style="border-left: 0px;"
+											onClick="incNum(this)">
+									</div>
+								</div>
+							</div>
+							<div style="height: 100px; border: 1px solid #CADEFD">
+								<div
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 100px; line-height: 100px;">视频介绍：</div>
+								<div
+									style="width: 440px; height: 100px; float: left; border: 1px solid #CADEFD;">
+									<textarea style="width: 100%; height: 100%;"
+										name="video_introduce" id="update_video_introduce"></textarea>
+									
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							id="updatequxiao">取消</button>
+						<button type="button" class="btn btn-primary" id="update">提交</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /model -->
 	</div>
-<script src="assets/js/jquery-1.10.2.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.metisMenu.js"></script>
-<script src="assets/js/dataTables/jquery.dataTables.js"></script>
-<script src="dist/js/bootstrap-datepicker.min.js"></script>
-<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
-<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
-<script src="assets/js/common.js"></script>
-<script>
+	<script src="assets/js/jquery-1.10.2.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery.metisMenu.js"></script>
+	<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+	<script src="dist/js/bootstrap-datepicker.min.js"></script>
+	<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+	<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
+	<script src="assets/js/common.js"></script>
+	<script>
 $(document).ready(function () {
     $('#dataTables-example').dataTable();
 });
@@ -436,7 +535,7 @@ $(function(){
 		url : '/videoServer/videoTab/getVideoTabs.do',
 		success : function(data){
 			for(var i=0;i<data.length;i++){
-				$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td></tr>")
+				$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_ppt+"</td><td>"+data[i].video_qz+"</td><td>"+data[i].video_time+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateVideoModal' data-videoid='"+data[i].video_id+"'>视频修改</button></td></tr>")
 			}
 			$("#teacher_id").val(data[0].teacher_id);
 		},error: function(){
@@ -502,22 +601,22 @@ function getId(obj){
 	var progress = document.getElementById("jd");
 	//创建socket连接	
 	var socket= io.connect('http://127.0.0.1:8099');
-			//连接成功后会监听到
+	//连接成功后会监听到
 	socket.on('connect',function() {
 	     output('<span>连接成功</span>');
 	});
 		    
-			socket.on('connecting',function() {
-		        output('<span>正在连接...</span>');
-		    });
+	socket.on('connecting',function() {
+		  output('<span>正在连接...</span>');
+	});
 		    
-		    socket.on('disconnect',function() {
-		        output('<span>断开连接! </span>');
-		    });
+	socket.on('disconnect',function() {
+		 output('<span>断开连接! </span>');
+	 });
 		    
-		    socket.on('reconnecting',function() {
-		        output('<span>正在重连...</span>');
-		    });
+    socket.on('reconnecting',function() {
+		 output('<span>正在重连...</span>');
+    });
 		    
 	socket.on('reconnect',function() {
 		  output('<span>成功重连！</span>');
@@ -540,8 +639,7 @@ function getId(obj){
     		$.ajax({
     			url : 'http://localhost:8080/videoServer/socketServer/start',
     			type : 'post',				
-    			success : function() {	
-    				
+    			success : function() {	  				
     			},
     			error : function() {
     				//alert("soucketStart error");
@@ -553,8 +651,7 @@ function getId(obj){
 		 		$.ajax({
 		 			url : 'http://localhost:8080/videoServer/socketServer/stop',
 		 			type : 'post',				
-		 			success : function() {	
-		 				
+		 			success : function() {			 				
 		 			},
 		 			error : function() {
 		 				//alert(" soucketStop error");
@@ -564,34 +661,57 @@ function getId(obj){
     //启动socket
 		soucketStart();
 	//加载模态框    
-    $('#myModal').on('show.bs.modal', function (event) {     
+    $('#myModal').on('show.bs.modal', function (event) {  
+    	
        progress.innerText= 0;
  	   $("#videoName").val(""); 
- 	   $("#video_introduce").val("");		
+ 	   $("#video_introduce").val("");	
+ 	   //socket.();
     }); 
+    var videoTime ;
+    $('#video').change(function(){
+    	$("#sub").attr('disabled',true);
+    	 var video = $('#video').prop("files")[0];	 
+    	 var url = URL.createObjectURL(video);  
+		 document.getElementById("videoTime").src = url;  		
+	 }); 
     
-	$("#sub").click(function(){	
+	function myFunction(ele) {
+		//var hour = parseInt((ele.duration)/3600);
+		//var minute = parseInt((ele.duration%3600)/60);
+		//var second = Math.ceil(ele.duration%60);
+		//videoTime ="视频时长："+hour+"小时，"+minute+"分，"+second+"秒";
+		videoTime = parseInt(ele.duration);
+		$("#sub").attr('disabled',false);
+	}  ;
+   
+    $("#sub").click(function(){
 		//表单参数
 		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
 		 var videoName = $.trim($('#videoName').val());  
 		 var video_introduce =$.trim($("#video_introduce").val());
 		 var video_form_id = $.trim($("#kctype").val());
-		 var video = $('#video').prop("files")[0];
+		 var video = $('#video').prop("files")[0];	    
+		 var video_time= videoTime;
 		 var image = $('#image').prop("files")[0];
-		
+		 var ppt = $('#ppt').prop("files")[0];
+		 var video_qz = $.trim($("#video_qz").val());	
+	
 		 formData.append("videoName",videoName);  
 		 formData.append("video", video);  
 		 formData.append("image", image);
 		 formData.append("video_introduce", video_introduce);
 		 formData.append("video_form_id", video_form_id);
+		 formData.append("ppt", ppt);	
+		 formData.append("video_qz", video_qz);
+		 formData.append("video_time", video_time);
 		//阻止默认事件
-		 event.preventDefault();
-		
+		  event.preventDefault();	
 			var t = setInterval(function(){
 	 	 		 //下面的testMessage是自定义的。
 	 	 		 socket.emit('fileUpload',videoName,function(){	 
-				    	output('<span> emit' +data+ '</span>');				    	
-				    }); 
+	 	 			 output('0');
+				 }); 
 			}, 500);
 	 		 //这里是监听服务端返回的testMessage事件
 	 		 socket.on('fileUpload',function(data){
@@ -600,9 +720,8 @@ function getId(obj){
 	 			 } else{
 	 				clearInterval(t);
 	 				output(data);				
-	 			 }
-		    	 
-		    });   
+	 			 }		    	 
+		      });   
  	
 			//上传文件		
 			$.ajax({
@@ -613,15 +732,19 @@ function getId(obj){
 		        processData: false, 
 				success : function(data){				
 					progress.innerText = 100;	
-					alert("上传成功");			        					
+					alert("上传成功");			   
+					sendDisconnect();
 			        $("#myModal").modal("hide");
 					window.location.href="";					
 				},error: function(){
 					 alert("submit error");
 				}				
 			});	 
-			return false;		
-	});
+			return false;	
+      });
+    	 
+	
+	
 	
 	$("#queryorder").click(function(){
 		$.ajax({
@@ -634,18 +757,18 @@ function getId(obj){
 			 	}else{
 			 		$("#tb  tr:not(:first)").html("");
 			 		for(var i=0;i<data.length;i++){
-						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td></tr>")
+						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_ppt+"</td><td>"+data[i].video_qz+"</td><td>"+data[i].video_time+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateVideoModal' data-videoid='"+data[i].video_id+"'>视频修改</button></td></tr>")
 					}
 				}
 			},error: function(){
 				 
 			}
 		})
-	})
+	});
 	
 	$("#eliminates").click(function(){	
 		window.location.href="";
-	})
+	});
 	function getVideoForm(){
 		$.ajax({
 			type: "POST",
@@ -654,17 +777,95 @@ function getId(obj){
             dataType: "json",
 			success : function(data){
 				$("#kctype").empty(); 
-				$("#video_type").empty(); 
+				$("#video_type").empty();
+				$("#updatekctype").empty();
 				for (var i = 0; i < data.length; i++) {						
 			    	$("#kctype").append("<option value="+data[i].video_form_id+">"+data[i].video_form_class+data[i].video_form_name+"</option>");			    	
 			    	$("#video_type").append("<option value="+data[i].video_form_id+">"+data[i].video_form_class+data[i].video_form_name+"</option>");
-			    }
+			    	$("#updatekctype").append("<option value="+data[i].video_form_id+">"+data[i].video_form_class+data[i].video_form_name+"</option>");
+				}
 			},error: function(){
 				alert("VideoForm error"); 
 			}
-		})
+		});
+	};
+	
+	//视频修改   加载模态框    
+    $('#updateVideoModal').on('show.bs.modal', function (event) {   
+    	  var button = $(event.relatedTarget) // 触发事件的按钮  
+          var videoid = button.data('videoid') // 解析出data-whatever内容  
+    	  $("#updatevideoId").val(videoid);
+    	$.ajax({
+			type : 'post',		
+			url : '/videoServer/videoTab/getVideoById.do',
+			data:{id:videoid},		   
+	        dataType: "json",
+			success : function(data){										
+				 $("#updatevideoName").val(data[0].video_name);
+				 $("#update_video_introduce").val(data[0].video_introduce);
+				 
+			},error: function(){
+				 alert("get error");
+			}				
+		});	 			
+ 	 
+ 	  
+    }); 
+	 $("#update").click(function(){
+			//表单参数
+			 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
+			 var videoName = $.trim($('#updatevideoName').val());  
+			 var video_introduce =$.trim($("#update_video_introduce").val());
+			 var video_form_id = $.trim($("#updatekctype").val());					
+			 var image = $('#updateimage').prop("files")[0];
+			 var ppt = $('#updateppt').prop("files")[0];
+			 var video_qz = $.trim($("#update_video_qz").val());	
+		     var video_id =  $.trim($("#updatevideoId").val());
+			 formData.append("video_id", video_id);
+			 formData.append("videoName",videoName);  		
+			 formData.append("image", image);
+			 formData.append("video_introduce", video_introduce);
+			 formData.append("video_form_id", video_form_id);
+			 formData.append("ppt", ppt);	
+			 formData.append("video_qz", video_qz);
+						
+		    //上传文件		
+			$.ajax({
+					type : 'post',
+					data : formData,
+					url : '/videoServer/videoTab/updetVideoById.do',
+					contentType: false, 
+			        processData: false, 
+					success : function(data){										
+						alert("修改成功");			        					
+				        $("#updateVideoModal").modal("hide");
+						window.location.href="";					
+					},error: function(){
+						 alert("submit error");
+					}				
+				});	 				
+	      });
+</script>
+	<script>
+function updat(obj){
+	
+}
+	function disNum(dom){
+		var disNum=dom.nextSibling.value;
+		if(disNum<1)//防止数量少于1
+		{
+			dom.nextSibling.value=0;
+		}
+		else
+		{
+			dom.nextSibling.value--;
+		}
+	}
+	
+	function incNum(dom){
+		dom.previousSibling.value ++;
 	}
 </script>
-<script src="assets/js/custom-scripts.js"></script> 
+	<script src="assets/js/custom-scripts.js"></script>
 </body>
 </html>

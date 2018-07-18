@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UserRoleDAO">
+<insert id="addUserRole" parameterType="com.entity.UserRoleDomain">
+			insert into user_role_tab(
+				id,
+				user_id,
+				role_id
+			)values(
+				#{id,jdbcType=VARCHAR},
+				#{user_id,jdbcType=VARCHAR},
+				#{role_id,jdbcType=VARCHAR})
+			
+</insert>
+
+<delete id="deleteUserRole" parameterType="com.entity.UserRoleDomain">
+			delete from user_role_tab
+			where 1=1 
+			<if test="id != null and id.trim().length()>0">
+				 AND id = #{id}
+			</if>
+			<if test="user_id != null and user_id.trim().length()>0">
+				 AND user_id = #{user_id}
+			</if>
+			<if test="role_id != null and role_id.trim().length()>0">
+				 AND role_id = #{role_id}
+			</if>
+</delete>
+
+<update id="modifyUserRole" parameterType="com.entity.UserRoleDomain">
+			update user_role_tab set 
+			<if test="id != null and id.trim().length()>0">
+				id = #{id,jdbcType=VARCHAR},
+			</if>
+			<if test="user_id != null and user_id.trim().length()>0">
+				user_id = #{user_id,jdbcType=VARCHAR},
+			</if>
+			<if test="role_id != null and role_id.trim().length()>0">
+				role_id = #{role_id,jdbcType=VARCHAR},
+			</if>
+			where 1=1 
+			<if test="id != null and id.trim().length()>0">
+				 AND id = #{id}
+			</if>
+			<if test="user_id != null and user_id.trim().length()>0">
+				 AND user_id = #{user_id}
+			</if>
+			<if test="role_id != null and role_id.trim().length()>0">
+				 AND role_id = #{role_id}
+			</if>
+</update>
+
+<select id="queryUserRoleCount" parameterType="com.entity.UserRoleDomain" resultType="Integer">
+			select count(1) from  user_role_tab
+			 where 1=1 
+			<if test="id != null and id.trim().length()>0">
+				 AND id = #{id}
+			</if>
+			<if test="user_id != null and user_id.trim().length()>0">
+				 AND user_id = #{user_id}
+			</if>
+			<if test="role_id != null and role_id.trim().length()>0">
+				 AND role_id = #{role_id}
+			</if>
+</select>
+
+<select id="queryListUserRole" parameterType="com.entity.UserRoleDomain" resultType="com.entity.UserRoleDomain">
+			select 
+				id,
+				user_id,
+				role_id
+			 from user_role_tab
+			 where 1=1 
+			<if test="id != null and id.trim().length()>0">
+				 AND id = #{id}
+			</if>
+			<if test="user_id != null and user_id.trim().length()>0">
+				 AND user_id = #{user_id}
+			</if>
+			<if test="role_id != null and role_id.trim().length()>0">
+				 AND role_id = #{role_id}
+			</if>
+			<if test="page != null" >
+				<![CDATA[  limit #{page.startNum},#{page.endIndex}  ]]>
+			</if>
+</select>
+</mapper>
