@@ -1,5 +1,6 @@
 package com.web;
 
+
 import java.io.File;
 import java.util.Date;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.Random;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.disk.DiskFileItem;
+
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -18,14 +21,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.entity.TeacherDomain;
 import com.service.ITeacherService;
 import com.util.MD5;
+
 import com.util.OSSUtil;
+
 import com.util.PaginationBean;
 import com.util.ResponseInfo;
 import com.util.StringUtils;
@@ -47,6 +55,7 @@ public class TeacherController {
 	@Autowired
 	private HttpSession session;
 	
+
 	/**
 	 * 
 	* @Title: teacherImgUpload

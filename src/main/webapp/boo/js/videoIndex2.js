@@ -1,29 +1,24 @@
 $(function(){
-	//initBoutique(param);
-	initRecommend();
+	initRecommendTJ();
 	judgePC();
-	$("#videoHtml").click(function(){
-		window.location.href = "video.html";
-	});
 });
 //var url = "http:/127.0.0.1:8080"
 var url = "";
 var user_id = $.cookie('id');
 $("img.lazy").lazyload({effect: "fadeIn"});
 
-
 var pages = 0;//当前页数
 var nums = 8;//每页几条
 var total = 0;//总条数 
 
 //组装参数
-var param = {
+var paramT = {
 		page : nums,
 		nums : (pages*nums)
 }
 
 //生成分页条
-function page(pages, nums, total) {
+function pageT(pages, nums, total) {
 	var next = "";
 	var previous = "";
 	var pageStr = "";
@@ -66,14 +61,14 @@ function page(pages, nums, total) {
 
 	//console.log(pageStr);
 
-	var fanye = '<nav aria-label="Page navigation">'
+	var fanyeTT = '<nav aria-label="Page navigation">'
 		+ '<ul class="pagination">' + previous + pageStr
 		+ next + '<li><a>当前第'+(pages+1)+'页</a></li></ul>' + '</nav>'
-		$("#fanye").html(fanye);
+		$("#fanyeTT").html(fanyeTT);
 }
 
 //获取传递参数
-function getUrlParam(name) {
+function getUrlParamT(name) {
 	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
 	var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
 	if (r != null)
@@ -82,28 +77,27 @@ function getUrlParam(name) {
 }	
 
 //下一页
-function xiaye(){
+function xiayeT(){
 	pages++;
 	param.nums=pages*nums;	
-	$("#excellent").html("");
-	initBoutiqueVideoClick(param);
+	$("#RecomExcellent").html("");
+	initRecommendLessonClick(paramT);
 	return false;
 }
 //上页
-function shangye(){
+function shangyeT(){
 	pages--;
 	param.nums=pages*nums;
-	$("#excellent").html("");
-	initBoutiqueVideoClick(param);
+	$("#RecomExcellent").html("");
+	initRecommendLessonClick(paramT);
 	return false;
 }
 //页数换页
-function custom(number){
+function customT(number){
 	pages=number-1;
 	param.nums=(pages)*nums;
-	$("#excellent").html("");
-	initBoutiqueVideoClick(param);
-	//console.log(pages);
+	$("#RecomExcellent").html("");
+	initRecommendLessonClick(paramT);
 	return false;
 }
 
@@ -123,96 +117,39 @@ function queryClassVideo(queryAlls){
 	queryClassVideo2222(queryAlls);
 }
 
-function queryClassVideo1111(queryAlls){
-	param.queryAll=queryAlls;
-	$("#excellent").html("");
-	$("#buttonMore").html('<button class="btn btn-default" style="float: right" onclick="btnMore()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
+
+function queryClassVideo2222(queryAlls){
+	paramT.queryAll=queryAlls;
+	$("#RecomExcellent").html("");
+	$("#MoreLesson").html('<button class="btn btn-default" style="float: right" onclick="btnMore()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
 	$("#MoreLesson").html('<button class="btn btn-default" style="float: right" onclick="MoreLesson()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
-	$("#fanye").html("");
 	$("#fanyeTT").html("");
-	param.pages = 0;
-	param.nums = 0;
-	initBoutique(param);
+	$("#fanye").html("");
+	paramT.pages = 0;
+	paramT.nums = 0;
+	initRecommendLesson(paramT);
 	//点击更多
-	function btnMore(){
+	function MoreLesson(){
 		var phone = $.cookie("phone");
-		param.phone = phone;
-		$("#excellent").html("");
-		$("#buttonMore").html("");
-		initBoutiqueVideoClick(param);
+		paramT.phone = phone;
+		$("#RecomExcellent").html("");
+		$("#MoreLesson").html("");
+		initRecommendLessonClick(paramT);
 	}
 }
 
 //点击更多
-function btnMore(){
+function MoreLesson(){
 	var phone = $.cookie("phone");
-	param.phone = phone;
-	param.queryAll="";
-	$("#excellent").html("");
-	$("#buttonMore").html("");
-	initBoutiqueVideoClick(param);
-	
+	paramT.phone = phone;
+	paramT.queryAll="";
+	$("#RecomExcellent").html("");
+	$("#MoreLesson").html("");
+	initRecommendLessonClick(paramT);
 }
 
-//index 加载课程评分榜
-/*function initGrade(){
-	$.ajax({
-		type : "POST",
-		url : url+"/videoServer/front/VideoIndex/queryCourseGrade",
-		contentType : 'application/json; charset=UTF-8',
-		//data: JSON.stringify(param),  //传入组装的参数
-		dataType : "json",
-		success : function(result) {
-			if (result == "" || result.length == 0) {
-				$("#queryCourseGrade").append("暂无课程信息!");
-				return;
-			}
-			for(var i=0;i<result.length;i++){
-				var queryCourseGrade = '<li>'
-										+'<div class="col-md-12" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
-										+	'<a href="course.html?cid='+result[i].courses_id+'">'+result[i].courses_name+'</a>'
-										+	'<span style="float:right"><span class="glyphicon glyphicon-thumbs-up"></span><span style="color: red">'+result[i].courses_grade+'</span></span>'
-										+'</div>'		
-										+'</li>';
-				$("#queryCourseGrade").append(queryCourseGrade);				
-			}
-		}
-	});
-	
-
-}*/
-
-//index 加载课程点击榜
-/*function initClick(){
-	$.ajax({
-		type : "POST",
-		url : url+"/videoServer/front/VideoIndex/queryCourseClick",
-		contentType : 'application/json; charset=UTF-8',
-		//data: JSON.stringify(param),  //传入组装的参数
-		dataType : "json",
-		success : function(result) {
-			if (result == "" || result.length == 0) {
-				$("#queryCourseClick").append("暂无课程信息!");
-				return;
-			}
-			for(var i=0;i<result.length;i++){
-				var queryCourseClick = '<li>'
-										+'<div class="col-md-12" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
-										+	'<a href="course.html?cid='+result[i].courses_id+'">'+result[i].courses_name+'</a>'
-										+	'<span style="float:right"><span class="glyphicon glyphicon-hand-right"></span><span style="color: red">'+result[i].courses_click+'</span></span>'
-										+'</div>';
-										+'</li>';
-				$("#queryCourseClick").append(queryCourseClick);				
-			}
-		}
-		
-	});
-
-}*/
-
-
 //index 加载默认课程
-function initRecommend(){
+function initRecommendTJ(){
 	$
 	.ajax({
 		type : "POST",
@@ -222,12 +159,12 @@ function initRecommend(){
 		dataType : "json",
 		success : function(result) {
 			if (result == "" || result.length == 0) {
-				$("#excellent").append("暂无课程信息!");
-				$("#buttonMore").html("");
+				$("#RecomExcellent").append("暂无课程信息!");
+				$("#MoreLesson").html("");
 				return;
 			}
 			for (var i = 0; i < result.length; i++) {
-				var excellent = '<div class="col-md-3">'
+				var RecomExcellent = '<div class="col-md-3">'
 					+ '<div class="thumbnail">'
 					+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
 					+ result[i].courses_img_url
@@ -267,7 +204,7 @@ function initRecommend(){
 					+ '</div>'
 					+ '</div>'
 					+ '</div>';
-				$("#excellent").append(excellent);
+				$("#RecomExcellent").append(RecomExcellent);
 			}
 			$("img.lazy").lazyload({effect: "fadeIn",offset:300});
 		}
@@ -275,23 +212,24 @@ function initRecommend(){
 }
 
 
-//index 加载精品课程
-function initBoutique(param){
+
+//index 加载推荐好课
+function initRecommendLesson(paramT){
 	$
 	.ajax({
 		type : "POST",
 		url : url+"/videoServer/front/VideoIndex/queryBoutiqueVideo",
 		contentType : 'application/json; charset=UTF-8',
-		data: JSON.stringify(param),  //传入组装的参数
+		data: JSON.stringify(paramT),  //传入组装的参数
 		dataType : "json",
 		success : function(result) {
 			if (result == "" || result.length == 0) {
-				$("#excellent").append("暂无课程信息!");
-				$("#buttonMore").html("");
+				$("#RecomExcellent").append("暂无课程信息!");
+				$("#MoreLesson").html("");
 				return;
 			}
 			for (var i = 0; i < result.length; i++) {
-				var excellent = '<div class="col-md-3">'
+				var RecomExcellent = '<div class="col-md-3">'
 						+ '<div class="thumbnail">'
 						+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
 						+ result[i].courses_img_url
@@ -331,31 +269,31 @@ function initBoutique(param){
 						+ '</div>'
 						+ '</div>'
 						+ '</div>';
-				$("#excellent").append(excellent);
+				$("#RecomExcellent").append(RecomExcellent);
 			}
 			$("img.lazy").lazyload({effect: "fadeIn",offset:300});
 		}
 	});	
-
 }
 
-//点击添加更多精品课程
-function initBoutiqueVideoClick(param){
+//点击添加更多好课
+function initRecommendLessonClick(paramT){
 	$
 	.ajax({
 		type : "POST",
 		url : url+"/videoServer/front/VideoIndex/queryBoutiqueVideoClick",
 		contentType : 'application/json; charset=UTF-8',
-		data: JSON.stringify(param),  //传入组装的参数
+		data: JSON.stringify(paramT),  //传入组装的参数
 		dataType : "json",
 		success : function(result) {
 			if (result.list.length == 0) {
-				$("#excellent").append("暂无课程详情!");
-				$("#buttonMore").html("");
+				$("#RecomExcellent").append("暂无课程详情!");
+				$("#MoreLesson").html("");
 				return;
 			}else {
+				
 				for (var i = 0; i < result.list.length; i++) {
-						var excellent = '<div class="col-md-3">'
+						var RecomExcellent = '<div class="col-md-3">'
 							+ '<div class="thumbnail">'
 							+ '<a href="course.html?cid='+result.list[i].courses_id+'"><img data-original="'
 							+ result.list[i].courses_img_url
@@ -395,11 +333,11 @@ function initBoutiqueVideoClick(param){
 							+ '</div>'
 							+ '</div>'
 							+ '</div>';	
-						$("#excellent").append(excellent);
+						$("#RecomExcellent").append(RecomExcellent);
 				}
 				$("img.lazy").lazyload({effect: "fadeIn",offset:300});
 				total=result.total;
-				page(pages,nums,result.total);
+				pageT(pages,nums,result.total);
 			}
 		}
 	});	

@@ -385,6 +385,7 @@
 													<input type="hidden" id="user_id">
 												</div>
 											</div>
+
 											<div class="row addmargin">
 												<div class="col-sm-4 col-sm-offset-4">
 													<button id="modifyInfo" class="btn btn-primary">修改</button>
@@ -395,6 +396,7 @@
 
 											</div>
 										</div>
+
 										<div  class="col-sm-6">
 											<div class="pic">
 						                        <img id="userImg" src="" align="absmiddle" width="120" height="160" alt="用户照片"/>
@@ -402,6 +404,7 @@
 						                    </div>
 										</div>
 											
+
 									</div>
 									<!--
                 	作者：offline
@@ -434,7 +437,7 @@
 		<script src="dist/js/bootstrap-datepicker.min.js"></script>
 		<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
 		<script src="assets/js/common.js"></script>
-		
+
 
 		<script>
 			//var url = "http://localhost:8080/videoServer/";
@@ -470,7 +473,7 @@
 						}
 					});
 				}
-				
+
 				//显示数据
 				function adduserInfo(data) {
 					$("#user_name").val(data.user_name);
@@ -479,6 +482,7 @@
 					$("#user_date").val(data.user_date);
 					$("#user_imgurl").val(data.user_photo);
 					$("#userImg").attr("src",data.user_photo);
+
 					
 					var status = 6;
 					if(data.user_status == '正常'){
@@ -531,6 +535,7 @@
 				
 				$('#backBtn').click(function(){
 					window.history.go(-1);
+
 				})
 				
 				//日期控件

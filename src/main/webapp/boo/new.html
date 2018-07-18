@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>rigester 页面</title>
+	<title>login</title>
 	<!--
     <link rel="stylesheet" type="text/css" href="styles.css">
     -->
@@ -12,12 +12,10 @@
 	
 	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
-
+	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+	<!-- <script type="text/javascript" src="jquery.cookie1.4.1.js"></script> -->
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 
-	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
-	<script type="text/javascript" src="js/videoIndex.js"></script>
-	<script src="js/jquery.lazyload.min.js"></script>
 </head>
 <style>
 	#search_submit{
@@ -37,7 +35,7 @@
 	 	border-radius:2em;
 	 	border:1px #3AA8FF solid;
 	 	padding:2px 9px;
-	 	margin:0vh 2vw;
+	 	/* margin:0vh 2vw; */
 	 	display:inline-block;
 	 	verticle-align:middle;
 	 	color:black;
@@ -70,53 +68,45 @@
 	 #boo{
 	 	position:relative;
 	 }
-	#rigester{
+	#login{
 		width:28vw;
-	 	height:45vh;
+	 	height:50vh;
 	 	background-color:#FFFFFF;
 	 	border-radius:0.3em;
 	 	margin-left:52vw;
 	 	margin-top:12vh;
 	 	margin-bottom:9vh;
 	}
+	
 	form{
 		
 	 	position:relative;
-	 	top:5vh;
+	 	top:4vh;
 	 	left:2.2vw;
 	 	width:23vw;
-	 	height:40vh;
+	 	height:45vh;
+	 	
 	}
-	
 	#header span{
 	  font-size:1.5vw;
 	}
 	/* 输入框的圆角设置 */
 	#body input{
-	  margin: 2.2vh 0vw;
+	  margin: 1.5vh 0vw;
 	  border:1px solid #888;
       border-radius:4px;
-      height:4vh;
-      padding:0px 55px;
+      padding:5px 70px 5px 40px;
 	}
 	/*登录模态框中输入框的设置-添加小图标*/
-	input[name=phone]{
-		background: url(photos/LoginPhoto/user.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
-		padding:0vh 1.5vw;
-	}
-	input[name=nic]{
+	input[name=uname]{
 		
-		background: url(photos/LoginPhoto/phone.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
-		padding:0vh 1.5vw;
+		background: url(photos/LoginPhoto/user.png) no-repeat 6px 5px; /*引入图片图片*/
+		
 		
 	}
 	input[type=password]{
-		background: url(photos/LoginPhoto/pwd.png) no-repeat 0.5vw 0.8vh; /*引入图片图片*/
-		padding:0vh 1.5vw;
-	}
-	input[name=dx]{
-		padding:0vh 0.5vw;
-		
+		background: url(photos/LoginPhoto/pwd.png) no-repeat 6px 5px; /*引入图片图片*/
+	
 	}
 	a{
 		color:#3AA8FF;
@@ -125,43 +115,45 @@
 		text-decoration:none;
 		color:#3AA8FF;
 	}
-	/* 注册按钮设置 */
+	/* 登录按钮设置 */
 	#body button{
 		background:#3AA8FF;
       	border-radius:4px;
       	width:21.5vw;
-      	height:4vh;
+      	height:5vh;
       	border:0px;
-      	margin:3vh 0vw;
       	color:#FFFFFF;
+      	margin:3vh 0vw 1.2vh;
 	}
 	/* 设置输入框里的字体大小，浏览器兼容不一样，每个都要设置 */
 	input::-webkit-input-placeholder { /* WebKit browsers */ 
-		font-size:1.5vh;
+		font-size:2vh;
 	} 
 
 	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
-		font-size:1.5vh;
+		font-size:2vh;
 	} 
 	input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
-		font-size:1.5vh;
+		font-size:2vh;
 	} 
 	input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
-		font-size:1.5vh;
+		font-size:2vh;
 	} 
 	#bodys{
 		background:url(photos/LoginPhoto/bj@2x.png) no-repeat;
 		background-size:100% 100%; 
+		height:65vh;
 		border:1px solid gray;
 	}
 	#line{
-		margin-left:15vw;
+		margin-left:20vw;
 		float:left;
-	 	margin-top:0vh;
+	 	margin-top:-2vh;
 		height:55vh;
 		width:28vw;
-		border-right:1px solid #cc99ff;
+		
 	}
+	 
 	#logo{
 		position:relative;
 		margin-top:15vh;
@@ -236,8 +228,8 @@
 	 }
 </style>
 <body>
-	<nav class="navbar navbar-default">
-	<div class="container-fluid">
+	<nav class="navbar navbar-default" >
+	<div class="container-fluid" style="height:12vh">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -295,9 +287,7 @@
 						<!-- 添加头像 -->
 						<div id="logImg" class="dropdown">             			
 	                 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-
 	   							<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px" height="40px" class="img-circle"/>
-
 	    						<span class="caret"></span>
 	  						</button>
 		                 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -311,33 +301,42 @@
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
-	<!-- 内容部分 -->
 	<div id="bodys">
-		<div id="rigester">
+		
+		<div id="login">
 			<form>
 				<div id="header" style="margin-bottom:2vh">
-					<span>注册账户</span>
-					<a href="javascript:history.back(-1)" style="float:right;margin-right:1vw;">登录
+					<span>登录账户</span>
+					<a href="rigester.html" style="float:right;margin-right:1vw;">注册
 						<img :src="rigesterUrl">
 					</a>
 				</div>
 				<div id="body">
-					<label>
-			        	<input type="text" name="phone" id="phone" placeholder="请输入手机号" style="width:100%">
-			        	<br>	        	
+			        <label>
+			        	<input type="text" name="uname" id="uname" placeholder="手机号/用户名" style="width:100%">
 			        </label>
-			        <input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" style="width:53%">
-			       
-			        <input type="button" value="获取验证码" id="hmac" style="margin-right:1.2vw;width:37%;float:right;font-size:1.5vh;">
+			        <label>
+			        	<input type="password" id="pwd" placeholder="密码" style="width:100%">
+			        </label>
+			        <input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" style="width:50%;padding:5px 27px;display:none;">
+			        <input type="button" value="获取验证码" id="hmac" style="margin-right:1.3vw;width:35%;height:30px;display:none;float:right;font-size:1.5vh;">
 			        
+			        <br/>
+			        <span><input type="checkbox">记住密码</span>
+			  		<a href="resetpwd.html" style="float:right;margin-right:1vw;" id="mi">忘记密码？</a>
+			        <br/>
 					<label>
-						<button type="button" id="zhuce">注册</button>
+						<button type="button" id="denglu">登录</button>
 					</label>
 				</div>
-				 	
+				<div>
+					<span>
+						<span id="malogindiv">还没有密码？试试&nbsp</span><a id="malogin">验证码登录</a>
+					</span>
+				</div>	
 		    </form>
 		</div>
-	</div><!-- 内容结束 -->
+	</div>
 	<!-- 尾部 -->
 	<footer style="background:gray;margin-bottom:0vh;height:21vh;">
 		<div id="foot">
@@ -369,23 +368,139 @@
 	</footer>
 </body>
 <script>
-	
-	//var url="http:127.0.0.1:8080/";
+//var url="http:127.0.0.1:8080/";
 	var url="";
 	var code="";
+	$("#denglu").click(function(){
+		var uname=$('#uname').val();
+		pwd=$("#pwd").val();
+		var vcode = $('#vcode').val();
+		if($("#malogin").html()=="验证码登录"){
+			//密码登录页面
+			if(uname == ""){   	  
+		    	$("#uname").attr('placeholder','请输入手机号');
+				$("#uname").css('color','red'); 
+				$("#uname").focus(function(){
+					$("#uname").css('color','black');
+				});
+		        return false;  
+		    }
+			if(pwd == ""){
+				$("#pwd").attr('placeholder','请输入密码');
+				$("#pwd").css('color','red'); 
+				$("#pwd").focus(function(){
+					$("#pwd").css('color','black');
+				});
+		        return false;  
+		    }
+			if(typeof(uname)!="undefined"&&typeof(pwd)!="undefined"){
+				
+				$.ajax({
+		        	type:"POST",
+		        	url:url+"/videoServer/front/User/queryuser",
+		        	contentType:'application/json;charset=UTF-8',
+		        	data:JSON.stringify({user_phone:uname}),		        	
+		        	dataType:"json",
+		         	async : false,
+		        	success:function(data){	        	
+		        		if(data.length==1){	  
+		        			initss();
+		     	
+		        		}else{ 
+		        			alert("该号码未注册，请先注册！");
+		         		} 
+		        	},
+		        	error:function(){
+		        		
+		        	}
+		        });    
+			} 
+		}else if($("#malogin").html()=="密码登录"){
+			//验证码登录页面
+			if(uname == ""){   	  
+		    	$("#uname").attr('placeholder','请输入手机号');
+				$("#uname").css('color','red'); 
+				$("#uname").focus(function(){
+					$("#uname").css('color','black');
+				});
+		        return false;  
+		    }
+			if(vcode == ""){  
+		    	  
+		    	$("#vcode").attr('placeholder','请输入验证码');
+				$("#vcode").css('color','red'); 
+				$("#vcode").focus(function(){
+					$("#vcode").css('color','black');
+				});
+		        return false;  
+		    } 
+		    if(vcode!=code){
+		    	$("#vcode").attr('placeholder','验证码错误！');
+				$("#vcode").css('color','red'); 
+				$("#vcode").focus(function(){
+					$("#vcode").css('color','black');
+				});
+		        return false; 
+		    }    
+			if(typeof(uname)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code){
+				
+				$.ajax({
+		        	type:"POST",
+		        	url:url+"/videoServer/front/User/queryuser",
+		        	contentType:'application/json;charset=UTF-8',
+		        	data:JSON.stringify({user_phone:uname}),		        	
+		        	dataType:"json",
+		         	async : false,
+		        	success:function(data){	        	
+		        		if(data.length==1){	  
+		        			var expiresDate= new Date();
+			    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
+			    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
+			    			$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
+			        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
+			    			isfirst(data[0].user_phone);
+		     	
+		        		}else{ 
+		        			alert("该号码未注册，请先注册！");
+		         		} 
+		        	},
+		        	error:function(){
+		        		
+		        	}
+		        });    
+			} 
+		}
+		
+		
+	})
+	$("#malogin").click(function(){
+		if($("#malogin").html()=="验证码登录"){
+			$("#hmac").css({"display":"inline-block"});
+			$("#vcode").css({"display":"inline-block"});
+			$("#pwd").css({"display":"none"});
+			$("#malogindiv").html("已有密码？试试&nbsp");
+			$("#malogin").html("密码登录");
+		}else if($("#malogin").html()=="密码登录"){
+			$("#hmac").css({"display":"none"});
+			$("#vcode").css({"display":"none"});
+			$("#pwd").css({"display":"block"});
+			$("#malogindiv").html("还没有密码？试试&nbsp");
+			$("#malogin").html("验证码登录");
+		}
+	})
 	//获取验证码
 	$('#hmac').click(function(){  
 		
 		var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
 		//	    获取输入框内容
-		var phonenumber = $("#phone").val();
+		var phonenumber = $("#uname").val();
 		var phoneflag=1;//标记手机号是正确的
 		//alert(phonenumber);
 		if (!myreg.test(phonenumber)){
-			$("#phone").attr('placeholder','请输入正确的手机号');
-			$("#phone").css('color','red'); 
-			$("#phone").focus(function(){
-				$("#phone").css('color','black');
+			$("#uname").attr('placeholder','请输入正确的手机号');
+			$("#uname").css('color','red'); 
+			$("#uname").focus(function(){
+				$("#uname").css('color','black');
 			});
 			return phoneflag=0; 
 		}
@@ -414,16 +529,14 @@
 		        	for(var i=0;i<6;i++){
 		        		  code+=Math.floor(Math.random()*10);
 		        	}
-		        	alert(code);
-	           
-	          
+		        	//alert(code);
 	           var str={
 	        	   	phone:phonenumber,
 	        		code:code,//随机验证码
 	        		TemplateCode:"SMS_135036257"//模板信息
 	           }
-	           alert("str"+JSON.stringify(str));
-		        $.ajax({
+	           //alert("str"+JSON.stringify(str));
+		       /*  $.ajax({
 		        	type:"POST",
 		        	url:url+"/videoServer/front/User/queryuser",
 		        	contentType:'application/json;charset=UTF-8',
@@ -433,7 +546,7 @@
 		        		
 		        		if(data.length==1){
 		        			alert("该号码已注册，请直接登录");
-		        		}else{
+		        		}else{ */
 		        			$.ajax({
 		        	        	type:"POST",
 		        	        	url:url+"/videoServer/front/AliBigFish/verificationCode",
@@ -443,111 +556,78 @@
 		        	        	dataType:"json",
 		        	        	success:function(data){
 		        	        		//alert("验证码已发送，请注意查收！");
-		        	        		
+		        	        		code="";
 		        	        	},
 		        	        	error:function(){
 		        	        		
 		        	        	}
 		        	        });
-		        		}
+		        	/* 	}
 		        	}
-		        });    	            
+		        });        */
 	        }
 	})
-	//注册账号
-  	$("#zhuce").click(function(){
-  		
-  		var phone = $('#phone').val();  
-  		/* var name = $('#name').val();
-  		var pwd = $('#pwd').val();
-  		var repwd = $('#repwd').val(); */
-	    var vcode = $('#vcode').val();
-	    //var myreg=/^[a-zA-Z0-9]{6,21}$/;
-	  	if(phone == ""  ){  
-	  		$("#phone").attr('placeholder','手机号不能为空！');
-			$("#phone").css('color','red'); 
-			$("#phone").focus(function(){
-				$("#phone").css('color','black');
-			});
-	        return false;  
-	    }  
-	    /* if(name == ""){
-	    	 
-	    	$("#name").attr('placeholder','请输入昵称');
-			$("#name").css('color','red'); 
-			$("#name").focus(function(){
-				$("#name").css('color','black');
-			});
-	        return false;  
-	    }
-	    
-	    if(pwd == ""){
-	    	$("#pwd").attr('placeholder','请输入密码');
-			$("#pwd").css('color','red'); 
-			$("#pwd").focus(function(){
-				$("#pwd").css('color','black');
-			});
-	        return false;  
-	    }
-		if(pwd == ""){
-			$("#pwd").attr('placeholder','请输入密码');
-			$("#pwd").css('color','red'); 
-			$("#pwd").focus(function(){
-				$("#pwd").css('color','black');
-			});
-	        return false;  
-	    } */
-	    if(vcode == ""){  
-	    	  
-	    	$("#vcode").attr('placeholder','请输入验证码');
-			$("#vcode").css('color','red'); 
-			$("#vcode").focus(function(){
-				$("#vcode").css('color','black');
-			});
-	        return false;  
-	    } 
-	    if(vcode!=code){
-	    	$("#vcode").attr('placeholder','验证码错误！');
-			$("#vcode").css('color','red'); 
-			$("#vcode").focus(function(){
-				$("#vcode").css('color','black');
-			});
-	        return false; 
-	    } 
-	    
-	   var UserTab={
-	    		"user_phone":phone,
-        	
-	    } 
-	   // alert(JSON.stringify(UserTab));
-	    if(typeof(phone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code){   
-	    	$.ajax({
-	        	type:"POST",
-	        	url:url+"/videoServer/front/User/saveuser",
-	        	data:JSON.stringify(UserTab),	
-	        	contentType:'application/json;charset=UTF-8',
-	        	cache:false,
-	        	dataType:"json",
-	        	//dataType:"text",
-	        	success:function(data){
-	        		alert("注册成功！");
-	        		window.history.go(-1);
-	        		//window.location.href="index.html"; 
-	        		
-	        	},
-	        	error:function(data){
-	        		alert("注册失败！");
-	        	
-	        	},
-	        });
-	     }else{  
-	         
-	        return false;  
-	    }  
-	     
-  	})
 
-  	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
+	function initss(){
+			var UserTab={
+		    		"user_phone":$('#uname').val(),    	        		
+	        		"user_pwd":pwd,	        	        		
+		    } 
+			
+			$.ajax({
+	    	type:"POST",
+	    	url:url+"/videoServer/front/User/selectuser",
+	    	data:JSON.stringify(UserTab),	
+	    	contentType:'application/json;charset=UTF-8',
+	    	cache:false,
+	    	async : false,
+	    	dataType:"json",
+	    	success:function(data){
+	    		
+	    		if(data=="账号和密码不一致！"){
+	    			alert(data);
+	    		}else{
+	    			var expiresDate= new Date();
+	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
+	    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
+	    			$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
+	        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
+	    			isfirst(data[0].user_phone);
+	    		}
+	    	
+	    	},
+	    	error:function(){
+	    		alert("error");
+	    	}
+	    }); 
+	}
+	function isfirst(phone){
+		$.ajax({
+	        	type:"POST",
+	        	url:url+"/videoServer/front/User/isfirst",
+	        	contentType:'application/json;charset=UTF-8',
+	        	data:JSON.stringify({user_phone:phone}),		        	
+	        	dataType:"json",
+	         	async : false,
+	        	success:function(data){
+	        		
+	        		if(data.length==1){	 
+	        			//答过题的状态
+	        			//window.location.href="index.html";	
+	        			window.history.go(-1);
+	        		}else{ 
+	        			//未答题状态
+	        			
+	        			window.location.href="user_test.html";
+	        			
+	         		}  
+	        	},
+	        	error:function(){
+	        		
+	        	}
+	    });    
+	}
+	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
 	$(function(){
 		
 		//alert($.cookie('phone'));
@@ -583,12 +663,11 @@
 		 
 
 	})
-
-  	//登录注册样式切换
+	//登录注册样式切换
 	new Vue({  
 		  el: '#logsd',  
 		  data: {  
-		   flag:2,//默认为注册添加 .active  
+		   flag:1,//默认为百度添加 .active  
 		  },  
 		  methods:{  
 		   change:function(a){//传入参数这里指1、2  
@@ -597,21 +676,6 @@
 		  }  
 	})  
 
-	
-	//登录页面中注册按钮后的小图标
-	var rigster=new Vue({
-		el:'#header',
-		data:{
-			rigesterUrl:'photos/LoginPhoto/rigester.png'
-		}
-	})
-	//登录页面中的微信登录小图标
-	var weixin=new Vue({
-		el:'#wxChat',
-		data:{
-			weixin:'photos/LoginPhoto/weixin.png'
-		}
-	})
 
 	//判断PC或移动
 	$(function(){
@@ -630,6 +694,23 @@
 			$("#logsd").css("margin-top", "3.5vh");
 		}
 	} 
+
+</script>
+<script>
+	//登录页面中注册按钮后的小图标
+	var rigster=new Vue({
+		el:'#header',
+		data:{
+			rigesterUrl:'photos/LoginPhoto/rigester.png'
+		}
+	})
+	//登录页面中的微信登录小图标
+	var weixin=new Vue({
+		el:'#wxChat',
+		data:{
+			weixin:'photos/LoginPhoto/weixin.png'
+		}
+	})
 	/* 尾部li标签添加的关于我们 */
 	new Vue({
 	  el: '#footli',

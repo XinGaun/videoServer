@@ -340,6 +340,7 @@
 					<div class="col-md-8">
 						<div class="media">
 							<div class="media-left">
+								<span id="student_img"></span>
 								<a href="#" id="student_img"> 
 								</a>
 							</div>
@@ -362,7 +363,8 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<ul class="nav nav-tabs ">
-				<li role="presentation"><a href="video.html" id="qbhkclassify">全部好课</a></li>
+
+				<li role="presentation"><a href="index.html" id="qbhkclassify">全部好课</a></li>
 				<li role="presentation"><a href="#" id="schkcassify">收藏好课</a></li>
 				<li role="presentation"><a href="#" id="ddclassify">订单记录</a></li>
 				<li role="presentation"><a href="#" id="yhjclassify">优惠券</a></li>
@@ -950,6 +952,7 @@
     			"user_qq":qq,
     	}
     	
+
     	if(typeof(user)!="undefined"&&typeof(email)!="undefined"){
     		
     		$.ajax({
@@ -985,8 +988,8 @@
         		$("#name").val(data[0].user_name);//昵称
         		
         		$("#studentName").html(data[0].user_name);//个人中心页头借用用户昵称
-        		$("#student_img").html('<img src="'+data[0].user_photo+'"  alt="..." style="width:100%;" class="img-rounded lazy">');//个人中心页头借用用户图片
-            	
+        		$("#student_img").html('<img src="'+data[0].user_photo+'" alt="..."style="width:160px;height:130px;" class="img-rounded lazy">');//个人中心页头借用用户图片
+        		//alert(data[0].user_photo);
         		$("#email").val(data[0].user_email);//email
             	$("#aboutme").val(data[0].user_self);
             	$("#truename").val(data[0].user_truename);
@@ -1353,7 +1356,7 @@ function initRecommend(){
 			}
 			for (var i = 0; i < result.length; i++) {
 				var queryRecommendCourse = '<div class="col-md-12" >'
-					+ '<div class="thumbnail">'
+					+ '<div class="thumbnail" style="width:100%;">'
 					+ '<a href="course.html?cid='+result[i].courses_id+'">'
 					+ '<img data-original="'
 					+ result[i].courses_img_url
@@ -1425,20 +1428,27 @@ function initBoutique(param){
 							+ '<p style="color:green;font-weight: bold;font-size:18px;"><a href="course.html?cid='+result.list[i].courses_id+'">'
 							+ result.list[i].courses_name
 							+ '</a></p>'
-							+ '<p style="font-weight: bold;">'
-							+ result.list[i].courses_date
-							+ '</p>'
 							+ '<div class="col-md-6">'
+							+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+							+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result.list[i].teacher_id+'">'
+							+ result.list[i].teacher_name
+							+ '</a></p>'
+							
 							+ '</div>'
-							+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" ><span class="glyphicon glyphicon-star" style="color:yellow;"></span>'
-							+ result.list[i].courses_grade
+							+ '<div class="col-md-6">'
+							+ '<p style="text-align:right;font-weight: bold;">'
+							+ result.list[i].courses_time
+							+ '</p>'
+							+ '</div>'
+							+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" ><span>3622人已购买</span>'
+							//+ result.list[i].courses_grade
 							+ '</p>'
 							+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
 							+ result.list[i].courses_pricemoney
 							+ '<span>￥</span></p>'
-							+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+							/* + '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
 							+ result.list[i].courses_click
-							+ '</p>'
+							+ '</p>' */
 							+ '<p><button class="btn btn-info" style="width: 100%" onclick= "DeleteCancel('+result.list[i].courses_id+')">取消收藏</button></p>'
 							+ '</div>'
 							+ '</div>'
@@ -1626,7 +1636,7 @@ function initOrderInformation(paramT){
 				+ '<td>《<a href="#">'
 				+result.list[i].courses_name
 				+'</a>》<br> 订单编号:<span>'
-				+result.list[i].order_id
+				+result.list[i].video_id
 				+'</span></td>'
 				+'<td>'
 				+result.list[i].order_pricemoney
@@ -1634,8 +1644,7 @@ function initOrderInformation(paramT){
 				+result.list[i].order_status
 				+'</td><td>'
 				+result.list[i].order_date
-				+'</td><td><a href="course.html?cid='+result.list[i].order_id+'">查看课程</a><br></td></tr>';
-				
+				+'</td><td><a href="course.html?cid='+result.list[i].video_id+'">查看课程</a><br></td></tr>';			
 				$("#OrderInformation").append(OrderInformation);
 			}
 			total=result.total;

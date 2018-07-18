@@ -22,12 +22,14 @@
 			.addmargin {
 				margin-top: 10px;
 			}
+
 			.pic {
 			    position: relative;
 			    height: 160px;
 			    width: 120px;
 			    overflow: hidden;
 			}
+
 		</style>
 	</head>
 
@@ -329,6 +331,7 @@
                 -->
 									<div class="row">
 										<div class="col-sm-6">
+
 											<div class="row addmargin">
 												<div class="col-sm-4" align="right" style="line-height:-moz-block-height;">
 													<span class="">姓名:</span>
@@ -399,6 +402,7 @@
 						                    </div>
 						                    <button id="uploadImg">重新上传</button>
 										</div>
+
 									</div>
 									<!--
                 	作者：offline
@@ -436,6 +440,7 @@
 		<script>
 			var url = "http://localhost:8080/videoServer/";
 			//var url = "/videoServer/";
+
 			$(function() {
 				init();
 
@@ -514,6 +519,7 @@
 					$("#teacher_introduce").text(data.teacher_introduce);
 					//显示照片
 					$("#teacherImg").attr("src",data.teacher_imgurl);
+
 					backSelect("teacher_status",data.teacher_status);
 				}
 

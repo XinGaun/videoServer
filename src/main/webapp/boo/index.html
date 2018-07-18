@@ -15,6 +15,9 @@
 	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 	<script type="text/javascript" src="js/videoIndex.js"></script>
+
+	<script type="text/javascript" src="js/videoIndex2.js"></script>
+
 	
 </HEAD>
 <style>
@@ -140,7 +143,6 @@
 	 }
 	 #foot li{
 	 	display:inline-block;
-	 	
 	 	color:white;
 	 	margin:0vh 0.4vw
 	 }
@@ -270,9 +272,9 @@
 				<div class="col-md-4"></div>
 				<div class="col-md-4">
 					<ul class="nav nav-tabs nav-justified">
-						<li role="presentation"><a href="video.html">高中</a></li>
-						<li role="presentation"><a href="video.html">初中</a></li>
-						<li role="presentation"><a href="video.html">小学</a></li>
+						<li role="presentation"><a href="javascript:void(0)" onclick="queryClassVideo('高中')">高中</a></li>
+						<li role="presentation"><a href="javascript:void(0)" onclick="queryClassVideo('初中')">初中</a></li>
+						<li role="presentation"><a href="javascript:void(0)" onclick="queryClassVideo('小学')">小学</a></li>
 					</ul>
 				</div>
 				<div class="col-md-4"></div>
@@ -285,18 +287,20 @@
 							style="text-align: center; font-weight: bold">推荐好课</div>
 						<div class="col-md-12">&nbsp;</div>
 						<div class="panel-body">
-							<div class="col-md-6">
-								<a href="#"><img src="img/pic2.png" style="width: 100%"
-									class="img-rounded img-responsive "></a>
-							</div>
-							<div class="col-md-6">
-								<a href="#"><img src="img/pic1.png" style="width: 100%"
-									class="img-rounded img-responsive " ></a>
-							</div>
+							<div id="RecomExcellent">
 
+							<!-- 视频模板结束 -->
+
+
+							</div>
+							<!-- 翻页 -->
+							<div class="col-md-12" style="text-align: center;" id="fanyeTT">
+		
+							</div>
+							<!-- 分页结束 -->
 							<div class="col-md-12">&nbsp;</div>
-							<div class="col-md-12">
-								<button class="btn btn-default" style="float: right">
+							<div class="col-md-12" id="MoreLesson">
+								<button class="btn btn-default" style="float: right" onclick="MoreLesson()">
 									更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span>
 								</button>
 							</div>
@@ -326,18 +330,23 @@
 
 
 						</div>
-						<div class="col-md-12">
-							<button class="btn btn-default" style="float: right">
+						<div class="col-md-12" id="buttonMore">
+							<button class="btn btn-default" style="float: right" onclick="btnMore()">
 								更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span>
 							</button>
 						</div>
 
 					</div>
+					<!-- 翻页 -->
+					<div class="col-md-12" style="text-align: center;" id="fanye">
+
+					</div>
+					<!-- 分页结束 -->
 				</div>
 			</div>
 			<!-- 特惠套餐 -->
 
-			<div class="panel panel-default">
+			<!-- <div class="panel panel-default">
 
 				<div class="panel-heading col-md-12"
 					style="text-align: center; font-weight: bold">视频套餐</div>
@@ -356,11 +365,8 @@
 
 				</div>
 
-			</div>
-
-
-
-			<div class="panel panel-default">
+			</div> -->
+			<!-- <div class="panel panel-default">
 				<div class="panel-heading col-md-12"
 					style="text-align: center; font-weight: bold">打榜好课</div>
 				<div class="col-md-12">&nbsp;</div>
@@ -401,7 +407,7 @@
 						</h4>
 					</button>
 				</div>
-			</div>
+			</div> -->
 		</div>
 
 		<div class="col-md-1"></div>

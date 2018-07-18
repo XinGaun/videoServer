@@ -1,4 +1,4 @@
-package com.util;
+﻿package com.util;
 
 
 import java.io.File;
@@ -106,7 +106,6 @@ public class OSSUtil implements ProgressListener{
 			ossClient.putObject(bucketName1,ossFileName, file);  
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
 
@@ -167,17 +166,13 @@ public class OSSUtil implements ProgressListener{
 		ossClient.shutdown();
 	}
 	//获得视频时长
-	public String getVideoTime(long size) {
-		System.out.println("videoTime");
-		
+	public String getVideoTime(int size) {
+		System.out.println("videoTime");		
 		StringBuffer length =new StringBuffer("");
-		try {	        
-		
-			long ls = size;
+		try {	        		
+			int ls = size;
 			int hour = (int) (ls/3600);
-			
-				length.append(hour+":");
-			
+				length.append(hour+":");			
 			int minute = (int) (ls%3600)/60;
 			if( minute<10) {
 				length.append("0"+minute+":");
@@ -301,12 +296,12 @@ public class OSSUtil implements ProgressListener{
 	}
 
 	public static void main(String[] args) throws Exception {
-		OSSUtil oss = new OSSUtil();
+//		OSSUtil oss = new OSSUtil();
 //		System.out.println(oss.getVideoTime(new File("D:\\filedownload\\2017高考语文秋季长线拯救班_第15节_20161124223004.mp4")));
 //		String filename = "yuwen.mp4";
 //		oss.isVideo(filename);
 //		String fileName = oss.upload(new File("D:\\filedownload\\演示文稿1.pptx"), "测试ppt1.pptx");
 //		String path = oss.getWebURL(fileName);
-		System.out.println(oss.getVideoTime(Long.parseLong("5.12321")));
+//		System.out.println(oss.getVideoTime(Long.parseLong("5.12321")));
 	}
 }

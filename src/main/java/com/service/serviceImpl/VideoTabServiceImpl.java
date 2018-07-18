@@ -31,7 +31,7 @@ public class VideoTabServiceImpl implements VideoTabService{
 	@Transactional
 	public String uploadVideo(String videoName,String imageName,String pptName,int video_form_id,String video_introduce,MultipartFile video,MultipartFile image,MultipartFile ppt,int video_qz,int teacher_id,long size,String video_time) throws Exception {
 		HashMap<String,String> data = new HashMap<>();
-         System.out.println(1);
+ 
 		CommonsMultipartFile cf= (CommonsMultipartFile)video; //这个myfile是MultipartFile的
 		DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
 		File videoFile = fi.getStoreLocation(); 
@@ -103,8 +103,30 @@ public class VideoTabServiceImpl implements VideoTabService{
 	}
 
 	@Override
-	public void updetVideoById(VideoTab vd) {
-		videoDao.updetVideoById(vd);
+	public void updetVideoById(int video_id,String video_name,String video_form_id,String video_introduce,MultipartFile image,MultipartFile ppt,String video_qz,int teacher_id) throws Exception {
+		CommonsMultipartFile cf2= (CommonsMultipartFile)image; //这个myfile是MultipartFile的
+		DiskFileItem fi2 = (DiskFileItem)cf2.getFileItem(); 
+		File imageFile = fi2.getStoreLocation(); 
+		String imageOldName = image.getOriginalFilename();
+		String ossImageName = ossUpload.upload(imageFile,imageOldName);
+		
+		CommonsMultipartFile cf3= (CommonsMultipartFile)ppt; //这个myfile是MultipartFile的
+		DiskFileItem fi3 = (DiskFileItem)cf3.getFileItem(); 
+		File pptFile = fi3.getStoreLocation(); 
+		String pptOldName = ppt.getOriginalFilename();
+		String osspptName = ossUpload.upload(pptFile,pptOldName);
+	
+			
+		String imageUrl = ossUpload.getWebURL(ossImageName);
+		String pptUrl = ossUpload.getWebURL(osspptName);
+		VideoTab video = new VideoTab();
+		video.setVideo_id(video_id);
+		video.setVideo_img_url(imageUrl);
+		video.setVideo_introduce(video_introduce);
+		video.setVideo_form_id(Integer.parseInt(video_form_id));
+		video.setVideo_ppt(pptUrl);
+		video.setVideo_qz(Integer.parseInt(video_qz));
+		videoDao.updetVideoById(video);
 	}
 
 	@Override

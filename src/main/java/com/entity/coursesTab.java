@@ -16,8 +16,15 @@ public class coursesTab {
 	int video_form_id;
 	String video_form_name;
 	String courses_date;
-
+	String courses_time;
 	int courses_qz;
+	
+	public String getCourses_time() {
+		return courses_time;
+	}
+	public void setCourses_time(String courses_time) {
+		this.courses_time = courses_time;
+	}
 	public int getCourses_qz() {
 		return courses_qz;
 	}
