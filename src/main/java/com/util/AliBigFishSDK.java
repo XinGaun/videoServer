@@ -28,11 +28,8 @@ public class AliBigFishSDK {
 	public static String SendSMSAli(String data) throws ClientException {
 		HashMap<String,Object> map = JSON.parseObject(data, HashMap.class);
 		String phone = map.get("phone").toString();
-		System.out.println(phone);
 		String code = map.get("code").toString();
-		System.out.println(code);
 		String TemplateCode = map.get("TemplateCode").toString();
-		System.out.println(TemplateCode);
 		//设置超时时间-可自行调整
 		System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
 		System.setProperty("sun.net.client.defaultReadTimeout", "10000");

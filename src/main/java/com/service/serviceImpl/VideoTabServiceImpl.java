@@ -35,7 +35,9 @@ public class VideoTabServiceImpl implements VideoTabService{
 		CommonsMultipartFile cf= (CommonsMultipartFile)video; //这个myfile是MultipartFile的
 		DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
 		File videoFile = fi.getStoreLocation(); 
-		String ossVideoName =ossUpload.uploadJD(videoFile,videoName,size);
+
+		String ossVideoName =ossUpload.upload(videoFile,videoName);
+
 
 		CommonsMultipartFile cf2= (CommonsMultipartFile)image; //这个myfile是MultipartFile的
 		DiskFileItem fi2 = (DiskFileItem)cf2.getFileItem(); 

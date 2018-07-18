@@ -102,14 +102,17 @@ public class OSSUtil implements ProgressListener{
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret); 
 		String filetype= fileName.substring(fileName.lastIndexOf("."));
 		String ossFileName = getOSSName(filetype);
+		isVideo(ossFileName);
+		System.out.println("start");
 		try {
 			ossClient.putObject(bucketName1,ossFileName, file);  
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
-
+		System.out.println("end");
 		ossClient.shutdown();  
+		System.out.println("stop");
 		return ossFileName;
 	}
 
@@ -225,20 +228,21 @@ public class OSSUtil implements ProgressListener{
 	}
 
 	public void isVideo(String fileName) {
-		FileNameMap fileNameMap = URLConnection.getFileNameMap();
+
+		/*FileNameMap fileNameMap = URLConnection.getFileNameMap();
         String type = fileNameMap.getContentTypeFor(fileName);
         System.out.println(type);
         if (!TextUtils.isEmpty(fileName)&&type.contains(PREFIX_VIDEO)){
            System.out.println("video");
         }else {
         	System.out.println("no video");
-        }
+        }*/
        
-//		if (fileName.endsWith("mp4") || fileName.endsWith("mp3") || fileName.endsWith("MP4")) {			
-//			bucketName = bucketName2;
-//		}else {				
-//			bucketName = bucketName1;
-//		};
+		if (fileName.endsWith("mp4") || fileName.endsWith("mp3") || fileName.endsWith("MP4")) {			
+			bucketName = bucketName2;
+		}else {				
+			bucketName = bucketName1;
+		};
 	}
 
 	@Override

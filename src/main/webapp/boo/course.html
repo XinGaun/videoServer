@@ -213,7 +213,7 @@ a:hover {
 				<li class="dropdown" STYLE="margin-top: 5%">
 
 					<div class="form-group navbar-form navbar-left">
-						<div class="input-group col-xs-12">
+						<!-- <div class="input-group col-xs-12">
 							<div class="input-group-btn">
 
 								<select name="type" id="dropdown" class="form-control"
@@ -232,7 +232,7 @@ a:hover {
 									搜索</button>
 
 							</span>
-						</div>
+						</div> -->
 					</div>
 				</li>
 			</ul>
@@ -310,8 +310,8 @@ a:hover {
 									<span class="glyphicon glyphicon-user"></span> 学 员 : 3622
 								</div>
 								<div class="col-md-3">
-									<span class="glyphicon glyphicon-eye-open"></span> 游 览 : <span
-										id="courses_click"></span>
+									<!-- <span class="glyphicon glyphicon-eye-open"></span> 游 览 : <span
+										id="courses_click"></span> -->
 								</div>
 							</div>
 						</div>
@@ -587,9 +587,7 @@ a:hover {
 			</div>
 		</div>
 	</div>
-	<div id="foot-bot">
-		<div id="foot-bottom" style="color: white;">7*24小时服务电话：13623512127</div>
-	</div>
+	
 	</footer>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -750,28 +748,14 @@ a:hover {
 
 	/* 尾部li标签添加的关于我们 */
 	new Vue({
-		el : '#footli',
-		data : {
-			sites : [ {
-				name : '关于我们'
-			}, {
-				name : '|'
-			}, {
-				name : '加入我们'
-			}, {
-				name : '|'
-			}, {
-				name : '合作申请'
-			}, {
-				name : '|'
-			}, {
-				name : '意见反馈'
-			}, {
-				name : '|'
-			}, {
-				name : '用户协议'
-			} ]
-		}
+	  el: '#footli',
+	  data: {
+	    sites: [
+	      { name: '关于我们' },
+	      { name: '|'},
+	      { name: '意见反馈' },
+	    ]
+	  }
 	})
 	//尾部的语道图标
 	new Vue({
@@ -789,4 +773,3 @@ a:hover {
 		}
 	})
 </script>
-

@@ -51,6 +51,7 @@ public class VideosDaoServiceImpl implements VideosDaoService {
 	public String queryComment(String data) {
 		HashMap<String,Object> hashmap = JSON.parseObject(data,HashMap.class);
 		hashmap= Page.page(hashmap);
+		System.out.println("hashmap"+hashmap);
 		ArrayList<HashMap<String,Object>> list = videosDao.queryComment(hashmap);
 		int count = videosDao.queryCommentCount(hashmap);
 		return JSON.toJSONString(Count.counts(list, count, hashmap,200,"queryComment success"));

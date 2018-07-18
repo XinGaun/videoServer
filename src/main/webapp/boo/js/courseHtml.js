@@ -104,12 +104,8 @@ function joincourse(){
 
 
 	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
-		if(confirm("您还没有登录请先登录!")){
 			window.location.href="logins.html";
-			return false;
-		}else{
-			return false;
-		}
+		
 	}
 	var data = {
 			user_id:$.cookie('id'),
@@ -319,9 +315,8 @@ function initVideo(video_arr){
 				var kcmls ="";
 				if(result[i].video_ppt!=undefined){
 					kcmls= '<li class="list-group-item">'
-
 						+	'<div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
-						+	'<a href="javascript:void(0)" onclick="">'+result[i].video_ppt+'</a>'
+						+	'<a href="javascript:void(0)" onclick="lodingppt(&quot;'+result[i].video_ppt+'&quot;)">'+result[i].video_name+'课程文档</a>'
 						+'</div>'
 						+'</li>';
 					$("#kcmls").append(kcmls);
@@ -332,6 +327,40 @@ function initVideo(video_arr){
 		}
 	});
 
+}
+
+//下载课程文档
+function lodingppt(ppt){
+	var v_id=getUrlParam('cid');
+	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
+			window.location.href="logins.html";
+		
+	}
+	var data = {
+			user_id:$.cookie('id'),
+			video_id:getUrlParam('cid')
+	}
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/front/Videos/queryOrder",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(data), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			//console.log(result);
+			if(result!="success"){
+				if(confirm("您还没有购买课程,是否购买课程加入课程!")){
+					$("#myModal").modal('show');
+					return false;
+				}else{
+					return false;
+				}
+			}else{
+				window.open(ppt);
+			}
+		}
+	});
 }
 
 //弹出播放页面
@@ -580,7 +609,11 @@ function custom(number){
 //查询评论信息
 function videoComment(video_id){
 	
-	var data ={video_id:video_id};
+	var data ={
+			"video_id":video_id,
+			"pageSize":obj.limit,
+			"currPage":obj.curr
+		};
 	$.ajax({
 		type : "POST",
 		url : url+"/videoServer/front/Videos/queryComment",
@@ -652,12 +685,40 @@ $("#pinglbtn").click(function(){
 	})
 
 })
-//查询视频评论总数	
-laypage.render({
-    elem: 'fenye'
-    ,count: 100
-    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
-    ,jump: function(obj){
-      console.log(obj)
-    }
-  });
+//评论分页
+$(function () {
+	var obj = {
+				curr:1,
+				limit:10,
+				totalRows:0
+			}
+	//分页
+	function fenye(obj){
+		/* alert("进去分页");  */
+		//不显示首页尾页
+		layui.use(['laypage', 'layer'], function(){
+			var laypage = layui.laypage,
+			layer = layui.layer;
+			laypage.render({
+				elem: 'fenye',	
+				count: obj.totalRows,
+				skip:true,
+				groups:5,
+				first:1,
+				curr:obj.curr,
+				limit:obj.limit,
+				last:'尾页',
+				theme: '#1E9FFF',
+				jump:function(obj2,first){
+					//obj包含了当前分页的所有参数，比如
+					obj.curr=obj2.curr;
+					//首次不执行
+					if(!first){
+						//do something 
+						videoComment();
+					} 
+				},
+			});
+		})
+	} 
+})
