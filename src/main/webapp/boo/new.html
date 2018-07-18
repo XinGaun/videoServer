@@ -1,204 +1,190 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-	<title>login</title>
-	<!--
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    -->
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-	
-	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-	
-	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
-	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
-	<!-- <script type="text/javascript" src="jquery.cookie1.4.1.js"></script> -->
-	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>New Document</TITLE>
+<META NAME="Generator" CONTENT="EditPlus">
+<META NAME="Author" CONTENT="">
+<META NAME="Keywords" CONTENT="">
+<META NAME="Description" CONTENT="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-</head>
+<script type="text/javascript" src="ckplayer/ckplayer.js"></script>
+
+<!-- 分页js css -->
+<link rel="stylesheet" href="js/layui/css/layui.css" />
+<script type="text/javascript" src="js/layui/layui.js"></script>
+
+</HEAD>
 <style>
-	#search_submit{
-	 	border-top-left-radius:0em;
-		border-top-right-radius:2em;
-		border-bottom-right-radius:2em;
-		border-bottom-left-radius:0em; 
-	 }
- 	 #dropdown{
- 	 	border-top-left-radius:2em;
-		border-top-right-radius:0em;
-		border-bottom-right-radius:0em;
-		border-bottom-left-radius:2em; 
- 	 }
- 	 /*按钮圆角设置*/
-	.active{  
-	 	border-radius:2em;
-	 	border:1px #3AA8FF solid;
-	 	padding:2px 9px;
-	 	margin:0vh 2vw;
-	 	display:inline-block;
-	 	verticle-align:middle;
-	 	color:black;
-	 	text-decoration: none;
-	 } 
+.bg {
+	background: url(img/banner@2x.png) no-repeat center;
+}
 
-	 a:hover{
-	 	text-decoration:none;
-	 	
-	 } 
-	
-	  #log a{
-	 	color:#3AA8FF;
-	 	padding:1vh 1.5vw;
-	 	text-decoration:none;
-	 } 
-	 #logImg{
-	 	float:right;
-	 	border:1px solid red;
-	 	margin:2vh 1vw 0vh 0vw;
-	 	display:none;
-	 }
-	#login{
-		width:28vw;
-	 	height:50vh;
-	 	background-color:#FFFFFF;
-	 	border-radius:0.3em;
-	 	margin-left:52vw;
-	 	margin-top:12vh;
-	 	margin-bottom:9vh;
-	 	position:absolute;
-	}
-	
-	form{
-	 	position:relative;
-	 	top:4vh;
-	 	left:2.2vw;
-	 	width:23vw;
-	 	height:45vh;
-	 	
-	}
-	#header span{
-	  font-size:1.5vw;
-	}
-	/* 输入框的圆角设置 */
-	#body input{
-	  margin: 1.5vh 0vw;
-	  border:1px solid #888;
-      border-radius:4px;
-      padding:5px 70px 5px 40px;
-	}
-	/*登录模态框中输入框的设置-添加小图标*/
-	input[name=uname]{
-		
-		background: url(photos/LoginPhoto/user.png) no-repeat 6px 5px; /*引入图片图片*/
-		
-		
-	}
-	input[type=password]{
-		background: url(photos/LoginPhoto/pwd.png) no-repeat 6px 5px; /*引入图片图片*/
-	
-	}
-	a{
-		color:#3AA8FF;
-	}
-	a:hover{
-		text-decoration:none;
-		color:#3AA8FF;
-	}
-	/* 登录按钮设置 */
-	#body button{
-		background:#3AA8FF;
-      	border-radius:4px;
-      	width:21.5vw;
-      	height:5vh;
-      	border:0px;
-      	color:#FFFFFF;
-      	margin:3vh 0vw 1.2vh;
-	}
-	/* 设置输入框里的字体大小，浏览器兼容不一样，每个都要设置 */
-	input::-webkit-input-placeholder { /* WebKit browsers */ 
-		font-size:2vh;
-	} 
+.bgs {
+	background: url(img/20180602160122.png);
+}
 
-	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
-		font-size:2vh;
-	} 
-	input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
-		font-size:2vh;
-	} 
-	input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
-		font-size:2vh;
-	} 
-	#bodys{
-		background:url(photos/LoginPhoto/bj@2x.png) no-repeat;
-		background-size:100% 73vh;  
-		min-height:71vh;
-	}
-	
-	 
-	#logo{
-		position:relative;
-		margin-top:15vh;
-	 	border:1px solid #888888;
-	 	width:25vw;
-	}
-	 #foot{
-	 	width:100vw;
-	 	height:13vh;	
-	 	border-bottom:1px solid #999999;
-	 	position:relative;
-	 	border-top:1px solid gray;
-	 } 
-	 #foot-head{
-	 	margin:3vh 19.4vw 0vh 19.2vw;
-	 	height:9.2vh;
-	 	width:61.3vw;
-	 	
-	 }
-	
-	 #footimg{
-	 	height:9.2vh;
-	 	width:5vw;
-	 	margin-left:5vw;
-	 }
-	 #footma{
-	 	width:21vw;
-	 	margin-left:6vw;
-	 }
-	 #footma span{
-	 	
-	 	vertical-align:top;
-	 }
-	 #footma img,#footma span{
-	 	margin:0vh 0vw 0vh 0.9vw;
-	 }
-	 .footli{
-	 	float:left;
-	 }
-	 #footli{
-	 	width:24vw;
-	 	height:9.1vh;
-	 	font-size:0.8vw;
-	 }
-	 #footli span,#footli div{
-	 	
-		margin-left:0.5vw;
-	 }
-	 #foot ol{
-	 	list-style-type:none;
-	 	padding:0px;
-	 }
-	 #foot li{
-	 	display:inline-block;
-	 	color:white;
-	 	margin:0vh 0.4vw
-	 }
-	
-	 
+#btpbq {
+	font-size: 30px;
+}
+
+.kcjs {
+	color: #000000;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	word-break: break-all;
+}
+
+.xydtlh {
+	color: #000000;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	word-break: break-all;
+}
+
+.xymc {
+	color: #000000;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	word-break: break-all;
+}
+
+#search_submit {
+	border-top-left-radius: 0em;
+	border-top-right-radius: 2em;
+	border-bottom-right-radius: 2em;
+	border-bottom-left-radius: 0em;
+}
+
+#dropdown {
+	border-top-left-radius: 2em;
+	border-top-right-radius: 0em;
+	border-bottom-right-radius: 0em;
+	border-bottom-left-radius: 2em;
+}
+/*按钮圆角设置*/
+.active {
+	border-radius: 2em;
+	border: 1px #3AA8FF solid;
+	padding: 2px 9px;
+	margin: 0vh 2vw;
+	display: inline-block;
+	verticle-align: middle;
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+#log a {
+	color: #3AA8FF;
+	padding: 1vh 1.5vw;
+	text-decoration: none;
+}
+
+#logImg {
+	float: right;
+	border: 1px solid red;
+	margin: 2vh 1vw 0vh 0vw;
+	display: none;
+}
+
+#loginrouter {
+	position: fixed;
+	top: 15vh;
+	left: 58vw;
+	z-index: 2;
+}
+
+#foot {
+	width: 100vw;
+	height: 13vh;
+	border-bottom: 1px solid #999999;
+	position: relative;
+	border-top: 1px solid gray;
+}
+
+#foot-head {
+	margin: 3vh 19.4vw 0vh 19.2vw;
+	height: 9.2vh;
+	width: 61.3vw;
+}
+
+#foot-bot {
+	width: 100vw;
+	height: 6vh;
+	bottom: 0vh;
+}
+
+#foot-bottom {
+	margin: 1.7vh 21.3vw 0vh 19.2vw;
+	height: 1.5vh;
+	width: 59.4vw;
+}
+
+#footimg {
+	height: 9.2vh;
+	width: 5vw;
+	margin-left: 5vw;
+}
+
+#footma {
+	width: 21vw;
+	margin-left: 6vw;
+}
+
+#footma span {
+	vertical-align: top;
+}
+
+#footma img, #footma span {
+	margin: 0vh 0vw 0vh 0.9vw;
+}
+
+.footli {
+	float: left;
+}
+
+#footli {
+	width: 24vw;
+	height: 9.1vh;
+	font-size: 0.8vw;
+}
+
+#footli span, #footli div {
+	margin-left: 0.5vw;
+}
+
+#foot ol {
+	list-style-type: none;
+	padding: 0px;
+}
+
+#foot li {
+	display: inline-block;
+	color: white;
+	margin: 0vh 0.4vw
+}
 </style>
-<body style="overflow-y:hidden">
-	<nav class="navbar navbar-default" >
-	<div class="container-fluid" style="height:12vh">
+<script src="js/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.lazyload.min.js"></script>
+
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+
+<BODY>
+	<nav class="navbar navbar-default">
+	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -208,16 +194,20 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.html"><img src="img/logo @2x.png"
-				alt="..." class="img-rounded img-responsive lazy"></a>
+			<a class="navbar-brand" href="index.html"><img
+				src="img/logo @2x.png" alt="..."
+				class="img-rounded img-responsive lazy"></a>
+
 			<p>&nbsp;</p>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 
+
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav" style="margin-left:4vw;">
+
+			<ul class="nav navbar-nav" style="margin-left: 4vw;">
 				<!-- <li class="active">&nbsp; <span class="sr-only">(current)</span></li> -->
 
 
@@ -226,7 +216,10 @@
 					<div class="form-group navbar-form navbar-left">
 						<div class="input-group col-xs-12">
 							<div class="input-group-btn">
-								<select name="type" id="dropdown" class="form-control" style="width: auto;">
+
+								<select name="type" id="dropdown" class="form-control"
+									style="width: auto;">
+
 									<option value="1">全部</option>
 									<option value="2">高中</option>
 									<option value="3">初中</option>
@@ -234,460 +227,527 @@
 								</select>
 							</div>
 							<input type="text" name="keyword" id="keyword"
-								class="form-control" placeholder="请您输入关键词"> 
-							<span class="input-group-btn">
+								class="form-control" placeholder="请您输入关键词"> <span
+								class="input-group-btn">
 								<button class="btn btn-info" id="search_submit" type="submit">
-									搜索
-								</button>
+									搜索</button>
+
 							</span>
 						</div>
 					</div>
 				</li>
 			</ul>
+
 			<!-- 登录|注册 -->
-			
 			<ul class="nav navbar-nav navbar-right">
 				<li>
 					<div>
-						<div  id="logsd">
-							<a href="logins.html" @click="change(1)" :class="flag==1?'active':''">登录</a>
-					    	<a href="rigester.html" @click="change(2)" :class="flag==2?'active':''">注册</a>
+						<div id="logsd">
+							<a href="logins.html" @click="change(1)"
+								:class="flag==1?'active':''">登录</a> <a href="rigester.html"
+								@click="change(2)" :class="flag==2?'active':''">注册</a>
 						</div>
 						<!-- 添加头像 -->
-						<div id="logImg" class="dropdown">             			
-	                 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	   							<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px" height="40px" class="img-circle"/>
-	    						<span class="caret"></span>
-	  						</button>
-		                 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								<li><a href="personal_center.html">个人中心</a></li>					 
+						<div id="logImg" class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button"
+								id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="true">
+								<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px"
+									height="40px" class="img-circle" /> <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="personal_center.html">个人中心</a></li>
 								<li id="exit"><a>退出</a></li>
-							</ul>		                		
-	                 	</div>
-					</div><!-- 登录|注册结束 -->					
+							</ul>
+						</div>
+					</div> <!-- 登录|注册结束 -->
 				</li>
-			</ul>			
+			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
-	<div id="bodys"  style="clear:both;">
-		
-		<div id="login">
-			<form>
-				<div id="header" style="margin-bottom:2vh">
-					<span>登录账户</span>
-					<a href="rigester.html" style="float:right;margin-right:1vw;">注册
-						<img :src="rigesterUrl">
-					</a>
+	<!-- /.container-fluid --> </nav>
+	<!-- 课程头 -->
+
+	<div class="row bg" style="margin-top: -3vh;">
+		<div class="col-md-12">&nbsp;</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="row bgs">
+				<div class="col-md-4">
+					<div class="col-md-12">&nbsp;</div>
+					<div id="videoimg"></div>
+					<div class="col-md-12">&nbsp;</div>
 				</div>
-				<div id="body">
-			        <label>
-			        	<input type="text" name="uname" id="uname" placeholder="手机号/用户名" style="width:100%">
-			        </label>
-			        <label>
-			        	<input type="password" id="pwd" placeholder="密码" style="width:100%">
-			        </label>
-			        <input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" style="width:50%;padding:5px 27px;display:none;">
-			        <input type="button" value="获取验证码" id="hmac" style="margin-right:1.3vw;width:35%;height:30px;display:none;float:right;font-size:1.5vh;">
-			        
-			        <br/>
-			        <span><input type="checkbox">记住密码</span>
-			  		<a href="resetpwd.html" style="float:right;margin-right:1vw;" id="mi">忘记密码？</a>
-			        <br/>
-					<label>
-						<button type="button" id="denglu">登录</button>
-					</label>
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-md-8">
+							<p>&nbsp;</p>
+							<p id="btpbq">
+								《<span id="courses_name"></span>》
+							</p>
+						</div>
+						<div class="col-md-4" style="text-align: right;">
+							<p>&nbsp;</p>
+							<a href="#"> <img src="img/fxxz@2x.png" alt="..."
+								class="img-rounded "> 分享
+							</a>&nbsp;&nbsp;&nbsp;&nbsp; <img src="img/scwxz@2x.png" alt="..."
+								class="img-rounded "><a href="#" id="Collection">收藏 </a>
+						</div>
+						<div class="col-md-12">&nbsp;</div>
+						<div class="col-md-12">
+							<p>
+								评分: <span id="courses_grade"></span>分
+							</p>
+						</div>
+						<div class="col-md-12">&nbsp;</div>
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-3">
+									<span class="glyphicon glyphicon-yen"></span> 价格 : <span
+										id="qian"></span>
+								</div>
+								<div class="col-md-3">
+									<span class="glyphicon glyphicon-user"></span> 学 员 : 3622
+								</div>
+								<div class="col-md-3">
+									<span class="glyphicon glyphicon-eye-open"></span> 游 览 : <span
+										id="courses_click"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">&nbsp;</div>
+						<div class="col-md-12">&nbsp;</div>
+						<div class="col-md-12">&nbsp;</div>
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-3"></div>
+								<div class="col-md-3"></div>
+								<div class="col-md-3"></div>
+								<div class="col-md-3">
+									<p>
+										<button class="btn btn-info" style="width: 100%; height: 10%;"
+											onclick="joincourse()">加入课程</button>
+									</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
 				</div>
-				<div>
-					<span>
-						<span id="malogindiv">还没有密码？试试&nbsp</span><a id="malogin">验证码登录</a>
-					</span>
-				</div>	
-		    </form>
+
+			</div>
 		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-12">&nbsp;</div>
 	</div>
+	<p>&nbsp;</p>
+	<!-- 课程简介+课程老师 -->
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="row">
+				<div class="col-md-9">
+					<ul class="nav nav-tabs ">
+						<li role="presentation"><a href="javascript:void(0)"
+							id="jjclassify">学习资料</a></li>
+						<li role="presentation"><a href="javascript:void(0)"
+							id="kcclassify">课程选集</a></li>
+						<!-- <li role="presentation"><a href="javascript:void(0)"
+							id="xyclassify">学员评论</a></li> -->
+					</ul>
+					<!-- 课程简介 -->
+					<div id="kcjjs">
+						<h4>
+							<span class="glyphicon glyphicon-option-vertical"></span>课程简介
+						</h4>
+						<p>&nbsp;</p>
+						<p style="text-indent: 2em; font-size: 8px" class="kcjs"
+							id="courses_introduce"></p>
+						<p>&nbsp;</p>
+						<h4>
+							<span class="glyphicon glyphicon-option-vertical"></span>课程文档
+						</h4>
+						<!-- <p style="color: red;">
+							&nbsp;&nbsp;&nbsp;&nbsp;<span id="video_form_class"></span> <span
+								id="video_form_name"></span>
+
+						</p> -->
+						<ul class="list-group" id="kcmls" >
+						</ul>
+
+						<p>&nbsp;</p>
+						<h4>
+							<span class="glyphicon glyphicon-option-vertical"></span>课程目录
+						</h4>
+						<!-- <ol style="font-weight: bold;" id="videos">
+
+						</ol> -->
+						<ul class="list-group" id="videos">
+							<!-- <li class="list-group-item">免费域名注册</li>
+							<li class="list-group-item">免费 Window 空间托管</li>
+							<li class="list-group-item">图像的数量</li>
+							<li class="list-group-item">24*7 支持</li>
+							<li class="list-group-item">每年更新成本</li> -->
+						</ul>
+					</div>
+					<!-- 课程分类结束 -->
+					<!-- 课程目录 -->
+					<div id="kcml" class="row">
+						<h4>
+							<span class="glyphicon glyphicon-option-vertical"></span>课程选集
+						</h4>
+						<div style="width:600px;" id="kcxjs">
+
+						</div>
+					</div>
+					<!-- 课程目录结束 -->
+					<!-- 学员评论 -->
+					<div id="xypl">
+						<h4>
+							<span class="glyphicon glyphicon-option-vertical"></span>学员评论
+						</h4>
+						<p>&nbsp;</p>
+						<!--  -->
+						<div class="row">
+							<div class="row" id="excellent">
+
+								<!-- 教师模板结束 -->
+
+
+							</div>
+							<!-- 翻页 -->
+							<div class="col-md-12" style="text-align: center;" id="fanye">
+
+							</div>
+							<!-- 分页结束 -->
+						</div>
+					</div>
+					<p>&nbsp;</p>
+					<!-- 学员评论结束 -->
+					<!-- 推荐好课 -->
+					<!-- <div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading col-md-12" style="font-weight: bold">
+									猜你可能感兴趣的好课-<a href="#">推荐</a> <a href="#" style="float: right;">更多》</a>
+								</div>
+								<div class="col-md-12">&nbsp;</div>
+								<div class="panel-body">
+									<div class="row" id="queryqueryRecommendCourse"></div>
+								</div>
+							</div>
+						</div>
+					</div> -->
+
+				</div>
+				<!--  -->
+				<!-- 课程教师 -->
+				<div class="col-md-3">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading col-md-12" style="font-weight: bold">
+									课程老师</div>
+								<div class="col-md-12">&nbsp;</div>
+								<div class="panel-body ">
+									<div class="media col-md-12">
+										<div class="media-left">
+											<a href="#"> <img class="media-object" src="img/tx2.png"
+												alt="...">
+											</a>
+										</div>
+										<div class="media-body">
+											<p class="media-heading" id="teacher_name"></p>
+											<p class="kcjs" id="teacher_introduce"></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 课程教师结束 -->
+
+				<!-- 学员动态 -->
+				<!-- <div class="col-md-3">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading col-md-12" style="font-weight: bold">
+									学员动态</div>
+								<div class="col-md-12">&nbsp;</div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="xydtlh col-md-12">
+											<a href="#">学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态</a>
+										</div>
+										<p>&nbsp;</p>
+										<div class="xydtlh col-md-12">
+											<a href="#">学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态</a>
+										</div>
+										<p>&nbsp;</p>
+										<div class="xydtlh col-md-12">
+											<a href="#">学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态</a>
+										</div>
+										<p>&nbsp;</p>
+										<div class="xydtlh col-md-12">
+											<a href="#">学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态</a>
+										</div>
+										<p>&nbsp;</p>
+
+										<div class="xydtlh col-md-12">
+											<a href="#">学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态学员动态</a>
+										</div>
+										<p>&nbsp;</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<!-- 学员动态结束 -->
+				<!-- 新加入学员 -->
+				<!-- <div class="col-md-3">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading col-md-12" style="font-weight: bold">
+									新加入学员</div>
+								<div class="col-md-12">&nbsp;</div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-4">
+											<img src="img/tx5.png" class="img-responsive">
+											<p class="xymc">学员名称</p>
+										</div>
+										<div class="col-md-4">
+											<img src="img/tx5.png" class="img-responsive">
+											<p class="xymc">学员名称</p>
+										</div>
+										<div class="col-md-4">
+											<img src="img/tx5.png" class="img-responsive">
+											<p class="xymc">学员名称</p>
+										</div>
+										<div class="col-md-4">
+											<img src="img/tx5.png" class="img-responsive">
+											<p class="xymc">学员名称</p>
+										</div>
+										<div class="col-md-4">
+											<img src="img/tx5.png" class="img-responsive">
+											<p class="xymc">学员名称</p>
+										</div>
+										<div class="col-md-4">
+											<img src="img/tx5.png" class="img-responsive">
+											<p class="xymc">学员名称</p>
+										</div>
+										<div class="col-md-4">
+											<img src="img/tx5.png" class="img-responsive">
+											<p class="xymc">学员名称</p>
+										</div>
+										<div class="col-md-4">
+											<img src="img/tx5.png" class="img-responsive">
+											<p class="xymc">学员名称</p>
+										</div>
+										<div class="col-md-4">
+											<img src="img/tx5.png" class="img-responsive">
+											<p class="xymc">学员名称</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<!-- 新加入学员结束 -->
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+
 	<!-- 尾部 -->
 	<footer style="background:gray">
-		<div id="foot">
-			<div id="foot-head">
-				<div class="footli" id="footli">
-					<ol>
-    					<li v-for="site in sites">
-      						{{ site.name }}
-    					</li>
-    					
-  					</ol>
-  					<div id="footbeian">
-  						<img src="photos/LoginPhoto/beianbgs@2x.png"/>
-  						<span style="color:white;">晋ICP备18006212号</span>
-  					</div>
+	<div id="foot">
+		<div id="foot-head">
+			<div class="footli" id="footli">
+				<ol>
+					<li v-for="site in sites">{{ site.name }}</li>
+
+				</ol>
+				<div id="footbeian">
+					<img src="photos/LoginPhoto/beianbgs@2x.png" /> <span
+						style="color: white;">晋ICP备18006212号</span>
 				</div>
-				<div class="footli" id="footimg">
-					<img :src="footimg">
+			</div>
+			<div class="footli" id="footimg">
+				<img :src="footimg">
+			</div>
+			<div class="footli" id="footma">
+				<span style="color: white;">关注我们：</span> <img :src="footma"
+					style="width: 50px; height: 50px;" />
+			</div>
+		</div>
+	</div>
+	
+	</footer>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">购买课程</h4>
 				</div>
-				<div class="footli" id="footma">
-					<span style="color:white;">关注我们：</span>
-					<img :src="footma" style="width:50px;height:50px;"/>
+				<div class="modal-body">
+					课程名程:<span id="courses_names"></span><br> 课程价格:<span
+						id="qians"></span>元<br> 支付方式:<input type="radio" name="demo1"
+						id="demo1-alipay" value="option1" checked="">支付宝支付 <input
+						type="radio" name="demo1" id="demo1-weixin" value="option2">微信支付
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="goumais()">购买课程</button>
 				</div>
 			</div>
 		</div>
-		
-	</footer>
-</body>
-<script>
-//var url="http:127.0.0.1:8080/";
-	var url="";
-	
-	$("#denglu").click(function(){
-		if($.cookie("phone")!=null){
-			alert("你已登陆，请勿重复登陆");
-		}else{
-		var uname=$('#uname').val();
-		pwd=$("#pwd").val();
-		var vcode = $('#vcode').val();
-		if($("#malogin").html()=="验证码登录"){
-			//密码登录页面
-			if(uname == ""){   	  
-		    	$("#uname").attr('placeholder','请输入手机号');
-				$("#uname").css('color','red'); 
-				$("#uname").focus(function(){
-					$("#uname").css('color','black');
-				});
-		        return false;  
-		    }
-			if(pwd == ""){
-				$("#pwd").attr('placeholder','请输入密码');
-				$("#pwd").css('color','red'); 
-				$("#pwd").focus(function(){
-					$("#pwd").css('color','black');
-				});
-		        return false;  
-		    }
-			if(typeof(uname)!="undefined"&&typeof(pwd)!="undefined"){
-				
-				$.ajax({
-		        	type:"POST",
-		        	url:url+"/videoServer/front/User/queryuser",
-		        	contentType:'application/json;charset=UTF-8',
-		        	data:JSON.stringify({user_phone:uname}),		        	
-		        	dataType:"json",
-		         	async : false,
-		        	success:function(data){	        	
-		        		if(data.length==1){	  
-		        			initss();
-		     	
-		        		}else{ 
-		        			alert("该号码未注册，请先注册！");
-		         		} 
-		        	},
-		        	error:function(){
-		        		
-		        	}
-		        });    
-			} 
-		}else if($("#malogin").html()=="密码登录"){
-			//验证码登录页面
-			if(uname == ""){   	  
-		    	$("#uname").attr('placeholder','请输入手机号');
-				$("#uname").css('color','red'); 
-				$("#uname").focus(function(){
-					$("#uname").css('color','black');
-				});
-		        return false;  
-		    }
-			if(vcode == ""){  
-		    	  
-		    	$("#vcode").attr('placeholder','请输入验证码');
-				$("#vcode").css('color','red'); 
-				$("#vcode").focus(function(){
-					$("#vcode").css('color','black');
-				});
-		        return false;  
-		    } 
-		    if(vcode!=code){
-		    	$("#vcode").attr('placeholder','验证码错误！');
-				$("#vcode").css('color','red'); 
-				$("#vcode").focus(function(){
-					$("#vcode").css('color','black');
-				});
-		        return false; 
-		    }    
-			if(typeof(uname)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code){
-				
-				$.ajax({
-		        	type:"POST",
-		        	url:url+"/videoServer/front/User/queryuser",
-		        	contentType:'application/json;charset=UTF-8',
-		        	data:JSON.stringify({user_phone:uname}),		        	
-		        	dataType:"json",
-		         	async : false,
-		        	success:function(data){	        	
-		        		if(data.length==1){	  
-		        			var expiresDate= new Date();
-			    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
-			    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
-			    			$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
-			        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
-			    			isfirst(data[0].user_phone);
-		     	
-		        		}else{ 
-		        			alert("该号码未注册，请先注册！");
-		         		} 
-		        	},
-		        	error:function(){
-		        		
-		        	}
-		        });    
-			} 
-		}
-		
-		}
-	})
-	$("#malogin").click(function(){
-		if($("#malogin").html()=="验证码登录"){
-			$("#hmac").css({"display":"inline-block"});
-			$("#vcode").css({"display":"inline-block"});
-			$("#pwd").css({"display":"none"});
-			$("#malogindiv").html("已有密码？试试&nbsp");
-			$("#malogin").html("密码登录");
-		}else if($("#malogin").html()=="密码登录"){
-			$("#hmac").css({"display":"none"});
-			$("#vcode").css({"display":"none"});
-			$("#pwd").css({"display":"block"});
-			$("#malogindiv").html("还没有密码？试试&nbsp");
-			$("#malogin").html("验证码登录");
-		}
-	})
-	//获取验证码
-	var code="";
-	$('#hmac').click(function(){  
-		
-		var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
-		//	    获取输入框内容
-		var phonenumber = $("#uname").val();
-		var phoneflag=1;//标记手机号是正确的
-		//alert(phonenumber);
-		if (!myreg.test(phonenumber)){
-			$("#uname").attr('placeholder','请输入正确的手机号');
-			$("#uname").css('color','red'); 
-			$("#uname").focus(function(){
-				$("#uname").css('color','black');
-			});
-			return phoneflag=0; 
-		}
-	         var codeflag = 60;//点击时间间隔60s
-	         
-	        if(phoneflag == 1&&codeflag==60){  
-	        	var timeflag = setInterval(function(){  
-	                codeflag--;  
-	
-	                if(codeflag>0){ 
-	                	
-	                    $('#hmac').val('重新发送'+codeflag+'s');  
-	                    $('#hmac').css({'color':'#99897A'});  
-	                    $('#hmac').attr('disabled','disabled');  
-	                }else{  
-	                    codeflag=60;  
-	                    $('#hmac').val('获取验证码');  
-	                    $('#hmac').css({'color':'black'});  
-	                    $('#hmac').removeAttr('disabled');  
-	                    clearInterval(timeflag);  
-	            	}  
-	        	},1000);  
-	            
-	        	//随机生成六位验证码
-	            //var code="";
-	        	for(var i=0;i<6;i++){
-	        		  code+=Math.floor(Math.random()*10);
-	        	}
-	        	//alert(code);
-	           var str={
-	        	   	phone:phonenumber,
-	        		code:code,//随机验证码
-	        		TemplateCode:"SMS_135036257"//模板信息
-	           }
-	           //alert("str"+JSON.stringify(str));
-		       /*  $.ajax({
-		        	type:"POST",
-		        	url:url+"/videoServer/front/User/queryuser",
-		        	contentType:'application/json;charset=UTF-8',
-		        	data:JSON.stringify({user_phone:phonenumber}),
-		        	dataType:"json",
-		        	success:function(data){
-		        		
-		        		if(data.length==1){
-		        			alert("该号码已注册，请直接登录");
-		        		}else{ */
-		        			$.ajax({
-		        	        	type:"POST",
-		        	        	url:url+"/videoServer/front/AliBigFish/verificationCode",
-		        	        	contentType:'application/json;charset=UTF-8',
-		        	        	data:JSON.stringify(str),     	
-		        	        	//data:str,
-		        	        	dataType:"json",
-		        	        	success:function(data){
-		        	        		//alert("验证码已发送，请注意查收！");
-		        	        		
-		        	        		if(data=="error"){
-		        	        			alert("验证码请求过于频繁！");
-		        	        		}
-		        	        		setTimeout(function(){ 
-		        	        			code="";
-		        	        		}, 60000);
-		        	        	},
-		        	        	error:function(){
-		        	        		
-		        	        	}
-		        	        });
-		        	/* 	}
-		        	}
-		        });        */
-	        }
-	})
 
-	function initss(){
-			var UserTab={
-		    		"user_phone":$('#uname').val(),    	        		
-	        		"user_pwd":pwd,	        	        		
-		    } 
-			
-			$.ajax({
-	    	type:"POST",
-	    	url:url+"/videoServer/front/User/selectuser",
-	    	data:JSON.stringify(UserTab),	
-	    	contentType:'application/json;charset=UTF-8',
-	    	cache:false,
-	    	async : false,
-	    	dataType:"json",
-	    	success:function(data){
-	    		
-	    		if(data=="账号和密码不一致！"){
-	    			alert(data);
-	    		}else{
-	    			var expiresDate= new Date();
-	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
-	    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
-	    			$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
-	        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
-	    			isfirst(data[0].user_phone);
-	    		}
-	    	
-	    	},
-	    	error:function(){
-	    		alert("error");
-	    	}
-	    }); 
-	}
-	function isfirst(phone){
-		$.ajax({
-	        	type:"POST",
-	        	url:url+"/videoServer/front/User/isfirst",
-	        	contentType:'application/json;charset=UTF-8',
-	        	data:JSON.stringify({user_phone:phone}),		        	
-	        	dataType:"json",
-	         	async : false,
-	        	success:function(data){
-	        		
-	        		if(data.length==1){	 
-	        			//答过题的状态
-	        			//window.location.href="index.html";	
-	        			window.history.go(-1);
-	        		}else{ 
-	        			//未答题状态
-	        			
-	        			window.location.href="user_test.html";
-	        			
-	         		}  
-	        	},
-	        	error:function(){
-	        		
-	        	}
-	    });    
-	}
+	</div>
+
+	<!-- video model -->
+	<div class="modal fade bs-example-modal-lg" id="myModalvideo"
+		tabindex="-1" role="dialog" aria-labelledby="myModalLabelvideo">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">播放课程</h4>
+				</div>
+				<div class="modal-body">
+					<div class="video"></div>
+					<div>
+						<hr>
+					</div>
+
+					<div>
+						<textarea  name="addpinglun" id="addpinglun" cols="80" rows="2" placeholder="请写下你的评论..." ></textarea>
+						<button id="pinglbtn" onclick="pinglbtn()" style="margin-top:-5vh;margin-left:2vw;" class="btn btn-large btn-success">评论吧</button>
+					</div>
+					<div id="pingliu"></div>
+					<div id="fenye"></div>
+
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<form style='display: none;' id='formpay' name='formpay' method='post'
+		action='https://pay.paysapi.com'>
+		<input name='goodsname' id='goodsname' type='text' value='' /> <input
+			name='istype' id='istype' type='text' value='' /> <input name='key'
+			id='key' type='text' value='' /> <input name='notify_url'
+			id='notify_url' type='text' value='' /> <input name='orderid'
+			id='orderid' type='text' value='' /> <input name='orderuid'
+			id='orderuid' type='text' value='' /> <input name='price' id='price'
+			type='text' value='' /> <input name='return_url' id='return_url'
+			type='text' value='' /> <input name='uid' id='uid' type='text'
+			value='' /> <input type='submit' id='submitdemo1'>
+	</form>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/courseHtml.js"></script>
+</BODY>
+</HTML>
+
+<script type="text/javascript">
 	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
-	/* $(function(){
-		
+	$(function() {
 		//alert($.cookie('phone'));
 		//alert($.cookie('photo'));
-		if($.cookie("phone")==null){//cookie过期
-
+		if ($.cookie("phone") == null) {//cookie过期
 			//alert("登录过期，请重新登录");
-		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
+
+		} else if ($.cookie("phone") != null
+				&& ($.cookie("photo") == null || $.cookie("photo") == "")) {//cookie有用户信息，但没有头像，添加默认头像
 			//alert("pp");
 			$("#logsd").hide();
 			$("#logImg").show();
-		}else if($.cookie("phone")!=null&&$.cookie("photo")!=null){//cookie有用户信息和头像
+		} else if ($.cookie("phone") != null && $.cookie("photo") != null) {//cookie有用户信息和头像
 			//alert("dd");
 			$("#logsd").hide();
-			$("#imgt").attr("src",$.cookie("photo"));
+			$("#imgt").attr("src", $.cookie("photo"));
 			$("#logImg").show();
 		}
-		 
-		
-	}) */
+
+	})
 	/*
 	退出按钮点击事件
-	*/
-	$("#exit").click(function(){
+	 */
+	$("#exit").click(function() {
 		//alert(5);
 		//window.location.href="index.html"; 
-		
 		$("#logsd").show();
 		$("#logImg").hide();
-		$.cookie('id', '', { expires: -1 ,path:'/',secure: false});
-		$.cookie('phone', '', { expires: -1 ,path:'/',secure: false});
-		$.cookie('photo', '', { expires: -1,path:'/',secure: false }); 
-		 
+		$.cookie('id', '', {
+			expires : -1,
+			path : '/',
+			secure : false
+		});
+		$.cookie('phone', '', {
+			expires : -1,
+			path : '/',
+			secure : false
+		});
+		$.cookie('photo', '', {
+			expires : -1,
+			path : '/',
+			secure : false
+		});
 
 	})
-	//登录注册样式切换
-	new Vue({  
-		  el: '#logsd',  
-		  data: {  
-		   flag:1,//默认为百度添加 .active  
-		  },  
-		  methods:{  
-		   change:function(a){//传入参数这里指1、2  
-		    this.flag=a;//flag==1 or flag==2  
-		   }  
-		  }  
-	})  
 
+	//登录注册样式切换
+	new Vue({
+		el : '#logsd',
+		data : {
+			flag : 1,//默认为百度添加 .active  
+		},
+		methods : {
+			change : function(a) {//传入参数这里指1、2  
+				this.flag = a;//flag==1 or flag==2  
+			}
+		}
+	})
 
 	//判断PC或移动
-	$(function(){
+	$(function() {
 		judgePC();
 	})
-	function judgePC(){
+	function judgePC() {
 		if (navigator.userAgent.match(/mobile/i)) {
 			//移动端
 			$("#logsd").css("margin-right", "10vw");
 			$("#logsd").css("margin-top", "3.5vh");
-			$("#footimg").css("margin-top","-16vh");
-			$("#footlogo").css("margin-top","-16vh");
+			$("#footimg").css("margin-top", "-16vh");
+			$("#footlogo").css("margin-top", "-16vh");
 		} else {
 			//pc端
 			$("#logsd").css("margin-right", "15vw");
 			$("#logsd").css("margin-top", "3.5vh");
 		}
-	} 
+	}
 
-</script>
-<script>
-	//登录页面中注册按钮后的小图标
-	var rigster=new Vue({
-		el:'#header',
-		data:{
-			rigesterUrl:'photos/LoginPhoto/rigester.png'
-		}
-	})
-	//登录页面中的微信登录小图标
-	var weixin=new Vue({
-		el:'#wxChat',
-		data:{
-			weixin:'photos/LoginPhoto/weixin.png'
-		}
-	})
 	/* 尾部li标签添加的关于我们 */
 	new Vue({
 	  el: '#footli',
@@ -701,9 +761,9 @@
 	})
 	//尾部的语道图标
 	new Vue({
-		el:'#footimg',
-		data:{
-			footimg:'photos/LoginPhoto/yudaologo.png'
+		el : '#footimg',
+		data : {
+			footimg : 'photos/LoginPhoto/yudaologo.png'
 		}
 
 	    if(vcode == ""){  
@@ -754,14 +814,13 @@
 	    }  
 
 	})
-	
-	
+
 	//尾部二维码
 	new Vue({
-		el:'#footma',
-		data:{
-			footma:'photos/LoginPhoto/erweima_20180628215615.jpg'
 
+		el : '#footma',
+		data : {
+			footma : 'photos/LoginPhoto/erweima_20180628215615.jpg'
 		}
 		 
 		
@@ -779,4 +838,4 @@
 		$.cookie('photo', '', { expires: -1,path:'/',secure: false });  
 	})
 </script>
-</html>
+
