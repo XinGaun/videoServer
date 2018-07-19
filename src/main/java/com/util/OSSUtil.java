@@ -1,16 +1,15 @@
-﻿package com.util;
+package com.util;
 
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.FileNameMap;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Date;
 import java.util.UUID;
 
-import org.apache.http.util.TextUtils;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.aliyun.oss.ClientConfiguration;
 import com.aliyun.oss.HttpMethod;
@@ -19,6 +18,7 @@ import com.aliyun.oss.event.ProgressEvent;
 import com.aliyun.oss.event.ProgressEventType;
 import com.aliyun.oss.event.ProgressListener;
 import com.aliyun.oss.model.GetObjectRequest;
+import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.PutObjectRequest;  
 
 public class OSSUtil implements ProgressListener{
@@ -29,7 +29,7 @@ public class OSSUtil implements ProgressListener{
 	private static String bucketName1 = "img-1-yudao";
 	private static String bucketName2 = "video-yudao-1";
 	private static String bucketName;
-	private final static String PREFIX_VIDEO="video/";
+	//private final static String PREFIX_VIDEO="video/";
 	private long bytesWritten = 0;
 	private long totalBytes = -1;
 	private boolean succeed = false;
@@ -105,7 +105,7 @@ public class OSSUtil implements ProgressListener{
 		isVideo(ossFileName);
 		System.out.println("start");
 		try {
-			ossClient.putObject(bucketName1,ossFileName, file);  
+			ossClient.putObject(bucketName,ossFileName, file);  
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
@@ -161,6 +161,32 @@ public class OSSUtil implements ProgressListener{
 		System.out.println("end");
 		ossClient.shutdown();
 	}
+	
+	//下载一个文件到本地  
+		public void downloadInputStram(HttpServletRequest request, HttpServletResponse resp,String ossFileName) throws Exception{
+			OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);  
+			isVideo(ossFileName);
+			OSSObject obj=ossClient.getObject(new GetObjectRequest(bucketName, ossFileName ));
+			InputStream input =obj.getObjectContent();
+			resp.setHeader("content-type", "video/mpeg4");
+			//OutputStream out = resp.getOutputStream();
+			//int flog = input.available();
+			//System.out.println(ss);
+			//执行输出操作
+			byte[] bt = new byte[1024];
+			int i;
+			while ((i = input.read(bt)) != -1) {
+				 resp.getOutputStream().write(bt,0,i);
+		    }
+			//resp.getOutputStream().write(bt);
+	        
+	        /*方法内可以不关流*/
+			resp.getOutputStream().close();
+	        input.close();
+			//System.out.println("end");
+			//ossClient.shutdown();
+			//return input;
+		}
 	//删除一个文件  
 	public void delectFile(String yourObjectName) {
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);  
@@ -228,17 +254,8 @@ public class OSSUtil implements ProgressListener{
 	}
 
 	public void isVideo(String fileName) {
-
-		/*FileNameMap fileNameMap = URLConnection.getFileNameMap();
-        String type = fileNameMap.getContentTypeFor(fileName);
-        System.out.println(type);
-        if (!TextUtils.isEmpty(fileName)&&type.contains(PREFIX_VIDEO)){
-           System.out.println("video");
-        }else {
-        	System.out.println("no video");
-        }*/
        
-		if (fileName.endsWith("mp4") || fileName.endsWith("mp3") || fileName.endsWith("MP4")) {			
+		if(fileName.endsWith("mp4") || fileName.endsWith("mp3") || fileName.endsWith("MP4")) {			
 			bucketName = bucketName2;
 		}else {				
 			bucketName = bucketName1;

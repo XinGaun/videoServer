@@ -117,12 +117,27 @@ function queryClassVideo(queryAlls){
 	queryClassVideo2222(queryAlls);
 }
 
+//搜索框查询
+function queryNameVideo(){
+	paramT.queryAll = $("#dropdown").val();
+	//alert(paramT.queryAll);
+	paramT.keyword = $("#keyword").val();
+	if(paramT.queryAll=='' && paramT.keyword==''){
+		$("#RecomExcellent").html("");
+		initRecommendTJ();
+	}else{
+	//	alert(paramT.keyword);
+		$("#RecomExcellent").html("");
+		initRecommendSearch(paramT);
+	}
+	
+}
 
 function queryClassVideo2222(queryAlls){
 	paramT.queryAll=queryAlls;
 	$("#RecomExcellent").html("");
-	$("#MoreLesson").html('<button class="btn btn-default" style="float: right" onclick="btnMore()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
-	$("#MoreLesson").html('<button class="btn btn-default" style="float: right" onclick="MoreLesson()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
+	$("#buttonMore").html('精品课程<button class="btn btn-default" style="float: right" onclick="btnMore()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
+	$("#MoreLesson22").html('推荐好课<button class="btn btn-default" style="float: right" onclick="MoreLesson()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
 	$("#fanyeTT").html("");
 	$("#fanye").html("");
 	paramT.pages = 0;
@@ -133,8 +148,8 @@ function queryClassVideo2222(queryAlls){
 		var phone = $.cookie("phone");
 		paramT.phone = phone;
 		$("#RecomExcellent").html("");
-		$("#MoreLesson").html("");
 		initRecommendLessonClick(paramT);
+		$("#MoreLesson22").html('推荐好课<button class="btn btn-default" style="float: right" onclick="TakeBackLesson()">收&nbsp;回<span class="glyphicon glyphicon-menu-right"></span></button>');
 	}
 }
 
@@ -144,8 +159,15 @@ function MoreLesson(){
 	paramT.phone = phone;
 	paramT.queryAll="";
 	$("#RecomExcellent").html("");
-	$("#MoreLesson").html("");
 	initRecommendLessonClick(paramT);
+	$("#MoreLesson22").html('推荐好课<button class="btn btn-default" style="float: right" onclick="TakeBackLesson()">收&nbsp;回<span class="glyphicon glyphicon-menu-right"></span></button>');
+}
+//点击收回
+function TakeBackLesson(){
+	$("#RecomExcellent").html("");
+	$("#fanyeTT").html("");
+	$("#MoreLesson22").html('推荐好课<button class="btn btn-default" style="float: right" onclick="MoreLesson()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
+	initRecommendTJ();
 }
 
 //index 加载默认课程
@@ -160,7 +182,7 @@ function initRecommendTJ(){
 		success : function(result) {
 			if (result == "" || result.length == 0) {
 				$("#RecomExcellent").append("暂无课程信息!");
-				$("#MoreLesson").html("");
+				$("#MoreLesson").html("推荐好课");
 				return;
 			}
 			for (var i = 0; i < result.length; i++) {
@@ -174,7 +196,7 @@ function initRecommendTJ(){
 					+ '<p style="font-weight: bold;">'
 					+ result[i].courses_name
 					+ '</p>'
-					+ '<p style="text-indent:2em;" class="kcjs">'
+					+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
 					+ result[i].courses_introduce
 					+ '</p>'
 					+ '<div class="col-md-6">'
@@ -212,6 +234,68 @@ function initRecommendTJ(){
 }
 
 
+//搜索的课程
+function initRecommendSearch(paramT){
+	$
+	.ajax({
+		type : "POST",
+		url : url+"/videoServer/front/VideoIndex/queryComboSearch",
+		contentType : 'application/json; charset=UTF-8',
+		data: JSON.stringify(paramT),  //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			if (result == "" || result.length == 0) {
+				$("#RecomExcellent").append("暂无课程信息!");
+				$("#MoreLesson22").html("推荐好课");
+				return;
+			}
+			for (var i = 0; i < result.length; i++) {
+				var RecomExcellent = '<div class="col-md-3">'
+					+ '<div class="thumbnail">'
+					+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
+					+ result[i].courses_img_url
+					+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
+					+ '</a>'
+					+ '<div class="caption">'
+					+ '<p style="font-weight: bold;">'
+					+ result[i].courses_name
+					+ '</p>'
+					+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
+					+ result[i].courses_introduce
+					+ '</p>'
+					+ '<div class="col-md-6">'
+					+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result[i].teacher_id+'">'
+					+ result[i].teacher_name
+					+ '</a></p>'
+					+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+					+ '</div>'
+					+ '<div class="col-md-6">'
+					+ '<p>'
+					+ result[i].courses_date
+					+'</P>'
+					+ '<p style="text-align:right;font-weight: bold;">'
+					+ result[i].courses_time
+					+ '</p>'
+					+ '</div>'
+					+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" >'
+					//+ result.list[i].kcPerson
+					+ '<span>3266人已购买</span></p>'
+					+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+					+ result[i].courses_pricemoney
+					+ '<span>￥</span></p>'
+					/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+					+ result[i].courses_click
+					+ '</p>'*/
+					+ '<p>&nbsp;</p>'
+					+ '</div>'
+					+ '</div>'
+					+ '</div>';
+				$("#RecomExcellent").append(RecomExcellent);
+			}
+			$("img.lazy").lazyload({effect: "fadeIn",offset:300});
+		}
+	});
+}
 
 //index 加载推荐好课
 function initRecommendLesson(paramT){
@@ -225,7 +309,7 @@ function initRecommendLesson(paramT){
 		success : function(result) {
 			if (result == "" || result.length == 0) {
 				$("#RecomExcellent").append("暂无课程信息!");
-				$("#MoreLesson").html("");
+				$("#MoreLesson").html("推荐好课");
 				return;
 			}
 			for (var i = 0; i < result.length; i++) {
@@ -239,7 +323,7 @@ function initRecommendLesson(paramT){
 						+ '<p style="font-weight: bold;">'
 						+ result[i].courses_name
 						+ '</p>'
-						+ '<p style="text-indent:2em;" class="kcjs">'
+						+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
 						+ result[i].courses_introduce
 						+ '</p>'
 						+ '<div class="col-md-6">'
@@ -288,7 +372,7 @@ function initRecommendLessonClick(paramT){
 		success : function(result) {
 			if (result.list.length == 0) {
 				$("#RecomExcellent").append("暂无课程详情!");
-				$("#MoreLesson").html("");
+				$("#MoreLesson").html("推荐好课");
 				return;
 			}else {
 				
@@ -303,7 +387,7 @@ function initRecommendLessonClick(paramT){
 							+ '<p style="font-weight: bold;">'
 							+ result.list[i].courses_name
 							+ '</p>'
-							+ '<p style="text-indent:2em;" class="kcjs">'
+							+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
 							+ result.list[i].teacher_introduce
 							+ '</p>'
 							+ '<div class="col-md-6">'

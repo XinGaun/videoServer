@@ -126,8 +126,8 @@ function queryClassVideo(queryAlls){
 function queryClassVideo1111(queryAlls){
 	param.queryAll=queryAlls;
 	$("#excellent").html("");
-	$("#buttonMore").html('<button class="btn btn-default" style="float: right" onclick="btnMore()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
-	$("#MoreLesson").html('<button class="btn btn-default" style="float: right" onclick="MoreLesson()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
+	$("#buttonMore").html('精品课程<button class="btn btn-default" style="float: right" onclick="btnMore()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
+	$("#MoreLesson22").html('推荐好课<button class="btn btn-default" style="float: right" onclick="MoreLesson()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
 	$("#fanye").html("");
 	$("#fanyeTT").html("");
 	param.pages = 0;
@@ -138,8 +138,8 @@ function queryClassVideo1111(queryAlls){
 		var phone = $.cookie("phone");
 		param.phone = phone;
 		$("#excellent").html("");
-		$("#buttonMore").html("");
 		initBoutiqueVideoClick(param);
+		$("#buttonMore").html('精品课程<button class="btn btn-default" style="float: right" onclick="btnTakeBack()">收&nbsp;回<span class="glyphicon glyphicon-menu-right"></span></button>');
 	}
 }
 
@@ -149,9 +149,16 @@ function btnMore(){
 	param.phone = phone;
 	param.queryAll="";
 	$("#excellent").html("");
-	$("#buttonMore").html("");
-	initBoutiqueVideoClick(param);
-	
+	initBoutique(param);
+	$("#buttonMore").html('精品课程<button class="btn btn-default" style="float: right" onclick="btnTakeBack()">收&nbsp;回<span class="glyphicon glyphicon-menu-right"></span></button>');
+}
+
+//点击收回
+function btnTakeBack(){
+	$("#excellent").html("");
+	$("#fanye").html("");
+	$("#buttonMore").html('精品课程<button class="btn btn-default" style="float: right" onclick="btnMore()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>');
+	initRecommend();
 }
 
 //index 加载课程评分榜
@@ -223,7 +230,7 @@ function initRecommend(){
 		success : function(result) {
 			if (result == "" || result.length == 0) {
 				$("#excellent").append("暂无课程信息!");
-				$("#buttonMore").html("");
+				$("#buttonMore").html("精品课程");
 				return;
 			}
 			for (var i = 0; i < result.length; i++) {
@@ -237,7 +244,7 @@ function initRecommend(){
 					+ '<p style="font-weight: bold;">'
 					+ result[i].courses_name
 					+ '</p>'
-					+ '<p style="text-indent:2em;" class="kcjs">'
+					+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
 					+ result[i].courses_introduce
 					+ '</p>'
 					+ '<div class="col-md-6">'
@@ -287,7 +294,7 @@ function initBoutique(param){
 		success : function(result) {
 			if (result == "" || result.length == 0) {
 				$("#excellent").append("暂无课程信息!");
-				$("#buttonMore").html("");
+				$("#buttonMore").html("精品课程");
 				return;
 			}
 			for (var i = 0; i < result.length; i++) {
@@ -301,7 +308,7 @@ function initBoutique(param){
 						+ '<p style="font-weight: bold;">'
 						+ result[i].courses_name
 						+ '</p>'
-						+ '<p style="text-indent:2em;" class="kcjs">'
+						+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
 						+ result[i].courses_introduce
 						+ '</p>'
 						+ '<div class="col-md-6">'
@@ -351,7 +358,7 @@ function initBoutiqueVideoClick(param){
 		success : function(result) {
 			if (result.list.length == 0) {
 				$("#excellent").append("暂无课程详情!");
-				$("#buttonMore").html("");
+				$("#buttonMore").html("精品课程");
 				return;
 			}else {
 				for (var i = 0; i < result.list.length; i++) {
@@ -365,7 +372,7 @@ function initBoutiqueVideoClick(param){
 							+ '<p style="font-weight: bold;">'
 							+ result.list[i].courses_name
 							+ '</p>'
-							+ '<p style="text-indent:2em;" class="kcjs">'
+							+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
 							+ result.list[i].teacher_introduce
 							+ '</p>'
 							+ '<div class="col-md-6">'

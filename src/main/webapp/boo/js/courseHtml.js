@@ -402,6 +402,8 @@ function videourl(urls,id){
 				};
 				var player=new ckplayer(videoObject);
 				//查询评论信息
+				var urlStr = urls.substring(31,urls.length-5);
+				$("#downloadvideo").attr('href','/videoServer/front/UserTest/download?fileName='+urlStr);
 				videoComment(v_id);
 			}
 		}

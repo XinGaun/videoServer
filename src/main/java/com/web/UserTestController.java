@@ -1,5 +1,11 @@
 package com.web;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.service.UserTestService;
+import com.util.OSSUtil;
 
 @Controller
 @RequestMapping("/front/UserTest")
@@ -133,5 +140,22 @@ public class UserTestController {
 	public String queryAnswerEvaluate(@RequestBody String data) {
 		System.out.println(data);
 		return userTestService.queryAnswerEvaluate(data);
+	}
+	/**
+	 * 测试文件下载
+	 * @param data
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="/download",produces="application/json;charset=utf-8",method=RequestMethod.GET)
+	public void download(HttpServletRequest request, HttpServletResponse resp) throws Exception {
+		//System.out.println(123);
+		OSSUtil ossUtil = new OSSUtil();
+		String flieName = request.getQueryString()+".mp4";
+		flieName = flieName.substring(9, flieName.length());
+		System.out.println(flieName);
+		resp.setHeader("Content-Disposition", "attachment;filename="+flieName);
+		ossUtil.downloadInputStram(request,resp,flieName);
+		
 	}
 }
