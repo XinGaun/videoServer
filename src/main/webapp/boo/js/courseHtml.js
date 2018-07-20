@@ -1,5 +1,5 @@
 $(function(){
-
+	
 	var user_id = $.cookie('id');
 	$.cookie('photo')
 	$("#kcml").hide();
@@ -43,6 +43,7 @@ $(function(){
 	param.cid = cid;
 	initStudentComments(param);
 	judgePC();
+	ifgoumai();
 });
 
 //var url = "http:/127.0.0.1:8080"
@@ -52,7 +53,7 @@ var url ="";
 var pages = 0;//当前页数
 var nums = 3;//每页几条
 var total = 0;//总条数 
-
+var sarr = [];
 //组装参数
 var param = {
 		page : nums,
@@ -98,6 +99,37 @@ function goumais(){
 	});
 
 }
+//判断是否购买课程
+function ifgoumai(){
+	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
+		return ;
+	}
+	var data = {
+			user_id:$.cookie('id'),
+			video_id:getUrlParam('cid')
+	}
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/front/Videos/queryOrder",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(data), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			//console.log(result);
+			if(result!="success"){
+
+				return ;
+
+			}else{
+				$("#ifgoumai").html("开始学习");
+				
+				return true;
+			}
+		}
+
+	});
+}
 
 //加入课程
 function joincourse(){
@@ -122,15 +154,12 @@ function joincourse(){
 			//console.log(result);
 			if(result!="success"){
 
-				if(confirm("您还没有购买课程,是否购买课程加入课程!")){
-					$("#myModal").modal('show');
-					return false;
-				}else{
-					return false;
-				}
+				$("#myModal").modal('show');
+
 			}else{
-				alert("您已加入课程!,请直接在课程目录观看课程!");
-				return true;
+				//alert("您已加入课程!,请直接在课程目录观看课程!");
+				//return true;
+				imgvideo();
 			}
 		}
 
@@ -219,6 +248,21 @@ function initRecommendCourse(){
 	});
 }
 
+function imgvideo(){
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/front/CourseDetails/queryVideoDetails",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(sarr), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			console.log(result)
+			videourl(result[0].video_url,result[0].video_id);
+		}
+	});
+}
+
 //初始化课程头部信息
 function initCourseTop(cid){
 	$.ajax({
@@ -231,6 +275,7 @@ function initCourseTop(cid){
 		success : function(result) {
 			//console.log(result);
 			for(var i=0;i<result.length;i++){
+				//console.log(result)
 				if(result[0].video_id == "" || result[0].video_id == null){
 					$("#courses_name").html(result[0].courses_name);
 					$("#courses_names").html(result[0].courses_name);
@@ -241,7 +286,7 @@ function initCourseTop(cid){
 					$("#courses_introduce").html(result[0].courses_introduce);
 					$("#video_form_name").html(result[0].video_form_name);
 					$("#video_form_class").html(result[0].video_form_class);
-					$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
+					$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy"></a>');
 					$("#teacher_name").html(result[0].teacher_name);
 					$("#teacher_introduce").html(result[0].teacher_introduce);
 					$("#Collection").html("收藏");
@@ -258,7 +303,7 @@ function initCourseTop(cid){
 						$("#courses_introduce").html(result[0].courses_introduce);
 						$("#video_form_name").html(result[0].video_form_name);
 						$("#video_form_class").html(result[0].video_form_class);
-						$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
+						$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy"></a>');
 						$("#teacher_name").html(result[0].teacher_name);
 						$("#teacher_introduce").html(result[0].teacher_introduce);
 					}else{
@@ -272,7 +317,7 @@ function initCourseTop(cid){
 						$("#courses_introduce").html(result[0].courses_introduce);
 						$("#video_form_name").html(result[0].video_form_name);
 						$("#video_form_class").html(result[0].video_form_class);
-						$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
+						$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy"></a>');
 						$("#teacher_name").html(result[0].teacher_name);
 						$("#teacher_introduce").html(result[0].teacher_introduce);
 					}
@@ -287,6 +332,7 @@ function initCourseTop(cid){
 			arr = arr.replace("]","");
 			arr =arr.split(",");
 			initVideo(arr);
+			sarr = arr
 		}
 
 	});
@@ -350,12 +396,9 @@ function lodingppt(ppt){
 		success : function(result) {
 			//console.log(result);
 			if(result!="success"){
-				if(confirm("您还没有购买课程,是否购买课程加入课程!")){
-					$("#myModal").modal('show');
-					return false;
-				}else{
-					return false;
-				}
+			
+				$("#myModal").modal('show');
+				return false;
 			}else{
 				window.open(ppt);
 			}
@@ -384,12 +427,7 @@ function videourl(urls,id){
 		success : function(result) {
 			//console.log(result);
 			if(result!="success"){
-				if(confirm("您还没有购买课程,是否购买课程加入课程!")){
-					$("#myModal").modal('show');
-					return false;
-				}else{
-					return false;
-				}
+				$("#myModal").modal('show');
 			}else{
 				$("#myModalvideo").modal('show');
 				var videoObject = {
