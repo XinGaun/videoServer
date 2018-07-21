@@ -14,4 +14,8 @@ public interface VideoIndexDao {
 	public ArrayList<HashMap<String,Object>> queryBoutiqueVideoClick(HashMap<String,Object> map);
 	//查询所有课程总数
 	public int queryBoutiqueVideoAllCount();
+
+	//根据ID查询购买人数
+	public HashMap<String, Object> queryBoutiqueIntRs(int map);
+
 }

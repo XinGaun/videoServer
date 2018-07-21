@@ -1,5 +1,5 @@
 $(function(){
-	
+
 	var user_id = $.cookie('id');
 	$.cookie('photo')
 	$("#kcml").hide();
@@ -44,6 +44,7 @@ $(function(){
 	initStudentComments(param);
 	judgePC();
 	ifgoumai();
+
 });
 
 //var url = "http:/127.0.0.1:8080"
@@ -54,6 +55,7 @@ var pages = 0;//当前页数
 var nums = 3;//每页几条
 var total = 0;//总条数 
 var sarr = [];
+
 //组装参数
 var param = {
 		page : nums,
@@ -99,6 +101,7 @@ function goumais(){
 	});
 
 }
+
 //判断是否购买课程
 function ifgoumai(){
 	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
@@ -131,6 +134,7 @@ function ifgoumai(){
 	});
 }
 
+
 //加入课程
 function joincourse(){
 
@@ -153,7 +157,6 @@ function joincourse(){
 		success : function(result) {
 			//console.log(result);
 			if(result!="success"){
-
 				$("#myModal").modal('show');
 
 			}else{
@@ -248,6 +251,7 @@ function initRecommendCourse(){
 	});
 }
 
+
 function imgvideo(){
 	$.ajax({
 		type : "POST",
@@ -262,6 +266,7 @@ function imgvideo(){
 		}
 	});
 }
+
 
 //初始化课程头部信息
 function initCourseTop(cid){
@@ -395,8 +400,7 @@ function lodingppt(ppt){
 		dataType : "json",
 		success : function(result) {
 			//console.log(result);
-			if(result!="success"){
-			
+			if(result!="success"){	
 				$("#myModal").modal('show');
 				return false;
 			}else{

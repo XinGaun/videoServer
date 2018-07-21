@@ -71,4 +71,11 @@
 		LEFT JOIN teacher_tab ON teacher_tab.teacher_id=courses_tab.teacher_id 
 		WHERE 1=1 AND courses_status = 8
 	</select>
+	<!-- 根据id查询课程购买人数-->
+	<select id="queryBoutiqueIntRs" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select count(video_id) as count_person from order_tab 
+		LEFT JOIN courses_tab ON courses_tab.courses_id = order_tab.video_id 
+		WHERE order_tab.order_status='已付款' and courses_tab.courses_status = 8 and courses_tab.courses_id=#{courses_Id};
+	</select>
+
 </mapper>

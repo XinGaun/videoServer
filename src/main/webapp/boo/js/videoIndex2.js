@@ -186,47 +186,96 @@ function initRecommendTJ(){
 				return;
 			}
 			for (var i = 0; i < result.length; i++) {
-				var RecomExcellent = '<div class="col-md-3">'
-					+ '<div class="thumbnail">'
-					+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
-					+ result[i].courses_img_url
-					+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
-					+ '</a>'
-					+ '<div class="caption">'
-					+ '<p style="font-weight: bold;">'
-					+ result[i].courses_name
-					+ '</p>'
-					+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
-					+ result[i].courses_introduce
-					+ '</p>'
-					+ '<div class="col-md-6">'
-					+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result[i].teacher_id+'">'
-					+ result[i].teacher_name
-					+ '</a></p>'
-					+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
-					+ '</div>'
-					+ '<div class="col-md-6">'
-					+ '<p>'
-					+ result[i].courses_date
-					+'</P>'
-					+ '<p style="text-align:right;font-weight: bold;">'
-					+ result[i].courses_time
-					+ '</p>'
-					+ '</div>'
-					+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" ><span>3622人已购买</span>'
-					//+ result.list[i].courses_grade
-					+ '</p>'
-					+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
-					+ result[i].courses_pricemoney
-					+ '<span>￥</span></p>'
-					/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
-					+ result[i].courses_click
-					+ '</p>'*/
-					+ '<p>&nbsp;</p>'
-					+ '</div>'
-					+ '</div>'
-					+ '</div>';
-				$("#RecomExcellent").append(RecomExcellent);
+				//alert(result[i].courses_name);
+				if(result[i].courses_name == undefined || result[i].courses_name == ""){
+					
+				}else{
+					if(result[i].kcPerson == 0){
+						var RecomExcellent = '<div class="col-md-3">'
+							+ '<div class="thumbnail">'
+							+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
+							+ result[i].courses_img_url
+							+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
+							+ '</a>'
+							+ '<div class="caption">'
+							+ '<p style="font-weight: bold;">'
+							+ result[i].courses_name
+							+ '</p>'
+							+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
+							+ result[i].courses_introduce
+							+ '</p>'
+							+ '<div class="col-md-6">'
+							+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result[i].teacher_id+'">'
+							+ result[i].teacher_name
+							+ '</a></p>'
+							+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+							+ '</div>'
+							+ '<div class="col-md-6">'
+							+ '<p>'
+							+ result[i].courses_date
+							+'</P>'
+							+ '<p style="text-align:right;font-weight: bold;">'
+							+ result[i].courses_time
+							+ '</p>'
+							+ '</div>'
+							+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" >'
+							//+ result[i].kcPerson
+							+ '<span>0人已购买</span></p>'
+							+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+							+ result[i].courses_pricemoney
+							+ '<span>￥</span></p>'
+							/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+							+ result[i].courses_click
+							+ '</p>'*/
+							+ '<p>&nbsp;</p>'
+							+ '</div>'
+							+ '</div>'
+							+ '</div>';
+						$("#RecomExcellent").append(RecomExcellent);
+					}else{
+						var RecomExcellent = '<div class="col-md-3">'
+							+ '<div class="thumbnail">'
+							+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
+							+ result[i].courses_img_url
+							+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
+							+ '</a>'
+							+ '<div class="caption">'
+							+ '<p style="font-weight: bold;">'
+							+ result[i].courses_name
+							+ '</p>'
+							+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
+							+ result[i].courses_introduce
+							+ '</p>'
+							+ '<div class="col-md-6">'
+							+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result[i].teacher_id+'">'
+							+ result[i].teacher_name
+							+ '</a></p>'
+							+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+							+ '</div>'
+							+ '<div class="col-md-6">'
+							+ '<p>'
+							+ result[i].courses_date
+							+'</P>'
+							+ '<p style="text-align:right;font-weight: bold;">'
+							+ result[i].courses_time
+							+ '</p>'
+							+ '</div>'
+							+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" >'
+							+ result[i].kcPerson
+							+ '<span>人已购买</span></p>'
+							+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+							+ result[i].courses_pricemoney
+							+ '<span>￥</span></p>'
+							/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+							+ result[i].courses_click
+							+ '</p>'*/
+							+ '<p>&nbsp;</p>'
+							+ '</div>'
+							+ '</div>'
+							+ '</div>';
+						$("#RecomExcellent").append(RecomExcellent);
+					}
+				}
 			}
 			$("img.lazy").lazyload({effect: "fadeIn",offset:300});
 		}
@@ -250,47 +299,96 @@ function initRecommendSearch(paramT){
 				return;
 			}
 			for (var i = 0; i < result.length; i++) {
-				var RecomExcellent = '<div class="col-md-3">'
-					+ '<div class="thumbnail">'
-					+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
-					+ result[i].courses_img_url
-					+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
-					+ '</a>'
-					+ '<div class="caption">'
-					+ '<p style="font-weight: bold;">'
-					+ result[i].courses_name
-					+ '</p>'
-					+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
-					+ result[i].courses_introduce
-					+ '</p>'
-					+ '<div class="col-md-6">'
-					+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result[i].teacher_id+'">'
-					+ result[i].teacher_name
-					+ '</a></p>'
-					+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
-					+ '</div>'
-					+ '<div class="col-md-6">'
-					+ '<p>'
-					+ result[i].courses_date
-					+'</P>'
-					+ '<p style="text-align:right;font-weight: bold;">'
-					+ result[i].courses_time
-					+ '</p>'
-					+ '</div>'
-					+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" >'
-					//+ result.list[i].kcPerson
-					+ '<span>3266人已购买</span></p>'
-					+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
-					+ result[i].courses_pricemoney
-					+ '<span>￥</span></p>'
-					/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
-					+ result[i].courses_click
-					+ '</p>'*/
-					+ '<p>&nbsp;</p>'
-					+ '</div>'
-					+ '</div>'
-					+ '</div>';
-				$("#RecomExcellent").append(RecomExcellent);
+			//	alert(result[i].courses_name);
+				if(result[i].courses_name == undefined || result[i].courses_name == ""){
+					
+				}else{
+					if(result[i].kcPerson == 0){
+						var RecomExcellent = '<div class="col-md-3">'
+							+ '<div class="thumbnail">'
+							+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
+							+ result[i].courses_img_url
+							+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
+							+ '</a>'
+							+ '<div class="caption">'
+							+ '<p style="font-weight: bold;">'
+							+ result[i].courses_name
+							+ '</p>'
+							+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
+							+ result[i].courses_introduce
+							+ '</p>'
+							+ '<div class="col-md-6">'
+							+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result[i].teacher_id+'">'
+							+ result[i].teacher_name
+							+ '</a></p>'
+							+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+							+ '</div>'
+							+ '<div class="col-md-6">'
+							+ '<p>'
+							+ result[i].courses_date
+							+'</P>'
+							+ '<p style="text-align:right;font-weight: bold;">'
+							+ result[i].courses_time
+							+ '</p>'
+							+ '</div>'
+							+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" >'
+							//+ result.list[i].kcPerson
+							+ '<span>0人已购买</span></p>'
+							+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+							+ result[i].courses_pricemoney
+							+ '<span>￥</span></p>'
+							/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+							+ result[i].courses_click
+							+ '</p>'*/
+							+ '<p>&nbsp;</p>'
+							+ '</div>'
+							+ '</div>'
+							+ '</div>';
+						$("#RecomExcellent").append(RecomExcellent);
+					}else{
+						var RecomExcellent = '<div class="col-md-3">'
+							+ '<div class="thumbnail">'
+							+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
+							+ result[i].courses_img_url
+							+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
+							+ '</a>'
+							+ '<div class="caption">'
+							+ '<p style="font-weight: bold;">'
+							+ result[i].courses_name
+							+ '</p>'
+							+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
+							+ result[i].courses_introduce
+							+ '</p>'
+							+ '<div class="col-md-6">'
+							+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result[i].teacher_id+'">'
+							+ result[i].teacher_name
+							+ '</a></p>'
+							+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+							+ '</div>'
+							+ '<div class="col-md-6">'
+							+ '<p>'
+							+ result[i].courses_date
+							+'</P>'
+							+ '<p style="text-align:right;font-weight: bold;">'
+							+ result[i].courses_time
+							+ '</p>'
+							+ '</div>'
+							+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" >'
+							+ result[i].kcPerson
+							+ '<span>人已购买</span></p>'
+							+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+							+ result[i].courses_pricemoney
+							+ '<span>￥</span></p>'
+							/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+							+ result[i].courses_click
+							+ '</p>'*/
+							+ '<p>&nbsp;</p>'
+							+ '</div>'
+							+ '</div>'
+							+ '</div>';
+						$("#RecomExcellent").append(RecomExcellent);
+					}
+				}
 			}
 			$("img.lazy").lazyload({effect: "fadeIn",offset:300});
 		}
@@ -313,47 +411,96 @@ function initRecommendLesson(paramT){
 				return;
 			}
 			for (var i = 0; i < result.length; i++) {
-				var RecomExcellent = '<div class="col-md-3">'
-						+ '<div class="thumbnail">'
-						+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
-						+ result[i].courses_img_url
-						+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
-						+ '</a>'
-						+ '<div class="caption">'
-						+ '<p style="font-weight: bold;">'
-						+ result[i].courses_name
-						+ '</p>'
-						+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
-						+ result[i].courses_introduce
-						+ '</p>'
-						+ '<div class="col-md-6">'
-						+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result[i].teacher_id+'">'
-						+ result[i].teacher_name
-						+ '</a></p>'
-						+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
-						+ '</div>'
-						+ '<div class="col-md-6">'
-						+ '<p>'
-						+ result[i].courses_date
-						+'</P>'
-						+ '<p style="text-align:right;font-weight: bold;">'
-						+ result[i].courses_time
-						+ '</p>'
-						+ '</div>'
-						+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" ><span>3622人已购买</span>'
-						//+ result.list[i].courses_grade
-						+ '</p>'
-						+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
-						+ result[i].courses_pricemoney
-						+ '<span>￥</span></p>'
-						/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
-						+ result[i].courses_click
-						+ '</p>'*/
-						+ '<p>&nbsp;</p>'
-						+ '</div>'
-						+ '</div>'
-						+ '</div>';
-				$("#RecomExcellent").append(RecomExcellent);
+			//	alert(result[i].courses_name);
+				if(result[i].courses_name == undefined || result[i].courses_name == ""){
+					
+				}else{
+					if(result[i].kcPerson == 0 ){
+						var RecomExcellent = '<div class="col-md-3">'
+							+ '<div class="thumbnail">'
+							+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
+							+ result[i].courses_img_url
+							+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
+							+ '</a>'
+							+ '<div class="caption">'
+							+ '<p style="font-weight: bold;">'
+							+ result[i].courses_name
+							+ '</p>'
+							+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
+							+ result[i].courses_introduce
+							+ '</p>'
+							+ '<div class="col-md-6">'
+							+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result[i].teacher_id+'">'
+							+ result[i].teacher_name
+							+ '</a></p>'
+							+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+							+ '</div>'
+							+ '<div class="col-md-6">'
+							+ '<p>'
+							+ result[i].courses_date
+							+'</P>'
+							+ '<p style="text-align:right;font-weight: bold;">'
+							+ result[i].courses_time
+							+ '</p>'
+							+ '</div>'
+							+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" >'
+							//+ result[i].courses_grade
+							+ '<span>0人已购买</span></p>'
+							+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+							+ result[i].courses_pricemoney
+							+ '<span>￥</span></p>'
+							/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+							+ result[i].courses_click
+							+ '</p>'*/
+							+ '<p>&nbsp;</p>'
+							+ '</div>'
+							+ '</div>'
+							+ '</div>';
+					$("#RecomExcellent").append(RecomExcellent);
+					}else{
+						var RecomExcellent = '<div class="col-md-3">'
+							+ '<div class="thumbnail">'
+							+ '<a href="course.html?cid='+result[i].courses_id+'"><img data-original="'
+							+ result[i].courses_img_url
+							+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
+							+ '</a>'
+							+ '<div class="caption">'
+							+ '<p style="font-weight: bold;">'
+							+ result[i].courses_name
+							+ '</p>'
+							+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
+							+ result[i].courses_introduce
+							+ '</p>'
+							+ '<div class="col-md-6">'
+							+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result[i].teacher_id+'">'
+							+ result[i].teacher_name
+							+ '</a></p>'
+							+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+							+ '</div>'
+							+ '<div class="col-md-6">'
+							+ '<p>'
+							+ result[i].courses_date
+							+'</P>'
+							+ '<p style="text-align:right;font-weight: bold;">'
+							+ result[i].courses_time
+							+ '</p>'
+							+ '</div>'
+							+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" >'
+							+ result[i].kcPerson
+							+ '<span>人已购买</span></p>'
+							+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+							+ result[i].courses_pricemoney
+							+ '<span>￥</span></p>'
+							/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+							+ result[i].courses_click
+							+ '</p>'*/
+							+ '<p>&nbsp;</p>'
+							+ '</div>'
+							+ '</div>'
+							+ '</div>';
+					$("#RecomExcellent").append(RecomExcellent);
+				  }
+				}
 			}
 			$("img.lazy").lazyload({effect: "fadeIn",offset:300});
 		}
@@ -375,49 +522,97 @@ function initRecommendLessonClick(paramT){
 				$("#MoreLesson").html("推荐好课");
 				return;
 			}else {
-				
 				for (var i = 0; i < result.list.length; i++) {
-						var RecomExcellent = '<div class="col-md-3">'
-							+ '<div class="thumbnail">'
-							+ '<a href="course.html?cid='+result.list[i].courses_id+'"><img data-original="'
-							+ result.list[i].courses_img_url
-							+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
-							+ '</a>'
-							+ '<div class="caption">'
-							+ '<p style="font-weight: bold;">'
-							+ result.list[i].courses_name
-							+ '</p>'
-							+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
-							+ result.list[i].teacher_introduce
-							+ '</p>'
-							+ '<div class="col-md-6">'
-							+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result.list[i].teacher_id+'">'
-							+ result.list[i].teacher_name
-							+ '</a></p>'
-							+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
-							+ '</div>'
-							+ '<div class="col-md-6">'
-							+ '<p>'
-							+ result.list[i].courses_date
-							+'</P>'
-							+ '<p style="text-align:right;font-weight: bold;">'
-							+ result.list[i].courses_time
-							+ '</p>'
-							+ '</div>'
-							+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" ><span>3622人已购买</span>'
-							//+ result.list[i].courses_grade
-							+ '</p>'
-							+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
-							+ result.list[i].courses_pricemoney
-							+ '<span>￥</span></p>'
-							/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
-							+ result.list[i].courses_click
-							+ '</p>'*/
-							+ '<p>&nbsp;</p>'
-							+ '</div>'
-							+ '</div>'
-							+ '</div>';	
-						$("#RecomExcellent").append(RecomExcellent);
+					//alert(result[i].courses_name);
+					if(result.list[i].courses_name == undefined || result.list[i].courses_name == ""){
+						
+					}else{
+						if(result.list[i].kcPerson == 0 ){
+							var RecomExcellent = '<div class="col-md-3">'
+								+ '<div class="thumbnail">'
+								+ '<a href="course.html?cid='+result.list[i].courses_id+'"><img data-original="'
+								+ result.list[i].courses_img_url
+								+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
+								+ '</a>'
+								+ '<div class="caption">'
+								+ '<p style="font-weight: bold;">'
+								+ result.list[i].courses_name
+								+ '</p>'
+								+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
+								+ result.list[i].teacher_introduce
+								+ '</p>'
+								+ '<div class="col-md-6">'
+								+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result.list[i].teacher_id+'">'
+								+ result.list[i].teacher_name
+								+ '</a></p>'
+								+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+								+ '</div>'
+								+ '<div class="col-md-6">'
+								+ '<p>'
+								+ result.list[i].courses_date
+								+'</P>'
+								+ '<p style="text-align:right;font-weight: bold;">'
+								+ result.list[i].courses_time
+								+ '</p>'
+								+ '</div>'
+								+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" >'
+								//+ result.list[i].kcPerson
+								+ '<span>0人已购买</span></p>'
+								+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+								+ result.list[i].courses_pricemoney
+								+ '<span>￥</span></p>'
+								/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+								+ result.list[i].courses_click
+								+ '</p>'*/
+								+ '<p>&nbsp;</p>'
+								+ '</div>'
+								+ '</div>'
+								+ '</div>';	
+							$("#RecomExcellent").append(RecomExcellent);
+						}else{
+							var RecomExcellent = '<div class="col-md-3">'
+								+ '<div class="thumbnail">'
+								+ '<a href="course.html?cid='+result.list[i].courses_id+'"><img data-original="'
+								+ result.list[i].courses_img_url
+								+ '" class="jpckclass lazy" style="width:100%;height:180px" alt="...">'
+								+ '</a>'
+								+ '<div class="caption">'
+								+ '<p style="font-weight: bold;">'
+								+ result.list[i].courses_name
+								+ '</p>'
+								+ '<p style="width:260px;height:40px; border:0px solid red;overflow:hidden; text-overflow:ellipsis;" class="kcjs">'
+								+ result.list[i].teacher_introduce
+								+ '</p>'
+								+ '<div class="col-md-6">'
+								+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result.list[i].teacher_id+'">'
+								+ result.list[i].teacher_name
+								+ '</a></p>'
+								+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+								+ '</div>'
+								+ '<div class="col-md-6">'
+								+ '<p>'
+								+ result.list[i].courses_date
+								+'</P>'
+								+ '<p style="text-align:right;font-weight: bold;">'
+								+ result.list[i].courses_time
+								+ '</p>'
+								+ '</div>'
+								+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" >'
+								+ result.list[i].kcPerson
+								+ '<span>人已购买</span></p>'
+								+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+								+ result.list[i].courses_pricemoney
+								+ '<span>￥</span></p>'
+								/*+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+								+ result.list[i].courses_click
+								+ '</p>'*/
+								+ '<p>&nbsp;</p>'
+								+ '</div>'
+								+ '</div>'
+								+ '</div>';	
+							$("#RecomExcellent").append(RecomExcellent);
+						}
+					}
 				}
 				$("img.lazy").lazyload({effect: "fadeIn",offset:300});
 				total=result.total;

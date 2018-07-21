@@ -23,12 +23,40 @@ public class VideoIndexServiceImpl implements VideoIndexService {
 	public String queryBoutiqueVideo(String data) {
 		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
 		ArrayList<HashMap<String,Object>> list = videoIndexDao.queryBoutiqueVideo(map);
+		int bb = list.size();
+		for(int i=0;i<bb;i++) {
+			HashMap<String, Object> tt = list.get(i);
+			for(String in : tt.keySet()){
+				int value= Integer.parseInt(tt.get("courses_id").toString());
+				HashMap<String,Object> dd = videoIndexDao.queryBoutiqueIntRs(value);
+				for(String nn : dd.keySet()) {
+					Object value2 = dd.get("count_person");
+					tt.put("kcPerson", value2);
+				}
+				break;
+			}
+			list.add(tt);
+		}
 		return JSON.toJSONString(list);
 	}
 	//查询推荐套餐
 	@Override
 	public String queryCombo() {
 		ArrayList<HashMap<String,Object>> list = videoIndexDao.queryCombo();
+		int bb = list.size();
+		for(int i=0;i<bb;i++) {
+			HashMap<String, Object> tt = list.get(i);
+			for(String in : tt.keySet()){
+				int value= Integer.parseInt(tt.get("courses_id").toString());
+				HashMap<String,Object> dd = videoIndexDao.queryBoutiqueIntRs(value);
+				for(String nn : dd.keySet()) {
+					Object value2 = dd.get("count_person");
+					tt.put("kcPerson", value2);
+				}
+				break;
+			}
+			list.add(tt);
+		}
 		return JSON.toJSONString(list);
 	}
 	//查询推荐套餐
@@ -36,7 +64,7 @@ public class VideoIndexServiceImpl implements VideoIndexService {
 		public String queryComboSearch(String data) {
 			HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
 			 ArrayList<HashMap<String, Object>> list = videoIndexDao.queryComboSearch(map);
-			 /*int bb = list.size();
+			 int bb = list.size();
 				for(int i=0;i<bb;i++) {
 					HashMap<String, Object> tt = list.get(i);
 					for(String in : tt.keySet()){
@@ -49,7 +77,7 @@ public class VideoIndexServiceImpl implements VideoIndexService {
 						break;
 					}
 					list.add(tt);
-				}*/
+				}
 			return JSON.toJSONString(list);
 		}
 	//获取所有精品课程
@@ -58,6 +86,20 @@ public class VideoIndexServiceImpl implements VideoIndexService {
 		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
 		map= Page.page(map);
 		ArrayList<HashMap<String,Object>> list = videoIndexDao.queryBoutiqueVideoClick(map);
+		int bb = list.size();
+		for(int i=0;i<bb;i++) {
+			HashMap<String, Object> tt = list.get(i);
+			for(String in : tt.keySet()){
+				int value= Integer.parseInt(tt.get("courses_id").toString());
+				HashMap<String,Object> dd = videoIndexDao.queryBoutiqueIntRs(value);
+				for(String nn : dd.keySet()) {
+					Object value2 = dd.get("count_person");
+					tt.put("kcPerson", value2);
+				}
+				break;
+			}
+			list.add(tt);
+		}
 		int count = videoIndexDao.queryBoutiqueVideoAllCount();
 		return JSON.toJSONString(Count.counts(list, count, map,200,"queryBoutiqueVideoAllCount success"));
 	}
