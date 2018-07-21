@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
-<TITLE>New Document</TITLE>
+<TITLE>课程详情</TITLE>
 <META NAME="Generator" CONTENT="EditPlus">
 <META NAME="Author" CONTENT="">
 <META NAME="Keywords" CONTENT="">
@@ -9,6 +9,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <script type="text/javascript" src="ckplayer/ckplayer.js"></script>
+
+<!-- 分页js css -->
+<link rel="stylesheet" href="js/layui/css/layui.css" />
+<script type="text/javascript" src="js/layui/layui.js"></script>
 
 </HEAD>
 <style>
@@ -100,7 +104,6 @@ a:hover {
 	z-index: 2;
 }
 
-
 #foot {
 	width: 100vw;
 	height: 13vh;
@@ -176,10 +179,7 @@ a:hover {
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.lazyload.min.js"></script>
 
-
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
-
-
 <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 
 <BODY>
@@ -214,7 +214,7 @@ a:hover {
 				<li class="dropdown" STYLE="margin-top: 5%">
 
 					<div class="form-group navbar-form navbar-left">
-						<div class="input-group col-xs-12">
+						<!-- <div class="input-group col-xs-12">
 							<div class="input-group-btn">
 
 								<select name="type" id="dropdown" class="form-control"
@@ -233,7 +233,7 @@ a:hover {
 									搜索</button>
 
 							</span>
-						</div>
+						</div> -->
 					</div>
 				</li>
 			</ul>
@@ -311,8 +311,8 @@ a:hover {
 									<span class="glyphicon glyphicon-user"></span> 学 员 : 3622
 								</div>
 								<div class="col-md-3">
-									<span class="glyphicon glyphicon-eye-open"></span> 游 览 : <span
-										id="courses_click"></span>
+									<!-- <span class="glyphicon glyphicon-eye-open"></span> 游 览 : <span
+										id="courses_click"></span> -->
 								</div>
 							</div>
 						</div>
@@ -371,9 +371,11 @@ a:hover {
 						<!-- <p style="color: red;">
 							&nbsp;&nbsp;&nbsp;&nbsp;<span id="video_form_class"></span> <span
 								id="video_form_name"></span>
+
 						</p> -->
 						<ul class="list-group" id="kcmls" >
 						</ul>
+
 						<p>&nbsp;</p>
 						<h4>
 							<span class="glyphicon glyphicon-option-vertical"></span>课程目录
@@ -396,7 +398,7 @@ a:hover {
 							<span class="glyphicon glyphicon-option-vertical"></span>课程选集
 						</h4>
 						<div style="width:600px;" id="kcxjs">
-							
+
 						</div>
 					</div>
 					<!-- 课程目录结束 -->
@@ -586,9 +588,7 @@ a:hover {
 			</div>
 		</div>
 	</div>
-	<div id="foot-bot">
-		<div id="foot-bottom" style="color: white;">7*24小时服务电话：13623512127</div>
-	</div>
+	
 	</footer>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -620,7 +620,7 @@ a:hover {
 	<!-- video model -->
 	<div class="modal fade bs-example-modal-lg" id="myModalvideo"
 		tabindex="-1" role="dialog" aria-labelledby="myModalLabelvideo">
-		<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-dialog" role="document" style="width:1200px;height:600px;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
@@ -631,10 +631,21 @@ a:hover {
 				</div>
 				<div class="modal-body">
 					<div class="video"></div>
+					<hr>
+					<button class="btn btn-default">
+						<a id="downloadvideo">下载视频</a>
+					</button>
 					<div>
 						<hr>
 					</div>
+
+					<div>
+						<textarea  name="addpinglun" id="addpinglun" cols="80" rows="2" placeholder="请写下你的评论..." ></textarea>
+						<button id="pinglbtn" onclick="pinglbtn()" style="margin-top:-5vh;margin-left:2vw;" class="btn btn-large btn-success">评论吧</button>
+					</div>
 					<div id="pingliu"></div>
+					<div id="fenye"></div>
+
 				</div>
 
 				<div class="modal-footer">
@@ -742,28 +753,14 @@ a:hover {
 
 	/* 尾部li标签添加的关于我们 */
 	new Vue({
-		el : '#footli',
-		data : {
-			sites : [ {
-				name : '关于我们'
-			}, {
-				name : '|'
-			}, {
-				name : '加入我们'
-			}, {
-				name : '|'
-			}, {
-				name : '合作申请'
-			}, {
-				name : '|'
-			}, {
-				name : '意见反馈'
-			}, {
-				name : '|'
-			}, {
-				name : '用户协议'
-			} ]
-		}
+	  el: '#footli',
+	  data: {
+	    sites: [
+	      { name: '关于我们' },
+	      { name: '|'},
+	      { name: '意见反馈' },
+	    ]
+	  }
 	})
 	//尾部的语道图标
 	new Vue({
@@ -781,4 +778,3 @@ a:hover {
 		}
 	})
 </script>
-

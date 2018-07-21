@@ -15,7 +15,9 @@
 	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 	<script type="text/javascript" src="js/jquery.cookie.js"></script>
 	<script type="text/javascript" src="js/videoIndex.js"></script>
+
 	<script type="text/javascript" src="js/videoIndex2.js"></script>
+
 	
 </HEAD>
 <style>
@@ -67,9 +69,7 @@
 	 #logImg{
 	 	float:right;
 	 	border:1px solid red;
-
 	 	margin:2vh 1vw 0vh 0vw;
-
 	 	display:none;
 	 }
 	 #loginrouter{
@@ -176,16 +176,16 @@
 						<div class="input-group col-xs-12">
 							<div class="input-group-btn">
 								<select name="type" id="dropdown" class="form-control" style="width: auto;">
-									<option value="1">全部</option>
-									<option value="2">高中</option>
-									<option value="3">初中</option>
-									<option value="4">小学</option>
+									<option value="">全部</option>
+									<option value="高中">高中</option>
+									<option value="初中">初中</option>
+									<option value="小学">小学</option>
 								</select>
 							</div>
 							<input type="text" name="keyword" id="keyword"
 								class="form-control" placeholder="请您输入关键词"> 
 							<span class="input-group-btn">
-								<button class="btn btn-info" id="search_submit" type="submit">
+								<button class="btn btn-info" id="search_submit" onclick="queryNameVideo()">
 									搜索
 								</button>
 							</span>
@@ -270,9 +270,9 @@
 				<div class="col-md-4"></div>
 				<div class="col-md-4">
 					<ul class="nav nav-tabs nav-justified">
-						<li role="presentation"><a href="video.html">高中</a></li>
-						<li role="presentation"><a href="video.html">初中</a></li>
-						<li role="presentation"><a href="video.html">小学</a></li>
+						<li role="presentation"><a href="javascript:void(0)" onclick="queryClassVideo('高中')">高中</a></li>
+						<li role="presentation"><a href="javascript:void(0)" onclick="queryClassVideo('初中')">初中</a></li>
+						<li role="presentation"><a href="javascript:void(0)" onclick="queryClassVideo('小学')">小学</a></li>
 					</ul>
 				</div>
 				<div class="col-md-4"></div>
@@ -281,8 +281,9 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">
-						<div class="panel-heading col-md-12"
-							style="text-align: center; font-weight: bold">推荐好课</div>
+						<div class="panel-heading col-md-12" style="text-align: center; font-weight: bold"  id="MoreLesson22">
+							推荐好课<button class="btn btn-default" style="float: right" onclick="MoreLesson()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>
+						</div>
 						<div class="col-md-12">&nbsp;</div>
 						<div class="panel-body">
 							<div id="RecomExcellent">
@@ -297,11 +298,6 @@
 							</div>
 							<!-- 分页结束 -->
 							<div class="col-md-12">&nbsp;</div>
-							<div class="col-md-12" id="MoreLesson">
-								<button class="btn btn-default" style="float: right" onclick="MoreLesson()">
-									更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span>
-								</button>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -318,7 +314,10 @@
 
 			<div class="panel panel-default">
 				<div class="panel-heading col-md-12"
-					style="text-align: center; font-weight: bold">精品课程</div>
+					style="text-align: center; font-weight: bold" id="buttonMore">精品课程<button class="btn btn-default" style="float: right" onclick="btnMore()">
+								更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span>
+							</button>
+				</div>
 				<div class="col-md-12">&nbsp;</div>
 				<div class="panel-body">
 					<div class="row" id="">
@@ -328,12 +327,6 @@
 
 
 						</div>
-						<div class="col-md-12" id="buttonMore">
-							<button class="btn btn-default" style="float: right" onclick="btnMore()">
-								更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span>
-							</button>
-						</div>
-
 					</div>
 					<!-- 翻页 -->
 					<div class="col-md-12" style="text-align: center;" id="fanye">
@@ -344,7 +337,7 @@
 			</div>
 			<!-- 特惠套餐 -->
 
-			<div class="panel panel-default">
+			<!-- <div class="panel panel-default">
 
 				<div class="panel-heading col-md-12"
 					style="text-align: center; font-weight: bold">视频套餐</div>
@@ -363,7 +356,7 @@
 
 				</div>
 
-			</div>
+			</div> -->
 			<!-- <div class="panel panel-default">
 				<div class="panel-heading col-md-12"
 					style="text-align: center; font-weight: bold">打榜好课</div>
@@ -436,9 +429,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="foot-bot">
-			<div id="foot-bottom" style="color:white;">7*24小时服务电话：13623512127</div>
-		</div>
+		
 	</footer>
 
 	
@@ -514,13 +505,7 @@
 	    sites: [
 	      { name: '关于我们' },
 	      { name: '|'},
-	      { name: '加入我们' },
-	      { name: '|'},
-	      { name: '合作申请' },
-	      { name: '|'},
 	      { name: '意见反馈' },
-	      { name: '|'},
-	      { name: '用户协议' }
 	    ]
 	  }
 	})
@@ -528,7 +513,7 @@
 	new Vue({
 		el:'#footimg',
 		data:{
-			footma:'photos/LoginPhoto/erweima_20180628215615.jpg'
+			footimg:'photos/LoginPhoto/yudaologo.png'
 		}
 	})
 	
@@ -537,7 +522,7 @@
 	new Vue({
 		el:'#footma',
 		data:{
-			footma:'photos/LoginPhoto/erweima.png'
+			footma:'photos/LoginPhoto/erweima_20180628215615.jpg'
 		}
 	})
 </script>

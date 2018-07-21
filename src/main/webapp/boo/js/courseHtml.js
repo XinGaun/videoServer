@@ -1,7 +1,7 @@
 $(function(){
 
 	var user_id = $.cookie('id');
-
+	$.cookie('photo')
 	$("#kcml").hide();
 	$("#xypl").hide();
 	initRecommendCourse();
@@ -104,12 +104,8 @@ function joincourse(){
 
 
 	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
-		if(confirm("您还没有登录请先登录!")){
 			window.location.href="logins.html";
-			return false;
-		}else{
-			return false;
-		}
+		
 	}
 	var data = {
 			user_id:$.cookie('id'),
@@ -250,19 +246,37 @@ function initCourseTop(cid){
 					$("#teacher_introduce").html(result[0].teacher_introduce);
 					$("#Collection").html("收藏");
 				}else{
-					$("#Collection").html("已收藏");
-					$("#courses_name").html(result[0].courses_name);
-					$("#courses_names").html(result[0].courses_name);
-					$("#courses_grade").html(result[0].courses_grade);
-					$("#qian").html(result[0].courses_pricemoney);
-					$("#qians").html(result[0].courses_pricemoney);
-					$("#courses_click").html(result[0].courses_click);
-					$("#courses_introduce").html(result[0].courses_introduce);
-					$("#video_form_name").html(result[0].video_form_name);
-					$("#video_form_class").html(result[0].video_form_class);
-					$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
-					$("#teacher_name").html(result[0].teacher_name);
-					$("#teacher_introduce").html(result[0].teacher_introduce);
+					var userPhone = $.cookie("phone");
+					if(userPhone == null || userPhone == ""){
+						$("#Collection").html("收藏");
+						$("#courses_name").html(result[0].courses_name);
+						$("#courses_names").html(result[0].courses_name);
+						$("#courses_grade").html(result[0].courses_grade);
+						$("#qian").html(result[0].courses_pricemoney);
+						$("#qians").html(result[0].courses_pricemoney);
+						$("#courses_click").html(result[0].courses_click);
+						$("#courses_introduce").html(result[0].courses_introduce);
+						$("#video_form_name").html(result[0].video_form_name);
+						$("#video_form_class").html(result[0].video_form_class);
+						$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
+						$("#teacher_name").html(result[0].teacher_name);
+						$("#teacher_introduce").html(result[0].teacher_introduce);
+					}else{
+						$("#Collection").html("已收藏");
+						$("#courses_name").html(result[0].courses_name);
+						$("#courses_names").html(result[0].courses_name);
+						$("#courses_grade").html(result[0].courses_grade);
+						$("#qian").html(result[0].courses_pricemoney);
+						$("#qians").html(result[0].courses_pricemoney);
+						$("#courses_click").html(result[0].courses_click);
+						$("#courses_introduce").html(result[0].courses_introduce);
+						$("#video_form_name").html(result[0].video_form_name);
+						$("#video_form_class").html(result[0].video_form_class);
+						$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
+						$("#teacher_name").html(result[0].teacher_name);
+						$("#teacher_introduce").html(result[0].teacher_introduce);
+					}
+					
 				}									
 			}
 			$("img.lazy").lazyload({
@@ -301,9 +315,8 @@ function initVideo(video_arr){
 				var kcmls ="";
 				if(result[i].video_ppt!=undefined){
 					kcmls= '<li class="list-group-item">'
-
 						+	'<div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
-						+	'<a href="javascript:void(0)" onclick="">'+result[i].video_ppt+'</a>'
+						+	'<a href="javascript:void(0)" onclick="lodingppt(&quot;'+result[i].video_ppt+'&quot;)">'+result[i].video_name+'课程文档</a>'
 						+'</div>'
 						+'</li>';
 					$("#kcmls").append(kcmls);
@@ -316,8 +329,43 @@ function initVideo(video_arr){
 
 }
 
+//下载课程文档
+function lodingppt(ppt){
+	var v_id=getUrlParam('cid');
+	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
+			window.location.href="logins.html";
+		
+	}
+	var data = {
+			user_id:$.cookie('id'),
+			video_id:getUrlParam('cid')
+	}
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/front/Videos/queryOrder",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(data), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			//console.log(result);
+			if(result!="success"){
+				if(confirm("您还没有购买课程,是否购买课程加入课程!")){
+					$("#myModal").modal('show');
+					return false;
+				}else{
+					return false;
+				}
+			}else{
+				window.open(ppt);
+			}
+		}
+	});
+}
+
 //弹出播放页面
 function videourl(urls,id){
+	var v_id=getUrlParam('cid');
 	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
 			window.location.href="logins.html";
 		
@@ -354,7 +402,9 @@ function videourl(urls,id){
 				};
 				var player=new ckplayer(videoObject);
 				//查询评论信息
-				videoComment(id);
+				var urlStr = urls.substring(31,urls.length-5);
+				$("#downloadvideo").attr('href','/videoServer/front/UserTest/download?fileName='+urlStr);
+				videoComment(v_id);
 			}
 		}
 
@@ -558,46 +608,204 @@ function custom(number){
 	//console.log(pages);
 	return false;
 }
+
+//评论视频
+$("#pinglbtn").click(function(){
+	var v_id=getUrlParam('cid');
+	var data = {
+			user_id:$.cookie('id'),
+			video_id:getUrlParam('cid'),
+			comment_text:$("#addpinglun").val()
+	}
+	$.ajax({
+		type : "POST",
+		url : url+"/videoServer/front/Videos/addComment",
+		contentType : 'application/json; charset=UTF-8',
+		data: JSON.stringify(data),  //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			$("#addpinglun").val("");
+			videoComment(v_id);
+		},
+		error:function(){
+			alert("error");
+		}
+	})
+
+})
+//评论分页
+var obj = {
+				curr:1,
+				limit:10,
+				totalRows:0
+	}
+var v_id=getUrlParam('cid');
+
+//分页
+function fenye(obj){
+	/* alert("进去分页");  */
+	//不显示首页尾页
+	layui.use(['laypage', 'layer'], function(){
+		var laypage = layui.laypage,
+		layer = layui.layer;
+		laypage.render({
+			elem: 'fenye',	
+			count: obj.totalRows,
+			skip:true,
+			groups:5,
+			first:1,
+			curr:obj.curr,
+			limit:obj.limit,
+			last:'尾页',
+			theme: '#1E9FFF',
+			jump:function(obj2,first){
+				//obj包含了当前分页的所有参数，比如
+				obj.curr=obj2.curr;
+				//首次不执行
+				if(!first){
+					//do something 
+					videoComment(v_id);
+				} 
+			},
+		});
+	})
+} 
+
 //查询评论信息
 function videoComment(video_id){
-	var data ={video_id:video_id};
+	var data ={
+			"video_id":video_id,
+			"pageSize":obj.limit,
+			"currPage":obj.curr
+		};
 	$.ajax({
 		type : "POST",
 		url : url+"/videoServer/front/Videos/queryComment",
 		contentType : 'application/json; charset=UTF-8',
 		data: JSON.stringify(data),  //传入组装的参数
+		/*data:{
+				"video_id":video_id,
+				"pageSize":obj.limit,
+				"currPage":obj.curr
+		},*/
 		dataType : "json",
 		success : function(result) {
-			console.log(result);
+			console.log("succ");
 			if(result.list.length<=0){
 				$("#pingliu").html("暂无评论信息");
 			}else{
+				console.log("succ22");
 				$("#pingliu").html("");
+				obj.totalRows = result.parameter.pages.totalRows;
+				fenye(obj);
+				var photo="";
+				if($.cookie("photo")!=""&&$.cookie("photo")!=null&&$.cookie("photo")!=undefined){
+					//alert($.cookie("photo"));
+					//$("#imgt").attr("src",$.cookie("photo"));
+					console.log("succ");
+					photo=$.cookie("photo");
+				}else{
+					console.log("succ22");
+					//$("#imgt").attr("src","photos/LoginPhoto/txx.png");
+					photo="photos/LoginPhoto/txx.png";
+				}
+				console.log(photo);
 				for(var i=0;i<result.list.length;i++){
+					
 					var pinglun = '<div class="media">'
 						  +	'<div class="media-left">'
-						  +		'<a href="#"> <img class="media-object" src="img/tx4.png" alt="..."></a>'
+						  +		'<a href="#"> <img id="imgt" width="40px" height="40px" class="img-circle media-object" src="'+photo+'" alt="..."></a>'
 						  +	'</div>'
 						  +	'<div class="media-body">'
 						  +		'<h4 class="media-heading">'
 						  +		'<span>'+result.list[i].courses_date+'</span>&nbsp;&nbsp;<span>'+result.list[i].user_name+'</span>:</h4>'
 						  +		'<div>'+result.list[i].comment_text+'</div>'
-						  +		'<div>&nbsp;</div>'
-						  +		'<div class="media">'
-						  +		'<div class="media-left">'
-						  +			'<a href="#"> <img class="media-object" src="img/tx1.png" alt="..."></a>'
-						  +		'</div>'
-						  +		'<div class="media-body">'
-						  +			'<h4 class="media-heading">'
-						  +			'<span>2017-06-25 12:00:00</span>&nbsp;&nbsp;<span>教师名</span>&nbsp;回复&nbsp;<span>用户名</span>:</h4>'
-						  +			'<div>点赞!</div>'
-						  +		'</div></div>'
+						  +		'<div><a href="#" id="reply">回复</a></div>'
 						  +	'</div>'
+						  + '</div>';
+					var teahuifu= '<div class="media">'
+						  +	'<div class="media-left">'
+						  +			'<a href="#"> <img width="40px" height="40px" class="img-circle media-object" src="img/tx1.png" alt="..."></a>'
+						  +	'</div>'
+						  +	'<div class="media-body">'
+						  +			'<h4 class="media-heading">'
+						  +			'<span>'+result.list[i].reply_date+'</span>&nbsp;&nbsp;<span>'+result.list[i].teacher_name+'</span>&nbsp;回复&nbsp;<span>'+result.list[i].user_name+'</span>:</h4>'
+						  +			'<div>'+result.list[i].reply_text+'</div>'
+						  +			'</div></div>'
+						  + '</div>'
 						  +'</div>';
-					$("#pingliu").append(pinglun);
+					
+						$("#pingliu").append(pinglun);
+					if (result.list[i].reply_text!=null&&result.list[i].reply_text!=""&&result.list[i].reply_text!=undefined){
+						//$("#pingliu").append(pinglun);
+						$("#pingliu").append(teahuifu);
+					}
 				}
 				
 			}
 		}
 	});
+
 }
+//评论视频
+$("#pinglbtn").click(function(){
+	var v_id=getUrlParam('cid');
+	var data = {
+			user_id:$.cookie('id'),
+			video_id:getUrlParam('cid'),
+			comment_text:$("#addpinglun").val()
+	}
+	$.ajax({
+		type : "POST",
+		url : url+"/videoServer/front/Videos/addComment",
+		contentType : 'application/json; charset=UTF-8',
+		data: JSON.stringify(data),  //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			$("#addpinglun").val("");
+			videoComment(v_id);
+		},
+		error:function(){
+			alert("error");
+		}
+	})
+
+})
+//评论分页
+$(function () {
+	var obj = {
+				curr:1,
+				limit:10,
+				totalRows:0
+			}
+	//分页
+	function fenye(obj){
+		/* alert("进去分页");  */
+		//不显示首页尾页
+		layui.use(['laypage', 'layer'], function(){
+			var laypage = layui.laypage,
+			layer = layui.layer;
+			laypage.render({
+				elem: 'fenye',	
+				count: obj.totalRows,
+				skip:true,
+				groups:5,
+				first:1,
+				curr:obj.curr,
+				limit:obj.limit,
+				last:'尾页',
+				theme: '#1E9FFF',
+				jump:function(obj2,first){
+					//obj包含了当前分页的所有参数，比如
+					obj.curr=obj2.curr;
+					//首次不执行
+					if(!first){
+						//do something 
+						videoComment();
+					} 
+				},
+			});
+		})
+	} 
+})
+

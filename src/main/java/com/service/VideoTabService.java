@@ -15,5 +15,5 @@ public interface VideoTabService {
 	public List<VideoTab> selVideo(VideoTab vd);
 	public List<VideoTab> selVideoByVideoForm(VideoTab vd);
 	public void delVideoById(int video_id);
-	public void updetVideoById(VideoTab vd);
+	public void updetVideoById(int video_id,String video_name,String video_form_id,String video_introduce,MultipartFile image,MultipartFile ppt,String video_qz,int teacher_id)throws Exception;
 }

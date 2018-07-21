@@ -185,7 +185,9 @@ function custom(number){
 		}
 	});
 }
+
 */
+
 //加载推荐课程页面
 function initrecommend(){
 	$.ajax({

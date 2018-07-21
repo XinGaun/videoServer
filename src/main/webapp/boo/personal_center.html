@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
-<title>Home</title>
+<title>个人中心</title>
     <script src="js/jquery-3.3.1.min.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<script src="js/bootstrap.min.js"></script>
@@ -163,7 +163,7 @@
 	 #logImg{
 	 	float:right;
 	 	border:1px solid red;
-	 	margin:-2vh 1vw 0vh 0vw;
+	 	margin:2vh 1vw 0vh 0vw;
 	 	display:none;
 	 }
 	 #loginrouter{
@@ -172,11 +172,11 @@
 	 	left:58vw;
 	 	z-index:2;
 	 }
-	 #log{
+	 /* #log{
 	 	margin-top:3.5vh;
 	 	margin-right:15vw;
 	 	
-	 }
+	 } */
 	 #boo{
 	 	position:relative;
 	 }
@@ -274,7 +274,7 @@
 
 				<li class="dropdown" STYLE="margin-top: 5%">
 
-					<div class="form-group navbar-form navbar-left">
+					<!-- <div class="form-group navbar-form navbar-left">
 						<div class="input-group col-xs-12">
 							<div class="input-group-btn">
 								<select name="type" id="dropdown" class="form-control" style="width: auto;">
@@ -292,7 +292,7 @@
 								</button>
 							</span>
 						</div>
-					</div>
+					</div> -->
 				</li>
 			</ul>
 			<!-- 登录|注册 -->
@@ -305,8 +305,7 @@
 					    	<a href="rigester.html" @click="change(2)" :class="flag==2?'actives':''">注册</a>
 
 						</div>
-						<!-- 添加头像 -->
-					
+						
 						<!-- 添加头像 -->
 						<div id="logImg" class="dropdown">             			
 	                 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -363,6 +362,7 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<ul class="nav nav-tabs ">
+
 				<li role="presentation"><a href="index.html" id="qbhkclassify">全部好课</a></li>
 				<li role="presentation"><a href="#" id="schkcassify">收藏好课</a></li>
 				<li role="presentation"><a href="#" id="ddclassify">订单记录</a></li>
@@ -691,7 +691,7 @@
 		<div class="col-md-2"></div>
 	</div>
 <!-- 尾部 -->
-	<footer style="background:gray;margin-bottom:0vh;height:21vh;">
+	<footer style="background:gray;">
 		<div id="foot">
 			<div id="foot-head">
 				<div class="footli" id="footli">
@@ -714,9 +714,6 @@
 					<img :src="footma" style="width:50px;height:50px;"/>
 				</div>
 			</div>
-		</div>
-		<div id="foot-bot">
-			<div id="foot-bottom" style="color:white;">7*24小时服务电话：13623512127</div>
 		</div>
 	</footer>
 
@@ -907,7 +904,7 @@
     $("#updateuser").click(function(){  	
      	var user=$("#name").val();//昵称
     	var photo=$("#photoimg").val();
-    	var url=photo.substr(photo.lastIndexOf("/")+1);//头像
+    	//var url=photo.substr(photo.lastIndexOf("/")+1);//头像
     	var email=$("#email").val();//email
     	var sex=$('input:radio:checked').val();
     	var area=$("#aboutme").val();
@@ -942,7 +939,7 @@
     	
     	var alluser={
     			"user_name":user,
-    			"user_photo":url,
+    			"user_photo":photo,
     			"user_sex":sex,
     			"user_self":area,
     			"user_truename":truename,
@@ -951,6 +948,7 @@
     			"user_qq":qq,
     	}
     	
+
     	if(typeof(user)!="undefined"&&typeof(email)!="undefined"){
     		
     		$.ajax({
@@ -961,8 +959,13 @@
 	        	cache:false,
     			dataType:"json",
     			success:function(data){
-    				
     				alert(data);
+    				var expiresDate= new Date();
+	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000));
+	    			if(photo!=null&&photo!=""){
+    					$.cookie('photo',photo,{ expires:expiresDate,path:'/',secure: false});
+	    			}
+    				auto();
     			},
     			error:function(){
     				alert("信息保存失败");
@@ -986,8 +989,7 @@
         		$("#name").val(data[0].user_name);//昵称
         		
         		$("#studentName").html(data[0].user_name);//个人中心页头借用用户昵称
-        		$("#student_img").html('<img src="'+data[0].user_photo+'" alt="..."style="width:160px;height:130px;" class="img-rounded lazy">');//个人中心页头借用用户图片
-        		//alert(data[0].user_photo);
+        		$("#student_img").html('<img src="'+$.cookie("photo")+'" style="width:160px;height:130px;" class="img-rounded lazy">');//个人中心页头借用用户图片
         		$("#email").val(data[0].user_email);//email
             	$("#aboutme").val(data[0].user_self);
             	$("#truename").val(data[0].user_truename);
@@ -1003,8 +1005,8 @@
             		$("input[name=sex][value=7]").attr("checked",true);
             	} */
             	
-            	if(data[0].user_photo!=null&&data[0].user_photo!=""){
-            		$("#thumburlShow").attr("src",data[0].user_photo);//显示图片  
+            	if($.cookie("photo")!=null&&$.cookie("photo")!=""){
+            		$("#thumburlShow").attr("src",$.cookie("photo"));//显示图片  
             	}
         	},
         	error:function(){
@@ -1062,8 +1064,6 @@
 		        		  code+=Math.floor(Math.random()*10);
 		        	}
 		        	//alert(code);
-	           
-	          
 	           var str={
 	        	   	phone:userphone,
 	        		code:code,//随机验证码
@@ -1076,7 +1076,13 @@
 		        	    data:JSON.stringify(str),     			        	        	
 		        	    dataType:"json",
 		        	    success:function(data){
-		        	       //alert("验证码已发送，请注意查收！");		        	        		
+		        	       //alert("验证码已发送，请注意查收！");	
+		        	    	if(data=="error"){
+        	        			alert("验证码请求过于频繁！");
+        	        		}
+        	        		setTimeout(function(){ 
+        	        			code="";
+        	        		}, 60000);
 		        	     },
 		    	       	error:function(){
 		        	        		
@@ -1191,15 +1197,13 @@
 		退出按钮点击事件
 	*/
 	$("#exit").click(function(){
-		//window.location.href="index.html"; 
-		
 		$("#logsd").show();
 		$("#logImg").hide();
 		
 		$.cookie('id', '', { expires: -1 ,path:'/',secure: false});
 		$.cookie('phone', '', { expires: -1 ,path:'/',secure: false});
 		$.cookie('photo', '', { expires: -1,path:'/',secure: false }); 
-		 
+		window.location.href="index.html"; 
 	})
 	
 	//登录注册样式切换
@@ -1431,7 +1435,6 @@ function initBoutique(param){
 							+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result.list[i].teacher_id+'">'
 							+ result.list[i].teacher_name
 							+ '</a></p>'
-							
 							+ '</div>'
 							+ '<div class="col-md-6">'
 							+ '<p style="text-align:right;font-weight: bold;">'
@@ -1487,13 +1490,7 @@ function initOrderBoutique(param){
 	    sites: [
 	      { name: '关于我们' },
 	      { name: '|'},
-	      { name: '加入我们' },
-	      { name: '|'},
-	      { name: '合作申请' },
-	      { name: '|'},
 	      { name: '意见反馈' },
-	      { name: '|'},
-	      { name: '用户协议' }
 	    ]
 	  }
 	})
@@ -1642,8 +1639,7 @@ function initOrderInformation(paramT){
 				+result.list[i].order_status
 				+'</td><td>'
 				+result.list[i].order_date
-				+'</td><td><a href="course.html?cid='+result.list[i].video_id+'">查看课程</a><br></td></tr>';
-				
+				+'</td><td><a href="course.html?cid='+result.list[i].video_id+'">查看课程</a><br></td></tr>';			
 				$("#OrderInformation").append(OrderInformation);
 			}
 			total=result.total;

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>login</title>
+	<title>登录</title>
 	<!--
     <link rel="stylesheet" type="text/css" href="styles.css">
     -->
@@ -35,7 +35,7 @@
 	 	border-radius:2em;
 	 	border:1px #3AA8FF solid;
 	 	padding:2px 9px;
-	 	/* margin:0vh 2vw; */
+	 	margin:0vh 2vw;
 	 	display:inline-block;
 	 	verticle-align:middle;
 	 	color:black;
@@ -57,16 +57,6 @@
 	 	margin:2vh 1vw 0vh 0vw;
 	 	display:none;
 	 }
-	 #loginrouter{
-	 	position:fixed;
-	 	top:15vh;
-	 	left:58vw;
-	 	z-index:2;
-	 }
-	
-	 #boo{
-	 	position:relative;
-	 }
 	#login{
 		width:28vw;
 	 	height:50vh;
@@ -75,10 +65,10 @@
 	 	margin-left:52vw;
 	 	margin-top:12vh;
 	 	margin-bottom:9vh;
+	 	position:absolute;
 	}
 	
 	form{
-		
 	 	position:relative;
 	 	top:4vh;
 	 	left:2.2vw;
@@ -140,18 +130,10 @@
 	} 
 	#bodys{
 		background:url(photos/LoginPhoto/bj@2x.png) no-repeat;
-		background-size:100% 100%; 
-		height:65vh;
-		border:1px solid gray;
+		background-size:100% 73vh;  
+		min-height:71vh;
 	}
-	#line{
-		margin-left:20vw;
-		float:left;
-	 	margin-top:-2vh;
-		height:55vh;
-		width:28vw;
-		
-	}
+	
 	 
 	#logo{
 		position:relative;
@@ -159,31 +141,20 @@
 	 	border:1px solid #888888;
 	 	width:25vw;
 	}
-	#foot{
+	 #foot{
 	 	width:100vw;
-	 	height:12vh;	
+	 	height:13vh;	
 	 	border-bottom:1px solid #999999;
 	 	position:relative;
 	 	border-top:1px solid gray;
-	 	
-	 }
+	 } 
 	 #foot-head{
 	 	margin:3vh 19.4vw 0vh 19.2vw;
-	 	height:9vh;
+	 	height:9.2vh;
 	 	width:61.3vw;
 	 	
 	 }
-	 #foot-bot{
-	 	width:100vw;
-	 	height:6vh;
-	 	
-	 	bottom:0vh;
-	 }
-	 #foot-bottom{
-	 	margin:1.7vh 21.3vw 0vh 19.2vw;
-	 	height:1.5vh;
-	 	width:59.4vw;
-	 }
+	
 	 #footimg{
 	 	height:9.2vh;
 	 	width:5vw;
@@ -205,28 +176,26 @@
 	 }
 	 #footli{
 	 	width:24vw;
-	 	height:9vh;
+	 	height:9.1vh;
 	 	font-size:0.8vw;
 	 }
 	 #footli span,#footli div{
 	 	
 		margin-left:0.5vw;
 	 }
-	 ol{
+	 #foot ol{
 	 	list-style-type:none;
 	 	padding:0px;
 	 }
-	 li{
+	 #foot li{
 	 	display:inline-block;
-	 	
 	 	color:white;
 	 	margin:0vh 0.4vw
 	 }
-	 body{
-	 	heigh:100vh;
-	 }
+	
+	 
 </style>
-<body>
+<body style="overflow-y:hidden">
 	<nav class="navbar navbar-default" >
 	<div class="container-fluid" style="height:12vh">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -253,7 +222,7 @@
 
 				<li class="dropdown" STYLE="margin-top: 5%">
 
-					<div class="form-group navbar-form navbar-left">
+					<!-- <div class="form-group navbar-form navbar-left">
 						<div class="input-group col-xs-12">
 							<div class="input-group-btn">
 								<select name="type" id="dropdown" class="form-control" style="width: auto;">
@@ -271,7 +240,7 @@
 								</button>
 							</span>
 						</div>
-					</div>
+					</div> -->
 				</li>
 			</ul>
 			<!-- 登录|注册 -->
@@ -300,7 +269,7 @@
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
-	<div id="bodys">
+	<div id="bodys"  style="clear:both;">
 		
 		<div id="login">
 			<form>
@@ -337,7 +306,7 @@
 		</div>
 	</div>
 	<!-- 尾部 -->
-	<footer style="background:gray;margin-bottom:0vh;height:21vh;">
+	<footer style="background:gray">
 		<div id="foot">
 			<div id="foot-head">
 				<div class="footli" id="footli">
@@ -361,16 +330,17 @@
 				</div>
 			</div>
 		</div>
-		<div id="foot-bot">
-			<div id="foot-bottom" style="color:white;">7*24小时服务电话：13623512127</div>
-		</div>
+		
 	</footer>
 </body>
 <script>
 //var url="http:127.0.0.1:8080/";
 	var url="";
-	var code="";
+	
 	$("#denglu").click(function(){
+		if($.cookie("phone")!=null){
+			alert("你已登陆，请勿重复登陆");
+		}else{
 		var uname=$('#uname').val();
 		pwd=$("#pwd").val();
 		var vcode = $('#vcode').val();
@@ -470,7 +440,7 @@
 			} 
 		}
 		
-		
+		}
 	})
 	$("#malogin").click(function(){
 		if($("#malogin").html()=="验证码登录"){
@@ -488,6 +458,7 @@
 		}
 	})
 	//获取验证码
+	var code="";
 	$('#hmac').click(function(){  
 		
 		var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
@@ -506,7 +477,7 @@
 	         var codeflag = 60;//点击时间间隔60s
 	         
 	        if(phoneflag == 1&&codeflag==60){  
-	            var timeflag = setInterval(function(){  
+	        	var timeflag = setInterval(function(){  
 	                codeflag--;  
 	
 	                if(codeflag>0){ 
@@ -523,12 +494,12 @@
 	            	}  
 	        	},1000);  
 	            
-	            	//随机生成六位验证码
-		            //var code="";
-		        	for(var i=0;i<6;i++){
-		        		  code+=Math.floor(Math.random()*10);
-		        	}
-		        	//alert(code);
+	        	//随机生成六位验证码
+	            //var code="";
+	        	for(var i=0;i<6;i++){
+	        		  code+=Math.floor(Math.random()*10);
+	        	}
+	        	//alert(code);
 	           var str={
 	        	   	phone:phonenumber,
 	        		code:code,//随机验证码
@@ -556,6 +527,12 @@
 		        	        	success:function(data){
 		        	        		//alert("验证码已发送，请注意查收！");
 		        	        		
+		        	        		if(data=="error"){
+		        	        			alert("验证码请求过于频繁！");
+		        	        		}
+		        	        		setTimeout(function(){ 
+		        	        			code="";
+		        	        		}, 60000);
 		        	        	},
 		        	        	error:function(){
 		        	        		
@@ -611,8 +588,8 @@
 	        		
 	        		if(data.length==1){	 
 	        			//答过题的状态
-	        			//window.location.href="index.html";	
-	        			window.history.go(-1);
+	        			window.location.href="index.html";	
+	        			//window.history.go(-1);
 	        		}else{ 
 	        			//未答题状态
 	        			
@@ -626,7 +603,7 @@
 	    });    
 	}
 	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
-	$(function(){
+	/* $(function(){
 		
 		//alert($.cookie('phone'));
 		//alert($.cookie('photo'));
@@ -646,7 +623,7 @@
 		}
 		 
 		
-	})
+	}) */
 	/*
 	退出按钮点击事件
 	*/
@@ -715,13 +692,7 @@
 	    sites: [
 	      { name: '关于我们' },
 	      { name: '|'},
-	      { name: '加入我们' },
-	      { name: '|'},
-	      { name: '合作申请' },
-	      { name: '|'},
 	      { name: '意见反馈' },
-	      { name: '|'},
-	      { name: '用户协议' }
 	    ]
 	  }
 	})
