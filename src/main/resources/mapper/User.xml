@@ -6,13 +6,13 @@
 	<!-- 添加注册用户 -->
 	<insert id="addUser" parameterType="com.entity.UserTab">
 		insert into user_tab(user_name,user_sex,user_phone,user_pwd,user_status,user_date,user_email,user_photo) 
- 		values('',3,#{user_phone},'',5,now() ,'','')
+ 		values('',3,#{user_phone},#{user_pwd},5,now() ,'','')
 	</insert>
 
 	<!-- 登录注册时查询是否有该用户 -->
 
 	<select id="queryUser" parameterType="String" resultType="java.util.HashMap">
-		select user_id,user_phone,user_name,user_pwd,user_photo from user_tab where user_phone=#{phone}
+		select user_id,user_phone,user_name,user_pwd,user_photo,user_sex,user_truename,user_self,user_email,user_qq from user_tab where user_phone=#{phone}
 		
 	</select>
 
@@ -30,7 +30,29 @@
 	</update>
 	<!-- 个人中心更改所有信息 -->
 	<update id="updatemessage" parameterType="com.entity.UserTab">
-		update user_tab set user_name=#{user_name},user_sex=#{user_sex},user_email=#{user_email},user_truename=#{user_truename},user_qq=#{user_qq},user_photo=#{user_photo},user_self=#{user_self} where user_phone=#{user_phone}
+		update user_tab set 
+		<if test="user_name != null and user_name.trim().length()>0">
+			user_name = #{user_name,jdbcType=VARCHAR},
+		</if>
+		<if test="user_sex != null">
+			user_sex = #{user_sex},
+		</if>
+		<if test="user_email != null and user_email.trim().length()>0">
+			user_email = #{user_email,jdbcType=VARCHAR},
+		</if>
+		<if test="user_truename != null and user_truename.trim().length()>0">
+			user_truename = #{user_truename,jdbcType=VARCHAR},
+		</if>
+		<if test="user_qq != null and user_qq.trim().length()>0">
+			user_qq = #{user_qq,jdbcType=VARCHAR},
+		</if>
+		<if test="user_photo != null and user_photo.trim().length()>0">
+			user_photo = #{user_photo,jdbcType=VARCHAR},
+		</if>
+		<if test="user_self != null and user_self.trim().length()>0">
+			user_self = #{user_self,jdbcType=VARCHAR}
+		</if>
+		where user_phone=#{user_phone}
 	</update>
 	<!-- 更改手机号 -->
 	<update id="updatephone"  parameterType="com.entity.UserTab">

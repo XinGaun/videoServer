@@ -339,9 +339,9 @@
 					<div class="col-md-8">
 						<div class="media">
 							<div class="media-left">
-								<span id="student_img"></span>
-								<a href="#" id="student_img"> 
-								</a>
+								<span><img id="student_img" src="photos/LoginPhoto/txx.png" width="160px" height="130px" /></span>
+								<!-- <a href="#" id="student_img"> 
+								</a> -->
 							</div>
 							<div class="media-body">
 								<h4 class="media-heading" style="font-weight: bold;"><span id="studentName"></span></h4>
@@ -960,12 +960,11 @@
     			dataType:"json",
     			success:function(data){
     				alert(data);
-    				var expiresDate= new Date();
+    				/* var expiresDate= new Date();
 	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000));
-	    			if(photo!=null&&photo!=""){
-    					$.cookie('photo',photo,{ expires:expiresDate,path:'/',secure: false});
-	    			}
-    				auto();
+    				$.cookie('photo',photo,{ expires:expiresDate,path:'/',secure: false}); */
+    				getmessage();
+					
     			},
     			error:function(){
     				alert("信息保存失败");
@@ -978,7 +977,10 @@
 	//var userphone=15036608954;
    	var userphone=$.cookie("phone");
   	//alert(userphone);
-    $(function(){	
+  	$(function(){
+  		getmessage();
+  	});
+    function getmessage(){	
     	$.ajax({
         	type:"POST",
         	url:url+"/videoServer/front/User/queryuser",
@@ -986,11 +988,14 @@
         	data:JSON.stringify({user_phone:userphone}),
         	dataType:"json",
         	success:function(data){
+        		var expiresDate= new Date();
+    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000));
+				$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false}); 
         		$("#name").val(data[0].user_name);//昵称
         		
         		$("#studentName").html(data[0].user_name);//个人中心页头借用用户昵称
-        		$("#student_img").html('<img src="'+$.cookie("photo")+'" style="width:160px;height:130px;" class="img-rounded lazy">');//个人中心页头借用用户图片
-        		
+        		//$("#student_img").html('<img src="'+data[0].user_photo+'" alt="..."style="width:160px;height:130px;" class="img-rounded lazy">');//个人中心页头借用用户图片
+        		//alert(data[0].user_photo);
         		$("#email").val(data[0].user_email);//email
             	$("#aboutme").val(data[0].user_self);
             	$("#truename").val(data[0].user_truename);
@@ -1006,15 +1011,20 @@
             		$("input[name=sex][value=7]").attr("checked",true);
             	} */
             	
-            	if($.cookie("photo")!=null&&$.cookie("photo")!=""){
-            		$("#thumburlShow").attr("src",$.cookie("photo"));//显示图片  
+            	if(data[0].user_photo!=null&&data[0].user_photo!=""){
+            		$("#student_img").attr("src",data[0].user_photo);//显示图片
+            		
             	}
+            	if(data[0].user_photo!=null&&data[0].user_photo!=""){
+            		$("#thumburlShow").attr("src",data[0].user_photo);//显示图片  
+            	}
+            	auto();
         	},
         	error:function(){
         		
         	}
 		})		 
-    })
+    }
     //个人信息手机号更改
      $("#alterphone").click(function(){
     	var data={
