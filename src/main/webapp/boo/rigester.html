@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>rigester 页面</title>
+	<title>注册</title>
 	<!--
     <link rel="stylesheet" type="text/css" href="styles.css">
     -->
@@ -232,7 +232,7 @@
 
 				<li class="dropdown" STYLE="margin-top: 5%">
 
-					<div class="form-group navbar-form navbar-left">
+					<!-- <div class="form-group navbar-form navbar-left">
 						<div class="input-group col-xs-12">
 							<div class="input-group-btn">
 								<select name="type" id="dropdown" class="form-control" style="width: auto;">
@@ -250,7 +250,7 @@
 								</button>
 							</span>
 						</div>
-					</div>
+					</div> -->
 				</li>
 			</ul>
 			<!-- 登录|注册 -->
@@ -377,7 +377,6 @@
 	        	},1000);  
 	            
 	            	//随机生成六位验证码
-		            //var code="";
 		        	for(var i=0;i<6;i++){
 		        		  code+=Math.floor(Math.random()*10);
 		        	}
@@ -387,7 +386,7 @@
 	           var str={
 	        	   	phone:phonenumber,
 	        		code:code,//随机验证码
-	        		TemplateCode:"SMS_135036257"//模板信息
+	        		TemplateCode:"SMS_135036257",//模板信息
 	           }
 	           //alert("str"+JSON.stringify(str));
 		        $.ajax({
@@ -401,36 +400,38 @@
 		        		if(data.length==1){
 		        			alert("该号码已注册，请直接登录");
 		        		}else{
-		        			$.ajax({
-		        	        	type:"POST",
-		        	        	url:url+"/videoServer/front/AliBigFish/verificationCode",
-		        	        	contentType:'application/json;charset=UTF-8',
-		        	        	data:JSON.stringify(str),     	
-		        	        	//data:str,
-		        	        	dataType:"json",
-		        	        	success:function(data){
-		        	        		//alert("验证码已发送，请注意查收！");
-		        	        		alert(data);
-		        	        		setTimeout(function(){ 
-		        	        			code="";
-		        	        		}, 60000);
-		        	        	},
-		        	        	error:function(){
-		        	        		
-		        	        	}
-		        	        });
+		        			duanxin(str);	
 		        		}
 		        	}
 		        });    	            
 	        }
 	})
-	
+	function duanxin(str){
+		$.ajax({
+        	type:"POST",
+        	url:url+"/videoServer/front/AliBigFish/verificationCode",
+        	contentType:'application/json;charset=UTF-8',
+        	data:JSON.stringify(str),     	
+        	//data:str,
+        	dataType:"json",
+        	success:function(data){
+        		//alert("验证码已发送，请注意查收！");
+        		//alert(data);
+        		setTimeout(function(){ 
+        			code="";
+        		}, 60000);
+        	},
+        	error:function(){
+        		
+        	}
+        });
+	}
 	//注册账号
   	$("#zhuce").click(function(){
   		
   		var phone = $('#phone').val();  
   		/* var name = $('#name').val();
-  		var pwd = $('#pwd').val();
+  		
   		var repwd = $('#repwd').val(); */
 	    var vcode = $('#vcode').val();
 	    //var myreg=/^[a-zA-Z0-9]{6,21}$/;
@@ -442,39 +443,7 @@
 			});
 	        return false;  
 	    }  
-	    /* if(name == ""){
-	    	 
-	    	$("#name").attr('placeholder','请输入昵称');
-			$("#name").css('color','red'); 
-			$("#name").focus(function(){
-				$("#name").css('color','black');
-			});
-	        return false;  
-	    }
-	    
-	    if(pwd == ""){
-	    	$("#pwd").attr('placeholder','请输入密码');
-			$("#pwd").css('color','red'); 
-			$("#pwd").focus(function(){
-				$("#pwd").css('color','black');
-			});
-	        return false;  
-	    }else if(!myreg.test(pwd)){
-	    	$("#pwd").attr('placeholder','密码格式错误！');
-			$("#pwd").css('color','red'); 
-			$("#pwd").focus(function(){
-				$("#pwd").css('color','black');
-			});
-			return false; 
-	    }
-	    if(repwd == ""||repwd!=pwd){
-	    	$("#repwd").attr('placeholder','密码不一致！');
-			$("#repwd").css('color','red'); 
-			$("#repwd").focus(function(){
-				$("#repwd").css('color','black');
-			});
-	        return false;  
-	    } */
+	   
 	    if(vcode == ""){  
 	    	  
 	    	$("#vcode").attr('placeholder','请输入验证码');
@@ -495,7 +464,6 @@
 	    
 	   var UserTab={
 	    		"user_phone":phone,
-        	
 	    } 
 	   // alert(JSON.stringify(UserTab));
 	    if(typeof(phone)!="undefined"&&typeof(vcode)!="undefined"&&vcode==code){   
@@ -511,7 +479,17 @@
 	        		alert("注册成功！");
 	        		//window.history.go(-1);
 	        		window.location.href="logins.html"; 
-	        		
+	        		var cod="";
+	        		//随机生成六位密码
+		        	for(var i=0;i<6;i++){
+		        		  cod+=Math.floor(Math.random()*10);
+		        	}
+		            var str={
+		        	   	phone:phonenumber,
+		        		code:cod,//随机验证码
+		        		TemplateCode:"SMS_139981438",//模板信息
+		            };
+		            duanxin(str);
 	        	},
 	        	error:function(data){
 	        		alert("注册失败！");
@@ -525,28 +503,6 @@
 	     
   	})
 
-  	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
-	/* $(function(){
-		
-		//alert($.cookie('phone'));
-		//alert($.cookie('photo'));
-		if($.cookie("phone")==null){//cookie过期
-
-			//alert("登录过期，请重新登录");
-
-		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
-			//alert("pp");
-			$("#logsd").hide();
-			$("#logImg").show();
-		}else if($.cookie("phone")!=null&&$.cookie("photo")!=null){//cookie有用户信息和头像
-			//alert("dd");
-			$("#logsd").hide();
-			$("#imgt").attr("src",$.cookie("photo"));
-			$("#logImg").show();
-		}
-		 
-		
-	}) */
 	/*
 	退出按钮点击事件
 	*/

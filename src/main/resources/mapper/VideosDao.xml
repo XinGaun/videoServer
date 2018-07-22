@@ -79,7 +79,12 @@
 		usr.user_name,tea.teacher_name
 		FROM comment_tab com LEFT JOIN user_tab usr ON com.user_id=usr.user_id
 		LEFT JOIN teacher_tab tea ON com.reply_teacher = tea.teacher_id WHERE
-		1=1 AND com.video_id = #{video_id} ORDER BY com.comment_date desc;
+		1=1 AND com.video_id = #{video_id} ORDER BY com.comment_date desc 
+		<if test="pages != null" >
+				<![CDATA[  limit #{pages.startNum},#{pages.endIndex}  ]]>
+		</if>
+		
+		;
 	</select>
 	<!-- 查询课程信息总数 -->
 	<select id="queryCommentCount" parameterType="java.util.HashMap" resultType="int">

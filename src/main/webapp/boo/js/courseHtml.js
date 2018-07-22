@@ -43,6 +43,8 @@ $(function(){
 	param.cid = cid;
 	initStudentComments(param);
 	judgePC();
+	ifgoumai();
+
 });
 
 //var url = "http:/127.0.0.1:8080"
@@ -52,6 +54,7 @@ var url ="";
 var pages = 0;//当前页数
 var nums = 3;//每页几条
 var total = 0;//总条数 
+var sarr = [];
 
 //组装参数
 var param = {
@@ -99,17 +102,10 @@ function goumais(){
 
 }
 
-//加入课程
-function joincourse(){
-
-
+//判断是否购买课程
+function ifgoumai(){
 	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
-		if(confirm("您还没有登录请先登录!")){
-			window.location.href="logins.html";
-			return false;
-		}else{
-			return false;
-		}
+		return ;
 	}
 	var data = {
 			user_id:$.cookie('id'),
@@ -126,15 +122,47 @@ function joincourse(){
 			//console.log(result);
 			if(result!="success"){
 
-				if(confirm("您还没有购买课程,是否购买课程加入课程!")){
-					$("#myModal").modal('show');
-					return false;
-				}else{
-					return false;
-				}
+				return ;
+
 			}else{
-				alert("您已加入课程!,请直接在课程目录观看课程!");
+				$("#ifgoumai").html("开始学习");
+				
 				return true;
+			}
+		}
+
+	});
+}
+
+
+//加入课程
+function joincourse(){
+
+
+	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
+			window.location.href="logins.html";
+		
+	}
+	var data = {
+			user_id:$.cookie('id'),
+			video_id:getUrlParam('cid')
+	}
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/front/Videos/queryOrder",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(data), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			//console.log(result);
+			if(result!="success"){
+				$("#myModal").modal('show');
+
+			}else{
+				//alert("您已加入课程!,请直接在课程目录观看课程!");
+				//return true;
+				imgvideo();
 			}
 		}
 
@@ -223,6 +251,23 @@ function initRecommendCourse(){
 	});
 }
 
+
+function imgvideo(){
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/front/CourseDetails/queryVideoDetails",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(sarr), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			console.log(result)
+			videourl(result[0].video_url,result[0].video_id);
+		}
+	});
+}
+
+
 //初始化课程头部信息
 function initCourseTop(cid){
 	$.ajax({
@@ -235,6 +280,7 @@ function initCourseTop(cid){
 		success : function(result) {
 			//console.log(result);
 			for(var i=0;i<result.length;i++){
+				//console.log(result)
 				if(result[0].video_id == "" || result[0].video_id == null){
 					$("#courses_name").html(result[0].courses_name);
 					$("#courses_names").html(result[0].courses_name);
@@ -245,7 +291,7 @@ function initCourseTop(cid){
 					$("#courses_introduce").html(result[0].courses_introduce);
 					$("#video_form_name").html(result[0].video_form_name);
 					$("#video_form_class").html(result[0].video_form_class);
-					$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
+					$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy"></a>');
 					$("#teacher_name").html(result[0].teacher_name);
 					$("#teacher_introduce").html(result[0].teacher_introduce);
 					$("#Collection").html("收藏");
@@ -262,7 +308,7 @@ function initCourseTop(cid){
 						$("#courses_introduce").html(result[0].courses_introduce);
 						$("#video_form_name").html(result[0].video_form_name);
 						$("#video_form_class").html(result[0].video_form_class);
-						$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
+						$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy"></a>');
 						$("#teacher_name").html(result[0].teacher_name);
 						$("#teacher_introduce").html(result[0].teacher_introduce);
 					}else{
@@ -276,7 +322,7 @@ function initCourseTop(cid){
 						$("#courses_introduce").html(result[0].courses_introduce);
 						$("#video_form_name").html(result[0].video_form_name);
 						$("#video_form_class").html(result[0].video_form_class);
-						$("#videoimg").html('<img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy">');
+						$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy"></a>');
 						$("#teacher_name").html(result[0].teacher_name);
 						$("#teacher_introduce").html(result[0].teacher_introduce);
 					}
@@ -291,6 +337,7 @@ function initCourseTop(cid){
 			arr = arr.replace("]","");
 			arr =arr.split(",");
 			initVideo(arr);
+			sarr = arr
 		}
 
 	});
@@ -319,9 +366,8 @@ function initVideo(video_arr){
 				var kcmls ="";
 				if(result[i].video_ppt!=undefined){
 					kcmls= '<li class="list-group-item">'
-
 						+	'<div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">'
-						+	'<a href="javascript:void(0)" onclick="">'+result[i].video_ppt+'</a>'
+						+	'<a href="javascript:void(0)" onclick="lodingppt(&quot;'+result[i].video_ppt+'&quot;)">'+result[i].video_name+'课程文档</a>'
 						+'</div>'
 						+'</li>';
 					$("#kcmls").append(kcmls);
@@ -332,6 +378,36 @@ function initVideo(video_arr){
 		}
 	});
 
+}
+
+//下载课程文档
+function lodingppt(ppt){
+	var v_id=getUrlParam('cid');
+	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
+			window.location.href="logins.html";
+		
+	}
+	var data = {
+			user_id:$.cookie('id'),
+			video_id:getUrlParam('cid')
+	}
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/front/Videos/queryOrder",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(data), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			//console.log(result);
+			if(result!="success"){	
+				$("#myModal").modal('show');
+				return false;
+			}else{
+				window.open(ppt);
+			}
+		}
+	});
 }
 
 //弹出播放页面
@@ -355,12 +431,7 @@ function videourl(urls,id){
 		success : function(result) {
 			//console.log(result);
 			if(result!="success"){
-				if(confirm("您还没有购买课程,是否购买课程加入课程!")){
-					$("#myModal").modal('show');
-					return false;
-				}else{
-					return false;
-				}
+				$("#myModal").modal('show');
 			}else{
 				$("#myModalvideo").modal('show');
 				var videoObject = {
@@ -373,6 +444,8 @@ function videourl(urls,id){
 				};
 				var player=new ckplayer(videoObject);
 				//查询评论信息
+				var urlStr = urls.substring(31,urls.length-5);
+				$("#downloadvideo").attr('href','/videoServer/front/UserTest/download?fileName='+urlStr);
 				videoComment(v_id);
 			}
 		}
@@ -577,9 +650,71 @@ function custom(number){
 	//console.log(pages);
 	return false;
 }
+
+//评论视频
+$("#pinglbtn").click(function(){
+	var v_id=getUrlParam('cid');
+	var data = {
+			user_id:$.cookie('id'),
+			video_id:getUrlParam('cid'),
+			comment_text:$("#addpinglun").val()
+	}
+	$.ajax({
+		type : "POST",
+		url : url+"/videoServer/front/Videos/addComment",
+		contentType : 'application/json; charset=UTF-8',
+		data: JSON.stringify(data),  //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			$("#addpinglun").val("");
+			videoComment(v_id);
+		},
+		error:function(){
+			alert("error");
+		}
+	})
+
+})
+//评论分页
+var obj = {
+				curr:1,
+				limit:10,
+				totalRows:0
+	}
+var v_id=getUrlParam('cid');
+
+//分页
+function fenye(obj){
+	/* alert("进去分页");  */
+	//不显示首页尾页
+	layui.use(['laypage', 'layer'], function(){
+		var laypage = layui.laypage,
+		layer = layui.layer;
+		laypage.render({
+			elem: 'fenye',	
+			count: obj.totalRows,
+			skip:true,
+			groups:5,
+			first:1,
+			curr:obj.curr,
+			limit:obj.limit,
+			last:'尾页',
+			theme: '#1E9FFF',
+			jump:function(obj2,first){
+				//obj包含了当前分页的所有参数，比如
+				obj.curr=obj2.curr;
+				//首次不执行
+				if(!first){
+					//do something 
+					videoComment(v_id);
+				} 
+			},
+		});
+	})
+} 
+
 //查询评论信息
 function videoComment(video_id){
-	
 	var data ={
 			"video_id":video_id,
 			"pageSize":obj.limit,
@@ -590,17 +725,33 @@ function videoComment(video_id){
 		url : url+"/videoServer/front/Videos/queryComment",
 		contentType : 'application/json; charset=UTF-8',
 		data: JSON.stringify(data),  //传入组装的参数
+		/*data:{
+				"video_id":video_id,
+				"pageSize":obj.limit,
+				"currPage":obj.curr
+		},*/
 		dataType : "json",
 		success : function(result) {
-			
+			console.log("succ");
 			if(result.list.length<=0){
 				$("#pingliu").html("暂无评论信息");
 			}else{
+				console.log("succ22");
 				$("#pingliu").html("");
+				obj.totalRows = result.parameter.pages.totalRows;
+				fenye(obj);
+				var photo="";
+				if($.cookie("photo")!=""&&$.cookie("photo")!=null&&$.cookie("photo")!=undefined){			
+					console.log("succ");
+					photo=$.cookie("photo");
+				}else{		
+					photo="photos/LoginPhoto/txx.png";
+				}
+				console.log(photo);
 				for(var i=0;i<result.list.length;i++){
 					var pinglun = '<div class="media">'
 						  +	'<div class="media-left">'
-						  +		'<a href="#"> <img width="40px" height="40px" class="img-circle media-object" src="'+$.cookie('photo')+'" alt="..."></a>'
+						  +		'<a href="#"> <img id="imgt" width="40px" height="40px" class="img-circle media-object" src="'+photo+'" alt="..."></a>'
 						  +	'</div>'
 						  +	'<div class="media-body">'
 						  +		'<h4 class="media-heading">'
@@ -631,65 +782,5 @@ function videoComment(video_id){
 			}
 		}
 	});
-}
-//评论视频
-$("#pinglbtn").click(function(){
-	var v_id=getUrlParam('cid');
-	var data = {
-			user_id:$.cookie('id'),
-			video_id:getUrlParam('cid'),
-			comment_text:$("#addpinglun").val()
-	}
-	$.ajax({
-		type : "POST",
-		url : url+"/videoServer/front/Videos/addComment",
-		contentType : 'application/json; charset=UTF-8',
-		data: JSON.stringify(data),  //传入组装的参数
-		dataType : "json",
-		success : function(result) {
-			$("#addpinglun").val("");
-			videoComment(v_id);
-		},
-		error:function(){
-			alert("error");
-		}
-	})
 
-})
-//评论分页
-$(function () {
-	var obj = {
-				curr:1,
-				limit:10,
-				totalRows:0
-			}
-	//分页
-	function fenye(obj){
-		/* alert("进去分页");  */
-		//不显示首页尾页
-		layui.use(['laypage', 'layer'], function(){
-			var laypage = layui.laypage,
-			layer = layui.layer;
-			laypage.render({
-				elem: 'fenye',	
-				count: obj.totalRows,
-				skip:true,
-				groups:5,
-				first:1,
-				curr:obj.curr,
-				limit:obj.limit,
-				last:'尾页',
-				theme: '#1E9FFF',
-				jump:function(obj2,first){
-					//obj包含了当前分页的所有参数，比如
-					obj.curr=obj2.curr;
-					//首次不执行
-					if(!first){
-						//do something 
-						videoComment();
-					} 
-				},
-			});
-		})
-	} 
-})
+}

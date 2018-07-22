@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
-<title>Home</title>
+<title>个人中心</title>
     <script src="js/jquery-3.3.1.min.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<script src="js/bootstrap.min.js"></script>
@@ -274,7 +274,7 @@
 
 				<li class="dropdown" STYLE="margin-top: 5%">
 
-					<div class="form-group navbar-form navbar-left">
+					<!-- <div class="form-group navbar-form navbar-left">
 						<div class="input-group col-xs-12">
 							<div class="input-group-btn">
 								<select name="type" id="dropdown" class="form-control" style="width: auto;">
@@ -292,7 +292,7 @@
 								</button>
 							</span>
 						</div>
-					</div>
+					</div> -->
 				</li>
 			</ul>
 			<!-- 登录|注册 -->
@@ -339,9 +339,9 @@
 					<div class="col-md-8">
 						<div class="media">
 							<div class="media-left">
-								<span id="student_img"></span>
-								<a href="#" id="student_img"> 
-								</a>
+								<span><img id="student_img" src="photos/LoginPhoto/txx.png" width="160px" height="130px" /></span>
+								<!-- <a href="#" id="student_img"> 
+								</a> -->
 							</div>
 							<div class="media-body">
 								<h4 class="media-heading" style="font-weight: bold;"><span id="studentName"></span></h4>
@@ -382,7 +382,8 @@
 			</ul>
 
 			<div class="row">
-				<div class="col-md-9">
+				<div class="col-md-12">
+
 					<!-- 全部好课结束 -->
 					<!-- 私藏好课 -->
 					<div class="panel panel-default" id="schk">
@@ -672,7 +673,7 @@
 					</div>
 					<!-- 我的账户结束 -->
 				</div>
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-3">
 						<div class="panel panel-default">
 
@@ -680,12 +681,15 @@
 							<div class="col-md-12">&nbsp;</div>
 							
 								<div class="panel-body">
-									<!-- 推荐好课内容 -->
+
+									推荐好课内容
 									<div class="row" id="queryRecommendCourse"></div>
 								</div>
 						</div>
 					</div>
-				</div>
+
+				</div> -->
+
 			</div>
 		</div>
 		<div class="col-md-2"></div>
@@ -904,7 +908,7 @@
     $("#updateuser").click(function(){  	
      	var user=$("#name").val();//昵称
     	var photo=$("#photoimg").val();
-    	var url=photo.substr(photo.lastIndexOf("/")+1);//头像
+    	//var url=photo.substr(photo.lastIndexOf("/")+1);//头像
     	var email=$("#email").val();//email
     	var sex=$('input:radio:checked').val();
     	var area=$("#aboutme").val();
@@ -939,7 +943,7 @@
     	
     	var alluser={
     			"user_name":user,
-    			"user_photo":url,
+    			"user_photo":photo,
     			"user_sex":sex,
     			"user_self":area,
     			"user_truename":truename,
@@ -959,8 +963,12 @@
 	        	cache:false,
     			dataType:"json",
     			success:function(data){
-    				
     				alert(data);
+    				/* var expiresDate= new Date();
+	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000));
+    				$.cookie('photo',photo,{ expires:expiresDate,path:'/',secure: false}); */
+    				getmessage();
+					
     			},
     			error:function(){
     				alert("信息保存失败");
@@ -973,7 +981,10 @@
 	//var userphone=15036608954;
    	var userphone=$.cookie("phone");
   	//alert(userphone);
-    $(function(){	
+  	$(function(){
+  		getmessage();
+  	});
+    function getmessage(){	
     	$.ajax({
         	type:"POST",
         	url:url+"/videoServer/front/User/queryuser",
@@ -981,10 +992,13 @@
         	data:JSON.stringify({user_phone:userphone}),
         	dataType:"json",
         	success:function(data){
+        		var expiresDate= new Date();
+    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000));
+				$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false}); 
         		$("#name").val(data[0].user_name);//昵称
         		
         		$("#studentName").html(data[0].user_name);//个人中心页头借用用户昵称
-        		$("#student_img").html('<img src="'+data[0].user_photo+'" alt="..."style="width:160px;height:130px;" class="img-rounded lazy">');//个人中心页头借用用户图片
+        		//$("#student_img").html('<img src="'+data[0].user_photo+'" alt="..."style="width:160px;height:130px;" class="img-rounded lazy">');//个人中心页头借用用户图片
         		//alert(data[0].user_photo);
         		$("#email").val(data[0].user_email);//email
             	$("#aboutme").val(data[0].user_self);
@@ -1002,14 +1016,19 @@
             	} */
             	
             	if(data[0].user_photo!=null&&data[0].user_photo!=""){
+            		$("#student_img").attr("src",data[0].user_photo);//显示图片
+            		
+            	}
+            	if(data[0].user_photo!=null&&data[0].user_photo!=""){
             		$("#thumburlShow").attr("src",data[0].user_photo);//显示图片  
             	}
+            	auto();
         	},
         	error:function(){
         		
         	}
 		})		 
-    })
+    }
     //个人信息手机号更改
      $("#alterphone").click(function(){
     	var data={
@@ -1193,15 +1212,13 @@
 		退出按钮点击事件
 	*/
 	$("#exit").click(function(){
-		//window.location.href="index.html"; 
-		
 		$("#logsd").show();
 		$("#logImg").hide();
 		
 		$.cookie('id', '', { expires: -1 ,path:'/',secure: false});
 		$.cookie('phone', '', { expires: -1 ,path:'/',secure: false});
 		$.cookie('photo', '', { expires: -1,path:'/',secure: false }); 
-		 
+		window.location.href="index.html"; 
 	})
 	
 	//登录注册样式切换
@@ -1433,7 +1450,6 @@ function initBoutique(param){
 							+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result.list[i].teacher_id+'">'
 							+ result.list[i].teacher_name
 							+ '</a></p>'
-							
 							+ '</div>'
 							+ '<div class="col-md-6">'
 							+ '<p style="text-align:right;font-weight: bold;">'

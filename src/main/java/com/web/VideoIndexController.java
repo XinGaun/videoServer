@@ -36,6 +36,15 @@ public class VideoIndexController {
 		return indexService.queryCombo();
 	}
 	/**
+	 * 查询搜索内容
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryComboSearch",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryComboSearch(@RequestBody String data) {
+		return indexService.queryComboSearch(data);
+	}
+	/**
 	 * index查询更多课程
 	 * @param data
 	 * @return
