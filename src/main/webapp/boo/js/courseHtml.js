@@ -741,19 +741,14 @@ function videoComment(video_id){
 				obj.totalRows = result.parameter.pages.totalRows;
 				fenye(obj);
 				var photo="";
-				if($.cookie("photo")!=""&&$.cookie("photo")!=null&&$.cookie("photo")!=undefined){
-					//alert($.cookie("photo"));
-					//$("#imgt").attr("src",$.cookie("photo"));
+				if($.cookie("photo")!=""&&$.cookie("photo")!=null&&$.cookie("photo")!=undefined){			
 					console.log("succ");
 					photo=$.cookie("photo");
-				}else{
-					console.log("succ22");
-					//$("#imgt").attr("src","photos/LoginPhoto/txx.png");
+				}else{		
 					photo="photos/LoginPhoto/txx.png";
 				}
 				console.log(photo);
 				for(var i=0;i<result.list.length;i++){
-					
 					var pinglun = '<div class="media">'
 						  +	'<div class="media-left">'
 						  +		'<a href="#"> <img id="imgt" width="40px" height="40px" class="img-circle media-object" src="'+photo+'" alt="..."></a>'
@@ -789,65 +784,3 @@ function videoComment(video_id){
 	});
 
 }
-//评论视频
-$("#pinglbtn").click(function(){
-	var v_id=getUrlParam('cid');
-	var data = {
-			user_id:$.cookie('id'),
-			video_id:getUrlParam('cid'),
-			comment_text:$("#addpinglun").val()
-	}
-	$.ajax({
-		type : "POST",
-		url : url+"/videoServer/front/Videos/addComment",
-		contentType : 'application/json; charset=UTF-8',
-		data: JSON.stringify(data),  //传入组装的参数
-		dataType : "json",
-		success : function(result) {
-			$("#addpinglun").val("");
-			videoComment(v_id);
-		},
-		error:function(){
-			alert("error");
-		}
-	})
-
-})
-//评论分页
-$(function () {
-	var obj = {
-				curr:1,
-				limit:10,
-				totalRows:0
-			}
-	//分页
-	function fenye(obj){
-		/* alert("进去分页");  */
-		//不显示首页尾页
-		layui.use(['laypage', 'layer'], function(){
-			var laypage = layui.laypage,
-			layer = layui.layer;
-			laypage.render({
-				elem: 'fenye',	
-				count: obj.totalRows,
-				skip:true,
-				groups:5,
-				first:1,
-				curr:obj.curr,
-				limit:obj.limit,
-				last:'尾页',
-				theme: '#1E9FFF',
-				jump:function(obj2,first){
-					//obj包含了当前分页的所有参数，比如
-					obj.curr=obj2.curr;
-					//首次不执行
-					if(!first){
-						//do something 
-						videoComment();
-					} 
-				},
-			});
-		})
-	} 
-})
-
