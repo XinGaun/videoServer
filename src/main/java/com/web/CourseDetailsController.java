@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.service.CourseDetailsService;
 
 @Controller
@@ -59,5 +60,14 @@ public class CourseDetailsController {
 	@RequestMapping(value="/addCollection",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String addCollection(@RequestBody String data) {
 		return courseDetailsService.addCollection(data);
+	}
+	/**
+	 * 测试数据
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/loginss",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String loginss(@RequestBody String data) {
+		return JSON.toJSONString(data);
 	}
 }

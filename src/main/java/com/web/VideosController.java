@@ -1,5 +1,7 @@
 package com.web;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,5 +52,16 @@ public class VideosController {
 	@RequestMapping(value="/queryComment",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String queryComment(@RequestBody String data) {
 		return videosDaoService.queryComment(data);
+	}
+	
+	/**
+	 * 添加视频评论信息
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/addComment",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public int addComment(@RequestBody String data) {
+		System.out.println("safdsagd");
+		return videosDaoService.addComment(data);
 	}
 }

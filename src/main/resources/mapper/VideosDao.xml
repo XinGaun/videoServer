@@ -13,7 +13,7 @@
 		courses_tab.teacher_id=teacher_tab.teacher_id
 		LEFT JOIN video_form_tab ON video_form_tab.video_form_id =
 		courses_tab.video_form_id
-		WHERE 1=1 AND courses_status = 5
+		WHERE 1=1 AND courses_status = 8
 		<if test="keyword!=''">
 			AND courses_name like '%${keyword}%'
 		</if>
@@ -46,7 +46,7 @@
 		courses_tab.teacher_id=teacher_tab.teacher_id
 		LEFT JOIN video_form_tab ON video_form_tab.video_form_id =
 		courses_tab.video_form_id
-		WHERE 1=1 AND courses_status = 5
+		WHERE 1=1 AND courses_status = 8
 		<if test="keyword!=''">
 			AND courses_name like '%${keyword}%'
 		</if>
@@ -62,7 +62,7 @@
 		LEFT JOIN teacher_tab ON
 		teacher_tab.teacher_id=courses_tab.teacher_id
 		WHERE 1=1 AND
-		courses_status = 5 order by courses_date DESC LIMIT 0,3
+		courses_status = 8 order by courses_date DESC LIMIT 0,3
 	</select>
 	<!-- 查询用户是否有过下单记录 -->
 	<select id="queryOrder" resultType="int" parameterType="java.util.HashMap">
@@ -79,7 +79,12 @@
 		usr.user_name,tea.teacher_name
 		FROM comment_tab com LEFT JOIN user_tab usr ON com.user_id=usr.user_id
 		LEFT JOIN teacher_tab tea ON com.reply_teacher = tea.teacher_id WHERE
-		1=1 AND com.video_id = #{video_id} ORDER BY com.comment_date;
+		1=1 AND com.video_id = #{video_id} ORDER BY com.comment_date desc 
+		<if test="pages != null" >
+				<![CDATA[  limit #{pages.startNum},#{pages.endIndex}  ]]>
+		</if>
+		
+		;
 	</select>
 	<!-- 查询课程信息总数 -->
 	<select id="queryCommentCount" parameterType="java.util.HashMap" resultType="int">
@@ -89,4 +94,8 @@
 		LEFT JOIN teacher_tab tea ON com.reply_teacher = tea.teacher_id WHERE
 		1=1 AND com.video_id = #{video_id} ORDER BY com.comment_date;
 	</select>
+	<!-- 添加视频评论信息 -->
+	<insert id="addComment" parameterType="java.util.HashMap">
+		INSERT INTO comment_tab(video_id,user_id,comment_text,comment_date,comment_status) VALUES(#{videoId},#{userId},#{commentText},now(),10)
+	</insert>
 </mapper>

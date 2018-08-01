@@ -18,6 +18,7 @@ public class UserServiceImpls implements UserService{
 		// TODO Auto-generated method stub
 		//System.out.println("ut"+ut);
 		//System.out.println(ut.getUser_name());
+		int id=ut.getUser_id();
 		return aDao.addUser(ut);
 	}
 	//注册登录时根据手机号查找是否有该用户

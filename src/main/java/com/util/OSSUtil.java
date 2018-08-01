@@ -2,43 +2,33 @@
 
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.net.FileNameMap;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Date;
 import java.util.UUID;
 
-import org.apache.http.util.TextUtils;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.aliyun.oss.ClientConfiguration;
 import com.aliyun.oss.HttpMethod;
 import com.aliyun.oss.OSSClient;
-import com.aliyun.oss.event.ProgressEvent;
-import com.aliyun.oss.event.ProgressEventType;
-import com.aliyun.oss.event.ProgressListener;
 import com.aliyun.oss.model.GetObjectRequest;
-import com.aliyun.oss.model.PutObjectRequest;  
+import com.aliyun.oss.model.OSSObject;  
 
-public class OSSUtil implements ProgressListener{
-	private static String endpoint = "http://oss-cn-beijing.aliyuncs.com";  
+public class OSSUtil{
+	private static String endpoint = "http://oss-cn-beijing.aliyuncs.com";  //内网
+	//private static String endpoint =  "http://oss-cn-beijing-internal.aliyuncs.com"; //外网
 	private static String accessKeyId = "LTAIb7ibuLQWDSIm";
 	private static String accessKeySecret = "Pa3gsiNAHC2FlFc0oKgCO3j70R6m8m";
 	private static String serviceName = "http://www.niceyuwen.com";
 	private static String bucketName1 = "img-1-yudao";
 	private static String bucketName2 = "video-yudao-1";
 	private static String bucketName;
-	private final static String PREFIX_VIDEO="video/";
-	private long bytesWritten = 0;
-	private long totalBytes = -1;
 	private boolean succeed = false;
-	private String fileName = "";
-	private long size=0;
-	private long progress = 0;
 	String callbackUrl = "http://oss-cn-beijing.aliyuncs.com";
 	String key = "";
-
 	// 单例，只需要建立一次链接  
 	private static OSSClient client = null;  
 	// 是否使用另外一套本地账户  
@@ -102,51 +92,17 @@ public class OSSUtil implements ProgressListener{
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret); 
 		String filetype= fileName.substring(fileName.lastIndexOf("."));
 		String ossFileName = getOSSName(filetype);
+		isVideo(ossFileName);
+		System.out.println("start");
 		try {
-			ossClient.putObject(bucketName1,ossFileName, file);  
+			ossClient.putObject(bucketName,ossFileName, file);  
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
-
+		System.out.println("end");
 		ossClient.shutdown();  
-		return ossFileName;
-	}
-
-	// 带进度条的上传。视频
-	public String uploadJD(File file,String fileName,long fileSize) throws IOException {
-
-		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
-		this.size = fileSize;
-		String name = fileName.substring(0, fileName.lastIndexOf("."));
-		//System.out.println("ossutil "+name);
-		this.fileName = name;
-		ProgressSingleton.put(name+"status", "start");
-		ProgressSingleton.put(name+"size", size);
-		this.progress = 0;
-		//System.out.println(ProgressSingleton.get(name+"progress"));
-		ProgressSingleton.put(name+"progress", progress);
-		String filetype= fileName.substring(fileName.lastIndexOf("."));
-		String ossFileName = getOSSName(filetype);		
-		try {
-
-			ossClient.putObject(new PutObjectRequest(bucketName2, ossFileName,file).
-					<PutObjectRequest>withProgressListener(this));
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
-		//当文件上传完成之后，从单例中移除此次上传的状态信息
-		System.out.println("oss end");	
-		// 关闭OSSClient。
-		ProgressSingleton.put(name+"status", "end");
-		ProgressSingleton.remove(name + "size");
-		ProgressSingleton.remove(name + "progress");
-		//System.out.println(ProgressSingleton.get(name+"progress"));
-		System.out.println("oss end 2");
-		ossClient.shutdown();
-
+		System.out.println("stop");
 		return ossFileName;
 	}
 
@@ -157,6 +113,26 @@ public class OSSUtil implements ProgressListener{
 		ossClient.getObject(new GetObjectRequest(bucketName,ossFileName), new File(localFile));
 		System.out.println("end");
 		ossClient.shutdown();
+	}
+
+	//下载一个文件到本地  
+	public InputStream downloadInputStram(HttpServletRequest request, HttpServletResponse resp,String ossFileName) throws Exception{
+		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);  
+		isVideo(ossFileName);
+		OSSObject obj=ossClient.getObject(new GetObjectRequest(bucketName, ossFileName ));
+		InputStream input =obj.getObjectContent();
+		int index;
+		byte[] bytes = new byte[1024];
+		FileOutputStream downloadFile = new FileOutputStream("D://upload//"+ossFileName);
+		while ((index = input.read(bytes)) != -1) {
+			downloadFile.write(bytes, 0, index);
+			downloadFile.flush();
+		}
+		downloadFile.close();
+		input.close();
+		System.out.println("end");
+		ossClient.shutdown();
+		return input;
 	}
 	//删除一个文件  
 	public void delectFile(String yourObjectName) {
@@ -172,7 +148,7 @@ public class OSSUtil implements ProgressListener{
 		try {	        		
 			int ls = size;
 			int hour = (int) (ls/3600);
-				length.append(hour+":");			
+			length.append(hour+":");			
 			int minute = (int) (ls%3600)/60;
 			if( minute<10) {
 				length.append("0"+minute+":");
@@ -225,58 +201,12 @@ public class OSSUtil implements ProgressListener{
 	}
 
 	public void isVideo(String fileName) {
-		FileNameMap fileNameMap = URLConnection.getFileNameMap();
-        String type = fileNameMap.getContentTypeFor(fileName);
-        System.out.println(type);
-        if (!TextUtils.isEmpty(fileName)&&type.contains(PREFIX_VIDEO)){
-           System.out.println("video");
-        }else {
-        	System.out.println("no video");
-        }
-       
-//		if (fileName.endsWith("mp4") || fileName.endsWith("mp3") || fileName.endsWith("MP4")) {			
-//			bucketName = bucketName2;
-//		}else {				
-//			bucketName = bucketName1;
-//		};
-	}
 
-	@Override
-	public void progressChanged(ProgressEvent progressEvent) {
-		// TODO Auto-generated method stub
-		long bytes = progressEvent.getBytes();
-		ProgressEventType eventType = progressEvent.getEventType();
-		switch (eventType) {
-		case TRANSFER_STARTED_EVENT:
-			System.out.println("Start to upload......");
-			break;
-		case REQUEST_CONTENT_LENGTH_EVENT:
-			this.totalBytes = bytes;
-			System.out.println(this.totalBytes + " bytes in total will be uploaded to OSS");
-			break;
-
-		case REQUEST_BYTE_TRANSFER_EVENT:
-			progress += bytes;
-			ProgressSingleton.put(fileName+"progress", progress);			
-			this.bytesWritten += bytes;
-			if (this.totalBytes != -1) {
-				//int percent = (int)(this.bytesWritten * 100.0 / this.totalBytes);
-				//System.out.println(bytes + " bytes have been written at this time, upload progress: " + percent + "%(" + this.bytesWritten + "/" + this.totalBytes + ")");
-			} else {
-				//System.out.println(bytes + " bytes have been written at this time, upload ratio: unknown" + "(" + this.bytesWritten + "/...)");
-			}
-			break;
-		case TRANSFER_COMPLETED_EVENT:
-			this.succeed = true;
-			System.out.println("Succeed to upload, " + this.bytesWritten + " bytes have been transferred in total");
-			break;
-		case TRANSFER_FAILED_EVENT:
-			System.out.println("Failed to upload, " + this.bytesWritten + " bytes have been transferred");
-			break;
-		default:
-			break;
-		}
-
+		if(fileName.endsWith("mp4") || fileName.endsWith("mp3") || fileName.endsWith("MP4")) {			
+			bucketName = bucketName2;
+		}else {				
+			bucketName = bucketName1;
+		};
 	}
 
 	public boolean isSucceed() {
@@ -292,16 +222,19 @@ public class OSSUtil implements ProgressListener{
 		return uuid.replaceAll("-", "");
 	}
 	public static String getOSSName(String filetype) {
-		return getUUID()+filetype;
+		return getUUID()+filetype;	
 	}
 
 	public static void main(String[] args) throws Exception {
-//		OSSUtil oss = new OSSUtil();
-//		System.out.println(oss.getVideoTime(new File("D:\\filedownload\\2017高考语文秋季长线拯救班_第15节_20161124223004.mp4")));
-//		String filename = "yuwen.mp4";
-//		oss.isVideo(filename);
-//		String fileName = oss.upload(new File("D:\\filedownload\\演示文稿1.pptx"), "测试ppt1.pptx");
-//		String path = oss.getWebURL(fileName);
-//		System.out.println(oss.getVideoTime(Long.parseLong("5.12321")));
+		OSSUtil oss = new OSSUtil();
+		/*InputStream input = oss.downloadInputStram("ea5162fc3f7a4d07b93d0bf8564e05af.MP4");
+		System.out.println(input.toString());*/
+		oss.upload(new File("D:\\filedownload\\2017高考语文秋季长线拯救班_第15节_20161124223004.mp4"), "zftest.mp4");
+		//		System.out.println(oss.getVideoTime(new File("D:\\filedownload\\2017高考语文秋季长线拯救班_第15节_20161124223004.mp4")));
+		//		String filename = "yuwen.mp4";
+		//		oss.isVideo(filename);
+		//		String fileName = oss.upload(new File("D:\\filedownload\\演示文稿1.pptx"), "测试ppt1.pptx");
+		//		String path = oss.getWebURL(fileName);
+		//		System.out.println(oss.getVideoTime(Long.parseLong("5.12321")));
 	}
 }

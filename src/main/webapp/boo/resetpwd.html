@@ -46,7 +46,8 @@
 	 	margin: 1.5vh 0vw;
 	  	border:1px solid #888;
       	border-radius:4px;
-      	padding:5px 10px;
+      	padding:5px 5px;
+      	width:60%;
 	 }
 
 	 a:hover{
@@ -72,8 +73,9 @@
 	 	left:58vw;
 	 	z-index:2;
 	 }
-
+	
 	#foot{
+		background:gray;
 	 	width:100vw;
 	 	height:12vh;	
 	 	border-bottom:1px solid #999999;
@@ -194,7 +196,7 @@
 					<div>
 						<div  id="logsd">
 							<a href="logins.html" @click="change(1)" :class="flag==1?'active':''">登录</a>
-					    	<a href="rigester.html" @click="change(2)" :class="flag==2?'active':''">注册</a>
+					    	<!-- <a href="rigester.html" @click="change(2)" :class="flag==2?'active':''">注册</a> -->
 						</div>
 						<!-- 添加头像 -->
 						<div id="logImg" class="dropdown">             			
@@ -218,7 +220,7 @@
 
 	<!--  -->
 
-	<div id="center_body" style="width:40vw;margin:0vh 30vw;">
+	<div id="center_body" style="width:40vw;margin:0vh 30vw;height:70.9vh;">
 		<div >      
 			<div class="clo-md-12" >
 				<h3 style="margin-left:0vw;">修改密码</h3>
@@ -242,7 +244,7 @@
 							<!-- <input name="dx" id="vcode" placeholder="请输入短信验证码" type="text" class="form-control"/>		
 							<span>&nbsp;</span> -->
 						 	<input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" style="width:30%"/>
-	        				<input type="button" value="获取验证码" id="hmac" style="padding:7px;width:20%;float:right;font-size:1.8vh;margin-top:1.5vh;margin-right:13vw"/>
+	        				<input type="button" value="获取验证码" id="hmac" style="padding:7px;width:25%;float:right;font-size:1.8vh;margin-top:1.5vh;margin-right:12vw"/>
 						</td>
 					</tr>
 					<tr>
@@ -253,7 +255,7 @@
 		</div>
 	</div>
 	<!-- 尾部 -->
-	<footer style="background:gray;margin-bottom:0vh;height:21vh;">
+	<footer >
 		<div id="foot">
 			<div id="foot-head">
 				<div class="footli" id="footli">
@@ -269,7 +271,7 @@
   					</div>
 				</div>
 				<div class="footli" id="footimg">
-					<img :src="footimg"/>
+					<img :src="footimg">
 				</div>
 				<div class="footli" id="footma">
 					<span style="color:white;">关注我们：</span>
@@ -277,9 +279,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="foot-bot">
-			<div id="foot-bottom" style="color:white;">7*24小时服务电话：13623512127</div>
-		</div>
+		
 	</footer>
 
 <script type="text/javascript">
@@ -428,7 +428,7 @@
 		//alert($.cookie('photo'));
 
 		if($.cookie("phone")==null){//cookie过期
-			alert("登录过期，请重新登录");
+			//alert("登录过期，请重新登录");
 		
 		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
 			//alert("pp");
@@ -495,13 +495,7 @@
 	    sites: [
 	      { name: '关于我们' },
 	      { name: '|'},
-	      { name: '加入我们' },
-	      { name: '|'},
-	      { name: '合作申请' },
-	      { name: '|'},
 	      { name: '意见反馈' },
-	      { name: '|'},
-	      { name: '用户协议' }
 	    ]
 	  }
 	})

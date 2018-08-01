@@ -2,11 +2,12 @@ package com.service;
 
 public interface VideoIndexService {
 	//查询推荐课程
-	public String queryBoutiqueVideo();
+	public String queryBoutiqueVideo(String data);
 	//查询推荐套餐
 	public String queryCombo();
-	//查询课程点击榜
-	public String queryCourseClick();
-	//查询课程评分榜
-	public String queryCourseGrade();
+	//查询搜索内容
+	public String queryComboSearch(String data);
+	//查询所有的精品课程
+	public String queryBoutiqueVideoClick(String data);
+
 }

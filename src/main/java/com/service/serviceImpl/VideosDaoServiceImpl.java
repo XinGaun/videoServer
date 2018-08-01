@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.dao.VideosDao;
+import com.entity.CommentTab;
+import com.entity.UserTab;
 import com.service.VideosDaoService;
 import com.util.Count;
 import com.util.Page;
+import com.util.PaginationBean;
+import com.util.ResponseInfo;
 @SuppressWarnings("unchecked")
 @Service
 public class VideosDaoServiceImpl implements VideosDaoService {
@@ -47,11 +51,38 @@ public class VideosDaoServiceImpl implements VideosDaoService {
 	 */
 	@Override
 	public String queryComment(String data) {
+		ResponseInfo responseInfo = new ResponseInfo(1, "加载用户信息成功!");
+		PaginationBean pages = null;
+		int count = 0;
+		
 		HashMap<String,Object> hashmap = JSON.parseObject(data,HashMap.class);
 		hashmap= Page.page(hashmap);
+		System.out.println("hashmap"+hashmap);
+		Integer pageSize=(Integer) hashmap.get("pageSize");
+		Integer currPage=(Integer) hashmap.get("currPage");
+		if (pageSize != null && currPage != null) {
+			pages = new PaginationBean();
+			pages.setPageSize(pageSize);
+			pages.setCurrentPage(currPage);
+			count = videosDao.queryCommentCount(hashmap);
+			pages.setTotalRows(count);
+			pages.repaginate();
+			hashmap.put("pages", pages);
+		}
 		ArrayList<HashMap<String,Object>> list = videosDao.queryComment(hashmap);
-		int count = videosDao.queryCommentCount(hashmap);
+		responseInfo.setListObject(list);
+		responseInfo.setRetObject(pages);
+		
 		return JSON.toJSONString(Count.counts(list, count, hashmap,200,"queryComment success"));
 	}
-
+	/**
+	 * 添加视频评论信息
+	 */
+	@Override
+	public int addComment(String data) {
+		CommentTab ct = JSON.parseObject(data,CommentTab.class);
+		System.out.println(ct.getUserId()+";"+ct.getVideoId()+";"+ct.getCommentText());
+		return videosDao.addComment(ct);
+	}
+	
 }

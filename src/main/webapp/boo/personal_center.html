@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
-<title>Home</title>
+<title>个人中心</title>
     <script src="js/jquery-3.3.1.min.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<script src="js/bootstrap.min.js"></script>
@@ -163,7 +163,7 @@
 	 #logImg{
 	 	float:right;
 	 	border:1px solid red;
-	 	margin:-2vh 1vw 0vh 0vw;
+	 	margin:2vh 1vw 0vh 0vw;
 	 	display:none;
 	 }
 	 #loginrouter{
@@ -172,11 +172,11 @@
 	 	left:58vw;
 	 	z-index:2;
 	 }
-	 #log{
+	 /* #log{
 	 	margin-top:3.5vh;
 	 	margin-right:15vw;
 	 	
-	 }
+	 } */
 	 #boo{
 	 	position:relative;
 	 }
@@ -274,7 +274,7 @@
 
 				<li class="dropdown" STYLE="margin-top: 5%">
 
-					<div class="form-group navbar-form navbar-left">
+					<!-- <div class="form-group navbar-form navbar-left">
 						<div class="input-group col-xs-12">
 							<div class="input-group-btn">
 								<select name="type" id="dropdown" class="form-control" style="width: auto;">
@@ -292,7 +292,7 @@
 								</button>
 							</span>
 						</div>
-					</div>
+					</div> -->
 				</li>
 			</ul>
 			<!-- 登录|注册 -->
@@ -302,11 +302,10 @@
 						<div  id="logsd">
 
 							<a href="logins.html" @click="change(1)" :class="flag==1?'actives':''">登录</a>
-					    	<a href="rigester.html" @click="change(2)" :class="flag==2?'actives':''">注册</a>
+					    	<!-- <a href="rigester.html" @click="change(2)" :class="flag==2?'actives':''">注册</a> -->
 
 						</div>
-						<!-- 添加头像 -->
-					
+						
 						<!-- 添加头像 -->
 						<div id="logImg" class="dropdown">             			
 	                 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -340,8 +339,9 @@
 					<div class="col-md-8">
 						<div class="media">
 							<div class="media-left">
-								<a href="#" id="student_img"> 
-								</a>
+								<span><img id="student_img" src="photos/LoginPhoto/txx.png" width="160px" height="130px" /></span>
+								<!-- <a href="#" id="student_img"> 
+								</a> -->
 							</div>
 							<div class="media-body">
 								<h4 class="media-heading" style="font-weight: bold;"><span id="studentName"></span></h4>
@@ -362,7 +362,8 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<ul class="nav nav-tabs ">
-				<li role="presentation"><a href="video.html" id="qbhkclassify">全部好课</a></li>
+
+				<li role="presentation"><a href="index.html" id="qbhkclassify">全部好课</a></li>
 				<li role="presentation"><a href="#" id="schkcassify">收藏好课</a></li>
 				<li role="presentation"><a href="#" id="ddclassify">订单记录</a></li>
 				<li role="presentation"><a href="#" id="yhjclassify">优惠券</a></li>
@@ -381,7 +382,8 @@
 			</ul>
 
 			<div class="row">
-				<div class="col-md-9">
+				<div class="col-md-12">
+
 					<!-- 全部好课结束 -->
 					<!-- 私藏好课 -->
 					<div class="panel panel-default" id="schk">
@@ -671,7 +673,7 @@
 					</div>
 					<!-- 我的账户结束 -->
 				</div>
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-3">
 						<div class="panel panel-default">
 
@@ -679,18 +681,21 @@
 							<div class="col-md-12">&nbsp;</div>
 							
 								<div class="panel-body">
-									<!-- 推荐好课内容 -->
+
+									推荐好课内容
 									<div class="row" id="queryRecommendCourse"></div>
 								</div>
 						</div>
 					</div>
-				</div>
+
+				</div> -->
+
 			</div>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
 <!-- 尾部 -->
-	<footer style="background:gray;margin-bottom:0vh;height:21vh;">
+	<footer style="background:gray;">
 		<div id="foot">
 			<div id="foot-head">
 				<div class="footli" id="footli">
@@ -713,9 +718,6 @@
 					<img :src="footma" style="width:50px;height:50px;"/>
 				</div>
 			</div>
-		</div>
-		<div id="foot-bot">
-			<div id="foot-bottom" style="color:white;">7*24小时服务电话：13623512127</div>
 		</div>
 	</footer>
 
@@ -906,7 +908,7 @@
     $("#updateuser").click(function(){  	
      	var user=$("#name").val();//昵称
     	var photo=$("#photoimg").val();
-    	var url=photo.substr(photo.lastIndexOf("/")+1);//头像
+    	//var url=photo.substr(photo.lastIndexOf("/")+1);//头像
     	var email=$("#email").val();//email
     	var sex=$('input:radio:checked').val();
     	var area=$("#aboutme").val();
@@ -941,7 +943,7 @@
     	
     	var alluser={
     			"user_name":user,
-    			"user_photo":url,
+    			"user_photo":photo,
     			"user_sex":sex,
     			"user_self":area,
     			"user_truename":truename,
@@ -950,6 +952,7 @@
     			"user_qq":qq,
     	}
     	
+
     	if(typeof(user)!="undefined"&&typeof(email)!="undefined"){
     		
     		$.ajax({
@@ -960,8 +963,12 @@
 	        	cache:false,
     			dataType:"json",
     			success:function(data){
-    				
     				alert(data);
+    				/* var expiresDate= new Date();
+	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000));
+    				$.cookie('photo',photo,{ expires:expiresDate,path:'/',secure: false}); */
+    				getmessage();
+					
     			},
     			error:function(){
     				alert("信息保存失败");
@@ -974,7 +981,10 @@
 	//var userphone=15036608954;
    	var userphone=$.cookie("phone");
   	//alert(userphone);
-    $(function(){	
+  	$(function(){
+  		getmessage();
+  	});
+    function getmessage(){	
     	$.ajax({
         	type:"POST",
         	url:url+"/videoServer/front/User/queryuser",
@@ -982,11 +992,14 @@
         	data:JSON.stringify({user_phone:userphone}),
         	dataType:"json",
         	success:function(data){
+        		var expiresDate= new Date();
+    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000));
+				$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false}); 
         		$("#name").val(data[0].user_name);//昵称
         		
         		$("#studentName").html(data[0].user_name);//个人中心页头借用用户昵称
-        		$("#student_img").html('<img src="'+data[0].user_photo+'"  alt="..." style="width:100%;" class="img-rounded lazy">');//个人中心页头借用用户图片
-            	
+        		//$("#student_img").html('<img src="'+data[0].user_photo+'" alt="..."style="width:160px;height:130px;" class="img-rounded lazy">');//个人中心页头借用用户图片
+        		//alert(data[0].user_photo);
         		$("#email").val(data[0].user_email);//email
             	$("#aboutme").val(data[0].user_self);
             	$("#truename").val(data[0].user_truename);
@@ -1003,14 +1016,19 @@
             	} */
             	
             	if(data[0].user_photo!=null&&data[0].user_photo!=""){
+            		$("#student_img").attr("src",data[0].user_photo);//显示图片
+            		
+            	}
+            	if(data[0].user_photo!=null&&data[0].user_photo!=""){
             		$("#thumburlShow").attr("src",data[0].user_photo);//显示图片  
             	}
+            	auto();
         	},
         	error:function(){
         		
         	}
 		})		 
-    })
+    }
     //个人信息手机号更改
      $("#alterphone").click(function(){
     	var data={
@@ -1061,8 +1079,6 @@
 		        		  code+=Math.floor(Math.random()*10);
 		        	}
 		        	//alert(code);
-	           
-	          
 	           var str={
 	        	   	phone:userphone,
 	        		code:code,//随机验证码
@@ -1075,7 +1091,13 @@
 		        	    data:JSON.stringify(str),     			        	        	
 		        	    dataType:"json",
 		        	    success:function(data){
-		        	       //alert("验证码已发送，请注意查收！");		        	        		
+		        	       //alert("验证码已发送，请注意查收！");	
+		        	    	if(data=="error"){
+        	        			alert("验证码请求过于频繁！");
+        	        		}
+        	        		setTimeout(function(){ 
+        	        			code="";
+        	        		}, 60000);
 		        	     },
 		    	       	error:function(){
 		        	        		
@@ -1190,15 +1212,13 @@
 		退出按钮点击事件
 	*/
 	$("#exit").click(function(){
-		//window.location.href="index.html"; 
-		
 		$("#logsd").show();
 		$("#logImg").hide();
 		
 		$.cookie('id', '', { expires: -1 ,path:'/',secure: false});
 		$.cookie('phone', '', { expires: -1 ,path:'/',secure: false});
 		$.cookie('photo', '', { expires: -1,path:'/',secure: false }); 
-		 
+		window.location.href="index.html"; 
 	})
 	
 	//登录注册样式切换
@@ -1353,7 +1373,7 @@ function initRecommend(){
 			}
 			for (var i = 0; i < result.length; i++) {
 				var queryRecommendCourse = '<div class="col-md-12" >'
-					+ '<div class="thumbnail">'
+					+ '<div class="thumbnail" style="width:100%;">'
 					+ '<a href="course.html?cid='+result[i].courses_id+'">'
 					+ '<img data-original="'
 					+ result[i].courses_img_url
@@ -1425,20 +1445,26 @@ function initBoutique(param){
 							+ '<p style="color:green;font-weight: bold;font-size:18px;"><a href="course.html?cid='+result.list[i].courses_id+'">'
 							+ result.list[i].courses_name
 							+ '</a></p>'
-							+ '<p style="font-weight: bold;">'
-							+ result.list[i].courses_date
-							+ '</p>'
 							+ '<div class="col-md-6">'
+							+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+							+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result.list[i].teacher_id+'">'
+							+ result.list[i].teacher_name
+							+ '</a></p>'
 							+ '</div>'
-							+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" ><span class="glyphicon glyphicon-star" style="color:yellow;"></span>'
-							+ result.list[i].courses_grade
+							+ '<div class="col-md-6">'
+							+ '<p style="text-align:right;font-weight: bold;">'
+							+ result.list[i].courses_time
+							+ '</p>'
+							+ '</div>'
+							+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" ><span>3622人已购买</span>'
+							//+ result.list[i].courses_grade
 							+ '</p>'
 							+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
 							+ result.list[i].courses_pricemoney
 							+ '<span>￥</span></p>'
-							+ '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
+							/* + '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
 							+ result.list[i].courses_click
-							+ '</p>'
+							+ '</p>' */
 							+ '<p><button class="btn btn-info" style="width: 100%" onclick= "DeleteCancel('+result.list[i].courses_id+')">取消收藏</button></p>'
 							+ '</div>'
 							+ '</div>'
@@ -1479,13 +1505,7 @@ function initOrderBoutique(param){
 	    sites: [
 	      { name: '关于我们' },
 	      { name: '|'},
-	      { name: '加入我们' },
-	      { name: '|'},
-	      { name: '合作申请' },
-	      { name: '|'},
 	      { name: '意见反馈' },
-	      { name: '|'},
-	      { name: '用户协议' }
 	    ]
 	  }
 	})
@@ -1626,7 +1646,7 @@ function initOrderInformation(paramT){
 				+ '<td>《<a href="#">'
 				+result.list[i].courses_name
 				+'</a>》<br> 订单编号:<span>'
-				+result.list[i].order_id
+				+result.list[i].video_id
 				+'</span></td>'
 				+'<td>'
 				+result.list[i].order_pricemoney
@@ -1634,8 +1654,7 @@ function initOrderInformation(paramT){
 				+result.list[i].order_status
 				+'</td><td>'
 				+result.list[i].order_date
-				+'</td><td><a href="course.html?cid='+result.list[i].order_id+'">查看课程</a><br></td></tr>';
-				
+				+'</td><td><a href="course.html?cid='+result.list[i].video_id+'">查看课程</a><br></td></tr>';			
 				$("#OrderInformation").append(OrderInformation);
 			}
 			total=result.total;
