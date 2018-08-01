@@ -29,13 +29,9 @@ public class VideoTabServiceImpl implements VideoTabService{
 	private String url = "http://www.niceyuwen.com:2020/videoffmpeg/transcoding/transcodingm3u8";
 	@Override
 	@Transactional
-	public String uploadVideo(String videoName,String imageName,String pptName,int video_form_id,String video_introduce,MultipartFile video,MultipartFile image,MultipartFile ppt,int video_qz,int teacher_id,long size,String video_time) throws Exception {
+	public String uploadVideo(String videoName,String imageName,String pptName,int video_form_id,String video_introduce,String videoPath,MultipartFile image,MultipartFile ppt,int video_qz,int teacher_id,String video_time) throws Exception {
 		HashMap<String,String> data = new HashMap<>();
  
-		CommonsMultipartFile cf= (CommonsMultipartFile)video; //这个myfile是MultipartFile的
-		DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
-		File videoFile = fi.getStoreLocation(); 
-		String ossVideoName =ossUpload.upload(videoFile,videoName);
 		CommonsMultipartFile cf2= (CommonsMultipartFile)image; //这个myfile是MultipartFile的
 		DiskFileItem fi2 = (DiskFileItem)cf2.getFileItem(); 
 		File imageFile = fi2.getStoreLocation(); 
@@ -45,19 +41,25 @@ public class VideoTabServiceImpl implements VideoTabService{
 		DiskFileItem fi3 = (DiskFileItem)cf3.getFileItem(); 
 		File pptFile = fi3.getStoreLocation(); 
 		String osspptName = ossUpload.upload(pptFile,pptName);
-	
 		
-		String viderUrl = ossUpload.getWebURL(ossVideoName);
+		
 		String imageUrl = ossUpload.getWebURL(ossImageName);
 		String pptUrl = ossUpload.getWebURL(osspptName);
+		String videoSuffix = videoPath.substring(videoPath.lastIndexOf("."));
+		videoName = videoName+videoSuffix;
+		String ossVideoName = videoPath.substring(videoPath.lastIndexOf("video")+7);
+		System.out.println("succes");
 		
 		String path = "/oss/video/"+ossVideoName;
 		String fileName ="/oss/video/"+ossVideoName.substring(0, ossVideoName.lastIndexOf("."));
 		data.put("PATH",path);
 		data.put("fileName",fileName);
+		System.out.println(videoName);
+		System.out.println(path);
+		System.out.println(fileName);
 		HttpReq.httpRequest(url, "POST", JSON.toJSONString(data));
 		
-		String savevideoPath = viderUrl.substring(0, viderUrl.lastIndexOf("."))+".m3u8";
+		String savevideoPath = videoPath.substring(0, videoPath.lastIndexOf("."))+".m3u8";
 		System.out.println("video service"+path+"   "+fileName+"   "+savevideoPath+"   "+pptUrl+"   "+video_time);
 		createVideoTab(videoName,savevideoPath,imageUrl,pptUrl,video_introduce,video_form_id,teacher_id,video_qz,video_time);
 

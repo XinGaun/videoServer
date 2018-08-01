@@ -51,7 +51,9 @@ public class UserControllers {
 	@RequestMapping(value="/saveuser",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	public String saveuser(@RequestBody String data,HttpServletResponse response){
 		UserTab ut = JSON.parseObject(data,UserTab.class);
-		return JSON.toJSONString(aService.addUser(ut));
+		int a=aService.addUser(ut);
+		
+		return JSON.toJSONString(ut.getUser_id());
 	}
 	//根据手机号查找是否有该用户
 

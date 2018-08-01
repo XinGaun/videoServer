@@ -782,5 +782,4 @@ function videoComment(video_id){
 			}
 		}
 	});
-
 }

@@ -250,7 +250,7 @@
 					<div>
 						<div  id="logsd">
 							<a href="logins.html" @click="change(1)" :class="flag==1?'active':''">登录</a>
-					    	<a href="rigester.html" @click="change(2)" :class="flag==2?'active':''">注册</a>
+					    	<!-- <a href="rigester.html" @click="change(2)" :class="flag==2?'active':''">注册</a> -->
 						</div>
 						<!-- 添加头像 -->
 						<div id="logImg" class="dropdown">             			
@@ -275,9 +275,9 @@
 			<form>
 				<div id="header" style="margin-bottom:2vh">
 					<span>登录账户</span>
-					<a href="rigester.html" style="float:right;margin-right:1vw;">注册
+					<!-- <a href="rigester.html" style="float:right;margin-right:1vw;">注册
 						<img :src="rigesterUrl">
-					</a>
+					</a> -->
 				</div>
 				<div id="body">
 			        <label>
@@ -376,7 +376,7 @@
 		        			initss();
 		     	
 		        		}else{ 
-		        			alert("该号码未注册，请先注册！");
+		        			alert("首次登录，请用验证码登录！");
 		         		} 
 		        	},
 		        	error:function(){
@@ -420,8 +420,9 @@
 		        	data:JSON.stringify({user_phone:uname}),		        	
 		        	dataType:"json",
 		         	async : false,
-		        	success:function(data){	        	
-		        		if(data.length==1){	  
+		        	success:function(suc){
+		        		alert(suc.length);
+		        		if(suc.length==1){	  
 		        			var expiresDate= new Date();
 			    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
 			    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
@@ -430,7 +431,31 @@
 			    			isfirst(data[0].user_phone);
 		     	
 		        		}else{ 
-		        			alert("该号码未注册，请先注册！");
+		        			$.ajax({
+		        	        	type:"POST",
+		        	        	url:url+"/videoServer/front/User/saveuser",
+		        	        	data:JSON.stringify({user_phone:uname}),
+		        	        	contentType:'application/json;charset=UTF-8',
+		        	        	cache:false,
+		        	        	dataType:"json",
+		        	        	//dataType:"text",
+		        	        	success:function(data){
+		        	        		alert(data);
+		        	        		var expiresDate= new Date();
+					    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
+					    			$.cookie('id',data,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
+					    			$.cookie('phone',uname,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
+					        		//$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
+					    			//isfirst(data[0].user_phone);
+		        	        		//window.history.go(-1);
+		        	        		window.location.href="index.html"; 
+		        	        		
+		        	        	},
+		        	        	error:function(data){
+		        	        		alert("登录失败！");
+		        	        	
+		        	        	},
+		        	        });
 		         		} 
 		        	},
 		        	error:function(){
@@ -503,7 +528,7 @@
 	           var str={
 	        	   	phone:phonenumber,
 	        		code:code,//随机验证码
-	        		TemplateCode:"SMS_135036257"//模板信息
+	        		TemplateCode:"SMS_139981768"//模板信息
 	           }
 	           //alert("str"+JSON.stringify(str));
 		       /*  $.ajax({
@@ -642,7 +667,7 @@
 	new Vue({  
 		  el: '#logsd',  
 		  data: {  
-		   flag:1,//默认为百度添加 .active  
+		   flag:1,//默认为登录添加 .active  
 		  },  
 		  methods:{  
 		   change:function(a){//传入参数这里指1、2  

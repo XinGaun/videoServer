@@ -8,7 +8,6 @@
 .role {
 	display: none
 }
-
 </style>
 <link rel="stylesheet"
 	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -22,8 +21,8 @@
 	rel='stylesheet' type='text/css' />
 <link href="assets/js/dataTables/dataTables.bootstrap.css"
 	  rel="stylesheet" />
-<link href="css/common.css" rel="stylesheet" />
-<script src="js/jquery-2.1.4.js"></script>
+<!-- oss upload -->
+<link rel="stylesheet" type="text/css" href="ossupload/style.css"/>
 </head>
 <body>
 	<div id="wrapper">
@@ -353,7 +352,7 @@
 						</button>
 						<h4 class="modal-title" id="myModalLabel">课程视频添加</h4>
 					</div>
-					<form action="/videoServer/videoTab/uploadflv1.do" method="post"
+					<form action="/videoServer/videoTab/uploadflv.do" method="post"
 						enctype="multipart/form-data" id="dataForm">
 						<div style="width: 100%;">
 							<div
@@ -375,11 +374,21 @@
 									</select>
 								</div>
 							</div>
-							<div style="height: 50px; border: 1px solid #CADEFD">
+							<div style="height: 200px; border: 1px solid #CADEFD">
 								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">选择视频：</div>
-								<input type="file" name="video" id="video" accept="video/*">
-								 <video style="display:none;" controls="controls" oncanplaythrough="myFunction(this)" id="videoTime" ></video>								
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 200px; line-height: 200px;">选择视频：</div>
+								<!-- <input type="file" name="video" id="video" accept="video/*"> -->
+								<h4>您所选择的文件列表：</h4>
+                                <div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！</div>
+                                <br/>
+                                <div id="container">
+	                               <a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a>
+	                               <a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a>
+                               </div>
+                               <pre id="console"></pre>
+                               <p>&nbsp;</p>    
+                               <input style="display:none;" name="video" id="video">                       
+							    <video style="display:none;" controls="controls" oncanplaythrough="myFunction(this)" id="videoTime" ></video>								
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
@@ -415,15 +424,7 @@
 										name="video_introduce" id="video_introduce"></textarea>
 									<input type="hidden" name="video_introduce">
 								</div>
-							</div>
-							<div style="height: 100px; border: 1px solid #CADEFD">
-							<div style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 100px; line-height: 100px;">上传进度：</div>
-							<div style="height:100px">
-								上传进度：    <progress></progress><br>
-                                                          已上传大小：           <span id="progress">0 bytes</span><br>
-                                            <span id="info"></span>
-                            </div>
-                            </div>
+							</div>						
 					 </div>
 					</form>
 					 <div class="modal-footer">
@@ -527,7 +528,14 @@
 	<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 	<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
 	<script src="assets/js/common.js"></script>
-	<script>
+	<!-- oss upload -->
+	<script type="text/javascript" src="ossupload/lib/crypto1/crypto/crypto.js"></script>
+    <script type="text/javascript" src="ossupload/lib/crypto1/hmac/hmac.js"></script>
+    <script type="text/javascript" src="ossupload/lib/crypto1/sha1/sha1.js"></script>
+    <script type="text/javascript" src="ossupload/lib/base64.js"></script>
+    <script type="text/javascript" src="ossupload/lib/plupload-2.3.6/js/plupload.full.min.js"></script>
+    <script type="text/javascript" src="ossupload/upload.js"></script>
+<script>
 $(document).ready(function () {
     $('#dataTables-example').dataTable();
 });
@@ -602,14 +610,12 @@ function getId(obj){
 </script>
 
 	<script>	
-   var videoTime ;
-    $('#video').change(function(){
-    	$("#sub").attr('disabled',true);
-    	 var video = $('#video').prop("files")[0];	 
-    	 var url = URL.createObjectURL(video);  
-		 document.getElementById("videoTime").src = url;  		
-	 });  
-    
+	 $('#myModal').on('show.bs.modal', function (event) {      	   
+   	  $("#videoName").val("");
+   	  $("#video_introduce").val("");
+	  
+   }); 
+   var videoTime ;  
 	 function myFunction(ele) {
 		//var hour = parseInt((ele.duration)/3600);
 		//var minute = parseInt((ele.duration%3600)/60);
@@ -618,25 +624,13 @@ function getId(obj){
 		videoTime = parseInt(ele.duration);
 		$("#sub").attr('disabled',false);
 	  } ; 
-	  var totalSize = 0;
-	//绑定所有type=file的元素的onchange事件的处理函数
-	  $(':file').change(function() {
-	  var file = this.files[0]; //假设file标签没打开multiple属性，那么只取第一个文件就行了
-	  name = file.name;
-	  size = file.size;
-	  type = file.type;
-	  url = window.URL.createObjectURL(file); //获取本地文件的url，如果是图片文件，可用于预览图片
-	  $(this).next().html("文件名：" + name + " 文件类型：" + type + " 文件大小：" + size + " url: " + url);
-	  totalSize += size;
-	  $("#info").html("总大小: " + totalSize + "bytes");
-	  });
      $("#sub").click(function(){
 		//表单参数
 		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
 		 var videoName = $.trim($('#videoName').val());  
 		 var video_introduce =$.trim($("#video_introduce").val());
 		 var video_form_id = $.trim($("#kctype").val());
-		 var video = $('#video').prop("files")[0];	    
+		 var video = $('#video').val();	    
 		 var video_time=videoTime;
 		 var image = $('#image').prop("files")[0];
 		 var ppt = $('#ppt').prop("files")[0];
@@ -654,15 +648,7 @@ function getId(obj){
 			$.ajax({
 				type : 'post',
 				data : formData,
-				url : '/videoServer/videoTab/uploadflv.do',
-				xhr: function(){ //获取ajaxSettings中的xhr对象，为它的upload属性绑定progress事件的处理函数
-					var myXhr = $.ajaxSettings.xhr();
-					if(myXhr.upload){ //检查upload属性是否存在
-					//绑定progress事件的回调函数
-					myXhr.upload.addEventListener('progress',progressHandlingFunction, false);
-					} 
-					return myXhr; //xhr对象返回给jQuery使用
-				},
+				url : '/videoServer/videoTab/uploadflv.do',				
 				contentType: false, 
 		        processData: false, 
 				success : function(data){									
@@ -675,14 +661,6 @@ function getId(obj){
 			});	 
 			return false;	
       }); 
-   //上传进度回调函数：
-     function progressHandlingFunction(e) {    
-     if (e.lengthComputable) {
-     $('progress').attr({value : e.loaded, max : e.total}); //更新数据到进度条
-     var percent = e.loaded/e.total*100;
-     $('#progress').html(e.loaded + "/" + e.total+" bytes. " + percent.toFixed(2) + "%");
-     }
-     };
 	
 	$("#queryorder").click(function(){
 		$.ajax({
