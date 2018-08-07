@@ -81,6 +81,7 @@ public class VideoTabServiceImpl implements VideoTabService{
 		video.setVideo_ppt(pptUrl);
 		video.setVideo_qz(video_qz);
 		video.setVideo_time(videoTime);
+		System.out.println("succes2");
 		videoDao.createVideo(video);
 	}
 	@Override

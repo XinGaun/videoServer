@@ -142,7 +142,7 @@ function set_upload_param(up, filename, ret)
 var uploader = new plupload.Uploader({
 	runtimes : 'html5,flash,silverlight,html4',
 	browse_button : 'selectfiles', 
-    //multi_selection: false,
+    multi_selection: false,
 	container: document.getElementById('container'),
 	flash_swf_url : 'lib/plupload-2.1.2/js/Moxie.swf',
 	silverlight_xap_url : 'lib/plupload-2.1.2/js/Moxie.xap',
@@ -151,7 +151,7 @@ var uploader = new plupload.Uploader({
 	init: {
 		PostInit: function() {
 			document.getElementById('ossfile').innerHTML = '';
-			document.getElementById('postfiles').onclick = function() {
+			document.getElementById('sub').onclick = function() {
             set_upload_param(uploader, '', false);
             return false;
 			};
@@ -195,9 +195,55 @@ var uploader = new plupload.Uploader({
 		},
 
 		Error: function(up, err) {
+			documeng.getElementById('console').style.display="";
 			document.getElementById('console').appendChild(document.createTextNode("\nError xml:" + err.response));
 		}
 	}
 });
+videoTime = 0 ;  
+function myFunction(ele) {
+	//var hour = parseInt((ele.duration)/3600);
+	//var minute = parseInt((ele.duration%3600)/60);
+	//var second = Math.ceil(ele.duration%60);
+	//videoTime ="视频时长："+hour+"小时，"+minute+"分，"+second+"秒";
+	videoTime = parseInt(ele.duration);
+	submit();
+ } ; 
+function submit(){	 
+	//表单参数
+	 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
+	 var videoName = $.trim($('#videoName').val());  
+	 var video_introduce =$.trim($("#video_introduce").val());
+	 var video_form_id = $.trim($("#kctype").val());
+	 var video = $('#video').val();	    
+	 var video_time=videoTime;
+	 var image = $('#image').prop("files")[0];
+	 var ppt = $('#ppt').prop("files")[0];
+	 var video_qz = $.trim($("#video_qz").val());	
 
+	 formData.append("videoName",videoName);  
+	 formData.append("video", video);  
+	 formData.append("image", image);
+	 formData.append("video_introduce", video_introduce);
+	 formData.append("video_form_id", video_form_id);
+	 formData.append("ppt", ppt);	
+	 formData.append("video_qz", video_qz);
+	 formData.append("video_time", video_time);
+		//上传文件		
+		$.ajax({
+			type : 'post',
+			data : formData,
+			url : '/videoServer/videoTab/uploadflv.do',				
+			contentType: false, 
+	        processData: false, 
+			success : function(data){									
+				alert("上传成功");			   					
+		        $("#myModal").modal("hide");
+				window.location.href="";					
+			},error: function(){
+				 alert("submit error");
+			}				
+		});	 
+	   return false;
+ }; 
 uploader.init();

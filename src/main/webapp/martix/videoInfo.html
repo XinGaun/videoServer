@@ -6,8 +6,18 @@
 <title></title>
 <style type="text/css">
 .role {
-	display: none
+	display: none;
 }
+.wrap{
+    width: 150px; /* 设置需要固定的宽度 */
+    white-space: nowrap; /* 不换行 */
+    text-overflow: ellipsis;/*  超出部分用....代替 */
+    overflow: hidden; /* 超出隐藏 */
+} 
+table {
+table-layout: fixed;
+width: 1300px;
+};
 </style>
 <link rel="stylesheet"
 	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -320,11 +330,11 @@
 									<tr>
 										<!-- <td><input type="checkbox"/></td> -->
 										<td>序号</td>
-										<td style="width: 100px; white-space: nowrap;">视频名称</td>
-										<td>视频介绍</td>
+										<td >视频名称</td>
+										<td >视频介绍</td>
 										<td>视频类型</td>
-										<td>视频链接</td>
-										<td>视频PPT</td>
+										<td >视频链接</td>
+										<td >视频PPT</td>
 										<td>视频权重</td>
 										<td>视频时长</td>
 										<td>视频评分</td>
@@ -383,10 +393,10 @@
                                 <br/>
                                 <div id="container">
 	                               <a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a>
-	                               <a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a>
+	                              <!--  <a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a> -->
                                </div>
-                               <pre id="console"></pre>
-                               <p>&nbsp;</p>    
+                               <pre id="console" style="display:none;"></pre>
+                            <!--    <p>&nbsp;</p> -->    
                                <input style="display:none;" name="video" id="video">                       
 							    <video style="display:none;" controls="controls" oncanplaythrough="myFunction(this)" id="videoTime" ></video>								
 							</div>
@@ -545,9 +555,10 @@ $(function(){
 	$.ajax({
 		type : 'post',
 		url : '/videoServer/videoTab/getVideoTabs.do',
-		success : function(data){
+		success : function(data){	
 			for(var i=0;i<data.length;i++){
-				$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_ppt+"</td><td>"+data[i].video_qz+"</td><td>"+data[i].video_time+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateVideoModal' data-videoid='"+data[i].video_id+"'>视频修改</button></td></tr>")
+				var videoformname = data[i].video_form_class+data[i].video_form_name;
+				$("#tb").append("<tr><td>"+(i+1)+"</td><td class='wrap' title='"+data[i].video_name+"'>"+data[i].video_name+"</td><td class='wrap' title='"+data[i].video_introduce+"'>"+data[i].video_introduce+"</td><td>"+videoformname+"</td><td class='wrap' title='"+data[i].video_url+"'>"+data[i].video_url+"</td><td class='wrap' title='"+data[i].video_ppt+"'>"+data[i].video_ppt+"</td><td>"+data[i].video_qz+"</td><td>"+data[i].video_time+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateVideoModal' data-videoid='"+data[i].video_id+"'>视频修改</button></td></tr>")
 			}
 			$("#teacher_id").val(data[0].teacher_id);
 		},error: function(){
@@ -608,60 +619,12 @@ function getId(obj){
     })
 }	
 </script>
-
-	<script>	
+<script>	
 	 $('#myModal').on('show.bs.modal', function (event) {      	   
    	  $("#videoName").val("");
    	  $("#video_introduce").val("");
 	  
-   }); 
-   var videoTime ;  
-	 function myFunction(ele) {
-		//var hour = parseInt((ele.duration)/3600);
-		//var minute = parseInt((ele.duration%3600)/60);
-		//var second = Math.ceil(ele.duration%60);
-		//videoTime ="视频时长："+hour+"小时，"+minute+"分，"+second+"秒";
-		videoTime = parseInt(ele.duration);
-		$("#sub").attr('disabled',false);
-	  } ; 
-     $("#sub").click(function(){
-		//表单参数
-		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
-		 var videoName = $.trim($('#videoName').val());  
-		 var video_introduce =$.trim($("#video_introduce").val());
-		 var video_form_id = $.trim($("#kctype").val());
-		 var video = $('#video').val();	    
-		 var video_time=videoTime;
-		 var image = $('#image').prop("files")[0];
-		 var ppt = $('#ppt').prop("files")[0];
-		 var video_qz = $.trim($("#video_qz").val());	
-	
-		 formData.append("videoName",videoName);  
-		 formData.append("video", video);  
-		 formData.append("image", image);
-		 formData.append("video_introduce", video_introduce);
-		 formData.append("video_form_id", video_form_id);
-		 formData.append("ppt", ppt);	
-		 formData.append("video_qz", video_qz);
-		 formData.append("video_time", video_time);
-			//上传文件		
-			$.ajax({
-				type : 'post',
-				data : formData,
-				url : '/videoServer/videoTab/uploadflv.do',				
-				contentType: false, 
-		        processData: false, 
-				success : function(data){									
-					alert("上传成功");			   					
-			        $("#myModal").modal("hide");
-					window.location.href="";					
-				},error: function(){
-					 alert("submit error");
-				}				
-			});	 
-			return false;	
-      }); 
-	
+   }); 	
 	$("#queryorder").click(function(){
 		$.ajax({
 			type : 'post',
@@ -673,7 +636,8 @@ function getId(obj){
 			 	}else{
 			 		$("#tb  tr:not(:first)").html("");
 			 		for(var i=0;i<data.length;i++){
-						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_name+"</td><td>"+data[i].video_introduce+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].video_url+"</td><td>"+data[i].video_ppt+"</td><td>"+data[i].video_qz+"</td><td>"+data[i].video_time+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateVideoModal' data-videoid='"+data[i].video_id+"'>视频修改</button></td></tr>")
+			 			var videoformname = data[i].video_form_class+data[i].video_form_name;
+						$("#tb").append("<tr><td>"+(i+1)+"</td><td class='wrap'>"+data[i].video_name+"</td><td class='wrap'>"+data[i].video_introduce+"</td><td>"+videoformname+"</td><td class='wrap'>"+data[i].video_url+"</td><td class='wrap'>"+data[i].video_ppt+"</td><td>"+data[i].video_qz+"</td><td>"+data[i].video_time+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateVideoModal' data-videoid='"+data[i].video_id+"'>视频修改</button></td></tr>")
 					}
 				}
 			},error: function(){

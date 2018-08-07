@@ -9,10 +9,18 @@
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
    	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
-   <!--  <style type="text/css">
-		table{table-layout:fixed;}
-		table td{word-wrap:break-word;}
-	</style> -->
+<style type="text/css">
+.wrap{
+    width: 150px; /* 设置需要固定的宽度 */
+    white-space: nowrap; /* 不换行 */
+    text-overflow: ellipsis;/*  超出部分用....代替 */
+    overflow: hidden; /* 超出隐藏 */
+} 
+table {
+table-layout: fixed;
+width: 1300px;
+};
+</style>
 </head>
 <body>
     <div id="wrapper">
@@ -515,12 +523,13 @@
 		$.ajax({
 			type : 'post',
 			url : '/videoServer/coursesTab/getTabList.do',
-			success : function(data){			
+			success : function(data){	
 				for(var i=0;i<data.length;i++){			
+					var videoformname = data[i].video_form_class+data[i].video_form_name;
 					if(data[i].courses_status=='8'){
-						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td><td>"+data[i].courses_qz+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateClassModal'  data-upcourseid='"+data[i].courses_id+"'>视频修改</button></td><td onclick='delet(this)'><input type='button' value='下线'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
+						$("#tb").append("<tr><td>"+(i+1)+"</td><td class='wrap' title='"+data[i].courses_name+"'>"+data[i].courses_name+"</td><td>"+videoformname+"</td><td class='wrap' title='"+data[i].courses_introduce+"'>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td class='wrap' title='"+data[i].courses_img_url+"'>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td><td>"+data[i].courses_qz+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateClassModal'  data-upcourseid='"+data[i].courses_id+"'>视频修改</button></td><td onclick='delet(this)'><input type='button' value='下线'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
 					}else if(data[i].courses_status=='9'){
-						$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td><td>"+data[i].courses_qz+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateClassModal'  data-upcourseid='"+data[i].courses_id+"'>视频修改</button></td><td onclick='delet(this)'><input type='button' value='上线'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
+						$("#tb").append("<tr><td>"+(i+1)+"</td><td class='wrap' title='"+data[i].courses_name+"'>"+data[i].courses_name+"</td><td>"+videoformname+"</td><td class='wrap' title='"+data[i].courses_introduce+"'>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td class='wrap' title='"+data[i].courses_img_url+"'>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td><td>"+data[i].courses_qz+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateClassModal'  data-upcourseid='"+data[i].courses_id+"'>视频修改</button></td><td onclick='delet(this)'><input type='button' value='上线'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
 					}
 				}
 				$("#teacher_id").val(data[0].teacher_id);
@@ -714,10 +723,11 @@
 			 	}else{
 			 		$("#tb  tr:not(:first)").html("");
 			 		for(var i=0;i<data.length;i++){
+			 			var videoformname = data[i].video_form_class+data[i].video_form_name;
 						if(data[i].courses_status=='8'){
-							$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td><td>"+data[i].courses_qz+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateClassModal' data-upcourseid='"+data[i].courses_id+"'>视频修改</button></td><td onclick='delet(this)'><input type='button' value='下线'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
+							$("#tb").append("<tr><td>"+(i+1)+"</td><td class='wrap' title='"+data[i].courses_name+"'>"+data[i].courses_name+"</td><td>"+videoformname+"</td><td class='wrap' title='"+data[i].courses_introduce+"'>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td class='wrap' title='"+data[i].courses_img_url+"'>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td><td>"+data[i].courses_qz+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateClassModal' data-upcourseid='"+data[i].courses_id+"'>视频修改</button></td><td onclick='delet(this)'><input type='button' value='下线'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
 						}else if(data[i].courses_status=='9'){
-							$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].courses_name+"</td><td>"+data[i].video_form_id+"</td><td>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td><td>"+data[i].courses_qz+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateClassModal' data-upcourseid='"+data[i].courses_id+"'>视频修改</button></td><td onclick='delet(this)'><input type='button' value='上线'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
+							$("#tb").append("<tr><td>"+(i+1)+"</td><td class='wrap' title='"+data[i].courses_name+"'>"+data[i].courses_name+"</td><td>"+videoformname+"</td><td class='wrap' title='"+data[i].courses_introduce+"'>"+data[i].courses_introduce+"</td><td>"+data[i].courses_video+"</td><td class='wrap' title='"+data[i].courses_img_url+"'>"+data[i].courses_img_url+"</td><td>"+data[i].courses_pricemoney+"</td><td>"+data[i].courses_grade+"</td><td>"+data[i].courses_click+"</td><td>"+data[i].courses_qz+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateClassModal' data-upcourseid='"+data[i].courses_id+"'>视频修改</button></td><td onclick='delet(this)'><input type='button' value='上线'><input type='hidden' id='a' value='"+data[i].courses_id+"'/></td></tr>")
 						}
 					}
 				}

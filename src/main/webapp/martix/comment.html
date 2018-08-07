@@ -572,11 +572,14 @@ $(function(){
                     
                     { 
      					"data": "video_name",
-     				 	"sDefaultContent":"",     			
+     				 	"sDefaultContent":"",     	
+     				 	"sWidth":"20%",
      				},     	
      				{ 
      					"data": "comment_text",
-     					 "sDefaultContent":"",     				
+     					
+     					 "sDefaultContent":"", 
+     					 "sWidth":"20%",
      				},
      				{ 
      					"data": "comment_date",
@@ -614,7 +617,8 @@ $(function(){
      				{  
      					"data": "reply_text" ,
      					"orderable" : false, // 禁用排序  
-                        "sDefaultContent" : "",                    
+                        "sDefaultContent" : "",              
+                        "sWidth":"20%",
                          "render" : function(data, type, full, meta) {  
                             if(data=="" ||data == null ){                                  
                  				data = null;

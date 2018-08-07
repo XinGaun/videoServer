@@ -110,7 +110,7 @@ public class coursesTabServiceImpl implements coursesTabService{
 		c.setCourses_introduce(courses_introduce);
 		c.setCourses_video(courses_video);
 		c.setCourses_img_url(imageUrl);
-//		c.setTeacher_id(teacher_id);
+		c.setTeacher_id(teacher_id);
 		c.setCourses_pricemoney(courses_pricemoney);
 		c.setCourses_qz(courses_qz);
 		c.setCourses_time(Integer.toString(coursesTimeInt));

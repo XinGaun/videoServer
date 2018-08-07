@@ -15,6 +15,7 @@ public class coursesTab {
 	int courses_status;
 	int video_form_id;
 	String video_form_name;
+	String video_form_class;
 	String courses_date;
 	String courses_time;
 	int courses_qz;
@@ -45,6 +46,12 @@ public class coursesTab {
 		this.video_form_name = video_form_name;
 	}
 
+	public String getVideo_form_class() {
+		return video_form_class;
+	}
+	public void setVideo_form_class(String video_form_class) {
+		this.video_form_class = video_form_class;
+	}
 	public int getCourses_id() {
 		return courses_id;
 	}

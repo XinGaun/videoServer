@@ -8,7 +8,9 @@
 		values(#{video_grade,jdbcType=INTEGER},#{video_img_url,jdbcType=VARCHAR},#{video_introduce,jdbcType=VARCHAR},#{video_name,jdbcType=VARCHAR},#{video_url,jdbcType=VARCHAR},now(),#{teacher_id,jdbcType=INTEGER},#{video_form_id,jdbcType=INTEGER},#{video_qz,jdbcType=INTEGER},#{video_ppt,jdbcType=VARCHAR},#{video_time,jdbcType=VARCHAR})
 	</insert>
 	<select id="getVideoList" resultType="com.entity.VideoTab">
-		select * from video_tab where video_status=5 and teacher_id=#{teacher_id,jdbcType=INTEGER} order by video_qz desc
+		SELECT v.video_id,v.video_grade,v.video_img_url,v.video_introduce,v.video_name,v.video_url,v.video_date,v.teacher_id,v.video_form_id,vf.video_form_name,vf.video_form_class,v.video_qz,v.video_ppt,v.video_time,v.video_click FROM
+		video_tab v LEFT JOIN video_form_tab vf ON v.video_form_id = vf.video_form_id where v.video_status=5 and v.teacher_id=#{teacher_id,jdbcType=INTEGER} order by v.video_qz desc
+		
 	</select>
 	<select id="getVideoById" resultType="com.entity.VideoTab">
 		select * from video_tab where video_id=#{id,jdbcType=INTEGER} 

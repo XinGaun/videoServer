@@ -4,6 +4,8 @@ package com.entity;
 public class VideoTab {
 	Integer video_id;
 	Integer video_form_id;
+	String  video_form_name;
+	String video_form_class;
 	Integer teacher_id;
 	String video_name;
 	String video_introduce;
@@ -23,6 +25,20 @@ public class VideoTab {
 	public void setVideo_time(String video_time) {
 		this.video_time = video_time;
 	}	
+	
+	public String getVideo_form_name() {
+		return video_form_name;
+	}
+	public void setVideo_form_name(String video_form_name) {
+		this.video_form_name = video_form_name;
+	}
+	
+	public String getVideo_form_class() {
+		return video_form_class;
+	}
+	public void setVideo_form_class(String video_form_class) {
+		this.video_form_class = video_form_class;
+	}
 	public int getVideo_qz() {
 		return video_qz;
 	}
