@@ -8,16 +8,19 @@
 .role {
 	display: none;
 }
-.wrap{
-    width: 150px; /* 设置需要固定的宽度 */
-    white-space: nowrap; /* 不换行 */
-    text-overflow: ellipsis;/*  超出部分用....代替 */
-    overflow: hidden; /* 超出隐藏 */
-} 
+
+.wrap {
+	width: 150px; /* 设置需要固定的宽度 */
+	white-space: nowrap; /* 不换行 */
+	text-overflow: ellipsis; /*  超出部分用....代替 */
+	overflow: hidden; /* 超出隐藏 */
+}
+
 table {
-table-layout: fixed;
-width: 1300px;
-};
+	table-layout: fixed;
+	width: 1300px;
+}
+;
 </style>
 <link rel="stylesheet"
 	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -30,9 +33,8 @@ width: 1300px;
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css' />
 <link href="assets/js/dataTables/dataTables.bootstrap.css"
-	  rel="stylesheet" />
-<!-- oss upload -->
-<link rel="stylesheet" type="text/css" href="ossupload/style.css"/>
+	rel="stylesheet" />
+
 </head>
 <body>
 	<div id="wrapper">
@@ -227,7 +229,6 @@ width: 1300px;
 		<!--/. NAV TOP  -->
 		<nav class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
-
 				<ul class="nav" id="main-menu">
 					<li class="role" style="display: none;"><a href="#"><i
 							class="fa fa-sitemap"></i>权限管理<span class="fa arrow"></span></a>
@@ -239,9 +240,9 @@ width: 1300px;
 							<li><a href="user_list.html"><i class="fa fa-user"></i>
 									用户管理</a></li>
 						</ul></li>
-						<li><a href="videoformtab.html" ><i
+					<li><a href="videoformtab.html" class="active-menu"><i
 							class="fa fa-table"></i>视频类型管理</a></li>
-					<li><a href="videoInfo.html" class="active-menu"><i
+					<li><a href="videoInfo.html" ><i
 							class="fa fa-table"></i>视频管理</a></li>
 					<li><a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
 					</li>
@@ -280,18 +281,17 @@ width: 1300px;
 									<tr>
 										<td>
 											<div class="input-group" width="100%">
-												<span class="input-group-addon">视频名称</span> <input
-													type="text" class="form-control" placeholder="请输入视频名称"
-													id="video_name1">
+												<span class="input-group-addon">视频类型名称</span> <input
+													type="text" class="form-control" placeholder="请输入类型名称"
+													id="video_form_name_sea">
 											</div>
 										</td>
 										<td>
 											<div class="input-group" width="100%">
-												<span class="input-group-addon">视频类型</span> <select
-													class="form-control"
-													style="width: 200px; text-align: center;" id="video_type">
-
-												</select>
+												<span class="input-group-addon">视频类型年级</span> 
+												<input
+													type="text" class="form-control" placeholder="请输入类型年级"
+													id="video_form_class_sea">
 											</div>
 										</td>
 									</tr>
@@ -327,30 +327,20 @@ width: 1300px;
 
 							<div class="panel-body"
 								style="overflow-x: scroll; height: 330px; width: 99%;">
-								<table id="tb" class='table table-bordered'
-									style="width: 1300px;">
+								<table id="tb" class='table table-bordered'>
 									<tr>
-										<!-- <td><input type="checkbox"/></td> -->
 										<td>序号</td>
-										<td >视频名称</td>
-										<td >视频介绍</td>
-										<td>视频类型</td>
-										<td >视频链接</td>
-										<td >视频PPT</td>
-										<td>视频权重</td>
-										<td>视频时长</td>
-										<td>视频评分</td>
-										<td>点击次数</td>
-										<td>上传时间</td>
-										<td>视频修改</td>
+										<td>视频类型名称</td>
+										<td>视频年级名称</td>									
+										<td>视频类型修改</td>
+										<td>视频类型状态</td>
 									</tr>
 								</table>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<input type="hidden" id="teacher_id" />
+			</div>		
 		</div>
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -362,96 +352,45 @@ width: 1300px;
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title" id="myModalLabel">课程视频添加</h4>
+						<h4 class="modal-title" id="myModalLabel">课程视频类型添加</h4>
 					</div>
 					<form action="/videoServer/videoTab/uploadflv.do" method="post"
 						enctype="multipart/form-data" id="dataForm">
 						<div style="width: 100%;">
-							<div
-								style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
+							<div style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频标题：</div>
+									style="width: 25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型名称：</div>
 								<div
-									style="width: 200px; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
+									style="width: 75%; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
 									<input type="text" style="width: 100%; height: 100%;"
-										name="videoName" id="videoName">
+										name="video_form_name_ins" id="video_form_name_ins">
 								</div>
-								<div
-									style="width: 100px;; background: #D9ECFF; float: left; text-align: right; height: 50px; line-height: 50px;">视频类型：</div>
-								<div
-									style="width: 130px; height: 50px; float: left; border: 1px solid #CADEFD;">
-									<select style="width: 100%; text-align: center;" id="kctype">
-
-									</select>
-								</div>
-							</div>
-							<div style="height: 200px; border: 1px solid #CADEFD">
-								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 200px; line-height: 200px;">选择视频：</div>
-								<!-- <input type="file" name="video" id="video" accept="video/*"> -->
-								<h4>您所选择的文件列表：</h4>
-                                <div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！</div>
-                                <br/>
-                                <div id="container">
-	                               <a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a>
-	                              <!--  <a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a> -->
-                               </div>
-                               <pre id="console" style="display:none;"></pre>
-                            <!--    <p>&nbsp;</p> -->    
-                               <input style="display:none;" name="video" id="video">                       
-							    <video style="display:none;" controls="controls" oncanplaythrough="myFunction(this)" id="videoTime" ></video>								
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频封面：</div>
-								<input type="file" name="image" id="image" accept="image/*">
-							</div>
-							<div style="height: 50px; border: 1px solid #CADEFD">
+									style="width: 25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型年级：</div>
 								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频PPT：</div>
-								<input type="file" name="ppt" id="ppt">
-							</div>
-							<div style="height: 50px; border: 1px solid #CADEFD">
-								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频权重：</div>
-								<div style="width: 440px; height: 50px; float: left;">
-									<div style="margin-top: 25px; margin-left: 25px;">
-										<input type="button" style="border-right: 0px;"
-											onClick="disNum(this)" value="-"><input type="text"
-											value="0" id="video_qz"
-											style="width: 30px; text-align: center"
-											onkeyup="value=value.replace(/[^\d]/g,'1')" /><input
-											type="button" value="+" style="border-left: 0px;"
-											onClick="incNum(this)">
-									</div>
+									style="width: 75%; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
+									<input type="text" style="width: 100%; height: 100%;"
+										name="video_form_class_ins" id="video_form_class_ins">
 								</div>
 							</div>
-							<div style="height: 100px; border: 1px solid #CADEFD">
-								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 100px; line-height: 100px;">视频介绍：</div>
-								<div
-									style="width: 440px; height: 100px; float: left; border: 1px solid #CADEFD;">
-									<textarea style="width: 100%; height: 100%;"
-										name="video_introduce" id="video_introduce"></textarea>
-									<input type="hidden" name="video_introduce">
-								</div>
-							</div>						
-					 </div>
+						</div>
 					</form>
-					 <div class="modal-footer">
+					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"
 							id="quxiao">取消</button>
 						<button type="button" class="btn btn-primary" id="sub">提交</button>
-					</div> 				
+					</div>
 				</div>
 			</div>
 		</div>
 		<!-- /model -->
-		
+
 		<!-- Modal2 -->
-		<div class="modal fade" id="updateVideoModal" tabindex="-1" role="dialog"
-			aria-labelledby="updateVideoModalLabel">
+		<div class="modal fade" id="updateModal" tabindex="-1"
+			role="dialog" aria-labelledby="updateModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -459,65 +398,38 @@ width: 1300px;
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title" id="myModalLabel">课程视频修改</h4>
+						<h4 class="modal-title" id="myModalLabel">课程视频类型修改</h4>
 					</div>
-					<form action="/videoServer/videoTab/updetVideoById.do" method="post"
-						enctype="multipart/form-data" id="updatedataForm">
+					<form action="/videoServer/videoTab/updetVideoById.do"
+						method="post" enctype="multipart/form-data" id="updatedataForm">
 						<div style="width: 100%;">
-							<div
-								style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
+							<div style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频标题：</div>
+									style="width: 25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型名称：</div>
 								<div
-									style="width: 200px; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
+									style="width: 75%; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
 									<input type="text" style="width: 100%; height: 100%;"
-										name="videoName" id="updatevideoName">
-								     <input type="hidden" id="updatevideoId" />
-								   
+										name="video_form_name_upd" id="video_form_name_upd">
 								</div>
+								<input type="hidden" id="video_form_id_upd">
+							</div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
-									style="width: 100px;; background: #D9ECFF; float: left; text-align: right; height: 50px; line-height: 50px;">视频类型：</div>
+									style="width:  25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD;  text-align: right; height: 50px; line-height: 50px;">视频类型年级：</div>
 								<div
-									style="width: 130px; height: 50px; float: left; border: 1px solid #CADEFD;">
-									<select style="width: 100%; text-align: center;" id="updatekctype">
-
-									</select>
+									style="width: 75%; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
+									<input type="text" style="width: 100%; height: 100%;"
+										name="video_form_class_upd" id="video_form_class_upd">
 								</div>
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频封面：</div>
-								<input type="file" name="updateimage" id="updateimage" accept="image/*">
-							</div>
-							<div style="height: 50px; border: 1px solid #CADEFD">
+									style="width:  25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型状态：</div>
 								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频PPT：</div>
-								<input type="file" name="updateppt" id="updateppt">
-							</div>
-							<div style="height: 50px; border: 1px solid #CADEFD">
-								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频权重：</div>
-								<div style="width: 440px; height: 50px; float: left;">
-									<div style="margin-top: 25px; margin-left: 25px;">
-										<input type="button" style="border-right: 0px;"
-											onClick="disNum(this)" value="-"><input type="text"
-											value="0" id="update_video_qz"
-											style="width: 30px; text-align: center"
-											onkeyup="value=value.replace(/[^\d]/g,'1')" /><input
-											type="button" value="+" style="border-left: 0px;"
-											onClick="incNum(this)">
-									</div>
-								</div>
-							</div>
-							<div style="height: 100px; border: 1px solid #CADEFD">
-								<div
-									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 100px; line-height: 100px;">视频介绍：</div>
-								<div
-									style="width: 440px; height: 100px; float: left; border: 1px solid #CADEFD;">
-									<textarea style="width: 100%; height: 100%;"
-										name="video_introduce" id="update_video_introduce"></textarea>
-									
+									style="width: 75%; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
+									<input type="text" style="width: 100%; height: 100%;"
+										name="video_form_status_upd" id="video_form_status_upd">
 								</div>
 							</div>
 						</div>
@@ -540,106 +452,90 @@ width: 1300px;
 	<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 	<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
 	<script src="assets/js/common.js"></script>
-	<!-- oss upload -->
-	<script type="text/javascript" src="ossupload/lib/crypto1/crypto/crypto.js"></script>
-    <script type="text/javascript" src="ossupload/lib/crypto1/hmac/hmac.js"></script>
-    <script type="text/javascript" src="ossupload/lib/crypto1/sha1/sha1.js"></script>
-    <script type="text/javascript" src="ossupload/lib/base64.js"></script>
-    <script type="text/javascript" src="ossupload/lib/plupload-2.3.6/js/plupload.full.min.js"></script>
-    <script type="text/javascript" src="ossupload/upload.js"></script>
-<script>
+	<script>
 $(document).ready(function () {
     $('#dataTables-example').dataTable();
 });
 $(function(){
-	loadRoleInfo();
-	getVideoForm();
 	$.ajax({
 		type : 'post',
-		url : '/videoServer/videoTab/getVideoTabs.do',
+		url : '/videoServer/videoFormTab/getVideoList.do',
 		success : function(data){	
-			for(var i=0;i<data.length;i++){
-				var videoformname = data[i].video_form_class+data[i].video_form_name;
-				$("#tb").append("<tr><td>"+(i+1)+"</td><td class='wrap' title='"+data[i].video_name+"'>"+data[i].video_name+"</td><td class='wrap' title='"+data[i].video_introduce+"'>"+data[i].video_introduce+"</td><td>"+videoformname+"</td><td class='wrap' title='"+data[i].video_url+"'>"+data[i].video_url+"</td><td class='wrap' title='"+data[i].video_ppt+"'>"+data[i].video_ppt+"</td><td>"+data[i].video_qz+"</td><td>"+data[i].video_time+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateVideoModal' data-videoid='"+data[i].video_id+"'>视频修改</button></td></tr>")
+			//console.log(data);
+			for(var i=0;i<data.length;i++){			
+				if(data[i].video_form_status=='5'){
+					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_form_name+"</td><td>"+data[i].video_form_class+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateModal'  data-upformid='"+data[i].video_form_id+"'>视频类型修改</button></td><td onclick='delet(6,"+data[i].video_form_id+")'><input type='button' value='正常'><input type='hidden' id='a' value='"+data[i].video_form_id+"'/></td></tr>")
+				}else if(data[i].video_form_status=='6'){
+					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_form_name+"</td><td>"+data[i].video_form_class+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateModal'  data-upformid='"+data[i].video_form_id+"'>视频类型修改</button></td><td onclick='delet(5,"+data[i].video_form_id+")'><input type='button' value='禁用'><input type='hidden' id='a' value='"+data[i].video_form_id+"'/></td></tr>")
+				}
 			}
-			$("#teacher_id").val(data[0].teacher_id);
 		},error: function(){
 			 
 		}
 	})
 })
-function updat(obj){
-	var orderId=$(obj).html();
-	var d=0;
- 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
- 		d=orderId.substring(67,orderId.length-2)
- 	}
- 	if (navigator.userAgent.indexOf('Firefox') >= 0){
- 		d=orderId.substring(53,orderId.length-16)
- 	}else{
- 		d=orderId.substring(67,orderId.length-2);
- 	}
-	window.location.href="updateVideo.html?video_id="+d;
-}
-function delet(obj){
-	var orderId=$(obj).html();
-	var d=0;
- 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
- 		d=orderId.substring(67,orderId.length-2)
- 	}
- 	if (navigator.userAgent.indexOf('Firefox') >= 0){
- 		d=orderId.substring(46,orderId.length-16)
- 	}else{
- 		d=orderId.substring(67,orderId.length-2);
- 	}
+
+function delet(status,id){
+	//var orderId=$("#a").val;	
 	$.ajax({
        	type : 'post',
-       	url : '/videoServer/videoTab/delVideoById.do?video_id='+d,
+       	url : '/videoServer/videoFormTab/upstatusTabById.do',
+       	data:{video_form_status : status,video_form_id : id},
        	success : function(){
-       		alert("删除成功！");
+       		alert("修改成功！");
        		window.location.href="";
        	}
-    })
+    })	;										
 }
-function getId(obj){
-	var orderId=$(obj).html();
-	var d=0;
- 	if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){
- 		d=orderId.substring(60,orderId.length-2)
- 	}
- 	if (navigator.userAgent.indexOf('Firefox') >= 0){
- 		d=orderId.substring(46,orderId.length-16)
- 	}else{
- 		d=orderId.substring(60,orderId.length-2);
- 	}
-	$.ajax({
-       	type : 'post',
-       	url : '/videoServer/videoTab/getVideoById.do?id='+d,
-       	success : function(data){
-       		window.location.href="player.html?video_url="+data[0].video_id;
-       	}
-    })
-}	
 </script>
-<script>	
-	 $('#myModal').on('show.bs.modal', function (event) {      	   
-   	  $("#videoName").val("");
-   	  $("#video_introduce").val("");
+	<script>	
+   $('#myModal').on('show.bs.modal', function (event) {      	   
+	   $('#video_form_name_ins').val();
+	   $("#video_form_class_ins").val();
 	  
-   }); 	
-	$("#queryorder").click(function(){
+   }); 	 
+   $("#sub").click(function(){
+		//表单参数
+		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  
+		 var video_form_name = $.trim($('#video_form_name_ins').val());  
+		 var video_form_class =$.trim($("#video_form_class_ins").val());
+		 if(video_form_name.length < 1 || video_form_class.length < 1){
+			 alert("不能为空");
+			 return;
+		 }
+		 formData.append("video_form_name", video_form_name);
+		 formData.append("video_form_class",video_form_class);  									
+		$.ajax({
+				type : 'post',
+				data : formData,
+				url : '/videoServer/videoFormTab/insertTab.do',
+				contentType: false, 
+		        processData: false, 
+				success : function(data){										
+					alert("添加成功");			        					
+			        $("#myModal").modal("hide");
+					window.location.href="";					
+				},error: function(){
+					 alert("submit error");
+				}				
+			});	 				
+     }); 
+	 $("#queryorder").click(function(){
 		$.ajax({
 			type : 'post',
-			data : {teacher_id:$("#teacher_id").val(),video_form_id:$("#video_type").val(),video_name:$("#video_name1").val()},
-			url : '/videoServer/videoTab/selVideo.do',
+			data : {video_form_name:$.trim($("#video_form_name_sea").val()),video_form_class:$.trim($("#video_form_class_sea").val())},
+			url : '/videoServer/videoFormTab/searchTab.do',
 			success : function(data){
 				if(data.length==0){
-			 		alert("暂无符合条件的视频");
+			 		alert("暂无符合条件的结果");
 			 	}else{
 			 		$("#tb  tr:not(:first)").html("");
-			 		for(var i=0;i<data.length;i++){
-			 			var videoformname = data[i].video_form_class+data[i].video_form_name;
-						$("#tb").append("<tr><td>"+(i+1)+"</td><td class='wrap'>"+data[i].video_name+"</td><td class='wrap'>"+data[i].video_introduce+"</td><td>"+videoformname+"</td><td class='wrap'>"+data[i].video_url+"</td><td class='wrap'>"+data[i].video_ppt+"</td><td>"+data[i].video_qz+"</td><td>"+data[i].video_time+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateVideoModal' data-videoid='"+data[i].video_id+"'>视频修改</button></td></tr>")
+			 		for(var i=0;i<data.length;i++){			
+						if(data[i].video_form_status=='5'){
+							$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_form_name+"</td><td>"+data[i].video_form_class+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateModal'  data-upformid='"+data[i].video_form_id+"'>视频类型修改</button></td><td onclick='delet(this)'><input type='button' value='正常'><input type='hidden' id='a' value='"+data[i].video_form_id+"'/></td></tr>")
+						}else if(data[i].video_form_status=='6'){
+							$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_form_name+"</td><td>"+data[i].video_form_class+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateModal'  data-upformid='"+data[i].video_form_id+"'>视频类型修改</button></td><td onclick='delet(this)'><input type='button' value='禁用'><input type='hidden' id='a' value='"+data[i].video_form_id+"'/></td></tr>")
+						}
 					}
 				}
 			},error: function(){
@@ -651,102 +547,54 @@ function getId(obj){
 	$("#eliminates").click(function(){	
 		window.location.href="";
 	});
-	function getVideoForm(){
-		$.ajax({
-			type: "POST",
-			url : '/videoServer/videoFormTab/getVideoList.do',
-			cache: false,  //禁用缓存
-            dataType: "json",
-			success : function(data){
-				$("#kctype").empty(); 
-				$("#video_type").empty();
-				$("#updatekctype").empty();
-				for (var i = 0; i < data.length; i++) {						
-			    	$("#kctype").append("<option value="+data[i].video_form_id+">"+data[i].video_form_class+data[i].video_form_name+"</option>");			    	
-			    	$("#video_type").append("<option value="+data[i].video_form_id+">"+data[i].video_form_class+data[i].video_form_name+"</option>");
-			    	$("#updatekctype").append("<option value="+data[i].video_form_id+">"+data[i].video_form_class+data[i].video_form_name+"</option>");
-				}
-			},error: function(){
-				alert("VideoForm error"); 
-			}
-		});
-	};
 	
-	//视频修改   加载模态框    
-    $('#updateVideoModal').on('show.bs.modal', function (event) {   
+	//修改   加载模态框    
+    $('#updateModal').on('show.bs.modal', function (event) {   
     	  var button = $(event.relatedTarget) // 触发事件的按钮  
-          var videoid = button.data('videoid') // 解析出data-whatever内容  
-    	  $("#updatevideoId").val(videoid);
+          var upformid = button.data('upformid') // 解析出data-whatever内容  
+    	  $("#video_form_id_upd").val(upformid);
     	$.ajax({
 			type : 'post',		
-			url : '/videoServer/videoTab/getVideoById.do',
-			data:{id:videoid},		   
+			url : '/videoServer/videoFormTab/getTabById.do',
+			data:{video_form_id:upformid},		   
 	        dataType: "json",
 			success : function(data){										
-				 $("#updatevideoName").val(data[0].video_name);
-				 $("#update_video_introduce").val(data[0].video_introduce);
-				 
+				 $("#video_form_name_upd").val(data[0].video_form_name);
+				 $("#video_form_class_upd").val(data[0].video_form_class);
+				 $("#video_form_status_upd").val(data[0].video_form_status);
 			},error: function(){
 				 alert("get error");
 			}				
-		});	 			
- 	 
- 	  
+		});	 			 	 	  
     }); 
 	 $("#update").click(function(){
 			//表单参数
 			 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
-			 var videoName = $.trim($('#updatevideoName').val());  
-			 var video_introduce =$.trim($("#update_video_introduce").val());
-			 var video_form_id = $.trim($("#updatekctype").val());					
-			 var image = $('#updateimage').prop("files")[0];
-			 var ppt = $('#updateppt').prop("files")[0];
-			 var video_qz = $.trim($("#update_video_qz").val());	
-		     var video_id =  $.trim($("#updatevideoId").val());
-			 formData.append("video_id", video_id);
-			 formData.append("videoName",videoName);  		
-			 formData.append("image", image);
-			 formData.append("video_introduce", video_introduce);
+			 var video_form_id = $.trim($('#video_form_id_upd').val());  
+			 var video_form_name = $.trim($('#video_form_name_upd').val());  
+			 var video_form_class = $.trim($('#video_form_class_upd').val());  
+			 var video_form_status = $.trim($('#video_form_status_upd').val()); 
+			
 			 formData.append("video_form_id", video_form_id);
-			 formData.append("ppt", ppt);	
-			 formData.append("video_qz", video_qz);
+			 formData.append("video_form_name", video_form_name);
+			 formData.append("video_form_class", video_form_class);
+			 formData.append("video_form_status", video_form_status);
 						
-		    //上传文件		
 			$.ajax({
 					type : 'post',
 					data : formData,
-					url : '/videoServer/videoTab/updetVideoById.do',
+					url : '/videoServer/videoFormTab/updateTab.do',
 					contentType: false, 
 			        processData: false, 
 					success : function(data){										
 						alert("修改成功");			        					
-				        $("#updateVideoModal").modal("hide");
+				        $("#updateModal").modal("hide");
 						window.location.href="";					
 					},error: function(){
-						 alert("submit error");
+						 alert("submit update error");
 					}				
 				});	 				
-	      });
-</script>
-	<script>
-function updat(obj){
-	
-}
-	function disNum(dom){
-		var disNum=dom.nextSibling.value;
-		if(disNum<1)//防止数量少于1
-		{
-			dom.nextSibling.value=0;
-		}
-		else
-		{
-			dom.nextSibling.value--;
-		}
-	}
-	
-	function incNum(dom){
-		dom.previousSibling.value ++;
-	}
+	      }); 
 </script>
 	<script src="assets/js/custom-scripts.js"></script>
 </body>

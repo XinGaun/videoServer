@@ -25,5 +25,20 @@ public class videoFormTabServiceImpl implements videoFormTabService{
 	public void insertTab(videoFormTab c) {
 		vDao.insertTab(c);
 	}
+	@Override
+	public ArrayList<videoFormTab> searchTab(videoFormTab c) {
+		// TODO Auto-generated method stub
+		return vDao.searchTab(c);
+	}
+	@Override
+	public ArrayList<videoFormTab> getTabById(int videoFormId) {
+		// TODO Auto-generated method stub
+		return vDao.getTabById(videoFormId);
+	}
+	@Override
+	public void upStatusTabById(int videoFormId, int videoFormStatus) {
+		// TODO Auto-generated method stub
+		vDao.upStatusTabById(videoFormId, videoFormStatus);
+	}
 
 }
