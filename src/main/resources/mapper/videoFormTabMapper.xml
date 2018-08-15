@@ -25,7 +25,7 @@
 	<select id="getTabById" resultType="com.entity.videoFormTab" parameterType="int">
 		select * from video_form_tab where video_form_id = #{videoFormId,jdbcType=INTEGER}
 	</select>
-	<update id="upStatusTabById"  parameterType="int">
-		update video_form_tab set video_form_status=#{videoFormStatus,jdbcType=INTEGER} where video_form_id=#{videoFormId,jdbcType=INTEGER}
+	<update id="upStatusTabById" parameterType="int">
+		update video_form_tab set video_form_status=#{video_form_status} where video_form_id=#{video_form_id}
 	</update>
 </mapper>
