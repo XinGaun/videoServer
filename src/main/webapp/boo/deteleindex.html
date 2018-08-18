@@ -1,24 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>语道文心</title>
-<script src="js/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.lazyload.min.js"></script>
-<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
-<script src="js/jquery.lazyload.min.js"></script>
-<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
-<script type="text/javascript" src="js/jquery.cookie.js"></script>
-<script type="text/javascript" src="js/LoadIndex.js"></script>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>语道文心</TITLE>
+<META NAME="Generator" CONTENT="EditPlus">
+<META NAME="Author" CONTENT="">
+<META NAME="Keywords" CONTENT="">
+<META NAME="Description" CONTENT="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.lazyload.min.js"></script>
+	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/videoIndex.js"></script>
 
-<style type="text/css">
-* {
-	margin: 0;
-	padding: 0;
-}
-.lazy {
+	<script type="text/javascript" src="js/videoIndex2.js"></script>
+
+	
+</HEAD>
+<style>
+
+	.lazy {
 	    display: none;
 	}
 	.kcjs {
@@ -141,9 +145,7 @@
 	 	margin:0vh 0.4vw
 	 }
 </style>
-
-</head>
-<body style="background-color: #F0F0F0">
+<BODY id="boo">
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -170,7 +172,7 @@
 
 				<li class="dropdown" STYLE="margin-top: 5%">
 
-					<!-- <div class="form-group navbar-form navbar-left">
+					<div class="form-group navbar-form navbar-left">
 						<div class="input-group col-xs-12">
 							<div class="input-group-btn">
 								<select name="type" id="dropdown" class="form-control" style="width: auto;">
@@ -188,7 +190,7 @@
 								</button>
 							</span>
 						</div>
-					</div> -->
+					</div>
 				</li>
 			</ul>
 			<!-- 登录|注册 -->
@@ -219,150 +221,189 @@
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
-	<!-- /.container-fluid --> 
-	</nav>
-
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
-			<div class="col-md-12 panel panel-default">
-				<div class="col-md-3 " style="">
-					<h3>
-						<span class="label label-default">通知栏</span>
-					</h3>
-					<div class="list-group pre-scrollable">
-						<button type="button" class="list-group-item">1.消息通知</button>
-						<button type="button" class="list-group-item">2.消息通知</button>
-						<button type="button" class="list-group-item">3.消息通知</button>
-						<button type="button" class="list-group-item">4.消息通知</button>
-						<button type="button" class="list-group-item">5.消息通知</button>
-						<button type="button" class="list-group-item">6.消息通知</button>
-						<button type="button" class="list-group-item">7.消息通知</button>
-						<button type="button" class="list-group-item">8.消息通知</button>
-					</div>
-				</div>
-				<div class="col-md-9">
-					<div class="col-md-4">
-						<div class="row">
-							<div class=" col-md-12">
-								<div class="thumbnail">
-									<img src="img/tx1.png" class="img-thumbnail"
-										style="width: 100%; height: 100%;">
-									<div class="caption">
-										<p>文字介绍</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="row">
-							<div class=" col-md-12">
-								<div class="thumbnail">
-									<img src="img/tx1.png" class="img-thumbnail"
-										style="width: 100%; height: 100%;">
-									<div class="caption">
-										<p>文字介绍</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="row">
-							<div class=" col-md-12">
-								<div class="thumbnail">
-									<img src="img/tx1.png" class="img-thumbnail"
-										style="width: 100%; height: 100%;">
-									<div class="caption">
-										<p>文字介绍</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-
-						<ul class="nav nav-pills">
-							<li role="presentation" class="active" id="gzli"><a
-								href="javascript:void(0);" id="gaozhong">高中课程</a></li>
-							<li role="presentation" id="czli"><a
-								href="javascript:void(0);" id="chuzhong">初中课程</a></li>
-							<li role="presentation" id="xxli"><a
-								href="javascript:void(0);" id="xiaoxue">小学课程</a></li>
-						</ul>
+	<!-- /.container-fluid --> </nav>
 
 
-					</div>
-					<div class="panel-body">
-						<div id="gzbody" class="">
-							<div class="row" style="margin: 0px; padding: 0px;" id="gzCourseType">
-								
-							</div>
-						</div>
-						<div id="czbody" class="" style="display: none;">
-							<div class="row" style="margin: 0px; padding: 0px;" id="czCourseType">
-								
-							</div>
-						</div>
-						<div id="xxbody" class="" style="display: none;">
-							<div class="row" style="margin: 0px; padding: 0px;" id="xxCourseType">
-								
-							</div>
-						</div>
-					</div>
-				</div>
+	<!-- 滚动页面-->
+	<div id="carousel-example-generic" style="margin-top:-3vh" class="carousel slide"
+		data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#carousel-example-generic" data-slide-to="0"
+				class="active"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+		</ol>
+
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+				<img src="img/banner.png" class="">
 
 			</div>
+			<div class="item">
+				<img src="img/banner.png" class="">
 
+			</div>
+			<div class="item">
+				<img src="img/banner.png" class="">
 
-			<div class="row">
-				<div class="col-md-12">
-					<div class="col-md-12 panel panel-default">
-						<h3>
-							<span class="label label-info" id="kcbt">精选课程</span>
-						</h3>
-						<hr>
-						<div id="kcbody">
-							
-						</div>
-						<div style="text-align: center;" id="fanye" class="col-md-12">
-							<!-- <nav aria-label="Page navigation">
-								<ul class="pagination">
-									<li><a href="#" aria-label="Previous"> <span
-											aria-hidden="true">&laquo;</span>
-									</a></li>
-									<li><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#" aria-label="Next"> <span
-											aria-hidden="true">&raquo;</span>
-									</a></li>
-								</ul>
-							</nav> -->
-						</div>
-					</div>
-
-
-
-
-
-				</div>
 			</div>
 		</div>
 
+		<!-- Controls -->
+		<a class="left carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="prev"> <span
+			class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span
+			class="sr-only">上一页</span>
+		</a> <a class="right carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="next"> <span
+			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">下一页</span>
+		</a>
+	</div>
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<!-- 第二个页面导航条 -->
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<ul class="nav nav-tabs nav-justified">
+						<li role="presentation"><a href="javascript:void(0)" onclick="queryClassVideo('高中')">高中</a></li>
+						<li role="presentation"><a href="javascript:void(0)" onclick="queryClassVideo('初中')">初中</a></li>
+						<li role="presentation"><a href="javascript:void(0)" onclick="queryClassVideo('小学')">小学</a></li>
+					</ul>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<!-- 推荐好课 -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading col-md-12" style="text-align: center; font-weight: bold"  id="MoreLesson22">
+							推荐好课<button class="btn btn-default" style="float: right" onclick="MoreLesson()">更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span></button>
+						</div>
+						<div class="col-md-12">&nbsp;</div>
+						<div class="panel-body">
+							<div id="RecomExcellent">
+
+							<!-- 视频模板结束 -->
+
+
+							</div>
+							<!-- 翻页 -->
+							<div class="col-md-12" style="text-align: center;" id="fanyeTT">
+		
+							</div>
+							<!-- 分页结束 -->
+							<div class="col-md-12">&nbsp;</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="col-md-2"></div>
+	</div>
+	<!-- 精品课程 -->
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+
+			<div class="panel panel-default">
+				<div class="panel-heading col-md-12"
+					style="text-align: center; font-weight: bold" id="buttonMore">精品课程<button class="btn btn-default" style="float: right" onclick="btnMore()">
+								更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span>
+							</button>
+				</div>
+				<div class="col-md-12">&nbsp;</div>
+				<div class="panel-body">
+					<div class="row" id="">
+						<div id="excellent">
+
+							<!-- 视频模板结束 -->
+
+
+						</div>
+					</div>
+					<!-- 翻页 -->
+					<div class="col-md-12" style="text-align: center;" id="fanye">
+
+					</div>
+					<!-- 分页结束 -->
+				</div>
+			</div>
+			<!-- 特惠套餐 -->
+
+			<!-- <div class="panel panel-default">
+
+				<div class="panel-heading col-md-12"
+					style="text-align: center; font-weight: bold">视频套餐</div>
+				<div class="col-md-12">&nbsp;</div>
+
+				<div class="panel-body">
+					<div class="row">
+						<div id="querycombo"></div>
+					</div>
+					<div class="col-md-12">
+						<button class="btn btn-default" style="float: right">
+							更&nbsp;多<span class="glyphicon glyphicon-menu-right"></span>
+						</button>
+
+					</div>
+
+				</div>
+
+			</div> -->
+			<!-- <div class="panel panel-default">
+				<div class="panel-heading col-md-12"
+					style="text-align: center; font-weight: bold">打榜好课</div>
+				<div class="col-md-12">&nbsp;</div>
+				<div class="panel-body">
+					<div class="col-md-6">
+						<div class="panel panel-default" >
+							<div class="panel-heading col-md-12"
+								style="text-align: center; font-weight: bold">课程点击榜</div>
+							<div class="col-md-12">&nbsp;</div>
+							<div class="panel-body "
+								style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+								<ol id="queryCourseClick">
+
+
+								</ol>
+
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="panel panel-default">
+							<div class="panel-heading col-md-12"
+								style="text-align: center; font-weight: bold">课程评分榜</div>
+							<div class="col-md-12">&nbsp;</div>
+							<div class="panel-body"
+								style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+								<ol id="queryCourseGrade">
+
+								</ol>
+							</div>
+						</div>
+					</div>
+					<button class="btn btn-default" id="videoHtml"
+						style="float: right; width: 100%; font-weight: bold;">
+						<h4>
+							发&nbsp;现&nbsp;更&nbsp;多&nbsp;好&nbsp;课<span
+								class="glyphicon glyphicon-menu-right"></span>
+						</h4>
+					</button>
+				</div>
+			</div> -->
+		</div>
 
 		<div class="col-md-1"></div>
 	</div>
-
-	<hr>
+	<div class="col-md-12">&nbsp;</div>
 	<!-- 尾部 -->
 	<footer style="background:gray">
 		<div id="foot">
@@ -390,8 +431,9 @@
 		</div>
 		
 	</footer>
+
 	
-<script type="text/javascript">
+	<script type="text/javascript">
 	
 	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
 	$(function(){
