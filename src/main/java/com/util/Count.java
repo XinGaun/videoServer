@@ -26,6 +26,9 @@ public class Count {
 		HashMap<String,Object> restMap = new HashMap<String,Object>();
 		if(count>0) {
 			int page = Integer.parseInt(hashMap.get("page").toString());
+			if(page==0){
+				page =page+1;
+			}
 			int counts = count/page;
 			if(counts==0){
 				counts =counts+1;
