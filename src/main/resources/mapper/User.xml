@@ -37,9 +37,6 @@
 		<if test="user_sex != null">
 			user_sex = #{user_sex},
 		</if>
-		<if test="user_email != null and user_email.trim().length()>0">
-			user_email = #{user_email,jdbcType=VARCHAR},
-		</if>
 		<if test="user_truename != null and user_truename.trim().length()>0">
 			user_truename = #{user_truename,jdbcType=VARCHAR},
 		</if>
@@ -50,7 +47,10 @@
 			user_photo = #{user_photo,jdbcType=VARCHAR},
 		</if>
 		<if test="user_self != null and user_self.trim().length()>0">
-			user_self = #{user_self,jdbcType=VARCHAR}
+			user_self = #{user_self,jdbcType=VARCHAR},
+		</if>
+		<if test="user_email != null and user_email.trim().length()>0">
+			user_email = #{user_email,jdbcType=VARCHAR}
 		</if>
 		where user_phone=#{user_phone}
 	</update>

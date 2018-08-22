@@ -227,7 +227,6 @@ width: 1300px;
 		<!--/. NAV TOP  -->
 		<nav class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
-
 				<ul class="nav" id="main-menu">
 					<li class="role" style="display: none;"><a href="#"><i
 							class="fa fa-sitemap"></i>权限管理<span class="fa arrow"></span></a>
@@ -638,9 +637,10 @@ function getId(obj){
 			 	}else{
 			 		$("#tb  tr:not(:first)").html("");
 			 		for(var i=0;i<data.length;i++){
-			 			var videoformname = data[i].video_form_class+data[i].video_form_name;
-						$("#tb").append("<tr><td>"+(i+1)+"</td><td class='wrap'>"+data[i].video_name+"</td><td class='wrap'>"+data[i].video_introduce+"</td><td>"+videoformname+"</td><td class='wrap'>"+data[i].video_url+"</td><td class='wrap'>"+data[i].video_ppt+"</td><td>"+data[i].video_qz+"</td><td>"+data[i].video_time+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateVideoModal' data-videoid='"+data[i].video_id+"'>视频修改</button></td></tr>")
+						var videoformname = data[i].video_form_class+data[i].video_form_name;
+						$("#tb").append("<tr><td>"+(i+1)+"</td><td class='wrap' title='"+data[i].video_name+"'>"+data[i].video_name+"</td><td class='wrap' title='"+data[i].video_introduce+"'>"+data[i].video_introduce+"</td><td>"+videoformname+"</td><td class='wrap' title='"+data[i].video_url+"'>"+data[i].video_url+"</td><td class='wrap' title='"+data[i].video_ppt+"'>"+data[i].video_ppt+"</td><td>"+data[i].video_qz+"</td><td>"+data[i].video_time+"</td><td>"+data[i].video_grade+"</td><td>"+data[i].video_click+"</td><td>"+data[i].video_date+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateVideoModal' data-videoid='"+data[i].video_id+"'>视频修改</button></td></tr>")
 					}
+					//$("#teacher_id").val(data[0].teacher_id);
 				}
 			},error: function(){
 				 

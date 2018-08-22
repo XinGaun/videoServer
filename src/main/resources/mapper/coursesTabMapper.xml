@@ -8,25 +8,26 @@
 		values(#{courses_name,jdbcType=VARCHAR},#{video_form_id},#{courses_introduce,jdbcType=VARCHAR},#{courses_video,jdbcType=VARCHAR},#{courses_img_url,jdbcType=VARCHAR},now(),#{courses_pricemoney,jdbcType=VARCHAR},#{teacher_id,jdbcType=INTEGER},#{courses_qz,jdbcType=INTEGER},#{courses_time,jdbcType=VARCHAR})
 	</insert>
 	<select id="searchTabList" parameterType="java.util.HashMap" resultType="com.entity.coursesTab">
-		select * from courses_tab 
-			<where> courses_status=8
+		SELECT c.courses_id,c.courses_name,c.video_form_id,c.courses_introduce,c.courses_video,c.courses_status,c.courses_img_url,c.courses_date,c.courses_pricemoney,c.teacher_id,c.courses_qz,c.courses_time,vf.video_form_name,vf.video_form_class FROM
+		courses_tab c LEFT JOIN video_form_tab vf ON c.video_form_id = vf.video_form_id
+			<where> c.courses_status=8
 				<if test="teacher_id !='' and teacher_id !=null">
-					and teacher_id = #{teacher_id,jdbcType=VARCHAR}
+					and c.teacher_id = #{teacher_id,jdbcType=VARCHAR}
 				</if>
 				<if test="courses_name !='' and courses_name !=null">
-					and courses_name like CONCAT(CONCAT('%',#{courses_name,jdbcType=VARCHAR}),'%')
+					and c.courses_name like CONCAT(CONCAT('%',#{courses_name,jdbcType=VARCHAR}),'%')
 				</if>
 				<if test="courses_pricemoney !='' and courses_pricemoney !=null">
-					and courses_pricemoney = #{courses_pricemoney,jdbcType=VARCHAR}
+					and c.courses_pricemoney = #{courses_pricemoney,jdbcType=VARCHAR}
 				</if>
 				<if test="courses_grade !='' and courses_grade !=null">
-					and courses_grade = #{courses_grade,jdbcType=VARCHAR}
+					and c.courses_grade = #{courses_grade,jdbcType=VARCHAR}
 				</if>
 				<if test="video_form_id !='' and video_form_id !=null">
-					and video_form_id = #{video_form_id,jdbcType=VARCHAR}
+					and c.video_form_id = #{video_form_id,jdbcType=VARCHAR}
 				</if>
 			</where>
-			order by courses_qz desc
+			order by c.courses_qz desc
 	</select>
 	<select id="getTabList" parameterType="com.entity.coursesTab" resultType="com.entity.coursesTab">
 		SELECT c.courses_id,c.courses_name,c.video_form_id,c.courses_introduce,c.courses_video,c.courses_status,c.courses_img_url,c.courses_date,c.courses_pricemoney,c.teacher_id,c.courses_qz,c.courses_time,vf.video_form_name,vf.video_form_class FROM

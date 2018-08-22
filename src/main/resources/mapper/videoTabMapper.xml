@@ -16,19 +16,20 @@
 		select * from video_tab where video_id=#{id,jdbcType=INTEGER} 
 	</select>
 	<select id="selVideo" resultType="com.entity.VideoTab">
-		select * from video_tab 
-			<where> video_status=5 
+		SELECT v.video_id,v.video_grade,v.video_img_url,v.video_introduce,v.video_name,v.video_url,v.video_date,v.teacher_id,v.video_form_id,vf.video_form_name,vf.video_form_class,v.video_qz,v.video_ppt,v.video_time,v.video_click FROM
+		video_tab v LEFT JOIN video_form_tab vf ON v.video_form_id = vf.video_form_id 
+			<where> v.video_status=5 
 				<if test="teacher_id !='' and teacher_id !=null">
-					and teacher_id=#{teacher_id,jdbcType=INTEGER}
+					and v.teacher_id=#{teacher_id,jdbcType=INTEGER}
 				</if>
 				<if test="video_form_id !='' and video_form_id !=null">
-					and video_form_id=#{video_form_id,jdbcType=INTEGER} 
+					and v.video_form_id=#{video_form_id,jdbcType=INTEGER} 
 				</if>
 				<if test="video_name !='' and video_name !=null">
-					and video_name like CONCAT(CONCAT('%',#{video_name,jdbcType=VARCHAR}),'%')
+					and v.video_name like CONCAT(CONCAT('%',#{video_name,jdbcType=VARCHAR}),'%')
 				</if>
 			</where>
-			order by video_qz desc
+			order by v.video_qz desc
 	</select>
 	<update id="delVideoById" parameterType="com.entity.VideoTab">
 		update video_tab set video_status='6' where video_id=#{video_id,jdbcType=INTEGER} 

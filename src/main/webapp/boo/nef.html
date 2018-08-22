@@ -421,16 +421,14 @@
 		        	dataType:"json",
 		         	async : false,
 		        	success:function(suc){
-		        		//alert("a"+suc.length);
-		        		//alert("b"+suc[0].user_phone);
+		        		alert("a"+suc.length);
 		        		if(suc.length==1){	  
 		        			var expiresDate= new Date();
-			    			expiresDate.setTime(expiresDate.getTime() + (60 * 60 * 1000)); //设置cookie30分钟后失效
-			    			$.cookie('id',suc[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
-			    			$.cookie('phone',suc[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
-			    			
-			        		$.cookie('photo',suc[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
-			    			isfirst(suc[0].user_phone);
+			    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
+			    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
+			    			$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
+			        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
+			    			isfirst(data[0].user_phone);
 		     	
 		        		}else{ 
 		        			$.ajax({
@@ -442,9 +440,9 @@
 		        	        	dataType:"json",
 		        	        	//dataType:"text",
 		        	        	success:function(data){
-		        	        		//alert("cc"+data);
+		        	        		alert("cc"+data);
 		        	        		var expiresDate= new Date();
-					    			expiresDate.setTime(expiresDate.getTime() + (60 * 60 * 1000)); //设置cookie30分钟后失效
+					    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
 					    			$.cookie('id',data,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
 					    			$.cookie('phone',uname,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
 					        		//$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
@@ -590,7 +588,7 @@
 	    			alert(data);
 	    		}else{
 	    			var expiresDate= new Date();
-	    			expiresDate.setTime(expiresDate.getTime() + (60 * 60 * 1000)); //设置cookie30分钟后失效
+	    			expiresDate.setTime(expiresDate.getTime() + (30 * 60 * 1000)); //设置cookie30分钟后失效
 	    			$.cookie('id',data[0].user_id,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户id
 	    			$.cookie('phone',data[0].user_phone,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户注册手机号
 	        		$.cookie('photo',data[0].user_photo,{ expires:expiresDate,path:'/',secure: false});//cookie中存用户头像
@@ -604,7 +602,7 @@
 	    }); 
 	}
 	function isfirst(phone){
-		//alert("qq");
+		alert("qq");
 		$.ajax({
 	        	type:"POST",
 	        	url:url+"/videoServer/front/User/isfirst",
