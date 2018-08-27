@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.OpinionDao">
+	
+	<!-- 查询建议信息 -->
+	<select id="queryOpinionAll" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT o.opinion_id,u.user_name,o.opinion_text,date_format(o.opinion_date,'%Y-%m-%d %h:%i:%s')opinion_date,o.user_id FROM opinion_tab o,user_tab u 
+		where o.user_id = u.user_id
+		<if test="opinion_id!='' and opinion_id!=null">
+			and o.opinion_id = #{opinion_id}
+		</if> 
+		<if test="opinion_start!='' and opinion_start!=null">
+			and o.opinion_date >= str_to_date(#{opinion_start}, '%Y-%m-%d')
+		</if> 
+		<if test="opinion_start!=opinion_end">
+			<if test="opinion_end!='' and opinion_end!=null">
+				and o.opinion_date &lt;= str_to_date(#{opinion_end}, '%Y-%m-%d')
+			</if>
+		</if>
+		limit #{start},#{limit}
+	</select>
+	
+	<!-- 查询建议总数 -->
+	<select id="queryOpinionTabCount" parameterType="java.util.HashMap" resultType="int">
+	    SELECT COUNT(o.opinion_id) FROM opinion_tab o where 1=1 
+		<if test="order_id!='' and order_id!=null">
+			and o.opinion_id = #{opinion_id}
+		</if> 
+		<if test="user_name!='' and user_name!=null">
+			and o.user_id = #{user_id}
+		</if> 
+	</select>
+	<!-- 删除建议信息 -->
+	<delete id="deleteOpinionTab" parameterType="int">
+		DELETE FROM opinion_tab WHERE opinion_id = #{opinion_id}
+	</delete>
+</mapper>

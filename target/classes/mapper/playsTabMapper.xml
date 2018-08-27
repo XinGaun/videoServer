@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.playsTabDao">
+	<insert id="insertPlaysTab" parameterType="com.dao.playsTabDao">
+		insert into plays_tab(user_id,video_id,plays_time,subscription_date) values(#{user_id,jdbcType=INTEGER},#{video_id,jdbcType=INTEGER}#{plays_time,jdbcType=VARCHAR},now())
+	</insert>
+</mapper>

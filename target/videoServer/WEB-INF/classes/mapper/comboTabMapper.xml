@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.comboTabDao">
+	<insert id="insertComboTab" parameterType="com.entity.comboTab">
+		insert into combo_tab(teacher_id,combo_name,combo_introduce,video_id,combo_price,combo_imgs,combo_date) 
+		values(#{teacher_id,jdbcType=INTEGER},#{combo_name,jdbcType=VARCHAR},#{combo_introduce,jdbcType=VARCHAR},#{video_id,jdbcType=VARCHAR},#{combo_price,jdbcType=VARCHAR},#{combo_imgs,jdbcType=VARCHAR},now())
+	</insert>
+	<select id="getTaocanId" parameterType="int" resultType="com.entity.comboTab">
+		select * from combo_tab where combo_id=#{id,jdbcType=INTEGER}
+	</select>
+	<update id="delComboById" parameterType="com.entity.comboTab">
+		update combo_tab set combo_status='6' where combo_id=#{id,jdbcType=INTEGER} 
+	</update>
+	<select id="getTabList" parameterType="com.entity.comboTab" resultType="com.entity.comboTab">
+		select * from combo_tab 
+			<where> combo_status=5
+				<if test="combo_name !='' and combo_name !=null">
+					and combo_name=#{combo_name,jdbcType=VARCHAR} 
+				</if>
+				<if test="combo_price !='' and combo_price !=null">
+					and combo_price=#{combo_price,jdbcType=VARCHAR}
+				</if>
+				<if test="teacher_id !='' and teacher_id !=null">
+					and teacher_id = #{teacher_id,jdbcType=INTEGER})
+				</if>
+			</where>
+	</select>
+	<update id="updComboById" parameterType="com.entity.comboTab">
+		update combo_tab set combo_name=#{combo_name,jdbcType=VARCHAR},combo_introduce=#{combo_introduce,jdbcType=VARCHAR},
+		video_id=#{video_id,jdbcType=VARCHAR},combo_imgs=#{combo_imgs,jdbcType=VARCHAR},combo_price=#{combo_price,jdbcType=VARCHAR} 
+		where combo_id=#{combo_id,jdbcType=INTEGER} 
+	</update>
+</mapper>

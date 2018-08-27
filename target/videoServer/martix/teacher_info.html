@@ -1,0 +1,606 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title></title>
+		<!-- Bootstrap Styles-->
+		<link href="assets/css/bootstrap.css" rel="stylesheet" />
+		<!-- FontAwesome Styles-->
+		<link href="assets/css/font-awesome.css" rel="stylesheet" />
+		<!-- Morris Chart Styles-->
+
+		<!-- Custom Styles-->
+		<link href="assets/css/custom-styles.css" rel="stylesheet" />
+		<!-- Google Fonts-->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+		<!-- TABLE STYLES-->
+		<link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+		<link href="dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+		<style>
+			.addmargin {
+				margin-top: 10px;
+			}
+
+			.pic {
+			    position: relative;
+			    height: 160px;
+			    width: 120px;
+			    overflow: hidden;
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<div id="wrapper">
+			<nav class="navbar navbar-default top-navbar" role="navigation">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html"><i class="fa fa-comments"></i> <strong>语道后台管理 </strong></a>
+				</div>
+
+				<ul class="nav navbar-top-links navbar-right">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+							<i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-messages">
+							<li>
+								<a href="#">
+									<div>
+										<strong>John Doe</strong>
+										<span class="pull-right text-muted">
+											<em>Today</em>
+										</span>
+									</div>
+									<div>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</div>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="#">
+									<div>
+										<strong>John Smith</strong>
+										<span class="pull-right text-muted">
+											<em>Yesterday</em>
+										</span>
+									</div>
+									<div>Lorem Ipsum has been the industry's standard dummy text ever since an kwilnw...</div>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="#">
+									<div>
+										<strong>John Smith</strong>
+										<span class="pull-right text-muted">
+											<em>Yesterday</em>
+										</span>
+									</div>
+									<div>Lorem Ipsum has been the industry's standard dummy text ever since the...</div>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a class="text-center" href="#">
+									<strong>Read All Messages</strong>
+									<i class="fa fa-angle-right"></i>
+								</a>
+							</li>
+						</ul>
+						<!-- /.dropdown-messages -->
+					</li>
+					<!-- /.dropdown -->
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+							<i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-tasks">
+							<li>
+								<a href="#">
+									<div>
+										<p>
+											<strong>Task 1</strong>
+											<span class="pull-right text-muted">60% Complete</span>
+										</p>
+										<div class="progress progress-striped active">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+												<span class="sr-only">60% Complete (success)</span>
+											</div>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="#">
+									<div>
+										<p>
+											<strong>Task 2</strong>
+											<span class="pull-right text-muted">28% Complete</span>
+										</p>
+										<div class="progress progress-striped active">
+											<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" style="width: 28%">
+												<span class="sr-only">28% Complete</span>
+											</div>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="#">
+									<div>
+										<p>
+											<strong>Task 3</strong>
+											<span class="pull-right text-muted">60% Complete</span>
+										</p>
+										<div class="progress progress-striped active">
+											<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+												<span class="sr-only">60% Complete (warning)</span>
+											</div>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="#">
+									<div>
+										<p>
+											<strong>Task 4</strong>
+											<span class="pull-right text-muted">85% Complete</span>
+										</p>
+										<div class="progress progress-striped active">
+											<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+												<span class="sr-only">85% Complete (danger)</span>
+											</div>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a class="text-center" href="#">
+									<strong>See All Tasks</strong>
+									<i class="fa fa-angle-right"></i>
+								</a>
+							</li>
+						</ul>
+						<!-- /.dropdown-tasks -->
+					</li>
+					<!-- /.dropdown -->
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+							<i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-alerts">
+							<li>
+								<a href="#">
+									<div>
+										<i class="fa fa-comment fa-fw"></i> New Comment
+										<span class="pull-right text-muted small">4 min</span>
+									</div>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="#">
+									<div>
+										<i class="fa fa-twitter fa-fw"></i> 3 New Followers
+										<span class="pull-right text-muted small">12 min</span>
+									</div>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="#">
+									<div>
+										<i class="fa fa-envelope fa-fw"></i> Message Sent
+										<span class="pull-right text-muted small">4 min</span>
+									</div>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="#">
+									<div>
+										<i class="fa fa-tasks fa-fw"></i> New Task
+										<span class="pull-right text-muted small">4 min</span>
+									</div>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="#">
+									<div>
+										<i class="fa fa-upload fa-fw"></i> Server Rebooted
+										<span class="pull-right text-muted small">4 min</span>
+									</div>
+								</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a class="text-center" href="#">
+									<strong>See All Alerts</strong>
+									<i class="fa fa-angle-right"></i>
+								</a>
+							</li>
+						</ul>
+						<!-- /.dropdown-alerts -->
+					</li>
+					<!-- /.dropdown -->
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+							<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-user">
+							<li>
+								<a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="javascript:teacherLoginOut()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+							</li>
+						</ul>
+						<!-- /.dropdown-user -->
+					</li>
+					<!-- /.dropdown -->
+				</ul>
+			</nav>
+			<!--/. NAV TOP  -->
+			<nav class="navbar-default navbar-side" role="navigation">
+				<div class="sidebar-collapse">
+					<ul class="nav" id="main-menu">
+						<li class="role" style="display: none;">
+							<a href="#"><i class="fa fa-sitemap"  class="active-menu"></i>权限管理<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level collapse in">
+								<li>
+									<a href="role_list.html" ><i class="fa fa-lock"></i> 权限管理</a>
+								</li>
+								<li>
+									<a href="teacher_list.html" class="active-menu"><i class="fa fa-users"></i> 教师管理</a>
+								</li>
+								<li>
+									<a href="user_list.html"><i class="fa fa-user"></i> 用户管理</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+	                        <a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a>
+	                    </li>
+	                    <li>
+	                        <a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
+	                    </li>
+	                    <li>
+	                        <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
+	                    </li>
+						<li class="role" style="display: none;">
+							<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
+						</li>
+						<li>
+							<a href="comment.html"><i class="fa fa-table"></i>评论管理</a>
+						</li>
+						<li class="role" style="display: none;">
+							<a href="order.html"><i class="fa fa-table"></i>订单管理</a>
+						</li>
+						<li class="role" style="display: none;">
+							<a href="proposal.html"><i class="fa fa-edit"></i>建议管理</a>
+						</li>
+						<li class="role" style="display: none;">
+							<a href="test.html" ><i class="fa fa-edit"></i>题目管理</a>
+						</li>
+					</ul>
+
+				</div>
+
+			</nav>
+			<!-- /. NAV SIDE  -->
+
+			<div id="page-wrapper">
+				<div id="page-inner">
+					<div class="row">
+						<div class="col-md-12">
+							<h3 class="page-header">
+							语道 <small>教师管理</small>
+						</h3>
+						</div>
+					</div>
+					<!-- /. ROW  -->
+
+					<div class="row">
+						<div class="col-md-12">
+
+							<!-- Advanced Tables -->
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<!--
+                	作者：offline
+                	时间：2018-06-09
+                	描述：context begin
+                -->
+									<div class="row">
+										<div class="col-sm-6">
+
+											<div class="row addmargin">
+												<div class="col-sm-4" align="right" style="line-height:-moz-block-height;">
+													<span class="">姓名:</span>
+												</div>
+												<div class="col-sm-8">
+													<input type="text" id="teacher_name">
+												</div>
+											</div>
+											<div class="row addmargin">
+												<div class="col-sm-4" align="right" style="line-height:-moz-block-height;">
+													<span class="">电话:</span>
+												</div>
+												<div class="col-sm-8">
+													<input type="text" id="teacher_phone">
+												</div>
+											</div>
+											<div class="row addmargin">
+												<div class="col-sm-4" align="right" style="line-height:-moz-block-height;">
+													<span class="">邮箱:</span>
+												</div>
+												<div class="col-sm-8">
+													<input type="text" id="teacher_mail">
+												</div>
+											</div>
+
+											<div class="row addmargin">
+												<div class="col-sm-4" align="right" style="line-height:-moz-block-height;">
+													<span class="">状态:</span>
+												</div>
+												<div class="col-sm-8">
+													<select id="teacher_status">
+														<option value="6">禁用</option>
+														<option value="5">正常</option>
+													</select>
+												</div>
+											</div>
+											<div class="row addmargin">
+												<div class="col-sm-4" align="right" style="line-height:-moz-block-height;">
+													<span class="">录入日期:</span>
+												</div>
+												<div class="col-sm-8">
+													<input type="text" id="teacher_date" readonly="readonly">
+													<input type="hidden" id="teacher_imgurl">
+													<input type="hidden" id="teacher_id">
+												</div>
+											</div>
+											<div class="row addmargin">
+												<div class="col-sm-4" align="right" style="line-height:-moz-block-height;">
+													<span class="">教师简介:</span>
+												</div>
+												<div class="col-sm-8">
+													<textarea id="teacher_introduce" cols="40" rows="5"></textarea>
+												</div>
+											</div>
+
+											<div class="row addmargin">
+												<div class="col-sm-4 col-sm-offset-4">
+													<button id="modifyInfo" class="btn btn-primary">修改</button>
+													<!--<button class="btn btn-primary">提交</button>-->
+												</div>
+
+											</div>
+										</div>
+										<div  class="col-sm-6">
+											<div class="pic">
+						                        <img id="teacherImg" src="" align="absmiddle" width="120" height="160" alt="教师照片"/>
+						                        <div id="pic_tips_1"></div>
+						                    </div>
+						                    <button id="uploadImg">重新上传</button>
+										</div>
+
+									</div>
+									<!--
+                	作者：offline
+                	时间：2018-06-09
+                	描述：end context
+                -->
+								</div>
+							</div>
+							<!--End Advanced Tables -->
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- /. PAGE INNER  -->
+		</div>
+		<!-- /. PAGE WRAPPER  -->
+		<!-- /. WRAPPER  -->
+		<!-- JS Scripts-->
+		<!-- jQuery Js -->
+		<script src="assets/js/jquery-1.10.2.js"></script>
+		<!-- Bootstrap Js -->
+		<script src="assets/js/bootstrap.min.js"></script>
+		<!-- Metis Menu Js -->
+		<script src="assets/js/jquery.metisMenu.js"></script>
+		<!-- DATA TABLE SCRIPTS -->
+		<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+		<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+		<script src="dist/js/bootstrap-datepicker.min.js"></script>
+		<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
+		<script src="assets/js/common.js"></script>
+		<script src="assets/js/jquery.ocupload-1.1.2.js"></script>
+
+		<script>
+			var url = "http://localhost:8080/videoServer/";
+			//var url = "/videoServer/";
+
+			$(function() {
+				init();
+
+				function init() {
+					loadRoleInfo();
+					loadData();
+				}
+				
+				//图片上传
+				$("#uploadImg").upload({
+					name:'imgFile',//上传组件的name属性，即<input type='file' name='file'/>
+	                action:url+'teacher/teacherImgUpload?id='+Math.random(),//向服务器请求的路径
+	                enctype:'multipart/form-data',//mime类型，默认即可
+	                params:{
+	                	'rand': Math.random()
+	                },//请求时额外传递的参数，默认为空
+	                autoSubmit:false,//是否自动提交，即当选择了文件，自动关闭了选择窗口后，是否自动提交请求。
+	                onSubmit:function() {},//提交表单之前触发事件
+	                onComplete:function(data) {
+	                	console.log(data);
+	                	data = eval('(' + data + ')');
+                		console.log("2222");
+                		$("#teacherImg").attr("src", data.retMsg);
+                		console.log("src:"+data.retMsg);
+                		console.log("3333");
+                		$("#teacher_imgurl").val(data.retMsg)
+                		console.log("4444");
+	                },//提交表单完成后触发的事件
+	                onSelect:function() {
+				         //校验上传的文件名是否满足后缀为.xls或.xlsx
+				         var regex =/^.*\.(jpg|png|jpeg)$/i;
+				         //this.filename()返回当前选择的文件名称 (ps：我使用这个方法没好使，自己写了一个获取文件的名的方法) $("[name = '"+this.name()+"']").val())
+				         //alert(this.filename());
+				         console.log("name:"+$("[name = '"+this.name()+"']").val());
+				         if(regex.test($("[name = '"+this.name()+"']").val())){
+				             //通过校验
+				             this.submit();
+				         }else{
+				             //未通过
+				             $("#myModal3").modal(); //错误提示框，文件格式不正确，必须以.xls或.xlsx结尾
+				         }
+					                	
+	                }//当用户选择了一个文件后触发事件
+				})
+				function loadData() {
+					var currentUrl = this.location.href;
+					var id = currentUrl.substr(currentUrl.indexOf("=") + 1);
+					$("#teacher_id").val(id);
+					$.ajax({
+						type: "POST",
+						url: url + "teacher/queryTeacherAll",
+						datatype: 'json',
+						cache: false, //禁用缓存
+						data: {
+							"teacher_id": id
+						},
+						dataType: "json",
+						success: function(data) {
+							if(data.listObject.length == 1) { //加载成功
+								//添加数据
+								addTeacherInfo(data.listObject[0]);
+							} else {
+								alert("系统有误,加载信息失败!");
+							}
+						}
+					});
+				}
+
+				//显示数据
+				function addTeacherInfo(data) {
+					$("#teacher_name").val(data.teacher_name);
+					$("#teacher_phone").val(data.teacher_phone);
+					$("#teacher_mail").val(data.teacher_mail);
+					$("#teacher_date").val(data.teacher_date);
+					$("#teacher_imgurl").val(data.teacher_imgurl);
+					$("#teacher_introduce").text(data.teacher_introduce);
+					//显示照片
+					$("#teacherImg").attr("src",data.teacher_imgurl);
+
+					backSelect("teacher_status",data.teacher_status);
+				}
+
+				function backSelect(eleId,status){
+					 $("#"+eleId+" option").each(function(){   
+				          var txt = $(this).val();   
+				          if(txt==status){  
+				               this.selected = "selected";
+				          }  
+				     }) 
+				}
+				//提交修改信息
+				$('#modifyInfo').click(function() {
+					$.ajax({
+						type: "POST",
+						url: url + "teacher/modifyInfo",
+						datatype: 'json',
+						cache: false, //禁用缓存
+						data: {
+							"teacher_id": $("#teacher_id").val(),
+							"teacher_name": $("#teacher_name").val(),
+							"teacher_phone": $("#teacher_phone").val(),
+							"teacher_mail": $("#teacher_mail").val(),
+							"teacher_date": $("#teacher_date").val(),
+							"teacher_status": $("#teacher_status").val(),
+							"teacher_imgurl": $("#teacher_imgurl").val(),
+							"teacher_introduce": $("#teacher_introduce").text()
+						},
+						dataType: "json",
+						success: function(data) {
+							if(data.retCode == 1) { //修改成功
+								//页面跳转
+								window.location.href="teacher_list.html";
+							} else {
+								alert("系统有误,修改教师信息失败!");
+							}
+						}
+					});
+				});
+				
+				//日期控件
+				$("#sandbox-container .input-daterange").datepicker({
+					language: "zh-CN",
+					format: 'yyyy-mm-dd'
+				});
+
+				$(".checkall").click(function() {
+					var check = $(this).prop("checked");
+					$(".checkchild").prop("checked", check);
+				});
+				//提示信息
+				var lang = {
+					"sProcessing": "处理中...",
+					"sLengthMenu": "每页 _MENU_ 项",
+					"sZeroRecords": "没有匹配结果",
+					"sInfo": "当前显示第 _START_ 至 _END_ 项，共 _TOTAL_ 项。",
+					"sInfoEmpty": "当前显示第 0 至 0 项，共 0 项",
+					"sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+					"sInfoPostFix": "",
+					"sSearch": "搜索:",
+					"sUrl": "",
+					"sEmptyTable": "表中数据为空",
+					"sLoadingRecords": "载入中...",
+					"sInfoThousands": ",",
+					"oPaginate": {
+						"sFirst": "首页",
+						"sPrevious": "上页",
+						"sNext": "下页",
+						"sLast": "末页",
+						"sJump": "跳转"
+					},
+					"oAria": {
+						"sSortAscending": ": 以升序排列此列",
+						"sSortDescending": ": 以降序排列此列"
+					}
+				};
+			});
+		</script>
+		<!-- Custom Js -->
+		<script src="assets/js/custom-scripts.js"></script>
+
+	</body>
+
+</html>
