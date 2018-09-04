@@ -576,9 +576,9 @@
 									<td>
 										<!-- <input name="dx" id="vcode" placeholder="请输入短信验证码" type="text" class="form-control"/>		
 									 	<span>&nbsp;</span> -->
-									 	<input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" class="form-control" style="width:45%"/>
+									 	<input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" class="form-control" style="width:30%"/>
 
-	        							<input type="button" value="获取验证码" id="hmac" class="form-control"style="width:30%;float:right;font-size:1.5vh;margin-top:-5vh;margin-right:3vw"/>
+	        							<input type="button" value="获取验证码" id="hmac" class="form-control"style="width:25%;font-size:1.5vh;margin-top:-5vh;margin-left:20.5vw"/>
 									</td>
 								</tr>
 								<tr>
@@ -994,7 +994,7 @@
 	           var str={
 	        	   	phone:userphone,
 	        		code:code,//随机验证码
-	        		TemplateCode:"SMS_135036257"//模板信息
+	        		TemplateCode:"SMS_143560098"//模板信息
 	           };
 		       $.ajax({
 		       			type:"POST",
@@ -1081,7 +1081,8 @@
 	        	    cache:false,
 	        	    dataType:"json",
 	        	    success:function(data){
-	        	       alert(data);	   		 
+	        	       //alert(data);	
+	        	    	window.location.href="personal_center.html";
 	        	    },
 	        	    error:function(){
 	        	       alert("error");
@@ -1348,41 +1349,80 @@ function initBoutique(param){
 				return;
 			}else{
 				for (var i = 0; i < result.list.length; i++) {
-					var excellent = '<div class="col-md-4" >'
-							+ '<div class="thumbnail">'
-							+ '<a href="course.html?cid='+result.list[i].courses_id+'">' 
-							+ '<img src="'+ result.list[i].courses_img_url+'" class="jpckclass lazy"  style="width:100%;height:180px;" alt="...">'
-							+ '</a>'
-							+ '<div class="caption">'
-							+ '<p style="color:green;font-weight: bold;font-size:18px;"><a href="course.html?cid='+result.list[i].courses_id+'">'
-							+ result.list[i].courses_name
-							+ '</a></p>'
-							+ '<div class="col-md-6">'
-							+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
-							+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result.list[i].teacher_id+'">'
-							+ result.list[i].teacher_name
-							+ '</a></p>'
-							+ '</div>'
-							+ '<div class="col-md-6">'
-							+ '<p style="text-align:right;font-weight: bold;">'
-							+ result.list[i].courses_time
-							+ '</p>'
-							+ '</div>'
-							+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" ><span>3622人已购买</span>'
-							//+ result.list[i].courses_grade
-							+ '</p>'
-							+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
-							+ result.list[i].courses_pricemoney
-							+ '<span>￥</span></p>'
-							/* + '<p style="text-align:right;font-weight: bold;" class="col-md-8"><span class="glyphicon glyphicon-eye-open" style="color:red"></span>'
-							+ result.list[i].courses_click
-							+ '</p>' */
-							+ '<p><button class="btn btn-info" style="width: 100%" onclick= "DeleteCancel('+result.list[i].courses_id+')">取消收藏</button></p>'
-							+ '</div>'
-							+ '</div>'
-							+ '</div>';
-					$("#excellent").append(excellent);
-					$("#excellentTest").html("");
+					if(result.list[i].purchase_id=="" || result.list[i].purchase_id==null){
+							var excellent = '<div class="col-md-4" >'
+								+ '<div class="thumbnail">'
+								+ '<a href="course.html?cid='+result.list[i].courses_id+'">' 
+								+ '<img src="'+ result.list[i].courses_img_url+'" class="jpckclass lazy"  style="width:100%;height:180px;" alt="...">'
+								+ '</a>'
+								+ '<div class="caption">'
+								+ '<p style="color:green;font-weight: bold;font-size:18px;"><a href="course.html?cid='+result.list[i].courses_id+'">'
+								+ result.list[i].courses_name
+								+ '</a></p>'
+								+ '<div class="col-md-6">'
+								+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+								+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result.list[i].teacher_id+'">'
+							//	+ result.list[i].teacher_name
+								+ '</a></p>'
+								+ '</div>'
+								+ '<div class="col-md-6">'
+								+ '<p style="text-align:right;font-weight: bold;">'
+								+ result.list[i].courses_time
+								+ '</p>'
+								+ '</div>'
+								+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" >'
+								//+ result.list[i].courses_grade
+								+ '</p>'
+								+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+								+ result.list[i].courses_pricemoney
+								+ '<span>￥</span></p>'
+								+ '<p style="text-align:right;font-weight: bold;" class="col-md-8">'
+							//	+ result.list[i].purchase_id
+								+ '<span>0人已购买</span></p>'
+								+ '<p><button class="btn btn-info" style="width: 100%" onclick= "DeleteCancel('+result.list[i].courses_id+')">取消收藏</button></p>'
+								+ '</div>'
+								+ '</div>'
+								+ '</div>';
+						$("#excellent").append(excellent);
+						$("#excellentTest").html("");
+					}else{
+							var excellent = '<div class="col-md-4" >'
+								+ '<div class="thumbnail">'
+								+ '<a href="course.html?cid='+result.list[i].courses_id+'">' 
+								+ '<img src="'+ result.list[i].courses_img_url+'" class="jpckclass lazy"  style="width:100%;height:180px;" alt="...">'
+								+ '</a>'
+								+ '<div class="caption">'
+								+ '<p style="color:green;font-weight: bold;font-size:18px;"><a href="course.html?cid='+result.list[i].courses_id+'">'
+								+ result.list[i].courses_name
+								+ '</a></p>'
+								+ '<div class="col-md-6">'
+								+ '<p><span style="color:#00BFFF;font-weight: bold;">课程时长：</span></p>'
+								+ '<p style="color:green;font-weight: bold;"><a href="teacher_centre.html?cid='+result.list[i].teacher_id+'">'
+							//	+ result.list[i].teacher_name
+								+ '</a></p>'
+								+ '</div>'
+								+ '<div class="col-md-6">'
+								+ '<p style="text-align:right;font-weight: bold;">'
+								+ result.list[i].courses_time
+								+ '</p>'
+								+ '</div>'
+								+ '<p style="text-align:right;font-weight: bold;" class="col-md-12" >'
+								//+ result.list[i].courses_grade
+								+ '</p>'
+								+ '<p style="color:#00BFFF;font-weight: bold;" class="col-md-4">'
+								+ result.list[i].courses_pricemoney
+								+ '<span>￥</span></p>'
+								+ '<p style="text-align:right;font-weight: bold;" class="col-md-8">'
+								+ result.list[i].purchase_id
+								+ '<span>人已购买</span></p>'
+								+ '<p><button class="btn btn-info" style="width: 100%" onclick= "DeleteCancel('+result.list[i].courses_id+')">取消收藏</button></p>'
+								+ '</div>'
+								+ '</div>'
+								+ '</div>';
+						$("#excellent").append(excellent);
+						$("#excellentTest").html("");
+					}
+					
 				}
 				$("img.lazy").lazyload({
 					effectT : "fadeIn",

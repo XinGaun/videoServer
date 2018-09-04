@@ -1,7 +1,6 @@
 $(function(){
-
 	var user_id = $.cookie('id');
-	$.cookie('photo')
+	$.cookie('photo');
 	$("#kcml").hide();
 	$("#xypl").hide();
 	initRecommendCourse();
@@ -43,6 +42,9 @@ $(function(){
 	initTeacherClass(cid);
 	param.cid = cid;
 	initStudentComments(param);
+	param.cid = cid;
+	param.user_id=user_id;
+	initEnshrine(param);
 	judgePC();
 	ifgoumai();
 
@@ -281,8 +283,7 @@ function initCourseTop(cid){
 		success : function(result) {
 			//console.log(result);
 			for(var i=0;i<result.length;i++){
-				//console.log(result)
-				if(result[0].video_id == "" || result[0].video_id == null){
+				
 					$("#courses_name").html(result[0].courses_name);
 					$("#courses_names").html(result[0].courses_name);
 					$("#courses_grade").html(result[0].courses_grade);
@@ -297,6 +298,7 @@ function initCourseTop(cid){
 
 					$("#teacher_name").html(result[0].teacher_name);
 					$("#teacher_introduce").html(result[0].teacher_introduce);
+/*
 					$("#Collection").html("收藏");
 				}else{
 					var userPhone = $.cookie("phone");
@@ -335,6 +337,9 @@ function initCourseTop(cid){
 					}
 					
 				}									
+========
+*/
+									
 			}
 			$("img.lazy").lazyload({
 				effect : "fadeIn",
@@ -349,6 +354,35 @@ function initCourseTop(cid){
 
 	});
 }
+
+
+//判断是否收藏课程
+function initEnshrine(param){
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/front/CourseDetails/queryInitEnshrine",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify(param), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			var userPhone = $.cookie("phone");
+			if(userPhone == null || userPhone == ""){
+				$("#Collection").html("收藏");
+			}else{
+				console.log(result);
+				if(result[0].video_id == "" || result[0].video_id == null){
+					$("#Collection").html("收藏");
+				}else{
+					$("#Collection").html("已收藏");
+				}
+			}
+			
+		}
+	});
+
+}
+
 
 //初始化课程视频信息
 function initVideo(video_arr){
@@ -776,7 +810,7 @@ function videoComment(video_id){
 						  +			'<span>'+result.list[i].reply_date+'</span>&nbsp;&nbsp;<span>'+result.list[i].teacher_name+'</span>&nbsp;回复&nbsp;<span>'+result.list[i].user_name+'</span>:</h4>'
 						  +			'<div>'+result.list[i].reply_text+'</div>'
 						  +			'</div></div>'
-						  + '</div>'
+						  + '</div><div >&nbsp;</div><div >&nbsp;</div>'
 						  +'</div>';
 					
 						$("#pingliu").append(pinglun);

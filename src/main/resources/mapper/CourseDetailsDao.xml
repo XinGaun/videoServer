@@ -15,6 +15,16 @@
 		LEFT JOIN video_form_tab v ON v.video_form_id=c.video_form_id 
 		WHERE 1=1 AND c.courses_id = #{cid}
 	</select>
+	<!-- 是否已收藏课程 -->
+	<select id="queryInitEnshrine" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		SELECT s.video_id 
+		FROM courses_tab c LEFT JOIN teacher_tab t ON c.teacher_id=t.teacher_id 
+		LEFT JOIN subscription_tab s ON c.courses_id = s.video_id 
+		LEFT JOIN user_tab u ON s.user_id = u.user_id
+		LEFT JOIN video_form_tab v ON v.video_form_id=c.video_form_id 
+		WHERE 1=1 AND c.courses_id = #{cid} AND u.user_id = #{user_id}
+	</select>
 	<!-- 查询视频详情 -->
 	<select id="queryVideoDetails" parameterType="int" resultType="java.util.HashMap">
 		SELECT video_id,video_name,video_url,video_ppt FROM video_tab WHERE video_id = #{video_id}

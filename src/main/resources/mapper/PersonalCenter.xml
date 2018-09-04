@@ -35,6 +35,12 @@
  			AND u.user_phone = #{userphone} 
  		</if>
 	</select>
+	<!-- 查询购买课程总数 -->
+	<select id="queryPurchaseAllCount" parameterType="java.util.HashMap" resultType="int">
+		select count(video_id) from order_tab 
+		LEFT JOIN courses_tab ON courses_tab.courses_id = order_tab.video_id 
+		WHERE order_tab.order_status='已付款' and courses_tab.courses_id=#{courses_id};
+	</select>
 	<!-- 查询所有推荐课程 -->
 	<select id="queryRecommend" resultType="java.util.HashMap">
 		SELECT
@@ -59,9 +65,9 @@
 	<!-- 查询收藏课程总数 -->
 	<select id="queryOrderInformationAllCount" parameterType="java.util.HashMap" resultType="int">
 		select count(o.order_id) 
-		from test.order_tab o 
-		LEFT JOIN test.courses_tab c ON c.courses_id= o.video_id 
-		LEFT JOIN test.user_tab u ON u.user_id = o.user_id where o.order_status='已付款' 
+		from order_tab o 
+		LEFT JOIN courses_tab c ON c.courses_id= o.video_id 
+		LEFT JOIN user_tab u ON u.user_id = o.user_id where o.order_status='已付款' 
 		<if test="userphone!=''">
  			AND u.user_phone = #{userphone} 
  		</if>

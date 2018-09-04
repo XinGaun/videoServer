@@ -28,11 +28,11 @@ $(function() {
 		$('#gzbody').css('display', 'block');
 		$('#czbody').css('display', 'none');
 		$('#xxbody').css('display', 'none');
-		$("#gzli").addClass("active");
-		$("#czli").removeClass("active");
-		$("#xxli").removeClass("active");
+		$("#gaozhong").addClass("actives");
+		$("#chuzhong").removeClass("actives");
+		$("#xiaoxue").removeClass("actives");
 		pages = 0;
-		nums =16;
+		nums =8;
 		coursetype='高中';
 		$("#kcbt").html("高中精品课程");
 		video_form_name = null;
@@ -64,11 +64,11 @@ $(function() {
 		$('#gzbody').css('display', 'none');
 		$('#czbody').css('display', 'block');
 		$('#xxbody').css('display', 'none');
-		$("#czli").addClass("active");
-		$("#gzli").removeClass("active");
-		$("#xxli").removeClass("active");
+		$("#chuzhong").addClass("actives");
+		$("#gaozhong").removeClass("actives");
+		$("#xiaoxue").removeClass("actives");
 		pages = 0;
-		nums =16;
+		nums =8;
 		coursetype='初中';
 		$("#kcbt").html("初中精品课程");
 		video_form_name = null;
@@ -99,11 +99,11 @@ $(function() {
 		$('#gzbody').css('display', 'none');
 		$('#czbody').css('display', 'none');
 		$('#xxbody').css('display', 'block');
-		$("#xxli").addClass("active");
-		$("#gzli").removeClass("active");
-		$("#czli").removeClass("active");
+		$("#xiaoxue").addClass("actives");
+		$("#gaozhong").removeClass("actives");
+		$("#chuzhong").removeClass("actives");
 		pages = 0;
-		nums =16;
+		nums =8;
 		coursetype='小学';
 		$("#kcbt").html("小学精品课程");
 		video_form_name = null;
@@ -118,12 +118,12 @@ $(function() {
 })
 
 var pages = 0;//当前页数
-var nums = 16;//每页几条
+var nums = 8;//每页几条
 var total = 0;//总条数 
 //点击修改课程标题
 function kctypeclick(data){
 	pages = 0;
-	nums =16;
+	nums =8;
 	$("#kcbt").html(data);
 	video_form_name = data;
 	initcourse();
@@ -133,7 +133,7 @@ function kctypeclick(data){
 function initcourse(){
 	var data = {
 			video_form_class:coursetype,
-			nums : (pages*nums),
+			nums : pages*nums,
 			page:nums,
 			video_form_name:video_form_name
 	}
@@ -145,10 +145,10 @@ function initcourse(){
 		data:JSON.stringify(data),
 		dataType: "json",
 		success: function(data){
-			console.log(data);
+			//console.log(data);
 			for(var i=0;i<data.list.length;i++){
-				var CourseBody = '<div class="thumbnail col-md-3"><a href="course.html?cid='+data.list[i].courses_id+'">'
-					+'<img data-original="'+data.list[i].courses_img_url+'" class="img-rounded lazy" style="width: 100%; height: 220px;">'
+				var CourseBody = '<div class="thumbnail" style="width: 290px; height: 224px;float:left;margin-right: 12px;"><a href="course.html?cid='+data.list[i].courses_id+'">'
+					+'<img data-original="'+data.list[i].courses_img_url+'" class="img-rounded lazy" style="width: 290px; height:158px;">'
 					+'<div class="caption">'
 					+'<p>'+data.list[i].courses_name+'</p>'
 					+'<p>￥'+data.list[i].courses_pricemoney+'</p>'
@@ -238,8 +238,7 @@ function page(pages, nums, total) {
 }
 //下一页
 function xiaye(){
-	pages++;
-	nums=pages*nums;	
+	pages++;	
 	//$("#excellent").html("");
 	initcourse();
 	return false;
@@ -247,11 +246,6 @@ function xiaye(){
 //上页
 function shangye(){
 	pages--;
-	if(pages==0){
-		nums =16;
-	}else{
-		nums=pages*nums;
-	}
 	//$("#excellent").html("");
 	initcourse();
 	return false;
@@ -259,11 +253,6 @@ function shangye(){
 //页数换页
 function custom(number){
 	pages=number-1;
-	if(pages==0){
-		nums =16;
-	}else{
-		nums=(pages)*nums;
-	}
 	//$("#excellent").html("");
 	initcourse();
 	//console.log(pages);
