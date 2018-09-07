@@ -140,6 +140,17 @@
 	 	color:white;
 	 	margin:0vh 0.4vw
 	 }
+	 #frontPage{
+	 	height:auto;
+	 	width:auto;
+	 	position: relative;
+	 }
+	 #NoticeBoard{
+	 	position: absolute;
+	 	left:12%;
+	 	top:-4%;
+	 }
+	 
 </style>
 
 </head>
@@ -223,10 +234,45 @@
 	</nav>
 
 	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
-			<div class="col-md-12 panel panel-default">
-				<div class="col-md-3 " style="">
+		<div class="col-md-12 panel panel-default" id="frontPage">
+				<!-- 滚动页面-->
+				<div id="carousel-example-generic" class="carousel slide"
+					data-ride="carousel">
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-example-generic" data-slide-to="0"
+							class="active"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+					</ol>
+			
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+						<div class="item active">
+							<img src="img/banner.png" class="" style="height:90%;">
+			
+						</div>
+						<div class="item">
+							<img src="img/banner.png" class="" style="height:90%;">
+			
+						</div>
+						<div class="item">
+							<img src="img/banner.png" class="" style="height:90%;">
+						</div>
+					</div>
+			
+					<!-- Controls -->
+					<a class="left carousel-control" href="#carousel-example-generic"
+						role="button" data-slide="prev"> <span
+						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span
+						class="sr-only">上一页</span>
+					</a> <a class="right carousel-control" href="#carousel-example-generic"
+						role="button" data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">下一页</span>
+					</a>
+				</div>
+				 <div class="col-md-2 " style="" id="NoticeBoard">
 					<h3>
 						<span class="label label-default">通知栏</span>
 					</h3>
@@ -241,8 +287,30 @@
 						<button type="button" class="list-group-item">8.消息通知</button>
 					</div>
 				</div>
-				<div class="col-md-9">
-					<div class="col-md-4">
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			
+			<div class="col-md-12 panel panel-default">
+				 <!-- <div class="col-md-3 " style="">
+					<h3>
+						<span class="label label-default">通知栏</span>
+					</h3>
+					<div class="list-group pre-scrollable">
+						<button type="button" class="list-group-item">1.消息通知</button>
+						<button type="button" class="list-group-item">2.消息通知</button>
+						<button type="button" class="list-group-item">3.消息通知</button>
+						<button type="button" class="list-group-item">4.消息通知</button>
+						<button type="button" class="list-group-item">5.消息通知</button>
+						<button type="button" class="list-group-item">6.消息通知</button>
+						<button type="button" class="list-group-item">7.消息通知</button>
+						<button type="button" class="list-group-item">8.消息通知</button>
+					</div>
+				</div>  -->
+				
+				 <div class="col-md-12">
+				 	
+					<!-- <div class="col-md-4">
 						<div class="row">
 							<div class=" col-md-12">
 								<div class="thumbnail">
@@ -254,8 +322,8 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-4">
+					</div> -->
+					<!-- <div class="col-md-4">
 						<div class="row">
 							<div class=" col-md-12">
 								<div class="thumbnail">
@@ -267,8 +335,8 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-4">
+					</div> -->
+					<!-- <div class="col-md-4">
 						<div class="row">
 							<div class=" col-md-12">
 								<div class="thumbnail">
@@ -280,9 +348,9 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
-			</div>
+			</div> 
 
 			<div class="panel panel-default">
 				<div class="panel panel-default">
@@ -349,6 +417,8 @@
 							</nav> -->
 						</div>
 					</div>
+
+
 
 
 

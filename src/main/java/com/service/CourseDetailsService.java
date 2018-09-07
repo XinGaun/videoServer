@@ -16,4 +16,10 @@ public interface CourseDetailsService {
 	 * @return
 	 */
 	public String addCollection(String data);
+	/**
+	 * 根据课程ID查询教师信息
+	 * @param data
+	 * @return
+	 */
+	public String queryTeacherClass(String data);
 }

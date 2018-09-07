@@ -32,10 +32,8 @@
  	 }
  	 /*按钮圆角设置*/
 	.active{  
-	 	border-radius:2em;
-	 	border:1px #3AA8FF solid;
-	 	padding:2px 9px;
-	 	margin:0vh 2vw;
+	 	
+	 	margin:2vh -8vw 0vh 5vw;
 	 	display:inline-block;
 	 	verticle-align:middle;
 	 	color:black;
@@ -58,11 +56,11 @@
 	 	display:none;
 	 }
 	#login{
-		width:28vw;
-	 	height:50vh;
+		width:22vw;
+	 	height:52vh;
 	 	background-color:#FFFFFF;
 	 	border-radius:0.3em;
-	 	margin-left:52vw;
+	 	margin-left:70vw;
 	 	margin-top:12vh;
 	 	margin-bottom:9vh;
 	 	position:absolute;
@@ -72,7 +70,7 @@
 	 	position:relative;
 	 	top:4vh;
 	 	left:2.2vw;
-	 	width:23vw;
+	 	width:18vw;
 	 	height:45vh;
 	 	
 	}
@@ -87,16 +85,16 @@
       padding:5px 70px 5px 40px;
 	}
 	/*登录模态框中输入框的设置-添加小图标*/
-	input[name=uname]{
+	/* input[name=uname]{
 		
-		background: url(photos/LoginPhoto/user.png) no-repeat 6px 5px; /*引入图片图片*/
+		background: url(photos/LoginPhoto/user.png) no-repeat 6px 5px; 引入图片图片
 		
 		
 	}
 	input[type=password]{
-		background: url(photos/LoginPhoto/pwd.png) no-repeat 6px 5px; /*引入图片图片*/
+		background: url(photos/LoginPhoto/pwd.png) no-repeat 6px 5px; 引入图片图片
 	
-	}
+	} */
 	a{
 		color:#3AA8FF;
 	}
@@ -108,11 +106,11 @@
 	#body button{
 		background:#3AA8FF;
       	border-radius:4px;
-      	width:21.5vw;
+      	width:18vw;
       	height:5vh;
       	border:0px;
       	color:#FFFFFF;
-      	margin:3vh 0vw 1.2vh;
+      	margin:2vh 0vw 1vh;
 	}
 	/* 设置输入框里的字体大小，浏览器兼容不一样，每个都要设置 */
 	input::-webkit-input-placeholder { /* WebKit browsers */ 
@@ -172,10 +170,10 @@
 	 	margin:0vh 0vw 0vh 0.9vw;
 	 }
 	 .footli{
-	 	float:left;
+	 	text-align:center;
 	 }
 	 #footli{
-	 	width:24vw;
+	 	width:50vw;
 	 	height:9.1vh;
 	 	font-size:0.8vw;
 	 }
@@ -189,7 +187,7 @@
 	 }
 	 #foot li{
 	 	display:inline-block;
-	 	color:white;
+	 	color:#999999;
 	 	margin:0vh 0.4vw
 	 }
 	
@@ -247,7 +245,7 @@
 			
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<div>
+					<div >
 						<div  id="logsd">
 							<a href="logins.html" @click="change(1)" :class="flag==1?'active':''">登录</a>
 					    	<!-- <a href="rigester.html" @click="change(2)" :class="flag==2?'active':''">注册</a> -->
@@ -273,7 +271,7 @@
 		
 		<div id="login">
 			<form>
-				<div id="header" style="margin-bottom:2vh">
+				<div id="header" style="margin-bottom:2vh;border-bottom:2px solid #cccccc;padding-bottom:2vh;">
 					<span>登录账户</span>
 					<!-- <a href="rigester.html" style="float:right;margin-right:1vw;">注册
 						<img :src="rigesterUrl">
@@ -281,17 +279,17 @@
 				</div>
 				<div id="body">
 			        <label>
-			        	<input type="text" name="uname" id="uname" placeholder="手机号/用户名" style="width:100%">
+			        	<input type="text" name="uname" id="uname" placeholder="请输入手机号/用户名" style="margin-left:0vw;width:114%;padding:5px 15px;">
 			        </label>
 			        <label>
-			        	<input type="password" id="pwd" placeholder="密码" style="width:100%">
+			        	<input type="password" id="pwd" placeholder="密码" style="width:114%;display:none;padding:5px 15px;">
 			        </label>
-			        <input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" style="width:50%;padding:5px 27px;display:none;">
-			        <input type="button" value="获取验证码" id="hmac" style="margin-right:1.3vw;width:35%;height:30px;display:none;float:right;font-size:1.5vh;">
+			        <input type="text" name="dx" id="vcode" placeholder="请输入验证码" style="margin-left:0vw;width:45%;padding:5px 15px;">
+			        <a><input type="button" value="获取验证码" id="hmac" style="margin-right:0vw;width:35%;height:30px;float:right;font-size:2vh;"></a>
 			        
 			        <br/>
 			        <span><input type="checkbox">记住密码</span>
-			  		<a href="resetpwd.html" style="float:right;margin-right:1vw;" id="mi">忘记密码？</a>
+			  		<a href="resetpwd.html" style="float:right;margin-right:0vw;" id="mi">忘记密码？</a>
 			        <br/>
 					<label>
 						<button type="button" id="denglu">登录</button>
@@ -299,34 +297,25 @@
 				</div>
 				<div>
 					<span>
-						<span id="malogindiv">还没有密码？试试&nbsp</span><a id="malogin">验证码登录</a>
+						<span id="malogindiv">已有密码？试试&nbsp</span><a id="malogin">密码登录</a>
 					</span>
 				</div>	
 		    </form>
 		</div>
 	</div>
 	<!-- 尾部 -->
-	<footer style="background:gray">
+	<footer style="background:#666666">
 		<div id="foot">
 			<div id="foot-head">
 				<div class="footli" id="footli">
+					<div id="footbeian">
+  						<span style="color:#999999;"> copyright @2018yudao . All Rights Reserved</span>
+  					</div>
 					<ol>
     					<li v-for="site in sites">
       						{{ site.name }}
     					</li>
-    					
   					</ol>
-  					<div id="footbeian">
-  						<img src="photos/LoginPhoto/beianbgs@2x.png"/>
-  						<span style="color:white;">晋ICP备18006212号</span>
-  					</div>
-				</div>
-				<div class="footli" id="footimg">
-					<img :src="footimg">
-				</div>
-				<div class="footli" id="footma">
-					<span style="color:white;">关注我们：</span>
-					<img :src="footma" style="width:50px;height:50px;"/>
 				</div>
 			</div>
 		</div>
@@ -718,9 +707,17 @@
 	  el: '#footli',
 	  data: {
 	    sites: [
-	      { name: '关于我们' },
+	      { name: '语道中心教育有限公司版权所有' },
 	      { name: '|'},
-	      { name: '意见反馈' },
+	      { name: '服务协议' },
+	      { name: '|'},
+	      { name: '站点地图' },
+	      { name: '|'},
+	      { name: '侵权投诉' },
+	      { name: '|'},
+	      { name: '问题反馈' },
+	      { name: '|'},
+	      { name: '帮助' }
 	    ]
 	  }
 	})

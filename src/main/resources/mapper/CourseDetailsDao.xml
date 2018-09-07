@@ -56,4 +56,14 @@
 	<insert id="addCollection" parameterType="java.util.HashMap">
 		INSERT INTO subscription_tab(user_id,video_id,subscription_date) VALUES ((select user_id from user_tab where user_phone=#{userphone}),#{cid},now())
 	</insert>
+	<!-- 查询教师信息-->
+	<select id="queryTeacherClass" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select t.teacher_name,t.teacher_id,t.teacher_introduce,t.teacher_imgurl 
+		from teacher_tab t 
+		LEFT JOIN courses_tab c ON c.teacher_id=t.teacher_id 
+		where  1=1 
+		<if test="cid!=''">
+			AND c.courses_id = #{cid}
+		</if>
+	</select>
 </mapper>

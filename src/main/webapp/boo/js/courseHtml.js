@@ -40,6 +40,7 @@ $(function(){
 	});
 	var cid = getUrlParam('cid');
 	initCourseTop(cid);
+	initTeacherClass(cid);
 	param.cid = cid;
 	initStudentComments(param);
 	judgePC();
@@ -285,13 +286,15 @@ function initCourseTop(cid){
 					$("#courses_name").html(result[0].courses_name);
 					$("#courses_names").html(result[0].courses_name);
 					$("#courses_grade").html(result[0].courses_grade);
-					$("#qian").html(result[0].courses_pricemoney);
+					$("#qian").html('<span style="font-size:18px;color:#B0171F;">'+result[0].courses_pricemoney+'&nbsp;元</span>');
 					$("#qians").html(result[0].courses_pricemoney);
 					$("#courses_click").html(result[0].courses_click);
 					$("#courses_introduce").html(result[0].courses_introduce);
 					$("#video_form_name").html(result[0].video_form_name);
 					$("#video_form_class").html(result[0].video_form_class);
-					$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy"></a>');
+
+					$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:300px;" class="img-rounded lazy"></a>');
+
 					$("#teacher_name").html(result[0].teacher_name);
 					$("#teacher_introduce").html(result[0].teacher_introduce);
 					$("#Collection").html("收藏");
@@ -302,13 +305,15 @@ function initCourseTop(cid){
 						$("#courses_name").html(result[0].courses_name);
 						$("#courses_names").html(result[0].courses_name);
 						$("#courses_grade").html(result[0].courses_grade);
-						$("#qian").html(result[0].courses_pricemoney);
+						$("#qian").html('<span style="font-size:18px;color:#B0171F;">'+result[0].courses_pricemoney+'&nbsp;元</span>');
 						$("#qians").html(result[0].courses_pricemoney);
 						$("#courses_click").html(result[0].courses_click);
 						$("#courses_introduce").html(result[0].courses_introduce);
 						$("#video_form_name").html(result[0].video_form_name);
 						$("#video_form_class").html(result[0].video_form_class);
-						$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy"></a>');
+
+						$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:300px;" class="img-rounded lazy"></a>');
+
 						$("#teacher_name").html(result[0].teacher_name);
 						$("#teacher_introduce").html(result[0].teacher_introduce);
 					}else{
@@ -316,13 +321,15 @@ function initCourseTop(cid){
 						$("#courses_name").html(result[0].courses_name);
 						$("#courses_names").html(result[0].courses_name);
 						$("#courses_grade").html(result[0].courses_grade);
-						$("#qian").html(result[0].courses_pricemoney);
+						$("#qian").html('<span style="font-size:18px;color:#B0171F;">'+result[0].courses_pricemoney+'&nbsp;元</span>');
 						$("#qians").html(result[0].courses_pricemoney);
 						$("#courses_click").html(result[0].courses_click);
 						$("#courses_introduce").html(result[0].courses_introduce);
 						$("#video_form_name").html(result[0].video_form_name);
 						$("#video_form_class").html(result[0].video_form_class);
-						$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:240px;" class="img-rounded lazy"></a>');
+
+						$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:300px;" class="img-rounded lazy"></a>');
+
 						$("#teacher_name").html(result[0].teacher_name);
 						$("#teacher_introduce").html(result[0].teacher_introduce);
 					}
@@ -783,3 +790,43 @@ function videoComment(video_id){
 		}
 	});
 }
+
+
+
+//初始化教师信息
+function initTeacherClass(cid){
+	$.ajax({
+		type : "POST",
+		url : url
+		+ "/videoServer/front/CourseDetails/queryTeacherClass",
+		contentType : 'application/json; charset=UTF-8',
+		data : JSON.stringify({cid:cid}), //传入组装的参数
+		dataType : "json",
+		success : function(result) {
+			//alert(result.length);
+			if(result.length==0){
+				$("#TeacherClass").html("暂无教师信息");
+			}else{
+				var TeacherClass ='<div class="media-left">'
+					+'<a href="#"><img data-original="'
+					+result[0].teacher_imgurl
+					+'" class="jpckclass lazy" style="height:15%;" alt="...">'
+					+ '</a></div>'
+					+'<div class="media-body">'
+					+ '<p style="font-weight: bold;">'
+					+result[0].teacher_name
+					+'</p>'
+					+ '<p style="text-indent:2em" class="kcjs">'
+					+result[0].teacher_introduce
+					+'</p></div>';
+				$("#TeacherClass").append(TeacherClass);
+				$("img.lazy").lazyload({
+					effect : "fadeIn",
+					offset : 300
+				});
+			}
+		}
+
+	});
+}
+

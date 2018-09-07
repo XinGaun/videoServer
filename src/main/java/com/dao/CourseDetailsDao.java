@@ -25,4 +25,10 @@ public interface CourseDetailsDao {
 	 * @return
 	 */
 	public Integer addCollection(HashMap<String,Object> map);
+	/**
+	 * 根据课程ID查询教师信息
+	 * @param map
+	 * @return
+	 */
+	public ArrayList<HashMap<String,Object>> queryTeacherClass(HashMap<String,Object> map);
 }

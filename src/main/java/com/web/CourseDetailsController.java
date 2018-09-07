@@ -70,4 +70,13 @@ public class CourseDetailsController {
 	public String loginss(@RequestBody String data) {
 		return JSON.toJSONString(data);
 	}
+	/**
+	 * 通过课程ID查询教师信息
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryTeacherClass",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryTeacherClass(@RequestBody String data) {
+		return courseDetailsService.queryTeacherClass(data);
+	}
 }

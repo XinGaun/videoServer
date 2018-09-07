@@ -235,13 +235,7 @@
 	                    </li>
 	                    <li>
 	                        <a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
-	                    </li>
-	                    <li>
-	                        <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
-	                    </li>
-						<li class="role" style="display: none;">
-							<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
-						</li>
+	                    </li>	       
 						<li>
 							<a href="comment.html" class="active-menu"><i class="fa fa-table"></i>评论管理</a>
 						</li>
@@ -714,8 +708,9 @@ $(function(){
 	                   }
 	            	   if(commmentStatus == "不通过"){
 	            		   param.comment_status = 11;//
-	                   }
-	            	   
+	                   }else{
+	                	   param.comment_status =null;
+	                   }            	   
 	               }
 	              /*  var teachername= $.trim($("#teacher_name").val());
 	               if (teachername.length > 0) 

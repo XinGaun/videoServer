@@ -35,11 +35,9 @@
 		border-bottom-left-radius:2em; 
  	 }
  	 /*按钮圆角设置*/
-	.actives{  
-	 	border-radius:2em;
-	 	border:1px #3AA8FF solid;
-	 	padding:2px 9px;
-	 	margin:0vh 2vw;
+	.active{  
+	 	
+	 	margin:2vh -8vw 0vh 5vw;
 	 	display:inline-block;
 	 	verticle-align:middle;
 	 	color:black;
@@ -50,7 +48,7 @@
 	 	
 	 } 
 	
-	 #log a{
+	  #log a{
 	 	color:#3AA8FF;
 	 	padding:1vh 1.5vw;
 	 	text-decoration:none;
@@ -61,37 +59,104 @@
 	 	margin:2vh 1vw 0vh 0vw;
 	 	display:none;
 	 }
-	 #loginrouter{
-	 	position:fixed;
-	 	top:15vh;
-	 	left:58vw;
-	 	z-index:2;
-	 }
-	#foot{
+	#login{
+		width:22vw;
+	 	height:52vh;
+	 	background-color:#FFFFFF;
+	 	border-radius:0.3em;
+	 	margin-left:70vw;
+	 	margin-top:12vh;
+	 	margin-bottom:9vh;
+	 	position:absolute;
+	}
+	
+	form{
+	 	position:relative;
+	 	top:4vh;
+	 	left:2.2vw;
+	 	width:18vw;
+	 	height:45vh;
+	 	
+	}
+	#header span{
+	  font-size:1.5vw;
+	}
+	/* 输入框的圆角设置 */
+	#body input{
+	  margin: 1.5vh 0vw;
+	  border:1px solid #888;
+      border-radius:4px;
+      padding:5px 70px 5px 40px;
+	}
+	/*登录模态框中输入框的设置-添加小图标*/
+	/* input[name=uname]{
+		
+		background: url(photos/LoginPhoto/user.png) no-repeat 6px 5px; 引入图片图片
+		
+		
+	}
+	input[type=password]{
+		background: url(photos/LoginPhoto/pwd.png) no-repeat 6px 5px; 引入图片图片
+	
+	} */
+	a{
+		color:#3AA8FF;
+	}
+	a:hover{
+		text-decoration:none;
+		color:#3AA8FF;
+	}
+	/* 登录按钮设置 */
+	#body button{
+		background:#3AA8FF;
+      	border-radius:4px;
+      	width:18vw;
+      	height:5vh;
+      	border:0px;
+      	color:#FFFFFF;
+      	margin:2vh 0vw 1vh;
+	}
+	/* 设置输入框里的字体大小，浏览器兼容不一样，每个都要设置 */
+	input::-webkit-input-placeholder { /* WebKit browsers */ 
+		font-size:2vh;
+	} 
+
+	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+		font-size:2vh;
+	} 
+	input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+		font-size:2vh;
+	} 
+	input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+		font-size:2vh;
+	} 
+	#bodys{
+		background:url(photos/LoginPhoto/bj@2x.png) no-repeat;
+		background-size:100% 73vh;  
+		min-height:71vh;
+	}
+	
+	 
+	#logo{
+		position:relative;
+		margin-top:15vh;
+	 	border:1px solid #888888;
+	 	width:25vw;
+	}
+	 #foot{
 	 	width:100vw;
-	 	height:12vh;	
+	 	height:13vh;	
 	 	border-bottom:1px solid #999999;
 	 	position:relative;
 	 	border-top:1px solid gray;
-	 	
-	 }
+	 } 
 	 #foot-head{
 	 	margin:3vh 19.4vw 0vh 19.2vw;
-	 	height:9vh;
+	 	height:9.2vh;
 	 	width:61.3vw;
 	 	
 	 }
-	 #foot-bot{
-	 	width:100vw;
-	 	height:6vh;
-	 	
-	 	bottom:0vh;
-	 }
-	 #foot-bottom{
-	 	margin:1.7vh 21.3vw 0vh 19.2vw;
-	 	height:1.5vh;
-	 	width:59.4vw;
-	 }
+	
 	 #footimg{
 	 	height:9.2vh;
 	 	width:5vw;
@@ -109,30 +174,28 @@
 	 	margin:0vh 0vw 0vh 0.9vw;
 	 }
 	 .footli{
-	 	float:left;
+	 	text-align:center;
 	 }
 	 #footli{
-	 	width:24vw;
-	 	height:9vh;
+	 	width:50vw;
+	 	height:9.1vh;
 	 	font-size:0.8vw;
 	 }
 	 #footli span,#footli div{
 	 	
 		margin-left:0.5vw;
 	 }
-	 ol{
+	 #foot ol{
 	 	list-style-type:none;
 	 	padding:0px;
 	 }
-	 li{
+	 #foot li{
 	 	display:inline-block;
-	 	
-	 	color:white;
+	 	color:#999999;
 	 	margin:0vh 0.4vw
 	 }
-	 body{
-	 	heigh:100vh;
-	 }
+	
+	 
 	 #queryAll{
  	 	border-top-left-radius:2em;
 		border-top-right-radius:0em;
@@ -175,8 +238,8 @@
 
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav" style="margin-left:4vw;">
-				<!-- <li class="active">&nbsp; <span class="sr-only">(current)</span></li> -->
+			<!-- <ul class="nav navbar-nav" style="margin-left:4vw;">
+				<li class="active">&nbsp; <span class="sr-only">(current)</span></li>
 
 
 				<li class="dropdown" STYLE="margin-top: 5%">
@@ -206,7 +269,7 @@
 					</div>
 				</li>
 			</ul>
-
+ -->
 			<!-- 登录|注册 -->
 			
 			<ul class="nav navbar-nav navbar-right">
@@ -392,32 +455,24 @@
 		</div>
 
 		<!-- 尾部 -->
-	<footer style="background:gray;margin-bottom:0vh;">
+	<footer style="background:#666666">
 		<div id="foot">
 			<div id="foot-head">
 				<div class="footli" id="footli">
+					<div id="footbeian">
+  						<span style="color:#999999;"> copyright @2018yudao . All Rights Reserved</span>
+  					</div>
 					<ol>
     					<li v-for="site in sites">
       						{{ site.name }}
     					</li>
-    					
   					</ol>
-  					<div id="footbeian">
-  						<img src="photos/LoginPhoto/beianbgs@2x.png"/>
-  						<span style="color:white;">晋ICP备18006212号</span>
-  					</div>
-				</div>
-				<div class="footli" id="footimg">
-					<img :src="footimg">
-				</div>
-				<div class="footli" id="footma">
-					<span style="color:white;">关注我们：</span>
-					<img :src="footma" style="width:50px;height:50px;"/>
 				</div>
 			</div>
 		</div>
 		
 	</footer>
+
 
 		<script type="text/javascript" src="js/videoHtml.js">
 			
@@ -495,9 +550,17 @@
 	  el: '#footli',
 	  data: {
 	    sites: [
-	      { name: '关于我们' },
+	      { name: '语道中心教育有限公司版权所有' },
 	      { name: '|'},
-	      { name: '意见反馈' },
+	      { name: '服务协议' },
+	      { name: '|'},
+	      { name: '站点地图' },
+	      { name: '|'},
+	      { name: '侵权投诉' },
+	      { name: '|'},
+	      { name: '问题反馈' },
+	      { name: '|'},
+	      { name: '帮助' }
 	    ]
 	  }
 	})

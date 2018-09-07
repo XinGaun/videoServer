@@ -47,7 +47,8 @@ public class VideoTabServiceImpl implements VideoTabService{
 		String pptUrl = ossUpload.getWebURL(osspptName);
 		String videoSuffix = videoPath.substring(videoPath.lastIndexOf("."));
 		videoName = videoName+videoSuffix;
-		String ossVideoName = videoPath.substring(videoPath.lastIndexOf("video")+7);
+		String ossVideoName = videoPath.substring(videoPath.lastIndexOf("video")+6);
+		
 		System.out.println("succes");
 		
 		String path = "/oss/video/"+ossVideoName;

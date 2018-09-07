@@ -406,27 +406,19 @@
 		<div class="col-md-1"></div>
 	</div>
 	<hr>
-<footer style="background:gray">
+<!-- 尾部 -->
+	<footer style="background:#666666">
 		<div id="foot">
 			<div id="foot-head">
 				<div class="footli" id="footli">
+					<div id="footbeian">
+  						<span style="color:#999999;"> copyright @2018yudao . All Rights Reserved</span>
+  					</div>
 					<ol>
     					<li v-for="site in sites">
-      						
+      						{{ site.name }}
     					</li>
-    					
   					</ol>
-  					<div id="footbeian">
-  						
-  						
-  					</div>
-				</div>
-				<div class="footli" id="footimg">
-					<img :src="footimg">
-				</div>
-				<div class="footli" id="footma">
-					<span style="color:white;"></span>
-					
 				</div>
 			</div>
 		</div>

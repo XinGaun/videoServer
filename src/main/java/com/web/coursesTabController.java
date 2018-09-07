@@ -82,11 +82,11 @@ public class coursesTabController {
 	}
 	@RequestMapping(value="/addCoursesTab.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void addCoursesTab(HttpServletRequest request,String courses_name,int courses_video_form_id,String courses_introduce,String courses_pricemoney,String courses_video,MultipartFile image,String courses_qz) throws Exception{
+	public void addCoursesTab(HttpServletRequest request,String courses_name,int courses_video_form_id,String courses_introduce,String courses_pricemoney,String courses_video,MultipartFile image,String courses_qz,String coures_price) throws Exception{
 		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
 		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
 		System.out.println(image.getOriginalFilename());
-		ctService.addCoursesTab(courses_name,courses_video_form_id,courses_introduce,courses_pricemoney,courses_video, image,teacher_id,Integer.parseInt(courses_qz));
+		ctService.addCoursesTab(courses_name,courses_video_form_id,courses_introduce,courses_pricemoney,courses_video, image,teacher_id,Integer.parseInt(courses_qz),coures_price);
 	}
 	@RequestMapping(value="/delCoursesById.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
@@ -102,9 +102,9 @@ public class coursesTabController {
 	
 	@RequestMapping(value="/upCoursesById.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public void upCoursesById(int courses_id,String courses_name,int courses_video_form_id,String courses_introduce,String courses_pricemoney,String courses_video,MultipartFile image,String courses_qz,HttpServletRequest request)  throws Exception{
+	public void upCoursesById(HttpServletRequest request,String courses_id,String courses_name,String courses_video_form_id,String courses_introduce,String courses_pricemoney,String courses_video,MultipartFile image,String courses_qz,String coures_price)  throws Exception{
 		System.out.println("controller");
-		ctService.upCoursesById( courses_id, courses_name, courses_video_form_id, courses_introduce, courses_pricemoney, courses_video, image,Integer.parseInt(courses_qz));
+		ctService.upCoursesById( Integer.parseInt(courses_id), courses_name, Integer.parseInt(courses_video_form_id), courses_introduce, courses_pricemoney, courses_video, image,Integer.parseInt(courses_qz), coures_price);
 	}
 	@RequestMapping(value="/updateCoursesById.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody

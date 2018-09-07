@@ -70,4 +70,13 @@ public class CourseDetailsServiceImpl implements CourseDetailsService {
 		Integer arrayList = courseDetailsDao.addCollection(map);
 		return "success";
 	}
+	/**
+	 * 查询教师信息
+	 */
+	@Override
+	public String queryTeacherClass(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		ArrayList<HashMap<String,Object>> arrayList = courseDetailsDao.queryTeacherClass(map);
+		return JSON.toJSONString(arrayList);
+	}
 }
