@@ -17,6 +17,9 @@
 		<if test="reply_date!=null">
 			,reply_date
 		</if>
+		<if test="comment_status !=null">
+			,comment_status
+		</if>
 		)
 		VALUES (#{video_id},#{user_id},#{comment_text},#{comment_date}
 		<if test="reply_text != null">
@@ -28,14 +31,17 @@
 		<if test="reply_date!=null">
 			,#{reply_date}
 		</if>
+		<if test="comment_status !=null">
+			,#{comment_status}
+		</if>
 		)
 	</insert>
 
 	<insert id="addCommentTabEntity" parameterType="com.entity.CommentTab"
 		keyProperty="comment_id">
 		INSERT INTO
-		comment_tab(video_id,user_id,comment_text,comment_date,reply_text,reply_teacher,reply_date)
-		values(#{videoId},#{userId},#{commentText},#{commentDate},#{replyText},#{replyTeacher},#{replyDate})
+		comment_tab(video_id,user_id,comment_text,comment_date,reply_text,reply_teacher,reply_date,comment_status)
+		values(#{videoId},#{userId},#{commentText},#{commentDate},#{replyText},#{replyTeacher},#{replyDate},0)
 	</insert>
 
 	<!-- 查询 -->
@@ -59,6 +65,9 @@
 			</if>
 			<if test="teacher_name != null and teacher_name !='' ">
 				and t.teacher_name = #{teacher_name}
+			</if>
+			<if test="comment_status != null and comment_status !='' ">
+				and c.comment_status = #{comment_status}
 			</if>
 			<if test="comment_start!='' and comment_start!=null">
 				and c.comment_date >= str_to_date(#{comment_start},
@@ -97,6 +106,9 @@
 			</if>
 			<if test="teacher_name != null and teacher_name !='' ">
 				and t.teacher_name = #{teacher_name}
+			</if>
+			<if test="comment_status != null and comment_status !='' ">
+				and c.comment_status = #{comment_status}
 			</if>
 			<if test="comment_start!='' and comment_start!=null">
 				and c.comment_date >= str_to_date(#{comment_start},
