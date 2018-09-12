@@ -9,550 +9,258 @@
 <script src="js/jquery.lazyload.min.js"></script>
 <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 <script src="js/jquery.lazyload.min.js"></script>
-<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+<script
+	src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="js/LoadIndex.js"></script>
-
 <style type="text/css">
-* {
-	margin: 0;
-	padding: 0;
+.tzl:hover {
+	background-color: #6a6b6c;
+	color: #fff;
 }
-.lazy {
-	    display: none;
-	}
-	.kcjs {
-		color: #000000;
-		overflow: hidden;
-		display: -webkit-box;
-		-webkit-line-clamp: 4;
-		-webkit-box-orient: vertical;
-		word-break: break-all;
-	}
-	#search_submit{
-	 	border-top-left-radius:0em;
-		border-top-right-radius:2em;
-		border-bottom-right-radius:2em;
-		border-bottom-left-radius:0em; 
-	 }
- 	 #dropdown{
- 	 	border-top-left-radius:2em;
-		border-top-right-radius:0em;
-		border-bottom-right-radius:0em;
-		border-bottom-left-radius:2em; 
- 	 }
- 	 /*按钮圆角设置*/
-	.actives{  
-	 	border-radius:2em;
-	 	border:1px #3AA8FF solid;
-	 	padding:2px 9px;
-	 	margin:0vh 2vw;
-	 	display:inline-block;
-	 	verticle-align:middle;
-	 	color:black;
-	 	text-decoration: none;
-	 } 
-	 a:hover{
-	 	text-decoration:none;
-	 	
-	 } 
-	
-	  #log a{
-	 	color:#3AA8FF;
-	 	padding:1vh 1.5vw;
-	 	text-decoration:none;
-	 } 
-	 #logImg{
-	 	float:right;
-	 	border:1px solid red;
-	 	margin:2vh 1vw 0vh 0vw;
-	 	display:none;
-	 }
-	 #loginrouter{
-	 	position:fixed;
-	 	top:15vh;
-	 	left:58vw;
-	 	z-index:2;
-	 }
-	
-	 #boo{
-	 	position:relative;
-	 }
-	  #foot{
-	 	width:100vw;
-	 	height:13vh;	
-	 	border-bottom:1px solid #999999;
-	 	position:relative;
-	 	border-top:1px solid gray;
-	 	
-	 } 
-	 #foot-head{
-	 	margin:3vh 19.4vw 0vh 19.2vw;
-	 	height:9.2vh;
-	 	width:61.3vw;
-	 	
-	 }
-	 #foot-bot{
-	 	width:100vw;
-	 	height:6vh;
-	 	
-	 	bottom:0vh;
-	 }
-	 #foot-bottom{
-	 	margin:1.7vh 21.3vw 0vh 19.2vw;
-	 	height:1.5vh;
-	 	width:59.4vw;
-	 }
-	 #footimg{
-	 	height:9.2vh;
-	 	width:5vw;
-	 	margin-left:5vw;
-	 }
-	 #footma{
-	 	width:21vw;
-	 	margin-left:6vw;
-	 }
-	 #footma span{
-	 	
-	 	vertical-align:top;
-	 }
-	 #footma img,#footma span{
-	 	margin:0vh 0vw 0vh 0.9vw;
-	 }
-	 .footli{
-	 	float:left;
-	 }
-	 #footli{
-	 	width:24vw;
-	 	height:9.1vh;
-	 	font-size:0.8vw;
-	 }
-	 #footli span,#footli div{
-	 	
-		margin-left:0.5vw;
-	 }
-	 #foot ol{
-	 	list-style-type:none;
-	 	padding:0px;
-	 }
-	 #foot li{
-	 	display:inline-block;
-	 	color:white;
-	 	margin:0vh 0.4vw
-	 }
-	 #frontPage{
-	 	height:auto;
-	 	width:auto;
-	 	position: relative;
-	 }
-	 #NoticeBoard{
-	 	position: absolute;
-	 	left:12%;
-	 	top:-4%;
-	 }
-	 
+/*按钮圆角设置*/
+#logsd {
+	margin-top:10px;
+	float:right;
+	display: inline-block;
+	verticle-align: middle;
+	color: black;
+	text-decoration: none;
+}
+.actives{
+ 	background-image: url('./img/img_select1.png'); 
+ 	background-repeat: no-repeat;
+  	background-position: 0px 56px;
+  	color: #24b4f8;
+ }
+ #logsd{
+ 	font-size: 18px; 
+ 	font-weight: bold;
+ }
 </style>
-
 </head>
-<body style="background-color: #F0F0F0">
-	<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-				aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="index.html"><img src="img/logo @2x.png"
-				alt="..." class="img-rounded img-responsive lazy"></a>
+<body style="background-color: #f5f5f5;">
+	<!-- 页头 -->
+	<div
+		style="height: 67px; display: flex; justify-content: center; align-items: center; background-color: #fff;">
+		<div style="margin: 0 auto; width: 1200px;">
+			<a href="index.html"><img src="./img/logos.png"></a>
+			<a id="logsd" href="logins.html" @click="change(1)"
+					:class="flag==1?'actives':''">登录</a>
+
+			<div id="logImg" class="dropdown" style="float:right;">
+				<button class="btn btn-default dropdown-toggle" type="button"
+					id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="true">
+					<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px"
+						height="40px" class="img-circle" /> <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					<li><a href="personal_center.html">个人中心</a></li>
+					<li id="exit"><a>退出</a></li>
+				</ul>
+			</div>
+		</div>
+
+
+
+	</div>
+	<!-- 滚动页面-->
+	<div id="carousel-example-generic" class="carousel slide"
+		data-ride="carousel" style="height: 340px;">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#carousel-example-generic" data-slide-to="0"
+				class="active"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+		</ol>
+
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+				<img src="img/banner.png" class=""
+					style="height: 340px; width: 100%;">
+
+			</div>
+			<div class="item">
+				<img src="img/banner.png" class=""
+					style="height: 340px; width: 100%;">
+
+			</div>
+			<div class="item">
+				<img src="img/banner.png" class=""
+					style="height: 340px; width: 100%;">
+			</div>
+		</div>
+
+		<!-- Controls -->
+		<a class="left carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="prev"> <span
+			class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span
+			class="sr-only">上一页</span>
+		</a> <a class="right carousel-control" href="#carousel-example-generic"
+			role="button" data-slide="next"> <span
+			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">下一页</span>
+		</a>
+	</div>
+	<!-- 名师推荐 -->
+	<div style="background-color: #fff;">
+		<div style="height: 55px; margin: 0 auto; width: 1200px;">
+			<p
+				style="line-height: 55px; font-size: 18px; font-weight: bold; margin-left: 12px;">名师推荐</p>
+		</div>
+		<div style="height: 266px; margin: 0 auto; width: 1200px;">
+			<div style="width: 290px; float: left;">
+				<img src="img/banner2.jpg" style="width: 290px; height: 195px;">
+				<div style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
+					<p style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
+					<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
+				</div>
+			</div>
+			<div style="width: 290px; float: left; margin-left: 12px;">
+				<img src="img/banner2.jpg" style="width: 290px; height: 195px;">
+				<div style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
+					<p style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
+					<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
+				</div>
+			</div>
+			<div style="width: 290px; float: left; margin-left: 12px;">
+				<img src="img/banner2.jpg" style="width: 290px; height: 195px;">
+				<div style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
+					<p style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
+					<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
+				</div>
+			</div>
+			<div style="width: 290px; float: left; margin-left: 12px;">
+				<img src="img/banner2.jpg" style="width: 290px; height: 195px;">
+				<div style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
+					<p style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
+					<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- 分类 -->
+	<div style="background-color: #fff;margin-top:0px;">
+		<div
+			style="height: 59px; width: 1200px; margin: 0 auto; padding: 0px;">
+			<button class="btn btn-default actives" id="gaozhong"
+				style="height: 59px; width: 100px; font-size: 18px; font-weight: bold; border: 0px; float: left;">高中课程</button>
+			<button class="btn btn-default" id="chuzhong"
+				style="height: 59px; width: 100px; font-size: 18px; font-weight: bold; border: 0px; float: left;">初中课程</button>
+			<button class="btn btn-default" id="xiaoxue"
+				style="height: 59px; width: 100px; font-size: 18px; font-weight: bold; border: 0px; float: left;">小学课程</button>
+		</div>
+	</div>
+	<div
+		style="position: absolute; right: 0px; top: 730px; margin-top: 127px; width: 180px; text-align: center; background-color: #fff;">
+		<p style="line-height: 44px; width: 180px;" class="tzl">
+			<a href="#">1.消息通知标题限制</a>
+		</p>
+		<p style="line-height: 44px; width: 180px;" class="tzl">
+			<a href="#">2.消息通知标题限制</a>
+		</p>
+		<p style="line-height: 44px; width: 180px;" class="tzl">
+			<a href="#">3.消息通知标题限制</a>
+		</p>
+		<p style="line-height: 44px; width: 180px;" class="tzl">
+			<a href="#">4.消息通知标题限制</a>
+		</p>
+	</div>
+	<div
+		style="height: 127px; width: 1200px; margin: 0 auto; padding: 0px; background-color: #fff; margin-top: 4px;">
+		<div id="gzbody" class="">
+			<div class="row" style="margin: 0px; padding: 0px;" id="gzCourseType"></div>
+		</div>
+		<div id="czbody" class="" style="display: none;">
+			<div class="row" style="margin: 0px; padding: 0px;" id="czCourseType"></div>
+		</div>
+		<div id="xxbody" class="" style="display: none;">
+			<div class="row" style="margin: 0px; padding: 0px;" id="xxCourseType"></div>
+		</div>
+	</div>
+	<div
+		style="height: 57px; width: 1200px; margin: 0 auto; padding: 0px; margin-top: 4px; color: #6b6b6b;">
+		<p
+			style="line-height: 57px; font-size: 18px; font-weight: bold; margin-left: 12px;"
+			id="kcbt">精品课程</p>
+	</div>
+	<div style="height: 500px; px; width: 1212px; margin: 0 auto;"
+		id="kcbody"></div>
+	<div>
+		<div style="text-align: center; height: 60px;" id="fanye"></div>
+
+	</div>
+	<!-- 页尾 -->
+	<div
+		style="height: 140px; width: 100%; background-color: #444547; margin-top: 36px;">
+		<div style="text-align: center; font-size: 15px;">
 			<p>&nbsp;</p>
+			<p>opyright © 2018 Yundao.All Rights Reserved.</p>
+			<p>语道文心教育有限公司 版权所有 | 服务协议 | 侵权投诉 | 问题反馈 | 帮助</p>
 		</div>
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav" style="margin-left:4vw;">
-				<!-- <li class="active">&nbsp; <span class="sr-only">(current)</span></li> -->
-
-
-				<li class="dropdown" STYLE="margin-top: 5%">
-
-					<!-- <div class="form-group navbar-form navbar-left">
-						<div class="input-group col-xs-12">
-							<div class="input-group-btn">
-								<select name="type" id="dropdown" class="form-control" style="width: auto;">
-									<option value="">全部</option>
-									<option value="高中">高中</option>
-									<option value="初中">初中</option>
-									<option value="小学">小学</option>
-								</select>
-							</div>
-							<input type="text" name="keyword" id="keyword"
-								class="form-control" placeholder="请您输入关键词"> 
-							<span class="input-group-btn">
-								<button class="btn btn-info" id="search_submit" onclick="queryNameVideo()">
-									搜索
-								</button>
-							</span>
-						</div>
-					</div> -->
-				</li>
-			</ul>
-			<!-- 登录|注册 -->
-			
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<div>
-						<div  id="logsd">
-							<a href="logins.html" @click="change(1)" :class="flag==1?'actives':''">登录</a>
-					    	<!-- <a href="rigester.html" @click="change(2)" :class="flag==2?'actives':''">注册</a> -->
-						</div>
-						<!-- 添加头像 -->
-
-						<div id="logImg" class="dropdown">             			
-	                 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	   							<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px" height="40px" class="img-circle"/>
-	    						<span class="caret"></span>
-	  						</button>
-		                 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								<li><a href="personal_center.html">个人中心</a></li>					 
-								<li id="exit"><a>退出</a></li>
-							</ul>		                		
-	                 	</div>
-					</div><!-- 登录|注册结束 -->					
-
-				</li>
-			</ul>			
-		</div>
-		<!-- /.navbar-collapse -->
 	</div>
-	<!-- /.container-fluid --> 
-	</nav>
-
-	<div class="row">
-		<div class="col-md-12 panel panel-default" id="frontPage">
-				<!-- 滚动页面-->
-				<div id="carousel-example-generic" class="carousel slide"
-					data-ride="carousel">
-					<!-- Indicators -->
-					<ol class="carousel-indicators">
-						<li data-target="#carousel-example-generic" data-slide-to="0"
-							class="active"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-					</ol>
-			
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner" role="listbox">
-						<div class="item active">
-							<img src="img/banner.png" class="" style="height:90%;">
-			
-						</div>
-						<div class="item">
-							<img src="img/banner.png" class="" style="height:90%;">
-			
-						</div>
-						<div class="item">
-							<img src="img/banner.png" class="" style="height:90%;">
-						</div>
-					</div>
-			
-					<!-- Controls -->
-					<a class="left carousel-control" href="#carousel-example-generic"
-						role="button" data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span
-						class="sr-only">上一页</span>
-					</a> <a class="right carousel-control" href="#carousel-example-generic"
-						role="button" data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">下一页</span>
-					</a>
-				</div>
-				 <div class="col-md-2 " style="" id="NoticeBoard">
-					<h3>
-						<span class="label label-default">通知栏</span>
-					</h3>
-					<div class="list-group pre-scrollable">
-						<button type="button" class="list-group-item">1.消息通知</button>
-						<button type="button" class="list-group-item">2.消息通知</button>
-						<button type="button" class="list-group-item">3.消息通知</button>
-						<button type="button" class="list-group-item">4.消息通知</button>
-						<button type="button" class="list-group-item">5.消息通知</button>
-						<button type="button" class="list-group-item">6.消息通知</button>
-						<button type="button" class="list-group-item">7.消息通知</button>
-						<button type="button" class="list-group-item">8.消息通知</button>
-					</div>
-				</div>
-		</div>
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
-			
-			<div class="col-md-12 panel panel-default">
-				 <!-- <div class="col-md-3 " style="">
-					<h3>
-						<span class="label label-default">通知栏</span>
-					</h3>
-					<div class="list-group pre-scrollable">
-						<button type="button" class="list-group-item">1.消息通知</button>
-						<button type="button" class="list-group-item">2.消息通知</button>
-						<button type="button" class="list-group-item">3.消息通知</button>
-						<button type="button" class="list-group-item">4.消息通知</button>
-						<button type="button" class="list-group-item">5.消息通知</button>
-						<button type="button" class="list-group-item">6.消息通知</button>
-						<button type="button" class="list-group-item">7.消息通知</button>
-						<button type="button" class="list-group-item">8.消息通知</button>
-					</div>
-				</div>  -->
-				
-				 <div class="col-md-12">
-				 	
-					<!-- <div class="col-md-4">
-						<div class="row">
-							<div class=" col-md-12">
-								<div class="thumbnail">
-									<img src="img/tx1.png" class="img-thumbnail"
-										style="width: 100%; height: 100%;">
-									<div class="caption">
-										<p>文字介绍</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div> -->
-					<!-- <div class="col-md-4">
-						<div class="row">
-							<div class=" col-md-12">
-								<div class="thumbnail">
-									<img src="img/tx1.png" class="img-thumbnail"
-										style="width: 100%; height: 100%;">
-									<div class="caption">
-										<p>文字介绍</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div> -->
-					<!-- <div class="col-md-4">
-						<div class="row">
-							<div class=" col-md-12">
-								<div class="thumbnail">
-									<img src="img/tx1.png" class="img-thumbnail"
-										style="width: 100%; height: 100%;">
-									<div class="caption">
-										<p>文字介绍</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div> -->
-				</div>
-			</div> 
-
-			<div class="panel panel-default">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-
-						<ul class="nav nav-pills">
-							<li role="presentation" class="active" id="gzli"><a
-								href="javascript:void(0);" id="gaozhong">高中课程</a></li>
-							<li role="presentation" id="czli"><a
-								href="javascript:void(0);" id="chuzhong">初中课程</a></li>
-							<li role="presentation" id="xxli"><a
-								href="javascript:void(0);" id="xiaoxue">小学课程</a></li>
-						</ul>
-
-
-					</div>
-					<div class="panel-body">
-						<div id="gzbody" class="">
-							<div class="row" style="margin: 0px; padding: 0px;" id="gzCourseType">
-								
-							</div>
-						</div>
-						<div id="czbody" class="" style="display: none;">
-							<div class="row" style="margin: 0px; padding: 0px;" id="czCourseType">
-								
-							</div>
-						</div>
-						<div id="xxbody" class="" style="display: none;">
-							<div class="row" style="margin: 0px; padding: 0px;" id="xxCourseType">
-								
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-
-			<div class="row">
-				<div class="col-md-12">
-					<div class="col-md-12 panel panel-default">
-						<h3>
-							<span class="label label-info" id="kcbt">精选课程</span>
-						</h3>
-						<hr>
-						<div id="kcbody">
-							
-						</div>
-						<div style="text-align: center;" id="fanye" class="col-md-12">
-							<!-- <nav aria-label="Page navigation">
-								<ul class="pagination">
-									<li><a href="#" aria-label="Previous"> <span
-											aria-hidden="true">&laquo;</span>
-									</a></li>
-									<li><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#" aria-label="Next"> <span
-											aria-hidden="true">&raquo;</span>
-									</a></li>
-								</ul>
-							</nav> -->
-						</div>
-					</div>
-
-
-
-
-
-
-
-				</div>
-			</div>
-		</div>
-
-
-		<div class="col-md-1"></div>
-	</div>
-
-	<hr>
-	<!-- 尾部 -->
-	<footer style="background:gray">
-		<div id="foot">
-			<div id="foot-head">
-				<div class="footli" id="footli">
-					<ol>
-    					<li v-for="site in sites">
-      						{{ site.name }}
-    					</li>
-    					
-  					</ol>
-  					<div id="footbeian">
-  						<img src="photos/LoginPhoto/beianbgs@2x.png"/>
-  						<span style="color:white;">晋ICP备18006212号</span>
-  					</div>
-				</div>
-				<div class="footli" id="footimg">
-					<img :src="footimg">
-				</div>
-				<div class="footli" id="footma">
-					<span style="color:white;">关注我们：</span>
-					<img :src="footma" style="width:50px;height:50px;"/>
-				</div>
-			</div>
-		</div>
-		
-	</footer>
 	
-<script type="text/javascript">
-	
-	//进入页面自动获取cookie的值，根据cookie决定是否显示登录
-	$(function(){
-		if($.cookie("phone")==null){//cookie过期
-			//alert("登录过期，请重新登录");
-		}else if($.cookie("phone")!=null&&($.cookie("photo")==null||$.cookie("photo")=="")){//cookie有用户信息，但没有头像，添加默认头像
-			//alert("pp");
-			$("#logsd").hide();
-			$("#logImg").show();
-		}else if($.cookie("phone")!=null&&$.cookie("photo")!=null){//cookie有用户信息和头像
-			//alert("dd");
-			$("#logsd").hide();
-			$("#imgt").attr("src",$.cookie("photo"));
-			$("#logImg").show();
-		}
-	})
-	/*
-		退出按钮点击事件
-	*/
-	$("#exit").click(function(){
+	<script type="text/javascript">
+		//进入页面自动获取cookie的值，根据cookie决定是否显示登录
+		$(function() {
+			if ($.cookie("phone") == null) {//cookie过期
+				//alert("登录过期，请重新登录");
+				$("#logImg").hide();
+			} else if ($.cookie("phone") != null
+					&& ($.cookie("photo") == null || $.cookie("photo") == "")) {//cookie有用户信息，但没有头像，添加默认头像
+				//alert("pp");
+				$("#logsd").hide();
+				$("#logImg").show();
+			} else if ($.cookie("phone") != null && $.cookie("photo") != null) {//cookie有用户信息和头像
+				//alert("dd");
+				$("#logsd").hide();
+				$("#imgt").attr("src", $.cookie("photo"));
+				$("#logImg").show();
+			}
+		})
+		/*
+			退出按钮点击事件
+		 */
+		$("#exit").click(function() {
 
-		
+			$("#logsd").show();
 
-		$("#logsd").show();
+			$("#logImg").hide();
+			$.cookie('id', '', {
+				expires : -1,
+				path : '/',
+				secure : false
+			});
+			$.cookie('phone', '', {
+				expires : -1,
+				path : '/',
+				secure : false
+			});
+			$.cookie('photo', '', {
+				expires : -1,
+				path : '/',
+				secure : false
+			});
 
-		$("#logImg").hide();
-		$.cookie('id', '', { expires: -1 ,path:'/',secure: false});
-		$.cookie('phone', '', { expires: -1 ,path:'/',secure: false});
-		$.cookie('photo', '', { expires: -1,path:'/',secure: false }); 
-		 
-	})
-	
+		})
 
-	//登录注册样式切换
-	new Vue({  
-		  el: '#logsd',  
-		  data: {  
-		   flag:1,//默认为百度添加 .active  
-		  },  
-		  methods:{  
-		   change:function(a){//传入参数这里指1、2  
-		    this.flag=a;//flag==1 or flag==2  
-		   }  
-		  }  
-	})  
+		//登录注册样式切换
+		new Vue({
+			el : '#logsd',
+			data : {
+				flag : 1,//默认为百度添加 .active  
+			},
+			methods : {
+				change : function(a) {//传入参数这里指1、2  
+					this.flag = a;//flag==1 or flag==2  
+				}
+			}
+		})
 
-	//判断PC或移动
-	$(function(){
-		judgePC();
-	})
-	function judgePC(){
-		if (navigator.userAgent.match(/mobile/i)) {
-			//移动端
-			$("#logsd").css("margin-right", "10vw");
-			$("#logsd").css("margin-top", "3.5vh");
-			$("#footimg").css("margin-top","-16vh");
-			$("#footlogo").css("margin-top","-16vh");
-		} else {
-			//pc端
-			$("#logsd").css("margin-right", "15vw");
-			$("#logsd").css("margin-top", "3.5vh");
-		}
-	} 
-
-	/* 尾部li标签添加的关于我们 */
-	new Vue({
-	  el: '#footli',
-	  data: {
-	    sites: [
-	      { name: '关于我们' },
-	      { name: '|'},
-	      { name: '意见反馈' },
-	    ]
-	  }
-	})
-	//尾部的语道图标
-	new Vue({
-		el:'#footimg',
-		data:{
-			footimg:'photos/LoginPhoto/yudaologo.png'
-		}
-	})
-	
-	
-	//尾部二维码
-	new Vue({
-		el:'#footma',
-		data:{
-			footma:'photos/LoginPhoto/erweima_20180628215615.jpg'
-		}
-	})
 </script>
-</BODY>
-</HTML>
+</body>
+</html>

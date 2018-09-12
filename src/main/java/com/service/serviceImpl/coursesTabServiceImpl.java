@@ -44,7 +44,7 @@ public class coursesTabServiceImpl implements coursesTabService{
 	}
 
 	@Override
-	public void upCoursesById(int id,String courses_name,int video_form_id,String courses_introduce,String courses_pricemoney,String courses_video,MultipartFile image,int courses_qz) throws Exception {
+	public void upCoursesById(int id,String courses_name,int video_form_id,String courses_introduce,String courses_pricemoney,String courses_video,MultipartFile image,int courses_qz,String coures_price) throws Exception {
 		System.out.println("service");
 		String oldImageName = image.getOriginalFilename();
 		String imageName = courses_name+oldImageName.substring(oldImageName.lastIndexOf("."));
@@ -74,6 +74,7 @@ public class coursesTabServiceImpl implements coursesTabService{
 		c.setCourses_pricemoney(courses_pricemoney);
 		c.setCourses_qz(courses_qz);
 		c.setCourses_time(Integer.toString(coursesTimeInt));
+		c.setCoures_price(coures_price);
 		ctDao.upCoursesById(c);
 	}
 
@@ -84,7 +85,7 @@ public class coursesTabServiceImpl implements coursesTabService{
 
 	@Override
 	public void addCoursesTab(String courses_name,int video_form_id, String courses_introduce, String courses_pricemoney,
-			String courses_video, MultipartFile image,int teacher_id,int courses_qz) throws Exception {
+			String courses_video, MultipartFile image,int teacher_id,int courses_qz,String coures_price) throws Exception {
 		// TODO Auto-generated method stub
 		String oldImageName = image.getOriginalFilename();
 		String imageName = courses_name+oldImageName.substring(oldImageName.lastIndexOf("."));
@@ -114,6 +115,7 @@ public class coursesTabServiceImpl implements coursesTabService{
 		c.setCourses_pricemoney(courses_pricemoney);
 		c.setCourses_qz(courses_qz);
 		c.setCourses_time(Integer.toString(coursesTimeInt));
+		c.setCoures_price(coures_price);
 		addCoursesTab(c);
 	}
 

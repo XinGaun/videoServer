@@ -18,6 +18,7 @@ public class coursesTab {
 	String video_form_class;
 	String courses_date;
 	String courses_time;
+	String coures_price;
 	int courses_qz;
 	
 	public String getCourses_time() {
@@ -28,6 +29,13 @@ public class coursesTab {
 	}
 	public int getCourses_qz() {
 		return courses_qz;
+	}
+	
+	public String getCoures_price() {
+		return coures_price;
+	}
+	public void setCoures_price(String coures_price) {
+		this.coures_price = coures_price;
 	}
 	public void setCourses_qz(int courses_qz) {
 		this.courses_qz = courses_qz;

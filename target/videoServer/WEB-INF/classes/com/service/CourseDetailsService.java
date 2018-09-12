@@ -11,6 +11,12 @@ public interface CourseDetailsService {
 	 */
 	public String queryStudentComments(String data);
 	/**
+	 * 是否已经收藏课程
+	 * @param data
+	 * @return
+	 */
+	public String queryInitEnshrine(String data);
+	/**
 	 * 鎻掑叆鍒版敹钘忚〃
 	 * @param data
 	 * @return

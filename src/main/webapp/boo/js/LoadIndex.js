@@ -1,6 +1,8 @@
 var coursetype = '高中';
 var video_form_name = null;
 $(function() {
+	initrollplay();
+	initinform();
 	init();
 	initcourse();
 	$("#gaozhong").click(function() {
@@ -186,6 +188,67 @@ function init(){
 		}
 	});
 }
+//初始化滚播图片
+function initrollplay(){
+	var data ={
+		name:1
+	}
+	$.ajax({
+		type: "POST",
+		async:false, 
+		contentType : 'application/json; charset=UTF-8',
+		url:"/videoServer/front/IndexConfig/queryrRollplaTabAll",
+		data:JSON.stringify(data),
+		dataType: "json",
+		success: function(data){
+			//console.log(data);
+			for(var i=0;i<data.list.length;i++){
+				var listbox ="";
+				if(i==0){
+					listbox = '<div class="item active">'
+						+'<a href="'+data.list[i].roll_url+'"><img src="http://www.niceyuwen.com/image/'+data.list[i].roll_img+'" class="" style="height: 340px; width: 100%;"></a>'
+					+'</div>';	
+				}else{
+					listbox = '<div class="item">'
+								+'<a href="'+data.list[i].roll_url+'"><img src="http://www.niceyuwen.com/image/'+data.list[i].roll_img+'" class="" style="height: 340px; width: 100%;"></a>'
+							+'</div>';
+				}
+				$("#listbox").append(listbox);
+				if(i==0){
+					var yuandian ='<li data-target="#carousel-example-generic" data-slide-to="'+i+'" class="active"></li>';
+					$("#yuandian").append(yuandian);
+				}else{
+					var yuandian ='<li data-target="#carousel-example-generic" data-slide-to="'+i+'" ></li>';
+					$("#yuandian").append(yuandian);
+				}
+			}
+		}
+	});
+}
+//初始化通知消息
+function initinform(){
+	var data ={
+		name:1
+	}
+	$.ajax({
+		type: "POST",
+		async:false, 
+		contentType : 'application/json; charset=UTF-8',
+		url:"/videoServer/front/IndexConfig/queryinformList",
+		data:JSON.stringify(data),
+		dataType: "json",
+		success: function(data){
+			//console.log(data);
+			for(var i=0;i<data.list.length;i++){
+				var inform = '<p style="line-height: 44px; width: 180px;" class="tzl">'
+							+'<a href="'+data.list[i].info_url+'">'+data.list[i].info_text+'</a>'
+							+'</p>';
+				$("#colee1").append(inform);
+			}
+		}
+	});
+}
+
 
 //生成分页条
 function page(pages, nums, total) {
@@ -257,4 +320,39 @@ function custom(number){
 	initcourse();
 	//console.log(pages);
 	return false;
+}
+
+
+var speed = 30;
+var colee2 = document.getElementById("colee2");
+var colee1 = document.getElementById("colee1");
+var colee = document.getElementById("colee");
+colee2.innerHTML = colee1.innerHTML; //克隆colee1为colee2
+function Marquee1() {
+	//当滚动至colee1与colee2交界时
+	/*if(colee2.offsetTop-colee.scrollTop<=0){
+	colee.scrollTop-=colee1.offsetHeight; //colee跳到最顶端
+	}else{
+	colee.scrollTop++
+	}*/
+	//无限循环
+	if (colee.scrollTop >= colee1.offsetHeight) {
+		colee.scrollTop = 0;
+	} else {
+		var ss = colee.scrollTop;
+		colee.scrollTop=colee.scrollTop+1;
+		if(ss==colee.scrollTop){
+			ss = -1;
+			colee.scrollTop = 0;
+		}
+	}
+}
+var MyMar1 = setInterval(Marquee1, speed)//设置定时器
+//鼠标移上时清除定时器达到滚动停止的目的
+colee.onmouseover = function() {
+	clearInterval(MyMar1);
+}
+//鼠标移开时重设定时器
+colee.onmouseout = function() {
+	MyMar1 = setInterval(Marquee1, speed);
 }

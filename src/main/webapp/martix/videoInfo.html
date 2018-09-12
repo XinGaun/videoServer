@@ -8,16 +8,19 @@
 .role {
 	display: none;
 }
-.wrap{
-    width: 150px; /* 设置需要固定的宽度 */
-    white-space: nowrap; /* 不换行 */
-    text-overflow: ellipsis;/*  超出部分用....代替 */
-    overflow: hidden; /* 超出隐藏 */
-} 
+
+.wrap {
+	width: 150px; /* 设置需要固定的宽度 */
+	white-space: nowrap; /* 不换行 */
+	text-overflow: ellipsis; /*  超出部分用....代替 */
+	overflow: hidden; /* 超出隐藏 */
+}
+
 table {
-table-layout: fixed;
-width: 1300px;
-};
+	table-layout: fixed;
+	width: 1300px;
+}
+;
 </style>
 <link rel="stylesheet"
 	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -30,9 +33,9 @@ width: 1300px;
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css' />
 <link href="assets/js/dataTables/dataTables.bootstrap.css"
-	  rel="stylesheet" />
+	rel="stylesheet" />
 <!-- oss upload -->
-<link rel="stylesheet" type="text/css" href="ossupload/style.css"/>
+<link rel="stylesheet" type="text/css" href="ossupload/style.css" />
 </head>
 <body>
 	<div id="wrapper">
@@ -48,7 +51,7 @@ width: 1300px;
 					class="fa fa-comments"></i> <strong><span
 						style="font-size: 25px;">语道后台管理 </span></strong></a>
 			</div>
-			<ul class="nav navbar-top-links navbar-right">
+			<!-- <ul class="nav navbar-top-links navbar-right">
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" aria-expanded="false"> <i
 						class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -87,8 +90,8 @@ width: 1300px;
 						<li><a class="text-center" href="#"> <strong>Read
 									All Messages</strong> <i class="fa fa-angle-right"></i>
 						</a></li>
-					</ul> <!-- /.dropdown-messages --></li>
-				<!-- /.dropdown -->
+					</ul> /.dropdown-messages</li>
+				/.dropdown
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" aria-expanded="false"> <i
 						class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -161,8 +164,8 @@ width: 1300px;
 						<li><a class="text-center" href="#"> <strong>See
 									All Tasks</strong> <i class="fa fa-angle-right"></i>
 						</a></li>
-					</ul> <!-- /.dropdown-tasks --></li>
-				<!-- /.dropdown -->
+					</ul> /.dropdown-tasks</li>
+				/.dropdown
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" aria-expanded="false"> <i
 						class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -206,8 +209,8 @@ width: 1300px;
 						<li><a class="text-center" href="#"> <strong>See
 									All Alerts</strong> <i class="fa fa-angle-right"></i>
 						</a></li>
-					</ul> <!-- /.dropdown-alerts --></li>
-				<!-- /.dropdown -->
+					</ul> /.dropdown-alerts</li>
+				/.dropdown
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" aria-expanded="false"> <i
 						class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -220,9 +223,9 @@ width: 1300px;
 						<li class="divider"></li>
 						<li><a href="javascript:teacherLoginOut()"><i
 								class="fa fa-sign-out fa-fw"></i> Logout</a></li>
-					</ul> <!-- /.dropdown-user --></li>
-				<!-- /.dropdown -->
-			</ul>
+					</ul> /.dropdown-user</li>
+				/.dropdown
+			</ul> -->
 		</nav>
 		<!--/. NAV TOP  -->
 		<nav class="navbar-default navbar-side" role="navigation">
@@ -238,12 +241,11 @@ width: 1300px;
 							<li><a href="user_list.html"><i class="fa fa-user"></i>
 									用户管理</a></li>
 						</ul></li>
-						<li><a href="videoformtab.html" ><i
-							class="fa fa-table"></i>视频类型管理</a></li>
+					<li><a href="videoformtab.html"><i class="fa fa-table"></i>视频类型管理</a></li>
 					<li><a href="videoInfo.html" class="active-menu"><i
 							class="fa fa-table"></i>视频管理</a></li>
 					<li><a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
-					</li>				
+					</li>
 					<li><a href="comment.html"><i class="fa fa-table"></i>评论管理</a>
 					</li>
 					<li class="role" style="display: none;"><a href="order.html"><i
@@ -252,6 +254,13 @@ width: 1300px;
 						href="proposal.html"><i class="fa fa-edit"></i>建议管理</a></li>
 					<li class="role" style="display: none;"><a href="test.html"><i
 							class="fa fa-edit"></i>题目管理</a></li>
+					<li class="role" style="display: none;"><a href="#"><i
+							class="fa fa-sitemap"></i>首页管理<span class="fa arrows"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="inform.html"><i class="fa fa-table"></i>通知管理</a></li>
+							<li><a href="teacher_show.html"><i class="fa fa-table"></i>教师展示</a></li>
+							<li><a href="rollplay.html"><i class="fa fa-table"></i>滚播管理</a></li>
+						</ul></li>
 				</ul>
 			</div>
 		</nav>
@@ -327,11 +336,11 @@ width: 1300px;
 									<tr>
 										<!-- <td><input type="checkbox"/></td> -->
 										<td>序号</td>
-										<td >视频名称</td>
-										<td >视频介绍</td>
+										<td>视频名称</td>
+										<td>视频介绍</td>
 										<td>视频类型</td>
-										<td >视频链接</td>
-										<td >视频PPT</td>
+										<td>视频链接</td>
+										<td>视频PPT</td>
 										<td>视频权重</td>
 										<td>视频时长</td>
 										<td>视频评分</td>
@@ -386,16 +395,17 @@ width: 1300px;
 									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 200px; line-height: 200px;">选择视频：</div>
 								<!-- <input type="file" name="video" id="video" accept="video/*"> -->
 								<h4>您所选择的文件列表：</h4>
-                                <div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！</div>
-                                <br/>
-                                <div id="container">
-	                               <a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a>
-	                              <!--  <a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a> -->
-                               </div>
-                               <pre id="console" style="display:none;"></pre>
-                            <!--    <p>&nbsp;</p> -->    
-                               <input style="display:none;" name="video" id="video">                       
-							    <video style="display:none;" controls="controls" oncanplaythrough="myFunction(this)" id="videoTime" ></video>								
+								<div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！</div>
+								<br />
+								<div id="container">
+									<a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a>
+									<!--  <a id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a> -->
+								</div>
+								<pre id="console" style="display: none;"></pre>
+								<!--    <p>&nbsp;</p> -->
+								<input style="display: none;" name="video" id="video">
+								<video style="display: none;" controls="controls"
+									oncanplaythrough="myFunction(this)" id="videoTime"></video>
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
@@ -431,22 +441,22 @@ width: 1300px;
 										name="video_introduce" id="video_introduce"></textarea>
 									<input type="hidden" name="video_introduce">
 								</div>
-							</div>						
-					 </div>
+							</div>
+						</div>
 					</form>
-					 <div class="modal-footer">
+					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"
 							id="quxiao">取消</button>
 						<button type="button" class="btn btn-primary" id="sub">提交</button>
-					</div> 				
+					</div>
 				</div>
 			</div>
 		</div>
 		<!-- /model -->
-		
+
 		<!-- Modal2 -->
-		<div class="modal fade" id="updateVideoModal" tabindex="-1" role="dialog"
-			aria-labelledby="updateVideoModalLabel">
+		<div class="modal fade" id="updateVideoModal" tabindex="-1"
+			role="dialog" aria-labelledby="updateVideoModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -456,8 +466,8 @@ width: 1300px;
 						</button>
 						<h4 class="modal-title" id="myModalLabel">课程视频修改</h4>
 					</div>
-					<form action="/videoServer/videoTab/updetVideoById.do" method="post"
-						enctype="multipart/form-data" id="updatedataForm">
+					<form action="/videoServer/videoTab/updetVideoById.do"
+						method="post" enctype="multipart/form-data" id="updatedataForm">
 						<div style="width: 100%;">
 							<div
 								style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
@@ -467,15 +477,16 @@ width: 1300px;
 								<div
 									style="width: 200px; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
 									<input type="text" style="width: 100%; height: 100%;"
-										name="videoName" id="updatevideoName">
-								     <input type="hidden" id="updatevideoId" />
-								   
+										name="videoName" id="updatevideoName"> <input
+										type="hidden" id="updatevideoId" />
+
 								</div>
 								<div
 									style="width: 100px;; background: #D9ECFF; float: left; text-align: right; height: 50px; line-height: 50px;">视频类型：</div>
 								<div
 									style="width: 130px; height: 50px; float: left; border: 1px solid #CADEFD;">
-									<select style="width: 100%; text-align: center;" id="updatekctype">
+									<select style="width: 100%; text-align: center;"
+										id="updatekctype">
 
 									</select>
 								</div>
@@ -483,7 +494,8 @@ width: 1300px;
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
 									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频封面：</div>
-								<input type="file" name="updateimage" id="updateimage" accept="image/*">
+								<input type="file" name="updateimage" id="updateimage"
+									accept="image/*">
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
@@ -512,7 +524,7 @@ width: 1300px;
 									style="width: 440px; height: 100px; float: left; border: 1px solid #CADEFD;">
 									<textarea style="width: 100%; height: 100%;"
 										name="video_introduce" id="update_video_introduce"></textarea>
-									
+
 								</div>
 							</div>
 						</div>
@@ -536,13 +548,15 @@ width: 1300px;
 	<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
 	<script src="assets/js/common.js"></script>
 	<!-- oss upload -->
-	<script type="text/javascript" src="ossupload/lib/crypto1/crypto/crypto.js"></script>
-    <script type="text/javascript" src="ossupload/lib/crypto1/hmac/hmac.js"></script>
-    <script type="text/javascript" src="ossupload/lib/crypto1/sha1/sha1.js"></script>
-    <script type="text/javascript" src="ossupload/lib/base64.js"></script>
-    <script type="text/javascript" src="ossupload/lib/plupload-2.3.6/js/plupload.full.min.js"></script>
-    <script type="text/javascript" src="ossupload/upload.js"></script>
-<script>
+	<script type="text/javascript"
+		src="ossupload/lib/crypto1/crypto/crypto.js"></script>
+	<script type="text/javascript" src="ossupload/lib/crypto1/hmac/hmac.js"></script>
+	<script type="text/javascript" src="ossupload/lib/crypto1/sha1/sha1.js"></script>
+	<script type="text/javascript" src="ossupload/lib/base64.js"></script>
+	<script type="text/javascript"
+		src="ossupload/lib/plupload-2.3.6/js/plupload.full.min.js"></script>
+	<script type="text/javascript" src="ossupload/upload.js"></script>
+	<script>
 $(document).ready(function () {
     $('#dataTables-example').dataTable();
 });
@@ -619,7 +633,7 @@ function getId(obj){
     })
 }	
 </script>
-<script>	
+	<script>	
 	 $('#myModal').on('show.bs.modal', function (event) {      	   
    	  $("#videoName").val("");
    	  $("#video_introduce").val("");

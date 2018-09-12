@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 public interface CourseDetailsDao {
 	public ArrayList<HashMap<String,Object>> queryCourseDetails(HashMap<String,Object> map);
+	//是否已收藏课程
+	public ArrayList<HashMap<String,Object>> queryInitEnshrine(HashMap<String,Object> map);
 	public HashMap<String,Object> queryVideoDetails(int video_id);
 	public  ArrayList<HashMap<String,Object>> queryRecommendCourse();
 	/**

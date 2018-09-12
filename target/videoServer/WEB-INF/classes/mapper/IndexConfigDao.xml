@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.IndexConfigDao">
+	<!-- 添加首页滚播数据 -->
+	<insert id="addRollplayTab" parameterType="java.util.HashMap">
+		insert into rollplay_tab(roll_img, roll_url, roll_weight) VALUES 
+  		(#{roll_img},#{roll_url},#{roll_weight})
+	</insert>
+	<!-- 查询首页滚播放数据 -->
+	<select id="queryRollplayRab">
+		select roll_id,roll_img,roll_url,roll_weight from rollplay_tab
+	</select>
+	<!-- 更新首页滚动播放数据 -->
+	<update id="updateRollplayTab" parameterType="java.util.HashMap">
+		update rollplay_tab
+		<trim prefix="set" suffixOverrides=",">
+			<if test="roll_img!=null">
+				roll_img =#{roll_img}
+			</if>
+			<if test="roll_url!=null">
+				roll_url =#{roll_url}
+			</if>
+			<if test="roll_weight!=null">
+				roll_weight =#{roll_weight}
+			</if>
+		</trim>
+		where roll_id =#{roll_id}
+	</update>
+	<!--  删除首页滚播数据 -->
+	<delete id="deleteRollplayTab" parameterType="java.util.ArrayList">
+		delete from rollplay_tab where 1=1
+		and roll_id in
+		<foreach collection="list" item="roll_id" index="index"
+					open="(" close=")" separator=",">
+					#{roll_id}
+		</foreach>
+	</delete>
+</mapper>

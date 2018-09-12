@@ -94,6 +94,7 @@ D:\java\videoServer\src\main\java\com\dao\PersonalCenterDao.java
 D:\java\videoServer\src\main\java\com\util\PageHelper.java
 D:\java\videoServer\src\main\java\com\dao\subscriptionTabDao.java
 D:\java\videoServer\src\main\java\com\util\ResponseInfo.java
+D:\java\videoServer\src\main\java\com\dao\IndexConfigDao.java
 D:\java\videoServer\src\main\java\com\dao\RoleRightDAO.java
 D:\java\videoServer\src\main\java\com\web\VideoTabController.java
 D:\java\videoServer\src\main\java\com\web\CourseDetailsController.java

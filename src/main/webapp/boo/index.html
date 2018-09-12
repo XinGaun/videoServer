@@ -4,15 +4,16 @@
 <meta charset="UTF-8">
 <title>语道文心</title>
 <script src="js/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<script src="js/bootstrap.min.js"></script>
+
 <script src="js/jquery.lazyload.min.js"></script>
 <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 <script src="js/jquery.lazyload.min.js"></script>
 <script
 	src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
-<script type="text/javascript" src="js/LoadIndex.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script>
 <style type="text/css">
 .tzl:hover {
 	background-color: #6a6b6c;
@@ -20,19 +21,25 @@
 }
 /*按钮圆角设置*/
 #logsd {
-	margin-top:10px;
-	float:right;
+	margin-top: 10px;
+	float: right;
 	display: inline-block;
 	verticle-align: middle;
 	color: black;
 	text-decoration: none;
 }
-.actives{
- 	background-image: url('./img/img_select1.png'); 
- 	background-repeat: no-repeat;
-  	background-position: 0px 56px;
-  	color: #24b4f8;
- }
+
+.actives {
+	background-image: url('./img/img_select1.png');
+	background-repeat: no-repeat;
+	background-position: 0px 56px;
+	color: #24b4f8;
+}
+
+#logsd {
+	font-size: 18px;
+	font-weight: bold;
+}
 </style>
 </head>
 <body style="background-color: #f5f5f5;">
@@ -40,11 +47,11 @@
 	<div
 		style="height: 67px; display: flex; justify-content: center; align-items: center; background-color: #fff;">
 		<div style="margin: 0 auto; width: 1200px;">
-			<a href="index.html"><img src="./img/logos.png"></a>
-			<a id="logsd" href="logins.html" @click="change(1)"
-					:class="flag==1?'actives':''">登录</a>
+			<a href="index.html"><img src="./img/logos.png"></a> <a
+				id="logsd" href="logins.html" @click="change(1)"
+				:class="flag==1?'actives':''">登录</a>
 
-			<div id="logImg" class="dropdown" style="float:right;">
+			<div id="logImg" class="dropdown" style="float: right;">
 				<button class="btn btn-default dropdown-toggle" type="button"
 					id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="true">
@@ -61,20 +68,23 @@
 
 
 	</div>
+
+	</div>
+
 	<!-- 滚动页面-->
 	<div id="carousel-example-generic" class="carousel slide"
 		data-ride="carousel" style="height: 340px;">
 		<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<li data-target="#carousel-example-generic" data-slide-to="0"
+		<ol class="carousel-indicators" id="yuandian">
+			<!-- <li data-target="#carousel-example-generic" data-slide-to="0"
 				class="active"></li>
 			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-			<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="2"></li> -->
 		</ol>
 
 		<!-- Wrapper for slides -->
-		<div class="carousel-inner" role="listbox">
-			<div class="item active">
+		<div class="carousel-inner" role="listbox" id="listbox">
+			<!-- <div class="item active">
 				<img src="img/banner.png" class=""
 					style="height: 340px; width: 100%;">
 
@@ -87,7 +97,7 @@
 			<div class="item">
 				<img src="img/banner.png" class=""
 					style="height: 340px; width: 100%;">
-			</div>
+			</div> -->
 		</div>
 
 		<!-- Controls -->
@@ -107,40 +117,141 @@
 			<p
 				style="line-height: 55px; font-size: 18px; font-weight: bold; margin-left: 12px;">名师推荐</p>
 		</div>
-		<div style="height: 266px; margin: 0 auto; width: 1200px;">
-			<div style="width: 290px; float: left;">
-				<img src="img/banner2.jpg" style="width: 290px; height: 195px;">
-				<div style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
-					<p style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
-					<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
-				</div>
-			</div>
-			<div style="width: 290px; float: left; margin-left: 12px;">
-				<img src="img/banner2.jpg" style="width: 290px; height: 195px;">
-				<div style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
-					<p style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
-					<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
-				</div>
-			</div>
-			<div style="width: 290px; float: left; margin-left: 12px;">
-				<img src="img/banner2.jpg" style="width: 290px; height: 195px;">
-				<div style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
-					<p style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
-					<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
-				</div>
-			</div>
-			<div style="width: 290px; float: left; margin-left: 12px;">
-				<img src="img/banner2.jpg" style="width: 290px; height: 195px;">
-				<div style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
-					<p style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
-					<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
-				</div>
-			</div>
+
+		
+		<div id="colee_lefts"
+			style="overflow: hidden; height: 266px; width: 1200px; margin: 0 auto;">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td id="colee_lefts1" valign="top" align="center">
+						<table cellpadding="2" cellspacing="0" border="0">
+							<tr align="center">
+								<td class="tdclass"><div
+										style="width: 290px; float: left; margin-left: 12px;">
+										<img src="img/banner2.jpg"
+											style="width: 290px; height: 195px;">
+										<div
+											style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
+											<p
+												style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
+											<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
+										</div>
+									</div></td>
+								<td class="tdclass"><div
+										style="width: 290px; float: left; margin-left: 12px;">
+										<img src="img/banner2.jpg"
+											style="width: 290px; height: 195px;">
+										<div
+											style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
+											<p
+												style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
+											<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
+										</div>
+									</div></td>
+								<td class="tdclass"><div
+										style="width: 290px; float: left; margin-left: 12px;">
+										<img src="img/banner2.jpg"
+											style="width: 290px; height: 195px;">
+										<div
+											style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
+											<p
+												style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
+											<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
+										</div>
+									</div></td>
+								<td class="tdclass"><div
+										style="width: 290px; float: left; margin-left: 12px;">
+										<img src="img/banner2.jpg"
+											style="width: 290px; height: 195px;">
+										<div
+											style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
+											<p
+												style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
+											<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
+										</div>
+									</div></td>
+								<td class="tdclass"><div
+										style="width: 290px; float: left; margin-left: 12px;">
+										<img src="img/banner2.jpg"
+											style="width: 290px; height: 195px;">
+										<div
+											style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
+											<p
+												style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
+											<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
+										</div>
+									</div></td>
+								<td class="tdclass"><div
+										style="width: 290px; float: left; margin-left: 12px;">
+										<img src="img/banner2.jpg"
+											style="width: 290px; height: 195px;">
+										<div
+											style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
+											<p
+												style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
+											<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
+										</div>
+									</div></td>
+								<td class="tdclass"><div
+										style="width: 290px; float: left; margin-left: 12px;">
+										<img src="img/banner2.jpg"
+											style="width: 290px; height: 195px;">
+										<div
+											style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">
+											<p
+												style="font-weight: bold; margin-left: 10px; margin-top: 10px;">教师名称</p>
+											<p style="margin-left: 10px;">大厦大厦大火卢卡斯的花里胡哨的离开</p>
+										</div>
+									</div></td>
+							</tr>
+						</table>
+					</td>
+					<td id="colee_lefts2" valign="top"></td>
+				</tr>
+			</table>
 		</div>
 
+
+
+
 	</div>
+	<!--  -->
+	<!-- 名师推荐 -->
+
+
+
+
+
+	<script>
+		//使用div时，请保证colee_left2与colee_left1是在同一行上.
+		var speed = 30//速度数值越大速度越慢
+		var colee_left2 = document.getElementById("colee_lefts2");
+		var colee_left1 = document.getElementById("colee_lefts1");
+		var colee_left = document.getElementById("colee_lefts");
+		var elements = $('.tdclass');
+		var len = elements.length;
+		if(len>4){
+			colee_left2.innerHTML = colee_left1.innerHTML
+		}
+		
+		function Marquee3() {
+			if (colee_left2.offsetWidth - colee_left.scrollLeft <= 0)//offsetWidth 是对象的可见宽度
+				colee_left.scrollLeft -= colee_left1.offsetWidth//scrollWidth 是对象的实际内容的宽，不包边线宽度
+			else {
+				colee_left.scrollLeft++
+			}
+		}
+		var MyMar3 = setInterval(Marquee3, speed)
+		colee_left.onmouseover = function() {
+			clearInterval(MyMar3)
+		}
+		colee_left.onmouseout = function() {
+			MyMar3 = setInterval(Marquee3, speed)
+		}
+	</script>
+
 	<!-- 分类 -->
-	<div style="background-color: #fff;margin-top:0px;">
+	<div style="background-color: #fff; margin-top: 0px;">
 		<div
 			style="height: 59px; width: 1200px; margin: 0 auto; padding: 0px;">
 			<button class="btn btn-default actives" id="gaozhong"
@@ -151,23 +262,13 @@
 				style="height: 59px; width: 100px; font-size: 18px; font-weight: bold; border: 0px; float: left;">小学课程</button>
 		</div>
 	</div>
-	<div
-		style="position: absolute; right: 0px; top: 730px; margin-top: 127px; width: 180px; text-align: center; background-color: #fff;">
-		<p style="line-height: 44px; width: 180px;" class="tzl">
-			<a href="#">1.消息通知标题限制</a>
-		</p>
-		<p style="line-height: 44px; width: 180px;" class="tzl">
-			<a href="#">2.消息通知标题限制</a>
-		</p>
-		<p style="line-height: 44px; width: 180px;" class="tzl">
-			<a href="#">3.消息通知标题限制</a>
-		</p>
-		<p style="line-height: 44px; width: 180px;" class="tzl">
-			<a href="#">4.消息通知标题限制</a>
-		</p>
+	<div id="colee"
+		style="margin-top: 127px; position: absolute; right: 0px; top: 730px; overflow: hidden; width: 180px; height: 176px; background-color: #fff; text-align: center;">
+		<div id="colee1" style=""></div>
+		<div id="colee2"></div>
 	</div>
 	<div
-		style="height: 127px; width: 1200px; margin: 0 auto; padding: 0px; background-color: #fff; margin-top: 4px;">
+		style="width: 1200px; margin: 0 auto; padding: 0px; background-color: #fff; margin-top: 4px;">
 		<div id="gzbody" class="">
 			<div class="row" style="margin: 0px; padding: 0px;" id="gzCourseType"></div>
 		</div>
@@ -199,8 +300,10 @@
 			<p>语道文心教育有限公司 版权所有 | 服务协议 | 侵权投诉 | 问题反馈 | 帮助</p>
 		</div>
 	</div>
-	
+	<script type="text/javascript" src="js/LoadIndex.js"></script>
 	<script type="text/javascript">
+		//左侧无缝轮播
+
 		//进入页面自动获取cookie的值，根据cookie决定是否显示登录
 		$(function() {
 			if ($.cookie("phone") == null) {//cookie过期
@@ -217,6 +320,7 @@
 				$("#imgt").attr("src", $.cookie("photo"));
 				$("#logImg").show();
 			}
+
 		})
 		/*
 			退出按钮点击事件
@@ -256,7 +360,6 @@
 				}
 			}
 		})
-
-</script>
+	</script>
 </body>
 </html>

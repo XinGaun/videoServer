@@ -17,6 +17,9 @@
 		 <!-- TABLE STYLES-->
 		<link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 		<link href="dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="js/layui/css/layui.css" />
+		<script type="text/javascript" src="js/laydate/laydate.js"></script>
+		<script type="text/javascript" src="js/layui/layui.js"></script>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -386,6 +389,7 @@
 						
 					</tbody>
 				</table>
+				<div id="publicPaging"></div>
 				</div>
 			</div>
 		</div>
@@ -434,6 +438,35 @@
 			loadData();
 		})
 		
+		function fenye(obj){
+			/* alert("进去分页");  */
+			//不显示首页尾页
+			layui.use(['laypage', 'layer'], function(){
+				var laypage = layui.laypage,
+				layer = layui.layer;
+				laypage.render({
+					elem: 'publicPaging',	
+					count: obj.totalRows,
+					skip:true,
+					groups:5,
+					first:1,
+					curr:obj.curr,
+					limit:obj.limit,
+					last:'尾页',
+					theme: '#1E9FFF',
+					jump:function(obj2,first){
+						//obj包含了当前分页的所有参数，比如
+						obj.curr=obj2.curr;
+						//首次不执行
+						if(!first){
+							//do something 
+							loadData()
+						} 
+					},
+				});
+			})
+		} 
+		
 		function loadData(){
 			$.ajax({
 					type: "POST",
@@ -452,6 +485,8 @@
 						if(data.retCode == 1){	//加载成功
 							//添加数据
 							addUserBody(data.listObject);
+							obj.totalRows=data.retObject.totalRows;
+							fenye(obj);
 						}else{
 							alert(data.retMsg);
 						}

@@ -49,7 +49,10 @@ $(function(){
 	ifgoumai();
 
 });
-
+var videoObject =null;
+$('#myModalvideo').on('hide.bs.modal', function () {
+	location.reload([false]);
+});
 //var url = "http:/127.0.0.1:8080"
 
 var url ="";
@@ -349,7 +352,61 @@ function initCourseTop(cid){
 			arr = arr.replace("]","");
 			arr =arr.split(",");
 			initVideo(arr);
-			sarr = arr
+			sarr = arr;
+			//alert(window.location.href);
+			window._bd_share_config = {
+
+					common : {
+
+						bdText : $("#courses_name").text(),	
+
+						bdDesc : $("#courses_name").text(),	
+
+						bdUrl : window.location.href+"", 	
+
+						bdPic : result[0].courses_img_url
+
+					},
+
+					share : [{
+
+						"bdSize" : 16
+
+					}],
+
+					slide : [{	   
+
+						bdImg : 0,
+
+						bdPos : "right",
+
+						bdTop : 100
+
+					}],
+
+					image : [{
+
+						viewType : 'list',
+
+						viewPos : 'top',
+
+						viewColor : 'black',
+
+						viewSize : '16',
+
+						viewList : ['qzone','tsina','huaban','tqq','renren']
+
+					}],
+
+					selectShare : [{
+
+						"bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
+
+					}]
+
+				}
+
+				with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
 		}
 
 	});
@@ -475,7 +532,7 @@ function videourl(urls,id){
 				$("#myModal").modal('show');
 			}else{
 				$("#myModalvideo").modal('show');
-				var videoObject = {
+				videoObject = {
 						container: '.video',//“#”代表容器的ID，“.”或“”代表容器的class
 						variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
 						autoplay:true,//自动播放
@@ -842,7 +899,7 @@ function initTeacherClass(cid){
 				$("#TeacherClass").html("暂无教师信息");
 			}else{
 				var TeacherClass ='<div class="media-left">'
-					+'<a href="#"><img data-original="'
+					+'<a href="#"><img style="width:75px;height:75px;" data-original="'
 					+result[0].teacher_imgurl
 					+'" class="jpckclass lazy" style="height:15%;" alt="...">'
 					+ '</a></div>'

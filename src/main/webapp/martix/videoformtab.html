@@ -8,6 +8,7 @@
 .role {
 	display: none;
 }
+
 .wrap {
 	width: 150px; /* 设置需要固定的宽度 */
 	white-space: nowrap; /* 不换行 */
@@ -49,7 +50,7 @@ table {
 					class="fa fa-comments"></i> <strong><span
 						style="font-size: 25px;">语道后台管理 </span></strong></a>
 			</div>
-			<ul class="nav navbar-top-links navbar-right">
+			<!-- <ul class="nav navbar-top-links navbar-right">
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" aria-expanded="false"> <i
 						class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -88,8 +89,8 @@ table {
 						<li><a class="text-center" href="#"> <strong>Read
 									All Messages</strong> <i class="fa fa-angle-right"></i>
 						</a></li>
-					</ul> <!-- /.dropdown-messages --></li>
-				<!-- /.dropdown -->
+					</ul> /.dropdown-messages</li>
+				/.dropdown
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" aria-expanded="false"> <i
 						class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -162,8 +163,8 @@ table {
 						<li><a class="text-center" href="#"> <strong>See
 									All Tasks</strong> <i class="fa fa-angle-right"></i>
 						</a></li>
-					</ul> <!-- /.dropdown-tasks --></li>
-				<!-- /.dropdown -->
+					</ul> /.dropdown-tasks</li>
+				/.dropdown
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" aria-expanded="false"> <i
 						class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -207,8 +208,8 @@ table {
 						<li><a class="text-center" href="#"> <strong>See
 									All Alerts</strong> <i class="fa fa-angle-right"></i>
 						</a></li>
-					</ul> <!-- /.dropdown-alerts --></li>
-				<!-- /.dropdown -->
+					</ul> /.dropdown-alerts</li>
+				/.dropdown
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" aria-expanded="false"> <i
 						class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -221,17 +222,17 @@ table {
 						<li class="divider"></li>
 						<li><a href="javascript:teacherLoginOut()"><i
 								class="fa fa-sign-out fa-fw"></i> Logout</a></li>
-					</ul> <!-- /.dropdown-user --></li>
-				<!-- /.dropdown -->
-			</ul>
+					</ul> /.dropdown-user</li>
+				/.dropdown
+			</ul> -->
 		</nav>
 		<!--/. NAV TOP  -->
 		<nav class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
 
 				<ul class="nav" id="main-menu">
-					<li class="role" ><a href="#"><i
-							class="fa fa-sitemap"></i>权限管理<span class="fa arrow"></span></a>
+					<li class="role"><a href="#"><i class="fa fa-sitemap"></i>权限管理<span
+							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li><a href="role_list.html"><i class="fa fa-lock"></i>
 									权限管理</a></li>
@@ -240,20 +241,26 @@ table {
 							<li><a href="user_list.html"><i class="fa fa-user"></i>
 									用户管理</a></li>
 						</ul></li>
-						<li><a href="videoformtab.html" class="active-menu"><i
+					<li><a href="videoformtab.html" class="active-menu"><i
 							class="fa fa-table"></i>视频类型管理</a></li>
-					<li><a href="videoInfo.html" ><i
-							class="fa fa-table"></i>视频管理</a></li>
+					<li><a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a></li>
 					<li><a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
 					</li>
 					<li><a href="comment.html"><i class="fa fa-table"></i>评论管理</a>
 					</li>
-					<li class="role" ><a href="order.html"><i
+					<li class="role"><a href="order.html"><i
 							class="fa fa-table"></i>订单管理</a></li>
-					<li class="role"><a
-						href="proposal.html"><i class="fa fa-edit"></i>建议管理</a></li>
-					<li class="role" ><a href="test.html"><i
+					<li class="role"><a href="proposal.html"><i
+							class="fa fa-edit"></i>建议管理</a></li>
+					<li class="role"><a href="test.html"><i
 							class="fa fa-edit"></i>题目管理</a></li>
+					<li class="role" style="display: none;"><a href="#"><i
+							class="fa fa-sitemap"></i>首页管理<span class="fa arrows"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="inform.html"><i class="fa fa-table"></i>通知管理</a></li>
+							<li><a href="teacher_show.html"><i class="fa fa-table"></i>教师展示</a></li>
+							<li><a href="rollplay.html"><i class="fa fa-table"></i>滚播管理</a></li>
+						</ul></li>
 				</ul>
 			</div>
 		</nav>
@@ -284,8 +291,7 @@ table {
 										</td>
 										<td>
 											<div class="input-group" width="100%">
-												<span class="input-group-addon">视频类型年级</span> 
-												<input
+												<span class="input-group-addon">视频类型年级</span> <input
 													type="text" class="form-control" placeholder="请输入类型年级"
 													id="video_form_class_sea">
 											</div>
@@ -327,7 +333,7 @@ table {
 									<tr>
 										<td>序号</td>
 										<td>视频类型名称</td>
-										<td>视频年级名称</td>									
+										<td>视频年级名称</td>
 										<td>视频类型修改</td>
 										<td>视频类型状态</td>
 									</tr>
@@ -336,7 +342,7 @@ table {
 						</div>
 					</div>
 				</div>
-			</div>		
+			</div>
 		</div>
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -353,7 +359,8 @@ table {
 					<form action="/videoServer/videoTab/uploadflv.do" method="post"
 						enctype="multipart/form-data" id="dataForm">
 						<div style="width: 100%;">
-							<div style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
+							<div
+								style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
 									style="width: 25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型名称：</div>
@@ -385,8 +392,8 @@ table {
 		<!-- /model -->
 
 		<!-- Modal2 -->
-		<div class="modal fade" id="updateModal" tabindex="-1"
-			role="dialog" aria-labelledby="updateModalLabel">
+		<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
+			aria-labelledby="updateModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -399,7 +406,8 @@ table {
 					<form action="/videoServer/videoTab/updetVideoById.do"
 						method="post" enctype="multipart/form-data" id="updatedataForm">
 						<div style="width: 100%;">
-							<div style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
+							<div
+								style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
 									style="width: 25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型名称：</div>
@@ -412,7 +420,7 @@ table {
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
-									style="width:  25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD;  text-align: right; height: 50px; line-height: 50px;">视频类型年级：</div>
+									style="width: 25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型年级：</div>
 								<div
 									style="width: 75%; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
 									<input type="text" style="width: 100%; height: 100%;"
@@ -421,7 +429,7 @@ table {
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
-									style="width:  25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型状态：</div>
+									style="width: 25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型状态：</div>
 								<div
 									style="width: 75%; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
 									<input type="text" style="width: 100%; height: 100%;"

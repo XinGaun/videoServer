@@ -17,6 +17,12 @@ public interface PersonalCenterDao {
 	 */
 	public int queryPersonalCenterAllCount(HashMap<String,Object> hashMap);
 	/**
+	 * 查询购买课程总数
+	 * @param courses_id
+	 * @return
+	 */
+	public int queryPurchaseAllCount(Object courses_id);
+	/**
 	 * 删除收藏信息
 	 * @param map
 	 * @return
