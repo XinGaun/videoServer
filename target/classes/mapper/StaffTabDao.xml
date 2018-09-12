@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.StaffTabDao">
+	<!-- 添加员工信息 -->
+	<insert id="addStaffTab" parameterType="com.entity.StaffTab">
+		INSERT INTO
+		staff_tab(staf_usr_name,staf_pwd,staf_name
+		<if test="staf_sales!=null">
+			,staf_sales
+		</if>
+		<if test="shop_id!=null">
+			,shop_id
+		</if>
+		<if test="jdde_id!=null">
+			,jdde_id
+		</if>
+		<if test="inst_unit_id!=null">
+			,inst_unit_id
+		</if>
+		<if test="ware_id!=null">
+			,ware_id
+		</if>
+		<if test="staf_role!=null">
+			,staf_role
+		</if>
+		<if test="staf_date!=null">
+			,staf_date
+		</if>
+		<if test="staf_stop_status!=null">
+			,staf_stop_status
+		</if>
+		<if test="staf_dete_status!=null">
+			,staf_dete_status
+		</if>
+		<if test="staf_job!=null">
+			,staf_job
+		</if>
+		<if test="branch_id!=null">
+			,branch_id
+		</if>
+		<if test="staf_approve!=null">
+			,staf_approve
+		</if>
+		) VALUES
+		(#{staf_usr_name},#{staf_pwd},#{staf_name}
+		<if test="staf_sales!=null">
+			,#{staf_sales}
+		</if>
+		<if test="shop_id!=null">
+			,#{shop_id}
+		</if>
+		<if test="jdde_id!=null">
+			,#{jdde_id}
+		</if>
+		<if test="inst_unit_id!=null">
+			,#{inst_unit_id}
+		</if>
+		<if test="ware_id!=null">
+			,#{ware_id}
+		</if>
+		<if test="staf_role!=null">
+			,array${staf_role}
+		</if>
+		<if test="staf_date!=null">
+			,#{staf_date}
+		</if>
+		<if test="staf_stop_status!=null">
+			,#{staf_stop_status}
+		</if>
+		<if test="staf_dete_status!=null">
+			,#{staf_dete_status}
+		</if>
+		<if test="staf_job!=null">
+			,#{staf_job}
+		</if>
+		<if test="branch_id!=null">
+			,#{branch_id}
+		</if>
+		<if test="staf_approve!=null">
+			,#{staf_approve}
+		</if>
+		)
+	</insert>
+	<!-- 分公司 -->
+	<resultMap type="java.util.HashMap" id="branch_tab">
+		<id property="bran_id" column="bran_id" />
+		<result property="bran_name" column="bran_name" />
+		<result property="bran_addr" column="bran_addr" />
+	</resultMap>
+	<!-- 门店 -->
+	<resultMap type="java.util.HashMap" id="shop_tab">
+		<id property="shop_id" column="shop_id" />
+		<result property="shop_name" column="shop_name" />
+		<result property="shop_addr" column="shop_addr" />
+		<result property="shop_date" column="shop_date" />
+		<result property="branch_id" column="jdde_branch_id" />
+	</resultMap>
+	<!-- 配送单位 -->
+	<resultMap type="java.util.HashMap" id="jdde_tab">
+		<id property="jdde_id" column="jdde_id" />
+		<result property="jdde_name" column="jdde_name" />
+		<result property="jdde_scope" column="jdde_scope" />
+		<result property="jdde_stop_status" column="jdde_stop_status" />
+		<result property="jdde_dete_status" column="jdde_dete_status" />
+		<result property="branch_id" column="jdde_branch_id" />
+	</resultMap>
+	<!-- 安装单位 -->
+	<resultMap type="java.util.HashMap" id="install_unit_tab">
+		<id property="inst_unit_id" column="inst_unit_id" />
+		<result property="inst_unit_name" column="inst_unit_name" />
+		<result property="inst_unit_scope" column="inst_unit_scope" />
+		<result property="inst_unit_stop_status" column="inst_unit_stop_status" />
+		<result property="inst_unit_dete_status" column="inst_unit_dete_status" />
+		<result property="branch_id" column="install_unit_branch_id" />
+	</resultMap>
+	<!-- 仓库 -->
+	<resultMap type="java.util.HashMap" id="warehouse_tab">
+		<id property="ware_id" column="ware_id" />
+		<result property="ware_name" column="ware_name" />
+		<result property="ware_addr" column="ware_addr" />
+		<result property="ware_superior" column="ware_superior" />
+		<result property="branch_id" column="ware_branch_id" />
+		<result property="jdde_id" column="ware_jdde_id" />
+		<result property="ware_class" column="ware_class" />
+	</resultMap>
+	<!-- 员工信息 -->
+	<resultMap type="java.util.HashMap" id="staffTab">
+		<id property="staf_id" column="staf_id" />
+		<result property="staf_usr_name" column="staf_usr_name" />
+		<result property="staf_pwd" column="staf_pwd" />
+		<result property="staf_name" column="staf_name" />
+		<result property="staf_sales" column="staf_sales" />
+		<result property="shop_id" column="staff_shop_id" />
+		<result property="inst_unit_id" column="staff_inst_unit_id" />
+		<result property="ware_id" column="staff_ware_id" />
+		<result property="jdde_id" column="staff_jdde_id" />
+		<result property="branch_id" column="staff_branch_id" />
+		<result property="staf_date" column="staf_date" />
+		<result property="staf_stop_status" column="staf_stop_status" />
+		<result property="staf_dete_status" column="staf_dete_status" />
+		<result property="staf_job" column="staf_job" />
+		<result property="staf_role" column="staf_role" jdbcType="ARRAY" />
+		<result property="staf_approve" column="staf_approve" /> 
+		<collection property="branch_tab" resultMap="branch_tab"></collection>
+		<collection property="shop_tab" resultMap="shop_tab"></collection>
+		<collection property="jdde_tab" resultMap="jdde_tab"></collection>
+		<collection property="install_unit_tab" resultMap="install_unit_tab"></collection>
+		<collection property="warehouse_tab" resultMap="warehouse_tab"></collection>	
+	</resultMap>
+	<!-- 查询员工信息 -->
+	<select id="queryStaffTab" parameterType="java.util.HashMap" resultMap="staffTab">
+		SELECT
+		staf_id,staf_usr_name,staf_pwd,staf_name,staf_sales,staff.shop_id staff_shop_id,staff.jdde_id staff_jdde_id,staff.inst_unit_id staff_inst_unit_id,staff.ware_id staff_ware_id,to_char(staf_date,'yyyy-mm-dd hh24:mi:ss')staf_date,staf_stop_status,staf_dete_status,
+		staf_role,staf_job,staff.branch_id staff_branch_id,staf_approve,shop.shop_id,shop.shop_name,shop.shop_addr,shop.shop_date,shop.branch_id shop_branch_id
+		,jdde.jdde_id,jdde.jdde_name,jdde.jdde_scope,jdde.jdde_dete_status,jdde.jdde_stop_status,jdde.branch_id jdde_branch_id,
+		install_unit.inst_unit_id,install_unit.inst_unit_name,install_unit.inst_unit_scope,install_unit.inst_unit_dete_status,
+		install_unit.inst_unit_stop_status,install_unit.branch_id install_unit_branch_id,
+		ware.ware_id,ware.ware_name,ware.ware_addr,ware.ware_superior,ware.branch_id ware_branch_id,ware.jdde_id,ware.ware_class,
+		branch.bran_id,branch.bran_name,branch.bran_addr
+		FROM staff_tab staff LEFT JOIN shop_tab shop ON staff.shop_id = shop.shop_id
+		LEFT JOIN jdde_tab jdde ON staff.jdde_id = jdde.jdde_id
+		LEFT JOIN install_unit_tab install_unit ON staff.inst_unit_id = install_unit.inst_unit_id
+		LEFT JOIN warehouse_tab ware ON staff.ware_id = ware.ware_id
+		LEFT JOIN branch_tab branch ON staff.branch_id = branch.bran_id
+		WHERE 1=1
+		<if test="staf_id!=null">
+			and staf_id = #{staf_id}
+		</if>
+		<if test="staff_id!=null">
+			and staf_id = #{staff_id}
+		</if>
+		<if test="staf_usr_name!=null">
+			and staf_usr_name = #{staf_usr_name}
+		</if>
+	<!-- 	<if test="staf_pwd!=null">
+			and staf_pwd = #{staf_pwd}
+		</if> -->
+		<if test="staf_name!=null">
+			and staf_name = #{staf_name}
+		</if>
+		<if test="staf_sales!=null">
+			and staf_sales = #{staf_sales}
+		</if>
+		<if test="staff_id==null">
+			<if test="shop_id!=null">
+				and shop_id = #{shop_id}
+			</if>
+		</if>
+		<if test="jdde_id!=null">
+			and jdde_id = #{jdde_id}
+		</if>
+		<if test="inst_unit_id!=null">
+			and inst_unit_id = #{inst_unit_id}
+		</if>
+		<if test="ware_id!=null">
+			and ware_id = #{ware_id}
+		</if>
+		<if test="staf_stop_status!=null">
+			and staf_stop_status = #{staf_stop_status}
+		</if>
+		<if test="staf_dete_status!=null">
+			and staf_dete_status = #{staf_dete_status}
+		</if>
+		<if test="staf_job!=null">
+			and staf_job = #{staf_job}
+		</if>
+		<if test="branch_id!=null">
+			and branch_id = #{branch_id}
+		</if>
+		<if test="staf_date!=null">
+			and staf_date = to_timestamp(#{staf_date},'yyyy-mm-dd
+			hh24:mi:ss')
+		</if>
+		<if test="staf_approve!=null">
+			and staf_approve = #{staf_approve}
+		</if>
+		LIMIT #{page} OFFSET #{nums}
+	</select>
+	<!-- 查询员工信息总条数 -->
+	<select id="queryStaffTabCount" resultType="int" parameterType="java.util.HashMap">
+		SELECT COUNT(staf_id) FROM staff_tab staff LEFT JOIN shop_tab shop ON staff.shop_id = shop.shop_id
+		LEFT JOIN jdde_tab jdde ON staff.jdde_id = jdde.jdde_id
+		LEFT JOIN install_unit_tab install_unit ON staff.inst_unit_id = install_unit.inst_unit_id
+		LEFT JOIN warehouse_tab ware ON staff.ware_id = ware.ware_id
+		LEFT JOIN branch_tab branch ON staff.branch_id = branch.bran_id
+		WHERE 1=1
+		<if test="staf_id!=null">
+			and staf_id = #{staf_id}
+		</if>
+		<if test="staff_id!=null">
+			and staf_id = #{staff_id}
+		</if>
+		<if test="staf_usr_name!=null">
+			and staf_usr_name = #{staf_usr_name}
+		</if>
+		<if test="staf_pwd!=null">
+			and staf_pwd = #{staf_pwd}
+		</if>
+		<if test="staf_name!=null">
+			and staf_name = #{staf_name}
+		</if>
+		<if test="staf_sales!=null">
+			and staf_sales = #{staf_sales}
+		</if>
+		<if test="staff_id==null">
+			<if test="shop_id!=null">
+				and shop_id = #{shop_id}
+			</if>
+		</if>
+		<if test="jdde_id!=null">
+			and jdde_id = #{jdde_id}
+		</if>
+		<if test="inst_unit_id!=null">
+			and inst_unit_id = #{inst_unit_id}
+		</if>
+		<if test="ware_id!=null">
+			and ware_id = #{ware_id}
+		</if>
+		<if test="staf_stop_status!=null">
+			and staf_stop_status = #{staf_stop_status}
+		</if>
+		<if test="staf_dete_status!=null">
+			and staf_dete_status = #{staf_dete_status}
+		</if>
+		<if test="staf_job!=null">
+			and staf_job = #{staf_job}
+		</if>
+		<if test="branch_id!=null">
+			and branch_id = #{branch_id}
+		</if>
+		<if test="staf_date!=null">
+			and staf_date = to_timestamp(#{staf_date},'yyyy-mm-dd
+			hh24:mi:ss')
+		</if>
+		<if test="staf_approve!=null">
+			and staf_approve = #{staf_approve}
+		</if>
+	</select>
+	<!-- 更新员工名称信息 -->
+	<update id="updateStaffTab" parameterType="com.entity.StaffTab">
+		UPDATE staff_tab
+		<trim prefix="set" suffixOverrides=",">
+			<if test="staf_usr_name!=null">
+				staf_usr_name=#{staf_usr_name},
+			</if>
+			<if test="staf_pwd!=null">
+				staf_pwd=#{staf_pwd},
+			</if>
+			<if test="staf_name!=null">
+				staf_name=#{staf_name},
+			</if>
+			<if test="staf_sales!=null">
+				staf_sales=#{staf_sales},
+			</if>
+			<if test="shop_id!=null">
+				shop_id=#{shop_id},
+			</if>
+			<if test="jdde_id!=null">
+				jdde_id=#{jdde_id},
+			</if>
+			<if test="inst_unit_id!=null">
+				inst_unit_id=#{inst_unit_id},
+			</if>
+			<if test="ware_id!=null">
+				ware_id=#{ware_id},
+			</if>
+			<if test="staf_job!=null">
+				staf_job=#{staf_job},
+			</if>
+			
+			<if test="staf_role!=null">
+				staf_role=array${staf_role},
+			</if>
+			<if test="staf_date!=null">
+				staf_date=to_timestamp(#{staf_date},'yyyy-mm-dd hh24:mi:ss'),
+			</if>
+			<if test="staf_stop_status!=null">
+				staf_stop_status=#{staf_stop_status},
+			</if>
+			<if test="staf_dete_status!=null">
+				staf_dete_status=#{staf_dete_status},
+			</if>
+			<if test="staf_approve!=null">
+				staf_approve=#{staf_approve},
+			</if>
+			
+		</trim>
+		WHERE staf_id =#{staf_id}
+	</update>
+	<!-- 删除员工信息 -->
+	<delete id="deleteStaffTab" parameterType="int">
+		DELETE from
+		staff_tab
+		WHERE staf_id=#{staf_id}
+	</delete>
+</mapper>

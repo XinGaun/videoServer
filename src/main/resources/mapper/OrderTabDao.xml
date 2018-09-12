@@ -5,135 +5,649 @@
 <mapper namespace="com.dao.OrderTabDao">
 	<!-- 添加订单信息 -->
 	<insert id="addOrderTab" parameterType="java.util.HashMap"
-		keyProperty="order_id">
+		useGeneratedKeys="true" keyProperty="orde_id">
 		INSERT INTO
-		order_tab(user_id,order_due,order_status,order_date,order_type
-		<if test="video_id!=null">
-			,video_id
+		order_tab(orde_total_val,
+		orde_status,buye_id,orde_addr,orde_phone,pay_status,pay_type,orde_date,delivery_type,sell_type,staf_sell_id,orde_invoice
+		<if test="fina_tab!=null">
+			,fina_tab
 		</if>
-		<if test="combo_id!=null">
-			,combo_id
+		<if test="orde_remark!=null">
+			,orde_remark
 		</if>
-		<if test="order_pricemoney!=null">
-			,order_pricemoney
+		<if test="deli_id!=null">
+			,deli_id
 		</if>
-		<if test="discounts_id!=null">
-			,discounts_id
+		<if test="staf_deli_id!=null">
+			,staf_deli_id
 		</if>
-		)
-		VALUES (#{user_id},${order_due},#{order_status},now(),#{order_type}
-		<if test="video_id!=null">
-			,#{video_id}
+		<if test="inst_id!=null">
+			,inst_id
 		</if>
-		<if test="combo_id!=null">
-			,#{combo_id}
+		<if test="staf_insf_id!=null">
+			,staf_insf_id
 		</if>
-		<if test="order_pricemoney!=null">
-			,#{order_pricemoney}
+		<if test="ware_id!=null">
+			,ware_id
 		</if>
-		<if test="discounts_id!=null">
-			,#{discounts_id}
+		<if test="pay_date!=null">
+			,pay_date
+		</if>
+		) VALUES
+		(#{orde_total_val},#{orde_status},#{buye_id},#{orde_addr},#{orde_phone},#{pay_status},#{pay_type},now(),#{delivery_type},#{sell_type},#{staf_sell_id},#{orde_invoice}
+		<if test="fina_tab!=null">
+			,#{fina_tab}
+		</if>
+		<if test="orde_remark!=null">
+			,#{orde_remark}
+		</if>
+		<if test="deli_id!=null">
+			,#{deli_id}
+		</if>
+		<if test="staf_deli_id!=null">
+			,#{staf_deli_id}
+		</if>
+		<if test="inst_id!=null">
+			,#{inst_id}
+		</if>
+		<if test="staf_insf_id!=null">
+			,#{staf_insf_id}
+		</if>
+		<if test="ware_id!=null">
+			,#{ware_id}
+		</if>
+		<if test="pay_date!=null">
+			,to_timestamp(#{pay_date},'yyyy-mm-dd hh24:mi:ss')
 		</if>
 		)
 	</insert>
 	<!-- 查询订单信息 -->
-	<select id="queryOrderTab" parameterType="java.util.HashMap"
-		resultType="int">
-		SELECT count(order_id) FROM order_tab WHERE
-		order_id=#{order_id} AND order_status = '已付款'
+	<select id="queryOrderTab" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		SELECT st2.staf_name inst_staf_name,st.staf_name
+		deli_staf_name,del.staf_id
+		deli_staf_id,recommend_name,sta.staf_name,del.deli_name,del.deli_phone,ord.orde_id,orde_total_val,orde_status,ord.buye_id,orde_addr,orde_phone,pay_status,pay_type,fina_tab,to_char(orde_date,'yyyy-mm-dd hh24:mi:ss')orde_date,to_char(pay_date,'yyyy-mm-dd hh24:mi:ss')pay_date,orde_remark,delivery_type,ord.deli_id,staf_deli_id,ord.inst_id,staf_insf_id,ord.ware_id,sell_type,staf_sell_id,orde_invoice
+		FROM order_tab ord
+		LEFT JOIN deliver_tab del ON ord.orde_id =
+		del.orde_id
+		left join staff_tab sta on ord.staf_sell_id = sta.staf_id
+		left join
+		staff_tab st on del.staf_id = st.staf_id
+		left join install_tab tab on
+		ord.inst_id =tab.inst_id
+		left join staff_tab st2 on st2.staf_id =
+		tab.staf_id
+		<if test="comm_id!=null">
+			left join sales_record_tab sal on ord.orde_id = sal.orde_id
+		</if>
+		WHERE 1=1 and del.chan_id is null
+		<if test="comm_id!=null">
+			and comm_id = #{comm_id}
+		</if>
+		<if test="orde_id!=null">
+			and ord.orde_id = #{orde_id}
+		</if>
+		<if test="orde_status!=null">
+			and ord.orde_status = #{orde_status}
+		</if>
+		<if test="buye_id!=null">
+			and ord.buye_id = #{buye_id}
+		</if>
+		<if test="orde_addr!=null">
+			and ord.orde_addr = #{orde_addr}
+		</if>
+		<if test="orde_phone!=null">
+			and ord.orde_phone = #{orde_phone}
+		</if>
+		<if test="pay_status!=null">
+			and ord.pay_status = #{pay_status}
+		</if>
+		<if test="pay_type!=null">
+			and ord.pay_type = #{pay_type}
+		</if>
+		<if test="delivery_type!=null">
+			and ord.delivery_type = #{delivery_type}
+		</if>
+		<if test="deli_id!=null">
+			and ord.deli_id = #{deli_id}
+		</if>
+		<if test="staf_deli_id!=null">
+			and ord.staf_deli_id = #{staf_deli_id}
+		</if>
+		<if test="inst_id!=null">
+			and ord.inst_id = #{inst_id}
+		</if>
+		<if test="staf_insf_id!=null">
+			and ord.staf_insf_id = #{staf_insf_id}
+		</if>
+		<if test="ware_id!=null">
+			and ord.ware_id = #{ware_id}
+		</if>
+		<if test="sell_type!=null">
+			and ord.sell_type = #{sell_type}
+		</if>
+		<if test="staf_sell_id!=null">
+			and ord.staf_sell_id = #{staf_sell_id}
+		</if>
+		<if test="orde_invoice!=null">
+			and ord.orde_invoice = #{orde_invoice}
+		</if>
+		<if test="start_date!=null">
+			and ord.orde_date >=
+			to_timestamp(#{start_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="ending_date!=null">
+			and ord.orde_date &lt;=
+			to_timestamp(#{ending_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		ORDER BY ord.orde_date DESC
+		LIMIT #{page} OFFSET #{nums}
+	</select>
+	<!-- 查询订单总数信息 -->
+	<select id="queryOrderTabCount" resultType="int" parameterType="java.util.HashMap">
+		SELECT COUNT(ord.orde_id) FROM order_tab ord
+		LEFT JOIN deliver_tab del
+		ON ord.orde_id = del.orde_id
+		left join staff_tab sta on ord.staf_sell_id = sta.staf_id
+		<if test="comm_id!=null">
+			left join sales_record_tab sal on ord.orde_id = sal.orde_id
+		</if>
+		WHERE 1=1 and del.chan_id is null
+		<if test="comm_id!=null">
+			and comm_id = #{comm_id}
+		</if>
+		<if test="orde_id!=null">
+			and ord.orde_id = #{orde_id}
+		</if>
+		<if test="orde_status!=null">
+			and ord.orde_status = #{orde_status}
+		</if>
+		<if test="buye_id!=null">
+			and ord.buye_id = #{buye_id}
+		</if>
+		<if test="orde_addr!=null">
+			and ord.orde_addr = #{orde_addr}
+		</if>
+		<if test="orde_phone!=null">
+			and ord.orde_phone = #{orde_phone}
+		</if>
+		<if test="pay_status!=null">
+			and ord.pay_status = #{pay_status}
+		</if>
+		<if test="pay_type!=null">
+			and ord.pay_type = #{pay_type}
+		</if>
+		<if test="delivery_type!=null">
+			and ord.delivery_type = #{delivery_type}
+		</if>
+		<if test="deli_id!=null">
+			and ord.deli_id = #{deli_id}
+		</if>
+		<if test="staf_deli_id!=null">
+			and ord.staf_deli_id = #{staf_deli_id}
+		</if>
+		<if test="inst_id!=null">
+			and ord.inst_id = #{inst_id}
+		</if>
+		<if test="staf_insf_id!=null">
+			and ord.staf_insf_id = #{staf_insf_id}
+		</if>
+		<if test="ware_id!=null">
+			and ord.ware_id = #{ware_id}
+		</if>
+		<if test="sell_type!=null">
+			and ord.sell_type = #{sell_type}
+		</if>
+		<if test="staf_sell_id!=null">
+			and ord.staf_sell_id = #{staf_sell_id}
+		</if>
+		<if test="orde_invoice!=null">
+			and ord.orde_invoice = #{orde_invoice}
+		</if>
+		<if test="start_date!=null">
+			and ord.orde_date >=
+			to_timestamp(#{start_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="ending_date!=null">
+			and ord.orde_date &lt;=
+			to_timestamp(#{ending_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
 	</select>
 	<!-- 更新订单信息 -->
-	<update id="updateOrderTab" parameterType="java.util.HashMap">
-		UPDATE order_tab SET
-		order_pricemoney = ${order_pricemoney},order_status = #{order_status}
-		WHERE order_id = #{order_id}
+	<update id="updateOrderTab" parameterType="com.entity.OrderTab">
+		UPDATE order_tab
+		<trim prefix="set" suffixOverrides=",">
+			<if test="orde_total_val!=null">
+				orde_total_val=#{orde_total_val},
+			</if>
+			<if test="orde_status!=null">
+				orde_status=#{orde_status},
+			</if>
+			<if test="orde_addr!=null">
+				orde_addr=#{orde_addr},
+			</if>
+			<if test="orde_phone!=null">
+				orde_phone=#{orde_phone},
+			</if>
+			<if test="pay_status!=null">
+				pay_status=#{pay_status},
+			</if>
+			<if test="pay_type!=null">
+				pay_type=#{pay_type},
+			</if>
+			<if test="fina_tab!=null">
+				fina_tab=#{fina_tab},
+			</if>
+			<if test="pay_date!=null">
+				pay_date=to_timestamp(#{pay_date},'yyyy-mm-dd
+				hh24:mi:ss'),
+			</if>
+			<if test="orde_remark!=null">
+				orde_remark=#{orde_remark},
+			</if>
+			<if test="delivery_type!=null">
+				delivery_type=#{delivery_type},
+			</if>
+			<if test="deli_id!=null">
+				deli_id=#{deli_id},
+			</if>
+			<if test="staf_deli_id!=null">
+				staf_deli_id=#{staf_deli_id},
+			</if>
+			<if test="inst_id!=null">
+				inst_id=#{inst_id},
+			</if>
+			<if test="staf_insf_id!=null">
+				staf_insf_id=#{staf_insf_id},
+			</if>
+			<if test="ware_id!=null">
+				ware_id=#{ware_id},
+			</if>
+			<if test="sell_type!=null">
+				sell_type=#{sell_type},
+			</if>
+			<if test="staf_sell_id!=null">
+				staf_sell_id=#{staf_sell_id},
+			</if>
+			<if test="orde_invoice!=null">
+				orde_invoice=#{orde_invoice},
+			</if>
+		</trim>
+		WHERE orde_id =#{orde_id}
 	</update>
-	<!-- 查询所有订单信息 -->
-	<select id="queryOrderTabAll" parameterType="java.util.HashMap"
-		resultType="java.util.HashMap">
-		SELECT
-		o.order_id,o.user_id,o.video_id,o.combo_id,o.order_pricemoney,o.order_due,o.discounts_id,date_format(o.order_date,'%Y-%m-%d %h:%i:%s')order_date
-		,o.order_status,o.order_type,s.status_type,u.user_name,v.video_name,c.combo_name
-		FROM order_tab o LEFT JOIN status_tab s ON o.order_type = s.status_id
-		LEFT JOIN user_tab u ON o.user_id = u.user_id LEFT JOIN video_tab v ON
-		o.video_id=v.video_id
-		LEFT JOIN combo_tab c on o.combo_id = o.combo_id where 1=1 
-		<if test="order_id!='' and order_id!=null">
-			and o.order_id = #{order_id}
-		</if> 
-		<if test="user_name!='' and user_name!=null">
-			and u.user_name = #{user_name}
-		</if> 
-		<if test="video_name!='' and video_name!=null">
-			and v.video_name = #{video_name}
-		</if> 
-		<if test="combo_name!='' and combo_name!=null">
-			and c.combo_name = #{combo_name}
-		</if> 
-		<if test="order_status!='' and order_status!=null">
-			and o.order_status = #{order_status}
-		</if> 
-		<if test="order_type!='' and order_type!=null and order_type!=0">
-			and o.order_type = #{order_type}
-		</if> 
-		<if test="order_start!='' and order_start!=null">
-			and o.order_date >= str_to_date(#{order_start}, '%Y-%m-%d')
-		</if> 
-		<if test="order_start!=order_end">
-			<if test="order_end!='' and order_end!=null">
-				and o.order_date &lt;= str_to_date(#{order_end}, '%Y-%m-%d')
-			</if>
-		</if>
-		limit #{start},#{limit}
-	</select>
-	<!-- 查询定单总数 -->
-	<select id="queryOrderTabCount" parameterType="java.util.HashMap" resultType="int">
-	    SELECT COUNT(o.order_id) FROM order_tab o LEFT JOIN status_tab s ON o.order_type = s.status_id
-		LEFT JOIN user_tab u ON o.user_id = u.user_id LEFT JOIN video_tab v ON
-		o.video_id=v.video_id
-		LEFT JOIN combo_tab c on o.combo_id = o.combo_id where 1=1 
-		<if test="order_id!='' and order_id!=null">
-			and o.order_id = #{order_id}
-		</if> 
-		<if test="user_name!='' and user_name!=null">
-			and u.user_name = #{user_name}
-		</if> 
-		<if test="video_name!='' and video_name!=null">
-			and v.video_name = #{video_name}
-		</if> 
-		<if test="combo_name!='' and combo_name!=null">
-			and c.combo_name = #{combo_name}
-		</if> 
-		<if test="order_status!='' and order_status!=null">
-			and o.order_status = #{order_status}
-		</if> 
-		<if test="order_type!='' and order_type!=null and order_type!=0">
-			and o.order_type = #{order_type}
-		</if> 
-		<if test="order_start!='' and order_start!=null">
-			and o.order_date >= str_to_date(#{order_start}, '%Y-%m-%d')
-		</if> 
-		<if test="order_start!=order_end">
-			<if test="order_end!='' and order_end!=null">
-				and o.order_date &lt;= str_to_date(#{order_end}, '%Y-%m-%d')
-			</if>
-		</if>
-	</select>
 	<!-- 删除订单信息 -->
 	<delete id="deleteOrderTab" parameterType="int">
-		DELETE FROM order_tab WHERE order_id = #{order_id}
+		DELETE FROM order_tab
+		WHERE orde_id =#{orde_id}
 	</delete>
-	<!-- 查询订单是否存在 -->
-	<select id="queryOrderExist" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT order_id FROM order_tab WHERE user_id = #{user_id} and order_type = #{order_type}
-		<if test="video_id!=null">
-			and video_id = #{video_id} 
+	<!-- 添加财务记录 -->
+	<insert id="addFinancialTab" parameterType="java.util.HashMap"
+		useGeneratedKeys="true" keyProperty="fina_id">
+		INSERT INTO financial_tab(fina_money
+		<if test="pay_type!=null">
+			,pay_type
 		</if>
-		<if test="combo_id!=null">
-			and combo_id = #{combo_id}
+		<if test="pay_date!=null">
+			,pay_date
 		</if>
-		<if test="combo_id!=null">
-			and combo_id = #{combo_id}
-		</if>	
+		<if test="surplus_money!=null">
+			,surplus_money
+		</if>
+		<if test="bank_name!=null">
+			,bank_name
+		</if>
+		<if test="bank_num!=null">
+			,bank_num
+		</if>
+		)
+		values(#{orde_total_val}
+		<if test="pay_type!=null">
+			,#{pay_type}
+		</if>
+		<if test="pay_date!=null">
+			,to_timestamp(#{pay_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="surplus_money!=null">
+			,#{surplus_money}
+		</if>
+		<if test="bank_name!=null">
+			,#{bank_name}
+		</if>
+		<if test="bank_num!=null">
+			,#{bank_num}
+		</if>
+		)
+	</insert>
+	<!-- 更新财务记录 -->
+	<update id="updateFinancialTab" parameterType="java.util.HashMap">
+		update
+		financial_tab set orde_id = #{orde_id} where 1=1 and fina_id =
+		#{fina_id}
+	</update>
+	<!-- 更新付款后的财务记录 -->
+	<update id="updateFinancialTabEnd" parameterType="java.util.HashMap">
+		update
+		financial_tab set pay_number =
+		#{pay_number},pay_date=to_timestamp(#{pay_date},'yyyy-mm-dd hh24:mi:ss') where 1=1 and orde_id = #{orde_id}
+	</update>
+	<!-- 后端商品添加下单 -->
+	<insert id="addOrderBack" parameterType="java.util.HashMap"
+		useGeneratedKeys="true" keyProperty="orde_id">
+		INSERT INTO
+		order_tab(orde_total_val,orde_status,pay_status,fina_tab,sell_type
+		<if test="buye_id!=null">
+			,buye_id
+		</if>
+		<if test="orde_date!=null">
+			,orde_date
+		</if>
+		<if test="orde_phone!=null">
+			,orde_phone
+		</if>
+		<if test="pay_type!=null">
+			,pay_type
+		</if>
+		<if test="orde_addr!=null">
+			,orde_addr
+		</if>
+		<if test="pay_date!=null">
+			,pay_date
+		</if>
+		<if test="orde_remark!=null">
+			,orde_remark
+		</if>
+		<if test="delivery_type!=null">
+			,delivery_type
+		</if>
+		<if test="deli_id!=null">
+			,deli_id
+		</if>
+		<if test="staf_deli_id!=null">
+			,staf_deli_id
+		</if>
+		<if test="inst_id!=null">
+			,inst_id
+		</if>
+		<if test="staf_insf_id!=null">
+			,staf_insf_id
+		</if>
+		<if test="ware_id!=null">
+			,ware_id
+		</if>
+		<if test="staf_sell_id!=null">
+			,staf_sell_id
+		</if>
+		<if test="orde_invoice!=null">
+			,orde_invoice
+		</if>
+		<if test="recommend_name!=null">
+			,recommend_name
+		</if>
+		)
+		values(#{orde_total_val},#{orde_status},#{pay_status},#{fina_id},#{sell_type}
+		<if test="buye_id!=null">
+			,#{buye_id}
+		</if>
+		<if test="orde_date!=null">
+			,now()
+		</if>
+		<if test="orde_phone!=null">
+			,#{orde_phone}
+		</if>
+		<if test="pay_type!=null">
+			,#{pay_type}
+		</if>
+		<if test="orde_addr!=null">
+			,#{orde_addr}
+		</if>
+		<if test="pay_date!=null">
+			,to_timestamp(#{pay_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="orde_remark!=null">
+			,#{orde_remark}
+		</if>
+		<if test="delivery_type!=null">
+			,#{delivery_type}
+		</if>
+		<if test="deli_id!=null">
+			,#{deli_id}
+		</if>
+		<if test="staf_deli_id!=null">
+			,#{staf_deli_id}
+		</if>
+		<if test="inst_id!=null">
+			,#{inst_id}
+		</if>
+		<if test="staf_insf_id!=null">
+			,#{staf_insf_id}
+		</if>
+		<if test="ware_id!=null">
+			,#{ware_id}
+		</if>
+		<if test="staf_sell_id!=null">
+			,#{staf_sell_id}
+		</if>
+		<if test="orde_invoice!=null">
+			,#{orde_invoice}
+		</if>
+		<if test="recommend_name!=null">
+			,#{recommend_name}
+		</if>
+		)
+	</insert>
+	<!-- 删除所属订单的商品销售记录 -->
+	<delete id="deleteOrderRecord" parameterType="java.util.HashMap">
+		DELETE FROM
+		sales_record_tab WHERE orde_id = #{orde_id}
+	</delete>
+	<!-- 删除所属财务记录的订单信息 -->
+	<delete id="deleteOrderFinancial" parameterType="java.util.HashMap">
+		DELETE FROM
+		financial_tab WHERE orde_id = #{orde_id}
+	</delete>
+	<!-- 添加买家信息 -->
+	<insert id="addBuyerTab" parameterType="java.util.HashMap"
+		useGeneratedKeys="true" keyProperty="buye_id">
+		INSERT INTO buyer_tab(buye_phone
+		)VALUES (#{orde_phone})
+	</insert>
+	<!-- 添加送货地址 -->
+	<insert id="addDeliverYaddrTab" parameterType="java.util.HashMap">
+		INSERT INTO delivery_addr_tab(buye_id, deli_contacts, deli_phone
+		<if test="deli_addr!=null">
+			,deli_addr
+		</if>
+		)
+		VALUES(#{buye_id},#{deli_contacts},#{deli_phone}
+		<if test="deli_addr!=null">
+			,#{deli_addr}
+		</if>
+		)
+	</insert>
+	<!-- 添加配送单信息 -->
+	<insert id="addOrderDeliverTab" parameterType="java.util.HashMap"
+		useGeneratedKeys="true" keyProperty="deli_id">
+		INSERT INTO deliver_tab(orde_id,
+		jdde_id,deli_addr,deli_phone,deli_name,deli_status
+		<if test="staf_id!=null">
+			,staf_id
+		</if>
+		<if test="chan_id!=null">
+			,chan_id
+		</if>
+		<if test="deli_make_date!=null">
+			,deli_make_date
+		</if>
+		<if test="deli_delivery_date!=null">
+			,deli_delivery_date
+		</if>
+		<if test="deli_come_date!=null">
+			,deli_come_date
+		</if>
+		<if test="deli_visit_date!=null">
+			,deli_visit_date
+		</if>
+		<if test="deli_sign_date!=null">
+			,deli_sign_date
+		</if>
+		<if test="deli_sign_name!=null">
+			,deli_sign_name
+		</if>
+		<if test="deli_remark!=null">
+			,deli_remark
+		</if>
+		)
+		VALUES
+		(#{orde_id},#{jdde_id},#{deli_addr},#{deli_phone},#{deli_name},#{deli_status}
+		<if test="staf_id!=null">
+			,#{staf_id}
+		</if>
+		<if test="chan_id!=null">
+			,#{chan_id}
+		</if>
+		<if test="deli_make_date!=null">
+			,to_timestamp(#{deli_make_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="deli_delivery_date!=null">
+			, to_timestamp(#{deli_delivery_date},'yyyy-mm-dd
+			hh24:mi:ss')
+		</if>
+		<if test="deli_come_date!=null">
+			, to_timestamp(#{deli_come_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="deli_visit_date!=null">
+			, to_timestamp(#{deli_visit_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="deli_sign_date!=null">
+			, to_timestamp(#{deli_sign_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="deli_sign_name!=null">
+			,#{deli_sign_name}
+		</if>
+		<if test="deli_remark!=null">
+			,#{deli_remark}
+		</if>
+		)
+	</insert>
+	<!-- 更新配送前端购物配送单信息 -->
+	<update id="updateOrderDeliverTab" parameterType="java.util.HashMap">
+		UPDATE
+		deliver_tab SET deli_status = '创建' WHERE orde_id = #{orde_id}
+	</update>
+	<!-- 商城前端查询用户个人订单详情 -->
+	<resultMap type="com.entity.OrderTab" id="queryBuyerOrderMap">
+		<id property="orde_id" column="orde_id" />
+		<result property="orde_status" column="orde_status" />
+		<result property="pay_type" column="pay_type" />
+		<result property="orde_date" column="orde_date" />
+		<result property="pay_date" column="pay_date" />
+		<result property="buye_id" column="buye_id" />
+		<result property="deli_id" column="deli_id" />
+		<result property="staf_sell_id" column="staf_sell_id" />
+		<result property="inst_id" column="inst_id" />
+		<result property="ware_id" column="ware_id" />
+		<result property="staf_deli_id" column="staf_deli_id" />
+		<result property="orde_total_val" column="orde_total_val" />
+		<result property="orde_addr" column="orde_addr" />
+		<result property="orde_phone" column="orde_phone" />
+		<result property="pay_status" column="pay_status" />
+		<result property="orde_remark" column="orde_remark" />
+		<result property="delivery_type" column="delivery_type" />
+		<result property="deli_name" column="deli_name" />
+		<result property="jdde_name" column="jdde_name" />
+		<result property="disc_id" column="disc_id" />
+		<collection property="CommodityList" resultMap="queryBuyerCommodityMap"></collection>
+	</resultMap>
+	<resultMap type="com.entity.CommodityTab" id="queryBuyerCommodityMap">
+		<id property="comm_putaway_id" column="comm_putaway_id" />
+		<result property="comm_name" column="comm_name" />
+		<result property="comm_main_img" column="comm_main_img" />
+		<result property="comm_price" column="comm_price" />
+		<result property="comm_current_price" column="comm_current_price" />
+		<result property="offline_price" column="offline_price" />
+		<result property="sale_id" column="sale_id" />
+		<result property="sale_price" column="sale_price" />
+		<result property="real_price" column="real_price" />
+		<result property="sale_num" column="sale_num" />
+		<result property="discounts_id" column="discounts_id" />
+		
+	</resultMap>
+	<select id="queryBuyerOrder" parameterType="java.util.HashMap"
+		resultMap="queryBuyerOrderMap">
+		SELECT
+		dis.disc_id,comm_name,comm_main_img,comm_putaway_id,comm_price,comm_current_price,offline_price,ord.orde_id,orde_status,pay_type,to_char(orde_date,'yyyy-mm-dd hh24:mi:ss')orde_date,to_char(pay_date,'yyyy-mm-dd hh24:mi:ss')pay_date,
+		ord.buye_id,deli_id,staf_sell_id,inst_id,ware_id,staf_deli_id,orde_total_val
+		FROM order_tab ord LEFT JOIN sales_record_tab sal ON ord.orde_id =
+		sal.orde_id
+		LEFT JOIN commodity_tab com ON sal.comm_id =
+		com.comm_putaway_id
+    	left join discuss_tab dis on dis.orde_id =ord.orde_id
+    	where 1=1
+		<if test="buye_id!=null">
+			and ord.buye_id = #{buye_id}
+			and orde_status!= '撤销'
+		</if>
+		<if test="staf_sell_id!=null">
+			and ord.staf_sell_id = #{staf_sell_id}
+		</if>
+		ORDER BY orde_date DESC
 	</select>
+	<!-- 商城前端查询用户单独订单详情 -->
+
+	<select id="queryBuyerOrderDetails" parameterType="java.util.HashMap"
+		resultMap="queryBuyerOrderMap">
+		SELECT
+		ord.orde_id,orde_total_val,orde_status,orde_addr,orde_phone,pay_status,pay_type
+		,to_char(orde_date,'yyyy-mm-dd hh24:mi:ss')orde_date,to_char(pay_date,'yyyy-mm-dd hh24:mi:ss')pay_date,
+		orde_remark,delivery_type,<!-- sal.sale_id,sale_price,real_price,cargo_id,discounts_id, -->
+		<!-- comm_putaway_id,comm_price,comm_main_img,comm_name,comm_current_price,offline_price, -->
+		deli_name,jdde_name
+		FROM order_tab ord <!-- LEFT JOIN sales_record_tab sal 
+			ON ord.orde_id = sal.orde_id -->
+		<!-- LEFT JOIN commodity_tab com ON sal.comm_id = com.comm_putaway_id -->
+		LEFT JOIN deliver_tab deli ON ord.orde_id = deli.orde_id
+		LEFT JOIN
+		jdde_tab ON deli.jdde_id = jdde_tab.jdde_id
+		WHERE ord.orde_id
+		=#{orde_id}
+	</select>
+	<!-- 订单ID查询商品销售记录 -->
+	<select id="querySaleOrderID" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select
+		sal.sale_id,sale_price,real_price,cargo_id,discounts_id,comm_putaway_id,comm_price,comm_main_img,comm_name,comm_current_price,offline_price
+		from sales_record_tab sal
+		LEFT JOIN commodity_tab com ON sal.comm_id =
+		com.comm_putaway_id where orde_id =#{orde_id} and sal.chan_id is null
+	</select>
+	<!-- 撤销订单时查询订单信息 -->
+	<select id="queryOrderId" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select
+		orde_id,orde_total_val,orde_status,buye_id,orde_addr,orde_phone,pay_status,pay_type,fina_tab,to_char(orde_date,'yyyy-mm-dd hh24:mi:ss')orde_date,to_char(pay_date,'yyyy-mm-dd hh24:mi:ss')pay_date,orde_remark,
+		delivery_type,deli_id,staf_deli_id,inst_id,staf_insf_id,ware_id,sell_type,sell_type,staf_sell_id,orde_invoice
+		from order_tab where orde_id = #{orde_id}
+	</select>
+	<!-- 撤销订单时查询财务记录信息 -->
+	<select id="queryFinancialTabOredrID" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select
+		fina_id,orde_id,fina_money,pay_type,pay_date,pay_number,surplus_money,refund_rele_id,bank_name,bank_num
+		from financial_tab where orde_id =#{orde_id}
+	</select>
+	<!-- 撤销后更新订单信息 -->
+	<update id="updateOrderID" parameterType="java.util.HashMap">
+		update order_tab set
+		orde_status = '撤销' where orde_id =#{orde_id}
+	</update>
+	<!-- 更新订单关联配送单信息 -->
+	<update id="updateOrdeIDDeli" parameterType="java.util.HashMap">
+		update deliver_tab
+		set deli_status = #{deli_status} where orde_id =#{orde_id}
+	</update>
+	<!-- 更新订单关联安装单信息 -->
+	<update id="updateOrdeIDInst" parameterType="java.util.HashMap">
+		update install_tab
+		set inst_status = #{inst_status} where orde_id =#{orde_id}
+	</update>
 </mapper>

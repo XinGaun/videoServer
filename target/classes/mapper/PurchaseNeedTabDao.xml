@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.PurchaseNeedTabDao">
+	<!-- 添加采购需求单 -->
+	<insert id="addPurchaseNeedTab" parameterType="com.entity.PurchaseNeedTab">
+		INSERT INTO
+		purchase_need_tab(comm_id, shop_id,purc_need_num,apply_date,staff_id,purc_need_status,acc_num
+		<if test="purc_id!=null">
+			,purc_id
+		</if>
+		) VALUES
+		(#{comm_id},#{shop_id},#{purc_need_num},now(),#{staff_id},#{purc_need_status},#{acc_num}
+		<if test="purc_id!=null">
+		,#{purc_id}
+		</if>
+		)
+	</insert>
+	<!-- 查询采购需求单 -->
+	<select id="queryPurchaseNeedTab" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		SELECT purc_need_id,comm_id,shop_id,purc_need_num,to_char(apply_date,'yyyy-mm-dd hh24:mi:ss')apply_date,staff_id,purc_need_status,acc_num,purc_id FROM purchase_need_tab WHERE
+		1=1
+		<if test="purc_need_id!=null">
+			and purc_need_id = #{purc_need_id}
+		</if>
+		<if test="comm_id!=null">
+			and comm_id = #{comm_id}
+		</if>
+		<if test="shop_id!=null">
+			and shop_id = #{shop_id}
+		</if>
+		<if test="purc_need_num!=null">
+			and purc_need_num = #{purc_need_num}
+		</if>
+		<if test="apply_date!=null">
+			and apply_date = to_timestamp(#{apply_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="staff_id!=null">
+			and staff_id = #{staff_id}
+		</if>
+		<if test="purc_need_status!=null">
+			and purc_need_status = #{purc_need_status}
+		</if>
+		<if test="purc_id!=null">
+			and purc_id = #{purc_id}
+		</if> 
+		ORDER BY purc_need_id DESC 
+		LIMIT #{page} OFFSET #{nums}
+	</select>
+	<!-- 查询采购需求单总数信息 -->
+	<select id="queryPurchaseNeedTabCount" resultType="int"
+		parameterType="java.util.HashMap">
+		SELECT COUNT(purc_need_id) FROM purchase_need_tab WHERE 1=1
+		<if test="purc_need_id!=null">
+			and purc_need_id = #{purc_need_id}
+		</if>
+		<if test="comm_id!=null">
+			and comm_id = #{comm_id}
+		</if>
+		<if test="shop_id!=null">
+			and shop_id = #{shop_id}
+		</if>
+		<if test="purc_need_num!=null">
+			and purc_need_num = #{purc_need_num}
+		</if>
+		<if test="apply_date!=null">
+			and apply_date = to_timestamp(#{apply_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="staff_id!=null">
+			and staff_id = #{staff_id}
+		</if>
+		<if test="purc_need_status!=null">
+			and purc_need_status = #{purc_need_status}
+		</if>
+		<if test="purc_id!=null">
+			and purc_id = #{purc_id}
+		</if>
+	</select>
+	<!-- 更新采购需求单信息 -->
+	<update id="updatePurchaseNeedTab" parameterType="com.entity.PurchaseNeedTab">
+		UPDATE purchase_need_tab
+		<trim prefix="set" suffixOverrides=",">
+			<if test="comm_id!=null">
+				comm_id=#{comm_id},
+			</if>
+			<if test="shop_id!=null">
+				shop_id=#{shop_id},
+			</if>
+			<if test="purc_need_num!=null">
+				purc_need_num = #{purc_need_num},
+			</if>
+			<if test="staff_id!=null">
+				staff_id = #{staff_id},
+			</if>
+			<if test="purc_need_status!=null">
+				purc_need_status = #{purc_need_status},
+			</if>
+			<if test="acc_num!=null">
+				acc_num = #{acc_num},
+			</if>
+			<if test="purc_id!=null">
+				purc_id = #{purc_id},
+			</if>
+		</trim>
+		WHERE purc_need_id =#{purc_need_id}
+	</update>
+	<!-- 删除采购需求单信息 -->
+	<delete id="deletePurchaseNeedTab" parameterType="int">
+		DELETE FROM
+		purchase_need_tab WHERE purc_need_id =#{purc_need_id}
+	</delete>
+</mapper>

@@ -1,0 +1,42 @@
+#数据库配置
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/gas_o2o?characterEncoding=UTF-8
+    username: guanxin
+    password: D8XA71inJXIasQ0BwDePGMrYmdS0lYzm
+  http:
+    multipart:
+      maxFileSize: 2Mb
+      maxRequestSize: 10Mb
+
+#url: jdbc:postgresql://106.14.80.134:5432/gas_o2o?characterEncoding=UTF-8
+#url: jdbc:postgresql://106.14.80.134:5432/gas_o2o_total?characterEncoding=UTF-8
+
+#配置存储图片路径
+#imgs: E://logo
+#imgs: /home/guanxin/guanxin/img
+imgs: /var/lib/hangran_o2o/upload
+
+#监听本地
+#server:
+#  address: 127.0.0.1
+
+#Mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: qg.fangrui.boot.model
+
+#spring-boot关闭服务配置
+endpoints:
+  shutdown:
+    enabled: true
+    sensitive: false
+
+#配置SSL证书
+#server:
+# ssl:
+#  key-store: classpath:feiao.p12
+#  key-store-password: cs@123456
+#  keyStoreType: PKCS12
+#  keyAlias: tomcat

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.InventoryDetailTabDao">
+	<!-- 添加库存明细单 -->
+	<insert id="addInventoryDetailTab" parameterType="com.entity.InventoryDetailTab">
+		INSERT INTO
+		inventory_detail_tab(ware_id, comm_id,cargo_id,inve_code,inve_status
+		<if test="inve_cause!=null">
+			,inve_cause
+		</if>
+		<if test="staf_id!=null">
+			,staf_id
+		</if>
+		<if test="inve_join_date!=null">
+			,inve_join_date
+		</if>
+		<if test="inve_come_sign!=null">
+			,inve_come_sign
+		</if>
+		<if test="inve_come_date!=null">
+			,inve_come_date
+		</if>
+		<if test="come_ware_id!=null">
+			,come_ware_id
+		</if>
+		) VALUES
+		(#{ware_id},#{comm_id},#{cargo_id},#{inve_code},#{inve_status}
+		<if test="inve_cause!=null">
+			,#{inve_cause}
+		</if>
+		<if test="staf_id!=null">
+			,#{staf_id}
+		</if>
+		<if test="inve_join_date!=null">
+			,to_timestamp(#{inve_join_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="inve_come_sign!=null">
+			,#{inve_come_sign}
+		</if>
+		<if test="inve_come_date!=null">
+			,to_timestamp(#{inve_come_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="come_ware_id!=null">
+			,#{come_ware_id}
+		</if>
+		)
+	</insert>
+	<!-- 查询库存明细单 -->
+	<select id="queryInventoryDetailTab" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		SELECT inve_id,ware_id,comm_id,cargo_id,inve_code,inve_status,inve_cause,staf_id,to_char(inve_join_date,'yyyy-mm-dd hh24:mi:ss')inve_join_date,inve_come_sign,to_char(inve_come_date,'yyyy-mm-dd hh24:mi:ss')inve_come_date,come_ware_id FROM inventory_detail_tab WHERE
+		 1=1
+		<if test="inve_id!=null">
+			and inve_id = #{inve_id}
+		</if>
+		<if test="ware_id!=null">
+			and ware_id = #{ware_id}
+		</if>
+		<if test="comm_id!=null">
+			and comm_id = #{comm_id}
+		</if>
+		<if test="inve_code!=null">
+			and inve_code = #{inve_code}
+		</if>
+		<if test="inve_status!=null">
+			and inve_status = #{inve_status}
+		</if>
+		<if test="inve_cause!=null">
+			and inve_cause = #{inve_cause}
+		</if>
+		<if test="staf_id!=null">
+			and staf_id = #{staf_id}
+		</if>
+		<if test="inve_come_sign!=null">
+			and inve_come_sign = #{inve_come_sign}
+		</if> 
+		<if test="come_ware_id!=null">
+			and come_ware_id = #{come_ware_id}
+		</if> 
+		LIMIT #{page} OFFSET #{nums}
+	</select>
+	<!-- 查询库存明细单总数信息 -->
+	<select id="queryInventoryDetailTabCount" resultType="int"
+		parameterType="java.util.HashMap">
+		SELECT COUNT(inve_id) FROM inventory_detail_tab WHERE 1=1
+		<if test="inve_id!=null">
+			and inve_id = #{inve_id}
+		</if>
+		<if test="ware_id!=null">
+			and ware_id = #{ware_id}
+		</if>
+		<if test="comm_id!=null">
+			and comm_id = #{comm_id}
+		</if>
+		<if test="inve_code!=null">
+			and inve_code = #{inve_code}
+		</if>
+		<if test="inve_status!=null">
+			and inve_status = #{inve_status}
+		</if>
+		<if test="inve_cause!=null">
+			and inve_cause = #{inve_cause}
+		</if>
+		<if test="staf_id!=null">
+			and staf_id = #{staf_id}
+		</if>
+		<if test="inve_come_sign!=null">
+			and inve_come_sign = #{inve_come_sign}
+		</if> 
+		<if test="come_ware_id!=null">
+			and come_ware_id = #{come_ware_id}
+		</if> 
+	</select>
+	<!-- 更新库存明细单信息 -->
+	<update id="updateInventoryDetailTab" parameterType="com.entity.InventoryDetailTab">
+		UPDATE inventory_detail_tab
+		<trim prefix="set" suffixOverrides=",">
+			<if test="ware_id!=null">
+				ware_id=#{ware_id},
+			</if>
+			<if test="comm_id!=null">
+				comm_id=#{comm_id},
+			</if>
+			<if test="cargo_id!=null">
+				cargo_id = #{cargo_id},
+			</if>
+			<if test="inve_code!=null">
+				inve_code = #{inve_code},
+			</if>
+			<if test="inve_status!=null">
+				inve_status = #{inve_status},
+			</if>
+			<if test="inve_cause!=null">
+				inve_cause = #{inve_cause},
+			</if>
+			<if test="staf_id!=null">
+				staf_id = #{staf_id},
+			</if>
+			<if test="inve_join_date!=null">
+				inve_join_date =  to_timestamp(#{inve_join_date},'yyyy-mm-dd hh24:mi:ss'),
+			</if>
+			<if test="inve_come_sign!=null">
+				inve_come_sign = #{inve_come_sign},
+			</if>
+			<if test="inve_come_date!=null">
+				inve_come_date = to_timestamp(#{inve_come_date},'yyyy-mm-dd hh24:mi:ss'),
+			</if>
+			<if test="come_ware_id!=null">
+				come_ware_id = #{come_ware_id},
+			</if>
+		</trim>
+		WHERE inve_id =#{inve_id}
+	</update>
+	<!-- 删除库存明细单信息 -->
+	<delete id="deleteInventoryDetailTab" parameterType="int">
+		DELETE FROM
+		inventory_detail_tab WHERE inve_id =#{inve_id}
+	</delete>
+	<!-- 入库添加库存变更表 -->
+	<insert id="addinventoryAlterTab" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="inve_alter_id">
+		INSERT INTO inventory_alter_tab(warehouse_id, comm_id, cargo_id, inve_alter_code, inve_alter_type, inve_alter_cause, inve_alter_date, staff_id
+		<if test="inve_alter_remark!=null">
+			,inve_alter_remark
+		</if>
+		<if test="purc_id!=null">
+			,purc_id
+		</if>
+		<if test="source_ware_id!=null">
+			,source_ware_id
+		</if>
+		<if test="bourn_ware_id!=null">
+			,bourn_ware_id
+		</if>
+		<if test="orde_id!=null">
+			,orde_id
+		</if>
+		<if test="chan_id!=null">
+			,chan_id
+		</if>
+		<if test="deli_id!=null">
+			,deli_id
+		</if>
+		) VALUES
+  		(#{warehouse_id},#{comm_id},#{cargo_id},#{inve_alter_code},#{inve_alter_type},#{inve_alter_cause},to_timestamp(#{inve_alter_date},'yyyy-mm-dd hh24:mi:ss'),#{staff_id}
+  		<if test="inve_alter_remark!=null">
+			,#{inve_alter_remark}
+		</if>
+		<if test="purc_id!=null">
+			,#{purc_id}
+		</if>
+		<if test="source_ware_id!=null">
+			,#{source_ware_id}
+		</if>
+		<if test="bourn_ware_id!=null">
+			,#{bourn_ware_id}
+		</if>
+		<if test="orde_id!=null">
+			,#{orde_id}
+		</if>
+		<if test="chan_id!=null">
+			,#{chan_id}
+		</if>
+		<if test="deli_id!=null">
+			,#{deli_id}
+		</if>
+  		)
+	</insert>
+	<!-- 入库添加库存明细信息 -->
+	<update id="addRuKuInventoryDetailTab" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="inve_id">		
+		update inventory_detail_tab set inve_code = #{inve_alter_code},inve_status='在库',inve_cause=#{inve_cause},staf_id=#{staff_id},inve_join_date=to_timestamp(#{inve_join_date},'yyyy-mm-dd hh24:mi:ss'),
+		inve_come_sign =null,ware_id =#{bourn_ware_id} where cargo_id=#{cargo_id} 
+		<!-- INSERT INTO inventory_detail_tab(ware_id, comm_id, cargo_id, inve_code, inve_status, inve_cause, staf_id, inve_join_date) VALUES
+  		(#{warehouse_id},#{comm_id},#{cargo_id},#{inve_alter_code},'在库',#{inve_cause},#{staff_id},to_timestamp(#{inve_join_date},'yyyy-mm-dd hh24:mi:ss')) -->
+	</update>
+	<!-- 采购入库添加库存明细 -->
+	<insert id="addRuKuInventoryDetailTabs" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="inve_id">
+		INSERT INTO inventory_detail_tab(ware_id, comm_id, cargo_id, inve_code, inve_status, inve_cause, staf_id, inve_join_date) VALUES
+  		(#{warehouse_id},#{comm_id},#{cargo_id},#{inve_alter_code},'在库',#{inve_cause},#{staff_id},to_timestamp(#{inve_join_date},'yyyy-mm-dd hh24:mi:ss'))
+	</insert>
+	<!-- 查询库存量信息 -->
+	<select id="queryStockTab" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT stoc_id,ware_id,comm_id,stoc_count,lock_count,scrap_count,ship_count FROM stock_tab WHERE ware_id =#{bourn_ware_id} and comm_id = #{comm_id}
+	</select>
+	<!-- querySouStockTab -->
+	<!-- 查询原仓库库存量信息 -->
+	<select id="querySouStockTab" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT stoc_id,ware_id,comm_id,stoc_count,lock_count,scrap_count,ship_count FROM stock_tab WHERE ware_id =#{source_ware_id} and comm_id = #{comm_id}
+	</select>
+	<!-- 添加库存量信息 -->
+	<insert id="addStockTab" parameterType="java.util.HashMap">
+		INSERT INTO stock_tab(ware_id, comm_id, stoc_count, lock_count, scrap_count, ship_count) VALUES
+  		(#{warehouse_id},#{comm_id},#{num},0,0,#{bum});
+	</insert>
+	<!-- 更新库存量信息 -->
+	<update id="updateStockTab" parameterType="java.util.HashMap">
+		UPDATE stock_tab SET stoc_count=#{stoc_count},ship_count=#{ship_count} WHERE stoc_id= #{stoc_id}
+	</update>
+	<!-- 查询采购单信息 -->
+	<select id="queryPurchaseTab" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT purc_id,purc_date,purc_status,staff_id,purc_need_id FROM purchase_tab WHERE purc_id=#{purc_id};
+	</select>
+	<!-- 查询采购需求ID -->
+	<select id="querypurchaseNeedTab" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT purc_need_id,comm_id,shop_id,purc_need_num,apply_date,staff_id,purc_need_status,acc_num,purc_id FROM purchase_need_tab WHERE purc_need_id =#{purc_need_id}
+	</select>
+	<!-- 更新采需求信息 -->
+	<update id="updatepurchaseNeedTab" parameterType="java.util.HashMap">
+		UPDATE purchase_need_tab SET purc_need_status = #{purc_need_status},acc_num =#{acc_num} WHERE purc_need_id=#{purc_need_id}
+	</update>
+	<!-- 更新采购单信息 -->
+	<update id="updatePurchaseTab" parameterType="java.util.HashMap">
+		UPDATE purchase_tab SET purc_status =#{purc_status} WHERE purc_id=#{purc_id}
+	</update>
+	<!-- 查询是否有缺货登记记录 -->
+	<select id="queryregistration" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT want_id,want_status FROM want_tab WHERE purc_need_id = #{purc_need_id}
+	</select>
+	<!-- 更新缺货登记记录 -->
+	<update id="updateregistration" parameterType="java.util.HashMap">
+		update want_tab set want_status = #{want_status} where = want_id=#{want_id}
+	</update>
+	<!-- 根据退换货ID查询商品销售记录信息 -->
+	<select id="querySalesRecordTab" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from sales_record_tab where 1=1 and chan_id = #{chan_id}
+	</select>
+	<!-- 退换货ID查询配送单信息 -->
+	<select id="queryDeliverTab" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from deliver_tab where orde_id = #{orde_id}
+	</select>
+</mapper>

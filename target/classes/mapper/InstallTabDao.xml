@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.InstallTabDao">
+	<!-- 添加安装单信息 -->
+	<insert id="addInstallTab" parameterType="com.entity.InstallTab" useGeneratedKeys="true" keyProperty="inst_id">
+		INSERT INTO install_tab(orde_id, inst_unit_id,inst_addr,inst_phone,inst_name,inst_status
+		<if test="inst_staf_id!=null">
+			,staf_id
+		</if>
+		<if test="chan_id!=null">
+			,chan_id
+		</if>
+		<if test="inst_make_date!=null">
+			,inst_make_date
+		</if>
+		<if test="inst_date!=null">
+			,inst_date
+		</if>
+		<if test="inst_visit_date!=null">
+			,inst_visit_date
+		</if>
+		<if test="inst_achieve_date!=null">
+			,inst_achieve_date
+		</if>
+		<if test="inst_check_date!=null">
+			,inst_check_date
+		</if>
+		<if test="inst_check_name!=null">
+			,inst_check_name
+		</if>
+		<if test="inst_remark!=null">
+			,inst_remark
+		</if>
+		) 
+		VALUES (#{orde_id},#{inst_unit_id},#{inst_addr},#{inst_phone},#{inst_name},#{inst_status}
+		<if test="inst_staf_id!=null">
+			,#{inst_staf_id}
+		</if>
+		<if test="chan_id!=null">
+			,#{chan_id}
+		</if>
+		<if test="inst_make_date!=null">
+			,to_timestamp(#{inst_make_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="inst_date!=null">
+			,to_timestamp(#{inst_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="inst_visit_date!=null">
+			,to_timestamp(#{inst_visit_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="inst_achieve_date!=null">
+			,to_timestamp(#{inst_achieve_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="inst_check_date!=null">
+			,to_timestamp(#{inst_check_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="inst_check_name!=null">
+			,#{inst_check_name}
+		</if>
+		<if test="inst_remark!=null">
+			,#{inst_remark}
+		</if>
+		)
+	</insert>
+	<!-- 查询安装单信息 -->
+	<select id="queryInstallTab" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT inst_id,orde_id,chan_id,inst_unit_id,inst_addr,inst_phone,inst_name,to_char(inst_make_date,'yyyy-mm-dd hh24:mi:ss')inst_make_date,to_char(inst_date,'yyyy-mm-dd hh24:mi:ss')inst_date,staf_id,to_char(inst_visit_date,'yyyy-mm-dd hh24:mi:ss')inst_visit_date,to_char(inst_achieve_date,'yyyy-mm-dd hh24:mi:ss')inst_achieve_date,to_char(inst_check_date,'yyyy-mm-dd hh24:mi:ss')inst_check_date,inst_check_name,inst_status,inst_remark FROM install_tab WHERE 1=1 
+		<if test="inst_id!=null">
+			and inst_id = #{inst_id}
+		</if>
+		<if test="orde_id!=null">
+			and orde_id = #{orde_id}
+		</if>
+		<if test="chan_id!=null">
+			and chan_id = #{chan_id}
+		</if>
+		<if test="inst_unit_id!=null">
+			and inst_unit_id = #{inst_unit_id}
+		</if> 
+		<if test="inst_addr!=null">
+			and inst_addr = #{inst_addr}
+		</if> 
+		<if test="inst_phone!=null">
+			and inst_phone = #{inst_phone}
+		</if> 
+		<if test="inst_name!=null">
+			and inst_name = #{inst_name}
+		</if> 
+		<if test="staf_id!=null">
+			and staf_id = #{staf_id}
+		</if> 
+		<if test="inst_status!=null">
+			and inst_status = #{inst_status}
+		</if> 
+		<if test="make==0">
+			ORDER BY inst_make_date ASC
+		</if>
+		<if test="make==1">
+			ORDER BY inst_make_date DESC
+		</if>
+		LIMIT #{page} OFFSET #{nums}
+	</select>
+	<!-- 查询安装单总数信息 -->
+	<select id="queryInstallTabCount" resultType="int" parameterType="java.util.HashMap">
+		SELECT COUNT(inst_id) FROM install_tab WHERE 1=1 
+		<if test="inst_id!=null">
+			and inst_id = #{inst_id}
+		</if>
+		<if test="orde_id!=null">
+			and orde_id = #{orde_id}
+		</if>
+		<if test="chan_id!=null">
+			and chan_id = #{chan_id}
+		</if>
+		<if test="inst_unit_id!=null">
+			and inst_unit_id = #{inst_unit_id}
+		</if> 
+		<if test="inst_addr!=null">
+			and inst_addr = #{inst_addr}
+		</if> 
+		<if test="inst_phone!=null">
+			and inst_phone = #{inst_phone}
+		</if> 
+		<if test="inst_name!=null">
+			and inst_name = #{inst_name}
+		</if> 
+		<if test="staf_id!=null">
+			and staf_id = #{staf_id}
+		</if> 
+		<if test="inst_status!=null">
+			and inst_status = #{inst_status}
+		</if> 
+	</select>
+	<!-- 更新安装单信息 -->
+	<update id="updateInstallTab" parameterType="com.entity.InstallTab">
+		UPDATE install_tab 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="orde_id!=null">
+				orde_id=#{orde_id},
+			</if>
+			<if test="chan_id!=null">
+				chan_id=#{chan_id},
+			</if>
+			<if test="inst_unit_id!=null">
+				inst_unit_id=#{inst_unit_id},
+			</if>
+			<if test="inst_addr!=null">
+				inst_addr=#{inst_addr},
+			</if>
+			<if test="inst_phone!=null">
+				inst_phone=#{inst_phone},
+			</if> 
+			<if test="inst_name!=null">
+				inst_name=#{inst_name},
+			</if> 
+			<if test="inst_make_date!=null">
+				inst_make_date=to_timestamp(#{inst_make_date},'yyyy-mm-dd hh24:mi:ss'),
+			</if> 
+			<if test="inst_date!=null">
+				inst_date=to_timestamp(#{inst_date},'yyyy-mm-dd hh24:mi:ss'),
+			</if> 
+			<if test="staf_id!=null">
+				staf_id=#{staf_id},
+			</if> 
+			<if test="inst_visit_date!=null">
+				inst_visit_date=to_timestamp(#{inst_visit_date},'yyyy-mm-dd hh24:mi:ss'),
+			</if> 
+			<if test="inst_achieve_date!=null">
+				inst_achieve_date=to_timestamp(#{inst_achieve_date},'yyyy-mm-dd hh24:mi:ss'),
+			</if> 
+			<if test="inst_check_date!=null">
+				inst_check_date=to_timestamp(#{inst_check_date},'yyyy-mm-dd hh24:mi:ss'),
+			</if> 
+			<if test="inst_check_name!=null">
+				inst_check_name=#{inst_check_name},
+			</if> 
+			<if test="inst_status!=null">
+				inst_status=#{inst_status},
+			</if> 
+			<if test="inst_remark!=null">
+				inst_remark=#{inst_remark},
+			</if> 
+		</trim> 
+		WHERE inst_id =#{inst_id}
+	</update>
+	<!-- 删除安装单信息 -->
+	<delete id="deleteInstallTab" parameterType="int">
+		DELETE FROM install_tab WHERE inst_id=#{inst_id}
+	</delete>
+	<!-- 更新安装单信息 -->
+	<update id="updateSignDeliverTabAll" parameterType="java.util.HashMap">
+		update install_tab set inst_status = #{inst_status} where inst_id =#{inst_id}
+	</update>
+	<!-- 更新订单信息 -->
+	<update id="updateOrder" parameterType="java.util.HashMap">
+		update order_tab set orde_status = #{status} where inst_id =${inst_id}
+	</update>
+</mapper>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.StockTabDao">
+	<!-- 添加库存量表信息 -->
+	<insert id="addStockTab" parameterType="com.entity.StockTab">
+		INSERT INTO stock_tab(ware_id, comm_id,stoc_count,lock_count,scrap_count,ship_count
+		<if test="sample_count!=null">
+			,sample_count
+		</if>
+		) VALUES (#{ware_id},#{comm_id},#{stoc_count},#{lock_count},#{scrap_count},#{ship_count}
+		<if test="sample_count!=null">
+			,#{sample_count}
+		</if>
+		)
+	</insert>
+	<!-- 查询库存量表信息 -->
+	<select id="queryStockTab" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT stoc_id,ware_id,comm_id,stoc_count,lock_count,scrap_count,ship_count,sample_count FROM stock_tab WHERE 1=1 
+		<if test="stoc_id!=null">
+			and stoc_id = #{stoc_id}
+		</if>
+		<if test="ware_id!=null">
+			and ware_id = #{ware_id}
+		</if>
+		<if test="comm_id!=null">
+			and comm_id = #{comm_id}
+		</if>
+		LIMIT #{page} OFFSET #{nums}
+	</select>
+	<!-- 查询库存量表总数信息 -->
+	<select id="queryStockTabCount" resultType="int" parameterType="java.util.HashMap">
+		SELECT COUNT(stoc_id) FROM stock_tab WHERE 1=1 
+		<if test="stoc_id!=null">
+			and stoc_id = #{stoc_id}
+		</if>
+		<if test="ware_id!=null">
+			and ware_id = #{ware_id}
+		</if>
+		<if test="comm_id!=null">
+			and comm_id = #{comm_id}
+		</if>
+	</select>
+	<!-- 更新库存量表信息 -->
+	<update id="updateStockTab" parameterType="com.entity.StockTab">
+		UPDATE stock_tab 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="ware_id!=null">
+				ware_id=#{ware_id},
+			</if>
+			<if test="comm_id!=null">
+				comm_id=#{comm_id},
+			</if>
+			<if test="stoc_count!=null">
+				stoc_count=#{stoc_count},
+			</if>
+			<if test="lock_count!=null">
+				lock_count=#{lock_count},
+			</if>
+			<if test="scrap_count!=null">
+				scrap_count=#{scrap_count},
+			</if>
+			<if test="ship_count!=null">
+				ship_count=#{ship_count},
+			</if>
+			<if test="sample_count!=null">
+				sample_count=#{sample_count}
+			</if>
+		</trim> 
+		WHERE stoc_id =#{stoc_id}
+	</update>
+
+</mapper>

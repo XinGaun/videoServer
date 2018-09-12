@@ -3,6 +3,8 @@ package com.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.alibaba.fastjson.JSON;
+
 public class Count {
 	public static ArrayList<HashMap<String,Object>> count(ArrayList<HashMap<String,Object>> list,int count,HashMap<String,Object> hashMap){
 		if(count>0){
@@ -26,9 +28,6 @@ public class Count {
 		HashMap<String,Object> restMap = new HashMap<String,Object>();
 		if(count>0) {
 			int page = Integer.parseInt(hashMap.get("page").toString());
-			if(page==0){
-				page =page+1;
-			}
 			int counts = count/page;
 			if(counts==0){
 				counts =counts+1;
@@ -39,6 +38,7 @@ public class Count {
 			restMap.put("total",counts);
 			restMap.put("list",list);
 		}else{
+			restMap.put("total", 0);
 			restMap.put("list",list);
 		}
 		restMap.put("code",code);
@@ -46,4 +46,15 @@ public class Count {
 		restMap.put("parameter",hashMap);
 		return restMap;
 	};
+	
+	@SuppressWarnings("rawtypes")
+	public static String resultMap(ArrayList list,int code,String msg,HashMap<String,Object> parameter) {
+		HashMap<String,Object> restMap = new HashMap<String,Object>();
+		restMap.put("list",list);
+		restMap.put("code",code);
+		restMap.put("msg",msg);
+		restMap.put("parameter",parameter);
+		return JSON.toJSONString(restMap);
+	}
+	
 }

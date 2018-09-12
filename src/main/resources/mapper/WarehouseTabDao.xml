@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.WarehouseTabDao">
+	<!-- 添加仓库信息 -->
+	<insert id="addWarehouseTab" parameterType="com.entity.WarehouseTab">
+		INSERT INTO
+		warehouse_tab(ware_name,ware_addr
+		<if test="ware_superior!=null and ware_superior!=0">
+			,ware_superior
+		</if>
+		<if test="branch_id!=null">
+			,branch_id
+		</if>
+		<if test="jdde_id!=null">
+			,jdde_id
+		</if>
+		<if test="ware_class!=null">
+			,ware_class
+		</if>
+		) VALUES
+		(#{ware_name},#{ware_addr}
+		<if test="ware_superior!=null and ware_superior!=0">
+			,#{ware_superior}
+		</if>
+		<if test="branch_id!=null">
+			,#{branch_id}
+		</if>
+		<if test="jdde_id!=null">
+			,#{jdde_id}
+		</if>
+		<if test="ware_class!=null">
+			,#{ware_class}
+		</if>
+		)
+	</insert>
+	
+	<resultMap type="java.util.HashMap" id="branch_tab">
+		<id property="bran_id" column="bran_id" />
+		<result property="bran_name" column="bran_name" />
+		<result property="bran_addr" column="bran_addr" />
+	</resultMap>
+	<resultMap type="java.util.HashMap" id="jdde_tab">
+		<id property="jdde_id" column="jdde_id" />
+		<result property="jdde_name" column="jdde_name" />
+		<result property="jdde_scope" column="jdde_scope" />
+		<result property="jdde_stop_status" column="jdde_stop_status" />
+		<result property="jdde_dete_status" column="jdde_dete_status" />
+		<result property="branch_id" column="jdde_branch_id" />
+	</resultMap>
+	<resultMap type="java.util.HashMap" id="warehouse_tab">
+		<id property="ware_id" column="ware_id" />
+		<result property="ware_name" column="ware_name" />
+		<result property="ware_addr" column="ware_addr" />
+		<result property="ware_superior" column="ware_superior" />
+		<result property="branch_id" column="ware_branch_id" />
+		<result property="jdde_id" column="ware_jdde_id" />
+		<result property="ware_class" column="ware_class" />
+		<collection property="branch_tab" resultMap="branch_tab"></collection>
+		<collection property="jdde_tab" resultMap="jdde_tab"></collection>
+	</resultMap>
+	
+	<!-- 查询仓库信息 -->
+	<select id="queryWarehouseTab" resultMap="warehouse_tab"
+		parameterType="java.util.HashMap">
+		SELECT
+		ware_id,ware_name,ware_addr,ware_superior,ware_class,ware.jdde_id
+		ware_jdde_id,jdde.jdde_id,ware.branch_id ware_branch_id
+		,jdde.jdde_name,jdde.jdde_scope,jdde.jdde_stop_status,jdde.jdde_dete_status,jdde.branch_id
+		jdde_branch_id,
+		bran_id,branch.bran_name,branch.bran_addr
+		FROM warehouse_tab ware LEFT JOIN jdde_tab jdde ON jdde.jdde_id =
+		ware.jdde_id
+		LEFT JOIN branch_tab branch ON ware.branch_id = branch.bran_id
+		WHERE 1=1
+		<if test="ware_id!=null">
+			and ware_id = #{ware_id}
+		</if>
+		<if test="ware_name!=null">
+			and ware_name = #{ware_name}
+		</if>
+		<if test="ware_addr!=null">
+			and ware_addr = #{ware_addr}
+		</if>
+		<if test="ware_superior!=null">
+			and ware_superior = #{ware_superior}
+		</if>
+		<if test="branch_id!=null">
+			and branch_id = #{branch_id}
+		</if>
+		<if test="jdde_id!=null">
+			and jdde_id = #{jdde_id}
+		</if>
+		<if test="ware_class!=null">
+			and ware_class = #{ware_class}
+		</if>
+		<if test="sole_id!=null">
+			and ware_id != #{sole_id}
+		</if>
+		LIMIT #{page} OFFSET #{nums}
+	</select>
+	<!-- 查询仓库信息总条数 -->
+	<select id="queryWarehouseTabCount" resultType="int"
+		parameterType="java.util.HashMap">
+		SELECT COUNT(ware_id) FROM warehouse_tab ware LEFT JOIN jdde_tab jdde ON jdde.jdde_id =
+		ware.jdde_id
+		LEFT JOIN branch_tab branch ON ware.branch_id = branch.bran_id
+		<if test="ware_id!=null">
+			and ware_id = #{ware_id}
+		</if>
+		<if test="ware_name!=null">
+			and ware_name = #{ware_name}
+		</if>
+		<if test="ware_addr!=null">
+			and ware_addr = #{ware_addr}
+		</if>
+		<if test="ware_superior!=null">
+			and ware_superior = #{ware_superior}
+		</if>
+		<if test="branch_id!=null">
+			and branch_id = #{branch_id}
+		</if>
+		<if test="jdde_id!=null">
+			and jdde_id = #{jdde_id}
+		</if>
+		<if test="ware_class!=null">
+			and ware_class = #{ware_class}
+		</if>
+		<if test="sole_id!=null">
+			and ware_id != #{sole_id}
+		</if>
+	</select>
+	<!-- 更新仓库信息 -->
+	<update id="updateWarehouseTab" parameterType="com.entity.ShopTab">
+		UPDATE warehouse_tab
+		<trim prefix="set" suffixOverrides=",">
+			<if test="ware_name!=null">
+				ware_name=#{ware_name},
+			</if>
+			<if test="ware_addr!=null">
+				ware_addr=#{ware_addr},
+			</if>
+			<if test="ware_superior!=null and ware_superior!=0">
+				ware_superior=#{ware_superior},
+			</if>
+			<if test="ware_superior==0">
+				ware_superior = NULL,
+			</if>
+			<if test="branch_id!=null">
+				branch_id=#{branch_id},jdde_id=null,
+			</if>
+			<if test="jdde_id!=null">
+				jdde_id=#{jdde_id},branch_id=null,
+			</if>
+			<if test="ware_class!=null">
+				ware_class=#{ware_class},
+			</if>
+		</trim>
+		WHERE ware_id =#{ware_id}
+	</update>
+	<!-- 删除仓库信息 -->
+	<delete id="deleteWarehouseTab" parameterType="int">
+		DELETE from
+		warehouse_tab WHERE ware_id=#{ware_id}
+	</delete>
+	<!-- 查询父类仓库信息 -->
+	<select id="queryWarehousetop" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		SELECT ware_id,ware_name,ware_addr,ware_superior,branch_id,jdde_id,ware_class
+		FROM
+		warehouse_tab WHERE 1=1 and ware_id = #{ware_superior}
+	</select>
+</mapper>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.InquiryTabDao">
+	<!-- 添加咨询留言信息 -->
+	<insert id="addInquiryTab" parameterType="com.entity.InquiryTab">
+		INSERT INTO inquiry_tab(buye_id, inqu_title,inqu_test,inqu_type,inqu_date,inqu_status,inqu_phone
+		<if test="inqu_img!=null">
+			,inqu_img
+		</if>
+		<if test="staf_id!=null">
+			,staf_id
+		</if>
+		<if test="inqu_reply!=null">
+			,inqu_reply
+		</if>
+		<if test="inqu_reply_date!=null">
+			,inqu_reply_date
+		</if>
+		<if test="orde_id!=null">
+			,orde_id
+		</if>
+		) 
+		VALUES (#{buye_id},#{inqu_title},#{inqu_test},#{inqu_type},now(),#{inqu_status},#{inqu_phone}
+		<if test="inqu_img!=null">
+			,#{inqu_img}
+		</if>
+		<if test="staf_id!=null">
+			,#{staf_id}
+		</if>
+		<if test="inqu_reply!=null">
+			,#{inqu_reply}
+		</if>
+		<if test="inqu_reply_date!=null">
+			,to_timestamp(#{inqu_reply_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="orde_id!=null">
+			,#{orde_id}
+		</if>
+		)
+	</insert>
+	<!-- 查询咨询留言信息 -->
+	<select id="queryInquiryTab" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT staf.staf_name,deli.deli_contacts buye_name,inqu_id,inqu.buye_id,inqu_title,inqu_test,inqu_img,inqu_type,to_char(inqu_date,'yyyy-mm-dd hh24:mi:ss')inqu_date,inqu_status,inqu.staf_id,inqu_reply,to_char(inqu_reply_date,'yyyy-mm-dd hh24:mi:ss')inqu_reply_date,inqu_phone,orde_id FROM
+		inquiry_tab inqu
+		LEFT JOIN delivery_addr_tab deli ON inqu.buye_id=deli.buye_id
+		LEFT JOIN staff_tab staf ON inqu.staf_id = staf.staf_id
+		WHERE 1=1
+		<if test="inqu_id!=null">
+			and inqu_id = #{inqu_id}
+		</if>
+		<if test="buye_id!=null">
+			and deli.buye_id = #{buye_id}
+		</if>
+		<if test="inqu_title!=null">
+			and inqu_title = #{inqu_title}
+		</if>
+		<if test="inqu_type!=null">
+			and inqu_type = #{inqu_type}
+		</if> 
+		<if test="inqu_status!=null">
+			and inqu_status = #{inqu_status}
+		</if> 
+		<if test="staf_id!=null">
+			and staf_id = #{staf_id}
+		</if> 
+		<if test="inqu_phone!=null">
+			and inqu_phone = #{inqu_phone}
+		</if> 
+		<if test="orde_id!=null">
+			and orde_id = #{orde_id}
+		</if> 
+		LIMIT #{page} OFFSET #{nums}
+	</select>
+	<!-- 查询咨询留言总数信息 -->
+	<select id="queryInquiryTabCount" resultType="int" parameterType="java.util.HashMap">
+		SELECT COUNT(inqu_id) FROM inquiry_tab inqu
+		LEFT JOIN delivery_addr_tab deli ON inqu.buye_id=deli.buye_id
+		LEFT JOIN staff_tab staf ON inqu.staf_id = staf.staf_id
+		WHERE 1=1
+		<if test="inqu_id!=null">
+			and inqu_id = #{inqu_id}
+		</if>
+		<if test="buye_id!=null">
+			and deli.buye_id = #{buye_id}
+		</if>
+		<if test="inqu_title!=null">
+			and inqu_title = #{inqu_title}
+		</if>
+		<if test="inqu_type!=null">
+			and inqu_type = #{inqu_type}
+		</if> 
+		<if test="inqu_status!=null">
+			and inqu_status = #{inqu_status}
+		</if> 
+		<if test="staf_id!=null">
+			and staf_id = #{staf_id}
+		</if> 
+		<if test="inqu_phone!=null">
+			and inqu_phone = #{inqu_phone}
+		</if> 
+		<if test="orde_id!=null">
+			and orde_id = #{orde_id}
+		</if> 
+	</select>
+	<!-- 更新咨询留言信息 -->
+	<update id="updateInquiryTab" parameterType="com.entity.InquiryTab">
+		UPDATE inquiry_tab 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="inqu_type!=null">
+				inqu_type=#{inqu_type},
+			</if>
+			<if test="inqu_status!=null">
+				inqu_status=#{inqu_status},
+			</if>
+			<if test="staf_id!=null">
+				staf_id=#{staf_id},
+			</if>
+			<if test="inqu_reply!=null">
+				inqu_reply=#{inqu_reply},
+			</if>
+			<if test="inqu_reply_date!=null">
+				inqu_reply_date=to_timestamp(#{inqu_reply_date},'yyyy-mm-dd hh24:mi:ss'),
+			</if>
+			<if test="orde_id!=null">
+				orde_id=#{orde_id},
+			</if>
+			<if test="inqu_phone!=null">
+				inqu_phone=#{inqu_phone},
+			</if>
+			<if test="inqu_img!=null">
+				inqu_img=#{inqu_img},
+			</if>
+			<if test="orde_id!=null">
+				orde_id=#{orde_id},
+			</if>
+		</trim> 
+		WHERE inqu_id =#{inqu_id}
+	</update>
+	<!-- 删除咨询留言信息 -->
+	<delete id="deleteInquiryTab" parameterType="int">
+		DELETE FROM inquiry_tab WHERE inqu_id =#{inqu_id}
+	</delete>
+</mapper>

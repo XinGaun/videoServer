@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.JddeTabDao">
+	<!-- 添加配送单位信息 -->
+	<insert id="addJddeTab" parameterType="com.entity.JddeTab">
+		INSERT INTO jdde_tab(jdde_name, jdde_scope
+		<if test="jdde_stop_status!=null">
+			,jdde_stop_status
+		</if>
+		<if test="jdde_dete_status!=null">
+			,jdde_dete_status
+		</if>
+		<if test="branch_id!=null">
+			,branch_id
+		</if>
+		) VALUES (#{jdde_name},#{jdde_scope}
+		<if test="jdde_stop_status!=null">
+			,#{jdde_stop_status}
+		</if>
+		<if test="jdde_dete_status!=null">
+			,#{jdde_dete_status}
+		</if>
+		<if test="branch_id!=null">
+			,#{branch_id}
+		</if>
+		)
+	</insert>
+	
+	<resultMap type="java.util.HashMap" id="branch_tab">
+		<id property="bran_id" column="bran_id" />
+		<result property="bran_name" column="bran_name" />
+		<result property="bran_addr" column="bran_addr" />
+	</resultMap>
+	<resultMap type="java.util.HashMap" id="jdde_tab">
+		<id property="jdde_id" column="jdde_id" />
+		<result property="jdde_name" column="jdde_name" />
+		<result property="jdde_scope" column="jdde_scope" />
+		<result property="jdde_stop_status" column="jdde_stop_status" />
+		<result property="jdde_dete_status" column="jdde_dete_status" />
+		<result property="branch_id" column="branch_id" />
+		<collection property="branch_tab" resultMap="branch_tab"></collection>
+	</resultMap>
+	<!-- 查询配送单位信息 -->
+	<select id="queryJddeTab" resultMap="jdde_tab" parameterType="java.util.HashMap">
+		SELECT jdde_id,jdde_name,jdde_scope,jdde_stop_status,jdde_dete_status,branch_id,bran_id,bran_name,bran_addr FROM jdde_tab jdde LEFT JOIN branch_tab branch ON jdde.branch_id = branch.bran_id
+		 WHERE 1=1 
+		<if test="jdde_id!=null">
+			and jdde_id = #{jdde_id}
+		</if>
+		<if test="jdde_name!=null">
+			and jdde_name = #{jdde_name}
+		</if>
+		<if test="jdde_scope!=null">
+			and jdde_scope = #{jdde_scope}
+		</if>
+		<if test="jdde_stop_status!=null">
+			and jdde_stop_status = #{jdde_stop_status}
+		</if> 
+		<if test="jdde_dete_status!=null">
+			and jdde_dete_status = #{jdde_dete_status}
+		</if> 
+		LIMIT #{page} OFFSET #{nums}
+	</select>
+	<!-- 查询配送单位总数信息 -->
+	<select id="queryJddeTabCount" resultType="int" parameterType="java.util.HashMap">
+		SELECT COUNT(jdde_id) FROM jdde_tab WHERE 1=1 
+		<if test="jdde_id!=null">
+			and jdde_id = #{jdde_id}
+		</if>
+		<if test="jdde_name!=null">
+			and jdde_name = #{jdde_name}
+		</if>
+		<if test="jdde_scope!=null">
+			and jdde_scope = #{jdde_scope}
+		</if>
+		<if test="jdde_stop_status!=null">
+			and jdde_stop_status = #{jdde_stop_status}
+		</if> 
+		<if test="jdde_dete_status!=null">
+			and jdde_dete_status = #{jdde_dete_status}
+		</if> 
+	</select>
+	<!-- 更新配送单位信息 -->
+	<update id="updateJddeTab" parameterType="com.entity.JddeTab">
+		UPDATE jdde_tab 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="jdde_name!=null">
+				jdde_name=#{jdde_name},
+			</if>
+			<if test="jdde_scope!=null">
+				jdde_scope=#{jdde_scope},
+			</if>
+			<if test="jdde_stop_status!=null">
+				jdde_stop_status=#{jdde_stop_status},
+			</if>
+			<if test="jdde_dete_status!=null">
+				jdde_dete_status=#{jdde_dete_status},
+			</if>
+			<if test="branch_id!=null">
+				branch_id=#{branch_id},
+			</if>
+		</trim> 
+		WHERE jdde_id =#{jdde_id}
+	</update>
+	<!-- 删除配送单位信息 -->
+	<update id="deleteJddeTab" parameterType="int"> 
+		UPDATE jdde_tab SET jdde_dete_status = '已删除' WHERE jdde_id = #{jdde_id}
+	</update>
+</mapper>

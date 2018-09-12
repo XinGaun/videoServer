@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ChangeTabDao">
+	<!-- 添加退换货单信息 -->
+	<insert id="addChangeTab" parameterType="com.entity.ChangeTab" useGeneratedKeys="true" keyProperty="chan_id">
+		INSERT INTO change_tab(orde_id, comm_id,chan_num,chan_status,apply_date
+		<if test="staf_acce_id!=null">
+			,staf_acce_id
+		</if>
+		<if test="chan_sign!=null ">
+			,chan_sign
+		</if>
+		<if test="cargo_status!=null">
+			,cargo_status
+		</if>
+		<if test="return_date!=null">
+			,return_date
+		</if>
+		<if test="chan_date!=null">
+			,chan_date
+		</if>
+		<if test="staf_refu_id!=null">
+			,staf_refu_id
+		</if>
+		<if test="refund_audit_date!=null">
+			,refund_audit_date
+		</if>
+		<if test="refund_type!=null">
+			,refund_type
+		</if>
+		<if test="refund_number!=null">
+			,refund_number
+		</if>
+		<if test="refund_date!=null">
+			,refund_date
+		</if>
+		<if test="chan_delivery_type!=null">
+			,chan_delivery_type
+		</if>
+		<if test="deli_id!=null">
+			,deli_id
+		</if>
+		<if test="inst_id!=null">
+			,inst_id
+		</if>
+		<if test="chan_cause!=null">
+			,chan_cause
+		</if>
+		<if test="chan_remark!=null">
+			,chan_remark
+		</if>
+		<if test="chan_img!=null">
+			,chan_img
+		</if>
+		) 
+		VALUES (#{orde_id},array${comm_ids},array${chan_nums},#{chan_status},now()<!-- to_timestamp(#{apply_date},'yyyy-mm-dd hh24:mi:ss') -->
+		<if test="staf_acce_id!=null">
+			,#{staf_acce_id}
+		</if>
+		<if test="chan_sign!=null">
+			,#{chan_sign}
+		</if>
+		<if test="cargo_status!=null">
+			,#{cargo_status}
+		</if>
+		<if test="return_date!=null">
+			,to_timestamp(#{return_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="chan_date!=null">
+			,to_timestamp(#{chan_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="staf_refu_id!=null">
+			,#{staf_refu_id}
+		</if>
+		<if test="refund_audit_date!=null">
+			,to_timestamp(#{refund_audit_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="refund_type!=null">
+			,#{refund_type}
+		</if>
+		<if test="refund_number!=null">
+			,#{refund_number}
+		</if>
+		<if test="refund_date!=null">
+			,to_timestamp(#{refund_date},'yyyy-mm-dd hh24:mi:ss')
+		</if>
+		<if test="chan_delivery_type!=null">
+			,#{chan_delivery_type}
+		</if>
+		<if test="deli_id!=null">
+			,#{deli_id}
+		</if>
+		<if test="inst_id!=null">
+			,#{inst_id}
+		</if>
+		<if test="chan_cause!=null">
+			,#{chan_cause}
+		</if>
+		<if test="chan_remark!=null">
+			,#{chan_remark}
+		</if>
+		<if test="chan_img!=null">
+			,#{chan_img}
+		</if>
+		)
+	</insert>
+	<!-- 查询退换货单信息 -->
+	<select id="queryChangeTab" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select chan_id,orde_id,chan_status,staf_acce_id,chan_sign,to_char(apply_date,'yyyy-mm-dd hh24:mi:ss')apply_date,to_char(return_date,'yyyy-mm-dd hh24:mi:ss')return_date
+		,to_char(chan_date,'yyyy-mm-dd hh24:mi:ss')chan_date,staf_refu_id,to_char(refund_audit_date,'yyyy-mm-dd hh24:mi:ss')refund_audit_date,refund_type,
+ 		refund_number,to_char(refund_date,'yyyy-mm-dd hh24:mi:ss')refund_date,chan_delivery_type,deli_id,inst_id,chan_cause,chan_remark,chan_img,cargo_status,
+  		comm_id,chan_num
+		from change_tab where 1=1
+		<if test="chan_id!=null">
+			and chan_id = #{chan_id}
+		</if> 
+		<if test="cargo_status!=null">
+			and cargo_status = #{cargo_status}
+		</if> 
+		<if test="orde_id!=null">
+			and orde_id = #{orde_id}
+		</if>  
+		<if test="chan_status!=null">
+			and chan_status = #{chan_status}
+		</if> 
+		<if test="staf_acce_id!=null">
+			and staf_acce_id = #{staf_acce_id}
+		</if> 
+		<if test="chan_sign!=null">
+			and chan_sign = #{chan_sign}
+		</if> 
+		<if test="staf_refu_id!=null">
+			and staf_refu_id = #{staf_refu_id}
+		</if> 
+		<if test="refund_type!=null">
+			and refund_type = #{refund_type}
+		</if> 
+		<if test="chan_delivery_type!=null">
+			and chan_delivery_type = #{chan_delivery_type}
+		</if> 
+		<if test="deli_id!=null">
+			and deli_id = #{deli_id}
+		</if> 
+		<if test="inst_id!=null">
+			and inst_id = #{inst_id}
+		</if> 
+		LIMIT #{page} OFFSET #{nums}
+	</select>
+	<!-- 查询退换货单总数信息 -->
+	<select id="queryChangeTabCount" resultType="int" parameterType="java.util.HashMap">
+		select COUNT(chan_id) from change_tab  WHERE 1=1
+		<if test="chan_id!=null">
+			and chan_id = #{chan_id}
+		</if> 
+		<if test="cargo_status!=null">
+			and cargo_status = #{cargo_status}
+		</if> 
+		<if test="orde_id!=null">
+			and orde_id = #{orde_id}
+		</if> 
+		<if test="chan_status!=null">
+			and chan_status = #{chan_status}
+		</if> 
+		<if test="staf_acce_id!=null">
+			and staf_acce_id = #{staf_acce_id}
+		</if> 
+		<if test="chan_sign!=null">
+			and chan_sign = #{chan_sign}
+		</if> 
+		<if test="staf_refu_id!=null">
+			and staf_refu_id = #{staf_refu_id}
+		</if> 
+		<if test="refund_type!=null">
+			and refund_type = #{refund_type}
+		</if> 
+		<if test="chan_delivery_type!=null">
+			and chan_delivery_type = #{chan_delivery_type}
+		</if> 
+		<if test="deli_id!=null">
+			and deli_id = #{deli_id}
+		</if> 
+		<if test="inst_id!=null">
+			and inst_id = #{inst_id}
+		</if> 
+	</select>
+	<!-- 更新退换货单信息 -->
+	<update id="updateChangeTab" parameterType="com.entity.ChangeTab">
+		UPDATE change_tab 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="staf_acce_id!=null">
+				staf_acce_id=#{staf_acce_id},
+			</if>
+			<if test="chan_sign!=null">
+				chan_sign=#{chan_sign},
+			</if>
+			<if test="cargo_status!=null">
+				cargo_status=#{cargo_status},
+			</if>
+			<if test="return_date!=null">
+				return_date=to_timestamp(#{return_date},'yyyy-mm-dd hh24:mi:ss'),
+			</if>
+			<if test="chan_date!=null">
+				chan_date=to_timestamp(#{chan_date},'yyyy-mm-dd hh24:mi:ss'),
+			</if>
+			<if test="staf_refu_id!=null">
+				staf_refu_id=#{staf_refu_id},
+			</if>
+			<if test="refund_audit_date!=null">
+				refund_audit_date=to_timestamp(#{refund_audit_date},'yyyy-mm-dd hh24:mi:ss'),
+			</if>
+			<if test="refund_type!=null">
+				refund_type=#{refund_type},
+			</if>
+			<if test="refund_number!=null">
+				refund_number=#{refund_number},
+			</if>
+			<if test="refund_date!=null">
+				refund_date=to_timestamp(#{refund_date},'yyyy-mm-dd hh24:mi:ss'),
+			</if>
+			<if test="chan_delivery_type!=null">
+				chan_delivery_type=#{chan_delivery_type},
+			</if>
+			<if test="deli_id!=null">
+				deli_id=#{deli_id},
+			</if>
+			<if test="inst_id!=null">
+				inst_id=#{inst_id},
+			</if>
+			<if test="chan_cause!=null">
+				chan_cause=#{chan_cause},
+			</if>
+			<if test="chan_remark!=null">
+				chan_remark=#{chan_remark},
+			</if>
+			<if test="chan_img!=null">
+				chan_img=#{chan_img},
+			</if>
+			<if test="chan_num!=null">
+				chan_num=#{chan_num},
+			</if>
+			<if test="chan_status!=null">
+				chan_status=#{chan_status},
+			</if>
+		</trim> 
+		WHERE chan_id =#{chan_id}
+	</update>
+	<!-- 删除退换货单信息 -->
+	<delete id="deleteChangeTab" parameterType="int">
+		DELETE FROM change_tab WHERE chan_id =#{chan_id}
+	</delete>
+	<!-- 订单ID查询需要入库的退换货信息 -->
+	<select id="queryChangeOrderId" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT chan_id,comm_name,cargo_id,sal.sale_id FROM change_tab chan
+		LEFT JOIN sales_record_tab sal ON chan.sale_id = sal.sale_id
+		LEFT JOIN commodity_tab com ON sal.comm_id = com.comm_putaway_id
+		WHERE chan.orde_id = #{orde_id} AND chan_status ='待入库'
+	</select>
+	<!-- 更新相关商品销售记录 -->
+	<update id="updateSalesRecordTab" parameterType="java.util.HashMap">
+		update sales_record_tab set chan_id = #{chan_id} where sale_id = #{sale_id}
+	</update>
+	<!-- 通过退换货ID查询商品销售信息-->
+	<select id="querySale" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select sale_id,orde_id,sale.comm_id,sale_price,real_price,cargo_id,discounts_id,chan_id,comm_name from sales_record_tab sale left join commodity_tab com on sale.comm_id = com.comm_putaway_id where chan_id =#{chan_id}
+	</select>
+	<!-- 通过订单ID查询商品销售记录 -->
+	<select id="querySaleOrdeID" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from sales_record_tab where orde_id = #{orde_id} and comm_id= #{comm_id} and chan_id isnull limit #{num}
+	</select>
+</mapper>

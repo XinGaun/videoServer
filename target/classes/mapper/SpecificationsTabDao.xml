@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.SpecificationsTabDao">
+	<!-- 添加商品规格信息 -->
+	<insert id="addSpecificationsTab" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="spec_id">
+		INSERT INTO
+		specifications_tab(spec_cate_id,spec_name,spec_form,spec_scope
+		<if test="lock_status!=null">
+			,lock_status
+		</if>
+		) VALUES
+		(#{spec_cate_id},#{spec_name},#{spec_form},#{spec_scope}
+		<if test="lock_status!=null">
+			,#{lock_status}
+		</if>
+		)
+	</insert>
+	<!-- 查询商品规格信息 -->
+	<select id="querySpecificationsTab" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		SELECT spec_id,spec_cate_id,spec_name,spec_form,spec_scope,lock_status FROM specifications_tab WHERE 1=1 
+		<if test="spec_id!=null">
+			and spec_id = #{spec_id}
+		</if> 
+		<if test="spec_cate_id!=null">
+			and spec_cate_id = #{spec_cate_id}
+		</if>  
+		<if test="spec_name!=null">
+			and spec_name = #{spec_name}
+		</if> 
+		<if test="spec_form!=null">
+			and spec_form = #{spec_form}
+		</if> 
+		<if test="spec_scope!=null">
+			and spec_scope = #{spec_scope}
+		</if> 
+		<if test="lock_status!=null">
+			and lock_status = #{lock_status}
+		</if> 
+		LIMIT #{page} OFFSET #{nums}
+	</select>
+	<!-- 查询商品规格信息总条数 -->
+	<select id="querySpecificationsTabCount" resultType="int" parameterType="java.util.HashMap">
+		SELECT COUNT(spec_id) FROM specifications_tab WHERE 1=1 
+		<if test="spec_id!=null">
+			and spec_id = #{spec_id}
+		</if> 
+		<if test="spec_cate_id!=null">
+			and spec_cate_id = #{spec_cate_id}
+		</if>  
+		<if test="spec_name!=null">
+			and spec_name = #{spec_name}
+		</if> 
+		<if test="spec_form!=null">
+			and spec_form = #{spec_form}
+		</if> 
+		<if test="spec_scope!=null">
+			and spec_scope = #{spec_scope}
+		</if>  
+		<if test="lock_status!=null">
+			and lock_status = #{lock_status}
+		</if> 
+	</select>
+	<!-- 更新商品规格名称信息 -->
+	<update id="updateSpecificationsTab" parameterType="com.entity.SpecificationsTab">
+		UPDATE specifications_tab 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="spec_cate_id!=0">
+				spec_cate_id=#{spec_cate_id},
+			</if>
+			<if test="spec_name!=null">
+				spec_name=#{spec_name},
+			</if>
+			<if test="spec_form!=null">
+				spec_form=#{spec_form},
+			</if>
+			<if test="spec_scope!=null">
+				spec_scope=#{spec_scope},
+			</if>
+			<if test="lock_status!=null">
+				lock_status = #{lock_status},
+			</if> 
+		</trim>
+		WHERE spec_id =#{spec_id}
+	</update>
+	<!-- 删除商品规格信息 -->
+	<delete id="deleteSpecificationsTab" parameterType="int">
+		DELETE from specifications_tab WHERE spec_id=#{spec_id}
+	</delete>
+</mapper>

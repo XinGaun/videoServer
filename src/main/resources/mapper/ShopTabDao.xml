@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ShopTabDao">
+	<!-- 添加门店信息 -->
+	<insert id="addShopTab" parameterType="com.entity.ShopTab">
+		INSERT INTO
+		shop_tab(shop_name,shop_addr,shop_date
+		<if test="branch_id!=null">
+			,branch_id
+		</if>
+		) VALUES
+		(#{shop_name},#{shop_addr},#{shop_date}
+		<if test="branch_id!=null">
+			,#{branch_id}
+		</if>
+		)
+	</insert>
+	
+	<resultMap type="java.util.HashMap" id="branch_tab">
+		<id property="bran_id" column="bran_id" />
+		<result property="bran_name" column="bran_name" />
+		<result property="bran_addr" column="bran_addr" />
+	</resultMap>
+	<resultMap type="java.util.HashMap" id="shop_tab">
+		<id property="shop_id" column="shop_id" />
+		<result property="shop_name" column="shop_name" />
+		<result property="shop_addr" column="shop_addr" />
+		<result property="shop_date" column="shop_date" />
+		<result property="branch_id" column="branch_id" />
+		<collection property="branch_tab" resultMap="branch_tab"></collection>
+	</resultMap>
+	<!-- 查询门店信息 -->
+	<select id="queryShopTab" resultMap="shop_tab"
+		parameterType="java.util.HashMap">
+		SELECT shop_id,shop_name,shop_addr,shop_date,branch_id,bran_name,bran_addr,bran_id FROM
+		shop_tab shop LEFT JOIN branch_tab branch ON shop.branch_id = branch.bran_id
+		WHERE 1=1 
+		<if test="shop_id!=null">
+			and shop_id = #{shop_id}
+		</if> 
+		<if test="shop_name!=null">
+			and shop_name = #{shop_name}
+		</if> 
+		<if test="shop_addr!=null">
+			and shop_addr = #{shop_addr}
+		</if> 
+		<if test="shop_addr!=null">
+			and shop_date = #{shop_date}
+		</if> 
+		<if test="branch_id!=null">
+			and branch_id = #{branch_id}
+		</if> 
+		<if test="page!=null and nums!=null">
+			LIMIT #{page} OFFSET #{nums}
+		</if>
+		
+	</select>
+	<!-- 查询门店信息总条数 -->
+	<select id="queryShopTabCount" resultType="int" parameterType="java.util.HashMap">
+		SELECT COUNT(shop_id) FROM shop_tab WHERE 1=1 
+		<if test="shop_id!=null">
+			and shop_id = #{shop_id}
+		</if> 
+		<if test="shop_name!=null">
+			and shop_name = #{shop_name}
+		</if> 
+		<if test="shop_addr!=null">
+			and shop_addr = #{shop_addr}
+		</if> 
+		<if test="shop_addr!=null">
+			and shop_date = #{shop_date}
+		</if> 
+		<if test="branch_id!=null">
+			and branch_id = #{branch_id}
+		</if> 
+	</select>
+	<!-- 更新门店信息 -->
+	<update id="updateShopTab" parameterType="com.entity.ShopTab">
+		UPDATE shop_tab 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="shop_name!=null">
+				shop_name=#{shop_name},
+			</if>
+			<if test="shop_addr!=null">
+				shop_addr=#{shop_addr},
+			</if>
+			<if test="shop_date!=null">
+				shop_date=#{shop_date},
+			</if>
+			<if test="branch_id!=null">
+				branch_id = #{branch_id},
+			</if> 
+		</trim>
+		WHERE shop_id =#{shop_id}
+	</update>
+	<!-- 删除门店信息 -->
+	<delete id="deleteShopTab" parameterType="int">
+		DELETE from shop_tab WHERE shop_id=#{shop_id}
+	</delete>
+</mapper>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DeliveryAddrTabDao">
+	<!-- 添加配送地址 -->
+	<insert id="addDeliveryAddrTab" parameterType="com.entity.DeliveryAddrTab">
+		INSERT INTO delivery_addr_tab(buye_id,deli_addr,deli_contacts,deli_phone
+		<if test="deli_jdde!=null">
+			,deli_jdde
+		</if>
+		) VALUES (#{buye_id},#{deli_addr},#{deli_contacts},#{deli_phone}
+		<if test="deli_jdde!=null">
+			,#{deli_jdde}
+		</if>
+		)
+	</insert>
+	<!-- 查询配送地址 -->
+	<select id="queryDeliveryAddrTab" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT deli_addr_id,buye_id,deli_addr,deli_contacts,deli_phone,deli_jdde FROM delivery_addr_tab WHERE 1=1 
+		<if test="deli_addr_id!=null">
+			and deli_addr_id = #{deli_addr_id}
+		</if>
+		<if test="buye_id!=null">
+			and buye_id = #{buye_id}
+		</if>
+		<if test="deli_addr!=null">
+			and deli_addr = #{deli_addr}
+		</if>
+		<if test="deli_contacts!=null">
+			and deli_contacts = #{deli_contacts}
+		</if>
+		<if test="deli_phone!=null">
+			and deli_phone = #{deli_phone}
+		</if> 
+		
+		LIMIT #{page} OFFSET #{nums}
+	</select>
+	<!-- 查询配置地址总数 -->
+	<select id="queryDeliveryAddrTabCount" parameterType="java.util.HashMap" resultType="int">
+		SELECT COUNT(deli_addr_id) FROM delivery_addr_tab WHERE 1=1 
+		<if test="deli_addr_id!=null">
+			and deli_addr_id = #{deli_addr_id}
+		</if>
+		<if test="buye_id!=null">
+			and buye_id = #{buye_id}
+		</if>
+		<if test="deli_addr!=null">
+			and deli_addr = #{deli_addr}
+		</if>
+		<if test="deli_contacts!=null">
+			and deli_contacts = #{deli_contacts}
+		</if>
+		<if test="deli_phone!=null">
+			and deli_phone = #{deli_phone}
+		</if> 
+	</select>
+	<!-- 更新配送地址 -->
+	<update id="updateDeliveryAddrTab" parameterType="com.entity.DeliveryAddrTab">
+		UPDATE delivery_addr_tab 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="deli_addr!=null">
+				deli_addr=#{deli_addr},
+			</if>
+			<if test="deli_contacts!=null">
+				deli_contacts=#{deli_contacts},
+			</if>
+			<if test="deli_phone!=null">
+				deli_phone=#{deli_phone},
+			</if>
+			<if test="deli_jdde!=null and deli_jdde!='N'.toString()">
+				deli_jdde=#{deli_jdde},
+			</if>
+			<if test="deli_jdde=='N'.toString()">
+				deli_jdde = NULL
+			</if>
+
+		</trim> 
+		WHERE deli_addr_id =#{deli_addr_id}
+	</update>
+	<!-- 删除配送地址 -->
+	<delete id="deleteDeliveryAddrTab" parameterType="int">
+		DELETE FROM delivery_addr_tab WHERE deli_addr_id=#{deli_addr_id}
+	</delete>
+	<!-- 根据买家ID删除配置地址 -->
+	<delete id="deleteDeliveryAddrBuyeID" parameterType="com.entity.BuyerTab">
+		DELETE FROM delivery_addr_tab WHERE buye_id = #{buye_id}
+	</delete>
+</mapper>
