@@ -1,6 +1,9 @@
 var coursetype = '高中';
 var video_form_name = null;
 $(function() {
+	initrollplay();
+	initinform();
+	initteachershow();
 	init();
 	initcourse();
 	$("#gaozhong").click(function() {
@@ -28,11 +31,11 @@ $(function() {
 		$('#gzbody').css('display', 'block');
 		$('#czbody').css('display', 'none');
 		$('#xxbody').css('display', 'none');
-		$("#gzli").addClass("active");
-		$("#czli").removeClass("active");
-		$("#xxli").removeClass("active");
+		$("#gaozhong").addClass("actives");
+		$("#chuzhong").removeClass("actives");
+		$("#xiaoxue").removeClass("actives");
 		pages = 0;
-		nums =16;
+		nums =8;
 		coursetype='高中';
 		$("#kcbt").html("高中精品课程");
 		video_form_name = null;
@@ -64,11 +67,11 @@ $(function() {
 		$('#gzbody').css('display', 'none');
 		$('#czbody').css('display', 'block');
 		$('#xxbody').css('display', 'none');
-		$("#czli").addClass("active");
-		$("#gzli").removeClass("active");
-		$("#xxli").removeClass("active");
+		$("#chuzhong").addClass("actives");
+		$("#gaozhong").removeClass("actives");
+		$("#xiaoxue").removeClass("actives");
 		pages = 0;
-		nums =16;
+		nums =8;
 		coursetype='初中';
 		$("#kcbt").html("初中精品课程");
 		video_form_name = null;
@@ -99,11 +102,11 @@ $(function() {
 		$('#gzbody').css('display', 'none');
 		$('#czbody').css('display', 'none');
 		$('#xxbody').css('display', 'block');
-		$("#xxli").addClass("active");
-		$("#gzli").removeClass("active");
-		$("#czli").removeClass("active");
+		$("#xiaoxue").addClass("actives");
+		$("#gaozhong").removeClass("actives");
+		$("#chuzhong").removeClass("actives");
 		pages = 0;
-		nums =16;
+		nums =8;
 		coursetype='小学';
 		$("#kcbt").html("小学精品课程");
 		video_form_name = null;
@@ -118,12 +121,12 @@ $(function() {
 })
 
 var pages = 0;//当前页数
-var nums = 16;//每页几条
+var nums = 8;//每页几条
 var total = 0;//总条数 
 //点击修改课程标题
 function kctypeclick(data){
 	pages = 0;
-	nums =16;
+	nums =8;
 	$("#kcbt").html(data);
 	video_form_name = data;
 	initcourse();
@@ -133,7 +136,7 @@ function kctypeclick(data){
 function initcourse(){
 	var data = {
 			video_form_class:coursetype,
-			nums : (pages*nums),
+			nums : pages*nums,
 			page:nums,
 			video_form_name:video_form_name
 	}
@@ -145,10 +148,10 @@ function initcourse(){
 		data:JSON.stringify(data),
 		dataType: "json",
 		success: function(data){
-			console.log(data);
+			//console.log(data);
 			for(var i=0;i<data.list.length;i++){
-				var CourseBody = '<div class="thumbnail col-md-3"><a href="course.html?cid='+data.list[i].courses_id+'">'
-					+'<img data-original="'+data.list[i].courses_img_url+'" class="img-rounded lazy" style="width: 100%; height: 220px;">'
+				var CourseBody = '<div class="thumbnail" style="width: 290px; height: 224px;float:left;margin-right: 12px;"><a href="course.html?cid='+data.list[i].courses_id+'">'
+					+'<img data-original="'+data.list[i].courses_img_url+'" class="img-rounded lazy" style="width: 290px; height:158px;">'
 					+'<div class="caption">'
 					+'<p>'+data.list[i].courses_name+'</p>'
 					+'<p>￥'+data.list[i].courses_pricemoney+'</p>'
@@ -186,6 +189,120 @@ function init(){
 		}
 	});
 }
+//初始化滚播图片
+function initrollplay(){
+	var data ={
+		name:1
+	}
+	$.ajax({
+		type: "POST",
+		async:false, 
+		contentType : 'application/json; charset=UTF-8',
+		url:"/videoServer/front/IndexConfig/queryrRollplaTabAll",
+		data:JSON.stringify(data),
+		dataType: "json",
+		success: function(data){
+			//console.log(data);
+			for(var i=0;i<data.list.length;i++){
+				var listbox ="";
+				if(i==0){
+					listbox = '<div class="item active">'
+						+'<a href="'+data.list[i].roll_url+'"><img src="http://www.niceyuwen.com/image/'+data.list[i].roll_img+'" class="" style="height: 340px; width: 100%;"></a>'
+					+'</div>';	
+				}else{
+					listbox = '<div class="item">'
+								+'<a href="'+data.list[i].roll_url+'"><img src="http://www.niceyuwen.com/image/'+data.list[i].roll_img+'" class="" style="height: 340px; width: 100%;"></a>'
+							+'</div>';
+				}
+				$("#listbox").append(listbox);
+				if(i==0){
+					var yuandian ='<li data-target="#carousel-example-generic" data-slide-to="'+i+'" class="active"></li>';
+					$("#yuandian").append(yuandian);
+				}else{
+					var yuandian ='<li data-target="#carousel-example-generic" data-slide-to="'+i+'" ></li>';
+					$("#yuandian").append(yuandian);
+				}
+			}
+		}
+	});
+}
+//初始化通知消息
+function initinform(){
+	var data ={
+		name:1
+	}
+	$.ajax({
+		type: "POST",
+		async:false, 
+		contentType : 'application/json; charset=UTF-8',
+		url:"/videoServer/front/IndexConfig/queryinformList",
+		data:JSON.stringify(data),
+		dataType: "json",
+		success: function(data){
+			//console.log(data);
+			for(var i=0;i<data.list.length;i++){
+				var inform = '<p style="line-height: 44px; width: 180px;" class="tzl">'
+							+'<a href="'+data.list[i].info_url+'">'+data.list[i].info_text+'</a>'
+							+'</p>';
+				$("#colee1").append(inform);
+			}
+		}
+	});
+}
+
+//初始化教师展示信息
+function initteachershow(){
+	var data ={
+		name:1
+	}
+	$.ajax({
+		type: "POST",
+		async:false, 
+		contentType : 'application/json; charset=UTF-8',
+		url:"/videoServer/front/IndexConfig/queryTeachershowTabAll",
+		data:JSON.stringify(data),
+		dataType: "json",
+		success: function(data){
+			console.log(data);
+			for(var i=0;i<data.list.length;i++){
+				var teachershow = '<td class="tdclass"><div style="width: 290px; float: left; margin-left: 12px;">'
+									+'<a href="'+data.list[i].teac_show_url+'"><img src="http://www.niceyuwen.com/image/'+data.list[i].teac_show_img+'" style="width: 290px; height: 195px;"></a>'
+									+'<div style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">'
+									+'<p style="font-weight: bold; margin-left: 10px; margin-top: 10px;">'+data.list[i].teac_show_name+'</p>'
+									+'<p style="margin-left: 10px;">'+data.list[i].teac_show_introduce+'</p>'
+									+'</div>'
+									+'</div></td>';
+					
+				$("#teachershow").append(teachershow);
+			}
+			var speed = 30//速度数值越大速度越慢
+			var colee_left2 = document.getElementById("colee_lefts2");
+			var colee_left1 = document.getElementById("colee_lefts1");
+			var colee_left = document.getElementById("colee_lefts");
+			var elements = $('.tdclass');
+			var len = elements.length;
+			if(len>4){
+				colee_left2.innerHTML = colee_left1.innerHTML
+			}
+			
+			function Marquee3() {
+				if (colee_left2.offsetWidth - colee_left.scrollLeft <= 0)//offsetWidth 是对象的可见宽度
+					colee_left.scrollLeft -= colee_left1.offsetWidth//scrollWidth 是对象的实际内容的宽，不包边线宽度
+				else {
+					colee_left.scrollLeft++
+				}
+			}
+			var MyMar3 = setInterval(Marquee3, speed)
+			colee_left.onmouseover = function() {
+				clearInterval(MyMar3)
+			}
+			colee_left.onmouseout = function() {
+				MyMar3 = setInterval(Marquee3, speed)
+			}
+		}
+	});
+}
+
 
 //生成分页条
 function page(pages, nums, total) {
@@ -238,8 +355,7 @@ function page(pages, nums, total) {
 }
 //下一页
 function xiaye(){
-	pages++;
-	nums=pages*nums;	
+	pages++;	
 	//$("#excellent").html("");
 	initcourse();
 	return false;
@@ -247,11 +363,6 @@ function xiaye(){
 //上页
 function shangye(){
 	pages--;
-	if(pages==0){
-		nums =16;
-	}else{
-		nums=pages*nums;
-	}
 	//$("#excellent").html("");
 	initcourse();
 	return false;
@@ -259,13 +370,43 @@ function shangye(){
 //页数换页
 function custom(number){
 	pages=number-1;
-	if(pages==0){
-		nums =16;
-	}else{
-		nums=(pages)*nums;
-	}
 	//$("#excellent").html("");
 	initcourse();
 	//console.log(pages);
 	return false;
+}
+
+
+var speed = 30;
+var colee2 = document.getElementById("colee2");
+var colee1 = document.getElementById("colee1");
+var colee = document.getElementById("colee");
+colee2.innerHTML = colee1.innerHTML; //克隆colee1为colee2
+function Marquee1() {
+	//当滚动至colee1与colee2交界时
+	/*if(colee2.offsetTop-colee.scrollTop<=0){
+	colee.scrollTop-=colee1.offsetHeight; //colee跳到最顶端
+	}else{
+	colee.scrollTop++
+	}*/
+	//无限循环
+	if (colee.scrollTop >= colee1.offsetHeight) {
+		colee.scrollTop = 0;
+	} else {
+		var ss = colee.scrollTop;
+		colee.scrollTop=colee.scrollTop+1;
+		if(ss==colee.scrollTop){
+			ss = -1;
+			colee.scrollTop = 0;
+		}
+	}
+}
+var MyMar1 = setInterval(Marquee1, speed)//设置定时器
+//鼠标移上时清除定时器达到滚动停止的目的
+colee.onmouseover = function() {
+	clearInterval(MyMar1);
+}
+//鼠标移开时重设定时器
+colee.onmouseout = function() {
+	MyMar1 = setInterval(Marquee1, speed);
 }

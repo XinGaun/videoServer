@@ -73,6 +73,7 @@ public class UserController {
 		}
 		List<UserDomain> userList = userService.queryListUser(param, page);
 		responseInfo.setListObject(userList);
+		responseInfo.setRetObject(page);
 		return responseInfo;
 	}
 }

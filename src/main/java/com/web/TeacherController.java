@@ -191,6 +191,7 @@ public class TeacherController {
 		}
 		List<TeacherDomain> teacherInfo = teacherService.queryListTeacher(param, page);
 		responseInfo.setListObject(teacherInfo);
+		responseInfo.setRetObject(page);
 		return responseInfo;
 	}
 	

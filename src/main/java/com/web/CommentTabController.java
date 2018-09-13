@@ -36,6 +36,7 @@ public class CommentTabController extends DemoController{
 		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
 		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
 		
+		@SuppressWarnings("unchecked")
 		HashMap<String,Object> hashmap = JSON.parseObject(data, HashMap.class);
 		hashmap.put("teacher_id", teacher_id);
 		logger.info("hashmap"+hashmap);

@@ -1,6 +1,7 @@
 package com.web;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.entity.TeacherDomain;
 import com.entity.VideoTab;
 import com.service.VideoTabService;
+import com.util.HttpReq;
 
 @Controller
 @RequestMapping("/videoTab")
@@ -55,10 +58,30 @@ public class VideoTabController {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
-		
+
 
 	}
 
+	private String url = "http://www.niceyuwen.com:2020/videoffmpeg/transcoding/transcodingm3u8";
+	@RequestMapping(value="/getmp4.do", method={RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public String getMP4(HttpServletRequest request,String videoPath,String videoName){
+
+		HashMap<String,String> data = new HashMap<>();
+		String videoSuffix = videoPath.substring(videoPath.lastIndexOf("."));
+		videoName = videoName+videoSuffix;
+		String ossVideoName = videoPath.substring(videoPath.lastIndexOf("video")+6);
+		String path = "/oss/video/"+ossVideoName;
+		String fileName ="/oss/video/"+ossVideoName.substring(0, ossVideoName.lastIndexOf("."));
+		data.put("PATH",path);
+		data.put("fileName",fileName);
+		System.out.println(videoName);
+		System.out.println(path);
+		System.out.println(fileName);
+		HttpReq.httpRequest(url, "POST", JSON.toJSONString(data));
+		String savevideoPath = videoPath.substring(0, videoPath.lastIndexOf("."))+".mp4";
+		return savevideoPath;
+	}
 
 	@RequestMapping(value="/getVideoTabs.do", method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
@@ -103,7 +126,7 @@ public class VideoTabController {
 	public void updetVideoById(int video_id,String video_name,String video_form_id,String video_introduce,MultipartFile image,MultipartFile ppt,String video_qz,HttpServletRequest request) throws Exception{
 		TeacherDomain teacher=(TeacherDomain) request.getSession().getAttribute("user");
 		int teacher_id = Integer.parseInt(teacher.getTeacher_id());
-		
+
 		vdservice.updetVideoById( video_id, video_name, video_form_id, video_introduce, image, ppt, video_qz, teacher_id);
 	}
 
