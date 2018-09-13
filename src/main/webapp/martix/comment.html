@@ -538,8 +538,7 @@ $(function(){
                      param.limit = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
                      param.start = data.start;//开始的记录序号
                      param.page = (data.start / data.length)+1;//当前页码
-     				//param.order_id = $("#order_id").val();//获得订单ID
-                     //  console.log(param);
+                     //console.log(param);
                      //ajax请求数据                      
                      $.ajax({
                          type: "POST",
@@ -744,8 +743,7 @@ $(function(){
 			              cache: false,  //禁用缓存
                           data: JSON.stringify(param),  //传入组装的参数
                           dataType: "json",
-                          success: function (result) {       
-                        
+                          success: function (result) {                              
                                  //console.log(result);
                                  //setTimeout仅为测试延迟效果
                                  //setTimeout(function () {
@@ -763,84 +761,7 @@ $(function(){
                           }
                    });
                 },
-                //列表表头字段
-                /* columns: [
-	                   {
-                         "sClass": "text-center",
-                         "data": "comment_id",
-                          "render": function (data, type, full, meta) {
-                          return '<input type="checkbox"  class="checkchild" name="commentCheck" value="' + data + '" />'; },
-                          "bSortable": false
-                         },
-                         { 
-  			               "data": "video_name",
-  		                },
-		                { "data": "user_name" },
-		                { 
-			                "data": "comment_text",          					
-		                 },
-						{
-		                	 "data": "comment_date", 		                	
-						},
-						 
-						{
-							"data": "reply_text",
-							"orderable" : false, // 禁用排序  
-	                        "sDefaultContent" : "",  	                    
-	                        "render" : function(data, type, full, meta) {  
-	                        	  //comment_id	    
-	                        	//var comment_id =$('#example').DataTable().rows( this ).data()[0]; 
-	                        	 var nRow = $(this).parents('tr')[0];//得到这一行  
-	                             var aData = $("#example").dataTable().fnGetData(nRow);//得到这一行的json数据  	
-	                             var id = aData.comment_id;//得到Id  
-	                            if(data=="" ||data == null ){                                  
-	                 				data = "<button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#myModal' data-commentid='"+full.comment_id+"' >回复</button>"  ;//
-	                            }else{  
-	                                data = "<button class='btn btn-sm btn-safety' >已回复</button>"  
-	                            }  
-	                             return   data;  
-	                          }   
-						}, 
-						{  
-	     					"data": "reply_text" ,
-	     					"orderable" : false, // 禁用排序  
-	                        "sDefaultContent" : "",  
-	                         "render" : function(data, type, full, meta) {  
-	                            if(data=="" ||data == null ){                                  
-	                 				data = null;
-	                            }else{  
-	                                data = data;
-	                            }  
-	                             return   data;  
-	                          }   
-	     				},
-	     				{ 
-	     					"data": "teacher_name" ,
-	     				    "sDefaultContent":"" ,
-	     				    "orderable" : false, // 禁用排序                  	                   
-	                        "render" : function(data, type, full, meta) {  
-	                             if(data=="" ||data == null ){                                  
-	             				       data = null;
-	                             }else{  
-	                                   data =data;
-	                             }  
-	                             return   data;  
-	                         }  
-	     				},
-	     				{ 
-	     					"data": "reply_date",  
-	     					"orderable" : false, // 禁用排序  
-	                        "sDefaultContent" : "",  	                       
-	                          "render" : function(data, type, full, meta) {  
-	                            if(data=="" ||data == null ){                                  
-	                 				data = null;
-	                            }else{  
-	                                data = data; 
-	                            }  
-	                             return   data;  
-	                          }   
-	     				}                      			
-                     ]  */
+                //列表表头字段              
                 columns: [
               	   {
                        "sClass": "text-center",
@@ -921,91 +842,88 @@ $(function(){
                   ] 
            }).api();   
       });    
-          
-      //加载模态框    
-      var table = $('#example').DataTable();
-       $('#myModal').on('show.bs.modal', function (event) {     	  	 
-    	   var button = $(event.relatedTarget) // 触发事件的按钮  
-           var id = button.data('commentid') // 解析出data-whatever内容  
-           var statusid = button.data('commentstatusid') // 解析出data-whatever内容           
-    	   $("#reply_comment_id").val(id);  
-    	   $("#reply_comment_status").val(statusid); 
-    	  /*  $.ajax({
-	              type: "POST",
-	              url: "/videoServer/commentTab/updateComment",
-	              contentType: 'application/json; charset=UTF-8',
-				  cache: false,  //禁用缓存
-	              data: JSON.stringify(param),  //传入组装的参数
-	              dataType: "json",
-	              success: function (result) {
-						if(result=="success"){
-							alert("留言成功");
-							window.location.reload();
-						}else{
-							alert("留言失败");
-						}
-					   }
-			   }); */
-       }); 
-       
-      //提交回复
-	 $("#reply_text_submit").click(function(){   
-			 var replytext = $.trim($("#reply_text_input").val()); 
-			 var commentId = $.trim($("#reply_comment_id").val());	
-			 var reply_comment_status = $.trim($("#reply_comment_status").val());	
-			 if(  replytext.length = 0 ){
-				 alert("请输入您的留言");
-			 }					
-			 var param = {};
-			 param.comment_id = commentId;
-			 param.comment_status=reply_comment_status;
-	         param.reply_text = replytext;		       
-	         param.reply_date = new Date();      
-			$.ajax({
-	              type: "POST",
-	              url: "/videoServer/commentTab/updateComment",
-	              contentType: 'application/json; charset=UTF-8',
-					   cache: false,  //禁用缓存
-	              data: JSON.stringify(param),  //传入组装的参数
-	              dataType: "json",
-	              success: function (result) {
-						if(result=="success"){
-							alert("留言成功");
-							window.location.reload();
-						}else{
-							alert("留言失败");
-						}
-					   }
-			   });
-			   $("#reply_comment_id").val("");   	
-		 	   $("reply_text_input").val("");		
-		 	  $("#reply_comment_status").val("");
-			  $("#myModal").modal("hide");
-		 });
-}); 
-function updateCommentStatus(commentId){
-	  /*  var button = $(event.relatedTarget) // 触发事件的按钮  
-    var id = button.data('commentid') // 解析出data-whatever内容  
-    var statusid = button.data('commentstatusid') // 解析出data-whatever内容        */
-    var param = {};
-	   param.comment_id = commentId;
-	   param.comment_status=11;
-    $.ajax({
-           type: "POST",
-           url: "/videoServer/commentTab/updateComment",
-           contentType: 'application/json; charset=UTF-8',
-		      cache: false,  //禁用缓存
-           data: JSON.stringify(param),  //传入组装的参数
-           dataType: "json",
-           success: function (result) {
-					if(result=="success"){
-						alert("审核成功");
+       $("#myModal").modal("hide");
+       //加载模态框    
+       var table = $('#example').DataTable();
+        $('#myModal').on('show.bs.modal', function (event) {     	  	 
+     	   var button = $(event.relatedTarget) // 触发事件的按钮  
+            var id = button.data('commentid') // 解析出data-whatever内容  
+            var statusid = button.data('commentstatusid') // 解析出data-whatever内容           
+     	   $("#reply_comment_id").val(id);  
+     	   $("#reply_comment_status").val(statusid); 
+     	  /*  $.ajax({
+ 	              type: "POST",
+ 	              url: "/videoServer/commentTab/updateComment",
+ 	              contentType: 'application/json; charset=UTF-8',
+ 				  cache: false,  //禁用缓存
+ 	              data: JSON.stringify(param),  //传入组装的参数
+ 	              dataType: "json",
+ 	              success: function (result) {
+ 						if(result=="success"){
+ 							alert("留言成功");
+ 							window.location.reload();
+ 						}else{
+ 							alert("留言失败");
+ 						}
+ 					   }
+ 			   }); */
+        }); 
+        
+       //提交回复
+ 	 $("#reply_text_submit").click(function(){   
+ 			 var replytext = $.trim($("#reply_text_input").val()); 
+ 			 var commentId = $.trim($("#reply_comment_id").val());	
+ 			 var reply_comment_status = $.trim($("#reply_comment_status").val());	
+ 			 if(  replytext.length = 0 ){
+ 				 alert("请输入您的留言");
+ 			 }					
+ 			 var param = {};
+ 			 param.comment_id = commentId;
+ 			 param.comment_status=reply_comment_status;
+ 	         param.reply_text = replytext;		       
+ 	         param.reply_date = new Date();      
+ 			$.ajax({
+ 	              type: "POST",
+ 	              url: "/videoServer/commentTab/updateComment",
+ 	              contentType: 'application/json; charset=UTF-8',
+ 				  cache: false,  //禁用缓存
+ 	              data: JSON.stringify(param),  //传入组装的参数
+ 	              dataType: "json",
+ 	              success: function (result) {
+ 	            	    alert("留言成功");
 						window.location.reload();
-					}else{
-						alert("审核失败");
-					}
-				   }
-		   });
+ 						if(result=="success"){
+ 							alert("留言成功");
+ 							window.location.reload();
+ 						}else{
+ 							alert("留言失败");
+ 						};
+ 				 }
+ 			   });
+ 			   $("#reply_comment_id").val("");   	
+ 		 	   $("reply_text_input").val("");		
+ 		 	  $("#reply_comment_status").val("");
+ 			  $("#myModal").modal("hide");
+ 		 });
+ }); 
+ function updateCommentStatus(commentId){
+ 	  /*  var button = $(event.relatedTarget) // 触发事件的按钮  
+     var id = button.data('commentid') // 解析出data-whatever内容  
+     var statusid = button.data('commentstatusid') // 解析出data-whatever内容        */
+     var param = {};
+ 	   param.comment_id = commentId;
+ 	   param.comment_status=11;
+     $.ajax({
+            type: "POST",
+            url: "/videoServer/commentTab/updateComment",
+            contentType: 'application/json; charset=UTF-8',
+ 		      cache: false,  //禁用缓存
+            data: JSON.stringify(param),  //传入组装的参数
+            dataType: "json",
+            success: function (result) {
+			   window.location.reload();
+            }
+ 		   });
 };
     </script>
 	<!-- Custom Js -->

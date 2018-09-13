@@ -41,12 +41,13 @@
 	<!-- 查询 -->
 	<select id="queryCommentTab" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
-		SELECT c.comment_id, v.video_name ,u.user_name ,c.comment_text,
-		c.comment_date,c.reply_text,t.teacher_name,c.reply_date,c.comment_status FROM
+		
+	   SELECT c.comment_id, v.video_name ,u.user_name ,c.comment_text,vid.teacher_id,
+		c.comment_date,c.reply_text,c.reply_teacher,c.reply_date,c.comment_status FROM
 		comment_tab c LEFT JOIN video_tab v ON c.video_id = v.video_id
-		LEFT
-		JOIN user_tab u ON c.user_id = u.user_id LEFT JOIN teacher_tab t ON
-		c.reply_teacher = t.teacher_id
+		LEFT JOIN user_tab u ON c.user_id = u.user_id
+		left join video_tab vid on vid.video_id= c.video_id
+		LEFT JOIN teacher_tab t ON c.video_id = vid.teacher_id
 		<where>
 			<if test="comment_id != null and comment_id !='' ">
 				and c.comment_id = #{comment_id}
@@ -71,7 +72,7 @@
 				</if>
 			</if>
 			<if test="teacher_id != null and teacher_id !='' ">
-				and t.teacher_id = #{teacher_id}
+				and vid.teacher_id = #{teacher_id}
 			</if>
 		</where>
 		limit #{start},#{limit}
@@ -80,11 +81,10 @@
 	<select id="queryCount" parameterType="java.util.HashMap"
 		resultType="int">
 		SELECT count(c.comment_id) FROM
-		comment_tab c LEFT JOIN video_tab v ON
-		c.video_id = v.video_id
+		comment_tab c LEFT JOIN video_tab v ON c.video_id = v.video_id
 		LEFT JOIN user_tab u ON c.user_id = u.user_id
-		LEFT JOIN teacher_tab t ON
-		c.reply_teacher = t.teacher_id
+		left join video_tab vid on vid.video_id= c.video_id
+		LEFT JOIN teacher_tab t ON c.video_id = vid.teacher_id
 		<where>
 			<if test="comment_id != null and comment_id !='' ">
 				and c.comment_id = #{comment_id}
@@ -108,8 +108,10 @@
 					'%Y-%m-%d')
 				</if>
 			</if>
-		</where>
-		limit #{start},#{limit}
+			<if test="teacher_id != null and teacher_id !='' ">
+				and vid.teacher_id = #{teacher_id}
+			</if>
+		</where>	
 	</select>
 	<!-- 更新 -->
 	<update id="updateCommentTab" parameterType="java.util.HashMap">
