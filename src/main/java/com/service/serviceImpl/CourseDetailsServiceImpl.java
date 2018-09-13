@@ -79,4 +79,13 @@ public class CourseDetailsServiceImpl implements CourseDetailsService {
 		ArrayList<HashMap<String,Object>> arrayList = courseDetailsDao.queryTeacherClass(map);
 		return JSON.toJSONString(arrayList);
 	}
+	/**
+	 * 是否已收藏课程
+	 */
+	@Override
+	public String queryInitEnshrine(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		ArrayList<HashMap<String,Object>> arrayList = courseDetailsDao.queryInitEnshrine(map);
+		return JSON.toJSONString(arrayList);
+	}
 }

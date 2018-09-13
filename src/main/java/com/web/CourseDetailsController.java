@@ -26,6 +26,15 @@ public class CourseDetailsController {
 		return courseDetailsService.queryCourseDetails(data);
 	}
 	/**
+	 * 判断是否已经收藏该课程
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryInitEnshrine",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryInitEnshrine(@RequestBody String data) {
+		return courseDetailsService.queryInitEnshrine(data);
+	}
+	/**
 	 * 閫氳繃ID鏌ヨ瑙嗛淇℃伅
 	 * @param data
 	 * @return

@@ -321,7 +321,7 @@ width: 1300px;
 						<div class="panel panel-default">
 
 							<div class="panel-body"
-								style="overflow-x: scroll; height: 330px; width: 99%;">
+								style="overflow-x: scroll; max-height: 650px;width: 99%;">
 								<table   class='table table-bordered'
 									style="width: 1300px;">
 								<thead>
@@ -675,7 +675,7 @@ function getPage(){
       } 
 	 function showdata(){
 		 $("#tb").empty(); 		
-		 for(var i=begin-1;i<end-1;i++){							
+		 for(var i=begin-1;i<end;i++){							
 				var videoformname = datalist[i].video_form_class+datalist[i].video_form_name;
 				$("#tb").append("<tr><td>"+(i+1)+"</td><td class='wrap' title='"+datalist[i].video_name+"'>"+datalist[i].video_name+"</td><td class='wrap' title='"+datalist[i].video_introduce+"'>"+datalist[i].video_introduce+"</td><td>"+videoformname+"</td><td class='wrap' title='"+datalist[i].video_url+"'>"+datalist[i].video_url+"</td><td class='wrap' title='"+datalist[i].video_ppt+"'>"+datalist[i].video_ppt+"</td><td>"+datalist[i].video_qz+"</td><td>"+datalist[i].video_time+"</td><td>"+datalist[i].video_grade+"</td><td>"+datalist[i].video_click+"</td><td>"+datalist[i].video_date+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateVideoModal' data-videoid='"+datalist[i].video_id+"'>视频修改</button></td></tr>")							
 			}

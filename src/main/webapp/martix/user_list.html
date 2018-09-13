@@ -17,6 +17,9 @@
 		 <!-- TABLE STYLES-->
 		<link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 		<link href="dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="js/layui/css/layui.css" />
+		<script type="text/javascript" src="js/laydate/laydate.js"></script>
+		<script type="text/javascript" src="js/layui/layui.js"></script>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -31,7 +34,7 @@
 					<a class="navbar-brand" href="index.html"><i class="fa fa-comments"></i> <strong>语道后台管理 </strong></a>
 				</div>
 
-				<ul class="nav navbar-top-links navbar-right">
+				<!-- <ul class="nav navbar-top-links navbar-right">
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
 							<i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -80,9 +83,9 @@
 								</a>
 							</li>
 						</ul>
-						<!-- /.dropdown-messages -->
+						/.dropdown-messages
 					</li>
-					<!-- /.dropdown -->
+					/.dropdown
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
 							<i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -159,9 +162,9 @@
 								</a>
 							</li>
 						</ul>
-						<!-- /.dropdown-tasks -->
+						/.dropdown-tasks
 					</li>
-					<!-- /.dropdown -->
+					/.dropdown
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
 							<i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -219,9 +222,9 @@
 								</a>
 							</li>
 						</ul>
-						<!-- /.dropdown-alerts -->
+						/.dropdown-alerts
 					</li>
-					<!-- /.dropdown -->
+					/.dropdown
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
 							<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -235,10 +238,10 @@
 							<li><a href="javascript:teacherLoginOut()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
 							</li>
 						</ul>
-						<!-- /.dropdown-user -->
+						/.dropdown-user
 					</li>
-					<!-- /.dropdown -->
-				</ul>
+					/.dropdown
+				</ul> -->
 			</nav>
 			<!--/. NAV TOP  -->
 			<nav class="navbar-default navbar-side" role="navigation">
@@ -259,6 +262,8 @@
 								</li>
 							</ul>
 						</li>
+						<li><a href="videoformtab.html" ><i
+							class="fa fa-table"></i>视频类型管理</a></li>
 						<li>
 	                        <a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a>
 	                    </li>
@@ -283,6 +288,13 @@
 						<li class="role" style="display: none;">
 							<a href="test.html" ><i class="fa fa-edit"></i>题目管理</a>
 						</li>
+						<li class="role" style="display: none;"><a href="#"><i
+							class="fa fa-sitemap"></i>首页管理<span class="fa arrows"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="inform.html"><i class="fa fa-table"></i>通知管理</a></li>
+							<li><a href="teacher_show.html"><i class="fa fa-table"></i>教师展示</a></li>
+							<li><a href="rollplay.html"><i class="fa fa-table"></i>滚播管理</a></li>
+						</ul></li>
 					</ul>
 				</div>
 
@@ -386,6 +398,7 @@
 						
 					</tbody>
 				</table>
+				<div id="publicPaging"></div>
 				</div>
 			</div>
 		</div>
@@ -434,6 +447,35 @@
 			loadData();
 		})
 		
+		function fenye(obj){
+			/* alert("进去分页");  */
+			//不显示首页尾页
+			layui.use(['laypage', 'layer'], function(){
+				var laypage = layui.laypage,
+				layer = layui.layer;
+				laypage.render({
+					elem: 'publicPaging',	
+					count: obj.totalRows,
+					skip:true,
+					groups:5,
+					first:1,
+					curr:obj.curr,
+					limit:obj.limit,
+					last:'尾页',
+					theme: '#1E9FFF',
+					jump:function(obj2,first){
+						//obj包含了当前分页的所有参数，比如
+						obj.curr=obj2.curr;
+						//首次不执行
+						if(!first){
+							//do something 
+							loadData()
+						} 
+					},
+				});
+			})
+		} 
+		
 		function loadData(){
 			$.ajax({
 					type: "POST",
@@ -452,6 +494,8 @@
 						if(data.retCode == 1){	//加载成功
 							//添加数据
 							addUserBody(data.listObject);
+							obj.totalRows=data.retObject.totalRows;
+							fenye(obj);
 						}else{
 							alert(data.retMsg);
 						}

@@ -58,7 +58,7 @@ public class VideoTabServiceImpl implements VideoTabService{
 		System.out.println(videoName);
 		System.out.println(path);
 		System.out.println(fileName);
-		HttpReq.httpRequest(url, "POST", JSON.toJSONString(data));
+		//HttpReq.httpRequest(url, "POST", JSON.toJSONString(data));
 		
 		String savevideoPath = videoPath.substring(0, videoPath.lastIndexOf("."))+".m3u8";
 		System.out.println("video service"+path+"   "+fileName+"   "+savevideoPath+"   "+pptUrl+"   "+video_time);

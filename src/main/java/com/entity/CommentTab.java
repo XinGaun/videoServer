@@ -11,7 +11,33 @@ public class CommentTab{
 	String replyText ;
 	int replyTeacher ;
 	Date replyDate ;
-	int comment_status;
+	
+	public CommentTab() {
+	
+	}
+	
+	/*public CommentTab(HashMap<String,Object> demo) {
+		if(demo.containsKey("commentId")) {
+			this.commentId = (int) demo.get("commentId");
+		}
+		if(demo.containsKey("userId")) {
+			this.userId = (int) demo.get("userId");
+		}
+		if(demo.containsKey("commentText")) {
+			this.commentText = (String) demo.get("commentText");
+		}
+		if(demo.containsKey("commentDate")) {
+			this.commentDate =new Date();
+		}
+		if(demo.containsKey("replyText")) {
+			this.replyText =  demo.get("replyText").toString();
+		}
+		if(demo.containsKey("replyTeacher")) {
+			this.replyTeacher =(int)demo.get("replyTeacher");
+		}
+		
+	}*/
+	
 	public int getCommentId() {
 		return commentId;
 	}
@@ -60,11 +86,4 @@ public class CommentTab{
 	public void setReplyDate(Date replyDate) {
 		this.replyDate = replyDate;
 	}
-	public int getComment_status() {
-		return comment_status;
-	}
-	public void setComment_status(int comment_status) {
-		this.comment_status = comment_status;
-	}
-	
 }
