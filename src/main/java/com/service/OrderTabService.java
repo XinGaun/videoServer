@@ -1,57 +1,48 @@
 package com.service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
- * 订单表Service层接口
+ * 订单Service层接口
  * @author vip
  *
  */
 public interface OrderTabService {
 	/**
-	 * 添加订单信息
+	 *  添加订单
 	 * @param data
 	 * @return
 	 */
-	public String addOrderTab(String data);
+	public String addOrderTab(HashMap<String,Object> hashMap);
 	/**
-	 * 查询订单信息
+	 * 查询订单
 	 * @param data
 	 * @return
 	 */
-	public String queryOrderTab(String data);
+	public int queryOrderTab(HashMap<String,Object> hashMap);
 	/**
-	 * 更新订单信息
+	 * 更新订单
 	 * @param data
 	 * @return
 	 */
-	public String updateOrderTab(String data);
+	public String updateOrderTab(HashMap<String,Object> hashMap);
 	/**
-	 * 删除订单信息
+	 * 删除订单
 	 * @param data
 	 * @return
 	 */
 	public String deleteOrderTab(String data);
 	/**
-	 * 后端购物提交订单
-	 */
-	public String addOrderBack(String data);
-	/**
-	 * 删除未结算订单信息
-	 */
-	public String deleteOrderBack(String data);
-	/**
-	 * 后端商品结算
-	 */
-	public String settleOrder(String data);
-	/**
-	 * 商城前端查询用户个人订单详情
+	 * 查询订单信息
 	 * @param data
 	 * @return
 	 */
-	public String queryBuyerOrder(String data);
+	public String queryOrderTabAll(String data);
 	/**
-	 * 商城前端查询用户个人通过订单ID订单详情
-	 * @param data
+	 * 查询订单是否存在
+	 * @param map
 	 * @return
 	 */
-	public String queryBuyerOrderDetails(String data);
-	
+	public ArrayList<HashMap<String,Object>> queryOrderExist(HashMap<String,Object> map);
 }

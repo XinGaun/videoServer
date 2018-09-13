@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title></title>
+<style type="text/css">
+.role {
+	display: none;
+}
+
+.wrap {
+	width: 150px; /* 设置需要固定的宽度 */
+	white-space: nowrap; /* 不换行 */
+	text-overflow: ellipsis; /*  超出部分用....代替 */
+	overflow: hidden; /* 超出隐藏 */
+}
+
+table {
+	table-layout: fixed;
+	width: 1300px;
+}
+;
+</style>
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="assets/css/bootstrap.css" rel="stylesheet" />
+<link href="assets/css/font-awesome.css" rel="stylesheet" />
+<link href="assets/css/custom-styles.css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css' />
+<link href="assets/js/dataTables/dataTables.bootstrap.css"
+	rel="stylesheet" />
+
+</head>
+<body>
+	<div id="wrapper">
+		<nav class="navbar navbar-default top-navbar" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html"><i
+					class="fa fa-comments"></i> <strong><span
+						style="font-size: 25px;">语道后台管理 </span></strong></a>
+			</div>
+			<!-- <ul class="nav navbar-top-links navbar-right">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-messages">
+						<li><a href="#">
+								<div>
+									<strong>John Doe</strong> <span class="pull-right text-muted">
+										<em>Today</em>
+									</span>
+								</div>
+								<div>Lorem Ipsum has been the industry's standard dummy
+									text ever since the 1500s...</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<strong>John Smith</strong> <span class="pull-right text-muted">
+										<em>Yesterday</em>
+									</span>
+								</div>
+								<div>Lorem Ipsum has been the industry's standard dummy
+									text ever since an kwilnw...</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<strong>John Smith</strong> <span class="pull-right text-muted">
+										<em>Yesterday</em>
+									</span>
+								</div>
+								<div>Lorem Ipsum has been the industry's standard dummy
+									text ever since the...</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a class="text-center" href="#"> <strong>Read
+									All Messages</strong> <i class="fa fa-angle-right"></i>
+						</a></li>
+					</ul> /.dropdown-messages</li>
+				/.dropdown
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-tasks">
+						<li><a href="#">
+								<div>
+									<p>
+										<strong>Task 1</strong> <span class="pull-right text-muted">60%
+											Complete</span>
+									</p>
+									<div class="progress progress-striped active">
+										<div class="progress-bar progress-bar-success"
+											role="progressbar" aria-valuenow="60" aria-valuemin="0"
+											aria-valuemax="100" style="width: 60%">
+											<span class="sr-only">60% Complete (success)</span>
+										</div>
+									</div>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<p>
+										<strong>Task 2</strong> <span class="pull-right text-muted">28%
+											Complete</span>
+									</p>
+									<div class="progress progress-striped active">
+										<div class="progress-bar progress-bar-info" role="progressbar"
+											aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"
+											style="width: 28%">
+											<span class="sr-only">28% Complete</span>
+										</div>
+									</div>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<p>
+										<strong>Task 3</strong> <span class="pull-right text-muted">60%
+											Complete</span>
+									</p>
+									<div class="progress progress-striped active">
+										<div class="progress-bar progress-bar-warning"
+											role="progressbar" aria-valuenow="60" aria-valuemin="0"
+											aria-valuemax="100" style="width: 60%">
+											<span class="sr-only">60% Complete (warning)</span>
+										</div>
+									</div>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<p>
+										<strong>Task 4</strong> <span class="pull-right text-muted">85%
+											Complete</span>
+									</p>
+									<div class="progress progress-striped active">
+										<div class="progress-bar progress-bar-danger"
+											role="progressbar" aria-valuenow="85" aria-valuemin="0"
+											aria-valuemax="100" style="width: 85%">
+											<span class="sr-only">85% Complete (danger)</span>
+										</div>
+									</div>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a class="text-center" href="#"> <strong>See
+									All Tasks</strong> <i class="fa fa-angle-right"></i>
+						</a></li>
+					</ul> /.dropdown-tasks</li>
+				/.dropdown
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-alerts">
+						<li><a href="#">
+								<div>
+									<i class="fa fa-comment fa-fw"></i> New Comment <span
+										class="pull-right text-muted small">4 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-twitter fa-fw"></i> 3 New Followers <span
+										class="pull-right text-muted small">12 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-envelope fa-fw"></i> Message Sent <span
+										class="pull-right text-muted small">4 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-tasks fa-fw"></i> New Task <span
+										class="pull-right text-muted small">4 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-upload fa-fw"></i> Server Rebooted <span
+										class="pull-right text-muted small">4 min</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a class="text-center" href="#"> <strong>See
+									All Alerts</strong> <i class="fa fa-angle-right"></i>
+						</a></li>
+					</ul> /.dropdown-alerts</li>
+				/.dropdown
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="#"><i class="fa fa-user fa-fw"></i> User
+								Profile</a></li>
+						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+						</li>
+						<li class="divider"></li>
+						<li><a href="javascript:teacherLoginOut()"><i
+								class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+					</ul> /.dropdown-user</li>
+				/.dropdown
+			</ul> -->
+		</nav>
+		<!--/. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+
+				<ul class="nav" id="main-menu">
+					<li class="role"><a href="#"><i class="fa fa-sitemap"></i>权限管理<span
+							class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="role_list.html"><i class="fa fa-lock"></i>
+									权限管理</a></li>
+							<li><a href="teacher_list.html"><i class="fa fa-users"></i>
+									教师管理</a></li>
+							<li><a href="user_list.html"><i class="fa fa-user"></i>
+									用户管理</a></li>
+						</ul></li>
+					<li><a href="videoformtab.html" class="active-menu"><i
+							class="fa fa-table"></i>视频类型管理</a></li>
+					<li><a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a></li>
+					<li><a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
+					</li>
+					<li><a href="comment.html"><i class="fa fa-table"></i>评论管理</a>
+					</li>
+					<li class="role"><a href="order.html"><i
+							class="fa fa-table"></i>订单管理</a></li>
+					<li class="role"><a href="proposal.html"><i
+							class="fa fa-edit"></i>建议管理</a></li>
+					<li class="role"><a href="test.html"><i class="fa fa-edit"></i>题目管理</a></li>
+					<li class="role" style="display: none;"><a href="#"><i
+							class="fa fa-sitemap"></i>首页管理<span class="fa arrows"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="inform.html"><i class="fa fa-table"></i>通知管理</a></li>
+							<li><a href="teacher_show.html"><i class="fa fa-table"></i>教师展示</a></li>
+							<li><a href="rollplay.html"><i class="fa fa-table"></i>滚播管理</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</nav>
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="page-header">
+							语道 <small>视频管理</small>
+						</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="table-responsive">
+								<table class="table"
+									class="display table-striped table-bordered table-hover table-condensed"
+									cellspacing="0" width="100%">
+									<tr>
+										<td>
+											<div class="input-group" width="100%">
+												<span class="input-group-addon">视频类型名称</span> <input
+													type="text" class="form-control" placeholder="请输入类型名称"
+													id="video_form_name_sea">
+											</div>
+										</td>
+										<td>
+											<div class="input-group" width="100%">
+												<span class="input-group-addon">视频类型年级</span> <input
+													type="text" class="form-control" placeholder="请输入类型年级"
+													id="video_form_class_sea">
+											</div>
+										</td>
+									</tr>
+									<tr>
+
+									</tr>
+									<tr>
+										<td>
+											<button type="button" class="btn btn-danger" id="removeorder"
+												data-toggle="modal" data-target="#myModal">添加视频</button>
+										</td>
+										<td></td>
+										<td></td>
+										<td>
+											<div style="float: right">
+												<button type="button" class="btn btn-primary"
+													id="queryorder">搜索</button>
+												&nbsp;&nbsp; &nbsp;&nbsp;
+												<button type="button" class="btn btn-warning"
+													id="eliminates">清空</button>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<!-- Advanced Tables -->
+						<div class="panel panel-default">
+
+							<div class="panel-body"
+								style="overflow-x: scroll; height: 330px; width: 99%;">
+								<table id="tb" class='table table-bordered'>
+									<tr>
+										<td>序号</td>
+										<td>视频类型名称</td>
+										<td>视频年级名称</td>
+										<td>视频类型修改</td>
+										<td>视频类型状态</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">课程视频类型添加</h4>
+					</div>
+					<form action="/videoServer/videoTab/uploadflv.do" method="post"
+						enctype="multipart/form-data" id="dataForm">
+						<div style="width: 100%;">
+							<div
+								style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型名称：</div>
+								<div
+									style="width: 75%; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
+									<input type="text" style="width: 100%; height: 100%;"
+										name="video_form_name_ins" id="video_form_name_ins">
+								</div>
+							</div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型年级：</div>
+								<div
+									style="width: 75%; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
+									<input type="text" style="width: 100%; height: 100%;"
+										name="video_form_class_ins" id="video_form_class_ins">
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							id="quxiao">取消</button>
+						<button type="button" class="btn btn-primary" id="sub">提交</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /model -->
+
+		<!-- Modal2 -->
+		<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
+			aria-labelledby="updateModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">课程视频类型修改</h4>
+					</div>
+					<form action="/videoServer/videoTab/updetVideoById.do"
+						method="post" enctype="multipart/form-data" id="updatedataForm">
+						<div style="width: 100%;">
+							<div
+								style="height: 30px; background: #D9ECFF; border: 1px solid #CADEFD"></div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型名称：</div>
+								<div
+									style="width: 75%; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
+									<input type="text" style="width: 100%; height: 100%;"
+										name="video_form_name_upd" id="video_form_name_upd">
+								</div>
+								<input type="hidden" id="video_form_id_upd">
+							</div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型年级：</div>
+								<div
+									style="width: 75%; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
+									<input type="text" style="width: 100%; height: 100%;"
+										name="video_form_class_upd" id="video_form_class_upd">
+								</div>
+							</div>
+							<div style="height: 50px; border: 1px solid #CADEFD">
+								<div
+									style="width: 25%; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">视频类型状态：</div>
+								<div
+									style="width: 75%; height: 50px; float: left; line-height: 50px; border: 1px solid #CADEFD;">
+									<input type="text" style="width: 100%; height: 100%;"
+										name="video_form_status_upd" id="video_form_status_upd">
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							id="updatequxiao">取消</button>
+						<button type="button" class="btn btn-primary" id="update">提交</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /model -->
+	</div>
+	<script src="assets/js/jquery-1.10.2.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery.metisMenu.js"></script>
+	<script src="assets/js/dataTables/jquery.dataTables.js"></script>
+	<script src="dist/js/bootstrap-datepicker.min.js"></script>
+	<script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+	<script src="dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
+	<script src="assets/js/common.js"></script>
+	<script>
+$(document).ready(function () {
+    $('#dataTables-example').dataTable();
+});
+$(function(){
+	$.ajax({
+		type : 'post',
+		url : '/videoServer/videoFormTab/getVideoList.do',
+		data:{name:1},
+		success : function(data){	
+			//console.log(data);
+			for(var i=0;i<data.length;i++){			
+				if(data[i].video_form_status=='5'){
+					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_form_name+"</td><td>"+data[i].video_form_class+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateModal'  data-upformid='"+data[i].video_form_id+"'>视频类型修改</button></td><td onclick='delet(6,"+data[i].video_form_id+")'><input type='button' value='正常'><input type='hidden' id='a' value='"+data[i].video_form_id+"'/></td></tr>")
+				}else if(data[i].video_form_status=='6'){
+					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_form_name+"</td><td>"+data[i].video_form_class+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateModal'  data-upformid='"+data[i].video_form_id+"'>视频类型修改</button></td><td onclick='delet(5,"+data[i].video_form_id+")'><input type='button' value='禁用'><input type='hidden' id='a' value='"+data[i].video_form_id+"'/></td></tr>")
+				}
+			}
+		},error: function(){
+			 
+		}
+	})
+})
+
+function delet(status,id){
+	//var orderId=$("#a").val;	
+	$.ajax({
+       	type : 'post',
+       	url : '/videoServer/videoFormTab/upstatusTabById.do',
+       	data:{video_form_status : status,video_form_id : id},
+       	success : function(){
+       		alert("修改成功！");
+       		window.location.href="";
+       	}
+    })	;										
+}
+</script>
+	<script>	
+   $('#myModal').on('show.bs.modal', function (event) {      	   
+	   $('#video_form_name_ins').val();
+	   $("#video_form_class_ins").val();
+	  
+   }); 	 
+   $("#sub").click(function(){
+		//表单参数
+		 var formData = new FormData();  //重点：要用这种方法接收表单的参数  
+		 var video_form_name = $.trim($('#video_form_name_ins').val());  
+		 var video_form_class =$.trim($("#video_form_class_ins").val());
+		 if(video_form_name.length < 1 || video_form_class.length < 1){
+			 alert("不能为空");
+			 return;
+		 }
+		 formData.append("video_form_name", video_form_name);
+		 formData.append("video_form_class",video_form_class);  									
+		$.ajax({
+				type : 'post',
+				data : formData,
+				url : '/videoServer/videoFormTab/insertTab.do',
+				contentType: false, 
+		        processData: false, 
+				success : function(data){										
+					alert("添加成功");			        					
+			        $("#myModal").modal("hide");
+					window.location.href="";					
+				},error: function(){
+					 alert("submit error");
+				}				
+			});	 				
+     }); 
+	 $("#queryorder").click(function(){
+		$.ajax({
+			type : 'post',
+			data : {video_form_name:$.trim($("#video_form_name_sea").val()),video_form_class:$.trim($("#video_form_class_sea").val())},
+			url : '/videoServer/videoFormTab/searchTab.do',
+			success : function(data){
+				if(data.length==0){
+			 		alert("暂无符合条件的结果");
+			 	}else{
+			 		$("#tb  tr:not(:first)").html("");
+			 		for(var i=0;i<data.length;i++){			
+						if(data[i].video_form_status=='5'){
+							$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_form_name+"</td><td>"+data[i].video_form_class+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateModal'  data-upformid='"+data[i].video_form_id+"'>视频类型修改</button></td><td onclick='delet(this)'><input type='button' value='正常'><input type='hidden' id='a' value='"+data[i].video_form_id+"'/></td></tr>")
+						}else if(data[i].video_form_status=='6'){
+							$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_form_name+"</td><td>"+data[i].video_form_class+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateModal'  data-upformid='"+data[i].video_form_id+"'>视频类型修改</button></td><td onclick='delet(this)'><input type='button' value='禁用'><input type='hidden' id='a' value='"+data[i].video_form_id+"'/></td></tr>")
+						}
+					}
+				}
+			},error: function(){
+				 
+			}
+		})
+	});
+	
+	$("#eliminates").click(function(){	
+		window.location.href="";
+	});
+	
+	//修改   加载模态框    
+    $('#updateModal').on('show.bs.modal', function (event) {   
+    	  var button = $(event.relatedTarget) // 触发事件的按钮  
+          var upformid = button.data('upformid') // 解析出data-whatever内容  
+    	  $("#video_form_id_upd").val(upformid);
+    	$.ajax({
+			type : 'post',		
+			url : '/videoServer/videoFormTab/getTabById.do',
+			data:{video_form_id:upformid},		   
+	        dataType: "json",
+			success : function(data){										
+				 $("#video_form_name_upd").val(data[0].video_form_name);
+				 $("#video_form_class_upd").val(data[0].video_form_class);
+				 $("#video_form_status_upd").val(data[0].video_form_status);
+			},error: function(){
+				 alert("get error");
+			}				
+		});	 			 	 	  
+    }); 
+	 $("#update").click(function(){
+			//表单参数
+			 var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
+			 var video_form_id = $.trim($('#video_form_id_upd').val());  
+			 var video_form_name = $.trim($('#video_form_name_upd').val());  
+			 var video_form_class = $.trim($('#video_form_class_upd').val());  
+			 var video_form_status = $.trim($('#video_form_status_upd').val()); 
+			
+			 formData.append("video_form_id", video_form_id);
+			 formData.append("video_form_name", video_form_name);
+			 formData.append("video_form_class", video_form_class);
+			 formData.append("video_form_status", video_form_status);
+						
+			$.ajax({
+					type : 'post',
+					data : formData,
+					url : '/videoServer/videoFormTab/updateTab.do',
+					contentType: false, 
+			        processData: false, 
+					success : function(data){										
+						alert("修改成功");			        					
+				        $("#updateModal").modal("hide");
+						window.location.href="";					
+					},error: function(){
+						 alert("submit update error");
+					}				
+				});	 				
+	      }); 
+</script>
+	<script src="assets/js/custom-scripts.js"></script>
+</body>
+</html>
