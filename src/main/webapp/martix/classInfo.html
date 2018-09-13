@@ -745,7 +745,7 @@ function getPage(){
 	 function showdata(){
 		 $("#tb").empty(); 
 	
-		 for(var i=begin-1;i<end;i++){			
+		 for(var i=begin-1;i<end-1;i++){			
 				var videoformname = datalist[i].video_form_class+datalist[i].video_form_name;
 				if(datalist[i].courses_status=='8'){
 					$("#tb").append("<tr><td>"+(i+1)+"</td><td class='wrap' title='"+datalist[i].courses_name+"'>"+datalist[i].courses_name+"</td><td>"+videoformname+"</td><td class='wrap' title='"+datalist[i].courses_introduce+"'>"+datalist[i].courses_introduce+"</td><td>"+datalist[i].courses_video+"</td><td class='wrap' title='"+datalist[i].courses_img_url+"'>"+datalist[i].courses_img_url+"</td><td>"+datalist[i].courses_pricemoney+"</td><td>"+datalist[i].courses_grade+"</td><td>"+datalist[i].courses_click+"</td><td>"+datalist[i].courses_qz+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateClassModal'  data-upcourseid='"+datalist[i].courses_id+"'>视频修改</button></td><td onclick='delet(this)'><input type='button' value='下线'><input type='hidden' id='a' value='"+datalist[i].courses_id+"'/></td></tr>")

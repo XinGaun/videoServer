@@ -324,6 +324,7 @@ table {
 							<div class="panel-body"
 								style="overflow-x: scroll; max-height:400px; width: 99%;">
 								<table id="tb" class='table table-bordered'>
+									<thead>
 									<tr>
 										<td>序号</td>
 										<td>视频类型名称</td>
@@ -331,7 +332,17 @@ table {
 										<td>视频类型修改</td>
 										<td>视频类型状态</td>
 									</tr>
+									</thead>
+									<tbody id = "tb">
+										
+									</tbody>
 								</table>
+									<div>
+						<span id="btn0"></span> <!-- <span>每页</span><input id="pageSize" type="text" size="1" maxlength="2" value="getDefaultValue()" /><span> 条 </span>  -->
+					   <a href="#" id="btn1">首页</a> <a href="#" id="btn2">上一页</a> 
+					   <a href="#" id="btn3">下一页</a> <a href="#" id="btn4">尾页</a>&nbsp; <a>转到&nbsp;</a>
+					   <input id="changePage" type="text" size="1" maxlength="4" /> <a>页&nbsp;</a><a href="#" id="btn5">跳转</a>
+					</div>	
 							</div>
 						</div>
 					</div>
@@ -452,6 +463,15 @@ table {
 $(document).ready(function () {
     $('#dataTables-example').dataTable();
 });
+var pageSize = 8;    //每页显示的记录条数
+var curPage=0;        //当前页
+var lastPage;        //最后页
+var direct=0;        //方向
+var len;            //总行数
+var page;            //总页数
+var begin;
+var end;
+var datalist;//数据
 $(function(){
 	$.ajax({
 		type : 'post',
@@ -459,19 +479,122 @@ $(function(){
 		data:{name:1},
 		success : function(data){	
 			//console.log(data);
-			for(var i=0;i<data.length;i++){			
+			/* for(var i=0;i<data.length;i++){			
 				if(data[i].video_form_status=='5'){
 					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_form_name+"</td><td>"+data[i].video_form_class+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateModal'  data-upformid='"+data[i].video_form_id+"'>视频类型修改</button></td><td onclick='delet(6,"+data[i].video_form_id+")'><input type='button' value='正常'><input type='hidden' id='a' value='"+data[i].video_form_id+"'/></td></tr>")
 				}else if(data[i].video_form_status=='6'){
 					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+data[i].video_form_name+"</td><td>"+data[i].video_form_class+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateModal'  data-upformid='"+data[i].video_form_id+"'>视频类型修改</button></td><td onclick='delet(5,"+data[i].video_form_id+")'><input type='button' value='禁用'><input type='hidden' id='a' value='"+data[i].video_form_id+"'/></td></tr>")
 				}
-			}
+			} */
+			datalist = data;
+			 getPage();
+			showdata();						
 		},error: function(){
 			 
 		}
 	})
 })
 
+function getPage(){    
+        
+	    len = datalist.length;     
+        page=len % pageSize==0 ? len/pageSize : Math.floor(len/pageSize)+1;//根据记录条数，计算页数
+        // alert("page==="+page);
+        curPage=1;    // 设置当前为第一页
+        displayPage(1);//显示第一页        
+        document.getElementById("btn0").innerHTML="当前 " + curPage + "/" + page + " 页  ";    // 显示当前多少    
+              
+       /*  $("#pageSizeSet").click(function setPageSize(){    // 设置每页显示多少条记录
+            pageSize = document.getElementById("pageSize").value;    //每页显示的记录条数
+            if (!/^[1-9]\d*$/.test(pageSize)) {
+                alert("请输入正整数");
+                return ;
+            }
+            len =$("#mytable tr").length - 1;
+            page=len % pageSize==0 ? len/pageSize : Math.floor(len/pageSize)+1;//根据记录条数，计算页数
+            curPage=1;        //当前页
+             direct=0;        //方向
+             firstPage();
+        });	          */
+        	   
+    }
+	  $("#btn1").click(function firstPage(){    // 首页
+          curPage=1;
+          direct = 0;
+          displayPage();
+          showdata();
+      });
+      $("#btn2").click(function frontPage(){    // 上一页
+          direct=-1;
+          displayPage();
+          showdata();
+      });
+      $("#btn3").click(function nextPage(){    // 下一页
+          direct=1;
+          displayPage();
+          showdata();
+      });
+      $("#btn4").click(function lastPage(){    // 尾页
+          curPage=page;
+          direct = 0;
+          displayPage();
+          showdata();
+      });
+      $("#btn5").click(function changePage(){    // 转页
+          curPage=document.getElementById("changePage").value * 1;
+          if (!/^[1-9]\d*$/.test(curPage)) {
+              alert("请输入正整数");
+              return ;
+          }
+          if (curPage > page) {
+              alert("超出数据页面");
+              return ;
+          }
+          direct = 0;
+          displayPage();
+          showdata();
+      });
+      
+	 function displayPage(){
+         if(curPage <=1 && direct==-1){
+             direct=0;
+             alert("已经是第一页了");
+             return;
+         } else if (curPage >= page && direct==1) {
+             direct=0;
+             alert("已经是最后一页了");
+             return ;
+         }        
+         lastPage = curPage;      
+         // 修复当len=1时，curPage计算得0的bug
+         if (len > pageSize) {
+             curPage = ((curPage + direct + len) % len);
+         } else {
+             curPage = 1;
+         }
+   
+         document.getElementById("btn0").innerHTML="当前 " + curPage + "/" + page + " 页  ";        // 显示当前多少页         
+         begin=(curPage-1)*pageSize + 1;// 起始记录号
+         end = begin + 1*pageSize - 1;    // 末尾记录号
+         
+         if(end > len ) end=len;
+       /*   $("#mytable tr").hide();    // 首先，设置这行为隐藏
+         $("#mytable tr").each(function(i){    // 然后，通过条件判断决定本行是否恢复显示
+             if((i>=begin && i<=end) || i==0 )//显示begin<=x<=end的记录
+                 $(this).show();
+         }); */
+
+      } 
+	 function showdata(){
+		 $("#tb").empty(); 	
+		 for(var i=begin-1;i<end;i++){			
+			 if(datalist[i].video_form_status=='5'){
+					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+datalist[i].video_form_name+"</td><td>"+datalist[i].video_form_class+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateModal'  data-upformid='"+datalist[i].video_form_id+"'>视频类型修改</button></td><td onclick='delet(6,"+datalist[i].video_form_id+")'><input type='button' value='正常'><input type='hidden' id='a' value='"+datalist[i].video_form_id+"'/></td></tr>")
+				}else if(datalist[i].video_form_status=='6'){
+					$("#tb").append("<tr><td>"+(i+1)+"</td><td>"+datalist[i].video_form_name+"</td><td>"+datalist[i].video_form_class+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateModal'  data-upformid='"+datalist[i].video_form_id+"'>视频类型修改</button></td><td onclick='delet(5,"+datalist[i].video_form_id+")'><input type='button' value='禁用'><input type='hidden' id='a' value='"+datalist[i].video_form_id+"'/></td></tr>")
+				}
+			}
+	 }	  
 function delet(status,id){
 	//var orderId=$("#a").val;	
 	$.ajax({
