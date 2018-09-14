@@ -254,6 +254,15 @@ table {
 						href="proposal.html"><i class="fa fa-edit"></i>建议管理</a></li>
 					<li class="role" ><a href="test.html"><i
 							class="fa fa-edit"></i>题目管理</a></li>
+							<li class="role" style="display: none;"><a href="#"><i
+							class="fa fa-sitemap" ></i>首页管理<span
+							class="fa arrows"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="inform.html"><i class="fa fa-table"></i>通知管理</a></li>
+							<li><a href="teacher_show.html" ><i
+									class="fa fa-table"></i>教师展示</a></li>
+							<li><a href="rollplay.html"><i class="fa fa-table"></i>滚播管理</a></li>
+						</ul></li>
 				</ul>
 			</div>
 		</nav>
@@ -461,6 +470,7 @@ table {
 	<script src="assets/js/common.js"></script>
 	<script>
 $(document).ready(function () {
+	loadRoleInfo(); 
     $('#dataTables-example').dataTable();
 });
 var pageSize = 8;    //每页显示的记录条数

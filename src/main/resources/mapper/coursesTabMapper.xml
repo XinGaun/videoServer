@@ -65,7 +65,7 @@
 		set 
 		courses_name =#{courses_name,jdbcType=VARCHAR},
 		video_form_id =#{video_form_id},courses_introduce=#{courses_introduce,jdbcType=VARCHAR},courses_video=#{courses_video,jdbcType=VARCHAR},
-		courses_img_url =#{courses_img_url,jdbcType=VARCHAR},courses_pricemoney=#{courses_pricemoney,jdbcType=VARCHAR},courses_qz=#{courses_qz,jdbcType=INTEGER},courses_time=#{courses_time,jdbcType=VARCHAR},c.coures_price=#{coures_price,jdbcType=VARCHAR}
+		courses_img_url =#{courses_img_url,jdbcType=VARCHAR},courses_pricemoney=#{courses_pricemoney,jdbcType=VARCHAR},courses_qz=#{courses_qz,jdbcType=INTEGER},courses_time=#{courses_time,jdbcType=VARCHAR},coures_price=#{coures_price,jdbcType=VARCHAR}
 		where courses_id=#{courses_id,jdbcType=INTEGER} 
 	</update>
 </mapper>

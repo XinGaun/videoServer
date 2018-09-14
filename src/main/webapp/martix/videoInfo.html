@@ -252,6 +252,15 @@ width: 1300px;
 						href="proposal.html"><i class="fa fa-edit"></i>建议管理</a></li>
 					<li class="role" style="display: none;"><a href="test.html"><i
 							class="fa fa-edit"></i>题目管理</a></li>
+					<li class="role" style="display: none;"><a href="#"><i
+							class="fa fa-sitemap" ></i>首页管理<span
+							class="fa arrows"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="inform.html"><i class="fa fa-table"></i>通知管理</a></li>
+							<li><a href="teacher_show.html" ><i
+									class="fa fa-table"></i>教师展示</a></li>
+							<li><a href="rollplay.html"><i class="fa fa-table"></i>滚播管理</a></li>
+						</ul></li>		
 				</ul>
 			</div>
 		</nav>
@@ -563,10 +572,11 @@ var begin;
 var end;
 var datalist;//数据
 $(document).ready(function () {
+	loadRoleInfo(); 
     $('#dataTables-example').dataTable();
 });
 $(function(){
-	loadRoleInfo(); 
+	//loadRoleInfo(); 
 	getVideoForm();
 	$.ajax({
 		type : 'post',
@@ -805,7 +815,8 @@ function getId(obj){
 			success : function(data){										
 				 $("#updatevideoName").val(data[0].video_name);
 				 $("#update_video_introduce").val(data[0].video_introduce);
-				 
+				 $("#update_video_qz").val(data[0].video_qz);
+				 $("#updatekctype").val(data[0].video_form_id);
 			},error: function(){
 				 alert("get error");
 			}				

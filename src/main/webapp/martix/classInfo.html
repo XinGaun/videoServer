@@ -259,6 +259,16 @@ table {
 						href="proposal.html"><i class="fa fa-edit"></i>建议管理</a></li>
 					<li class="role" style="display: none;"><a href="test.html"><i
 							class="fa fa-edit"></i>题目管理</a></li>
+					<li class="role" style="display: none;"><a href="#"><i
+							class="fa fa-sitemap" >
+						</i>首页管理<span
+							class="fa arrows"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a href="inform.html"><i class="fa fa-table"></i>通知管理</a></li>
+							<li><a href="teacher_show.html" ><i
+									class="fa fa-table"></i>教师展示</a></li>
+							<li><a href="rollplay.html"><i class="fa fa-table"></i>滚播管理</a></li>
+						</ul></li>
 				</ul>
 			</div>
 		</nav>
@@ -745,7 +755,7 @@ function getPage(){
 	 function showdata(){
 		 $("#tb").empty(); 
 	
-		 for(var i=begin-1;i<end-1;i++){			
+		 for(var i=begin-1;i<end;i++){			
 				var videoformname = datalist[i].video_form_class+datalist[i].video_form_name;
 				if(datalist[i].courses_status=='8'){
 					$("#tb").append("<tr><td>"+(i+1)+"</td><td class='wrap' title='"+datalist[i].courses_name+"'>"+datalist[i].courses_name+"</td><td>"+videoformname+"</td><td class='wrap' title='"+datalist[i].courses_introduce+"'>"+datalist[i].courses_introduce+"</td><td>"+datalist[i].courses_video+"</td><td class='wrap' title='"+datalist[i].courses_img_url+"'>"+datalist[i].courses_img_url+"</td><td>"+datalist[i].courses_pricemoney+"</td><td>"+datalist[i].courses_grade+"</td><td>"+datalist[i].courses_click+"</td><td>"+datalist[i].courses_qz+"</td><td><button class='btn btn-danger btn-sm' data-toggle='modal' data-target='#updateClassModal'  data-upcourseid='"+datalist[i].courses_id+"'>视频修改</button></td><td onclick='delet(this)'><input type='button' value='下线'><input type='hidden' id='a' value='"+datalist[i].courses_id+"'/></td></tr>")
@@ -928,7 +938,14 @@ function getPage(){
 	       		//$("#update_courses_introduce").val(data[0].courses_introduce);
 	       	    editor2.txt.html(data[0].courses_introduce);
 	       		$("#updatexianjia").val(data[0].coures_price);
-	       		
+	       		$("#update_courses_qz").val(data[0].courses_qz);
+	       	    $("#updatekctype").val(data[0].video_form_id);
+	       	    console.log(data[0].courses_video);
+	       	 /*   var videostr = data[0].courses_video;
+	       	  var String[] videos = videostr.split(",");
+	       	   for (var i = 0; i < videostr.size; i++) {
+	       		 $("input[type='checkbox']:val="+i+"").prop("checked", true);
+			   } */
 	       	}
 		});		 
  }); 
@@ -983,7 +1000,7 @@ function getPage(){
 		 var courses_video = str.substring(0,str.length-1);
 		 var courses_qz = $.trim($("#update_courses_qz").val());
 		 var coures_price =$.trim($("#updatexianjia").val());
-		 formData.append("course_id",course_id);
+		 formData.append("courses_id",course_id);
 		 formData.append("courses_name",courses_name);  
 		 formData.append("courses_video_form_id", courses_video_form_id); 
 		 formData.append("image", image);
