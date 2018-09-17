@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>课程优惠卷</title>
+<script src="js/jquery-3.3.1.min.js"></script>
+
+<script src="js/jquery.lazyload.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+<script src="js/jquery.lazyload.min.js"></script>
+<script
+	src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script>
+<style type="text/css">
+.tzl:hover {
+	background-color: #6a6b6c;
+	color: #fff;
+}
+/*按钮圆角设置*/
+#logsd {
+	margin-top: 10px;
+	float: right;
+	display: inline-block;
+	verticle-align: middle;
+	color: black;
+	text-decoration: none;
+}
+
+.actives {
+	background-image: url('./img/img_select1.png');
+	background-repeat: no-repeat;
+	background-position: 0px 56px;
+	color: #24b4f8;
+}
+
+#logsd {
+	font-size: 18px;
+	font-weight: bold;
+}
+.box1{
+    width: 1200px;
+    margin: 0px;
+    padding: 20px;
+    /* min-height: 700px; */
+    position:relative;
+    display: inline-block;
+    background: -webkit-gradient(linear, 0% 20%, 0% 1000%, from(#fff), to(#fff), color-stop(.1,#f3f3f3));
+    border: 1px solid #ccc;
+    -webkit-box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.1) inset;
+    -webkit-border-bottom-right-radius: 6px 50px;    
+}
+
+ .box1:before{
+    content: '';
+    width: 50px;
+    height: 100px;
+    position:absolute;
+    bottom:0; right:0;
+    -webkit-box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.1);
+    z-index:-1;
+    -webkit-transform: translate(-35px,-40px)
+                        skew(0deg,30deg)
+                        rotate(-25deg);
+} 
+
+ .box1:after{
+    content: '';
+    width: 100px;
+    height: 100px;
+    top:0; left:0;
+    position:absolute;
+    display: inline-block;
+    z-index:-1;
+    -webkit-box-shadow: -10px -10px 10px rgba(0, 0, 0, 0.2);
+    -webkit-transform: rotate(2deg)
+                        translate(20px,25px)
+                        skew(20deg);
+} 
+</style>
+</head>
+<body style="background-color: #f5f5f5;">
+	<div
+		style="height: 67px; display: flex; justify-content: center; align-items: center; background-color: #fff;">
+		<div style="margin: 0 auto; width: 1200px;">
+			<a href="index.html"><img src="./img/logos.png"></a> <a
+				id="logsd" href="logins.html" @click="change(1)"
+				:class="flag==1?'actives':''">登录</a>
+
+			<div id="logImg" class="dropdown" style="float: right;">
+				<button class="btn btn-default dropdown-toggle" type="button"
+					id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="true">
+					<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px"
+						height="40px" class="img-circle" /> <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					<li><a href="personal_center.html">个人中心</a></li>
+					<li id="exit"><a>退出</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- 页面内容 -->
+	<div style="height: 55px; margin: 0 auto; width: 1200px;">
+		<p
+			style="line-height: 55px; font-size: 18px; font-weight: bold; margin-left: 12px;">领取优惠卷</p>
+	</div>
+	<div style="width:1200px;margin: 0 auto">
+		<div class="box1" id="bodytext">
+			
+				<!-- <div class="" style="box-shadow: 2px 2px 5px #bbb;border:1px solid #f5f5f5;height:154px;width:364px;float:right;margin-left:20px;">
+					<img src="img/tx1.png" style="height:100px;width:100px;margin:27px;">
+					<div style="float:right;width:54px;">
+						<button class="btn btn-danger" style="width:34px;height:154px;float:right;" onclick="Getacoupon()">立<br>即<br>领<br>取</button>
+					</div>
+					<div style="float:right;width:154px;margin-top:15px;height:139px;">
+						<span style="font-weight:bold;color:red;font-style:normal;height:39px;position:absoult;top:0px;left:0px;">￥</span>
+						<strong style="font-weight:bold;color:red;font-size:35px;height:39px;">20</strong>
+						<span>《<span>精品课程</span>》</span>
+						<div style="height:60px;">优惠卷介绍</div>
+						<div style="">剩余<span style="color:green;font-weight:bold;font-size:18px;">30</span>张</div>
+					</div>
+				</div>
+				<div class="" style="box-shadow: 2px 2px 5px #bbb;border:1px solid #f5f5f5;height:154px;width:364px;float:right;margin-left:20px;">
+					<img src="img/tx1.png" style="height:100px;width:100px;margin:27px;">
+					<div style="float:right;width:54px;">
+						<button class="btn btn-danger" style="width:34px;height:154px;float:right;">立<br>即<br>领<br>取</button>
+					</div>
+					<div style="float:right;width:154px;margin-top:15px;height:139px;">
+						<span style="font-weight:bold;color:red;font-style:normal;height:39px;position:absoult;top:0px;left:0px;">￥</span>
+						<strong style="font-weight:bold;color:red;font-size:35px;height:39px;">20</strong>
+						<span>《<span>精品课程</span>》</span>
+						<div style="height:60px;">优惠卷介绍</div>
+						<div style="">剩余<span style="color:green;font-weight:bold;font-size:18px;">30</span>张</div>
+					</div>
+				</div>
+				<div class="" style="box-shadow: 2px 2px 5px #bbb;border:1px solid #f5f5f5;height:154px;width:364px;float:right;margin-left:20px;">
+					<img src="img/tx1.png" style="height:100px;width:100px;margin:27px;">
+					<div style="float:right;width:54px;">
+						<button class="btn btn-danger" style="width:34px;height:154px;float:right;">立<br>即<br>领<br>取</button>
+					</div>
+					<div style="float:right;width:154px;margin-top:15px;height:139px;">
+						<span style="font-weight:bold;color:red;font-style:normal;height:39px;position:absoult;top:0px;left:0px;">￥</span>
+						<strong style="font-weight:bold;color:red;font-size:35px;height:39px;">20</strong>
+						<span>《<span>精品课程</span>》</span>
+						<div style="height:60px;">优惠卷介绍</div>
+						<div style="">剩余<span style="color:green;font-weight:bold;font-size:18px;">30</span>张</div>
+					</div>
+				</div> -->
+			
+		</div>
+	</div>
+	<!-- 页尾 -->
+	<div
+		style="height: 140px; width: 100%; background-color: #444547; margin-top: 36px;">
+		<div style="text-align: center; font-size: 15px;">
+			<p>&nbsp;</p>
+			<p>opyright © 2018 Yundao.All Rights Reserved.</p>
+			<p>语道文心教育有限公司 版权所有 | 服务协议 | 侵权投诉 | 问题反馈 | 帮助</p>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		//左侧无缝轮播
+
+		//进入页面自动获取cookie的值，根据cookie决定是否显示登录
+		$(function() {
+			if ($.cookie("phone") == null) {//cookie过期
+				//alert("登录过期，请重新登录");
+				//window.location.href='logins.html';
+				$("#logImg").hide();
+			} else if ($.cookie("phone") != null
+					&& ($.cookie("photo") == null || $.cookie("photo") == "")) {//cookie有用户信息，但没有头像，添加默认头像
+				//alert("pp");
+				$("#logsd").hide();
+				$("#logImg").show();
+			} else if ($.cookie("phone") != null && $.cookie("photo") != null) {//cookie有用户信息和头像
+				//alert("dd");
+				$("#logsd").hide();
+				$("#imgt").attr("src", $.cookie("photo"));
+				$("#logImg").show();
+			}
+
+		})
+		/*
+			退出按钮点击事件
+		 */
+		$("#exit").click(function() {
+
+			$("#logsd").show();
+
+			$("#logImg").hide();
+			$.cookie('id', '', {
+				expires : -1,
+				path : '/',
+				secure : false
+			});
+			$.cookie('phone', '', {
+				expires : -1,
+				path : '/',
+				secure : false
+			});
+			$.cookie('photo', '', {
+				expires : -1,
+				path : '/',
+				secure : false
+			});
+
+		})
+
+		//登录注册样式切换
+		new Vue({
+			el : '#logsd',
+			data : {
+				flag : 1,//默认为百度添加 .active  
+			},
+			methods : {
+				change : function(a) {//传入参数这里指1、2  
+					this.flag = a;//flag==1 or flag==2  
+				}
+			}
+		})
+		//点击领取
+		function Getacoupon(){
+			if ($.cookie("phone") == null) {//cookie过期
+				//alert("登录过期，请重新登录");
+				//window.location.href='logins.html';
+				$("#logImg").hide();
+			} else if ($.cookie("phone") != null
+					&& ($.cookie("photo") == null || $.cookie("photo") == "")) {//cookie有用户信息，但没有头像，添加默认头像
+				//alert("pp");
+				$("#logsd").hide();
+				$("#logImg").show();
+			} else if ($.cookie("phone") != null && $.cookie("photo") != null) {//cookie有用户信息和头像
+				//alert("dd");
+				$("#logsd").hide();
+				$("#imgt").attr("src", $.cookie("photo"));
+				$("#logImg").show();
+			}
+		}
+	</script>
+	<script type="text/javascript" src="js/coupon.js"></script>
+</body>
+</html>

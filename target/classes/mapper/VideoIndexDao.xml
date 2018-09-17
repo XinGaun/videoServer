@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.VideoIndexDao">
+	<!-- 查询推荐课程 -->
+	<select id="queryBoutiqueVideo" resultType="java.util.HashMap">
+		SELECT
+		teacher_name,courses_id,teacher_tab.teacher_id,teacher_tab.teacher_introduce,courses_name,courses_introduce,courses_pricemoney,courses_click,courses_img_url,courses_grade,substring((SELECT sec_to_time(courses_time)courses_time FROM dual),1,8) as courses_time,date_format(courses_date,'%Y-%m-%d')courses_date
+		FROM courses_tab
+		LEFT JOIN teacher_tab ON teacher_tab.teacher_id=courses_tab.teacher_id 
+		LEFT JOIN video_form_tab ON video_form_tab.video_form_id = courses_tab.video_form_id
+		WHERE 1=1 AND
+		courses_status = 8 and teacher_tab.teacher_status = 5 
+		<if test="queryAll!=''">
+			AND video_form_tab.video_form_class = #{queryAll}
+		</if>
+		order by courses_date DESC LIMIT 0,8
+	</select>
+	<!-- 查询推荐套餐 -->
+	<select id="queryCombo" resultType="java.util.HashMap">
+		SELECT
+		teacher_name,courses_id,teacher_tab.teacher_id,teacher_tab.teacher_introduce,courses_name,courses_introduce,courses_pricemoney,courses_click,courses_img_url,courses_grade,substring((SELECT sec_to_time(courses_time)courses_time FROM dual),1,8) as courses_time,date_format(courses_date,'%Y-%m-%d')courses_date
+		FROM courses_tab
+		LEFT JOIN teacher_tab ON teacher_tab.teacher_id=courses_tab.teacher_id 
+		WHERE 1=1 AND
+		courses_status = 8 and teacher_tab.teacher_status = 5 
+		order by courses_date DESC LIMIT 0,8
+	</select>
+	<!-- 查询搜索课程 -->
+	<select id="queryComboSearch" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+		teacher_name,courses_id,teacher_tab.teacher_id,teacher_tab.teacher_introduce,courses_name,courses_introduce,courses_pricemoney,courses_click,courses_img_url,courses_grade,substring((SELECT sec_to_time(courses_time)courses_time FROM dual),1,8) as courses_time,date_format(courses_date,'%Y-%m-%d')courses_date
+		FROM courses_tab
+		LEFT JOIN teacher_tab ON teacher_tab.teacher_id=courses_tab.teacher_id 
+		LEFT JOIN video_form_tab ON video_form_tab.video_form_id = courses_tab.video_form_id
+		WHERE 1=1 AND
+		courses_status = 8 and teacher_tab.teacher_status = 5 
+		<if test="keyword!=''">
+			AND courses_name like '%${keyword}%'
+		</if>
+		<if test="queryAll!=''">
+			AND video_form_tab.video_form_class = #{queryAll}
+		</if>
+		order by courses_date DESC LIMIT 0,8
+	</select>
+	<!-- 查询所有精品课程 -->
+	<select id="queryBoutiqueVideoClick" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+		teacher_name,courses_id,teacher_tab.teacher_id,teacher_tab.teacher_introduce,courses_name,courses_introduce,courses_pricemoney,courses_click,courses_img_url,courses_grade,substring((SELECT sec_to_time(courses_time)courses_time FROM dual),1,8) as courses_time,date_format(courses_date,'%Y-%m-%d')courses_date
+		FROM courses_tab
+		LEFT JOIN teacher_tab ON teacher_tab.teacher_id=courses_tab.teacher_id 
+		LEFT JOIN video_form_tab ON video_form_tab.video_form_id = courses_tab.video_form_id 
+		WHERE 1=1 AND
+		courses_status = 8 and teacher_tab.teacher_status = 5 
+		<if test="queryAll!=''">
+			AND video_form_tab.video_form_class = #{queryAll}
+		</if>
+		order by 
+		<if test="phone==''">
+			courses_date DESC LIMIT 0,8
+		</if>
+		<if test="phone!=''">
+			courses_date DESC LIMIT #{nums},#{page}
+		</if>
+	</select>
+	<!-- 查询所有精品课程总数 -->
+	<select id="queryBoutiqueVideoAllCount" parameterType="java.util.HashMap" resultType="int">
+		select count(courses_tab.courses_id) 
+		FROM courses_tab 
+		LEFT JOIN teacher_tab ON teacher_tab.teacher_id=courses_tab.teacher_id 
+		WHERE 1=1 AND courses_status = 8
+	</select>
+	<!-- 根据id查询课程购买人数-->
+	<select id="queryBoutiqueIntRs" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select count(video_id) as count_person from order_tab 
+		LEFT JOIN courses_tab ON courses_tab.courses_id = order_tab.video_id 
+		WHERE order_tab.order_status='已付款' and courses_tab.courses_status = 8 and courses_tab.courses_id=#{courses_Id};
+	</select>
+
+</mapper>

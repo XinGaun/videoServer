@@ -20,7 +20,7 @@ public interface OrderTabDao {
 	 * @param hashMap
 	 * @return
 	 */
-	public int queryOrderTab(HashMap<String,Object> hashMap);
+	public HashMap<String,Object> queryOrderTab(HashMap<String,Object> hashMap);
 	/**
 	 * 查询订单信息总数
 	 * @param hashMap

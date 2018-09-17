@@ -38,8 +38,8 @@ public class OrderTabServiceImpl implements OrderTabService {
 	 * 查询订单信息
 	 */
 	@Override
-	public int queryOrderTab(HashMap<String,Object> hashMap) {
-		int flog =orderTabDao.queryOrderTab(hashMap);
+	public HashMap<String,Object> queryOrderTab(HashMap<String,Object> hashMap) {
+		HashMap<String,Object> flog =orderTabDao.queryOrderTab(hashMap);
 		
 		return flog;
 	}
