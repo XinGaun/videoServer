@@ -11,4 +11,10 @@ public interface LoadIndexService {
 	 * 查询初始化的推荐课程
 	 */
 	public String queryRecommendCourseList(String data);
+	/**
+	 * 用户查询课程信息
+	 * @param data
+	 * @return
+	 */
+	public String queryUseridCourseList(String data);
 }

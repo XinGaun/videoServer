@@ -33,5 +33,16 @@ public class LoadIndexServiceImpl implements LoadIndexService {
 		int count = indexDao.queryRecommendCourseListCount(map);
 		return JSON.toJSONString(Count.counts(list, count, map,200,"queryUserTest success"));
 	}
+	/**
+	 * 用户查询课程信息
+	 */
+	@Override
+	public String queryUseridCourseList(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data,HashMap.class);
+		map = Page.pages(map);
+		ArrayList<HashMap<String,Object>> list = indexDao.queryUseridCourseList(map);
+		int count = indexDao.queryUseridCourseCount(map);
+		return JSON.toJSONString(Count.counts(list, count, map,200,"queryUseridCourseList success"));
+	}
 
 }

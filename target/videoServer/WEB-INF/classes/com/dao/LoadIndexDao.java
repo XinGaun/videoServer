@@ -24,7 +24,13 @@ public interface LoadIndexDao {
 	 */
 	public int queryRecommendCourseListCount(HashMap<String,Object> map);
 	/**
-	 * 查询课程信息
+	 * 用户查询课程信息
 	 */
-	public ArrayList<HashMap<String,Object>> queryCourseList(HashMap<String,Object> map);
+	public ArrayList<HashMap<String,Object>> queryUseridCourseList(HashMap<String,Object> map);
+	/**
+	 * 用户查询课程信息总数
+	 * @param map
+	 * @return
+	 */
+	public int queryUseridCourseCount(HashMap<String,Object> map);
 }

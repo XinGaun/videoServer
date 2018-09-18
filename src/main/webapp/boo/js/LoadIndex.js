@@ -2,6 +2,7 @@ var coursetype = '高中';
 var video_form_name = null;
 $(function() {
 	initrollplay();
+	initPurchaseCourse();
 	initinform();
 	initteachershow();
 	init();
@@ -263,7 +264,7 @@ function initteachershow(){
 		data:JSON.stringify(data),
 		dataType: "json",
 		success: function(data){
-			console.log(data);
+			//console.log(data);
 			for(var i=0;i<data.list.length;i++){
 				var teachershow = '<td class="tdclass"><div style="width: 290px; float: left; margin-left: 12px;">'
 									+'<a href="'+data.list[i].teac_show_url+'" target="view_window" ><img src="http://www.niceyuwen.com/image/'+data.list[i].teac_show_img+'" style="width: 290px; height: 195px;"></a>'
@@ -376,7 +377,121 @@ function custom(number){
 	return false;
 }
 
+//初始化已购课程
+function initPurchaseCourse(){
+	if ($.cookie("phone") == null){
+		$("#ygkc").css("display","none");
+		return;
+	}
+	var data = {
+		user_id:$.cookie('id'),
+		nums : pagesT*numsT,
+		page:numsT,
+	}
+	$("#ygkcbody").html("");
+	$.ajax({
+		type: "POST",
+		contentType : 'application/json; charset=UTF-8',
+		url:"/videoServer/front/LoadIndex/queryUseridCourseList",
+		data:JSON.stringify(data),
+		dataType: "json",
+		success: function(data){
+			//console.log(data);
+			if(data.list.length==0){
+				$("#ygkc").css("display","none");
+				return;
+			}
+			for(var i=0;i<data.list.length;i++){
+				var ygkcbody = '<div class="thumbnail" style="width: 290px; height: 224px;float:left;margin-right: 12px;"><a href="course.html?cid='+data.list[i].courses_id+'">'
+					+'<img data-original="'+data.list[i].courses_img_url+'" class="img-rounded lazyT" style="width: 290px; height:158px;">'
+					+'<div class="caption">'
+					+'<p>'+data.list[i].courses_name+'</p>'
+					+'<p>￥'+data.list[i].courses_pricemoney+'</p>'
+					+'</div>'
+					+'</a></div>';
+				$("#ygkcbody").append(ygkcbody);
+			}
+			$("img.lazyT").lazyload({effect: "fadeIn",offset:300});
+			totalT = data.total;
+			pageT(pagesT,numsT,data.total);
+		}
+	});
+}
 
+var pagesT = 0;//当前页数
+var numsT = 8;//每页几条
+var totalT = 0;//总条数 
+//生成分页条
+function pageT(pages, nums, total) {
+	var next = "";
+	var previous = "";
+	var pageStr = "";
+	if (pages == 0) {
+		previous = "";
+	} else {
+		previous = '<li>'
+			+ '<a href="javascript:void(0)" onclick="shangyeT()" aria-label="Previous">'
+			+ '<span aria-hidden="true">&laquo;</span>'
+			+ '</a>' + '</li>';
+	}
+	if (pages == total-1) {
+		next = "";
+	} else {
+		next = '<li>' + '<a href="javascript:void(0)" onclick="xiayeT()" >'
+		+ '<span aria-hidden="true">&raquo;</span>'
+		+ '</a>' + '</li>';
+	}
+	if (total <= 5 || pages <= 4) {
+		var totalnum = 5;
+		if(total<=5){
+			totalnum = total
+		}
+		for (var i = 1; i <= totalnum; i++) {
+			pageStr = pageStr + '<li><a href="javascript:void(0)" onclick="customT('+i+')">' + i
+			+ '</a></li>';
+
+		}
+	} else if (total - pages <= 2) {
+		for (var i = 0; i < 5; i++) {
+			pageStr = '<li><a href="javascript:void(0)" onclick="customT('+(total - i)+')">' + (total - i)
+			+ '</a></li>' + pageStr;
+		}
+	} else {
+		for (var i = -1; i <= 3; i++) {
+			pageStr = pageStr + '<li><a href="javascript:void(0)" onclick="customT('+(pages + i)+')">'
+			+ (pages + i) + '</a></li>';
+		}
+	}
+
+	//console.log(pageStr);
+
+	var fanye = '<nav aria-label="Page navigation">'
+		+ '<ul class="pagination">' + previous + pageStr
+		+ next + '<li><a>当前第'+(pages+1)+'页</a></li></ul>' + '</nav>'
+		$("#fanyeT").html(fanye);
+}
+//下一页
+function xiayeT(){
+	pagesT++;	
+	//$("#excellent").html("");
+	initPurchaseCourse();
+	return false;
+}
+//上页
+function shangyeT(){
+	pagesT--;
+	//$("#excellent").html("");
+	initPurchaseCourse();
+	return false;
+}
+//页数换页
+function customT(number){
+	pagesT=number-1;
+	//$("#excellent").html("");
+	initPurchaseCourse();
+	//console.log(pages);
+	return false;
+}
 /*var speed = 60;
 var colee2 = document.getElementById("colee2");
 var colee1 = document.getElementById("colee1");

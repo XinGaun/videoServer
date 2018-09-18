@@ -37,9 +37,18 @@
 			and video_form_name =#{video_form_name}
 		</if>
 	</select>
-	<!-- 查询课程信息 -->
-	<select id="queryCourseList" resultType="java.util.HashMap"
+	<!-- 用户查询课程信息 -->
+	<select id="queryUseridCourseList" resultType="java.util.HashMap"
 		parameterType="java.util.HashMap">
-
+		select cou.courses_id,courses_name,courses_pricemoney,courses_img_url from courses_tab cou
+		left join order_tab o on o.video_id=cou.courses_id
+		where o.user_id=#{user_id} and o.order_status='已付款' order by order_date desc
+		LIMIT #{nums},#{page}
+	</select>
+	<!-- 用户查询课程信息总数 -->
+	<select id="queryUseridCourseCount" parameterType="java.util.HashMap" resultType="int">
+		select count(1) from courses_tab cou
+		left join order_tab o on o.video_id=cou.courses_id
+		where o.user_id=#{user_id} and o.order_status='已付款'
 	</select>
 </mapper>
