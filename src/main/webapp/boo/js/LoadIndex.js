@@ -207,11 +207,11 @@ function initrollplay(){
 				var listbox ="";
 				if(i==0){
 					listbox = '<div class="item active">'
-						+'<a href="'+data.list[i].roll_url+'"><img src="http://www.niceyuwen.com/image/'+data.list[i].roll_img+'" class="" style="height: 340px; width: 100%;"></a>'
+						+'<a href="'+data.list[i].roll_url+'" target="view_window" ><img src="http://www.niceyuwen.com/image/'+data.list[i].roll_img+'" class="" style="height: 340px; width: 100%;"></a>'
 					+'</div>';	
 				}else{
 					listbox = '<div class="item">'
-								+'<a href="'+data.list[i].roll_url+'"><img src="http://www.niceyuwen.com/image/'+data.list[i].roll_img+'" class="" style="height: 340px; width: 100%;"></a>'
+								+'<a href="'+data.list[i].roll_url+'" target="view_window" ><img src="http://www.niceyuwen.com/image/'+data.list[i].roll_img+'" class="" style="height: 340px; width: 100%;"></a>'
 							+'</div>';
 				}
 				$("#listbox").append(listbox);
@@ -242,7 +242,7 @@ function initinform(){
 			//console.log(data);
 			for(var i=0;i<data.list.length;i++){
 				var inform = '<p style="line-height: 44px; width: 180px;" class="tzl">'
-							+'<a href="'+data.list[i].info_url+'">'+data.list[i].info_text+'</a>'
+							+'<a href="'+data.list[i].info_url+'" target="view_window">'+data.list[i].info_text+'</a>'
 							+'</p>';
 				$("#colee1").append(inform);
 			}
@@ -266,7 +266,7 @@ function initteachershow(){
 			console.log(data);
 			for(var i=0;i<data.list.length;i++){
 				var teachershow = '<td class="tdclass"><div style="width: 290px; float: left; margin-left: 12px;">'
-									+'<a href="'+data.list[i].teac_show_url+'"><img src="http://www.niceyuwen.com/image/'+data.list[i].teac_show_img+'" style="width: 290px; height: 195px;"></a>'
+									+'<a href="'+data.list[i].teac_show_url+'" target="view_window" ><img src="http://www.niceyuwen.com/image/'+data.list[i].teac_show_img+'" style="width: 290px; height: 195px;"></a>'
 									+'<div style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">'
 									+'<p style="font-weight: bold; margin-left: 10px; margin-top: 10px;">'+data.list[i].teac_show_name+'</p>'
 									+'<p style="margin-left: 10px;">'+data.list[i].teac_show_introduce+'</p>'
@@ -377,7 +377,7 @@ function custom(number){
 }
 
 
-var speed = 30;
+var speed = 60;
 var colee2 = document.getElementById("colee2");
 var colee1 = document.getElementById("colee1");
 var colee = document.getElementById("colee");

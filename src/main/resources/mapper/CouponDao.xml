@@ -198,4 +198,46 @@
 			</if>
 		</set>
 	</update> -->
+	<!-- 根据年级查询课程分类信息 -->
+	<select id="queryvideoFormClass" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select video_form_id,video_form_name from video_form_tab where video_form_class =#{video_form_class}
+	</select>
+	<!-- 根据课程分类ID查询所属课程信息 -->
+	<select id="queryCoursesTabAll" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select courses_id,courses_name from courses_tab where video_form_id =#{video_form_id}
+	</select>
+	<!-- 添加优惠卷信息 -->
+	<insert id="addDiscountsTab" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="discounts_id">
+		insert into discounts_tab(discounts_text, discounts_money, discounts_date,courses_id) VALUES 
+		(#{discounts_text},#{discounts_money},str_to_date(#{discounts_date}, '%Y-%m-%d %H:%i:%s'),#{courses_id})
+	</insert>
+	<!-- 添加优惠码信息 -->
+	<insert id="addDiscountsNumberTab" parameterType="java.util.ArrayList">
+		insert into discounts_number_tab(discounts_id,discounts_code) VALUES
+		 <foreach collection ="list" item="reddemCode" index= "index" separator =",">
+               (#{reddemCode.discounts_id},#{reddemCode.discounts_code})
+         </foreach >
+	</insert>
+	<!-- 查询优惠卷信息 -->
+	<select id="queryDiscountsTab" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select discounts_id,discounts_text,discounts_money,date_format(discounts_date,'%Y-%m-%d')discounts_date,dis.courses_id,cou.courses_name from discounts_tab dis
+		left join courses_tab cou on dis.courses_id=cou.courses_id
+		order by discounts_id desc
+		limit #{startNum},#{endIndex}
+	</select>
+	<!-- 查询优惠卷信息总数 -->
+	<select id="queryDiscountsTabCount" parameterType="java.util.HashMap" resultType="int">
+		select count(1) from discounts_tab dis
+		left join courses_tab cou on dis.courses_id=cou.courses_id
+	</select>
+	<!-- 修改优惠卷信息 -->
+	<update id="updateDiscountsTab" parameterType="java.util.HashMap">
+		update discounts_tab set discounts_text =#{discounts_text} ,discounts_money=#{discounts_money} ,discounts_date=str_to_date(#{discounts_date}, '%Y-%m-%d %H:%i:%s')
+		where discounts_id = ${discounts_id}
+	</update>
+	<!-- 根据优惠卷ID查询优惠码信息 -->
+	<select id="queryDiscountsNumberTab" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select discounts_number_id,discounts_code,user_id,discounts_date,discounts_id from  discounts_number_tab
+		where discounts_id = #{discounts_id} order by discounts_number_id desc
+	</select>
 </mapper>

@@ -877,6 +877,8 @@ function getPage(){
 	   $("#jiage").val("");
 	   $("#xianjia").val("");
 	   editor1.txt.clear();
+	   var video_form_id =$.trim($("#kctype").val());
+	   getVideoTabs(video_form_id);
 	 
  }); 
 	$("#sub").click(function(){
@@ -892,10 +894,8 @@ function getPage(){
 		 var courses_video_form_id = $.trim($("#kctype").val());		
 		 var image = $('#courses_image').prop("files")[0];
 		 var courses_pricemoney =$.trim($("#jiage").val());
-		// var courses_introduce = $.trim($("#courses_introduce").val());
 		 getContent1();
 		 var courses_introduce = introcontent1;
-		 alert(courses_introduce);
 		 var courses_video = str.substring(0,str.length-1);
 		 var courses_qz = $.trim($("#courses_qz").val());	
 		 var coures_price =$.trim($("#xianjia").val());
@@ -940,6 +940,8 @@ function getPage(){
 	       		$("#updatexianjia").val(data[0].coures_price);
 	       		$("#update_courses_qz").val(data[0].courses_qz);
 	       	    $("#updatekctype").val(data[0].video_form_id);
+	        	 var video_form_id =$.trim($("#updatekctype").val());
+	  	          getVideoTabs(video_form_id);
 	       	    console.log(data[0].courses_video);
 	       	 /*   var videostr = data[0].courses_video;
 	       	  var String[] videos = videostr.split(",");
@@ -995,8 +997,7 @@ function getPage(){
 		 var image = $('#update_courses_image').prop("files")[0];
 		 var courses_pricemoney =$.trim($("#updatejiage").val());
 		 getContent2();
-		 var courses_introduce =introcontent2 ;
-		
+		 var courses_introduce =introcontent2 ;		
 		 var courses_video = str.substring(0,str.length-1);
 		 var courses_qz = $.trim($("#update_courses_qz").val());
 		 var coures_price =$.trim($("#updatexianjia").val());

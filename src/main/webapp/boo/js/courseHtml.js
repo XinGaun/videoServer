@@ -45,13 +45,14 @@ $(function(){
 	param.cid = cid;
 	param.user_id=user_id;
 	initEnshrine(param);
-	judgePC();
+	//judgePC();
 	ifgoumai();
 
 });
 var videoObject =null;
 $('#myModalvideo').on('hide.bs.modal', function () {
-	location.reload([false]);
+	//location.reload([false]);
+	window.location.reload();
 });
 //var url = "http:/127.0.0.1:8080"
 
@@ -175,7 +176,7 @@ function joincourse(){
 	});
 }
 //判断PC或移动
-function judgePC(){
+/*function judgePC(){
 	if (navigator.userAgent.match(/mobile/i)) {
 		$(".jpckclass").css("height", "500px");
 		$("body").css("font-size", "50px");
@@ -183,7 +184,7 @@ function judgePC(){
 	} else {
 		$(".jpckclass").css("height", "220px");
 	}
-}
+}*/
 
 //获取传递参数
 function getUrlParam(name) {

@@ -186,15 +186,8 @@ var uploader = new plupload.Uploader({
 				document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = 'upload to oss success, object name:' + get_uploaded_object_name(file.name);
 				videoPath = serviceName+"/video/"+get_uploaded_object_name(file.name);                 
 				document.getElementById("video").value = videoPath;		
-				getMP4();
-				if(suffix == ".mp4"){
-					document.getElementById("videoTime").src = videoPath; 					
-				}else{
-					setTimeout(function(){					
-						document.getElementById("videoTime").src = url; 				
-					},1000*60*3);	 	
-				}	
-					
+				getMP4();	
+				submit();
 			}
 			else
 			{
@@ -208,16 +201,30 @@ var uploader = new plupload.Uploader({
 		}
 	}
 });
-videoTime = 0 ; 
+var videoTime = 0 ; 
 
-function myFunction(ele) {
+/*function myFunction(ele) {
 	//var hour = parseInt((ele.duration)/3600);
 	//var minute = parseInt((ele.duration%3600)/60);
 	//var second = Math.ceil(ele.duration%60);
 	//videoTime ="视频时长："+hour+"小时，"+minute+"分，"+second+"秒";
-	videoTime = parseInt(ele.duration);
-	submit();
-} ; 
+	videoTime = parseInt(ele.duration);	
+	 //上传文件		
+	$.ajax({
+			type : 'post',		
+			data : {video_time:videoTime,video_id:video_id},
+			url : '/videoServer/videoTab/updetVideoById.do',
+			contentType: false, 
+	        processData: false, 
+			success : function(data){										
+				alert("修改成功");			        					
+		        $("#updateVideoModal").modal("hide");
+				window.location.href="";					
+			},error: function(){
+				 alert("submit error");
+			}				
+		});	 				
+} ; */
 function submit(){	 
 	//表单参数
 	var formData = new FormData();  //重点：要用这种方法接收表单的参数  	
@@ -248,7 +255,8 @@ function submit(){
 		success : function(data){									
 			alert("上传成功");			   					
 			$("#myModal").modal("hide");
-			window.location.href="";					
+			window.location.href="";			
+			// getVideoTime();
 		},error: function(){
 			alert("submit error");
 		}				
@@ -271,5 +279,23 @@ function getMP4(){
 			alert("转换 失败");
 		}				
 	});	 
-}
+};
+/*function getVideoTime(){
+	if(suffix == ".mp4"){
+		document.getElementById("videoTime").src = videoPath; 				 	
+	}else{
+		$.ajax({
+			type : 'post',
+			data : {videoName:videoName},
+			url : '/videoServer/videoTab/.do',				
+			success : function(data){									
+				//alert("转换成功");			   					
+				document.getElementById("videoTime").src = url; 		
+			},error: function(){
+				alert("转换 失败");
+			}		
+		});			
+	}		 	
+}*/
+
 uploader.init();

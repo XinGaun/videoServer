@@ -114,6 +114,19 @@ public class OSSUtil{
 		System.out.println("end");
 		ossClient.shutdown();
 	}
+	// 判断文件是否存在。
+	public boolean isExit(String ossFileName) {
+		// 创建OSSClient实例。
+		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
+		isVideo(ossFileName);
+		// 判断文件是否存在。
+		boolean found = ossClient.doesObjectExist(bucketName, ossFileName);
+		System.out.println(found);
+
+		// 关闭OSSClient。
+		ossClient.shutdown();
+		return found;
+	}
 
 	//下载一个文件到本地  
 	public InputStream downloadInputStram(HttpServletRequest request, HttpServletResponse resp,String ossFileName) throws Exception{
@@ -202,7 +215,7 @@ public class OSSUtil{
 
 	public void isVideo(String fileName) {
 
-		if(fileName.endsWith("mp4") || fileName.endsWith("mp3") || fileName.endsWith("MP4")) {			
+		if(fileName.endsWith("mp4") || fileName.endsWith("mp3") || fileName.endsWith("MP4")|| fileName.endsWith("flv")|| fileName.endsWith("avi")) {			
 			bucketName = bucketName2;
 		}else {				
 			bucketName = bucketName1;

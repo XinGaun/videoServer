@@ -22,4 +22,42 @@ public interface CouponService {
 	public String deleteCoupon(Coupon coupon);
 	
 	public List<Coupon> queryCouponByUserId(Integer userId);
+	/**
+	 * 据年级查询课程分类信息
+	 * @param data
+	 * @return
+	 */
+	public String queryvideoFormClass(String data);
+	/**
+	 * 根据课程分类ID查询所属课程信息
+	 * @param data
+	 * @return
+	 */
+	public String queryCoursesTabAll(String data);
+	/**
+	 * 添加优惠码信息
+	 * @param data
+	 * @return
+	 */
+	public String addDiscountsTab(String data);
+	/**
+	 * 查询优惠卷信息
+	 * @param data
+	 * @return
+	 */
+	public String queryDiscountsTab(String data);
+	/**
+	 * 修改优惠卷信息
+	 * @param data
+	 * @return
+	 */
+	public String updateDiscountsTab(String data);
+	/**
+	 * 查询优惠码信息
+	 */
+	public String queryDiscountsNumberTab(String data);
+	/**
+	 * 
+	 */
+	public String addDiscountsNumberTab(String data);
 }

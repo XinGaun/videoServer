@@ -27,7 +27,7 @@ public class VideoTabController {
 	private VideoTabService vdservice;
 	private File ssfile;
 	private String ssfileFileName;
-
+	
 	public File getSsfile() {
 		return ssfile;
 	}

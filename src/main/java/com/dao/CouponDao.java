@@ -1,6 +1,9 @@
 package com.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
 
 import com.entity.Coupon;
 import com.entity.UseCoupon;
@@ -54,4 +57,40 @@ public interface CouponDao {
 	 * @return
 	 */
 	public Integer addDiscountsUse(UseCoupon userCoupon);
+	/**
+	 * 根据年级查询课程分类信息
+	 * @param map
+	 * @return
+	 */
+	public ArrayList<HashMap<String,Object>> queryvideoFormClass(HashMap<String,Object> map);
+	/**
+	 * 根据课程分类ID查询所属课程信息
+	 */
+	public ArrayList<HashMap<String,Object>> queryCoursesTabAll(HashMap<String,Object> map);
+	/**
+	 * 添加优惠卷信息
+	 */
+	public int addDiscountsTab(HashMap<String,Object> map);
+	/**
+	 * 添加优惠码信息
+	 */
+	public int addDiscountsNumberTab(ArrayList<HashMap<String,Object>> list);
+	/**
+	 * 查询优惠卷信息
+	 */
+	public ArrayList<HashMap<String,Object>> queryDiscountsTab(HashMap<String,Object> map);
+	/**
+	 * 查询优惠卷信息总数
+	 */
+	public int queryDiscountsTabCount(HashMap<String,Object> map);
+	/**
+	 * 修改优惠卷信息
+	 * @param map
+	 * @return
+	 */
+	public int updateDiscountsTab(HashMap<String,Object> map);
+	/**
+	 * 根据优惠卷ID查询优惠码信息
+	 */
+	public ArrayList<HashMap<String,Object>> queryDiscountsNumberTab(HashMap<String,Object> map);
 }
