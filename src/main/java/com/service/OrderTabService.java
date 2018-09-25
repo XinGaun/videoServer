@@ -20,7 +20,7 @@ public interface OrderTabService {
 	 * @param data
 	 * @return
 	 */
-	public int queryOrderTab(HashMap<String,Object> hashMap);
+	public HashMap<String,Object> queryOrderTab(HashMap<String,Object> hashMap);
 	/**
 	 * 更新订单
 	 * @param data

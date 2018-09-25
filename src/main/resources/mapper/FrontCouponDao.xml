@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.FrontCouponDao">
+	<!-- 根据优惠卷ID查询优惠卷信息 -->
+	<select id="queryCouponIDList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select discounts_id,discounts_text,discounts_money,dis.courses_id,date_format(discounts_date,'%Y-%m-%d')discounts_date,cou.courses_name,cou.courses_img_url,
+		(select count(1) from discounts_number_tab where discounts_id = #{discounts_id} and user_id is null)num
+		<if test="user_id!=null">
+			(select count(1) from discounts_number_tab where dis.discounts_id=#{discounts_id} and user_id=#{user_id})flog
+		</if>
+		from discounts_tab dis left join courses_tab cou on cou.courses_id=dis.courses_id
+		where dis.discounts_id = #{discounts_id}
+	</select>
+	<!-- 查询是否领取过优惠卷 -->
+	<select id="queryUseridCoupon" parameterType="java.util.HashMap" resultType="int">
+		select count(1) from discounts_number_tab where user_id = #{user_id} and discounts_id = #{discounts_id}
+	</select>
+	<!-- 查询优惠码信息 -->
+	<select id="queryCouponCode" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select discounts_number_id from discounts_number_tab
+		where user_id IS null AND discounts_id=#{discounts_id} ORDER BY discounts_number_id ASC limit 0,1
+	</select>
+	<!-- 用户领取优惠卷 -->
+	<update id="updateUseridCoupon" parameterType="java.util.HashMap">
+		update discounts_number_tab set user_id =#{user_id} where discounts_number_id =#{discounts_number_id}
+	</update>
+	<!-- 用户查询自己优惠卷信息 -->
+	<select id="queryUseridCouponAll" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select dis.discounts_id,discounts_text,dis.discounts_money,date_format(dis.discounts_date,'%Y-%m-%d')discounts_date,dis.courses_id,discounts_number_id,discounts_status,courses_name from discounts_tab dis
+		left join discounts_number_tab tab on dis.discounts_id = tab.discounts_id
+		left join courses_tab cou on cou.courses_id=dis.courses_id
+		where user_id = #{user_id}
+		<if test="time!=null">
+			and dis.discounts_date >= str_to_date(#{time}, '%Y-%m-%d %H:%i:%s')
+		</if>
+		<if test="status!=null">
+			and discounts_status = #{status}
+		</if>
+		<if test="endtime!=null">
+			and dis.discounts_date &lt; str_to_date(#{endtime}, '%Y-%m-%d %H:%i:%s')
+		</if>
+		ORDER BY dis.discounts_date DESC
+	</select>
+	<!-- 用户使用优惠码领取优惠卷 -->
+	<select id="queryCodeCoupon" parameterType="java.util.HashMap" resultType="int">
+		select count(1) from discounts_number_tab where discounts_code = #{discounts_code} and user_id is null
+	</select>
+	<!-- 用户根据优惠码领取优惠卷 -->
+	<update id="updateCodeCoupon" parameterType="java.util.HashMap">
+		update discounts_number_tab set user_id =#{user_id} where discounts_code=#{discounts_code}
+	</update>
+	<!-- 购买时查询优惠卷信息 -->
+	<select id="queryPurchaseCoupon" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select discounts_number_id,discounts_text,discounts_money from discounts_tab dis
+		left join discounts_number_tab nub on dis.discounts_id = nub.discounts_id
+		where user_id =#{user_id} and nub.discounts_status='未使用' and dis.courses_id =#{courses_id}
+		and dis.discounts_date >= now()
+	</select>
+	<!-- 购买时修改优惠卷使用状态 -->
+	<update id="updateUserIDPurchaseCoupon" parameterType="java.util.HashMap">
+		update discounts_number_tab set discounts_date = now(),discounts_status='已使用' where discounts_number_id =#{discounts_id}
+	</update>
+</mapper>

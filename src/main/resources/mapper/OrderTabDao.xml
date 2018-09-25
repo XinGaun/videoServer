@@ -38,8 +38,8 @@
 	</insert>
 	<!-- 查询订单信息 -->
 	<select id="queryOrderTab" parameterType="java.util.HashMap"
-		resultType="int">
-		SELECT count(order_id) FROM order_tab WHERE
+		resultType="java.util.HashMap">
+		SELECT order_id,discounts_id FROM order_tab WHERE
 		order_id=#{order_id} AND order_status = '已付款'
 	</select>
 	<!-- 更新订单信息 -->

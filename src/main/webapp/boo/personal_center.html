@@ -2,20 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
-<title>个人中心</title>
-    <script src="js/jquery-3.3.1.min.js"></script>
+	<title>个人中心</title> <script src="js/jquery-3.3.1.min.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<script src="js/bootstrap.min.js"></script>
-	<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
-	<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
-	<script src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
-	<script type="text/javascript" src="js/jquery.cookie.js"></script>
-	<script src="js/jquery.lazyload.min.js"></script>
-
+		<script src="js/bootstrap.min.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+		<script
+			src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+		<script
+			src="https://cdn.bootcss.com/vue-router/2.7.0/vue-router.min.js"></script>
+		<script type="text/javascript" src="js/jquery.cookie.js"></script>
+		<script src="js/jquery.lazyload.min.js"></script>
 </head>
 <style>
-#btpbq{
-	font-size:30px;
+#btpbq {
+	font-size: 30px;
 }
 
 .kcjs {
@@ -26,230 +26,257 @@
 	-webkit-box-orient: vertical;
 	word-break: break-all;
 }
-	.jsjs {
-		color: #000000;
-		overflow: hidden;
-		display: -webkit-box;
-		-webkit-line-clamp: 3;
-		-webkit-box-orient: vertical;
-		word-break: break-all;
-	}
-	#myTabContent{
-		margin-top:2vh;
-	}
-	#infomation,#security,#three{
-		margin-left:1vw;
-		margin-right:3vw;
-	}
-	label{
-		margin-left:2vw;
-		text-align:right;
-		width:80px;
-	}
-	#infomation input,#infomation img,#infomation textarea,#infomation p,#three input{
-		margin-left:2vw;
-	}
-	#infomation p{
-		font-size:10px;
-		color:#999999;
-	}
-	textarea{
-		background:#F0F0F0;
-		border:0px;
-		padding-top:2vh;
-		padding-left:1vw;
-	}
-	#up{
-		font-size:10px;
-		margin-left:2vw;
-		
-	}
-	#btn{
-		background:#3AA8FF;
-		color:white;
-		margin-left:2vw;
-		border:0px;
-		
-	}
-	input {
-		border:1px solid #999999;
-	}
-	input:hover{
-		border:1px solid #3AA8FF;
-	}
-	td,#three div{
-		padding-top:2vh;
-	}
-	.default{
-		color:red;
-	}
-	.save{
-		background:#3AA8FF;
-		border-radius:2em;
-		padding-left:1vw;
-		padding-right:1vw;
-		color:white;
-		border:0px;
-		
-	}
-	.atab{
-		
-		border-radius:2em;
-		padding-left:1vw;
-		padding-right:1vw;
-		
-		border:1px solid #3AA8FF;
-	}
-	#three p{
-		margin-left:10vw;
-		display:none;
-	}
-	#three input{
-		width:31vw;
-	}
-	#security img{
-		margin-left:2vw;
-		margin-right:1vw;
-	}
-	#security button,#dengji{
-		float:right;
-	}
-	#security>div{
-		margin-top:2vh;
-	}
-	#security span{
-		margin-right:2vw;
-	}
-	#search_submit{
-	 	border-top-left-radius:0em;
-		border-top-right-radius:2em;
-		border-bottom-right-radius:2em;
-		border-bottom-left-radius:0em; 
-	 }
-	 /* #searchSubmitOne{
+
+.jsjs {
+	color: #000000;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	word-break: break-all;
+}
+
+#myTabContent {
+	margin-top: 2vh;
+}
+
+#infomation, #security, #three {
+	margin-left: 1vw;
+	margin-right: 3vw;
+}
+
+label {
+	margin-left: 2vw;
+	text-align: right;
+	width: 80px;
+}
+
+#infomation input, #infomation img, #infomation textarea, #infomation p,
+	#three input {
+	margin-left: 2vw;
+}
+
+#infomation p {
+	font-size: 10px;
+	color: #999999;
+}
+
+textarea {
+	background: #F0F0F0;
+	border: 0px;
+	padding-top: 2vh;
+	padding-left: 1vw;
+}
+
+#up {
+	font-size: 10px;
+	margin-left: 2vw;
+}
+
+#btn {
+	background: #3AA8FF;
+	color: white;
+	margin-left: 2vw;
+	border: 0px;
+}
+
+input {
+	border: 1px solid #999999;
+}
+
+input:hover {
+	border: 1px solid #3AA8FF;
+}
+
+td, #three div {
+	padding-top: 2vh;
+}
+
+.default {
+	color: red;
+}
+
+.save {
+	background: #3AA8FF;
+	border-radius: 2em;
+	padding-left: 1vw;
+	padding-right: 1vw;
+	color: white;
+	border: 0px;
+}
+
+.atab {
+	border-radius: 2em;
+	padding-left: 1vw;
+	padding-right: 1vw;
+	border: 1px solid #3AA8FF;
+}
+
+#three p {
+	margin-left: 10vw;
+	display: none;
+}
+
+#three input {
+	width: 31vw;
+}
+
+#security img {
+	margin-left: 2vw;
+	margin-right: 1vw;
+}
+
+#security button, #dengji {
+	float: right;
+}
+
+#security>div {
+	margin-top: 2vh;
+}
+
+#security span {
+	margin-right: 2vw;
+}
+
+#search_submit {
+	border-top-left-radius: 0em;
+	border-top-right-radius: 2em;
+	border-bottom-right-radius: 2em;
+	border-bottom-left-radius: 0em;
+}
+/* #searchSubmitOne{
 	 	border-top-left-radius:0em;
 		border-top-right-radius:2em;
 		border-bottom-right-radius:2em;
 		border-bottom-left-radius:0em; 
 	 } */
- 	 #dropdown{
- 	 	border-top-left-radius:2em;
-		border-top-right-radius:0em;
-		border-bottom-right-radius:0em;
-		border-bottom-left-radius:2em; 
- 	 }
- 	 /*按钮圆角设置*/
+#dropdown {
+	border-top-left-radius: 2em;
+	border-top-right-radius: 0em;
+	border-bottom-right-radius: 0em;
+	border-bottom-left-radius: 2em;
+}
+/*按钮圆角设置*/
+.actives {
+	border-radius: 2em;
+	border: 1px #3AA8FF solid;
+	padding: 2px 9px;
+	margin: 0vh 2vw;
+	display: inline-block;
+	verticle-align: middle;
+	color: black;
+	text-decoration: none;
+}
 
-	.actives{  
-	 	border-radius:2em;
-	 	border:1px #3AA8FF solid;
-	 	padding:2px 9px;
-	 	margin:0vh 2vw;
-	 	display:inline-block;
-	 	verticle-align:middle;
-	 	color:black;
-	 	text-decoration: none;
-	 } 
-	 a:hover{
-	 	text-decoration:none;
-	 	
-	 } 
-	
-	  #log a{
-	 	color:#3AA8FF;
-	 	padding:1vh 1.5vw;
-	 	text-decoration:none;
-	 } 
-	 #logImg{
-	 	float:right;
-	 	border:1px solid red;
-	 	margin:2vh 1vw 0vh 0vw;
-	 	display:none;
-	 }
-	 #loginrouter{
-	 	position:fixed;
-	 	top:15vh;
-	 	left:58vw;
-	 	z-index:2;
-	 }
-	 /* #log{
+a:hover {
+	text-decoration: none;
+}
+
+#log a {
+	color: #3AA8FF;
+	padding: 1vh 1.5vw;
+	text-decoration: none;
+}
+
+#logImg {
+	float: right;
+	border: 1px solid red;
+	margin: 2vh 1vw 0vh 0vw;
+	display: none;
+}
+
+#loginrouter {
+	position: fixed;
+	top: 15vh;
+	left: 58vw;
+	z-index: 2;
+}
+/* #log{
 	 	margin-top:3.5vh;
 	 	margin-right:15vw;
 	 	
 	 } */
-	 #boo{
-	 	position:relative;
-	 }
-	 #foot{
-	 	width:100vw;
-	 	height:12vh;	
-	 	border-bottom:1px solid #999999;
-	 	position:relative;
-	 	border-top:1px solid gray;
-	 	
-	 }
-	 #foot-head{
-	 	margin:3vh 19.4vw 0vh 19.2vw;
-	 	height:9vh;
-	 	width:61.3vw;
-	 	
-	 }
-	 #foot-bot{
-	 	width:100vw;
-	 	height:6vh;
-	 	
-	 	bottom:0vh;
-	 }
-	 #foot-bottom{
-	 	margin:1.7vh 21.3vw 0vh 19.2vw;
-	 	height:1.5vh;
-	 	width:59.4vw;
-	 }
-	 #footimg{
-	 	height:9.2vh;
-	 	width:5vw;
-	 	margin-left:5vw;
-	 }
-	 #footma{
-	 	width:21vw;
-	 	margin-left:6vw;
-	 }
-	 #footma span{
-	 	
-	 	vertical-align:top;
-	 }
-	 #footma img,#footma span{
-	 	margin:0vh 0vw 0vh 0.9vw;
-	 }
-	 .footli{
-	 	text-align:center;
-	 }
-	 #footli{
-	 	width:50vw;
-	 	height:9.1vh;
-	 	font-size:0.8vw;
-	 }
-	 #footli span,#footli div{
-	 	
-		margin-left:0.5vw;
-	 }
-	 ol{
-	 	list-style-type:none;
-	 	padding:0px;
-	 }
-	 li{
-	 	display:inline-block;
-	 	
-	 	color:#999999;
-	 	margin:0vh 0.4vw
-	 }
-	 body{
-	 	heigh:100vh;
-	 }
+#boo {
+	position: relative;
+}
+
+#foot {
+	width: 100vw;
+	height: 12vh;
+	border-bottom: 1px solid #999999;
+	position: relative;
+	border-top: 1px solid gray;
+}
+
+#foot-head {
+	margin: 3vh 19.4vw 0vh 19.2vw;
+	height: 9vh;
+	width: 61.3vw;
+}
+
+#foot-bot {
+	width: 100vw;
+	height: 6vh;
+	bottom: 0vh;
+}
+
+#foot-bottom {
+	margin: 1.7vh 21.3vw 0vh 19.2vw;
+	height: 1.5vh;
+	width: 59.4vw;
+}
+
+#footimg {
+	height: 9.2vh;
+	width: 5vw;
+	margin-left: 5vw;
+}
+
+#footma {
+	width: 21vw;
+	margin-left: 6vw;
+}
+
+#footma span {
+	vertical-align: top;
+}
+
+#footma img, #footma span {
+	margin: 0vh 0vw 0vh 0.9vw;
+}
+
+.footli {
+	text-align: center;
+}
+
+#footli {
+	width: 50vw;
+	height: 9.1vh;
+	font-size: 0.8vw;
+}
+
+#footli span, #footli div {
+	margin-left: 0.5vw;
+}
+
+ol {
+	list-style-type: none;
+	padding: 0px;
+}
+
+li {
+	display: inline-block;
+	color: #999999;
+	margin: 0vh 0.4vw
+}
+
+body {
+	heigh: 100vh;
+}
 </style>
 <body>
 	<div
-		style="width: 100%; height: 100px; margin-top:0vh;background: url(img/banner@2x.png)">
+		style="width: 100%; height: 100px; margin-top: 0vh; background: url(img/banner@2x.png)">
 		<div class="row">
 			<div class="col-md-12">&nbsp;</div>
 			<div class="col-md-12">&nbsp;</div>
@@ -257,14 +284,18 @@
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<div style="text-align:center;margin-top:-5vh;">
-							<div style="margin-top:0px;">
-								<span><img id="student_img" src="photos/LoginPhoto/txx.png" width="60px" height="60px" class="img-circle"/></span>
+						<div style="text-align: center; margin-top: -5vh;">
+							<div style="margin-top: 0px;">
+								<span><img id="student_img"
+									src="photos/LoginPhoto/txx.png" width="60px" height="60px"
+									class="img-circle" /></span>
 								<!-- <a href="#" id="student_img"> 
 								</a> -->
 							</div>
 							<div>
-								<h4 class="media-heading" style="font-weight: bold;"><span id="studentName"></span></h4>
+								<h4 class="media-heading" style="font-weight: bold;">
+									<span id="studentName"></span>
+								</h4>
 								<p>&nbsp;</p>
 
 								<p style="text-indent: 2em;" class="jsjs"></p>
@@ -294,7 +325,8 @@
 							<input type="text" name="searchSubmitOne" id="searchSubmitOne"
 								class="form-control" placeholder="搜索我加入的好课"> <span
 								class="input-group-btn">
-								<button class="btn btn-success" id="search_submit" type="submit" onclick="queryVideoName()">搜索</button>
+									<button class="btn btn-success" id="search_submit"
+										type="submit" onclick="queryVideoName()">搜索</button>
 							</span>
 						</div>
 					</div>
@@ -306,31 +338,29 @@
 
 					<!-- 全部好课结束 -->
 					<!-- 私藏好课 -->
-					<div class="panel panel-default" style="height:1280px;" id="schk">
+					<div class="panel panel-default" style="height: 1280px;" id="schk">
 
 						<div class="panel-heading col-md-12" style="font-weight: bold">收藏好课</div>
 						<div class="col-md-12">&nbsp;</div>
 						<div class="row">
 							<div class="panel-body">
 								<!--  -->
-								<div class="row" id="excellent">
-									
-								</div>
+								<div class="row" id="excellent"></div>
 								<div id="excellentTest"></div>
 								<!-- 翻页 -->
 								<div class="col-md-12" style="text-align: center;" id="fanye">
-									
+
 								</div>
 							</div>
 						</div>
 					</div>
 					<!-- 收藏好课结束 -->
 					<!-- 我的订单 -->
-					<div class="row" id="wddd" style="height:300px;">
+					<div class="row" id="wddd" style="height: 300px;">
 						<div class="clo-md-12">
 							<div class="table-responsive">
 								<table class="table table-striped table-hover">
-									 <thead>
+									<thead>
 										<tr>
 											<th>订单信息</th>
 											<th>付款金额(元)</th>
@@ -340,30 +370,61 @@
 										</tr>
 									</thead>
 									<tbody id="OrderInformation">
-										
+
 									</tbody>
-									
+
 								</table>
-							
+
 							</div>
 							<!-- 翻页 -->
 							<div class="col-md-12" style="text-align: center;" id="fanyeTT">
-										
+
 							</div>
 							<!--  -->
 						</div>
 					</div>
 					<!-- 我的订单结束 -->
 					<!-- 优惠券 -->
-					<div class="row" id="yhj" style="height:300px;">
+					<div class="row" id="yhj"  style="">
 						<div class="clo-md-12">
 							<ul class="nav nav-tabs ">
-								<li role="presentation"><a href="#" id="">全部优惠券</a></li>
-								<li role="presentation"><a href="#" id="">可使用</a></li>
-								<li role="presentation"><a href="#" id="">已使用</a></li>
-								<li role="presentation"><a href="#" id="">已过期</a></li>
+								<li role="presentation"><a href="#" id=""
+									onclick="initCoupon(0)">全部优惠券</a></li>
+								<li role="presentation"><a href="#" id=""
+									onclick="initCoupon(1)">可使用</a></li>
+								<li role="presentation"><a href="#" id=""
+									onclick="initCoupon(2)">已使用</a></li>
+								<li role="presentation"><a href="#" id=""
+									onclick="initCoupon(3)">已过期</a></li>
+								<li role="presentation"><a href="#" id="" onclick="openModel()">领取优惠卷</a></li>
 							</ul>
 						</div>
+						<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h3 class="modal-title" id="myModalLabel">领取优惠卷</h3>
+									</div>
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="exampleInputEmail"></label> <input type="email" class="form-control" id="discounts_code" placeholder="请输入优惠码"/>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">关闭</button>
+										<button type="button" class="btn btn-primary"
+											onclick="discountscode()">领取</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<div class="clo-md-12">
 							<div class="table-responsive">
 								<table class="table table-striped table-hover">
@@ -371,18 +432,24 @@
 										<tr>
 											<th>#优惠券信息</th>
 											<th>优惠金额(元)</th>
-											<th>适用范围</th>
+											<th>所属课程</th>
 											<th>有效期限</th>
 											<th>优惠券状态</th>
 										</tr>
 									</thead>
-									<tbody>
-										
+									<tbody id="couponbody">
+										<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
 									</tbody>
 								</table>
 								<div class="col-md-12">
 									<!-- 翻页 -->
-									<div class="col-md-12" style="text-align: center;">
+									<!-- <div class="col-md-12" style="text-align: center;">
 										<nav aria-label="Page navigation">
 											<ul class="pagination">
 												<li><a href="#" aria-label="Previous"> <span
@@ -398,7 +465,7 @@
 												</a></li>
 											</ul>
 										</nav>
-									</div>
+									</div> -->
 									<!--  -->
 								</div>
 							</div>
@@ -406,190 +473,203 @@
 					</div>
 					<!-- 优惠券结束 -->
 					<div class="row" id="wdzh">
-						<div id="myTab" >
-							<ul class="nav nav-tabs">	
-							   <li><a>我的账号</a></li>
-							   <li class="active"><a href="#infomation" data-toggle="tab">个人资料</a></li>
-							   <li><a id="anquan" style="display:none" href="#security" data-toggle="tab">安全设置</a></li>
-							   <li><a href="#three" data-toggle="tab">修改密码</a></li>
+						<div id="myTab">
+							<ul class="nav nav-tabs">
+								<li><a>我的账号</a></li>
+								<li class="active"><a href="#infomation" data-toggle="tab">个人资料</a></li>
+								<li><a id="anquan" style="display: none" href="#security"
+									data-toggle="tab">安全设置</a></li>
+								<li><a href="#three" data-toggle="tab">修改密码</a></li>
 							</ul>
 						</div>
 						<div id="myTabContent" class="tab-content">
-						   <div class="tab-pane fade in active" id="infomation">
-						   	  <h6>展示您的个人资料，是别人认识您的第一步</h6>
-						      <h4>基本信息</h4>
-						      <table>
-						      <tr>
-						      	<td><label><span class="default">*</span>昵称</label></td>
-						      	<td><input id="name" type="text"/></td>
-						      </tr>
-						      <tr>
-						      	<td><label>上传头像</label></td>
-						      	<td>
-						      		<table>
-						      			<tr>
-						      				<td rowspan="2" id="photoimg"><img id="thumburlShow" style="width:80px;height:80px;" src="photos/LoginPhoto/txx.png"/></td>
-						      				<td><span id="up">你可以上传JPG、GIF或PNG格式的文件，文件大小不能超过2M。</span></td>
-						      			</tr>
-						      			<tr>
-						      				<td>
-							      				<!-- <form id="uploadForm"  action="" method="post" enctype="multipart/form-data"> -->
-													<input type="file" name="uploadFile" id="uploadFile" style="visibility:hidden;position:absolute;top:0px;width:0px"/><!--隐藏默认标签样式-->
-												<!-- </form> -->
-												<input type="hidden" name="img"  id="thumbUrl"/>
-												<input type="button" class="btn btn-xs" value="上传你的头像" id="btn"/>				
-						      				</td>
-						      			</tr>
-						      		</table>
-						      	</td>
-						      </tr>
-						      <tr>
-						      	<td><label>性别</label>	</td>	      	
-				                <td><input type="radio" value="3"  name="sex"/>男
-				                <input type="radio" value="4"  name="sex"/>女
-				                <input type="radio" value="7" checked="checked" name="sex"/>保密</td>
-						      </tr>
-						      <tr>
-						      	<td><label>个人介绍</label></td>
-						      	<td><textarea name="aboutme"  id="aboutme" placeholder="再用一句话您介绍自己，这将显示在您的个人主页上，最多显示80个字" cols="70" rows="3"></textarea>
-						      		<p><span id="text-count">80</span>/80</p>
-						      	</td>
-						      </tr>
-						      </table>
-						      <h4>联系信息</h4>
-						      <table>
-						      <tr>
-						      	<td><label>真实姓名</label></td>
-						      	<td>
-						      		<input type="text" id="truename"/><p>仅用于身份验证，不会以任何形式向第三方透漏</p>
-						      	</td>
-						      </tr>
-						      <tr>
-						      	<td><label><span class="default">*</span>常用邮箱</label></td>
-						      	<td>
-						      		<input id="email" type="text"/>
-						      		
-						      		<p>用于接收平台来自平台和课程的邮件通知</p>
-						      	</td>
-						      </tr>
-						      <tr>
-						      	<td><label>修改手机</label></td>
-						      	<td><input id="altphone" type="text"/>
-						      	<a id="alterphone">修改手机号</a>
-						      		<p>仅用于优质课程的提醒等服务，及账号的快捷登录，手机号不会对外公开，请放心。</p>
+							<div class="tab-pane fade in active" id="infomation">
+								<h6>展示您的个人资料，是别人认识您的第一步</h6>
+								<h4>基本信息</h4>
+								<table>
+									<tr>
+										<td><label><span class="default">*</span>昵称</label></td>
+										<td><input id="name" type="text" /></td>
+									</tr>
+									<tr>
+										<td><label>上传头像</label></td>
+										<td>
+											<table>
+												<tr>
+													<td rowspan="2" id="photoimg"><img id="thumburlShow"
+														style="width: 80px; height: 80px;"
+														src="photos/LoginPhoto/txx.png" /></td>
+													<td><span id="up">你可以上传JPG、GIF或PNG格式的文件，文件大小不能超过2M。</span></td>
+												</tr>
+												<tr>
+													<td>
+														<!-- <form id="uploadForm"  action="" method="post" enctype="multipart/form-data"> -->
+														<input type="file" name="uploadFile" id="uploadFile"
+														style="visibility: hidden; position: absolute; top: 0px; width: 0px" />
+													<!--隐藏默认标签样式--> <!-- </form> --> <input type="hidden"
+														name="img" id="thumbUrl" /> <input type="button"
+														class="btn btn-xs" value="上传你的头像" id="btn" />
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td><label>性别</label></td>
+										<td><input type="radio" value="3" name="sex" />男 <input
+											type="radio" value="4" name="sex" />女 <input type="radio"
+											value="7" checked="checked" name="sex" />保密</td>
+									</tr>
+									<tr>
+										<td><label>个人介绍</label></td>
+										<td><textarea name="aboutme" id="aboutme"
+												placeholder="再用一句话您介绍自己，这将显示在您的个人主页上，最多显示80个字" cols="70"
+												rows="3"></textarea>
+											<p>
+												<span id="text-count">80</span>/80
+											</p></td>
+									</tr>
+								</table>
+								<h4>联系信息</h4>
+								<table>
+									<tr>
+										<td><label>真实姓名</label></td>
+										<td><input type="text" id="truename" />
+										<p>仅用于身份验证，不会以任何形式向第三方透漏</p></td>
+									</tr>
+									<tr>
+										<td><label><span class="default">*</span>常用邮箱</label></td>
+										<td><input id="email" type="text" />
 
-						      		<span style="display:none" id="userid"></span>
-
-						      	</td>
-						      </tr>
-						      <tr>
-						      	<td><label>QQ号码</label></td>
-						      	<td><input id="qq" type="text"/>
-						      		<p>仅用于课程的高效交流，方便与课程老师答疑。</p></td>
-						      </tr>
-						      </table>
-						      <hr/>
-						      <div style="margin-left:7vw;margin-top:-2vh;margin-bottom:3vh;"><button type="button" id="updateuser" class="btn btn-xs save">保存</button></div>
-						   </div>
-						   <!-- 个人资料结束 -->
-						   <div class="tab-pane fade" id="security">
-						      <div><h6>设置账户的安全信息，保护您账户安全每一天。</h6></div>
-						      <div><h4>密码安全</h4></div>
-						      <div style="display:inline-block;">
-						      	<div style="float:left;"><img alt="" style="width:50px;height:50px;margin-top:-2vh;" src="photos/LoginPhoto/alert3.png"></div>
-								<div class="progress" style="float:left;width:25vw;height:15px;">
-								  	<div class="progress-bar" role="progressbar" aria-valuenow="60" 
-										 aria-valuemin="0" aria-valuemax="100" style="width: 40%;background:#3AA8FF;">
-										
-									</div>
+											<p>用于接收平台来自平台和课程的邮件通知</p></td>
+									</tr>
+									<tr>
+										<td><label>修改手机</label></td>
+										<td><input id="altphone" type="text" /> <a
+											id="alterphone">修改手机号</a>
+											<p>仅用于优质课程的提醒等服务，及账号的快捷登录，手机号不会对外公开，请放心。</p> <span
+											style="display: none" id="userid"></span></td>
+									</tr>
+									<tr>
+										<td><label>QQ号码</label></td>
+										<td><input id="qq" type="text" />
+											<p>仅用于课程的高效交流，方便与课程老师答疑。</p></td>
+									</tr>
+								</table>
+								<hr />
+								<div
+									style="margin-left: 7vw; margin-top: -2vh; margin-bottom: 3vh;">
+									<button type="button" id="updateuser" class="btn btn-xs save">保存</button>
 								</div>
-						      	<div style="margin-left:6vw;" id="dengji">安全等级：低</div>
-						      </div>
-						      <div>
-						      	<img alt="" src="photos/LoginPhoto/sec.png">
-								<span>登录密码</span>
-								<span>登录网校时需要输入的密码</span>
-								<button type="button" class="btn btn-xs atab">修改</button>
-						      </div>
-						      <div>
-						      	<img alt="" src="photos/LoginPhoto/alert2.png">
-								<span>支付密码</span>
-								<span>在网校上进行消费行为时需要输入的密码</span>
-								<button type="button" class="btn btn-xs save">设置</button>
-						      </div>
-						      <div>
-						      	<img alt="" src="photos/LoginPhoto/alert2.png">
-								<span>安全设置</span>
-								<span>通过设置并且验证安全问题，保护账号密码安全</span>
-								<button type="button" class="btn btn-xs save">设置</button>
-						      </div>
-						      <div>
-						      	<img alt="" src="photos/LoginPhoto/alert2.png">
-								<span>安全邮箱</span>
-								<span>用于账号找回密码的一种验证方式</span>
-								<button type="button" class="btn btn-xs save">设置</button>
-						      </div>
-						      <hr/>
-						      <h4>第三方账户</h4>
-						      <div>
-						      	<img alt="" src="photos/LoginPhoto/weixin.png">
-								<span>微信账号</span>
-								<span>已绑定</span>
-								<button type="button" class="btn btn-xs atab" style="padding:0vh 0.2vw;">取消绑定</button>
-						      </div>
-						      <div>
-						      	<img alt="" src="photos/LoginPhoto/QQ.png">
-								<span>QQ账号</span>
-								<span>未绑定</span>
-								<button type="button" class="btn btn-xs save">绑定</button>
-						      </div>
-						      <div>
-						      	<img alt="" src="photos/LoginPhoto/weibo.png">
-								<span>微博账号</span>
-								<span>未绑定</span>
-								<button type="button" class="btn btn-xs save">绑定</button>
-						      </div>
-						   </div>
-						   <!-- 安全设置结束 -->
-						   <div class="tab-pane fade" id="three">      
-							  <div class="clo-md-12">
-							  <h3>修改密码</h3>
-							  <table class="table" >
-								<tr>
-									<td style="text-align: right;">旧密码:</td>
-									<td><input id="oldpwd" type="password" class="form-control"> <span>&nbsp;</span>
-									</td>
-								</tr>
-								<tr>
-									<td style="text-align: right;">新密码:</td>
+							</div>
+							<!-- 个人资料结束 -->
+							<div class="tab-pane fade" id="security">
+								<div>
+									<h6>设置账户的安全信息，保护您账户安全每一天。</h6>
+								</div>
+								<div>
+									<h4>密码安全</h4>
+								</div>
+								<div style="display: inline-block;">
+									<div style="float: left;">
+										<img alt=""
+											style="width: 50px; height: 50px; margin-top: -2vh;"
+											src="photos/LoginPhoto/alert3.png">
+									</div>
+									<div class="progress"
+										style="float: left; width: 25vw; height: 15px;">
+										<div class="progress-bar" role="progressbar"
+											aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+											style="width: 40%; background: #3AA8FF;"></div>
+									</div>
+									<div style="margin-left: 6vw;" id="dengji">安全等级：低</div>
+								</div>
+								<div>
+									<img alt="" src="photos/LoginPhoto/sec.png"> <span>登录密码</span>
+										<span>登录网校时需要输入的密码</span>
+										<button type="button" class="btn btn-xs atab">修改</button>
+								</div>
+								<div>
+									<img alt="" src="photos/LoginPhoto/alert2.png"> <span>支付密码</span>
+										<span>在网校上进行消费行为时需要输入的密码</span>
+										<button type="button" class="btn btn-xs save">设置</button>
+								</div>
+								<div>
+									<img alt="" src="photos/LoginPhoto/alert2.png"> <span>安全设置</span>
+										<span>通过设置并且验证安全问题，保护账号密码安全</span>
+										<button type="button" class="btn btn-xs save">设置</button>
+								</div>
+								<div>
+									<img alt="" src="photos/LoginPhoto/alert2.png"> <span>安全邮箱</span>
+										<span>用于账号找回密码的一种验证方式</span>
+										<button type="button" class="btn btn-xs save">设置</button>
+								</div>
+								<hr />
+								<h4>第三方账户</h4>
+								<div>
+									<img alt="" src="photos/LoginPhoto/weixin.png"> <span>微信账号</span>
+										<span>已绑定</span>
+										<button type="button" class="btn btn-xs atab"
+											style="padding: 0vh 0.2vw;">取消绑定</button>
+								</div>
+								<div>
+									<img alt="" src="photos/LoginPhoto/QQ.png"> <span>QQ账号</span>
+										<span>未绑定</span>
+										<button type="button" class="btn btn-xs save">绑定</button>
+								</div>
+								<div>
+									<img alt="" src="photos/LoginPhoto/weibo.png"> <span>微博账号</span>
+										<span>未绑定</span>
+										<button type="button" class="btn btn-xs save">绑定</button>
+								</div>
+							</div>
+							<!-- 安全设置结束 -->
+							<div class="tab-pane fade" id="three">
+								<div class="clo-md-12">
+									<h3>修改密码</h3>
+									<table class="table">
+										<tr>
+											<td style="text-align: right;">旧密码:</td>
+											<td><input id="oldpwd" type="password"
+												class="form-control"> <span>&nbsp;</span></td>
+										</tr>
+										<tr>
+											<td style="text-align: right;">新密码:</td>
 
 
-									<td><input id="pwd"  placeholder="请输入6-21位密码" type="password" class="form-control"/> <span>&nbsp;</span></td>
+											<td><input id="pwd" placeholder="请输入6-21位密码"
+												type="password" class="form-control" /> <span>&nbsp;</span></td>
 
-								</tr>
-								<tr>
-									<td style="text-align: right;">重新输入新密码:</td>
-									<td><input id="repwd" placeholder="请再次输入密码" type="password" class="form-control"/> <span>&nbsp;</span></td>
-								</tr>
-								<tr>
-									<td style="text-align: right;">短信验证码:</td>
-									<td>
-										<!-- <input name="dx" id="vcode" placeholder="请输入短信验证码" type="text" class="form-control"/>		
-									 	<span>&nbsp;</span> -->
-									 	<input type="text" name="dx" id="vcode" placeholder="请输入短信验证码" class="form-control" style="width:30%"/>
+										</tr>
+										<tr>
+											<td style="text-align: right;">重新输入新密码:</td>
+											<td><input id="repwd" placeholder="请再次输入密码"
+												type="password" class="form-control" /> <span>&nbsp;</span></td>
+										</tr>
+										<tr>
+											<td style="text-align: right;">短信验证码:</td>
+											<td>
+												<!-- <input name="dx" id="vcode" placeholder="请输入短信验证码" type="text" class="form-control"/>		
+									 	<span>&nbsp;</span> --> <input type="text" name="dx"
+												id="vcode" placeholder="请输入短信验证码" class="form-control"
+												style="width: 30%" /> <input type="button" value="获取验证码"
+												id="hmac" class="form-control"
+												style="width: 25%; font-size: 1.5vh; margin-top: -5vh; margin-left: 20.5vw" />
+											</td>
+										</tr>
+										<tr>
+											<td></td>
+											<td><button class="btn btn-info" id="reset"
+													style="float: right; margin-right: 3vw">修改密码</button></td>
+										</tr>
+									</table>
 
-	        							<input type="button" value="获取验证码" id="hmac" class="form-control"style="width:25%;font-size:1.5vh;margin-top:-5vh;margin-left:20.5vw"/>
-									</td>
-								</tr>
-								<tr>
-									<td></td><td><button class="btn btn-info" id="reset" style="float:right;margin-right:3vw">修改密码</button></td>
-								</tr>
-							  </table>
-							  
-						
-							</div><!-- 修改密码结束 -->
-						</div><!-- 基本信息结束 -->
-					  </div>
+
+								</div>
+								<!-- 修改密码结束 -->
+							</div>
+							<!-- 基本信息结束 -->
+						</div>
 					</div>
 					<!-- 我的账户结束 -->
 				</div>
@@ -616,21 +696,20 @@
 	</div>
 	<!-- 尾部 -->
 	<footer style="background:#666666">
-		<div id="foot">
-			<div id="foot-head">
-				<div class="footli" id="footli">
-					<div id="footbeian">
-  						<span style="color:#999999;"> copyright @2018yudao . All Rights Reserved</span>
-  					</div>
-					<ol>
-    					<li v-for="site in sites">
-      						{{ site.name }}
-    					</li>
-  					</ol>
+	<div id="foot">
+		<div id="foot-head">
+			<div class="footli" id="footli">
+				<div id="footbeian">
+					<span style="color: #999999;"> copyright @2018yudao . All
+						Rights Reserved</span>
 				</div>
+				<ol>
+					<li v-for="site in sites">{{ site.name }}</li>
+				</ol>
 			</div>
 		</div>
-		
+	</div>
+
 	</footer>
 
 
@@ -1148,7 +1227,7 @@
 	})  
 	
 </script>
-<script type="text/javascript">
+	<script type="text/javascript">
 $(function(){
 	var userphone=$.cookie("phone");
 	param.userphone=userphone;
@@ -1472,7 +1551,7 @@ function initOrderBoutique(param){
 	})
 	
 </script>
-<script type="text/javascript">
+	<script type="text/javascript">
 $(function(){
 	var userphone=$.cookie("phone");
 	paramT.userphone=userphone;
@@ -1498,14 +1577,14 @@ function pageT(pages, nums, total) {
 		previous = "";
 	} else {
 		previous = '<li>'
-			+ '<a href="javascript:void(0)" onclick="shangye()" aria-label="Previous">'
+			+ '<a href="javascript:void(0)" onclick="shangyeT()" aria-label="Previous">'
 			+ '<span aria-hidden="true">&laquo;</span>'
 			+ '</a>' + '</li>';
 	}
 	if (pages == total-1) {
 		next = "";
 	} else {
-		next = '<li>' + '<a href="javascript:void(0)" onclick="xiaye()" >'
+		next = '<li>' + '<a href="javascript:void(0)" onclick="xiayeT()" >'
 		+ '<span aria-hidden="true">&raquo;</span>'
 		+ '</a>' + '</li>';
 	}
@@ -1515,18 +1594,18 @@ function pageT(pages, nums, total) {
 			totalnum = total
 		}
 		for (var i = 1; i <= totalnum; i++) {
-			pageStr = pageStr + '<li><a href="javascript:void(0)" onclick="custom('+i+')">' + i
+			pageStr = pageStr + '<li><a href="javascript:void(0)" onclick="customT('+i+')">' + i
 			+ '</a></li>';
 
 		}
 	} else if (total - pages <= 2) {
 		for (var i = 0; i < 5; i++) {
-			pageStr = '<li><a href="javascript:void(0)" onclick="custom('+(total - i)+')">' + (total - i)
+			pageStr = '<li><a href="javascript:void(0)" onclick="customT('+(total - i)+')">' + (total - i)
 			+ '</a></li>' + pageStr;
 		}
 	} else {
 		for (var i = -1; i <= 3; i++) {
-			pageStr = pageStr + '<li><a href="javascript:void(0)" onclick="custom('+(pages + i)+')">'
+			pageStr = pageStr + '<li><a href="javascript:void(0)" onclick="customT('+(pages + i)+')">'
 			+ (pages + i) + '</a></li>';
 		}
 	}
@@ -1610,5 +1689,6 @@ function initOrderInformation(paramT){
 }
 
 </script>
+	<script type="text/javascript" src="js/personal_center.js"></script>
 </body>
 </html>

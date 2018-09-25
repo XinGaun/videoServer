@@ -1,3 +1,4 @@
+var qians = 0;
 $(function(){
 	var user_id = $.cookie('id');
 	$.cookie('photo');
@@ -47,8 +48,10 @@ $(function(){
 	initEnshrine(param);
 	//judgePC();
 	ifgoumai();
+	initCouPon();
 
 });
+
 var videoObject =null;
 $('#myModalvideo').on('hide.bs.modal', function () {
 	//location.reload([false]);
@@ -68,45 +71,98 @@ var param = {
 		page : nums,
 		nums : (pages*nums)
 }
+//初始化用户可以使用的优惠卷
+function initCouPon(){
+	if(getUrlParam('cid')!=""&&$.cookie("id")!=""){
+		var data = {
+				user_id:$.cookie("id"),
+				courses_id:getUrlParam('cid')
+		}
+		$("#add_grade").html("");
+		$("#add_grade").html("<option value='0,0'>无优惠卷</option>");
+		$.ajax({
+			type : "POST",
+			url : "/videoServer/front/coupon/queryPurchaseCoupon",
+			contentType : 'application/json; charset=UTF-8',
+			datatype : 'json',
+			cache : false, //禁用缓存
+			data :JSON.stringify(data),
+			dataType : "json",
+			success : function(data) {
+				if (data.code == 200) {
+					for(var i=0;i<data.list.length;i++){
+						var add_grade = '<option value="'+data.list[i].discounts_number_id+","+data.list[i].discounts_money+'">'+data.list[i].discounts_text+'</option>';
+						$("#add_grade").append(add_grade);
+					}
+				}
+			}
+		});
+	}
+}
+
+
+//使用优惠卷
+function add_grade(){
+	var length = $("#add_grade").val().length;
+	var coupon_money = $("#add_grade").val().substring($("#add_grade").val().indexOf(",")+1,length);
+	if(coupon_money!=0){
+		var money = qians;
+		money = money-coupon_money;
+		if(money<=0){
+			$("#qians").html("0.00");
+			$("#jian").html("-"+coupon_money);
+		}else{
+			$("#qians").html(money+".00");
+			$("#jian").html("-"+coupon_money);
+		}
+	}else{
+		$("#jian").html("");
+		$("#qians").html(qians);
+	}
+
+}
+
 //购买课程
 function goumais(){
 
 	function getistype(){
 		return ($("#demo1-alipay").is(':checked') ? "1" : "2" ); 
 	}
-	$.ajax({
-		type: "POST",
-		url:"/videoServer/front/pays/pay",
-		data:{
-			price : $("#qians").html(), 
-			istype : getistype(),
-			//goodsname :$("goodsname").val(),
-			user_id : $.cookie('id'),//用户ID
-			video_id : getUrlParam('cid'),//课程Id
-
-		},
-		dataType: "json",
-		success: function(data){
-			if(data==-1){
-				alert("购买成功!");
-				return;
+	var length = $("#add_grade").val().length;
+	var discounts_id = $("#add_grade").val().substring(0,$("#add_grade").val().indexOf(","));
+		$.ajax({
+			type: "POST",
+			url:"/videoServer/front/pays/pay",
+			data:{
+				price : $("#qians").html(), 
+				istype : getistype(),
+				//goodsname :$("goodsname").val(),
+				user_id : $.cookie('id'),//用户ID
+				video_id : getUrlParam('cid'),//课程Id
+				discounts_id:discounts_id
+			},
+			dataType: "json",
+			success: function(data){
+				if(data==-1){
+					alert("购买成功!");
+					window.location.reload();
+					return;
+				}
+				$("#goodsname").val(data.data.goodsname);
+				$("#istype").val(data.data.istype);
+				$('#key').val(data.data.key);
+				$('#notify_url').val(data.data.notify_url);
+				$('#orderid').val(data.data.orderid);
+				$('#orderuid').val(data.data.orderuid);
+				$('#price').val(data.data.price);
+				$('#return_url').val(data.data.return_url);
+				$('#uid').val(data.data.uid);
+				$('#submitdemo1').click();
+			},
+			error:function(){
+				alert(data.msg);
 			}
-			$("#goodsname").val(data.data.goodsname);
-			$("#istype").val(data.data.istype);
-			$('#key').val(data.data.key);
-			$('#notify_url').val(data.data.notify_url);
-			$('#orderid').val(data.data.orderid);
-			$('#orderuid').val(data.data.orderuid);
-			$('#price').val(data.data.price);
-			$('#return_url').val(data.data.return_url);
-			$('#uid').val(data.data.uid);
-			$('#submitdemo1').click();
-		},
-		error:function(){
-			alert(data.msg);
-		}
-	});
-
+		});
 }
 
 //判断是否购买课程
@@ -133,7 +189,7 @@ function ifgoumai(){
 
 			}else{
 				$("#ifgoumai").html("开始学习");
-				
+
 				return true;
 			}
 		}
@@ -147,8 +203,8 @@ function joincourse(){
 
 
 	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
-			window.location.href="logins.html";
-		
+		window.location.href="logins.html";
+
 	}
 	var data = {
 			user_id:$.cookie('id'),
@@ -287,22 +343,23 @@ function initCourseTop(cid){
 		success : function(result) {
 			//console.log(result);
 			for(var i=0;i<result.length;i++){
-				
-					$("#courses_name").html(result[0].courses_name);
-					$("#courses_names").html(result[0].courses_name);
-					$("#courses_grade").html(result[0].courses_grade);
-					$("#qian").html('<span style="font-size:18px;color:#B0171F;">'+result[0].courses_pricemoney+'&nbsp;元</span>');
-					$("#qians").html(result[0].courses_pricemoney);
-					$("#courses_click").html(result[0].courses_click);
-					$("#courses_introduce").html(result[0].courses_introduce);
-					$("#video_form_name").html(result[0].video_form_name);
-					$("#video_form_class").html(result[0].video_form_class);
 
-					$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:300px;" class="img-rounded lazy"></a>');
+				$("#courses_name").html(result[0].courses_name);
+				$("#courses_names").html(result[0].courses_name);
+				$("#courses_grade").html(result[0].courses_grade);
+				$("#qian").html('<span style="font-size:18px;color:#B0171F;">'+result[0].courses_pricemoney+'&nbsp;元</span>');
+				$("#qians").html(result[0].courses_pricemoney);
+				qians = result[0].courses_pricemoney;
+				$("#courses_click").html(result[0].courses_click);
+				$("#courses_introduce").html(result[0].courses_introduce);
+				$("#video_form_name").html(result[0].video_form_name);
+				$("#video_form_class").html(result[0].video_form_class);
 
-					$("#teacher_name").html(result[0].teacher_name);
-					$("#teacher_introduce").html(result[0].teacher_introduce);
-/*
+				$("#videoimg").html('<a href="javascript:void(0)" onclick="joincourse()"><img data-original="'+result[0].courses_img_url+'"  alt="..." style="width:100%;height:300px;" class="img-rounded lazy"></a>');
+
+				$("#teacher_name").html(result[0].teacher_name);
+				$("#teacher_introduce").html(result[0].teacher_introduce);
+				/*
 					$("#Collection").html("收藏");
 				}else{
 					var userPhone = $.cookie("phone");
@@ -339,11 +396,11 @@ function initCourseTop(cid){
 						$("#teacher_name").html(result[0].teacher_name);
 						$("#teacher_introduce").html(result[0].teacher_introduce);
 					}
-					
+
 				}									
 ========
-*/
-									
+				 */
+
 			}
 			$("img.lazy").lazyload({
 				effect : "fadeIn",
@@ -405,9 +462,9 @@ function initCourseTop(cid){
 
 					}]
 
-				}
+			}
 
-				with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+			with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
 		}
 
 	});
@@ -428,14 +485,14 @@ function initEnshrine(param){
 			if(userPhone == null || userPhone == ""){
 				$("#Collection").html("收藏");
 			}else{
-				console.log(result);
+				//console.log(result);
 				if(result[0].video_id == "" || result[0].video_id == null){
 					$("#Collection").html("收藏");
 				}else{
 					$("#Collection").html("已收藏");
 				}
 			}
-			
+
 		}
 	});
 
@@ -483,8 +540,8 @@ function initVideo(video_arr){
 function lodingppt(ppt){
 	var v_id=getUrlParam('cid');
 	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
-			window.location.href="logins.html";
-		
+		window.location.href="logins.html";
+
 	}
 	var data = {
 			user_id:$.cookie('id'),
@@ -513,8 +570,8 @@ function lodingppt(ppt){
 function videourl(urls,id){
 	var v_id=getUrlParam('cid');
 	if($.cookie('id')==null||$.cookie('id')==""||$.cookie('id')==undefined){
-			window.location.href="logins.html";
-		
+		window.location.href="logins.html";
+
 	}
 	var data = {
 			user_id:$.cookie('id'),
@@ -533,13 +590,19 @@ function videourl(urls,id){
 				$("#myModal").modal('show');
 			}else{
 				$("#myModalvideo").modal('show');
-				videoObject = {
+				if(isFirefox=navigator.userAgent.indexOf("Firefox")>0){
+					urls = urls.substring(0,urls.indexOf(".m3u8"));
+					$('#ckplayer_a1').html('<video controls="controls" muted poster="img/huge.jpeg" style="width:1100px;" src="'+urls+'.mp4"></video>');
+			        return "Firefox";  
+				}else{
+					videoObject = {
 						container: '.video',//“#”代表容器的ID，“.”或“”代表容器的class
 						variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
 						autoplay:true,//自动播放
 						video:urls,//视频地址,
 						h:'1',
 						m:'0'
+					}
 				};
 				var player=new ckplayer(videoObject);
 				//查询评论信息
@@ -776,10 +839,10 @@ $("#pinglbtn").click(function(){
 })
 //评论分页
 var obj = {
-				curr:1,
-				limit:10,
-				totalRows:0
-	}
+	curr:1,
+	limit:10,
+	totalRows:0
+}
 var v_id=getUrlParam('cid');
 
 //分页
@@ -818,7 +881,7 @@ function videoComment(video_id){
 			"video_id":video_id,
 			"pageSize":obj.limit,
 			"currPage":obj.curr
-		};
+	};
 	$.ajax({
 		type : "POST",
 		url : url+"/videoServer/front/Videos/queryComment",
@@ -849,35 +912,35 @@ function videoComment(video_id){
 				console.log(photo);
 				for(var i=0;i<result.list.length;i++){
 					var pinglun = '<div class="media">'
-						  +	'<div class="media-left">'
-						  +		'<a href="#"> <img id="imgt" width="40px" height="40px" class="img-circle media-object" src="'+photo+'" alt="..."></a>'
-						  +	'</div>'
-						  +	'<div class="media-body">'
-						  +		'<h4 class="media-heading">'
-						  +		'<span>'+result.list[i].courses_date+'</span>&nbsp;&nbsp;<span>'+result.list[i].user_name+'</span>:</h4>'
-						  +		'<div>'+result.list[i].comment_text+'</div>'
-						  +		'<div><a href="#" id="reply">回复</a></div>'
-						  +	'</div>'
-						  + '</div>';
+						+	'<div class="media-left">'
+						+		'<a href="#"> <img id="imgt" width="40px" height="40px" class="img-circle media-object" src="'+photo+'" alt="..."></a>'
+						+	'</div>'
+						+	'<div class="media-body">'
+						+		'<h4 class="media-heading">'
+						+		'<span>'+result.list[i].courses_date+'</span>&nbsp;&nbsp;<span>'+result.list[i].user_name+'</span>:</h4>'
+						+		'<div>'+result.list[i].comment_text+'</div>'
+						+		'<div><a href="#" id="reply">回复</a></div>'
+						+	'</div>'
+						+ '</div>';
 					var teahuifu= '<div class="media">'
-						  +	'<div class="media-left">'
-						  +			'<a href="#"> <img width="40px" height="40px" class="img-circle media-object" src="img/tx1.png" alt="..."></a>'
-						  +	'</div>'
-						  +	'<div class="media-body">'
-						  +			'<h4 class="media-heading">'
-						  +			'<span>'+result.list[i].reply_date+'</span>&nbsp;&nbsp;<span>'+result.list[i].teacher_name+'</span>&nbsp;回复&nbsp;<span>'+result.list[i].user_name+'</span>:</h4>'
-						  +			'<div>'+result.list[i].reply_text+'</div>'
-						  +			'</div></div>'
-						  + '</div><div >&nbsp;</div><div >&nbsp;</div>'
-						  +'</div>';
-					
-						$("#pingliu").append(pinglun);
+						+	'<div class="media-left">'
+						+			'<a href="#"> <img width="40px" height="40px" class="img-circle media-object" src="img/tx1.png" alt="..."></a>'
+						+	'</div>'
+						+	'<div class="media-body">'
+						+			'<h4 class="media-heading">'
+						+			'<span>'+result.list[i].reply_date+'</span>&nbsp;&nbsp;<span>'+result.list[i].teacher_name+'</span>&nbsp;回复&nbsp;<span>'+result.list[i].user_name+'</span>:</h4>'
+						+			'<div>'+result.list[i].reply_text+'</div>'
+						+			'</div></div>'
+						+ '</div><div >&nbsp;</div><div >&nbsp;</div>'
+						+'</div>';
+
+					$("#pingliu").append(pinglun);
 					if (result.list[i].reply_text!=null&&result.list[i].reply_text!=""&&result.list[i].reply_text!=undefined){
 						//$("#pingliu").append(pinglun);
 						$("#pingliu").append(teahuifu);
 					}
 				}
-				
+
 			}
 		}
 	});

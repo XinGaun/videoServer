@@ -33,4 +33,13 @@ public class LoadIndexController {
 	public String queryRecommendCourseList(@RequestBody String data) {
 		return indexService.queryRecommendCourseList(data);
 	}
+	/**
+	 * 用户查询已购课程信息
+	 * @param data
+	 * @return
+	 */
+	@RequestMapping(value="/queryUseridCourseList",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryUseridCourseList(@RequestBody String data) {
+		return indexService.queryUseridCourseList(data);
+	}
 }

@@ -187,7 +187,12 @@ var uploader = new plupload.Uploader({
 				videoPath = serviceName+"/video/"+get_uploaded_object_name(file.name);                 
 				document.getElementById("video").value = videoPath;		
 				getMP4();	
-				submit();
+				if(suffix == ".mp4"){
+					document.getElementById("videoTime").src = videoPath; 				 	
+				}else{
+					submit();
+				};
+				
 			}
 			else
 			{
@@ -203,28 +208,14 @@ var uploader = new plupload.Uploader({
 });
 var videoTime = 0 ; 
 
-/*function myFunction(ele) {
+function myFunction(ele) {
 	//var hour = parseInt((ele.duration)/3600);
 	//var minute = parseInt((ele.duration%3600)/60);
 	//var second = Math.ceil(ele.duration%60);
 	//videoTime ="视频时长："+hour+"小时，"+minute+"分，"+second+"秒";
 	videoTime = parseInt(ele.duration);	
-	 //上传文件		
-	$.ajax({
-			type : 'post',		
-			data : {video_time:videoTime,video_id:video_id},
-			url : '/videoServer/videoTab/updetVideoById.do',
-			contentType: false, 
-	        processData: false, 
-			success : function(data){										
-				alert("修改成功");			        					
-		        $("#updateVideoModal").modal("hide");
-				window.location.href="";					
-			},error: function(){
-				 alert("submit error");
-			}				
-		});	 				
-} ; */
+	submit();
+} ; 
 function submit(){	 
 	//表单参数
 	var formData = new FormData();  //重点：要用这种方法接收表单的参数  	

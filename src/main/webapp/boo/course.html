@@ -106,10 +106,11 @@ form {
 	border-radius: 4px;
 	padding: 5px 70px 5px 40px;
 }
- #logsd{
- 	font-size: 18px; 
- 	font-weight: bold;
- }
+
+#logsd {
+	font-size: 18px;
+	font-weight: bold;
+}
 /*登录模态框中输入框的设置-添加小图标*/
 /* input[name=uname]{
 		
@@ -294,7 +295,8 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 							<p>
 								评分: <span id="courses_grade"></span>分&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 								<span class="glyphicon glyphicon-user"></span> 学 员 :
-								3622&nbsp;&nbsp;&nbsp;<!--|&nbsp;&nbsp;&nbsp; <img
+								3622&nbsp;&nbsp;&nbsp;
+								<!--|&nbsp;&nbsp;&nbsp; <img
 									src="img/fxxz@2x.png" alt="..." class="img-rounded ">  分享： -->
 								<a class="bds_tsina" data-cmd="tsina"></a> <a class="bds_sqq"
 									data-cmd="sqq"></a> <a class="bds_qzone" data-cmd="qzone"></a>
@@ -594,9 +596,16 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
 				</div>
 				<div class="modal-body">
 					课程名程:<span id="courses_names"></span><br> 课程价格:<span
-						id="qians"></span>元<br> 支付方式:<input type="radio" name="demo1"
-						id="demo1-alipay" value="option1" checked="">支付宝支付 <input
-						type="radio" name="demo1" id="demo1-weixin" value="option2">微信支付
+						id="qians"></span>元&nbsp;&nbsp;<span id="jian" style="color:red"></span><br>
+					支付方式:<input type="radio" name="demo1" id="demo1-alipay"
+						value="option1" checked="">支付宝支付 <input type="radio"
+						name="demo1" id="demo1-weixin" value="option2">微信支付
+					<div class="form-group">
+						<label for="exampleInputEmail1">选择优惠卷:</label> <select
+							class="form-control" onchange="add_grade()" id="add_grade">
+							
+						</select>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

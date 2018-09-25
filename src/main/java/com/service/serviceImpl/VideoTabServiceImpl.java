@@ -49,19 +49,22 @@ public class VideoTabServiceImpl implements VideoTabService{
 		String savevideoPath = videoPath.substring(0, videoPath.lastIndexOf("."))+".m3u8";		
 		//String locpath = "d://filedownload//基本演绎法第六季01.mp4";
 		//File source = new File(locpath);
-		URL httpurl = new URL(videoPath);  
-		File tmpFile = File.createTempFile("temp", ".tmp");//创建临时文件
-		FileUtils.copyURLToFile(httpurl, tmpFile );  
-        Encoder encoder = new Encoder();
-        long ls = 0l;
-        try {
-             MultimediaInfo m = encoder.getInfo(tmpFile);
-             ls = m.getDuration()/1000;
-             System.out.println("此视频时长为:"+ls+"秒！");
-             video_time = Long.toString(ls);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }          
+		if(Integer.parseInt(video_time) == 0) {
+			URL httpurl = new URL(videoPath);  
+			File tmpFile = File.createTempFile("temp", ".tmp");//创建临时文件
+			FileUtils.copyURLToFile(httpurl, tmpFile );  
+	        Encoder encoder = new Encoder();
+	        long ls = 0l;
+	        try {
+	             MultimediaInfo m = encoder.getInfo(tmpFile);
+	             ls = m.getDuration()/1000;
+	             System.out.println("此视频时长为:"+ls+"秒！");
+	             video_time = Long.toString(ls);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }  
+		}
+			        
         createVideoTab(videoName,savevideoPath,imageUrl,pptUrl,video_introduce,video_form_id,teacher_id,video_qz,video_time);
 
 		return "succes";

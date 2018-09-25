@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.entity.PaySaPi;
-
+import com.service.FrontCouponService;
 import com.service.OrderTabService;
 import com.util.Outputsystem;
 
@@ -32,6 +32,8 @@ import com.util.PayUtil;
 public class PaysApiController {
 	@Autowired
 	private OrderTabService orderTabService;//调用订单Service层接口
+	@Autowired
+	private FrontCouponService couponService;
 
 	@RequestMapping(value="/pay",produces="application/json;charset=utf-8",method=RequestMethod.POST)
 	@ResponseBody
@@ -42,13 +44,18 @@ public class PaysApiController {
 		hashMap.put("user_id",user_id);
 		hashMap.put("combo_id", combo_id);
 		hashMap.put("video_id", video_id);
-		hashMap.put("discounts_id", discounts_id);
+		if(discounts_id!=0) {
+			hashMap.put("discounts_id", discounts_id);
+		}
 		hashMap.put("order_due", price);
 		hashMap.put("order_type", istype);
-		if(price.equals("0")) {
+		if(price.equals("0.00")) {
 			hashMap.put("order_status", "已付款");
 			hashMap.put("order_pricemoney", "0");
 			orderTabService.addOrderTab(hashMap);
+			if(discounts_id!=0) {
+				couponService.updateUserIDPurchaseCoupon(hashMap);
+			}
 			return JSON.toJSONString("-1");
 		}else {
 			hashMap.put("order_status", "未付款");
@@ -108,10 +115,13 @@ public class PaysApiController {
 		HashMap<String,Object> hashMap = new HashMap<String,Object>();
 		hashMap.put("order_id", orderid);
 		//System.out.println(orderid);
-		int flog = orderTabService.queryOrderTab(hashMap);
+		HashMap<String,Object> flogmap= orderTabService.queryOrderTab(hashMap);
 		//System.out.println(flog);
-		if(flog==1) {
+		if(null!=flogmap&&flogmap.containsKey("order_id")) {
 			isTrue = true;
+			if(null!=flogmap.get("discounts_id")) {
+				couponService.updateUserIDPurchaseCoupon(flogmap);
+			}
 		}
 		if (isTrue) {
 			view = new ModelAndView("boo/success");
