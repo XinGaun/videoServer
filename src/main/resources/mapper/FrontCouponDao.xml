@@ -7,6 +7,9 @@
 	<select id="queryCouponIDList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		select discounts_id,discounts_text,discounts_money,dis.courses_id,date_format(discounts_date,'%Y-%m-%d')discounts_date,cou.courses_name,cou.courses_img_url,
 		(select count(1) from discounts_number_tab where discounts_id = #{discounts_id} and user_id is null)num
+		<if test="user_id!=null">
+			(select count(1) from discounts_number_tab where dis.discounts_id=#{discounts_id} and user_id=#{user_id})flog
+		</if>
 		from discounts_tab dis left join courses_tab cou on cou.courses_id=dis.courses_id
 		where dis.discounts_id = #{discounts_id}
 	</select>
