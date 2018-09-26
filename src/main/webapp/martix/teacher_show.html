@@ -419,12 +419,12 @@
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">跳转地址:</label> 
-						<select class="form-control" id="updateteteac_show_id">
+						<select class="form-control" id="updateteac_show_url">
 							<option value="#">不跳转</option>
-						</select>
+						</select><input type="text" style="display:none;" id="updateteteac_show_id">
 						<!-- <input type="email"
 							class="form-control" id="updateteac_show_url"
-							placeholder="http:www.xxx.com"><input type="text" style="display:none;" id="updateteteac_show_id"> -->
+							placeholder="http:www.xxx.com"> -->
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">排序权重:</label> <input type="text"
@@ -624,7 +624,12 @@
 				formData.append("teac_show_img",teac_show_img);
 				formData.append("teac_show_name",teac_show_name);
 				formData.append("teac_show_introduce",teac_show_introduce);
-				formData.append("teac_show_url","http://www.niceyuwen.com/teacher_centre.html?cid="+teac_show_url);
+				if(teac_show_url!="#"){
+					formData.append("teac_show_url","http://www.niceyuwen.com/teacher_centre.html?cid="+teac_show_url);
+				}else{
+					formData.append("teac_show_url","#");
+				}
+				
 				formData.append("teac_show_weight",teac_show_weight);
 				//alert(data);
 				$.ajax({
@@ -670,7 +675,11 @@
 			formData.append("teac_show_img",teac_show_img);
 			formData.append("teac_show_name",teac_show_name);
 			formData.append("teac_show_introduce",teac_show_introduce);
-			formData.append("teac_show_url","http://www.niceyuwen.com/teacher_centre.html?cid="+teac_show_url);
+			if(teac_show_url!="#"){
+				formData.append("teac_show_url","http://www.niceyuwen.com/teacher_centre.html?cid="+teac_show_url);
+			}else{
+				formData.append("teac_show_url","#");
+			}
 			formData.append("teac_show_weight",teac_show_weight);
 			formData.append("teac_show_id",teac_show_id);
 			//alert(JSON.stringify(data));
@@ -732,7 +741,7 @@
 						for(var i=0;i<data.list.length;i++){
 							var addteac_show_url ='<option value='+data.list[i].teacher_id+'>'+data.list[i].teacher_name+'</option>'; 
 							$('#addteac_show_url').append(addteac_show_url);
-							$('#updateteteac_show_id').append(addteac_show_url);
+							$('#updateteac_show_url').append(addteac_show_url);
 						}
 					} else {
 						alert("删除失败!");

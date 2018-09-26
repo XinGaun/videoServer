@@ -246,12 +246,14 @@ function submit(){
 		success : function(data){									
 			alert("上传成功");			   					
 			$("#myModal").modal("hide");
-			window.location.href="";			
+			//window.location.href="";	
+			window.location.reload();
 			// getVideoTime();
 		},error: function(){
 			//alert("上传成功");			   					
 			$("#myModal").modal("hide");
-			window.location.href="";	
+			//window.location.href="";
+			window.location.reload();
 		}				
 	});	 
 	return false;

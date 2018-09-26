@@ -14,72 +14,30 @@
 
 </head>
 <style>
-	#search_submit{
-	 	border-top-left-radius:0em;
-		border-top-right-radius:2em;
-		border-bottom-right-radius:2em;
-		border-bottom-left-radius:0em; 
-	 }
- 	 #dropdown{
- 	 	border-top-left-radius:2em;
-		border-top-right-radius:0em;
-		border-bottom-right-radius:0em;
-		border-bottom-left-radius:2em; 
- 	 }
- 	 /*按钮圆角设置*/
-	.active{  
-	 	
-	 	margin:2vh -8vw 0vh 5vw;
-	 	display:inline-block;
-	 	verticle-align:middle;
-	 	color:black;
-	 	text-decoration: none;
-	 } 
-	 a:hover{
-	 	text-decoration:none;
-	 	
-	 } 
+
+ /*按钮圆角设置*/
+#logsd {
+	margin-top: 10px;
+	float: right;
+	display: inline-block;
+	verticle-align: middle;
+	color: black;
+	text-decoration: none;
+}
+
+.actives {
+	background-image: url('./img/img_select1.png');
+	background-repeat: no-repeat;
+	background-position: 0px 56px;
+	color: #24b4f8;
+}
+
+#logsd {
+	font-size: 18px;
+	font-weight: bold;
+}
 	
-	  #log a{
-	 	color:#3AA8FF;
-	 	padding:1vh 1.5vw;
-	 	text-decoration:none;
-	 } 
-	 #logImg{
-	 	float:right;
-	 	border:1px solid red;
-	 	margin:2vh 1vw 0vh 0vw;
-	 	display:none;
-	 }
-	#login{
-		width:22vw;
-	 	height:52vh;
-	 	background-color:#FFFFFF;
-	 	border-radius:0.3em;
-	 	margin-left:70vw;
-	 	margin-top:12vh;
-	 	margin-bottom:9vh;
-	 	position:absolute;
-	}
-	
-	form{
-	 	position:relative;
-	 	top:4vh;
-	 	left:2.2vw;
-	 	width:18vw;
-	 	height:45vh;
-	 	
-	}
-	#header span{
-	  font-size:1.5vw;
-	}
-	/* 输入框的圆角设置 */
-	#body input{
-	  margin: 1.5vh 0vw;
-	  border:1px solid #888;
-      border-radius:4px;
-      padding:5px 70px 5px 40px;
-	}
+
 	/*登录模态框中输入框的设置-添加小图标*/
 	/* input[name=uname]{
 		
@@ -108,26 +66,7 @@
       	color:#FFFFFF;
       	margin:2vh 0vw 1vh;
 	}
-	/* 设置输入框里的字体大小，浏览器兼容不一样，每个都要设置 */
-	input::-webkit-input-placeholder { /* WebKit browsers */ 
-		font-size:2vh;
-	} 
 
-	input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
-		font-size:2vh;
-	} 
-	input::-moz-placeholder { /* Mozilla Firefox 19+ */ 
-		font-size:2vh;
-	} 
-	input:-ms-input-placeholder { /* Internet Explorer 10+ */ 
-		font-size:2vh;
-	} 
-	#bodys{
-		background:url(photos/LoginPhoto/bj@2x.png) no-repeat;
-		background-size:100% 73vh;  
-		min-height:71vh;
-	}
-	
 	 
 	#logo{
 		position:relative;
@@ -135,136 +74,37 @@
 	 	border:1px solid #888888;
 	 	width:25vw;
 	}
-	 #foot{
-	 	width:100vw;
-	 	height:13vh;	
-	 	border-bottom:1px solid #999999;
-	 	position:relative;
-	 	border-top:1px solid gray;
-	 } 
-	 #foot-head{
-	 	margin:3vh 19.4vw 0vh 19.2vw;
-	 	height:9.2vh;
-	 	width:61.3vw;
-	 	
-	 }
-	
-	 #footimg{
-	 	height:9.2vh;
-	 	width:5vw;
-	 	margin-left:5vw;
-	 }
-	 #footma{
-	 	width:21vw;
-	 	margin-left:6vw;
-	 }
-	 #footma span{
-	 	
-	 	vertical-align:top;
-	 }
-	 #footma img,#footma span{
-	 	margin:0vh 0vw 0vh 0.9vw;
-	 }
-	 .footli{
-	 	text-align:center;
-	 }
-	 #footli{
-	 	width:50vw;
-	 	height:9.1vh;
-	 	font-size:0.8vw;
-	 }
-	 #footli span,#footli div{
-	 	
-		margin-left:0.5vw;
-	 }
-	 #foot ol{
-	 	list-style-type:none;
-	 	padding:0px;
-	 }
-	 #foot li{
-	 	display:inline-block;
-	 	color:#999999;
-	 	margin:0vh 0.4vw
-	 }
+
 	
 	 
 
 </style>
 <body>
-<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-				aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="index.html"><img src="img/logo @2x.png"
-				alt="..." class="img-rounded img-responsive lazy"></a>
-			<p>&nbsp;</p>
+	<!-- 页头 -->
+	<div
+		style="height: 67px; display: flex; justify-content: center; align-items: center; background-color: #fff;">
+		<div style="margin: 0 auto; width: 1200px;">
+			<a href="index.html"><img src="./img/logos.png"></a> <a
+				id="logsd" href="logins.html" @click="change(1)"
+				:class="flag==1?'actives':''">登录</a>
+
+			<div id="logImg" class="dropdown" style="float: right;">
+				<button class="btn btn-default dropdown-toggle" type="button"
+					id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="true">
+					<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px"
+						height="40px" class="img-circle" /> <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					<li><a href="personal_center.html">个人中心</a></li>
+					<li id="exit"><a>退出</a></li>
+				</ul>
+			</div>
 		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<!-- <ul class="nav navbar-nav" style="margin-left:4vw;">
-				<li class="active">&nbsp; <span class="sr-only">(current)</span></li>
 
 
-				<li class="dropdown" STYLE="margin-top: 5%">
-
-					<div class="form-group navbar-form navbar-left">
-						<div class="input-group col-xs-12">
-							<div class="input-group-btn">
-								<select name="type" id="dropdown" class="form-control" style="width: auto;">
-									<option value="1">全部</option>
-									<option value="2">高中</option>
-									<option value="3">初中</option>
-									<option value="4">小学</option>
-								</select>
-							</div>
-							<input type="text" name="keyword" id="keyword"
-								class="form-control" placeholder="请您输入关键词"> 
-							<span class="input-group-btn">
-								<button class="btn btn-info" id="search_submit" type="submit">
-									搜索
-								</button>
-							</span>
-						</div>
-					</div>
-				</li>
-			</ul> -->
-			<!-- 登录|注册 -->
-			
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<div>
-						<div  id="logsd">
-							<a href="logins.html" @click="change(1)" :class="flag==1?'active':''">登录</a>
-					    	<!-- <a href="rigester.html" @click="change(2)" :class="flag==2?'active':''">注册</a> -->
-						</div>
-						<!-- 添加头像 -->
-						<div id="logImg" class="dropdown">             			
-	                 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	   							<img id="imgt" src="photos/LoginPhoto/txx.png" width="40px" height="40px" class="img-circle"/>
-	    						<span class="caret"></span>
-	  						</button>
-		                 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								<li><a href="personal_center.html">个人中心</a></li>					 
-								<li id="exit"><a>退出</a></li>
-							</ul>		                		
-	                 	</div>
-					</div><!-- 登录|注册结束 -->					
-				</li>
-			</ul>			
-		</div>
-		<!-- /.navbar-collapse -->
 	</div>
-	<!-- /.container-fluid --> </nav>
 
 	<!--  -->
 	<div class="row">
@@ -362,23 +202,6 @@
 		  }  
 	})  
 
-	//判断PC或移动
-	$(function(){
-		judgePC();
-	})
-	function judgePC(){
-		if (navigator.userAgent.match(/mobile/i)) {
-			//移动端
-			$("#logsd").css("margin-right", "10vw");
-			$("#logsd").css("margin-top", "3.5vh");
-			$("#footimg").css("margin-top","-16vh");
-			$("#footlogo").css("margin-top","-16vh");
-		} else {
-			//pc端
-			$("#logsd").css("margin-right", "15vw");
-			$("#logsd").css("margin-top", "3.5vh");
-		}
-	} 
 
 </script>
 

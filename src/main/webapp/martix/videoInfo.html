@@ -724,7 +724,8 @@ function delet(obj){
        	data : {video_id:d},
        	success : function(){
        		alert("删除成功！");
-       		window.location.href="";
+       		//window.location.href="";
+       		window.location.reload();
        	}
     })
 }
@@ -781,7 +782,8 @@ function getId(obj){
 	});
 	
 	$("#eliminates").click(function(){	
-		window.location.href="";
+		//window.location.href="";
+		window.location.reload();
 	});
 	function getVideoForm(){
 		$.ajax({
@@ -855,7 +857,8 @@ function getId(obj){
 					success : function(data){										
 						alert("修改成功");			        					
 				        $("#updateVideoModal").modal("hide");
-						window.location.href="";					
+				        window.location.reload();
+				        //window.location.href="";					
 					},error: function(){
 						 alert("submit error");
 					}				

@@ -270,7 +270,7 @@ function initteachershow(){
 									+'<a href="'+data.list[i].teac_show_url+'" target="view_window" ><img src="http://www.niceyuwen.com/image/'+data.list[i].teac_show_img+'" style="width: 290px; height: 195px;"></a>'
 									+'<div style="height: 71px; width: 290px; border: 2px solid #f5f5f5;">'
 									+'<p style="font-weight: bold; margin-left: 10px; margin-top: 10px;">'+data.list[i].teac_show_name+'</p>'
-									+'<p style="margin-left: 10px;">'+data.list[i].teac_show_introduce+'</p>'
+									+'<p style="margin-left: 10px;" title="'+data.list[i].teac_show_introduce+'">'+data.list[i].teac_show_introduce+'</p>'
 									+'</div>'
 									+'</div></td>';
 					

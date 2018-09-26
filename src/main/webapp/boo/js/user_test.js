@@ -16,11 +16,16 @@ function init(){
 		//data: JSON.stringify(param),  //传入组装的参数
 		dataType : "json",
 		success : function(result) {
+			
+			if(result.length==0){
+				window.location.href="index.html";
+			}
 			for(var i=0;i<result.length;i++){
 				var str = result[i].test_type;
 				var onemenu = '<li role="presentation"><a href="javascript:void(0)" onclick="selectdifficulty(&quot;'+str+'&quot;)">'+result[i].test_type+'</a></li>'
 				$("#onemenu").append(onemenu);
 			}
+			
 			
 		}
 	});

@@ -592,7 +592,7 @@ function videourl(urls,id){
 				$("#myModalvideo").modal('show');
 				if(isFirefox=navigator.userAgent.indexOf("Firefox")>0){
 					urls = urls.substring(0,urls.indexOf(".m3u8"));
-					$('#ckplayer_a1').html('<video controls="controls" muted poster="img/huge.jpeg" style="width:1100px;" src="'+urls+'.mp4"></video>');
+					$('#ckplayer_a1').html('<video controls="controls" muted poster="img/huge.jpeg" style="width:1100px;height:500px;" src="'+urls+'.mp4"></video>');
 			        return "Firefox";  
 				}else{
 					videoObject = {
@@ -970,10 +970,10 @@ function initTeacherClass(cid){
 					+'<div class="media-body">'
 					+ '<p style="font-weight: bold;">'
 					+result[0].teacher_name
-					+'</p>'
-					+ '<p style="text-indent:2em" class="kcjs">'
-					+result[0].teacher_introduce
 					+'</p></div>';
+					/*+ '<p style="text-indent:2em" class="kcjs">'
+					+result[0].teacher_introduce
+					+'</p>'*/;
 				$("#TeacherClass").append(TeacherClass);
 				$("img.lazy").lazyload({
 					effect : "fadeIn",

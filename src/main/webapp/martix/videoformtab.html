@@ -616,7 +616,8 @@ function delet(status,id){
        	data:{video_form_status : status,video_form_id : id},
        	success : function(){
        		alert("修改成功！");
-       		window.location.href="";
+       		//window.location.href="";
+       		window.location.reload();
        	}
     })	;										
 }
@@ -647,7 +648,8 @@ function delet(status,id){
 				success : function(data){										
 					alert("添加成功");			        					
 			        $("#myModal").modal("hide");
-					window.location.href="";					
+			        window.location.reload();
+			        //window.location.href="";					
 				},error: function(){
 					 alert("submit error");
 				}				
@@ -678,7 +680,8 @@ function delet(status,id){
 	});
 	
 	$("#eliminates").click(function(){	
-		window.location.href="";
+		window.location.reload();
+		//window.location.href="";
 	});
 	
 	//修改   加载模态框    
@@ -734,7 +737,8 @@ function delet(status,id){
 					success : function(data){										
 						alert("修改成功");			        					
 				        $("#updateModal").modal("hide");
-						window.location.href="";					
+				        window.location.reload();
+				        //window.location.href="";					
 					},error: function(){
 						 alert("submit update error");
 					}				
