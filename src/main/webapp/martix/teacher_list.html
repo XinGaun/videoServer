@@ -20,6 +20,8 @@
 		<link rel="stylesheet" href="js/layui/css/layui.css" />
 		<script type="text/javascript" src="js/laydate/laydate.js"></script>
 		<script type="text/javascript" src="js/layui/layui.js"></script>
+		<!-- 富文本 -->
+	<script type="text/javascript"  src="js/wangEditor.min.js"></script>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -31,7 +33,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="index.html"><i class="fa fa-comments"></i> <strong>语道后台管理 </strong></a>
+					<a class="navbar-brand" href="#"><i class="fa fa-comments"></i> <strong>语道后台管理 </strong></a>
 				</div>
 
 				<!-- <ul class="nav navbar-top-links navbar-right">
@@ -392,7 +394,7 @@
 							<th>邮箱</th>
 							<th>录入日期</th>
 							<th>状态</th>
-							<th>简介</th>
+							<!-- <th>简介</th> -->
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -524,7 +526,7 @@
 							"<td>"+data[i].teacher_mail+"</td>"+
 							"<td>"+data[i].teacher_date+"</td>"+
 							"<td>"+data[i].teacher_status+"</td>"+
-							"<td>"+data[i].teacher_introduce+"</td>"+
+							/* "<td>"+data[i].teacher_introduce+"</td>"+ */
 							"<td><a href='teacher_info.html?id="+ data[i].teacher_id +"' class=\"btn btn-info\">查看</a>"+
 							"&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"javascript:deleteTeacherInfo('"+ data[i].teacher_id +"');\" class=\"btn btn-danger\">删除</a>"+
 							"</td>"+

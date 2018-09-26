@@ -15,7 +15,7 @@
 	<select id="queryUserTest" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT test_id,test_subject,test_answer,test_grade,test_type FROM user_test WHERE 1=1 
 		<if test="test_id!=''">
-			and test_id = #{test_id}
+			and test_id like '%${test_id}%'
 		</if>
 		<if test="test_subject!=''">
 			and test_subject like '%${test_subject}%'
@@ -29,7 +29,7 @@
 	<select id="queryUserTestCount" resultType="int" parameterType="java.util.HashMap">
 		SELECT count(test_id) FROM user_test where 1=1 
 		<if test="test_id!=''">
-			and test_id = #{test_id}
+			and test_id like '%${test_id}%'
 		</if>
 		<if test="test_subject!=''">
 			and test_subject like '%${test_subject}%'

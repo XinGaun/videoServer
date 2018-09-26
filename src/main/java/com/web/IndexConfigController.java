@@ -170,4 +170,14 @@ public class IndexConfigController {
 	public String queryTeachershowTabAll(@RequestBody String data) {
 		return configService.queryTeachershowTabAll(data);
 	}
+	/**
+	 * 查询跳转教师ID信息
+	 * @param data
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="/queryTeachersUrlID",produces="application/json;charset=utf-8",method=RequestMethod.POST)
+	public String queryTeachersUrlID(@RequestBody String data) {
+		return configService.queryTeachersUrlID(data);
+	}
 }

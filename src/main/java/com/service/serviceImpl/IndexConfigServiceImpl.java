@@ -293,5 +293,14 @@ public class IndexConfigServiceImpl implements IndexConfigService {
 		ArrayList<HashMap<String,Object>> list = configDao.queryTeachershowTabAll(map);
 		return JSON.toJSONString(Count.counts(list, -1, map,200,"queryTeachershowTabAll success"));
 	}
+	/**
+	 * 查询跳转教师ID信息
+	 */
+	@Override
+	public String queryTeachersUrlID(String data) {
+		HashMap<String,Object> map = JSON.parseObject(data, HashMap.class);
+		ArrayList<HashMap<String,Object>> list = configDao.queryTeachersUrlID(map);
+		return JSON.toJSONString(Count.counts(list, -1, map,200,"queryTeachersUrlID success"));
+	}
 
 }

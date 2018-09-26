@@ -139,7 +139,7 @@ function initCourseTop(cid){
 		data : JSON.stringify({cid:cid}), //传入组装的参数
 		dataType : "json",
 		success : function(result) {
-			//console.log(result);
+		//	console.log(result);
 			for(var i=0;i<result.length;i++){
 				$("#teacher_name").html(result[i].teacher_name);
 				$("#video_form_class").html(result[i].video_form_class);
@@ -147,7 +147,7 @@ function initCourseTop(cid){
 				$("#teacher_introduce").html(result[i].teacher_introduce);
 				//$("#video_form_name").html(result[0].video_form_name);
 				//$("#video_form_class").html(result[0].video_form_class);
-				$("#teacher_imgurl").html('<img data-original="'+result[i].teacher_imgurl+'"  alt="..." style="width:65%;" class="img-rounded lazy">');
+				$("#teacher_imgurl").html('<img data-original="'+result[i].teacher_imgurl+'"  alt="..." style="width:100%;height:300px;" class="img-rounded lazy">');
 				//$("#teacher_name").html(result[0].teacher_name);
 				//$("#teacher_introduce").html(result[0].teacher_introduce);
 			}
@@ -155,10 +155,10 @@ function initCourseTop(cid){
 				effect : "fadeIn",
 				offset : 300
 			});
-			var arr = result[0].courses_video.replace("[","");
+			/*var arr = result[0].courses_video.replace("[","");
 			arr = arr.replace("]","");
 			arr =arr.split(",");
-			initVideo(arr);
+			initVideo(arr);*/
 		}
 
 	});
@@ -174,6 +174,7 @@ function initBoutique(param){
 		data: JSON.stringify(param),  //传入组装的参数
 		dataType : "json",
 		success : function(result) {
+			//console.log(result);
 			if (result.list.length == 0) {
 				$("#excellent").append("暂无课程信息!");
 				return;

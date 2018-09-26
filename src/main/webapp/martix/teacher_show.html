@@ -36,7 +36,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html"><i
+				<a class="navbar-brand" href="#"><i
 					class="fa fa-comments"></i> <strong>语道后台管理 </strong></a>
 			</div>
 
@@ -318,9 +318,14 @@
 														id="addteac_show_introduce" placeholder="教师介绍">
 												</div>
 												<div class="form-group">
-													<label for="exampleInputEmail1">跳转地址:</label> <input
+												<label for="exampleInputEmail1">跳转地址:</label>
+												<select class="form-control" id="addteac_show_url">
+													<option value="#">不跳转</option>
+													
+												</select>
+													<!--  <input
 														type="email" class="form-control" id="addteac_show_url"
-														placeholder="http:www.xxx.com">
+														placeholder="http:www.xxx.com"> -->
 												</div>
 												<div class="form-group">
 													<label for="exampleInputEmail1">排序权重:</label> <input
@@ -413,9 +418,13 @@
 							placeholder="教师介绍">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">跳转地址:</label> <input type="email"
+						<label for="exampleInputEmail1">跳转地址:</label> 
+						<select class="form-control" id="updateteteac_show_id">
+							<option value="#">不跳转</option>
+						</select>
+						<!-- <input type="email"
 							class="form-control" id="updateteac_show_url"
-							placeholder="http:www.xxx.com"><input type="text" style="display:none;" id="updateteteac_show_id">
+							placeholder="http:www.xxx.com"><input type="text" style="display:none;" id="updateteteac_show_id"> -->
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">排序权重:</label> <input type="text"
@@ -463,6 +472,7 @@
 			function init() {
 				loadRoleInfo();
 				loadData();
+				initteaID();
 			}
 
 			$("#queryUserInfo").click(function() {
@@ -614,7 +624,7 @@
 				formData.append("teac_show_img",teac_show_img);
 				formData.append("teac_show_name",teac_show_name);
 				formData.append("teac_show_introduce",teac_show_introduce);
-				formData.append("teac_show_url",teac_show_url);
+				formData.append("teac_show_url","http://www.niceyuwen.com/teacher_centre.html?cid="+teac_show_url);
 				formData.append("teac_show_weight",teac_show_weight);
 				//alert(data);
 				$.ajax({
@@ -642,7 +652,7 @@
 		function updateinform(data){
 			$("#updateteac_show_name").val(data.teac_show_name);
 			$("#updateteac_show_introduce").val(data.teac_show_introduce);
-			$("#updateteac_show_url").val(data.teac_show_url);
+			//$("#updateteac_show_url").val(data.teac_show_url);
 			$("#updateteac_show_weight").val(data.teac_show_weight);
 			$("#updateteteac_show_id").val(data.teac_show_id);
 			$('#myModal2').modal('show');
@@ -660,7 +670,7 @@
 			formData.append("teac_show_img",teac_show_img);
 			formData.append("teac_show_name",teac_show_name);
 			formData.append("teac_show_introduce",teac_show_introduce);
-			formData.append("teac_show_url",teac_show_url);
+			formData.append("teac_show_url","http://www.niceyuwen.com/teacher_centre.html?cid="+teac_show_url);
 			formData.append("teac_show_weight",teac_show_weight);
 			formData.append("teac_show_id",teac_show_id);
 			//alert(JSON.stringify(data));
@@ -698,6 +708,32 @@
 					if (data.code == 200) { //删除成功
 						//添加数据
 						window.location.reload();
+					} else {
+						alert("删除失败!");
+					}
+				}
+			});
+		}
+		function initteaID(){
+			var data = {
+					name:1
+			}
+			$.ajax({
+				type : "POST",
+				url : url + "/front/IndexConfig/queryTeachersUrlID",
+				contentType : 'application/json; charset=UTF-8',
+				datatype : 'json',
+				cache : false, //禁用缓存
+				data :JSON.stringify(data),
+				dataType : "json",
+				success : function(data) {
+					if (data.code == 200) { //删除成功
+						//添加数据
+						for(var i=0;i<data.list.length;i++){
+							var addteac_show_url ='<option value='+data.list[i].teacher_id+'>'+data.list[i].teacher_name+'</option>'; 
+							$('#addteac_show_url').append(addteac_show_url);
+							$('#updateteteac_show_id').append(addteac_show_url);
+						}
 					} else {
 						alert("删除失败!");
 					}

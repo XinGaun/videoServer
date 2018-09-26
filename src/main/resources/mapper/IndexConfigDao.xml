@@ -122,4 +122,8 @@
 	<select id="queryTeachershowTabAll" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		select * from teachershow_tab order by teac_show_weight desc 
 	</select>
+	<!-- 查询跳转教师ID信息 -->
+	<select id="queryTeachersUrlID" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select teacher_id,teacher_name from teacher_tab
+	</select>
 </mapper>

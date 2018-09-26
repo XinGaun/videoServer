@@ -103,4 +103,8 @@ public interface IndexConfigDao {
 	 * 查询展示教师信息
 	 */
 	public ArrayList<HashMap<String,Object>> queryTeachershowTabAll(HashMap<String,Object> map);
+	/**
+	 * 查询跳转教师ID信息
+	 */
+	public ArrayList<HashMap<String,Object>> queryTeachersUrlID(HashMap<String,Object> map);
 }

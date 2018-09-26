@@ -249,7 +249,9 @@ function submit(){
 			window.location.href="";			
 			// getVideoTime();
 		},error: function(){
-			alert("submit error");
+			//alert("上传成功");			   					
+			$("#myModal").modal("hide");
+			window.location.href="";	
 		}				
 	});	 
 	return false;

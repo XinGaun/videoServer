@@ -90,4 +90,10 @@ public interface IndexConfigService {
 	 * @return
 	 */
 	public String queryTeachershowTabAll(String data);
+	/**
+	 * 查询跳转教师ID信息
+	 * @param data
+	 * @return
+	 */
+	public String queryTeachersUrlID(String data);
 }
