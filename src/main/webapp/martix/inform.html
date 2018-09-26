@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -23,6 +22,19 @@
 <link rel="stylesheet" href="js/layui/css/layui.css" />
 <script type="text/javascript" src="js/laydate/laydate.js"></script>
 <script type="text/javascript" src="js/layui/layui.js"></script>
+<!-- 富文本 -->
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
+<style type="text/css">
+.toolbar {
+	border: 1px solid #ccc;
+}
+.text {
+	border: 1px solid #ccc;
+	width: 100%;
+	height: 325px;
+	max-height: 320px;
+}
+</style>
 </head>
 <body>
 	<div id="wrapper">
@@ -229,13 +241,13 @@
 							<li><a href="user_list.html"><i class="fa fa-user"></i>
 									用户管理</a></li>
 						</ul></li>
-						<li><a href="videoformtab.html" ><i
-							class="fa fa-table"></i>视频类型管理</a></li>
+					<li><a href="videoformtab.html"><i class="fa fa-table"></i>视频类型管理</a></li>
 					<li><a href="videoInfo.html"><i class="fa fa-table"></i>视频管理</a>
 					</li>
 					<li><a href="classInfo.html"><i class="fa fa-edit"></i>课程管理</a>
 					</li>
-					<li class="role" style="display: none;"><a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a></li>
+					<li class="role" style="display: none;"><a href="coupon.html"><i
+							class="fa fa-qrcode"></i>优惠券管理</a></li>
 					<!--    <li>
 	                        <a href="taocanInfo.html"><i class="fa fa-sitemap"></i>套餐管理</a>
 	                    </li>
@@ -305,9 +317,12 @@
 														placeholder="通知内容">
 												</div>
 												<div class="form-group">
-													<label for="exampleInputEmail1">跳转地址:</label> <input
+													<label for="exampleInputEmail1">跳转地址:</label>
+													<!-- <input
 														type="email" class="form-control" id="zhuanurl"
-														placeholder="http:www.xxx.com">
+														placeholder="http:www.xxx.com"> -->
+													<div id="div1" class="toolbar"></div>
+													<div id="div2" class="text"></div>
 												</div>
 												<div class="form-group">
 													<label for="exampleInputEmail1">排序权重:</label> <input
@@ -389,19 +404,23 @@
 							class="form-control" id="updetetextbody" placeholder="通知内容">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">跳转地址:</label> <input type="email"
-							class="form-control" id="updatezhuanurl" placeholder="http:www.xxx.com">
+						<label for="exampleInputEmail1">跳转地址:</label>
+						<!-- <input type="email"
+							class="form-control" id="updatezhuanurl" placeholder="http:www.xxx.com"> -->
+						<div id="div3" class="toolbar"></div>
+						<div id="div4" class="text"></div>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">排序权重:</label> <input type="text"
 							onkeyup="value=value.replace(/[^\d]/g,'')" class="form-control"
-							id="updateinfoweight" placeholder="0">
-							<input type="text" id="updateinfoid" style="display:none;">
+							id="updateinfoweight" placeholder="0"> <input type="text"
+							id="updateinfoid" style="display: none;">
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" onclick="pushupdateinform()">修改</button>
+					<button type="button" class="btn btn-primary"
+						onclick="pushupdateinform()">修改</button>
 				</div>
 			</div>
 		</div>
@@ -426,6 +445,8 @@
 	<script>
 		//var url="http://localhost:8080/videoServer/";
 		var url = "/videoServer/"
+		var introcontent1;
+	    var introcontent2;
 		$(function() {
 			var obj = {
 				curr : 1,//页数
@@ -578,10 +599,12 @@
 
 		//添加通知信息
 		function addinform() {
+			 getContent1();
 			if($("#zhuanurl").val()!=""&&$("#textbody").val()!=""){
 				var data ={
 					info_text:$("#textbody").val(),
-					info_url:$("#zhuanurl").val(),
+					//info_url:$("#zhuanurl").val(),						
+				    info_url :introcontent1,
 					info_weight:$("#infoweight").val()
 				}
 				//alert(data);
@@ -610,7 +633,8 @@
 		//打开修改通知信息模态框
 		function updateinform(data){
 			$("#updetetextbody").val(data.info_text);
-			$("#updatezhuanurl").val(data.info_url);
+			//$("#updatezhuanurl").val(data.info_url);
+			 editor2.txt.html(data.info_url);
 			$("#updateinfoweight").val(data.info_weight);
 			$("#updateinfoid").val(data.info_id);
 			$('#myModal2').modal('show');
@@ -618,9 +642,11 @@
 		}
 		//修改通知信息
 		function pushupdateinform(){
+			 getContent2();
 			var data ={
 				info_text:$("#updetetextbody").val(),
-				info_url:$("#updatezhuanurl").val(),
+				//info_url:$("#updatezhuanurl").val(),				
+			    info_url :introcontent2 ,					
 				info_weight:$("#updateinfoweight").val(),
 				info_id:$("#updateinfoid").val()
 			}
@@ -670,7 +696,30 @@
 	</script>
 	<!-- Custom Js -->
 	<script src="assets/js/custom-scripts.js"></script>
+<!-- fuwenben -->
+	<script type="text/javascript">
+       var E = window.wangEditor;
+       var editor1 = new E('#div1', '#div2')  ;
+        // 或者 var editor = new E( document.getElementById('editor') )
+        editor1.customConfig.uploadImgShowBase64 = true ;  // 使用 base64 保存图片
+        editor1.customConfig.zIndex = 100;
+        editor1.create();
+         function getContent1(){      
+        // 读取 html
+            introcontent1 = editor1.txt.html();
+           
+        };
+        var editor2 = new E('#div3', '#div4')  ;
+        // 或者 var editor = new E( document.getElementById('editor') )
+        editor2.customConfig.uploadImgShowBase64 = true ;  // 使用 base64 保存图片
+        editor2.customConfig.zIndex = 100;
+        editor2.create();
+         function getContent2(){      
+        // 读取 html
+            introcontent2 = editor2.txt.html();        
+        };
 
+    </script>
 
 </body>
 </html>
