@@ -17,27 +17,30 @@
 	width: 150px; /* 设置需要固定的宽度 */
 	white-space: nowrap; /* 不换行 */
 	text-overflow: ellipsis; /*  超出部分用....代替 */
-	overflow: hidden; /* 超出隐藏 */ 
+	overflow: hidden; /* 超出隐藏 */
 }
 
+;
 table {
 	table-layout: fixed;
 	width: 1300px;
-	
-};
-  .toolbar {
-            border: 1px solid #ccc;
-           
-   }
-  .text {
-            border: 1px solid #ccc;
-            width:100%;
-            height: 325px;
-            max-height:320px;
-        }
+}
+
+;
+.toolbar {
+	border: 1px solid #ccc;
+}
+
+;
+.text {
+	border: 1px solid #ccc;
+	width: 100%;
+	height: 325px;
+	max-height: 320px;
+}
 </style>
-	<!-- 富文本 -->
-	<script type="text/javascript"  src="js/wangEditor.min.js"></script>
+<!-- 富文本 -->
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
 
 </head>
 <body>
@@ -50,9 +53,8 @@ table {
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><i
-					class="fa fa-comments"></i> <strong><span
-						style="font-size: 25px;">语道后台管理 </span></strong></a>
+				<a class="navbar-brand" href="#"><i class="fa fa-comments"></i>
+					<strong><span style="font-size: 25px;">语道后台管理 </span></strong></a>
 			</div>
 
 			<!-- <ul class="nav navbar-top-links navbar-right">
@@ -251,9 +253,8 @@ table {
 					</li>
 					<li><a href="classInfo.html" class="active-menu"><i
 							class="fa fa-edit"></i>课程管理</a></li>
-							 <li class="role" style="display: none;">
-							<a href="coupon.html"><i class="fa fa-qrcode"></i>优惠券管理</a>
-						</li>
+					<li class="role" style="display: none;"><a href="coupon.html"><i
+							class="fa fa-qrcode"></i>优惠券管理</a></li>
 					<li><a href="comment.html"><i class="fa fa-table"></i>评论管理</a>
 					</li>
 					<li class="role" style="display: none;"><a href="order.html"><i
@@ -263,13 +264,10 @@ table {
 					<li class="role" style="display: none;"><a href="test.html"><i
 							class="fa fa-edit"></i>题目管理</a></li>
 					<li class="role" style="display: none;"><a href="#"><i
-							class="fa fa-sitemap" >
-						</i>首页管理<span
-							class="fa arrows"></span></a>
+							class="fa fa-sitemap"> </i>首页管理<span class="fa arrows"></span></a>
 						<ul class="nav nav-second-level">
 							<li><a href="inform.html"><i class="fa fa-table"></i>通知管理</a></li>
-							<li><a href="teacher_show.html" ><i
-									class="fa fa-table"></i>教师展示</a></li>
+							<li><a href="teacher_show.html"><i class="fa fa-table"></i>教师展示</a></li>
 							<li><a href="rollplay.html"><i class="fa fa-table"></i>滚播管理</a></li>
 						</ul></li>
 				</ul>
@@ -354,33 +352,35 @@ table {
 
 							<div class="panel-body"
 								style="overflow-x: scroll; max-height: 650px; width: 99%;">
-								<table  class='table table-bordered'
-									style="width: 1300px;">
+								<table class='table table-bordered' style="width: 1300px;">
 									<thead>
-									  <tr>
-										<td>序号</td>
-										<td>课程名称</td>
-										<td>课程类型</td>
-								<!-- 		<td>课程介绍</td> -->
-										<td>课程视频</td>
-										<td>课程图片</td>
-										<td>课程价格</td>
-										<td>课程评分</td>
-										<td>点击次数</td>
-										<td>视频权重</td>
-										<td>修改</td>
-										<td>状态</td>
-									</tr></thead>
-									<tbody id = "tb">
-										
+										<tr>
+											<td>序号</td>
+											<td>课程名称</td>
+											<td>课程类型</td>
+											<!-- 		<td>课程介绍</td> -->
+											<td>课程视频</td>
+											<td>课程图片</td>
+											<td>课程价格</td>
+											<td>课程评分</td>
+											<td>点击次数</td>
+											<td>视频权重</td>
+											<td>修改</td>
+											<td>状态</td>
+										</tr>
+									</thead>
+									<tbody id="tb">
+
 									</tbody>
 								</table>
-					<div>
-						<span id="btn0"></span> <!-- <span>每页</span><input id="pageSize" type="text" size="1" maxlength="2" value="getDefaultValue()" /><span> 条 </span>  -->
-					   <a href="#" id="btn1">首页</a> <a href="#" id="btn2">上一页</a> 
-					   <a href="#" id="btn3">下一页</a> <a href="#" id="btn4">尾页</a>&nbsp; <a>转到&nbsp;</a>
-					   <input id="changePage" type="text" size="1" maxlength="4" /> <a>页&nbsp;</a><a href="#" id="btn5">跳转</a>
-					</div>							
+								<div>
+									<span id="btn0"></span>
+									<!-- <span>每页</span><input id="pageSize" type="text" size="1" maxlength="2" value="getDefaultValue()" /><span> 条 </span>  -->
+									<a href="#" id="btn1">首页</a> <a href="#" id="btn2">上一页</a> <a
+										href="#" id="btn3">下一页</a> <a href="#" id="btn4">尾页</a>&nbsp;
+									<a>转到&nbsp;</a> <input id="changePage" type="text" size="1"
+										maxlength="4" /> <a>页&nbsp;</a><a href="#" id="btn5">跳转</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -415,7 +415,8 @@ table {
 									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">课程类型：</div>
 								<div
 									style="width: 250px; height: 50px; float: left; border: 1px solid #CADEFD;">
-									<select style="text-align: center; width:249px; height:50px;" id="kctype" ></select>
+									<select style="text-align: center; width: 249px; height: 50px;"
+										id="kctype"></select>
 								</div>
 							</div>
 							<div style="height: 200px; border: 1px solid #CADEFD">
@@ -461,7 +462,7 @@ table {
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
-									  style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">排序权重：</div>
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">排序权重：</div>
 								<div style="width: 700px; height: 50px; float: left;">
 									&nbsp;
 									<div style="margin-left: 320px;">
@@ -480,13 +481,11 @@ table {
 									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 350px; line-height: 350px;">课程介绍：</div>
 
 								<div style="width: 650px; height: 325px; float: left;">
-									 <div id="div1" class="toolbar"></div>
-									 <div id="div2" class="text"> 
-                                         
-                                      </div>
+									<div id="div1" class="toolbar"></div>
+									<div id="div2" class="text"></div>
 								</div>
-								</div>
-								
+							</div>
+
 						</div>
 					</form>
 					<div class="modal-footer">
@@ -502,7 +501,7 @@ table {
 		<div class="modal fade" id="updateClassModal" tabindex="-1"
 			role="dialog" aria-labelledby="updateClassModalLabel">
 			<div class="modal-dialog" role="document">
-				<div class="modal-content"  style="width:865px">
+				<div class="modal-content" style="width: 865px">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
@@ -526,7 +525,8 @@ table {
 									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">课程类型：</div>
 								<div
 									style="width: 250px; height: 50px; float: left; border: 1px solid #CADEFD;">
-									<select style="text-align: center;width:100%;height:100%;" id="updatekctype"></select>
+									<select style="text-align: center; width: 100%; height: 100%;"
+										id="updatekctype"></select>
 								</div>
 							</div>
 							<div style="height: 200px; border: 1px solid #CADEFD">
@@ -575,7 +575,7 @@ table {
 							</div>
 							<div style="height: 50px; border: 1px solid #CADEFD">
 								<div
-									  style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">排序权重：</div>
+									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 50px; line-height: 50px;">排序权重：</div>
 								<div style="width: 700px; height: 50px; float: left;">
 									&nbsp;
 									<div style="margin-left: 320px;">
@@ -594,11 +594,9 @@ table {
 									style="width: 150px; background: #D9ECFF; float: left; border: 1px solid #CADEFD; text-align: right; height: 350px; line-height: 350px;">课程介绍：</div>
 
 								<div style="width: 650px; height: 325px; float: left;">
-									 <div id="div3" class="toolbar"></div>
-									 <div id="div4" class="text"> 
-                                         
-                                      </div>
-								</div>								
+									<div id="div3" class="toolbar"></div>
+									<div id="div4" class="text"></div>
+								</div>
 							</div>
 						</div>
 					</form>
@@ -1056,7 +1054,7 @@ function getPage(){
 </script>
 	<script src="assets/js/custom-scripts.js"></script>
 	<!-- fuwenben -->
-   <script type="text/javascript">
+	<script type="text/javascript">
        var E = window.wangEditor;
        var editor1 = new E('#div1', '#div2')  ;
         // 或者 var editor = new E( document.getElementById('editor') )
